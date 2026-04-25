@@ -1,0 +1,16 @@
+{
+  "registration": {
+    "first_name": "Amiel",
+    "last_name": "Test",
+    "telephone": "0501234567",
+    "newsletter": false
+  },
+  "search": {
+    "query": "MacBook",
+    "max_price": 700.0,
+    "limit": 5
+  },
+  "cart": {
+    "max_total": 2000.0
+  }
+}
