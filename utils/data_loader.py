@@ -1,16 +1,16 @@
 import json
 import os
-import time
+import uuid
 import yaml
 from typing import Any
 
 
-def load_json(path: str) -> dict:
+def _load_json(path: str) -> dict:
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
-def load_yaml(path: str) -> dict:
+def _load_yaml(path: str) -> dict:
     with open(path, "r", encoding="utf-8") as f:
         return yaml.safe_load(f)
 
@@ -20,7 +20,6 @@ def _data_path(filename: str) -> str:
 
 
 def _deep_merge(base: dict, override: dict) -> dict:
-    """Recursively merge override into base (override wins on conflicts)."""
     result = base.copy()
     for key, value in override.items():
         if key in result and isinstance(result[key], dict) and isinstance(value, dict):
@@ -31,38 +30,29 @@ def _deep_merge(base: dict, override: dict) -> dict:
 
 
 def _resolve_placeholders(section: Any) -> Any:
-    """Replace {ts} with the current Unix timestamp (unique per test run)."""
     if isinstance(section, dict):
         return {k: _resolve_placeholders(v) for k, v in section.items()}
     if isinstance(section, str) and "{ts}" in section:
-        return section.replace("{ts}", str(int(time.time())))
+        return section.replace("{ts}", uuid.uuid4().hex[:8])
     return section
 
 
 def _load_secrets() -> dict:
     path = _data_path("secrets.json")
-    if not os.path.exists(path):
+    try:
+        return _load_json(path)
+    except FileNotFoundError:
         raise FileNotFoundError(
             f"secrets.json not found at {path}. "
             "Copy data/secrets.json.example → data/secrets.json and fill in your credentials."
-        )
-    return load_json(path)
+        ) from None
 
 
-def get_test_data(key: str = None) -> Any:
-    """
-    Return merged test data (test_data.json + secrets.json).
-    secrets.json values take precedence so credentials stay out of VCS.
-    """
-    data = load_json(_data_path("test_data.json"))
-    secrets = _load_secrets()
-    merged = _deep_merge(data, secrets)
-
-    if key:
-        section = _resolve_placeholders(merged.get(key, {}))
-        return section
-    return _resolve_placeholders(merged)
+def get_test_data(key: str | None = None) -> Any:
+    merged = _deep_merge(_load_json(_data_path("test_data.json")), _load_secrets())
+    section = merged.get(key, {}) if key else merged
+    return _resolve_placeholders(section)
 
 
 def get_config() -> dict:
-    return load_yaml(_data_path("../config/config.yaml"))
+    return _load_yaml(_data_path("../config/config.yaml"))

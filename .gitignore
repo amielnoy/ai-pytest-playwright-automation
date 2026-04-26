@@ -1,0 +1,23 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Secrets — never commit
+data/secrets.json
+
+# Test artifacts
+allure-results/
+allure-report/
+.pytest_cache/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# macOS
+.DS_Store

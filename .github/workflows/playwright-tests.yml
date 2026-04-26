@@ -1,0 +1,163 @@
+# Playwright Python Tests -> Allure 3 Report -> GitHub Pages
+#
+# Setup (one-time):
+#   1. Repo -> Settings -> Pages -> Source: "Deploy from a branch" -> gh-pages / (root)
+#   2. Repo -> Settings -> Actions -> General -> Workflow permissions -> Read and write
+#   3. Repo -> Settings -> Secrets -> Actions -> New secret:
+#        Name:  TEST_SECRETS_JSON
+#        Value: paste the full contents of data/secrets.json
+
+name: Playwright Tests
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  # --- Job 1: run tests ---
+  test:
+    name: Run Playwright Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Write secrets.json from GitHub Secret
+        run: echo '${{ secrets.TEST_SECRETS_JSON }}' > data/secrets.json
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-chromium-${{ hashFiles('requirements.txt') }}
+
+      - name: Install Playwright browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: playwright install chromium --with-deps
+
+      - name: Install Playwright system dependencies (cached hit)
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: playwright install-deps chromium
+
+      - name: Run tests
+        run: pytest tests/ -n auto --dist loadscope
+        env:
+          CI: "true"
+        continue-on-error: true
+
+      - name: Upload raw Allure results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: allure-results
+          path: allure-results/
+          retention-days: 7
+
+  # --- Job 2: generate Allure 3 report and publish to GitHub Pages ---
+  report:
+    name: Allure 3 Report -> GitHub Pages
+    needs: test
+    runs-on: ubuntu-latest
+    if: always()
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download Allure results from test job
+        uses: actions/download-artifact@v4
+        with:
+          name: allure-results
+          path: allure-results/
+
+      - name: Checkout gh-pages history
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages-prev
+        continue-on-error: true
+
+      - name: Restore Allure history for trend charts
+        run: |
+          if [ -d gh-pages-prev/history ]; then
+            echo "Copying previous history into allure-results/ ..."
+            cp -r gh-pages-prev/history allure-results/history
+          else
+            echo "No previous history found - this is the first run."
+          fi
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Allure 3 CLI
+        run: npm install -g allure@3
+
+      - name: Generate Allure 3 report
+        run: allure generate allure-results --output allure-report --clean
+
+      - name: Add root index redirect
+        run: |
+          cat > allure-report/redirect.html << 'EOF'
+          <!DOCTYPE html>
+          <meta charset="utf-8">
+          <meta http-equiv="refresh" content="0; url=index.html">
+          EOF
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: allure-report
+          publish_branch: gh-pages
+          keep_files: false
+          commit_message: "ci: Allure report run #${{ github.run_number }} [${{ github.sha }}]"
+
+      - name: Post report link to job summary
+        if: always()
+        run: |
+          PAGES_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}"
+          REPO_URL="https://github.com/${{ github.repository }}"
+          RUN_URL="${REPO_URL}/actions/runs/${{ github.run_id }}"
+          COMMIT_SHORT="${{ github.sha }}"
+          COMMIT_SHORT="${COMMIT_SHORT:0:7}"
+          BRANCH="${{ github.ref_name }}"
+          RUN_NUM="${{ github.run_number }}"
+
+          cat >> $GITHUB_STEP_SUMMARY << EOF
+          ## Test Report
+
+          | | |
+          |---|---|
+          | **Allure Report** | [Open report]($PAGES_URL) |
+          | **Branch** | \`$BRANCH\` |
+          | **Commit** | [\`$COMMIT_SHORT\`](${REPO_URL}/commit/${{ github.sha }}) |
+          | **Run** | [#${RUN_NUM}]($RUN_URL) |
+
+          > [!NOTE]
+          > The report may take a minute to appear after the first deploy while GitHub Pages activates.
+          EOF
