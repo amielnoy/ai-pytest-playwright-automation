@@ -5,14 +5,15 @@ Uses OpenCart's standard AJAX endpoints:
   GET  /index.php?route=product/search&search=<query>  -> HTML with product cards
   POST /index.php?route=checkout/cart/add              -> adds product to session cart
 
-Each call creates an independent requests.Session (own OCSESSID), so parallel
+Each call creates an independent RestClient (own OCSESSID), so parallel
 workers never share server-side cart state.
 """
 import re
+from contextlib import closing
 from dataclasses import dataclass
+from urllib.parse import urlencode
 
-import requests
-
+from services.rest_client import RestClient
 from utils.price_parser import parse_price
 
 _HEADERS = {
@@ -28,8 +29,16 @@ class ApiProduct:
     price: float
 
 
-def _fetch(session: requests.Session, url: str) -> str:
-    resp = session.get(url, headers=_HEADERS, timeout=20)
+def build_session() -> RestClient:
+    return RestClient(headers=_HEADERS)
+
+
+def _search_url(base_url: str, query: str) -> str:
+    return f"{base_url}/index.php?{urlencode({'route': 'product/search', 'search': query})}"
+
+
+def _fetch(client: RestClient, url: str) -> str:
+    resp = client.get(url, timeout=20)
     resp.raise_for_status()
     return resp.text
 
@@ -69,24 +78,21 @@ def create_cart(
     Returns (ocsessid, products_added).  Each invocation gets its own
     OCSESSID so parallel calls never collide on the server.
     """
-    session = requests.Session()
+    with closing(build_session()) as client:
+        html = _fetch(client, _search_url(base_url, query))
+        candidates = _parse_cards(html, max_price, limit)
 
-    html = _fetch(session, f"{base_url}/index.php?route=product/search&search={query}")
-    candidates = _parse_cards(html, max_price, limit)
+        if not candidates:
+            raise ValueError(f"No products found for query='{query}' under ${max_price}")
 
-    if not candidates:
-        raise ValueError(f"No products found for query='{query}' under ${max_price}")
-
-    added: list[ApiProduct] = []
-    for pid, name, price in candidates:
-        resp = session.post(
-            f"{base_url}/index.php?route=checkout/cart/add",
-            data={"product_id": pid, "quantity": "1"},
-            headers=_HEADERS,
-            timeout=15,
-        )
-        if resp.ok:
+        added: list[ApiProduct] = []
+        for pid, name, price in candidates:
+            resp = client.post(
+                f"{base_url}/index.php?route=checkout/cart/add",
+                data={"product_id": pid, "quantity": "1"},
+            )
+            resp.raise_for_status()
             added.append(ApiProduct(product_id=pid, name=name, price=price))
 
-    ocsessid = session.cookies.get("OCSESSID", "")
-    return ocsessid, added
+        ocsessid = client.cookies.get("OCSESSID", "")
+        return ocsessid, added

@@ -4,8 +4,7 @@ import allure
 import pytest
 from playwright.sync_api import Browser, BrowserContext, Page, sync_playwright
 
-from utils.api_client import create_cart
-from utils.data_loader import get_config, get_test_data
+from utils.data_loader import get_config
 
 CONFIG = get_config()
 _IN_CI = os.environ.get("CI", "").lower() in ("true", "1")
@@ -43,33 +42,6 @@ def page(context: BrowserContext) -> Page:
 @pytest.fixture
 def app_url() -> str:
     return CONFIG["base_url"]
-
-
-@pytest.fixture
-def api_cart(app_url: str):
-    """
-    Populate a cart via the OpenCart REST API (no browser) and return the
-    server session cookie plus the products that were added.
-
-    Each call gets its own OCSESSID so parallel workers never share
-    server-side cart state.  The caller must inject the cookie into the
-    Playwright BrowserContext before navigating to the cart page:
-
-        context.add_cookies([{"name": "OCSESSID", "value": ocsessid, "url": app_url}])
-    """
-    data = get_test_data()
-    search = data["search"]
-    ocsessid, products = create_cart(
-        base_url=app_url,
-        query=search["query"],
-        max_price=search["max_price"],
-        limit=search["limit"],
-    )
-    assert products, (
-        f"api_cart fixture: no products added for query='{search['query']}' "
-        f"under ${search['max_price']}"
-    )
-    return ocsessid, products, data["cart"]["max_total"], search["max_price"]
 
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)

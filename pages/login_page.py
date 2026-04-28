@@ -1,4 +1,5 @@
 from playwright.sync_api import Page
+
 from pages.base_page import BasePage
 from pages.components import AlertComponent
 
@@ -14,10 +15,9 @@ class LoginPage(BasePage):
         self.alert = AlertComponent(page)
 
     def login(self, email: str, password: str) -> None:
-        self.page.fill(self._EMAIL, email)
-        self.page.fill(self._PASSWORD, password)
-        self.page.click(self._SUBMIT)
-        self.page.wait_for_load_state("networkidle")
+        self.page.locator(self._EMAIL).fill(email)
+        self.page.locator(self._PASSWORD).fill(password)
+        self.page.locator(self._SUBMIT).click()
 
     def is_login_successful(self) -> bool:
         return self.page.locator(self._ACCOUNT_HEADING).is_visible()

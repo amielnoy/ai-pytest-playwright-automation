@@ -45,7 +45,12 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Write secrets.json from GitHub Secret
-        run: echo '${{ secrets.TEST_SECRETS_JSON }}' > data/secrets.json
+        env:
+          TEST_SECRETS_JSON: ${{ secrets.TEST_SECRETS_JSON }}
+        run: |
+          if [ -n "$TEST_SECRETS_JSON" ]; then
+            printf '%s' "$TEST_SECRETS_JSON" > data/secrets.json
+          fi
 
       - name: Cache Playwright browsers
         uses: actions/cache@v4
@@ -66,7 +71,6 @@ jobs:
         run: pytest tests/ -n auto --dist loadscope
         env:
           CI: "true"
-        continue-on-error: true
 
       - name: Upload raw Allure results
         uses: actions/upload-artifact@v4
@@ -102,11 +106,11 @@ jobs:
 
       - name: Restore Allure history for trend charts
         run: |
-          if [ -d gh-pages-prev/history ]; then
-            echo "Copying previous history into allure-results/ ..."
-            cp -r gh-pages-prev/history allure-results/history
+          if [ -d gh-pages-prev/allure-history ]; then
+            cp -r gh-pages-prev/allure-history ./allure-history
+            echo "History restored from previous run."
           else
-            echo "No previous history found - this is the first run."
+            echo "No previous history found — first run."
           fi
 
       - name: Set up Node.js 20
@@ -118,15 +122,13 @@ jobs:
         run: npm install -g allure@3
 
       - name: Generate Allure 3 report
-        run: allure generate allure-results --output allure-report --clean
+        run: allure generate --clean
 
-      - name: Add root index redirect
+      - name: Persist history for next run
         run: |
-          cat > allure-report/redirect.html << 'EOF'
-          <!DOCTYPE html>
-          <meta charset="utf-8">
-          <meta http-equiv="refresh" content="0; url=index.html">
-          EOF
+          if [ -d allure-history ]; then
+            cp -r allure-history allure-report/allure-history
+          fi
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4

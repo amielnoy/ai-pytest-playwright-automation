@@ -12,6 +12,7 @@ data/secrets.json
 # Test artifacts
 allure-results/
 allure-report/
+docker-artifacts/
 .pytest_cache/
 
 # IDE

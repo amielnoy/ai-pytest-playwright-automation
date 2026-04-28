@@ -1,4 +1,5 @@
-from playwright.sync_api import Page
+from playwright.sync_api import Page, expect
+
 from pages.components.base_component import BaseComponent
 
 
@@ -6,17 +7,16 @@ class NavBarComponent(BaseComponent):
     _SEARCH_INPUT = "input[name='search']"
     _SEARCH_BUTTON = "button.btn-default[type='button']"
     _MY_ACCOUNT = "a[title='My Account']"
-    _LOGIN_LINK = "//a[text()='Login']"
-    _REGISTER_LINK = "//a[text()='Register']"
-    _LOGOUT_LINK = "//a[text()='Logout']"
+    _LOGIN_LINK = "a:text-is('Login')"
+    _REGISTER_LINK = "a:text-is('Register')"
+    _LOGOUT_LINK = "a:text-is('Logout')"
 
     def __init__(self, page: Page) -> None:
         super().__init__(page)
 
     def search(self, query: str) -> None:
-        self.page.fill(self._SEARCH_INPUT, query)
-        self.page.click(self._SEARCH_BUTTON)
-        self.page.wait_for_load_state("networkidle")
+        self.page.locator(self._SEARCH_INPUT).fill(query)
+        self.page.locator(self._SEARCH_BUTTON).click()
 
     def go_to_login(self) -> None:
         self._open_account_menu_and_click(self._LOGIN_LINK)
@@ -28,12 +28,11 @@ class NavBarComponent(BaseComponent):
         self._open_account_menu_and_click(self._LOGOUT_LINK)
 
     def is_logged_in(self) -> bool:
-        self.page.click(self._MY_ACCOUNT)
-        visible = self.page.locator(self._LOGOUT_LINK).is_visible()
-        self.page.keyboard.press("Escape")
-        return visible
+        # The dropdown items are always in the DOM; no click needed to check state.
+        return self.page.locator(self._LOGOUT_LINK).count() > 0
 
     def _open_account_menu_and_click(self, link_selector: str) -> None:
-        self.page.click(self._MY_ACCOUNT)
-        self.page.click(link_selector)
-        self.page.wait_for_load_state("networkidle")
+        self.page.locator(self._MY_ACCOUNT).click()
+        link = self.page.locator(link_selector)
+        expect(link).to_be_visible()
+        link.click()

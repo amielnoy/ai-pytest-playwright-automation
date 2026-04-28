@@ -1,4 +1,5 @@
-from playwright.sync_api import Page
+from playwright.sync_api import Page, expect
+
 from pages.components.base_component import BaseComponent
 
 
@@ -30,4 +31,4 @@ class AlertComponent(BaseComponent):
         return el.inner_text() if el.is_visible() else ""
 
     def wait_for_success(self, timeout: int = 8_000) -> None:
-        self.page.wait_for_selector(self._SUCCESS, timeout=timeout)
+        expect(self.page.locator(self._SUCCESS)).to_be_visible(timeout=timeout)

@@ -1,7 +1,10 @@
+from urllib.parse import urlencode
+
 from playwright.sync_api import Page
+
 from pages.base_page import BasePage
-from pages.models import ProductInfo
 from pages.components import AlertComponent, ProductCardComponent
+from pages.models import ProductInfo
 
 
 class SearchResultsPage(BasePage):
@@ -39,8 +42,8 @@ class SearchResultsPage(BasePage):
         return added
 
     def _load_search(self, query: str) -> None:
-        self.navigate(f"index.php?route=product/search&search={query}")
-        self.page.wait_for_load_state("networkidle")
+        params = urlencode({"route": "product/search", "search": query})
+        self.navigate(f"index.php?{params}")
 
     def _cards(self) -> list[ProductCardComponent]:
         thumbs = self.page.locator(self._PRODUCT_THUMBS)

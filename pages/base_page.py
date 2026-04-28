@@ -6,5 +6,7 @@ class BasePage:
         self.page = page
         self.base_url = base_url.rstrip("/")
 
-    def navigate(self, path: str = "") -> None:
-        self.page.goto(f"{self.base_url}/{path.lstrip('/')}")
+    def navigate(self, path: str = "", wait_until: str = "domcontentloaded") -> None:
+        route = path.lstrip("/")
+        target = f"{self.base_url}/{route}" if route else self.base_url
+        self.page.goto(target, wait_until=wait_until)

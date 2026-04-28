@@ -1,4 +1,5 @@
 from playwright.sync_api import Page
+
 from pages.components.base_component import BaseComponent
 
 
@@ -15,7 +16,7 @@ class RegistrationFormComponent(BaseComponent):
     _NEWSLETTER_NO = "input[name='newsletter'][value='0']"
     _PRIVACY_POLICY = "input[name='agree']"
     _SUBMIT = "input[type='submit'][value='Continue']"
-    _SUCCESS_HEADING = "//h1[contains(text(),'Your Account Has Been Created')]"
+    _SUCCESS_HEADING = "h1:text-is('Your Account Has Been Created!')"
 
     def __init__(self, page: Page) -> None:
         super().__init__(page)
@@ -43,8 +44,7 @@ class RegistrationFormComponent(BaseComponent):
         self.page.check(self._PRIVACY_POLICY)
 
     def submit(self) -> None:
-        self.page.click(self._SUBMIT)
-        self.page.wait_for_load_state("networkidle")
+        self.page.locator(self._SUBMIT).click()
 
     def is_submitted_successfully(self) -> bool:
         return self.page.locator(self._SUCCESS_HEADING).is_visible()

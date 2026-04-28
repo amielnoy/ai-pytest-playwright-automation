@@ -1,0 +1,11 @@
+{
+  "venvPath": ".",
+  "venv": ".venv",
+  "include": [
+    "tests",
+    "utils",
+    "pages",
+    "conftest.py",
+    "run_agent.py"
+  ]
+}

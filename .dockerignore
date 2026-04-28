@@ -1,0 +1,13 @@
+.git
+.github
+.pytest_cache
+.qodo
+.venv
+.vscode
+__pycache__
+*.py[cod]
+.DS_Store
+allure-report
+allure-results
+docker-artifacts
+data/secrets.json

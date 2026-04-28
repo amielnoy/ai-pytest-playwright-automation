@@ -1,4 +1,5 @@
 from playwright.sync_api import Page
+
 from pages.base_page import BasePage
 from pages.components import NavBarComponent
 
@@ -10,7 +11,6 @@ class HomePage(BasePage):
 
     def open(self) -> "HomePage":
         self.navigate()
-        self.page.wait_for_load_state("networkidle")
         return self
 
     def search(self, query: str) -> None:

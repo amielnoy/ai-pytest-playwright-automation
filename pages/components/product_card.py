@@ -1,4 +1,5 @@
 from playwright.sync_api import Locator
+
 from utils.price_parser import parse_price
 
 
@@ -7,7 +8,7 @@ class ProductCardComponent:
 
     _NAME = "h4 a"
     _PRICE = ".price"
-    _ADD_TO_CART = "//button[@onclick and contains(@onclick,'cart.add')]"
+    _ADD_TO_CART = "button[onclick*='cart.add']"
 
     def __init__(self, root: Locator, index: int) -> None:
         self.root = root

@@ -1,8 +1,7 @@
 import allure
 import pytest
-from playwright.sync_api import Page
 
-from pages.search_results_page import SearchResultsPage
+from tests.page_records import SearchPages
 from utils.data_loader import get_test_data
 
 
@@ -13,16 +12,14 @@ class TestSearchUnderPrice:
 
     @allure.title("searchItemsByNameUnderPrice returns items at or below max_price")
     @allure.severity(allure.severity_level.CRITICAL)
-    def test_search_items_under_price(self, page: Page, app_url: str):
+    def test_search_items_under_price(self, search_pages: SearchPages):
         data = get_test_data("search")
         query = data["query"]
         max_price = data["max_price"]
         limit = data["limit"]
 
-        results_page = SearchResultsPage(page, app_url)
-
         with allure.step(f"Search '{query}' and filter items under ${max_price}"):
-            names = results_page.search_items_by_name_under_price(
+            names = search_pages.search_results.search_items_by_name_under_price(
                 query=query, max_price=max_price, limit=limit
             )
 
@@ -43,11 +40,9 @@ class TestSearchUnderPrice:
 
     @allure.title("Search for non-existent product returns empty list")
     @allure.severity(allure.severity_level.NORMAL)
-    def test_search_no_results(self, page: Page, app_url: str):
-        results_page = SearchResultsPage(page, app_url)
-
+    def test_search_no_results(self, search_pages: SearchPages):
         with allure.step("Search with a query that yields no results"):
-            names = results_page.search_items_by_name_under_price(
+            names = search_pages.search_results.search_items_by_name_under_price(
                 query="xyznonexistentproduct999", max_price=999.0, limit=5
             )
 
@@ -56,11 +51,9 @@ class TestSearchUnderPrice:
 
     @allure.title("Items with price above max_price are excluded")
     @allure.severity(allure.severity_level.NORMAL)
-    def test_search_price_filter_excludes_expensive(self, page: Page, app_url: str):
-        results_page = SearchResultsPage(page, app_url)
-
+    def test_search_price_filter_excludes_expensive(self, search_pages: SearchPages):
         with allure.step("Search 'MacBook' with max_price = $1 (should return nothing)"):
-            names = results_page.search_items_by_name_under_price(
+            names = search_pages.search_results.search_items_by_name_under_price(
                 query="MacBook", max_price=1.0, limit=5
             )
 
@@ -69,11 +62,9 @@ class TestSearchUnderPrice:
 
     @allure.title("Result list is capped at limit even when more matches exist")
     @allure.severity(allure.severity_level.NORMAL)
-    def test_search_respects_limit(self, page: Page, app_url: str):
-        results_page = SearchResultsPage(page, app_url)
-
+    def test_search_respects_limit(self, search_pages: SearchPages):
         with allure.step("Search 'Apple' with high max_price and limit=2"):
-            names = results_page.search_items_by_name_under_price(
+            names = search_pages.search_results.search_items_by_name_under_price(
                 query="Apple", max_price=9999.0, limit=2
             )
 

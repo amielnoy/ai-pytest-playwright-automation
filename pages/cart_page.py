@@ -1,4 +1,5 @@
 from playwright.sync_api import Page
+
 from pages.base_page import BasePage
 from pages.components import CartSummaryComponent
 
@@ -10,7 +11,6 @@ class CartPage(BasePage):
 
     def open(self) -> None:
         self.navigate("index.php?route=checkout/cart")
-        self.page.wait_for_load_state("networkidle")
 
     def get_cart_total(self) -> float:
         return self.summary.get_total()

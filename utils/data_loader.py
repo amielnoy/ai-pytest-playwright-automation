@@ -1,22 +1,30 @@
 import json
 import os
 import uuid
-import yaml
+from functools import lru_cache
+from pathlib import Path
 from typing import Any
 
-
-def _load_json(path: str) -> dict:
-    with open(path, "r", encoding="utf-8") as f:
-        return json.load(f)
+import yaml
 
 
-def _load_yaml(path: str) -> dict:
-    with open(path, "r", encoding="utf-8") as f:
-        return yaml.safe_load(f)
+_PROJECT_ROOT = Path(__file__).resolve().parent.parent
+_DATA_DIR = _PROJECT_ROOT / "data"
+_CONFIG_DIR = _PROJECT_ROOT / "config"
 
 
-def _data_path(filename: str) -> str:
-    return os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "data", filename))
+def _load_json(path: Path) -> dict[str, Any]:
+    with path.open("r", encoding="utf-8") as file:
+        return json.load(file)
+
+
+def _load_yaml(path: Path) -> dict[str, Any]:
+    with path.open("r", encoding="utf-8") as file:
+        return yaml.safe_load(file)
+
+
+def _data_path(filename: str) -> Path:
+    return _DATA_DIR / filename
 
 
 def _deep_merge(base: dict, override: dict) -> dict:
@@ -37,22 +45,26 @@ def _resolve_placeholders(section: Any) -> Any:
     return section
 
 
-def _load_secrets() -> dict:
-    path = _data_path("secrets.json")
-    try:
-        return _load_json(path)
-    except FileNotFoundError:
-        raise FileNotFoundError(
-            f"secrets.json not found at {path}. "
-            "Copy data/secrets.json.example → data/secrets.json and fill in your credentials."
-        ) from None
+@lru_cache(maxsize=1)
+def _load_test_data_bundle() -> dict[str, Any]:
+    merged = _load_json(_data_path("test_data.json"))
+    secrets_path = _data_path("secrets.json")
+    if secrets_path.exists() and secrets_path.stat().st_size > 0:
+        merged = _deep_merge(merged, _load_json(secrets_path))
+    return merged
+
+
+def has_secret_file() -> bool:
+    return _data_path("secrets.json").exists()
 
 
 def get_test_data(key: str | None = None) -> Any:
-    merged = _deep_merge(_load_json(_data_path("test_data.json")), _load_secrets())
+    merged = _load_test_data_bundle()
     section = merged.get(key, {}) if key else merged
     return _resolve_placeholders(section)
 
 
+@lru_cache(maxsize=1)
 def get_config() -> dict:
-    return _load_yaml(_data_path("../config/config.yaml"))
+    config_name = os.environ.get("TEST_CONFIG_FILE", "config.yaml")
+    return _load_yaml(_CONFIG_DIR / config_name)

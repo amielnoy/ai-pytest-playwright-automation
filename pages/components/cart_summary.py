@@ -1,4 +1,5 @@
 from playwright.sync_api import Page
+
 from pages.components.base_component import BaseComponent
 from utils.price_parser import parse_price
 
@@ -12,8 +13,10 @@ class CartSummaryComponent(BaseComponent):
         super().__init__(page)
 
     def get_total(self) -> float:
-        raw = self.page.locator(self._TOTAL_ROW).last.inner_text()
-        return parse_price(raw) or 0.0
+        total_cell = self.page.locator(self._TOTAL_ROW).last
+        if not total_cell.is_visible():
+            return 0.0
+        return parse_price(total_cell.inner_text()) or 0.0
 
     def get_item_count(self) -> int:
         return self.page.locator(self._ITEMS).count()
