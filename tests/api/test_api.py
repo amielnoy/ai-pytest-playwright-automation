@@ -28,6 +28,68 @@ class TestSearchApi:
                 "Search response contains no product cards"
             )
 
+    @allure.title("Search returns expected products for known queries")
+    @allure.severity(allure.severity_level.CRITICAL)
+    @pytest.mark.parametrize(
+        ("query", "expected_product"),
+        [
+            ("MacBook", "MacBook"),
+            ("iPhone", "iPhone"),
+        ],
+    )
+    def test_search_returns_expected_product_names(
+        self, search_service: SearchService, query: str, expected_product: str
+    ):
+        with allure.step(f"GET search results for {query!r}"):
+            resp = search_service.search(query)
+
+        with allure.step("Assert HTTP OK and expected product name"):
+            assert resp.status_code == HTTP_OK, (
+                f"Expected {HTTP_OK}, got {resp.status_code}"
+            )
+            names = search_service.product_names(resp.text)
+            assert expected_product in names, (
+                f"Expected {expected_product!r} in search results, got {names}"
+            )
+
+    @allure.title("Search returns parseable positive prices for known queries")
+    @allure.severity(allure.severity_level.NORMAL)
+    @pytest.mark.parametrize("query", ["MacBook", "iPhone"])
+    def test_search_returns_positive_prices(
+        self, search_service: SearchService, query: str
+    ):
+        with allure.step(f"GET search results for {query!r}"):
+            resp = search_service.search(query)
+
+        with allure.step("Assert all parsed prices are positive"):
+            assert resp.status_code == HTTP_OK, (
+                f"Expected {HTTP_OK}, got {resp.status_code}"
+            )
+            prices = search_service.prices(resp.text)
+            assert prices, f"No parseable prices found for query {query!r}"
+            assert all(price > 0 for price in prices), (
+                f"Expected positive prices for {query!r}, got {prices}"
+            )
+
+    @allure.title("Search returns numeric product IDs for known queries")
+    @allure.severity(allure.severity_level.NORMAL)
+    @pytest.mark.parametrize("query", ["MacBook", "iPhone"])
+    def test_search_returns_numeric_product_ids(
+        self, search_service: SearchService, query: str
+    ):
+        with allure.step(f"GET search results for {query!r}"):
+            resp = search_service.search(query)
+
+        with allure.step("Assert all parsed product IDs are numeric"):
+            assert resp.status_code == HTTP_OK, (
+                f"Expected {HTTP_OK}, got {resp.status_code}"
+            )
+            product_ids = search_service.product_ids(resp.text)
+            assert product_ids, f"No product IDs found for query {query!r}"
+            assert all(product_id.isdigit() for product_id in product_ids), (
+                f"Expected numeric product IDs for {query!r}, got {product_ids}"
+            )
+
 
 @allure.feature("API Tests")
 @allure.story("Cart endpoint")
@@ -77,6 +139,27 @@ class TestCartApi:
             total = cart_service.total(cart_resp.text)
             assert total is not None and total > 0, (
                 "Cart total could not be parsed or is zero"
+            )
+
+    @allure.title("Cart accepts products found from known search queries")
+    @allure.severity(allure.severity_level.NORMAL)
+    @pytest.mark.parametrize("query", ["MacBook", "iPhone"])
+    def test_cart_accepts_products_from_search_results(
+        self, search_service: SearchService, cart_service: CartService, query: str
+    ):
+        with allure.step(f"Find first product ID for {query!r}"):
+            pid = search_service.first_product_id(query)
+
+        with allure.step(f"POST product_id={pid} to cart"):
+            resp = cart_service.add_product(pid)
+
+        with allure.step("Assert cart add succeeds and cart page is not empty"):
+            assert resp.status_code == HTTP_OK, (
+                f"Expected {HTTP_OK}, got {resp.status_code}"
+            )
+            cart_resp = cart_service.get_cart()
+            assert not cart_service.is_empty(cart_resp.text), (
+                f"Cart is empty after adding product {pid} from query {query!r}"
             )
 
     @allure.title("Two concurrent sessions have independent carts")

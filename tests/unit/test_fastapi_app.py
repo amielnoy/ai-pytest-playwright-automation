@@ -1,4 +1,5 @@
 from fastapi.testclient import TestClient
+import pytest
 
 import server.app as app_module
 from server.app import app
@@ -62,6 +63,52 @@ def test_mock_cart_flow():
     cart_response = client.get("/mock/cart")
     assert cart_response.status_code == 200
     assert cart_response.json()["items"][0]["quantity"] == 2
+
+
+@pytest.mark.parametrize(
+    ("query", "expected_product_id", "expected_name", "expected_price"),
+    [
+        ("MacBook", "43", "MacBook", 602.0),
+        ("iPhone", "40", "iPhone", 123.2),
+    ],
+)
+def test_mock_product_search_returns_matching_products(
+    query, expected_product_id, expected_name, expected_price
+):
+    response = client.get("/mock/products/search", params={"query": query})
+
+    assert response.status_code == 200
+    products = response.json()
+    assert products == [
+        {
+            "product_id": expected_product_id,
+            "name": expected_name,
+            "price": expected_price,
+        }
+    ]
+
+
+@pytest.mark.parametrize(
+    ("product_id", "quantity", "expected_total"),
+    [
+        ("43", 1, 602.0),
+        ("40", 3, 369.6),
+    ],
+)
+def test_mock_cart_add_calculates_total_from_quantity(
+    product_id, quantity, expected_total
+):
+    client.delete("/mock/cart")
+
+    response = client.post(
+        "/mock/cart/add",
+        json={"product_id": product_id, "quantity": quantity},
+    )
+
+    assert response.status_code == 200
+    cart = response.json()["cart"]
+    assert cart["items"][0]["quantity"] == quantity
+    assert cart["total"] == expected_total
 
 
 def test_mock_cart_add_returns_404_for_unknown_product():
