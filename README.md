@@ -10,6 +10,7 @@ UI and API test automation for the TutorialsNinja demo store, built with:
 ## Prerequisites
 
 - Python 3.12+ recommended
+- Node.js 18+ for the Allure 3 report CLI
 - A virtual environment with the project dependencies installed
 - Playwright Chromium installed
 
@@ -20,6 +21,7 @@ Install dependencies:
 ```bash
 pip install -r requirements.txt
 playwright install chromium
+npm install
 ```
 
 If you want to run registration tests, create `data/secrets.json` from `data/secrets.json.example`.
@@ -147,9 +149,51 @@ Allure results are written to:
 allure-results/
 ```
 
-Generate and open a local Allure report if Allure CLI is installed:
+This project uses Allure Report 3 through the local npm `allure` package. Avoid the global `allure` command if it reports a `2.x` version.
 
 ```bash
-allure generate allure-results --clean -o allure-report
-allure open allure-report
+npm run allure:version
+npm run allure:generate
+npm run allure:open
+```
+
+For live report updates while rerunning tests:
+
+```bash
+npm run allure:watch
+```
+
+## FastAPI Automation Service
+
+Start the local API:
+
+```bash
+uvicorn server.app:app --reload
+```
+
+Open the interactive docs at:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+Useful endpoints:
+
+```text
+GET    /health
+GET    /automation/config
+GET    /automation/test-data
+GET    /automation/test-data/{key}
+GET    /automation/external/search?query=MacBook
+POST   /automation/external/cart
+POST   /runs/pytest
+GET    /runs/{job_id}
+GET    /reports/allure/status
+GET    /reports/allure/summary
+POST   /reports/allure/generate
+GET    /reports/allure/view/index.html
+GET    /mock/products/search?query=MacBook
+POST   /mock/cart/add
+GET    /mock/cart
+DELETE /mock/cart
 ```

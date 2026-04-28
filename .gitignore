@@ -12,8 +12,10 @@ data/secrets.json
 # Test artifacts
 allure-results/
 allure-report/
+allure-history/
 docker-artifacts/
 .pytest_cache/
+node_modules/
 
 # IDE
 .idea/

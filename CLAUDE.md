@@ -51,7 +51,8 @@ docker run --rm -v "$PWD/docker-artifacts:/app/test-artifacts" \
 
 **Generate and view Allure report:**
 ```bash
-allure serve allure-results
+npm run allure:generate
+npm run allure:open
 ```
 
 ## Claude Skills

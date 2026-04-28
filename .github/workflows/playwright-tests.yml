@@ -122,7 +122,7 @@ jobs:
         run: npm install -g allure@3
 
       - name: Generate Allure 3 report
-        run: allure generate --clean
+        run: allure generate allure-results
 
       - name: Persist history for next run
         run: |

@@ -16,6 +16,9 @@ class HomePage(BasePage):
     def search(self, query: str) -> None:
         self.nav.search(query)
 
+    def has_currency_dropdown(self) -> bool:
+        return self.nav.has_currency_dropdown()
+
     def go_to_login(self) -> None:
         self.nav.go_to_login()
 
