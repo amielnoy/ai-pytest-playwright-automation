@@ -1,21 +1,15 @@
 from urllib.parse import urlencode
 
-from playwright.sync_api import Page, expect
+from playwright.sync_api import expect
 
 from pages.base_page import BasePage
-from pages.components import AlertComponent, ProductCardComponent
+from pages.components import ProductCardComponent
 from pages.models import ProductInfo, StoredProductInfo
 
 
 class SearchResultsPage(BasePage):
     _PRODUCT_THUMBS = ".product-thumb"
     _NO_RESULTS = "//p[contains(text(),'There is no product that matches')]"
-    _LIST_VIEW_BUTTON = "#list-view"
-    _SORT_SELECT = "#input-sort"
-
-    def __init__(self, page: Page, base_url: str) -> None:
-        super().__init__(page, base_url)
-        self.alert = AlertComponent(page)
 
     def search_items_by_name_under_price(
         self, query: str, max_price: float, limit: int = 5
@@ -45,13 +39,13 @@ class SearchResultsPage(BasePage):
 
     def choose_list_view(self) -> None:
         self.wait_for_product_results()
-        list_view = self.page.locator(self._LIST_VIEW_BUTTON)
+        list_view = self.page.get_by_role("link", name="List")
         expect(list_view).to_be_visible()
         list_view.click()
 
     def sort_by_name_ascending(self) -> None:
         self.wait_for_product_results()
-        sort_select = self.page.locator(self._SORT_SELECT)
+        sort_select = self.page.get_by_role("combobox", name="Sort By")
         expect(sort_select).to_be_visible()
         sort_select.select_option(label="Name (A - Z)")
         self.page.wait_for_load_state("domcontentloaded")
@@ -70,7 +64,7 @@ class SearchResultsPage(BasePage):
         return [card.stored_info() for card in self._cards()]
 
     def wait_for_product_results(self) -> None:
-        expect(self.page.locator(self._PRODUCT_THUMBS).first).to_be_visible()
+        self.wait_for_visible(self._PRODUCT_THUMBS)
 
     def _load_search(self, query: str) -> None:
         params = urlencode({"route": "product/search", "search": query})
