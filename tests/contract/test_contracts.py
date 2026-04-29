@@ -83,6 +83,9 @@ class TestSearchContract:
         resp = search_service.search("MacBook")
         html = resp.text
 
+        with allure.step("Assert HTTP OK"):
+            assert resp.status_code == HTTP_OK
+
         with allure.step("Assert at least one product name is present"):
             names = search_service.product_names(html)
             assert names, "No product names found in search response"
@@ -106,6 +109,7 @@ class TestSearchContract:
         self, search_service: SearchService
     ):
         resp = search_service.search("Apple")
+        assert resp.status_code == HTTP_OK
         pids = search_service.product_ids(resp.text)
         assert pids, "No product IDs found via cart.add() pattern"
         for pid in pids:
@@ -145,6 +149,7 @@ class TestRegistrationPageContract:
         self, account_service: AccountService
     ):
         resp = account_service.get_register_page()
+        assert resp.status_code == HTTP_OK
         assert 'name="agree"' in resp.text, (
             "Privacy policy checkbox not found on registration page"
         )
@@ -161,6 +166,7 @@ class TestPriceContract:
         self, search_service: SearchService
     ):
         resp = search_service.search("MacBook")
+        assert resp.status_code == HTTP_OK
         prices = search_service.prices(resp.text)
 
         with allure.step(f"Assert all {len(prices)} prices are > 0"):
@@ -175,10 +181,12 @@ class TestPriceContract:
         data = get_test_data("search")
         pid = search_service.first_product_id(data["query"])
 
-        cart_service.add_product(pid)
+        add_resp = cart_service.add_product(pid)
+        assert add_resp.status_code == HTTP_OK
 
         with allure.step("Fetch cart page and parse individual row prices and total"):
             cart_resp = cart_service.get_cart()
+            assert cart_resp.status_code == HTTP_OK
             html = cart_resp.text
 
         row_sum = cart_service.product_row_sum(html)

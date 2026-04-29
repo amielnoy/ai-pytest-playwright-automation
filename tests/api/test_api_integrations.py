@@ -134,3 +134,59 @@ class TestCartApiIntegration:
             assert total is not None and total > 0, (
                 f"Expected positive cart total, got {total}"
             )
+
+
+@allure.feature("API Integration Tests")
+@allure.story("Cart endpoint negative scenarios")
+@pytest.mark.api
+class TestCartApiNegative:
+
+    @allure.title("Cart add ignores missing or unknown product IDs")
+    @allure.severity(allure.severity_level.NORMAL)
+    @pytest.mark.parametrize("product_id", ["", "999999"])
+    def test_cart_add_ignores_invalid_product_id(
+        self, cart_service: CartService, product_id: str
+    ):
+        with allure.step(f"POST invalid product_id={product_id!r} to cart"):
+            resp = cart_service.add_product(product_id)
+
+        with allure.step("Assert request is handled and no product is added"):
+            assert resp.status_code == HTTP_OK, (
+                f"Expected {HTTP_OK}, got {resp.status_code}"
+            )
+            assert resp.json() == [], (
+                f"Expected empty response for invalid product_id={product_id!r}, "
+                f"got {resp.text}"
+            )
+            cart_resp = cart_service.get_cart()
+            assert cart_resp.status_code == HTTP_OK
+            assert cart_service.is_empty(cart_resp.text), (
+                f"Cart should stay empty after invalid product_id={product_id!r}"
+            )
+
+    @allure.title("Cart add with non-positive quantity does not add items")
+    @allure.severity(allure.severity_level.NORMAL)
+    @pytest.mark.parametrize("quantity", [0, -1])
+    def test_cart_add_non_positive_quantity_does_not_add_items(
+        self,
+        search_service: SearchService,
+        cart_service: CartService,
+        quantity: int,
+    ):
+        pid = search_service.first_product_id("MacBook")
+
+        with allure.step(f"POST product_id={pid} with quantity={quantity}"):
+            resp = cart_service.add_product(pid, quantity=quantity)
+
+        with allure.step("Assert cart remains empty"):
+            assert resp.status_code == HTTP_OK, (
+                f"Expected {HTTP_OK}, got {resp.status_code}"
+            )
+            assert "0 item(s)" in resp.text, (
+                f"Expected zero-item cart summary for quantity={quantity}, got {resp.text}"
+            )
+            cart_resp = cart_service.get_cart()
+            assert cart_resp.status_code == HTTP_OK
+            assert cart_service.is_empty(cart_resp.text), (
+                f"Cart should stay empty after quantity={quantity}"
+            )
