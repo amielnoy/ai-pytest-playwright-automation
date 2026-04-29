@@ -2,7 +2,7 @@
   "base_url": "https://tutorialsninja.com/demo",
   "browser": "chromium",
   "headless": false,
-  "slow_mo": 50,
+  "slow_mo": 500,
   "timeout": 30000,
   "viewport": {
     "width": 1280,

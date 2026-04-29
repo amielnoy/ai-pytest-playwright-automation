@@ -117,7 +117,7 @@ All page interactions live in `pages/`. Every page class extends `BasePage` (`pa
 
 ### Test Data & Configuration
 
-- **`config/config.yaml`** — Browser settings (`headless`, `slow_mo`, `timeout`, viewport). Set `headless: true` for CI.
+- **`config/config.json`** — Browser settings (`headless`, `slow_mo`, `timeout`, viewport). Set `headless: true` for CI.
 - **`data/test_data.json`** — All test inputs (credentials, search queries, price limits). Supports a `{ts}` placeholder that `data_loader.get_test_data()` resolves to a Unix timestamp at load time, ensuring unique email addresses per run.
 - **`utils/data_loader.py`** — `get_config()` and `get_test_data(key)` are the only entry points for loading external data; never read config/data files directly in tests.
 

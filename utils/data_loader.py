@@ -1,11 +1,8 @@
 import json
-import os
 import uuid
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
-
-import yaml
 
 
 _PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -16,11 +13,6 @@ _CONFIG_DIR = _PROJECT_ROOT / "config"
 def _load_json(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8") as file:
         return json.load(file)
-
-
-def _load_yaml(path: Path) -> dict[str, Any]:
-    with path.open("r", encoding="utf-8") as file:
-        return yaml.safe_load(file)
 
 
 def _data_path(filename: str) -> Path:
@@ -66,5 +58,4 @@ def get_test_data(key: str | None = None) -> Any:
 
 @lru_cache(maxsize=1)
 def get_config() -> dict:
-    config_name = os.environ.get("TEST_CONFIG_FILE", "config.yaml")
-    return _load_yaml(_CONFIG_DIR / config_name)
+    return _load_json(_CONFIG_DIR / "config.json")

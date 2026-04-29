@@ -14,6 +14,7 @@ import json
 import os
 import sys
 from pathlib import Path
+from typing import Any, cast
 
 import anthropic
 
@@ -232,10 +233,10 @@ def run(pages: list[str] | None = None) -> None:
                     "type": "text",
                     "text": SYSTEM_PROMPT,
                     # Cache the stable system prompt — saves tokens on every loop iteration
-                    "cache_control": {"type": "ephemeral"},
+            "cache_control": {"type": "ephemeral"},
                 }
             ],
-            tools=TOOLS,
+            tools=cast(Any, TOOLS),
             messages=messages,
         ) as stream:
             for event in stream:
