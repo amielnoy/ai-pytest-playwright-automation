@@ -1,5 +1,7 @@
 import re
 
+from requests import Response
+
 from services.rest_client import RestClient
 from utils.price_parser import parse_price
 
@@ -9,14 +11,14 @@ class CartService:
         self.client = client
         self.base_url = base_url
 
-    def add_product(self, product_id: str, quantity: int = 1):
+    def add_product(self, product_id: str, quantity: int = 1) -> Response:
         return self.client.post(
             f"{self.base_url}/index.php",
             params={"route": "checkout/cart/add"},
             data={"product_id": product_id, "quantity": str(quantity)},
         )
 
-    def get_cart(self):
+    def get_cart(self) -> Response:
         return self.client.get(
             f"{self.base_url}/index.php?route=checkout/cart",
         )

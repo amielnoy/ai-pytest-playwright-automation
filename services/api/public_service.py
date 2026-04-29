@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 
+from requests import Response
+
 from services.rest_client import RestClient
 
 
@@ -14,5 +16,5 @@ class PublicService:
         self.client = client
         self.base_url = base_url
 
-    def get_path(self, path: str):
+    def get_path(self, path: str) -> Response:
         return self.client.get(f"{self.base_url}{path}")

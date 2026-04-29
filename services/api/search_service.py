@@ -1,6 +1,8 @@
 import re
 from dataclasses import dataclass
 
+from requests import Response
+
 from services.rest_client import RestClient
 from utils.price_parser import parse_price
 
@@ -17,7 +19,7 @@ class SearchService:
         self.client = client
         self.base_url = base_url
 
-    def search(self, query: str):
+    def search(self, query: str) -> Response:
         return self.client.get(
             f"{self.base_url}/index.php",
             params={"route": "product/search", "search": query},

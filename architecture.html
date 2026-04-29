@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ארכיטקטורה ותיעוד טסטים — Ness Automation</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --surface2: #22263a;
+      --border: #2e3250;
+      --accent: #6c8bef;
+      --accent2: #a78bfa;
+      --green: #34d399;
+      --yellow: #fbbf24;
+      --red: #f87171;
+      --cyan: #22d3ee;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --code-bg: #0d0f1a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: linear-gradient(135deg, #1a1d27 0%, #12182e 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 2.5rem 4rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      direction: rtl;
+    }
+    header .logo {
+      width: 48px; height: 48px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; font-weight: 900; color: white; flex-shrink: 0;
+    }
+    header h1 { font-size: 1.6rem; font-weight: 700; }
+    header p { color: var(--muted); font-size: 0.9rem; margin-top: 2px; }
+    header .pill {
+      margin-right: auto;
+      background: rgba(108,139,239,0.15);
+      border: 1px solid rgba(108,139,239,0.35);
+      color: var(--accent);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    /* ── LAYOUT ── */
+    .layout {
+      display: flex;
+      min-height: calc(100vh - 82px);
+    }
+
+    /* ── SIDEBAR ── */
+    nav.sidebar {
+      width: 240px;
+      flex-shrink: 0;
+      background: var(--surface);
+      border-left: 1px solid var(--border);
+      padding: 2rem 1rem;
+      position: sticky;
+      top: 82px;
+      height: calc(100vh - 82px);
+      overflow-y: auto;
+    }
+    nav.sidebar .nav-section {
+      margin-bottom: 1.6rem;
+    }
+    nav.sidebar .nav-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    nav.sidebar a {
+      display: block;
+      padding: 7px 12px;
+      border-radius: 8px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: all 0.15s;
+    }
+    nav.sidebar a:hover,
+    nav.sidebar a.active {
+      background: rgba(108,139,239,0.12);
+      color: var(--accent);
+    }
+
+    /* ── MAIN ── */
+    main {
+      flex: 1;
+      padding: 3rem 4rem;
+      overflow: auto;
+      max-width: 1100px;
+    }
+
+    section { margin-bottom: 4rem; scroll-margin-top: 100px; }
+    h2 {
+      font-size: 1.55rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    h2 .icon {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 1.8rem 0 0.75rem;
+      color: var(--accent2);
+    }
+    p { color: var(--text); margin-bottom: 0.9rem; }
+
+    /* ── CARDS ── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(108,139,239,0.2), 0 4px 20px rgba(0,0,0,0.4);
+    }
+    .card .card-icon { font-size: 1.6rem; margin-bottom: 0.6rem; }
+    .card .card-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 0.3rem; }
+    .card .card-desc { font-size: 0.82rem; color: var(--muted); }
+
+    /* ── PYRAMID ── */
+    .pyramid {
+      margin: 1.5rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .pyramid-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      width: 100%;
+    }
+    .pyramid-bar {
+      border-radius: 8px;
+      padding: 0.7rem 1.5rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      direction: ltr;
+    }
+    .pyramid-bar .label { white-space: nowrap; }
+    .pyramid-bar .count {
+      background: rgba(0,0,0,0.25);
+      border-radius: 20px;
+      padding: 2px 10px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .pyr-unit  { width: 200px; background: rgba(52,211,153,0.2);  border: 1px solid rgba(52,211,153,0.4);  color: var(--green); }
+    .pyr-api   { width: 290px; background: rgba(34,211,238,0.15); border: 1px solid rgba(34,211,238,0.35); color: var(--cyan); }
+    .pyr-contract { width: 380px; background: rgba(167,139,250,0.15); border: 1px solid rgba(167,139,250,0.35); color: var(--accent2); }
+    .pyr-ui    { width: 470px; background: rgba(108,139,239,0.15); border: 1px solid rgba(108,139,239,0.35); color: var(--accent); }
+
+    /* ── FLOW DIAGRAM ── */
+    .flow {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      overflow-x: auto;
+      padding: 1.5rem 0;
+      flex-wrap: nowrap;
+      direction: ltr;
+    }
+    .flow-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.8rem 1.1rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-align: center;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .flow-box .sub { font-size: 0.72rem; color: var(--muted); font-weight: 400; display: block; margin-top: 2px; }
+    .flow-arrow {
+      font-size: 1.3rem;
+      color: var(--muted);
+      padding: 0 8px;
+      flex-shrink: 0;
+    }
+    .flow-box.blue  { border-color: rgba(108,139,239,0.5); background: rgba(108,139,239,0.08); color: var(--accent); }
+    .flow-box.green { border-color: rgba(52,211,153,0.5);  background: rgba(52,211,153,0.08);  color: var(--green); }
+    .flow-box.cyan  { border-color: rgba(34,211,238,0.5);  background: rgba(34,211,238,0.08);  color: var(--cyan); }
+    .flow-box.purple{ border-color: rgba(167,139,250,0.5); background: rgba(167,139,250,0.08); color: var(--accent2); }
+    .flow-box.yellow{ border-color: rgba(251,191,36,0.5);  background: rgba(251,191,36,0.08);  color: var(--yellow); }
+
+    /* ── POM DIAGRAM ── */
+    .pom-tree {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      direction: ltr;
+      text-align: left;
+    }
+    .pom-tree .base  { color: var(--yellow); font-weight: 700; }
+    .pom-tree .page  { color: var(--accent); }
+    .pom-tree .comp  { color: var(--accent2); }
+    .pom-tree .model { color: var(--green); }
+    .pom-tree .indent { padding-right: 1.5rem; display: inline-block; }
+    .pom-tree .line  { padding: 2px 0; }
+    .pom-tree .line-section { padding: 2px 0; margin-top: 0.8rem; }
+    .pom-tree .muted { color: var(--muted); }
+    .callout.mt-1 { margin-top: 1rem; }
+    .card-title-cyan { color: var(--cyan); }
+    code.ret { color: var(--green); }
+    code { direction: ltr; unicode-bidi: plaintext; }
+    .mt-12 { margin-top: 1.2rem; }
+    .mt-15 { margin-top: 1.5rem; }
+
+    /* ── TABLES ── */
+    .tbl-wrap { overflow-x: auto; margin-bottom: 1.5rem; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+    }
+    th {
+      background: var(--surface2);
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 10px 14px;
+      text-align: right;
+      border-bottom: 2px solid var(--border);
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    td code, th code {
+      direction: ltr;
+      display: inline-block;
+      unicode-bidi: plaintext;
+    }
+    tr:hover td { background: rgba(255,255,255,0.025); }
+
+    /* ── BADGES ── */
+    .badge {
+      display: inline-block;
+      border-radius: 20px;
+      padding: 2px 10px;
+      font-size: 0.73rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .badge-blue   { background: rgba(108,139,239,0.2); color: var(--accent); border: 1px solid rgba(108,139,239,0.35); }
+    .badge-green  { background: rgba(52,211,153,0.15); color: var(--green);  border: 1px solid rgba(52,211,153,0.35); }
+    .badge-yellow { background: rgba(251,191,36,0.15); color: var(--yellow); border: 1px solid rgba(251,191,36,0.35); }
+    .badge-red    { background: rgba(248,113,113,0.15); color: var(--red);   border: 1px solid rgba(248,113,113,0.35); }
+    .badge-cyan   { background: rgba(34,211,238,0.15); color: var(--cyan);  border: 1px solid rgba(34,211,238,0.35); }
+    .badge-purple { background: rgba(167,139,250,0.15); color: var(--accent2); border: 1px solid rgba(167,139,250,0.35); }
+
+    /* ── CODE BLOCK ── */
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.2rem 1.4rem;
+      overflow-x: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
+      color: #c9d1d9;
+      direction: ltr;
+      text-align: left;
+    }
+    pre .k { color: #ff7b72; }
+    pre .s { color: #a5d6ff; }
+    pre .c { color: #8b949e; font-style: italic; }
+    pre .fn { color: #d2a8ff; }
+    pre .d { color: #79c0ff; }
+
+    /* ── CALLOUT ── */
+    .callout {
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.2rem;
+      font-size: 0.88rem;
+      display: flex;
+      gap: 0.8rem;
+      align-items: flex-start;
+    }
+    .callout-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+    .callout.info  { background: rgba(34,211,238,0.08);  border: 1px solid rgba(34,211,238,0.3);  color: #a0e5f0; }
+    .callout.tip   { background: rgba(52,211,153,0.08);  border: 1px solid rgba(52,211,153,0.3);  color: #8ddfc4; }
+    .callout.warn  { background: rgba(251,191,36,0.08);  border: 1px solid rgba(251,191,36,0.3);  color: #e8c978; }
+
+    /* ── CI STEPS ── */
+    .ci-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      padding-left: 2rem;
+      direction: ltr;
+    }
+    .ci-steps::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 14px;
+      bottom: 14px;
+      width: 2px;
+      background: var(--border);
+    }
+    .ci-step {
+      display: flex;
+      gap: 1rem;
+      padding: 0.75rem 0;
+      position: relative;
+      text-align: left;
+    }
+    .ci-step .dot {
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 3px;
+      position: relative;
+      z-index: 1;
+    }
+    .ci-step .step-body { flex: 1; }
+    .ci-step .step-name { font-weight: 600; font-size: 0.92rem; }
+    .ci-step .step-desc { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+    .dot-blue   { background: var(--accent); box-shadow: 0 0 0 3px rgba(108,139,239,0.2); }
+    .dot-green  { background: var(--green);  box-shadow: 0 0 0 3px rgba(52,211,153,0.2); }
+    .dot-purple { background: var(--accent2);box-shadow: 0 0 0 3px rgba(167,139,250,0.2);}
+    .dot-cyan   { background: var(--cyan);   box-shadow: 0 0 0 3px rgba(34,211,238,0.2); }
+    .dot-yellow { background: var(--yellow); box-shadow: 0 0 0 3px rgba(251,191,36,0.2); }
+
+    /* ── STATS ROW ── */
+    .stats-row {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .stat-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.5rem;
+      text-align: center;
+      flex: 1;
+      min-width: 110px;
+    }
+    .stat-box .num { font-size: 2rem; font-weight: 800; }
+    .stat-box .lbl { font-size: 0.75rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+    .stat-blue   .num { color: var(--accent); }
+    .stat-green  .num { color: var(--green); }
+    .stat-cyan   .num { color: var(--cyan); }
+    .stat-purple .num { color: var(--accent2); }
+    .stat-yellow .num { color: var(--yellow); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 4rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    @media (max-width: 900px) {
+      header { padding: 1.5rem 2rem; }
+      main { padding: 2rem 1.5rem; }
+      nav.sidebar { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════ HEADER ══ -->
+<header>
+  <div class="logo">N</div>
+  <div>
+    <h1>Ness Automation — תיעוד ארכיטקטורה</h1>
+    <p>מסגרת בדיקות אוטומטיות ל־TutorialsNinja Demo Store</p>
+  </div>
+  <span class="pill">עדכון אחרון: אפריל 2026</span>
+</header>
+
+<div class="layout">
+
+  <!-- ══════════════════════════════════════════ SIDEBAR ══ -->
+  <nav class="sidebar">
+    <div class="nav-section">
+      <div class="nav-label">כללי</div>
+      <a href="#overview">סקירה כללית</a>
+      <a href="#pyramid">פירמידת הטסטים</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">ארכיטקטורה</div>
+      <a href="#pom">Page Object Model</a>
+      <a href="#services">שכבת ה-API</a>
+      <a href="#server">FastAPI Server</a>
+      <a href="#fixtures">Fixtures</a>
+      <a href="#data">נתוני בדיקה</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">טסטים</div>
+      <a href="#tests-ui">UI Tests</a>
+      <a href="#tests-api">API Tests</a>
+      <a href="#tests-contract">Contract Tests</a>
+      <a href="#tests-unit">Unit Tests</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">DevOps</div>
+      <a href="#cicd">CI/CD Pipeline</a>
+      <a href="#docker">Docker</a>
+      <a href="#reporting">דוחות Allure</a>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════ MAIN ══ -->
+  <main>
+
+    <!-- ── 1. OVERVIEW ── -->
+    <section id="overview">
+      <h2><span class="icon">🗂</span> סקירה כללית</h2>
+
+      <div class="stats-row">
+        <div class="stat-box stat-blue"><div class="num">6</div><div class="lbl">קבצי UI Test</div></div>
+        <div class="stat-box stat-cyan"><div class="num">4</div><div class="lbl">API Tests</div></div>
+        <div class="stat-box stat-purple"><div class="num">4</div><div class="lbl">Contract Suites</div></div>
+        <div class="stat-box stat-green"><div class="num">2</div><div class="lbl">Unit Test files</div></div>
+        <div class="stat-box stat-yellow"><div class="num">5</div><div class="lbl">Page Objects</div></div>
+      </div>
+
+      <p>הפרויקט הוא <strong>מסגרת בדיקות אוטומטיות רב-שכבתית</strong> שנבנתה עבור אתר ה-demo של TutorialsNinja — אתר e-commerce לדוגמה.</p>
+      <p>הארכיטקטורה מיישמת את <strong>פירמידת הטסטים</strong> (testing pyramid) עם ארבע שכבות ברורות: Unit → Contract → API → UI, כאשר כל שכבה בנויה על הקודמת ומספקת כיסוי שונה ומשלים.</p>
+
+      <h3>טכנולוגיות ליבה</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🎭</div>
+          <div class="card-title">Playwright (Python)</div>
+          <div class="card-desc">אוטומציה של דפדפן Chromium לטסטי ה-UI. כל בדיקה פועלת בהקשר (context) נפרד.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🧪</div>
+          <div class="card-title">pytest + pytest-xdist</div>
+          <div class="card-desc">מנוע הרצה ראשי. תמיכה ב-parallel execution עם <code>-n auto --dist loadscope</code>.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📊</div>
+          <div class="card-title">Allure 3</div>
+          <div class="card-desc">דוחות עשירים עם היסטוריה, screenshots בכישלון, ו-GitHub Pages deployment.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <div class="card-title">FastAPI Server</div>
+          <div class="card-desc">שרת אוטומציה מקומי: test-data API, הרצת pytest, דוחות, ו-mock store.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🐳</div>
+          <div class="card-title">Docker</div>
+          <div class="card-desc">סביבת הרצה מבודדת וניתנת לשחזור עבור CI וסביבות ייצור.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔄</div>
+          <div class="card-title">GitHub Actions</div>
+          <div class="card-desc">CI/CD: הרצת טסטים → יצירת דוח Allure → פרסום ב-GitHub Pages.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 2. PYRAMID ── -->
+    <section id="pyramid">
+      <h2><span class="icon">🔺</span> פירמידת הטסטים</h2>
+      <p>הפרויקט מיישם את פירמידת הטסטים הקלאסית — ככל שעולים גבוה יותר הטסטים איטיים יותר ויקרים יותר, אך בודקים תרחישים אינטגרטיביים מורכבים יותר.</p>
+
+      <div class="pyramid">
+        <div class="pyramid-row">
+          <div class="pyramid-bar pyr-ui">
+            <span class="label">🎭 UI Tests (Playwright)</span>
+            <span class="count">6 files · web-ui/</span>
+          </div>
+        </div>
+        <div class="pyramid-row">
+          <div class="pyramid-bar pyr-contract">
+            <span class="label">📋 Contract Tests</span>
+            <span class="count">4 suites · contract/</span>
+          </div>
+        </div>
+        <div class="pyramid-row">
+          <div class="pyramid-bar pyr-api">
+            <span class="label">🔌 API Tests</span>
+            <span class="count">2 suites · api/</span>
+          </div>
+        </div>
+        <div class="pyramid-row">
+          <div class="pyramid-bar pyr-unit">
+            <span class="label">⚙️ Unit Tests</span>
+            <span class="count">2 files · unit/</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tbl-wrap mt-15">
+        <table>
+          <tr>
+            <th>שכבה</th>
+            <th>תיקייה</th>
+            <th>מטרה</th>
+            <th>Marker</th>
+            <th>מהירות</th>
+          </tr>
+          <tr>
+            <td><span class="badge badge-green">Unit</span></td>
+            <td><code>tests/unit/</code></td>
+            <td>בדיקה של לוגיקה עצמאית בלי רשת, דפדפן, או Docker</td>
+            <td>—</td>
+            <td>⚡ מהיר מאוד</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-cyan">API</span></td>
+            <td><code>tests/api/</code></td>
+            <td>שיחות HTTP ישירות לשרת — status codes, cookies, session isolation</td>
+            <td><code>@pytest.mark.api</code></td>
+            <td>🚀 מהיר</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-purple">Contract</span></td>
+            <td><code>tests/contract/</code></td>
+            <td>בדיקת מבנה ה-API — שדות, מזהי מוצר, מחירים, endpoints ציבוריים</td>
+            <td><code>@pytest.mark.contract</code></td>
+            <td>🚀 מהיר</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-blue">UI</span></td>
+            <td><code>tests/web-ui/</code></td>
+            <td>בדיקות E2E מלאות בדפדפן — חיפוש, הוספה לעגלה, רישום משתמש</td>
+            <td><code>@pytest.mark.search / cart / registration</code></td>
+            <td>🐢 איטי יחסית</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- ── 3. POM ── -->
+    <section id="pom">
+      <h2><span class="icon">📄</span> Page Object Model</h2>
+      <p>כל האינטראקציה עם הדפדפן כתובה בקלאסי POM תחת <code>pages/</code>. הטסטים עצמם לא מכילים שום selector ישיר — רק קריאות לפונקציות ה-page objects.</p>
+
+      <div class="pom-tree">
+        <div class="line"><span class="base">BasePage</span> <span class="muted">← pages/base_page.py</span></div>
+        <div class="line"><span class="indent"></span>├── <code class="base">self.alert</code> — AlertComponent זמין לכל הדפים (ירושה)</div>
+        <div class="line"><span class="indent"></span>├── <code class="base">navigate(path, wait_until)</code> — ניווט בסיסי</div>
+        <div class="line"><span class="indent"></span>├── <code class="base">title</code> <span class="muted">@property</span> — כותרת הדף הנוכחי</div>
+        <div class="line"><span class="indent"></span>├── <code class="base">url</code> <span class="muted">@property</span> — URL הדף הנוכחי</div>
+        <div class="line"><span class="indent"></span>├── <code class="base">wait_for_visible(selector, timeout?)</code> — ציפייה לאלמנט גלוי</div>
+        <div class="line"><span class="indent"></span>├── <code class="base">take_screenshot()</code> → bytes — צילום מסך</div>
+        <div class="line"><span class="indent"></span>└── <code class="base">get_error_message()</code> — שגיאת banner/field (דרך self.alert)</div>
+        <div class="line-section"><span class="page">HomePage</span> <span class="muted">← pages/home_page.py</span></div>
+        <div class="line"><span class="indent"></span>├── <code>open()</code></div>
+        <div class="line"><span class="indent"></span>├── <code>search(query)</code></div>
+        <div class="line"><span class="indent"></span>├── <code>go_to_login() / go_to_register()</code></div>
+        <div class="line"><span class="indent"></span>└── <code>is_logged_in() / logout()</code></div>
+        <div class="line-section"><span class="page">SearchResultsPage</span> <span class="muted">← pages/search_results_page.py</span></div>
+        <div class="line"><span class="indent"></span>├── <code>product_names()</code></div>
+        <div class="line"><span class="indent"></span>├── <code>get_products_under_price(query, max_price, limit)</code></div>
+        <div class="line"><span class="indent"></span>├── <code>add_items_to_cart(products)</code> — משתמש ב-<code>self.alert</code> (בסיס)</div>
+        <div class="line"><span class="indent"></span>├── <code>sort_by_name_ascending()</code></div>
+        <div class="line"><span class="indent"></span>├── <code>stored_product_information()</code></div>
+        <div class="line"><span class="indent"></span>└── <code>wait_for_product_results()</code> — קורא ל-<code>wait_for_visible</code> (בסיס)</div>
+        <div class="line-section"><span class="page">CartPage</span> <span class="muted">← pages/cart_page.py</span></div>
+        <div class="line"><span class="indent"></span>├── <code>open()</code></div>
+        <div class="line"><span class="indent"></span>├── <code>get_cart_total()</code></div>
+        <div class="line"><span class="indent"></span>└── <code>is_empty()</code></div>
+        <div class="line-section"><span class="page">RegisterPage</span> <span class="muted">← pages/register_page.py</span></div>
+        <div class="line"><span class="indent"></span>├── <code>register(first_name, last_name, email, …)</code></div>
+        <div class="line"><span class="indent"></span>├── <code>is_registration_successful()</code></div>
+        <div class="line"><span class="indent"></span>└── <code>get_error_message()</code> <span class="muted">← ירושה מ-BasePage</span></div>
+        <div class="line-section"><span class="page">LoginPage</span> <span class="muted">← pages/login_page.py</span></div>
+        <div class="line"><span class="indent"></span>├── <code>login(email, password)</code></div>
+        <div class="line"><span class="indent"></span>├── <code>is_login_successful()</code></div>
+        <div class="line"><span class="indent"></span>└── <code>get_error_message()</code> <span class="muted">← ירושה מ-BasePage</span></div>
+        <div class="line-section"><span class="muted">Components (pages/components/) — ירושה מ-BaseComponent, ללא __init__ מיותר</span></div>
+        <div class="line"><span class="indent"></span>├── <span class="comp">NavBarComponent</span> — חיפוש, ניווט, login status</div>
+        <div class="line"><span class="indent"></span>├── <span class="comp">AlertComponent</span> — banner ושגיאות inline (חי ב-BasePage)</div>
+        <div class="line"><span class="indent"></span>├── <span class="comp">CartSummaryComponent</span> — תקציר עגלה</div>
+        <div class="line"><span class="indent"></span>├── <span class="comp">ProductCardComponent</span> — כרטיס מוצר (scoped ל-Locator, לא לדף)</div>
+        <div class="line"><span class="indent"></span>└── <span class="comp">RegistrationFormComponent</span> — טופס הרשמה</div>
+        <div class="line-section"><span class="model">ProductInfo / StoredProductInfo (dataclasses)</span> <span class="muted">← pages/models.py</span></div>
+        <div class="line"><span class="indent"></span>└── <code>name, price, index / name, picture_url, description, price</code></div>
+      </div>
+
+      <div class="callout tip mt-1">
+        <span class="callout-icon">💡</span>
+        <div><strong>כלל ברזל:</strong> selectors (CSS, XPath, text) נכתבים אך ורק בתוך ה-page objects. טסט שמכיל <code>page.locator()</code> ישירות — לא עבר review.</div>
+      </div>
+    </section>
+
+    <!-- ── 4. SERVICES ── -->
+    <section id="services">
+      <h2><span class="icon">🔌</span> שכבת ה-API Services</h2>
+      <p>בדיקות ה-API וה-contract לא משתמשות ב-Playwright אלא בסשן HTTP ישיר דרך <code>RestClient</code>.</p>
+
+      <div class="flow">
+        <div class="flow-box blue">Test<span class="sub">tests/api/ או contract/</span></div>
+        <div class="flow-arrow">←</div>
+        <div class="flow-box purple">Service<span class="sub">SearchService / CartService</span></div>
+        <div class="flow-arrow">←</div>
+        <div class="flow-box cyan">RestClient<span class="sub">services/rest_client.py</span></div>
+        <div class="flow-arrow">←</div>
+        <div class="flow-box green">requests.Session<span class="sub">+ Retry adapter</span></div>
+        <div class="flow-arrow">←</div>
+        <div class="flow-box yellow">TutorialsNinja API<span class="sub">tutorialsninja.com/demo</span></div>
+      </div>
+
+      <h3>RestClient — services/rest_client.py</h3>
+      <p>Wrapper סביב <code>requests.Session</code> עם retry logic מובנה:</p>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>פרמטר</th><th>ברירת מחדל</th><th>תפקיד</th></tr>
+          <tr><td><code>timeout</code></td><td>15 שניות</td><td>timeout לכל בקשה (ניתן לשינוי per-request)</td></tr>
+          <tr><td><code>retries</code></td><td>3</td><td>ניסיונות חוזרים אוטומטיים</td></tr>
+          <tr><td><code>backoff_factor</code></td><td>0.5</td><td>השהייה אקספוננציאלית בין ניסיונות</td></tr>
+          <tr><td><code>status_forcelist</code></td><td>429, 500, 502, 503, 504</td><td>קודי שגיאה שמפעילים retry</td></tr>
+        </table>
+      </div>
+
+      <h3>Service Classes</h3>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Service</th><th>Method</th><th>Return type</th><th>תפקיד</th></tr>
+          <tr>
+            <td rowspan="5"><span class="badge badge-cyan">SearchService</span></td>
+            <td><code>search(query)</code></td>
+            <td><code class="ret">Response</code></td>
+            <td>GET לדף חיפוש — מחזיר HTML גולמי</td>
+          </tr>
+          <tr>
+            <td><code>product_cards(html)</code></td>
+            <td><code>list[str]</code></td>
+            <td>כמה כרטיסי מוצר יש ב-HTML</td>
+          </tr>
+          <tr>
+            <td><code>product_names(html)</code></td>
+            <td><code>list[str]</code></td>
+            <td>שמות מוצרים מ-HTML</td>
+          </tr>
+          <tr>
+            <td><code>product_ids(html)</code></td>
+            <td><code>list[str]</code></td>
+            <td>IDs מוצרים (cart.add pattern)</td>
+          </tr>
+          <tr>
+            <td><code>prices(html)</code></td>
+            <td><code>list[float]</code></td>
+            <td>מחירים parseable מ-HTML</td>
+          </tr>
+          <tr>
+            <td rowspan="4"><span class="badge badge-cyan">CartService</span></td>
+            <td><code>add_product(product_id, quantity?)</code></td>
+            <td><code class="ret">Response</code></td>
+            <td>POST להוספת מוצר לעגלה</td>
+          </tr>
+          <tr>
+            <td><code>get_cart()</code></td>
+            <td><code class="ret">Response</code></td>
+            <td>GET לדף עגלת הקניות</td>
+          </tr>
+          <tr>
+            <td><code>total(html)</code></td>
+            <td><code>float | None</code></td>
+            <td>חישוב grand total מ-HTML</td>
+          </tr>
+          <tr>
+            <td><code>product_row_sum(html)</code></td>
+            <td><code>float</code></td>
+            <td>סכום שורות לפני Sub-Total</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-cyan">AccountService</span></td>
+            <td><code>get_register_page()</code></td>
+            <td><code class="ret">Response</code></td>
+            <td>GET לדף הרשמה — לבדיקות contract</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-cyan">PublicService</span></td>
+            <td><code>get_path(path)</code></td>
+            <td><code class="ret">Response</code></td>
+            <td>GET לכל endpoint ציבורי — לפי EndpointCase</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- ── 5. SERVER ── -->
+    <section id="server">
+      <h2><span class="icon">⚡</span> FastAPI Automation Server</h2>
+      <p>שרת מקומי ב-<code>server/app.py</code> שמשמש כ-API לניהול הסביבה, הרצת טסטים, וגישה לנתונים. מופעל עם <code>uvicorn</code>.</p>
+
+      <h3>Endpoints</h3>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Method</th><th>Path</th><th>תפקיד</th></tr>
+          <tr><td><span class="badge badge-green">GET</span></td><td><code>/health</code></td><td>בדיקת חיות של השרת</td></tr>
+          <tr><td><span class="badge badge-green">GET</span></td><td><code>/automation/config</code></td><td>קריאת config.yaml</td></tr>
+          <tr><td><span class="badge badge-green">GET</span></td><td><code>/automation/test-data/{key}</code></td><td>נתוני טסט לפי מפתח (search, cart, registration)</td></tr>
+          <tr><td><span class="badge badge-green">GET</span></td><td><code>/automation/secrets/status</code></td><td>האם secrets.json קיים</td></tr>
+          <tr><td><span class="badge badge-green">GET</span></td><td><code>/automation/external/search</code></td><td>חיפוש live ב-TutorialsNinja ומחזיר JSON</td></tr>
+          <tr><td><span class="badge badge-blue">POST</span></td><td><code>/automation/external/cart</code></td><td>יצירת עגלה live לפי test data</td></tr>
+          <tr><td><span class="badge badge-blue">POST</span></td><td><code>/runs/pytest</code></td><td>הרצת pytest async עם args מותאמים (עם סינון injection)</td></tr>
+          <tr><td><span class="badge badge-green">GET</span></td><td><code>/runs/{job_id}</code></td><td>מעקב אחרי job פעיל</td></tr>
+          <tr><td><span class="badge badge-green">GET</span></td><td><code>/reports/allure/status</code></td><td>סטטוס דוח Allure</td></tr>
+          <tr><td><span class="badge badge-blue">POST</span></td><td><code>/reports/allure/generate</code></td><td>יצירת דוח Allure async</td></tr>
+          <tr><td><span class="badge badge-green">GET</span></td><td><code>/mock/products/search</code></td><td>Mock store — חיפוש מוצרים</td></tr>
+          <tr><td><span class="badge badge-blue">POST</span></td><td><code>/mock/cart/add</code></td><td>Mock store — הוספה לעגלה</td></tr>
+          <tr><td><span class="badge badge-green">GET</span></td><td><code>/mock/cart</code></td><td>Mock store — תוכן עגלה + total</td></tr>
+          <tr><td><span class="badge badge-red">DELETE</span></td><td><code>/mock/cart</code></td><td>Mock store — איפוס עגלה</td></tr>
+        </table>
+      </div>
+
+      <div class="callout warn">
+        <span class="callout-icon">🛡️</span>
+        <div><strong>אבטחה:</strong> endpoint <code>/runs/pytest</code> מסנן args שמכילים <code>; && || | &gt; &lt; $( `</code> כדי למנוע command injection.</div>
+      </div>
+
+      <h3>Mock Store</h3>
+      <p>ה-<code>MockStore</code> מכיל 4 מוצרי דוגמה (MacBook, iPhone, Apple Cinema 30, Canon EOS 5D) ועגלה in-memory. משמש לבדיקות unit שלא צריכות רשת אמיתית.</p>
+    </section>
+
+    <!-- ── 6. FIXTURES ── -->
+    <section id="fixtures">
+      <h2><span class="icon">🔧</span> מערכת ה-Fixtures</h2>
+      <p>הפרויקט מחלק fixtures בין שני קבצי <code>conftest.py</code>: root level לדפדפן, ו-<code>tests/conftest.py</code> לשירותים ולאובייקטים.</p>
+
+      <h3>Root conftest.py — Browser Infrastructure</h3>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Fixture</th><th>Scope</th><th>תפקיד</th></tr>
+          <tr><td><code>browser_instance</code></td><td><span class="badge badge-yellow">session</span></td><td>מופע Chromium יחיד לכל הריצה. מאותחל עם הגדרות מ-config.yaml.</td></tr>
+          <tr><td><code>context</code></td><td><span class="badge badge-blue">request</span></td><td>BrowserContext חדש לכל טסט — viewport, base_url, timeout. מבדיל בין טסטים.</td></tr>
+          <tr><td><code>page</code></td><td><span class="badge badge-green">function</span></td><td>Page חדשה לכל פונקציית טסט. נסגרת אוטומטית.</td></tr>
+          <tr><td><code>app_url</code></td><td><span class="badge badge-green">function</span></td><td>base_url מה-config — לשימוש ב-page objects וב-cookie injection.</td></tr>
+        </table>
+      </div>
+
+      <div class="callout info">
+        <span class="callout-icon">📸</span>
+        <div><strong>pytest hook:</strong> <code>pytest_runtest_makereport</code> מצלם screenshot אוטומטית בכל כישלון ומצרף אותה לדוח Allure. לא דורש שינוי בטסטים.</div>
+      </div>
+
+      <h3>tests/conftest.py — Services &amp; Page Objects</h3>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Fixture</th><th>סוג</th><th>תפקיד</th></tr>
+          <tr><td><code>session</code></td><td>HTTP</td><td>RestClient חדש לכל טסט — OCSESSID נפרד, בידוד מלא.</td></tr>
+          <tr><td><code>search_service / cart_service / public_service / account_service</code></td><td>API</td><td>Service objects מחוברים ל-session ו-base_url.</td></tr>
+          <tr><td><code>home_page / search_results_page / cart_page / register_page / login_page</code></td><td>UI</td><td>Page objects מחוברים ל-page ו-app_url.</td></tr>
+          <tr><td><code>search_pages / cart_flow_pages / cart_pages / registration_pages</code></td><td>Composite</td><td>Named tuples (dataclasses) שמאחדים מספר page objects לפי flow.</td></tr>
+          <tr><td><code>registration_data</code></td><td>Data</td><td>נתוני הרשמה מ-secrets.json. מדלג (<code>pytest.skip</code>) אם הסוד לא מוגדר.</td></tr>
+          <tr><td><code>api_cart</code></td><td>Setup</td><td>מכין עגלה מלאה דרך API (ללא דפדפן) ומחזיר OCSESSID + products + thresholds.</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- ── 7. DATA ── -->
+    <section id="data">
+      <h2><span class="icon">📦</span> נתוני בדיקה וקונפיגורציה</h2>
+
+      <h3>config/config.yaml</h3>
+      <p>הגדרות הדפדפן וה-URL. ב-CI מוגדר <code>headless: true</code> אוטומטית על ידי משתנה הסביבה <code>CI=true</code>.</p>
+      <pre>browser: chromium
+headless: false          <span class="c"># CI override: true when CI=true</span>
+slow_mo: 50
+timeout: 10000
+base_url: https://tutorialsninja.com/demo
+viewport:
+  width: 1280
+  height: 720</pre>
+
+      <h3>data/test_data.json</h3>
+      <p>כל נתוני הקלט לטסטים. תומך ב-placeholder <code>{ts}</code> שמוחלף בזמן timestamp בטעינה — מבטיח כתובות email ייחודיות בכל ריצה.</p>
+      <pre>{
+  <span class="s">"search"</span>: {
+    <span class="s">"query"</span>: <span class="s">"MacBook"</span>, <span class="s">"max_price"</span>: 700.0, <span class="s">"limit"</span>: 3
+  },
+  <span class="s">"cart"</span>: { <span class="s">"max_total"</span>: 2100.0 },
+  <span class="s">"registration"</span>: {
+    <span class="s">"email"</span>: <span class="s">"test_{ts}@example.com"</span>,   <span class="c">// timestamp ייחודי</span>
+    <span class="s">"password"</span>: <span class="s">"..."</span>
+  }
+}</pre>
+
+      <h3>utils/data_loader.py — Entry Points</h3>
+      <div class="callout tip">
+        <span class="callout-icon">📌</span>
+        <div>הפונקציות <code>get_config()</code> ו-<code>get_test_data(key)</code> הן <strong>נקודות הכניסה היחידות</strong> לנתוני הקונפיגורציה. אין לקרוא קבצי JSON/YAML ישירות בטסטים.</div>
+      </div>
+    </section>
+
+    <!-- ── 8. UI TESTS ── -->
+    <section id="tests-ui">
+      <h2><span class="icon">🎭</span> UI Tests (Playwright)</h2>
+      <p>בדיקות E2E שמפעילות דפדפן Chromium אמיתי ומדמות משתמש. כל הבדיקות כתובות עם <strong>Allure decorators</strong> — feature, story, title, severity, ו-steps.</p>
+
+      <h3>test_registration.py — רישום משתמש</h3>
+      <div class="tbl-wrap"><table>
+        <tr><th>שם הטסט</th><th>Severity</th><th>מה נבדק</th></tr>
+        <tr>
+          <td><code>test_register_new_user</code></td>
+          <td><span class="badge badge-red">CRITICAL</span></td>
+          <td>זרימת הרשמה מלאה — ניווט → מילוי טופס → ודא הצלחה. משתמש ב-timestamp לאימייל ייחודי.</td>
+        </tr>
+        <tr>
+          <td><code>test_register_missing_fields</code></td>
+          <td><span class="badge badge-yellow">NORMAL</span></td>
+          <td>שליחת טופס ריק → ודא הופעת שגיאת validation.</td>
+        </tr>
+      </table></div>
+
+      <h3>test_search_under_price.py — חיפוש עם סינון מחיר</h3>
+      <div class="tbl-wrap"><table>
+        <tr><th>שם הטסט</th><th>Severity</th><th>מה נבדק</th></tr>
+        <tr>
+          <td><code>test_search_items_under_price</code></td>
+          <td><span class="badge badge-red">CRITICAL</span></td>
+          <td>חיפוש מוצרים מ-test_data, סינון לפי max_price ולפי limit. ודא מספר תוצאות וטיפוס שמות.</td>
+        </tr>
+        <tr>
+          <td><code>test_search_no_results</code></td>
+          <td><span class="badge badge-yellow">NORMAL</span></td>
+          <td>חיפוש עם query שלא קיים → מצפה לרשימה ריקה.</td>
+        </tr>
+        <tr>
+          <td><code>test_search_price_filter_excludes_expensive</code></td>
+          <td><span class="badge badge-yellow">NORMAL</span></td>
+          <td>חיפוש MacBook עם max_price=$1 → לא אמורה להיות תוצאה.</td>
+        </tr>
+        <tr>
+          <td><code>test_search_respects_limit</code></td>
+          <td><span class="badge badge-yellow">NORMAL</span></td>
+          <td>חיפוש Apple עם limit=2 → לא יותר מ-2 תוצאות.</td>
+        </tr>
+      </table></div>
+
+      <h3>test_sort_alphabetically.py — מיון אלפביתי</h3>
+      <div class="tbl-wrap"><table>
+        <tr><th>שם הטסט</th><th>Severity</th><th>מה נבדק</th></tr>
+        <tr>
+          <td><code>test_sort_alphabetically_ascending</code></td>
+          <td><span class="badge badge-red">CRITICAL</span></td>
+          <td>חיפוש iPod → מעבר ל-list view → מיון A-Z → ודא סדר אלפביתי. כולל בדיקת currency dropdown.</td>
+        </tr>
+      </table></div>
+
+      <h3>test_ipod_storage.py — אחסון מידע מוצרים</h3>
+      <div class="tbl-wrap"><table>
+        <tr><th>שם הטסט</th><th>Severity</th><th>מה נבדק</th></tr>
+        <tr>
+          <td><code>test_ipod_storage</code></td>
+          <td><span class="badge badge-red">CRITICAL</span></td>
+          <td>חיפוש iPod → שמירת שם, תמונה, תיאור ומחיר → ודא ש-"iPod" הוסר משמות המוצרים → ודא min/max price.</td>
+        </tr>
+      </table></div>
+
+      <h3>test_add_to_cart.py — הוספה לעגלה</h3>
+      <div class="tbl-wrap"><table>
+        <tr><th>שם הטסט</th><th>Severity</th><th>מה נבדק</th></tr>
+        <tr>
+          <td><code>test_add_items_to_cart</code></td>
+          <td><span class="badge badge-red">CRITICAL</span></td>
+          <td>חיפוש מוצרים → הוספה לעגלה → פתיחת עגלה → ודא לא ריקה.</td>
+        </tr>
+        <tr>
+          <td><code>test_no_items_added_when_nothing_matches</code></td>
+          <td><span class="badge badge-yellow">NORMAL</span></td>
+          <td>max_price=$0.01 → רשימה ריקה → לא מוסיפים כלום.</td>
+        </tr>
+      </table></div>
+
+      <h3>test_cart_total.py — סה"כ עגלה עם API setup</h3>
+      <div class="callout info">
+        <span class="callout-icon">🔀</span>
+        <div><strong>Hybrid setup:</strong> הטסטים האלה משתמשים ב-fixture <code>api_cart</code> — מכינים את העגלה דרך API (מהיר, ללא דפדפן) ואז מזריקים את ה-OCSESSID cookie ל-Playwright context כדי לפתוח את העגלה ב-UI.</div>
+      </div>
+      <div class="tbl-wrap"><table>
+        <tr><th>שם הטסט</th><th>Severity</th><th>מה נבדק</th></tr>
+        <tr>
+          <td><code>test_cart_total_not_exceeds</code></td>
+          <td><span class="badge badge-red">CRITICAL</span></td>
+          <td>ודא total של העגלה ≤ max_total מ-config.</td>
+        </tr>
+        <tr>
+          <td><code>test_cart_total_consistent_with_item_prices</code></td>
+          <td><span class="badge badge-yellow">NORMAL</span></td>
+          <td>ודא total ≤ max_price × מספר פריטים (חסם עליון תיאורטי).</td>
+        </tr>
+      </table></div>
+    </section>
+
+    <!-- ── 9. API TESTS ── -->
+    <section id="tests-api">
+      <h2><span class="icon">🔌</span> API Tests</h2>
+      <p>בדיקות HTTP ישירות לשרת TutorialsNinja — ללא דפדפן. כל טסט מקבל session חדש (OCSESSID נפרד).</p>
+
+      <h3>TestSearchApi</h3>
+      <div class="tbl-wrap"><table>
+        <tr><th>שם הטסט</th><th>Severity</th><th>מה נבדק</th></tr>
+        <tr>
+          <td><code>test_search_returns_200</code></td>
+          <td><span class="badge badge-red">CRITICAL</span></td>
+          <td>GET לחיפוש MacBook → HTTP 200 + יש product cards.</td>
+        </tr>
+        <tr>
+          <td><code>test_search_returns_expected_product_names</code> <span class="badge badge-blue">×2</span></td>
+          <td><span class="badge badge-red">CRITICAL</span></td>
+          <td>Parametrized: MacBook→"MacBook", iPhone→"iPhone". ודא שהשם קיים בתוצאות.</td>
+        </tr>
+        <tr>
+          <td><code>test_search_returns_positive_prices</code> <span class="badge badge-blue">×2</span></td>
+          <td><span class="badge badge-yellow">NORMAL</span></td>
+          <td>Parametrized: כל המחירים חיוביים.</td>
+        </tr>
+        <tr>
+          <td><code>test_search_returns_numeric_product_ids</code> <span class="badge badge-blue">×2</span></td>
+          <td><span class="badge badge-yellow">NORMAL</span></td>
+          <td>Parametrized: כל ה-product IDs הם מספרים.</td>
+        </tr>
+      </table></div>
+
+      <h3>TestCartApi</h3>
+      <div class="tbl-wrap"><table>
+        <tr><th>שם הטסט</th><th>Severity</th><th>מה נבדק</th></tr>
+        <tr>
+          <td><code>test_cart_add_returns_ok_and_sets_session</code></td>
+          <td><span class="badge badge-red">CRITICAL</span></td>
+          <td>POST לעגלה → HTTP 200 → OCSESSID cookie נוצר.</td>
+        </tr>
+        <tr>
+          <td><code>test_cart_page_reflects_api_add</code></td>
+          <td><span class="badge badge-red">CRITICAL</span></td>
+          <td>הוספה → קבלת עגלה → לא ריקה → total > 0.</td>
+        </tr>
+        <tr>
+          <td><code>test_cart_accepts_products_from_search_results</code> <span class="badge badge-blue">×2</span></td>
+          <td><span class="badge badge-yellow">NORMAL</span></td>
+          <td>Parametrized: MacBook ו-iPhone — הוספה מוצלחת לעגלה.</td>
+        </tr>
+        <tr>
+          <td><code>test_sessions_are_isolated</code></td>
+          <td><span class="badge badge-red">CRITICAL</span></td>
+          <td>שני sessions נפרדים — הוספה ב-A לא נראית ב-B. OCSESSID שונים.</td>
+        </tr>
+      </table></div>
+    </section>
+
+    <!-- ── 10. CONTRACT TESTS ── -->
+    <section id="tests-contract">
+      <h2><span class="icon">📋</span> Contract Tests</h2>
+      <p>בדיקות שמוודאות שה-API ממשיך לעמוד ב"חוזה" המובטח — מבנה תגובות, שדות חובה, ו-endpoints ציבוריים. map-driven ו-parametrized.</p>
+
+      <h3>TestPublicEndpointContract</h3>
+      <p>מבוסס על <code>PUBLIC_ENDPOINT_MAP</code> (מוגדר ב-conftest) — 5 endpoints: home, search, cart, register, login.</p>
+      <div class="tbl-wrap"><table>
+        <tr><th>שם הטסט</th><th>IDs</th><th>מה נבדק</th></tr>
+        <tr>
+          <td><code>test_public_endpoint_map_returns_expected_marker</code></td>
+          <td>home, search, cart, register, login</td>
+          <td>כל endpoint מחזיר HTTP 200 + מחרוזת HTML מסוימת (marker).</td>
+        </tr>
+      </table></div>
+
+      <h3>TestSearchContract</h3>
+      <div class="tbl-wrap"><table>
+        <tr><th>שם הטסט</th><th>Severity</th><th>מה נבדק</th></tr>
+        <tr><td><code>test_search_query_map_returns_expected_products</code> <span class="badge badge-blue">×2</span></td><td><span class="badge badge-red">CRITICAL</span></td><td>MacBook ו-iPhone: מספר cards ≥ min_cards, שמות מצופים קיימים ב-HTML.</td></tr>
+        <tr><td><code>test_search_response_has_names_and_prices</code></td><td><span class="badge badge-red">CRITICAL</span></td><td>חיפוש MacBook → יש שמות → יש מחירים.</td></tr>
+        <tr><td><code>test_search_no_results_contract</code></td><td><span class="badge badge-yellow">NORMAL</span></td><td>query אקראי (UUID) → אין product cards.</td></tr>
+        <tr><td><code>test_search_product_ids_are_integers</code></td><td><span class="badge badge-yellow">NORMAL</span></td><td>כל product IDs ניתנים ל-int parsing.</td></tr>
+      </table></div>
+
+      <h3>TestRegistrationPageContract</h3>
+      <div class="tbl-wrap"><table>
+        <tr><th>שם הטסט</th><th>Severity</th><th>מה נבדק</th></tr>
+        <tr><td><code>test_registration_page_has_required_fields</code></td><td><span class="badge badge-red">CRITICAL</span></td><td>דף הרשמה → HTTP 200 → כל שדות החובה קיימים ב-HTML (firstname, lastname, email, telephone, password, confirm).</td></tr>
+        <tr><td><code>test_registration_page_has_privacy_checkbox</code></td><td><span class="badge badge-yellow">NORMAL</span></td><td>checkbox privacy policy קיים.</td></tr>
+      </table></div>
+
+      <h3>TestPriceContract</h3>
+      <div class="tbl-wrap"><table>
+        <tr><th>שם הטסט</th><th>Severity</th><th>מה נבדק</th></tr>
+        <tr><td><code>test_all_search_prices_are_positive</code></td><td><span class="badge badge-red">CRITICAL</span></td><td>כל המחירים בתוצאות חיפוש MacBook > 0.</td></tr>
+        <tr><td><code>test_cart_total_matches_item_sum</code></td><td><span class="badge badge-red">CRITICAL</span></td><td>הוספת מוצר → row sum מול grand total — סטייה < $1.00.</td></tr>
+      </table></div>
+    </section>
+
+    <!-- ── 11. UNIT TESTS ── -->
+    <section id="tests-unit">
+      <h2><span class="icon">⚙️</span> Unit Tests</h2>
+      <p>בדיקות מהירות שלא צריכות רשת, Playwright, Docker, או secrets. משתמשות ב-fakes ו-monkeypatching.</p>
+
+      <h3>test_rest_client.py — RestClient behavior</h3>
+      <div class="tbl-wrap"><table>
+        <tr><th>שם הטסט</th><th>מה נבדק</th></tr>
+        <tr><td><code>test_rest_client_methods_delegate_to_request_with_default_timeout</code></td><td>GET/POST/PUT/DELETE — כולם מעבירים timeout ברירת מחדל (7s) ל-session.request</td></tr>
+        <tr><td><code>test_rest_client_allows_per_request_timeout_override</code></td><td>timeout per-request (30s) מחליף את ברירת המחדל</td></tr>
+      </table></div>
+
+      <h3>test_fastapi_app.py — FastAPI Server (11 tests)</h3>
+      <div class="tbl-wrap"><table>
+        <tr><th>שם הטסט</th><th>מה נבדק</th></tr>
+        <tr><td><code>test_health_returns_ok</code></td><td><code>GET /health</code> → <code>{"status":"ok"}</code></td></tr>
+        <tr><td><code>test_test_data_endpoint_returns_search_data</code></td><td><code>GET /automation/test-data/search</code> → query=MacBook</td></tr>
+        <tr><td><code>test_test_data_endpoint_returns_404_for_unknown_key</code></td><td>key לא קיים → 404 + הודעת שגיאה</td></tr>
+        <tr><td><code>test_allure_status_exposes_report_url</code></td><td>report_url נכון ב-response</td></tr>
+        <tr><td><code>test_allure_summary_returns_404_when_summary_missing</code></td><td>monkeypatching של ALLURE_SUMMARY_PATH → 404</td></tr>
+        <tr><td><code>test_mock_cart_flow</code></td><td>זרימה מלאה: clear → search → add → verify cart</td></tr>
+        <tr><td><code>test_mock_product_search_returns_matching_products</code> <span class="badge badge-blue">×2</span></td><td>MacBook ו-iPhone: product_id, name, price נכונים</td></tr>
+        <tr><td><code>test_mock_cart_add_calculates_total_from_quantity</code> <span class="badge badge-blue">×2</span></td><td>MacBook×1=602, iPhone×3=369.6</td></tr>
+        <tr><td><code>test_mock_cart_add_returns_404_for_unknown_product</code></td><td>product_id לא קיים → 404</td></tr>
+        <tr><td><code>test_run_pytest_rejects_unsafe_arguments</code></td><td>args עם <code>&&</code> → 400 + "Unsafe pytest arg"</td></tr>
+      </table></div>
+    </section>
+
+    <!-- ── 12. CI/CD ── -->
+    <section id="cicd">
+      <h2><span class="icon">🔄</span> CI/CD Pipeline</h2>
+      <p>GitHub Actions workflow ב-<code>.github/workflows/playwright-tests.yml</code> — שני jobs: הרצת טסטים ופרסום דוח.</p>
+
+      <div class="callout info">
+        <span class="callout-icon">⚡</span>
+        <div><strong>concurrency:</strong> הגדרת <code>cancel-in-progress: true</code> מבטיחה שרק ריצה אחת פועלת לכל branch בכל רגע נתון — חוסכת זמן CI.</div>
+      </div>
+
+      <h3>Job 1: Run Tests</h3>
+      <div class="ci-steps">
+        <div class="ci-step"><div class="dot dot-blue"></div><div class="step-body"><div class="step-name">Checkout</div><div class="step-desc">actions/checkout@v4</div></div></div>
+        <div class="ci-step"><div class="dot dot-blue"></div><div class="step-body"><div class="step-name">Set up Python 3.12</div><div class="step-desc">עם pip cache</div></div></div>
+        <div class="ci-step"><div class="dot dot-blue"></div><div class="step-body"><div class="step-name">Install dependencies</div><div class="step-desc">pip install -r requirements.txt</div></div></div>
+        <div class="ci-step"><div class="dot dot-yellow"></div><div class="step-body"><div class="step-name">Write secrets.json</div><div class="step-desc">מ-GitHub Secret TEST_SECRETS_JSON — אם קיים</div></div></div>
+        <div class="ci-step"><div class="dot dot-purple"></div><div class="step-body"><div class="step-name">Cache Playwright browsers</div><div class="step-desc">cache key: hash של requirements.txt</div></div></div>
+        <div class="ci-step"><div class="dot dot-purple"></div><div class="step-body"><div class="step-name">Install Playwright + Chromium</div><div class="step-desc">רק אם cache miss</div></div></div>
+        <div class="ci-step"><div class="dot dot-green"></div><div class="step-body"><div class="step-name">Run tests</div><div class="step-desc">pytest tests/ -n auto --dist loadscope (CI=true → headless)</div></div></div>
+        <div class="ci-step"><div class="dot dot-cyan"></div><div class="step-body"><div class="step-name">Upload Allure results</div><div class="step-desc">artifact: allure-results (7 ימי retention), if: always()</div></div></div>
+      </div>
+
+      <h3 class="mt-15">Job 2: Allure Report → GitHub Pages</h3>
+      <div class="ci-steps">
+        <div class="ci-step"><div class="dot dot-blue"></div><div class="step-body"><div class="step-name">Download Allure results</div><div class="step-desc">artifact מ-job 1</div></div></div>
+        <div class="ci-step"><div class="dot dot-purple"></div><div class="step-body"><div class="step-name">Restore history</div><div class="step-desc">checkout gh-pages branch → שמירת allure-history לגרפי trend</div></div></div>
+        <div class="ci-step"><div class="dot dot-yellow"></div><div class="step-body"><div class="step-name">Install Allure 3 CLI</div><div class="step-desc">npm install -g allure@3</div></div></div>
+        <div class="ci-step"><div class="dot dot-green"></div><div class="step-body"><div class="step-name">Generate report</div><div class="step-desc">allure generate allure-results</div></div></div>
+        <div class="ci-step"><div class="dot dot-cyan"></div><div class="step-body"><div class="step-name">Deploy to GitHub Pages</div><div class="step-desc">peaceiris/actions-gh-pages@v4 → branch gh-pages</div></div></div>
+        <div class="ci-step"><div class="dot dot-blue"></div><div class="step-body"><div class="step-name">Post report link</div><div class="step-desc">סיכום ב-job summary עם link לדוח, branch, commit ו-run number</div></div></div>
+      </div>
+
+      <div class="callout tip mt-12">
+        <span class="callout-icon">📊</span>
+        <div><strong>היסטוריית Trend:</strong> הדוח שומר <code>allure-history/</code> בין ריצות כדי שיוצגו גרפי trend שמראים שינויים לאורך זמן.</div>
+      </div>
+    </section>
+
+    <!-- ── 13. DOCKER ── -->
+    <section id="docker">
+      <h2><span class="icon">🐳</span> Docker</h2>
+      <p>קובץ <code>Dockerfile</code> בונה image עם Python, dependencies, ו-Chromium. משמש להרצה בסביבה מבודקת.</p>
+
+      <pre><span class="c"># בנייה</span>
+docker build -t ness-automation-tests .
+
+<span class="c"># הרצה עם artifacts</span>
+docker run --rm \
+  -v <span class="s">"$PWD/docker-artifacts:/app/test-artifacts"</span> \
+  ness-automation-tests \
+  pytest tests/ --alluredir=/app/test-artifacts/allure-results</pre>
+
+      <div class="callout info">
+        <span class="callout-icon">🔒</span>
+        <div><strong>.dockerignore:</strong> מוגדר כדי לא לכלול <code>allure-results/</code>, <code>allure-report/</code>, <code>docker-artifacts/</code>, <code>data/secrets.json</code>, ו-caches.</div>
+      </div>
+    </section>
+
+    <!-- ── 14. REPORTING ── -->
+    <section id="reporting">
+      <h2><span class="icon">📊</span> דוחות Allure</h2>
+      <p>כל הטסטים כתובים עם Allure decorators לדוח עשיר ואינפורמטיבי.</p>
+
+      <h3>Decorators שבשימוש</h3>
+      <div class="tbl-wrap"><table>
+        <tr><th>Decorator</th><th>תפקיד</th><th>ערכים לדוגמה</th></tr>
+        <tr><td><code>@allure.feature</code></td><td>קיבוץ טסטים לפי feature</td><td>Search, Cart, Registration, API Tests, Contract Tests</td></tr>
+        <tr><td><code>@allure.story</code></td><td>story בתוך feature</td><td>Search with price filter, addItemsToCart</td></tr>
+        <tr><td><code>@allure.title</code></td><td>שם קריא לאדם</td><td>"Search returns 200 and non-empty HTML"</td></tr>
+        <tr><td><code>@allure.severity</code></td><td>רמת חשיבות</td><td>CRITICAL, NORMAL</td></tr>
+        <tr><td><code>with allure.step(...)</code></td><td>שלבים פנימיים בטסט</td><td>מה שרואים בדוח כ-nested steps</td></tr>
+        <tr><td><code>allure.attach(...)</code></td><td>צירוף artifacts</td><td>screenshots, JSON, TEXT</td></tr>
+      </table></div>
+
+      <h3>הרצה מקומית</h3>
+      <pre><span class="c"># הרצה עם שמירת תוצאות</span>
+pytest
+
+<span class="c"># יצירת דוח</span>
+npm run allure:generate
+
+<span class="c"># פתיחת דוח בדפדפן</span>
+npm run allure:open</pre>
+
+      <div class="callout tip">
+        <span class="callout-icon">🖼️</span>
+        <div><strong>Screenshot אוטומטי:</strong> ה-hook <code>pytest_runtest_makereport</code> ב-root conftest מצרף screenshot ל-Allure בכל כישלון — ללא צורך בשינוי בטסטים עצמם.</div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <span>Ness Automation Test Suite — Architecture Docs</span>
+  <span>נוצר: אפריל 2026</span>
+</footer>
+
+<script>
+  // Highlight active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav.sidebar a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        const active = document.querySelector(`nav.sidebar a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

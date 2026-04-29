@@ -1,20 +1,12 @@
-from playwright.sync_api import Page, expect
+from playwright.sync_api import expect
 
 from pages.components.base_component import BaseComponent
 
 
 class AlertComponent(BaseComponent):
-    """
-    Flash messages and inline validation errors.
-    Shared by Login, Register, and Search results pages.
-    """
-
     _SUCCESS = ".alert-success"
     _DANGER = ".alert-danger"
     _FIELD_ERROR = ".text-danger"
-
-    def __init__(self, page: Page) -> None:
-        super().__init__(page)
 
     def get_error(self) -> str:
         """Return the first visible error text (banner or inline field error)."""
