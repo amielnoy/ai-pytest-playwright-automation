@@ -257,11 +257,36 @@
     .pom-tree .line-section { padding: 2px 0; margin-top: 0.8rem; }
     .pom-tree .muted { color: var(--muted); }
     .callout.mt-1 { margin-top: 1rem; }
-    .card-title-cyan { color: var(--cyan); }
     code.ret { color: var(--green); }
     code { direction: ltr; unicode-bidi: plaintext; }
     .mt-12 { margin-top: 1.2rem; }
     .mt-15 { margin-top: 1.5rem; }
+
+    /* ── DOCUMENTATION BLOCKS ── */
+    .section-intro {
+      color: var(--muted);
+      max-width: 900px;
+    }
+    .doc-block {
+      background: rgba(255,255,255,0.015);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.2rem 1.3rem 0.2rem;
+      margin: 1.4rem 0 1.8rem;
+    }
+    .doc-block h3:first-child {
+      margin-top: 0;
+    }
+    .doc-note {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-bottom: 1rem;
+    }
+    .test-suite-title {
+      color: var(--cyan);
+      font-size: 0.95rem;
+      margin-top: 1.2rem;
+    }
 
     /* ── TABLES ── */
     .tbl-wrap { overflow-x: auto; margin-bottom: 1.5rem; }
@@ -486,14 +511,14 @@
 
       <div class="stats-row">
         <div class="stat-box stat-blue"><div class="num">6</div><div class="lbl">קבצי UI Test</div></div>
-        <div class="stat-box stat-cyan"><div class="num">4</div><div class="lbl">API Tests</div></div>
+        <div class="stat-box stat-cyan"><div class="num">2</div><div class="lbl">API Test files</div></div>
         <div class="stat-box stat-purple"><div class="num">4</div><div class="lbl">Contract Suites</div></div>
         <div class="stat-box stat-green"><div class="num">2</div><div class="lbl">Unit Test files</div></div>
         <div class="stat-box stat-yellow"><div class="num">5</div><div class="lbl">Page Objects</div></div>
       </div>
 
       <p>הפרויקט הוא <strong>מסגרת בדיקות אוטומטיות רב-שכבתית</strong> שנבנתה עבור אתר ה-demo של TutorialsNinja — אתר e-commerce לדוגמה.</p>
-      <p>הארכיטקטורה מיישמת את <strong>פירמידת הטסטים</strong> (testing pyramid) עם ארבע שכבות ברורות: Unit → Contract → API → UI, כאשר כל שכבה בנויה על הקודמת ומספקת כיסוי שונה ומשלים.</p>
+      <p>הארכיטקטורה מיישמת את <strong>פירמידת הטסטים</strong> (testing pyramid) עם ארבע שכבות ברורות: Unit ← Contract ← API ← UI, כאשר כל שכבה בנויה על הקודמת ומספקת כיסוי שונה ומשלים.</p>
 
       <h3>טכנולוגיות ליבה</h3>
       <div class="card-grid">
@@ -525,7 +550,7 @@
         <div class="card">
           <div class="card-icon">🔄</div>
           <div class="card-title">GitHub Actions</div>
-          <div class="card-desc">CI/CD: הרצת טסטים → יצירת דוח Allure → פרסום ב-GitHub Pages.</div>
+          <div class="card-desc">CI/CD: הרצת טסטים ← יצירת דוח Allure ← פרסום ב-GitHub Pages.</div>
         </div>
       </div>
     </section>
@@ -551,7 +576,7 @@
         <div class="pyramid-row">
           <div class="pyramid-bar pyr-api">
             <span class="label">🔌 API Tests</span>
-            <span class="count">2 suites · api/</span>
+            <span class="count">2 files · 18 cases · api/</span>
           </div>
         </div>
         <div class="pyramid-row">
@@ -615,7 +640,7 @@
         <div class="line"><span class="indent"></span>├── <code class="base">title</code> <span class="muted">@property</span> — כותרת הדף הנוכחי</div>
         <div class="line"><span class="indent"></span>├── <code class="base">url</code> <span class="muted">@property</span> — URL הדף הנוכחי</div>
         <div class="line"><span class="indent"></span>├── <code class="base">wait_for_visible(selector, timeout?)</code> — ציפייה לאלמנט גלוי</div>
-        <div class="line"><span class="indent"></span>├── <code class="base">take_screenshot()</code> → bytes — צילום מסך</div>
+        <div class="line"><span class="indent"></span>├── <code class="base">take_screenshot()</code> ← bytes — צילום מסך</div>
         <div class="line"><span class="indent"></span>└── <code class="base">get_error_message()</code> — שגיאת banner/field (דרך self.alert)</div>
         <div class="line-section"><span class="page">HomePage</span> <span class="muted">← pages/home_page.py</span></div>
         <div class="line"><span class="indent"></span>├── <code>open()</code></div>
@@ -663,14 +688,14 @@
       <p>בדיקות ה-API וה-contract לא משתמשות ב-Playwright אלא בסשן HTTP ישיר דרך <code>RestClient</code>.</p>
 
       <div class="flow">
-        <div class="flow-box blue">Test<span class="sub">tests/api/ או contract/</span></div>
-        <div class="flow-arrow">→</div>
+        <div class="flow-box blue">Test<span class="sub">api / api_integrations / contract</span></div>
+        <div class="flow-arrow">←</div>
         <div class="flow-box purple">Service<span class="sub">SearchService / CartService</span></div>
-        <div class="flow-arrow">→</div>
+        <div class="flow-arrow">←</div>
         <div class="flow-box cyan">RestClient<span class="sub">services/rest_client.py</span></div>
-        <div class="flow-arrow">→</div>
+        <div class="flow-arrow">←</div>
         <div class="flow-box green">requests.Session<span class="sub">+ Retry adapter</span></div>
-        <div class="flow-arrow">→</div>
+        <div class="flow-arrow">←</div>
         <div class="flow-box yellow">TutorialsNinja API<span class="sub">tutorialsninja.com/demo</span></div>
       </div>
 
@@ -763,7 +788,7 @@
         <table>
           <tr><th>Method</th><th>Path</th><th>תפקיד</th></tr>
           <tr><td><span class="badge badge-green">GET</span></td><td><code>/health</code></td><td>בדיקת חיות של השרת</td></tr>
-          <tr><td><span class="badge badge-green">GET</span></td><td><code>/automation/config</code></td><td>קריאת config.yaml</td></tr>
+          <tr><td><span class="badge badge-green">GET</span></td><td><code>/automation/config</code></td><td>קריאת config.json</td></tr>
           <tr><td><span class="badge badge-green">GET</span></td><td><code>/automation/test-data/{key}</code></td><td>נתוני טסט לפי מפתח (search, cart, registration)</td></tr>
           <tr><td><span class="badge badge-green">GET</span></td><td><code>/automation/secrets/status</code></td><td>האם secrets.json קיים</td></tr>
           <tr><td><span class="badge badge-green">GET</span></td><td><code>/automation/external/search</code></td><td>חיפוש live ב-TutorialsNinja ומחזיר JSON</td></tr>
@@ -797,7 +822,7 @@
       <div class="tbl-wrap">
         <table>
           <tr><th>Fixture</th><th>Scope</th><th>תפקיד</th></tr>
-          <tr><td><code>browser_instance</code></td><td><span class="badge badge-yellow">session</span></td><td>מופע Chromium יחיד לכל הריצה. מאותחל עם הגדרות מ-config.yaml.</td></tr>
+          <tr><td><code>browser_instance</code></td><td><span class="badge badge-yellow">session</span></td><td>מופע Chromium יחיד לכל הריצה. מאותחל עם הגדרות מ-config.json.</td></tr>
           <tr><td><code>context</code></td><td><span class="badge badge-blue">request</span></td><td>BrowserContext חדש לכל טסט — viewport, base_url, timeout. מבדיל בין טסטים.</td></tr>
           <tr><td><code>page</code></td><td><span class="badge badge-green">function</span></td><td>Page חדשה לכל פונקציית טסט. נסגרת אוטומטית.</td></tr>
           <tr><td><code>app_url</code></td><td><span class="badge badge-green">function</span></td><td>base_url מה-config — לשימוש ב-page objects וב-cookie injection.</td></tr>
@@ -827,16 +852,19 @@
     <section id="data">
       <h2><span class="icon">📦</span> נתוני בדיקה וקונפיגורציה</h2>
 
-      <h3>config/config.yaml</h3>
+      <h3>config/config.json</h3>
       <p>הגדרות הדפדפן וה-URL. ב-CI מוגדר <code>headless: true</code> אוטומטית על ידי משתנה הסביבה <code>CI=true</code>.</p>
-      <pre>browser: chromium
-headless: false          <span class="c"># CI override: true when CI=true</span>
-slow_mo: 50
-timeout: 10000
-base_url: https://tutorialsninja.com/demo
-viewport:
-  width: 1280
-  height: 720</pre>
+      <pre>{
+  <span class="s">"base_url"</span>: <span class="s">"https://tutorialsninja.com/demo"</span>,
+  <span class="s">"browser"</span>: <span class="s">"chromium"</span>,
+  <span class="s">"headless"</span>: false,
+  <span class="s">"slow_mo"</span>: 500,
+  <span class="s">"timeout"</span>: 30000,
+  <span class="s">"viewport"</span>: {
+    <span class="s">"width"</span>: 1280,
+    <span class="s">"height"</span>: 720
+  }
+}</pre>
 
       <h3>data/test_data.json</h3>
       <p>כל נתוני הקלט לטסטים. תומך ב-placeholder <code>{ts}</code> שמוחלף בזמן timestamp בטעינה — מבטיח כתובות email ייחודיות בכל ריצה.</p>
@@ -869,12 +897,12 @@ viewport:
         <tr>
           <td><code>test_register_new_user</code></td>
           <td><span class="badge badge-red">CRITICAL</span></td>
-          <td>זרימת הרשמה מלאה — ניווט → מילוי טופס → ודא הצלחה. משתמש ב-timestamp לאימייל ייחודי.</td>
+          <td>זרימת הרשמה מלאה — ניווט ← מילוי טופס ← ודא הצלחה. משתמש ב-timestamp לאימייל ייחודי.</td>
         </tr>
         <tr>
           <td><code>test_register_missing_fields</code></td>
           <td><span class="badge badge-yellow">NORMAL</span></td>
-          <td>שליחת טופס ריק → ודא הופעת שגיאת validation.</td>
+          <td>שליחת טופס ריק ← ודא הופעת שגיאת validation.</td>
         </tr>
       </table></div>
 
@@ -889,17 +917,17 @@ viewport:
         <tr>
           <td><code>test_search_no_results</code></td>
           <td><span class="badge badge-yellow">NORMAL</span></td>
-          <td>חיפוש עם query שלא קיים → מצפה לרשימה ריקה.</td>
+          <td>חיפוש עם query שלא קיים ← מצפה לרשימה ריקה.</td>
         </tr>
         <tr>
           <td><code>test_search_price_filter_excludes_expensive</code></td>
           <td><span class="badge badge-yellow">NORMAL</span></td>
-          <td>חיפוש MacBook עם max_price=$1 → לא אמורה להיות תוצאה.</td>
+          <td>חיפוש MacBook עם max_price=$1 ← לא אמורה להיות תוצאה.</td>
         </tr>
         <tr>
           <td><code>test_search_respects_limit</code></td>
           <td><span class="badge badge-yellow">NORMAL</span></td>
-          <td>חיפוש Apple עם limit=2 → לא יותר מ-2 תוצאות.</td>
+          <td>חיפוש Apple עם limit=2 ← לא יותר מ-2 תוצאות.</td>
         </tr>
       </table></div>
 
@@ -909,7 +937,7 @@ viewport:
         <tr>
           <td><code>test_sort_alphabetically_ascending</code></td>
           <td><span class="badge badge-red">CRITICAL</span></td>
-          <td>חיפוש iPod → מעבר ל-list view → מיון A-Z → ודא סדר אלפביתי. כולל בדיקת currency dropdown.</td>
+          <td>חיפוש iPod ← מעבר ל-list view ← מיון A-Z ← ודא סדר אלפביתי. כולל בדיקת currency dropdown.</td>
         </tr>
       </table></div>
 
@@ -919,7 +947,7 @@ viewport:
         <tr>
           <td><code>test_ipod_storage</code></td>
           <td><span class="badge badge-red">CRITICAL</span></td>
-          <td>חיפוש iPod → שמירת שם, תמונה, תיאור ומחיר → ודא ש-"iPod" הוסר משמות המוצרים → ודא min/max price.</td>
+          <td>חיפוש iPod ← שמירת שם, תמונה, תיאור ומחיר ← ודא ש-"iPod" הוסר משמות המוצרים ← ודא min/max price.</td>
         </tr>
       </table></div>
 
@@ -929,12 +957,12 @@ viewport:
         <tr>
           <td><code>test_add_items_to_cart</code></td>
           <td><span class="badge badge-red">CRITICAL</span></td>
-          <td>חיפוש מוצרים → הוספה לעגלה → פתיחת עגלה → ודא לא ריקה.</td>
+          <td>חיפוש מוצרים ← הוספה לעגלה ← פתיחת עגלה ← ודא לא ריקה.</td>
         </tr>
         <tr>
           <td><code>test_no_items_added_when_nothing_matches</code></td>
           <td><span class="badge badge-yellow">NORMAL</span></td>
-          <td>max_price=$0.01 → רשימה ריקה → לא מוסיפים כלום.</td>
+          <td>max_price=$0.01 ← רשימה ריקה ← לא מוסיפים כלום.</td>
         </tr>
       </table></div>
 
@@ -961,57 +989,107 @@ viewport:
     <!-- ── 9. API TESTS ── -->
     <section id="tests-api">
       <h2><span class="icon">🔌</span> API Tests</h2>
-      <p>בדיקות HTTP ישירות לשרת TutorialsNinja — ללא דפדפן. כל טסט מקבל session חדש (OCSESSID נפרד).</p>
+      <p class="section-intro">בדיקות HTTP ישירות לשרת TutorialsNinja — ללא דפדפן. כל טסט מקבל session חדש (OCSESSID נפרד). התיקייה מחולקת לשני קבצים: בדיקות API בסיסיות ובדיקות אינטגרציה רחבות יותר.</p>
 
-      <h3>TestSearchApi</h3>
-      <div class="tbl-wrap"><table>
-        <tr><th>שם הטסט</th><th>Severity</th><th>מה נבדק</th></tr>
-        <tr>
-          <td><code>test_search_returns_200</code></td>
-          <td><span class="badge badge-red">CRITICAL</span></td>
-          <td>GET לחיפוש MacBook → HTTP 200 + יש product cards.</td>
-        </tr>
-        <tr>
-          <td><code>test_search_returns_expected_product_names</code> <span class="badge badge-blue">×2</span></td>
-          <td><span class="badge badge-red">CRITICAL</span></td>
-          <td>Parametrized: MacBook→"MacBook", iPhone→"iPhone". ודא שהשם קיים בתוצאות.</td>
-        </tr>
-        <tr>
-          <td><code>test_search_returns_positive_prices</code> <span class="badge badge-blue">×2</span></td>
-          <td><span class="badge badge-yellow">NORMAL</span></td>
-          <td>Parametrized: כל המחירים חיוביים.</td>
-        </tr>
-        <tr>
-          <td><code>test_search_returns_numeric_product_ids</code> <span class="badge badge-blue">×2</span></td>
-          <td><span class="badge badge-yellow">NORMAL</span></td>
-          <td>Parametrized: כל ה-product IDs הם מספרים.</td>
-        </tr>
-      </table></div>
+      <div class="doc-block">
+        <h3>test_api.py — API smoke &amp; behavior</h3>
+        <p class="doc-note">בדיקות מהירות יחסית שמוודאות שהשירותים המרכזיים חיים: חיפוש, מחירים, מזהי מוצרים, הוספה לעגלה ובידוד sessions.</p>
 
-      <h3>TestCartApi</h3>
-      <div class="tbl-wrap"><table>
-        <tr><th>שם הטסט</th><th>Severity</th><th>מה נבדק</th></tr>
-        <tr>
-          <td><code>test_cart_add_returns_ok_and_sets_session</code></td>
-          <td><span class="badge badge-red">CRITICAL</span></td>
-          <td>POST לעגלה → HTTP 200 → OCSESSID cookie נוצר.</td>
-        </tr>
-        <tr>
-          <td><code>test_cart_page_reflects_api_add</code></td>
-          <td><span class="badge badge-red">CRITICAL</span></td>
-          <td>הוספה → קבלת עגלה → לא ריקה → total > 0.</td>
-        </tr>
-        <tr>
-          <td><code>test_cart_accepts_products_from_search_results</code> <span class="badge badge-blue">×2</span></td>
-          <td><span class="badge badge-yellow">NORMAL</span></td>
-          <td>Parametrized: MacBook ו-iPhone — הוספה מוצלחת לעגלה.</td>
-        </tr>
-        <tr>
-          <td><code>test_sessions_are_isolated</code></td>
-          <td><span class="badge badge-red">CRITICAL</span></td>
-          <td>שני sessions נפרדים — הוספה ב-A לא נראית ב-B. OCSESSID שונים.</td>
-        </tr>
-      </table></div>
+        <h4 class="test-suite-title">TestSearchApi</h4>
+        <div class="tbl-wrap"><table>
+          <tr><th>שם הטסט</th><th>Severity</th><th>מה נבדק</th></tr>
+          <tr>
+            <td><code>test_search_returns_200</code></td>
+            <td><span class="badge badge-red">CRITICAL</span></td>
+            <td>GET לחיפוש MacBook ← HTTP 200 + יש product cards.</td>
+          </tr>
+          <tr>
+            <td><code>test_search_returns_expected_product_names</code> <span class="badge badge-blue">×2</span></td>
+            <td><span class="badge badge-red">CRITICAL</span></td>
+            <td>Parametrized: MacBook←"MacBook", iPhone←"iPhone". ודא שהשם קיים בתוצאות.</td>
+          </tr>
+          <tr>
+            <td><code>test_search_returns_positive_prices</code> <span class="badge badge-blue">×2</span></td>
+            <td><span class="badge badge-yellow">NORMAL</span></td>
+            <td>Parametrized: כל המחירים חיוביים.</td>
+          </tr>
+          <tr>
+            <td><code>test_search_returns_numeric_product_ids</code> <span class="badge badge-blue">×2</span></td>
+            <td><span class="badge badge-yellow">NORMAL</span></td>
+            <td>Parametrized: כל ה-product IDs הם מספרים.</td>
+          </tr>
+        </table></div>
+
+        <h4 class="test-suite-title">TestCartApi</h4>
+        <div class="tbl-wrap"><table>
+          <tr><th>שם הטסט</th><th>Severity</th><th>מה נבדק</th></tr>
+          <tr>
+            <td><code>test_cart_add_returns_ok_and_sets_session</code></td>
+            <td><span class="badge badge-red">CRITICAL</span></td>
+            <td>POST לעגלה ← HTTP 200 ← OCSESSID cookie נוצר.</td>
+          </tr>
+          <tr>
+            <td><code>test_cart_page_reflects_api_add</code></td>
+            <td><span class="badge badge-red">CRITICAL</span></td>
+            <td>הוספה ← קבלת עגלה ← לא ריקה ← total > 0.</td>
+          </tr>
+          <tr>
+            <td><code>test_cart_accepts_products_from_search_results</code> <span class="badge badge-blue">×2</span></td>
+            <td><span class="badge badge-yellow">NORMAL</span></td>
+            <td>Parametrized: MacBook ו-iPhone — הוספה מוצלחת לעגלה.</td>
+          </tr>
+          <tr>
+            <td><code>test_sessions_are_isolated</code></td>
+            <td><span class="badge badge-red">CRITICAL</span></td>
+            <td>שני sessions נפרדים — הוספה ב-A לא נראית ב-B. OCSESSID שונים.</td>
+          </tr>
+        </table></div>
+      </div>
+
+      <div class="doc-block">
+        <h3>test_api_integrations.py — API integration coverage</h3>
+        <p class="doc-note">בדיקות אינטגרציה שמחברות כמה פעולות או בודקות חוזק parsing והתנהגות state מול האתר החי. הן עדיין רצות בלי דפדפן, אבל בודקות תרחישים רחבים יותר מאשר smoke tests.</p>
+
+        <h4 class="test-suite-title">TestSearchApiIntegration</h4>
+        <div class="tbl-wrap"><table>
+          <tr><th>שם הטסט</th><th>Severity</th><th>מה נבדק</th></tr>
+          <tr>
+            <td><code>test_search_unknown_query_returns_no_product_cards</code></td>
+            <td><span class="badge badge-yellow">NORMAL</span></td>
+            <td>query אקראי שלא אמור להחזיר מוצרים ← HTTP 200 וללא product cards.</td>
+          </tr>
+          <tr>
+            <td><code>test_search_product_names_are_non_empty</code></td>
+            <td><span class="badge badge-yellow">NORMAL</span></td>
+            <td>חיפוש iPod ← כל שמות המוצרים שנשלפו מה-HTML לא ריקים.</td>
+          </tr>
+          <tr>
+            <td><code>test_search_product_cards_have_ids_and_names</code></td>
+            <td><span class="badge badge-yellow">NORMAL</span></td>
+            <td>חיפוש MacBook ← לכל product card יש שם, ויש לפחות product ID אחד לכל כרטיס.</td>
+          </tr>
+        </table></div>
+
+        <h4 class="test-suite-title">TestCartApiIntegration</h4>
+        <div class="tbl-wrap"><table>
+          <tr><th>שם הטסט</th><th>Severity</th><th>מה נבדק</th></tr>
+          <tr>
+            <td><code>test_new_session_cart_starts_empty</code></td>
+            <td><span class="badge badge-yellow">NORMAL</span></td>
+            <td>session חדש ← GET לעגלה ← העגלה ריקה.</td>
+          </tr>
+          <tr>
+            <td><code>test_cart_total_positive_after_adding_quantity_two</code></td>
+            <td><span class="badge badge-yellow">NORMAL</span></td>
+            <td>הוספת MacBook בכמות 2 ← total parseable וחיובי.</td>
+          </tr>
+          <tr>
+            <td><code>test_cart_keeps_multiple_products_in_same_session</code></td>
+            <td><span class="badge badge-yellow">NORMAL</span></td>
+            <td>הוספת MacBook ו-iPhone באותו session ← row sum ו-grand total חיוביים.</td>
+          </tr>
+        </table></div>
+      </div>
     </section>
 
     <!-- ── 10. CONTRACT TESTS ── -->
@@ -1034,15 +1112,15 @@ viewport:
       <div class="tbl-wrap"><table>
         <tr><th>שם הטסט</th><th>Severity</th><th>מה נבדק</th></tr>
         <tr><td><code>test_search_query_map_returns_expected_products</code> <span class="badge badge-blue">×2</span></td><td><span class="badge badge-red">CRITICAL</span></td><td>MacBook ו-iPhone: מספר cards ≥ min_cards, שמות מצופים קיימים ב-HTML.</td></tr>
-        <tr><td><code>test_search_response_has_names_and_prices</code></td><td><span class="badge badge-red">CRITICAL</span></td><td>חיפוש MacBook → יש שמות → יש מחירים.</td></tr>
-        <tr><td><code>test_search_no_results_contract</code></td><td><span class="badge badge-yellow">NORMAL</span></td><td>query אקראי (UUID) → אין product cards.</td></tr>
+        <tr><td><code>test_search_response_has_names_and_prices</code></td><td><span class="badge badge-red">CRITICAL</span></td><td>חיפוש MacBook ← יש שמות ← יש מחירים.</td></tr>
+        <tr><td><code>test_search_no_results_contract</code></td><td><span class="badge badge-yellow">NORMAL</span></td><td>query אקראי (UUID) ← אין product cards.</td></tr>
         <tr><td><code>test_search_product_ids_are_integers</code></td><td><span class="badge badge-yellow">NORMAL</span></td><td>כל product IDs ניתנים ל-int parsing.</td></tr>
       </table></div>
 
       <h3>TestRegistrationPageContract</h3>
       <div class="tbl-wrap"><table>
         <tr><th>שם הטסט</th><th>Severity</th><th>מה נבדק</th></tr>
-        <tr><td><code>test_registration_page_has_required_fields</code></td><td><span class="badge badge-red">CRITICAL</span></td><td>דף הרשמה → HTTP 200 → כל שדות החובה קיימים ב-HTML (firstname, lastname, email, telephone, password, confirm).</td></tr>
+        <tr><td><code>test_registration_page_has_required_fields</code></td><td><span class="badge badge-red">CRITICAL</span></td><td>דף הרשמה ← HTTP 200 ← כל שדות החובה קיימים ב-HTML (firstname, lastname, email, telephone, password, confirm).</td></tr>
         <tr><td><code>test_registration_page_has_privacy_checkbox</code></td><td><span class="badge badge-yellow">NORMAL</span></td><td>checkbox privacy policy קיים.</td></tr>
       </table></div>
 
@@ -1050,7 +1128,7 @@ viewport:
       <div class="tbl-wrap"><table>
         <tr><th>שם הטסט</th><th>Severity</th><th>מה נבדק</th></tr>
         <tr><td><code>test_all_search_prices_are_positive</code></td><td><span class="badge badge-red">CRITICAL</span></td><td>כל המחירים בתוצאות חיפוש MacBook > 0.</td></tr>
-        <tr><td><code>test_cart_total_matches_item_sum</code></td><td><span class="badge badge-red">CRITICAL</span></td><td>הוספת מוצר → row sum מול grand total — סטייה < $1.00.</td></tr>
+        <tr><td><code>test_cart_total_matches_item_sum</code></td><td><span class="badge badge-red">CRITICAL</span></td><td>הוספת מוצר ← row sum מול grand total — סטייה < $1.00.</td></tr>
       </table></div>
     </section>
 
@@ -1066,19 +1144,19 @@ viewport:
         <tr><td><code>test_rest_client_allows_per_request_timeout_override</code></td><td>timeout per-request (30s) מחליף את ברירת המחדל</td></tr>
       </table></div>
 
-      <h3>test_fastapi_app.py — FastAPI Server (11 tests)</h3>
+      <h3>test_fastapi_app.py — FastAPI Server (12 tests)</h3>
       <div class="tbl-wrap"><table>
         <tr><th>שם הטסט</th><th>מה נבדק</th></tr>
-        <tr><td><code>test_health_returns_ok</code></td><td><code>GET /health</code> → <code>{"status":"ok"}</code></td></tr>
-        <tr><td><code>test_test_data_endpoint_returns_search_data</code></td><td><code>GET /automation/test-data/search</code> → query=MacBook</td></tr>
-        <tr><td><code>test_test_data_endpoint_returns_404_for_unknown_key</code></td><td>key לא קיים → 404 + הודעת שגיאה</td></tr>
+        <tr><td><code>test_health_returns_ok</code></td><td><code>GET /health</code> ← <code>{"status":"ok"}</code></td></tr>
+        <tr><td><code>test_test_data_endpoint_returns_search_data</code></td><td><code>GET /automation/test-data/search</code> ← query=MacBook</td></tr>
+        <tr><td><code>test_test_data_endpoint_returns_404_for_unknown_key</code></td><td>key לא קיים ← 404 + הודעת שגיאה</td></tr>
         <tr><td><code>test_allure_status_exposes_report_url</code></td><td>report_url נכון ב-response</td></tr>
-        <tr><td><code>test_allure_summary_returns_404_when_summary_missing</code></td><td>monkeypatching של ALLURE_SUMMARY_PATH → 404</td></tr>
-        <tr><td><code>test_mock_cart_flow</code></td><td>זרימה מלאה: clear → search → add → verify cart</td></tr>
+        <tr><td><code>test_allure_summary_returns_404_when_summary_missing</code></td><td>monkeypatching של ALLURE_SUMMARY_PATH ← 404</td></tr>
+        <tr><td><code>test_mock_cart_flow</code></td><td>זרימה מלאה: clear ← search ← add ← verify cart</td></tr>
         <tr><td><code>test_mock_product_search_returns_matching_products</code> <span class="badge badge-blue">×2</span></td><td>MacBook ו-iPhone: product_id, name, price נכונים</td></tr>
         <tr><td><code>test_mock_cart_add_calculates_total_from_quantity</code> <span class="badge badge-blue">×2</span></td><td>MacBook×1=602, iPhone×3=369.6</td></tr>
-        <tr><td><code>test_mock_cart_add_returns_404_for_unknown_product</code></td><td>product_id לא קיים → 404</td></tr>
-        <tr><td><code>test_run_pytest_rejects_unsafe_arguments</code></td><td>args עם <code>&&</code> → 400 + "Unsafe pytest arg"</td></tr>
+        <tr><td><code>test_mock_cart_add_returns_404_for_unknown_product</code></td><td>product_id לא קיים ← 404</td></tr>
+        <tr><td><code>test_run_pytest_rejects_unsafe_arguments</code></td><td>args עם <code>&&</code> ← 400 + "Unsafe pytest arg"</td></tr>
       </table></div>
     </section>
 
@@ -1100,17 +1178,17 @@ viewport:
         <div class="ci-step"><div class="dot dot-yellow"></div><div class="step-body"><div class="step-name">Write secrets.json</div><div class="step-desc">מ-GitHub Secret TEST_SECRETS_JSON — אם קיים</div></div></div>
         <div class="ci-step"><div class="dot dot-purple"></div><div class="step-body"><div class="step-name">Cache Playwright browsers</div><div class="step-desc">cache key: hash של requirements.txt</div></div></div>
         <div class="ci-step"><div class="dot dot-purple"></div><div class="step-body"><div class="step-name">Install Playwright + Chromium</div><div class="step-desc">רק אם cache miss</div></div></div>
-        <div class="ci-step"><div class="dot dot-green"></div><div class="step-body"><div class="step-name">Run tests</div><div class="step-desc">pytest tests/ -n auto --dist loadscope (CI=true → headless)</div></div></div>
+        <div class="ci-step"><div class="dot dot-green"></div><div class="step-body"><div class="step-name">Run tests</div><div class="step-desc">pytest tests/ -n auto --dist loadscope (CI=true ← headless)</div></div></div>
         <div class="ci-step"><div class="dot dot-cyan"></div><div class="step-body"><div class="step-name">Upload Allure results</div><div class="step-desc">artifact: allure-results (7 ימי retention), if: always()</div></div></div>
       </div>
 
-      <h3 class="mt-15">Job 2: Allure Report → GitHub Pages</h3>
+      <h3 class="mt-15">Job 2: Allure Report ← GitHub Pages</h3>
       <div class="ci-steps">
         <div class="ci-step"><div class="dot dot-blue"></div><div class="step-body"><div class="step-name">Download Allure results</div><div class="step-desc">artifact מ-job 1</div></div></div>
-        <div class="ci-step"><div class="dot dot-purple"></div><div class="step-body"><div class="step-name">Restore history</div><div class="step-desc">checkout gh-pages branch → שמירת allure-history לגרפי trend</div></div></div>
+        <div class="ci-step"><div class="dot dot-purple"></div><div class="step-body"><div class="step-name">Restore history</div><div class="step-desc">checkout gh-pages branch ← שמירת allure-history לגרפי trend</div></div></div>
         <div class="ci-step"><div class="dot dot-yellow"></div><div class="step-body"><div class="step-name">Install Allure 3 CLI</div><div class="step-desc">npm install -g allure@3</div></div></div>
         <div class="ci-step"><div class="dot dot-green"></div><div class="step-body"><div class="step-name">Generate report</div><div class="step-desc">allure generate allure-results</div></div></div>
-        <div class="ci-step"><div class="dot dot-cyan"></div><div class="step-body"><div class="step-name">Deploy to GitHub Pages</div><div class="step-desc">peaceiris/actions-gh-pages@v4 → branch gh-pages</div></div></div>
+        <div class="ci-step"><div class="dot dot-cyan"></div><div class="step-body"><div class="step-name">Deploy to GitHub Pages</div><div class="step-desc">peaceiris/actions-gh-pages@v4 ← branch gh-pages</div></div></div>
         <div class="ci-step"><div class="dot dot-blue"></div><div class="step-body"><div class="step-name">Post report link</div><div class="step-desc">סיכום ב-job summary עם link לדוח, branch, commit ו-run number</div></div></div>
       </div>
 
