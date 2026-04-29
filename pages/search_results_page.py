@@ -39,7 +39,7 @@ class SearchResultsPage(BasePage):
 
     def choose_list_view(self) -> None:
         self.wait_for_product_results()
-        list_view = self.page.get_by_role("link", name="List")
+        list_view = self.page.locator("#list-view")
         expect(list_view).to_be_visible()
         list_view.click()
 

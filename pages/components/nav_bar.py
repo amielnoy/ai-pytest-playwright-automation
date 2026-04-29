@@ -29,6 +29,6 @@ class NavBarComponent(BaseComponent):
         return self.page.get_by_role("link", name="Logout").count() > 0
 
     def _open_account_menu_and_click(self, link: Locator) -> None:
-        self.page.get_by_role("link", name="My Account").click()
+        self.page.get_by_role("link", name="My Account").first.click()
         expect(link).to_be_visible()
         link.click()
