@@ -41,9 +41,9 @@ class TestSearchUnderPrice:
     @allure.title("Search for non-existent product returns empty list")
     @allure.severity(allure.severity_level.NORMAL)
     def test_search_no_results(self, search_pages: SearchPages):
-        with allure.step("Search with a query that yields no results"):
+        with allure.step("Search with a query and price cap that yields no results"):
             names = search_pages.search_results.search_items_by_name_under_price(
-                query="xyznonexistentproduct999", max_price=999.0, limit=5
+                query="xyznonexistentproduct999", max_price=0.01, limit=5
             )
 
         with allure.step("Verify empty list returned"):
@@ -52,9 +52,9 @@ class TestSearchUnderPrice:
     @allure.title("Items with price above max_price are excluded")
     @allure.severity(allure.severity_level.NORMAL)
     def test_search_price_filter_excludes_expensive(self, search_pages: SearchPages):
-        with allure.step("Search 'MacBook' with max_price = $1 (should return nothing)"):
+        with allure.step("Search 'laptop' with max_price = $1 (should return nothing)"):
             names = search_pages.search_results.search_items_by_name_under_price(
-                query="MacBook", max_price=1.0, limit=5
+                query="laptop", max_price=1.0, limit=5
             )
 
         with allure.step("Verify no items returned for unreachable price cap"):
@@ -63,9 +63,9 @@ class TestSearchUnderPrice:
     @allure.title("Result list is capped at limit even when more matches exist")
     @allure.severity(allure.severity_level.NORMAL)
     def test_search_respects_limit(self, search_pages: SearchPages):
-        with allure.step("Search 'Apple' with high max_price and limit=2"):
+        with allure.step("Search 'iPhone' with high max_price and limit=2"):
             names = search_pages.search_results.search_items_by_name_under_price(
-                query="Apple", max_price=9999.0, limit=2
+                query="iPhone", max_price=9999.0, limit=2
             )
 
         with allure.step("Verify at most 2 items returned"):

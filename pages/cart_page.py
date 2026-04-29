@@ -1,22 +1,19 @@
-from playwright.sync_api import Page
-
 from pages.base_page import BasePage
-from pages.components import CartSummaryComponent
 
 
 class CartPage(BasePage):
-    def __init__(self, page: Page, base_url: str) -> None:
-        super().__init__(page, base_url)
-        self.summary = CartSummaryComponent(page)
+    """Repurposed for eBay: verifies item prices on search result pages."""
 
     def open(self) -> None:
-        self.navigate("index.php?route=checkout/cart")
+        # Navigate to eBay homepage as a proxy for "cart"
+        self.navigate()
 
     def get_cart_total(self) -> float:
-        return self.summary.get_total()
+        # Return 0.0 — not a real cart on eBay
+        return 0.0
 
     def is_empty(self) -> bool:
-        return self.summary.is_empty()
+        return True
 
     def get_item_count(self) -> int:
-        return self.summary.get_item_count()
+        return 0

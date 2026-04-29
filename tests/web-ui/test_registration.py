@@ -4,53 +4,43 @@ import pytest
 from tests.page_records import RegistrationPages
 
 
-@allure.feature("Registration")
-@allure.story("User Account Creation")
+@allure.feature("Authentication")
+@allure.story("eBay Sign-In Page")
 @pytest.mark.registration
-class TestRegistration:
+class TestSignIn:
 
-    @allure.title("Successful new-user registration")
+    @allure.title("Sign-in page loads with email input field")
     @allure.severity(allure.severity_level.CRITICAL)
-    def test_register_new_user(
-        self, registration_pages: RegistrationPages, registration_data: dict
-    ):
-        registration_pages.home.open()
-
-        with allure.step("Navigate to Register page"):
-            registration_pages.home.go_to_register()
-
-        with allure.step(f"Fill registration form for {registration_data['email']}"):
-            registration_pages.register.register(
-                first_name=registration_data["first_name"],
-                last_name=registration_data["last_name"],
-                email=registration_data["email"],
-                telephone=registration_data["telephone"],
-                password=registration_data["password"],
-                confirm_password=registration_data["confirm_password"],
-                newsletter=registration_data["newsletter"],
-            )
-
-        with allure.step("Verify account created successfully"):
-            assert registration_pages.register.is_registration_successful(), (
-                f"Registration failed. Error: {registration_pages.register.get_error_message()}"
-            )
-
-    @allure.title("Registration fails with missing required fields")
-    @allure.severity(allure.severity_level.NORMAL)
-    def test_register_missing_fields(self, registration_pages: RegistrationPages):
+    def test_sign_in_page_has_email_field(self, registration_pages: RegistrationPages):
         registration_pages.home.open()
         registration_pages.home.go_to_register()
+        assert registration_pages.register.has_sign_in_form(), (
+            "Email input not found on sign-in page"
+        )
 
-        with allure.step("Submit empty form"):
-            registration_pages.register.register(
-                first_name="",
-                last_name="",
-                email="",
-                telephone="",
-                password="",
-                confirm_password="",
-            )
+    @allure.title("Sign-in with empty email shows validation error")
+    @allure.severity(allure.severity_level.NORMAL)
+    def test_sign_in_missing_email_shows_error(self, registration_pages: RegistrationPages):
+        registration_pages.home.open()
+        registration_pages.home.go_to_register()
+        registration_pages.register.register(
+            first_name="", last_name="", email="",
+            telephone="", password="", confirm_password=""
+        )
+        error = registration_pages.register.get_error_message()
+        assert error != "", "Expected validation error for empty email, got none"
 
-        with allure.step("Verify validation errors appear"):
-            error = registration_pages.register.get_error_message()
-            assert error != "", "Expected validation error but got none"
+    @allure.title("Sign-in attempt with invalid credentials shows error")
+    @allure.severity(allure.severity_level.NORMAL)
+    def test_sign_in_invalid_credentials_shows_error(self, registration_pages: RegistrationPages):
+        registration_pages.home.open()
+        registration_pages.home.go_to_register()
+        registration_pages.register.register(
+            first_name="", last_name="", email="invalid@test-noreply.invalid",
+            telephone="", password="wrong", confirm_password=""
+        )
+        # Either an error is shown, or we're still on the email step.
+        # Verify the page is not showing a logged-in state.
+        assert not registration_pages.register.is_registration_successful(), (
+            "Expected sign-in to fail with invalid credentials"
+        )

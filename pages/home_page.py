@@ -17,7 +17,8 @@ class HomePage(BasePage):
         self.nav.search(query)
 
     def has_currency_dropdown(self) -> bool:
-        return self.nav.has_currency_dropdown()
+        # Repurposed for eBay: checks that the site header is visible
+        return self.nav.has_site_header()
 
     def go_to_login(self) -> None:
         self.nav.go_to_login()

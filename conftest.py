@@ -16,6 +16,7 @@ def browser_instance():
         browser: Browser = getattr(pw, CONFIG["browser"]).launch(
             headless=_IN_CI or CONFIG["headless"],
             slow_mo=0 if _IN_CI else CONFIG["slow_mo"],
+            args=["--disable-blink-features=AutomationControlled"],
         )
         yield browser
         browser.close()

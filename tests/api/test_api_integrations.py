@@ -1,192 +1,89 @@
-import uuid
-
 import allure
 import pytest
 
-from services.api.cart_service import CartService
+from services.api.ebay_search_service import EbaySearchService
 from services.api.http_response_constants import HTTP_OK
-from services.api.search_service import SearchService
+from services.rest_client import RestClient
 
 
-@allure.feature("API Integration Tests")
-@allure.story("Search endpoint integration")
+@allure.feature("eBay API Integration Tests")
+@allure.story("Multi-category search")
 @pytest.mark.api
-class TestSearchApiIntegration:
+class TestEbayMultiCategorySearch:
 
-    @allure.title("Search returns OK with no product cards for an unknown query")
-    @allure.severity(allure.severity_level.NORMAL)
-    def test_search_unknown_query_returns_no_product_cards(
-        self, search_service: SearchService
+    @pytest.mark.parametrize("query,min_items", [
+        ("iPhone", 5), ("laptop", 5), ("book", 5),
+    ])
+    @allure.title("eBay search returns minimum item count for common categories")
+    @allure.severity(allure.severity_level.CRITICAL)
+    def test_search_returns_minimum_items(
+        self, ebay_search_service: EbaySearchService, query: str, min_items: int
     ):
-        query = f"unknown-product-{uuid.uuid4().hex[:8]}"
-
         with allure.step(f"GET search results for {query!r}"):
-            resp = search_service.search(query)
+            resp = ebay_search_service.search(query)
 
-        with allure.step("Assert response is OK and contains no product cards"):
-            assert resp.status_code == HTTP_OK, (
-                f"Expected {HTTP_OK}, got {resp.status_code}"
-            )
-            assert not search_service.product_cards(resp.text), (
-                f"Expected no product cards for unknown query {query!r}"
+        with allure.step(f"Assert at least {min_items} item IDs returned"):
+            assert resp.status_code == HTTP_OK
+            ids = ebay_search_service.item_ids(resp.text)
+            assert len(ids) >= min_items, (
+                f"Expected >={min_items} items for {query!r}, got {len(ids)}"
             )
 
-    @allure.title("Search result product names are non-empty")
+    @allure.title("eBay search prices are within a reasonable range for electronics")
     @allure.severity(allure.severity_level.NORMAL)
-    def test_search_product_names_are_non_empty(self, search_service: SearchService):
-        with allure.step("GET search results for 'iPod'"):
-            resp = search_service.search("iPod")
+    def test_electronics_prices_in_reasonable_range(self, ebay_search_service: EbaySearchService):
+        with allure.step("GET search results for 'iPhone'"):
+            resp = ebay_search_service.search("iPhone")
 
-        with allure.step("Assert every parsed product name has text"):
-            assert resp.status_code == HTTP_OK, (
-                f"Expected {HTTP_OK}, got {resp.status_code}"
-            )
-            names = search_service.product_names(resp.text)
-            assert names, "No product names found for iPod search"
-            assert all(name.strip() for name in names), (
-                f"Expected non-empty product names, got {names}"
-            )
+        with allure.step("Assert prices are all between 0 and 10000"):
+            assert resp.status_code == HTTP_OK
+            prices = ebay_search_service.item_prices(resp.text)
+            assert prices
+            assert all(0 < p < 10000 for p in prices), f"Unexpected prices: {prices}"
 
-    @allure.title("Search product cards have matching IDs and names")
+    @allure.title("eBay item ID count matches or exceeds title count")
     @allure.severity(allure.severity_level.NORMAL)
-    def test_search_product_cards_have_ids_and_names(
-        self, search_service: SearchService
-    ):
-        with allure.step("GET search results for 'MacBook'"):
-            resp = search_service.search("MacBook")
+    def test_item_id_count_not_less_than_title_count(self, ebay_search_service: EbaySearchService):
+        with allure.step("GET search results for 'laptop'"):
+            resp = ebay_search_service.search("laptop")
 
-        with allure.step("Assert parsed product IDs and names align to cards"):
-            assert resp.status_code == HTTP_OK, (
-                f"Expected {HTTP_OK}, got {resp.status_code}"
-            )
-            cards = search_service.product_cards(resp.text)
-            names = search_service.product_names(resp.text)
-            product_ids = search_service.product_ids(resp.text)
-            assert cards, "No product cards found for MacBook search"
-            assert len(names) == len(cards), (
-                f"Expected one name per card, got {len(names)} names and "
-                f"{len(cards)} cards"
-            )
-            assert len(product_ids) >= len(cards), (
-                f"Expected at least one product ID per card, got "
-                f"{len(product_ids)} IDs and {len(cards)} cards"
+        with allure.step("Assert ID count >= title count"):
+            assert resp.status_code == HTTP_OK
+            ids = ebay_search_service.item_ids(resp.text)
+            titles = ebay_search_service.item_titles(resp.text)
+            assert len(ids) >= len(titles), (
+                f"IDs ({len(ids)}) < titles ({len(titles)})"
             )
 
 
-@allure.feature("API Integration Tests")
-@allure.story("Cart endpoint integration")
+@allure.feature("eBay API Integration Tests")
+@allure.story("Search session isolation")
 @pytest.mark.api
-class TestCartApiIntegration:
+class TestEbaySearchSessionIsolation:
 
-    @allure.title("New API session starts with an empty cart")
-    @allure.severity(allure.severity_level.NORMAL)
-    def test_new_session_cart_starts_empty(self, cart_service: CartService):
-        with allure.step("Fetch cart page before adding products"):
-            cart_resp = cart_service.get_cart()
+    @allure.title("Two eBay search sessions are independent")
+    @allure.severity(allure.severity_level.CRITICAL)
+    def test_sessions_are_independent(self):
+        headers = {"User-Agent": "Mozilla/5.0 (compatible; test/1.0)"}
+        session_a = RestClient(headers=headers)
+        session_b = RestClient(headers=headers)
+        svc_a = EbaySearchService(session_a)
+        svc_b = EbaySearchService(session_b)
 
-        with allure.step("Assert cart page is empty"):
-            assert cart_resp.status_code == HTTP_OK, (
-                f"Expected {HTTP_OK}, got {cart_resp.status_code}"
-            )
-            assert cart_service.is_empty(cart_resp.text), (
-                "Expected a fresh API session to start with an empty cart"
-            )
+        with allure.step("Search 'iPhone' with session A and 'laptop' with session B"):
+            resp_a = svc_a.search("iPhone")
+            resp_b = svc_b.search("laptop")
 
-    @allure.title("Cart total is positive after adding quantity greater than one")
-    @allure.severity(allure.severity_level.NORMAL)
-    def test_cart_total_positive_after_adding_quantity_two(
-        self, search_service: SearchService, cart_service: CartService
-    ):
-        pid = search_service.first_product_id("MacBook")
+        with allure.step("Assert both responses are OK"):
+            assert resp_a.status_code == HTTP_OK
+            assert resp_b.status_code == HTTP_OK
 
-        with allure.step(f"Add quantity=2 for product_id={pid}"):
-            resp = cart_service.add_product(pid, quantity=2)
-
-        with allure.step("Assert cart total is positive"):
-            assert resp.status_code == HTTP_OK, (
-                f"Expected {HTTP_OK}, got {resp.status_code}"
-            )
-            cart_resp = cart_service.get_cart()
-            total = cart_service.total(cart_resp.text)
-            assert total is not None and total > 0, (
-                f"Expected positive cart total after adding quantity=2, got {total}"
+        with allure.step("Assert iPhone and laptop searches return disjoint item IDs"):
+            ids_a = set(svc_a.item_ids(resp_a.text))
+            ids_b = set(svc_b.item_ids(resp_b.text))
+            assert ids_a.isdisjoint(ids_b), (
+                "iPhone and laptop searches returned overlapping item IDs"
             )
 
-    @allure.title("Cart keeps multiple products in the same API session")
-    @allure.severity(allure.severity_level.NORMAL)
-    def test_cart_keeps_multiple_products_in_same_session(
-        self, search_service: SearchService, cart_service: CartService
-    ):
-        macbook_pid = search_service.first_product_id("MacBook")
-        iphone_pid = search_service.first_product_id("iPhone")
-
-        with allure.step("Add two different products to the same cart session"):
-            macbook_resp = cart_service.add_product(macbook_pid)
-            iphone_resp = cart_service.add_product(iphone_pid)
-
-        with allure.step("Assert cart has a parseable positive row sum and total"):
-            assert macbook_resp.status_code == HTTP_OK
-            assert iphone_resp.status_code == HTTP_OK
-            cart_resp = cart_service.get_cart()
-            row_sum = cart_service.product_row_sum(cart_resp.text)
-            total = cart_service.total(cart_resp.text)
-            assert row_sum > 0, f"Expected positive cart row sum, got {row_sum}"
-            assert total is not None and total > 0, (
-                f"Expected positive cart total, got {total}"
-            )
-
-
-@allure.feature("API Integration Tests")
-@allure.story("Cart endpoint negative scenarios")
-@pytest.mark.api
-class TestCartApiNegative:
-
-    @allure.title("Cart add ignores missing or unknown product IDs")
-    @allure.severity(allure.severity_level.NORMAL)
-    @pytest.mark.parametrize("product_id", ["", "999999"])
-    def test_cart_add_ignores_invalid_product_id(
-        self, cart_service: CartService, product_id: str
-    ):
-        with allure.step(f"POST invalid product_id={product_id!r} to cart"):
-            resp = cart_service.add_product(product_id)
-
-        with allure.step("Assert request is handled and no product is added"):
-            assert resp.status_code == HTTP_OK, (
-                f"Expected {HTTP_OK}, got {resp.status_code}"
-            )
-            assert resp.json() == [], (
-                f"Expected empty response for invalid product_id={product_id!r}, "
-                f"got {resp.text}"
-            )
-            cart_resp = cart_service.get_cart()
-            assert cart_resp.status_code == HTTP_OK
-            assert cart_service.is_empty(cart_resp.text), (
-                f"Cart should stay empty after invalid product_id={product_id!r}"
-            )
-
-    @allure.title("Cart add with non-positive quantity does not add items")
-    @allure.severity(allure.severity_level.NORMAL)
-    @pytest.mark.parametrize("quantity", [0, -1])
-    def test_cart_add_non_positive_quantity_does_not_add_items(
-        self,
-        search_service: SearchService,
-        cart_service: CartService,
-        quantity: int,
-    ):
-        pid = search_service.first_product_id("MacBook")
-
-        with allure.step(f"POST product_id={pid} with quantity={quantity}"):
-            resp = cart_service.add_product(pid, quantity=quantity)
-
-        with allure.step("Assert cart remains empty"):
-            assert resp.status_code == HTTP_OK, (
-                f"Expected {HTTP_OK}, got {resp.status_code}"
-            )
-            assert "0 item(s)" in resp.text, (
-                f"Expected zero-item cart summary for quantity={quantity}, got {resp.text}"
-            )
-            cart_resp = cart_service.get_cart()
-            assert cart_resp.status_code == HTTP_OK
-            assert cart_service.is_empty(cart_resp.text), (
-                f"Cart should stay empty after quantity={quantity}"
-            )
+        session_a.close()
+        session_b.close()

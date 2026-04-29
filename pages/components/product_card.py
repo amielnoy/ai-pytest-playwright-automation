@@ -7,13 +7,11 @@ from utils.price_parser import parse_price
 
 
 class ProductCardComponent:
-    """Scoped to a single .product-thumb locator, not the full page."""
+    """Scoped to a single li.s-item locator, not the full page."""
 
-    _NAME = "h4 a"
-    _IMAGE = ".image img"
-    _DESCRIPTION = ".caption > p:not(.price)"
-    _PRICE = ".price"
-    _ADD_TO_CART = "button[onclick*='cart.add']"
+    _TITLE = "span[role='heading']"
+    _PRICE = ".s-item__price"
+    _IMAGE = ".s-item__image-img"
 
     def __init__(self, root: Locator, index: int) -> None:
         self.root = root
@@ -21,7 +19,7 @@ class ProductCardComponent:
 
     @property
     def name(self) -> str:
-        return self.root.locator(self._NAME).inner_text().strip()
+        return self.root.locator(self._TITLE).inner_text().strip()
 
     @property
     def cleaned_name(self) -> str:
@@ -29,16 +27,21 @@ class ProductCardComponent:
 
     @property
     def picture_url(self) -> str:
-        return self.root.locator(self._IMAGE).get_attribute("src") or ""
+        img = self.root.locator(self._IMAGE)
+        if img.count() == 0:
+            return ""
+        return img.get_attribute("src") or ""
 
     @property
     def description(self) -> str:
-        description = self.root.locator(self._DESCRIPTION).first.inner_text()
-        return " ".join(description.split())
+        return ""
 
     @property
     def price(self) -> float | None:
-        return parse_price(self.root.locator(self._PRICE).inner_text())
+        price_el = self.root.locator(self._PRICE)
+        if price_el.count() == 0:
+            return None
+        return parse_price(price_el.inner_text())
 
     def stored_info(self) -> StoredProductInfo:
         price = self.price
@@ -50,6 +53,3 @@ class ProductCardComponent:
             description=self.description,
             price=price,
         )
-
-    def add_to_cart(self) -> None:
-        self.root.locator(self._ADD_TO_CART).click()

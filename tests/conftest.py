@@ -5,47 +5,34 @@ from pages.home_page import HomePage
 from pages.login_page import LoginPage
 from pages.register_page import RegisterPage
 from pages.search_results_page import SearchResultsPage
-from services.api.account_service import AccountService
-from services.api.cart_service import CartService
-from services.api.public_service import EndpointCase, PublicService
-from services.api.search_service import SearchCase, SearchService
+from services.api.ebay_search_service import EbaySearchService
+from services.api.public_service import EndpointCase
+from services.api.search_service import SearchCase
 from services.rest_client import RestClient
 from tests.page_records import CartFlowPages, CartPages, RegistrationPages, SearchPages
-from utils.api_client import build_session, create_cart
 from utils.data_loader import get_config, get_test_data, has_secret_file
 
 
+_EBAY_HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/120.0.0.0 Safari/537.36"
+    ),
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9",
+}
+
+
 PUBLIC_ENDPOINT_MAP = {
-    "home": EndpointCase(path="", required_text="Your Store"),
-    "search": EndpointCase(
-        path="/index.php?route=product/search&search=MacBook",
-        required_text="MacBook",
-    ),
-    "cart": EndpointCase(
-        path="/index.php?route=checkout/cart",
-        required_text="Shopping Cart",
-    ),
-    "register": EndpointCase(
-        path="/index.php?route=account/register",
-        required_text="Register Account",
-    ),
-    "login": EndpointCase(
-        path="/index.php?route=account/login",
-        required_text="Returning Customer",
-    ),
+    "home": EndpointCase(path="", required_text="Electronics"),
+    "search_laptop": EndpointCase(path="/sch/i.html?_nkw=laptop", required_text="s-item"),
+    "search_iphone": EndpointCase(path="/sch/i.html?_nkw=iPhone", required_text="s-item"),
 }
 
 SEARCH_QUERY_MAP = {
-    "macbook": SearchCase(
-        query="MacBook",
-        expected_names=("MacBook",),
-        min_cards=1,
-    ),
-    "iphone": SearchCase(
-        query="iPhone",
-        expected_names=("iPhone",),
-        min_cards=1,
-    ),
+    "iphone": SearchCase(query="iPhone", expected_names=("iPhone",), min_cards=1),
+    "laptop": SearchCase(query="laptop", expected_names=("laptop",), min_cards=1),
 }
 
 
@@ -60,35 +47,20 @@ def api_base_url() -> str:
 
 @pytest.fixture
 def session(api_base_url: str) -> RestClient:
-    """Fresh HTTP session per test: own OCSESSID, no shared cart state."""
-    client = build_session()
+    """Fresh HTTP session per test, warming up with eBay."""
+    client = RestClient(headers=_EBAY_HEADERS)
     client.get(api_base_url)
     yield client
     client.close()
 
 
 # ---------------------------------------------------------------------------
-# API service fixtures
+# eBay API service fixtures
 # ---------------------------------------------------------------------------
 
 @pytest.fixture
-def public_service(session: RestClient, api_base_url: str) -> PublicService:
-    return PublicService(session, api_base_url)
-
-
-@pytest.fixture
-def search_service(session: RestClient, api_base_url: str) -> SearchService:
-    return SearchService(session, api_base_url)
-
-
-@pytest.fixture
-def cart_service(session: RestClient, api_base_url: str) -> CartService:
-    return CartService(session, api_base_url)
-
-
-@pytest.fixture
-def account_service(session: RestClient, api_base_url: str) -> AccountService:
-    return AccountService(session, api_base_url)
+def ebay_search_service(page) -> EbaySearchService:
+    return EbaySearchService(page)
 
 
 # ---------------------------------------------------------------------------
@@ -165,24 +137,12 @@ def registration_data() -> dict:
 
 
 @pytest.fixture
-def api_cart(app_url: str):
-    """
-    Populate a cart via the OpenCart REST API (no browser) and return the
-    server session cookie plus the products that were added.
-
-    Each call gets its own OCSESSID so parallel workers never share
-    server-side cart state.  The caller must inject the cookie into the
-    Playwright BrowserContext *before* navigating to the cart page:
-
-        context.add_cookies([{"name": "OCSESSID", "value": ocsessid, "url": app_url}])
-    """
+def api_cart(ebay_search_service: EbaySearchService):
+    """eBay equivalent: returns items found via search (no session cart)."""
+    resp = ebay_search_service.search("iPhone")
+    ids = ebay_search_service.item_ids(resp.text)
+    prices = ebay_search_service.item_prices(resp.text)
     data = get_test_data()
-    search = data["search"]
-    # create_cart raises ValueError when no products match — no need to assert.
-    ocsessid, products = create_cart(
-        base_url=app_url,
-        query=search["query"],
-        max_price=search["max_price"],
-        limit=search["limit"],
-    )
-    return ocsessid, products, data["cart"]["max_total"], search["max_price"]
+    max_total = data.get("cart", {}).get("max_total", 5000.0)
+    max_price = data.get("search", {}).get("max_price", 800.0)
+    return ids[:5], prices[:5], max_total, max_price

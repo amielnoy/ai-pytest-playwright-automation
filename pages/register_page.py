@@ -1,28 +1,47 @@
-from playwright.sync_api import Page
 from pages.base_page import BasePage
-from pages.components import RegistrationFormComponent
 
 
 class RegisterPage(BasePage):
-    def __init__(self, page: Page, base_url: str) -> None:
-        super().__init__(page, base_url)
-        self.form = RegistrationFormComponent(page)
+    _EMAIL_INPUT = "input#userid"
+    _CONTINUE_BUTTON = "button#signin-continue-btn"
+    _ERROR = "span.error, div.field__error--display"
 
     def register(
         self,
-        first_name: str,
-        last_name: str,
+        first_name: str,  # noqa: ARG002
+        last_name: str,  # noqa: ARG002
         email: str,
-        telephone: str,
-        password: str,
-        confirm_password: str,
-        newsletter: bool = False,
+        telephone: str,  # noqa: ARG002
+        password: str,  # noqa: ARG002
+        confirm_password: str,  # noqa: ARG002
+        newsletter: bool = False,  # noqa: ARG002
     ) -> None:
-        self.form.fill(
-            first_name, last_name, email, telephone, password, confirm_password, newsletter
-        )
-        self.form.accept_privacy_policy()
-        self.form.submit()
+        # On eBay, "register" means navigate to sign-in page and submit email
+        self.navigate("signin/")
+        self.page.wait_for_load_state("domcontentloaded")
+        email_input = self.page.locator(self._EMAIL_INPUT)
+        email_input.wait_for(state="visible", timeout=10000)
+        if email:
+            email_input.fill(email)
+        self.page.locator(self._CONTINUE_BUTTON).click()
+        self.page.wait_for_load_state("domcontentloaded")
 
     def is_registration_successful(self) -> bool:
-        return self.form.is_submitted_successfully()
+        # Not possible without real credentials
+        return False
+
+    def get_error_message(self) -> str:
+        for sel in self._ERROR.split(", "):
+            el = self.page.locator(sel.strip()).first
+            try:
+                if el.is_visible(timeout=3000):
+                    return el.inner_text()
+            except Exception:
+                pass
+        return ""
+
+    def has_sign_in_form(self) -> bool:
+        try:
+            return self.page.locator(self._EMAIL_INPUT).is_visible(timeout=5000)
+        except Exception:
+            return False

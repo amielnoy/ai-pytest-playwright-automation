@@ -11,7 +11,7 @@ from pages.search_results_page import SearchResultsPage
 @allure.feature("Search")
 @allure.story("iPod product storage")
 @pytest.mark.search
-class TestIpoDStorage:
+class TestIpodStorage:
 
     @allure.title("ipodStorage")
     @allure.severity(allure.severity_level.CRITICAL)
@@ -20,10 +20,9 @@ class TestIpoDStorage:
         home_page: HomePage,
         search_results_page: SearchResultsPage,
     ):
-        with allure.step("Search for all iPod products"):
+        with allure.step("Search for all iPod products on eBay"):
             home_page.open()
             home_page.search("iPod")
-            search_results_page.choose_list_view()
 
         with allure.step("Store iPod name, picture URL, description, and price"):
             products = search_results_page.stored_product_information()
@@ -42,7 +41,7 @@ class TestIpoDStorage:
                 )
 
         with allure.step("Find and print maximum iPod price information"):
-            max_product = max(products, key=lambda product: product.price)
+            max_product = max(products, key=lambda p: p.price)
             max_info = json.dumps(asdict(max_product), indent=2)
             print(f"Maximum iPod price product:\n{max_info}")
             allure.attach(
@@ -52,7 +51,7 @@ class TestIpoDStorage:
             )
 
         with allure.step("Find and print minimum iPod price information"):
-            min_product = min(products, key=lambda product: product.price)
+            min_product = min(products, key=lambda p: p.price)
             min_info = json.dumps(asdict(min_product), indent=2)
             print(f"Minimum iPod price product:\n{min_info}")
             allure.attach(
@@ -62,6 +61,6 @@ class TestIpoDStorage:
             )
 
         with allure.step("Verify maximum and minimum prices are valid"):
-            prices = [product.price for product in products]
+            prices = [p.price for p in products]
             assert max_product.price == max(prices)
             assert min_product.price == min(prices)

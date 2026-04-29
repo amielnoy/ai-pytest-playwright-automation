@@ -24,7 +24,7 @@ def test_test_data_endpoint_returns_search_data():
     response = client.get("/automation/test-data/search")
 
     assert response.status_code == HTTP_OK
-    assert response.json()["query"] == "MacBook"
+    assert response.json()["query"] == "iPhone"
 
 
 def test_test_data_endpoint_returns_404_for_unknown_key():
