@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any
 
 from fastapi import FastAPI, HTTPException, Query
+from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
@@ -183,6 +184,13 @@ def create_app() -> FastAPI:
         StaticFiles(directory=ALLURE_REPORT_DIR, html=True, check_dir=False),
         name="allure-report",
     )
+
+    @app.get("/architecture", response_class=HTMLResponse)
+    def architecture_doc() -> str:
+        html_path = PROJECT_ROOT / "architecture.html"
+        if not html_path.exists():
+            raise HTTPException(status_code=404, detail="Architecture documentation not found")
+        return html_path.read_text(encoding="utf-8")
 
     @app.get("/health")
     def health() -> dict[str, str]:
