@@ -1,1 +1,1 @@
-{"id":"710283ec84005bbc13bb76ff67ccb2e4","fullName":"tests.web-ui.test_add_to_cart.TestAddItemsToCart#test_add_items_to_cart","name":"Add items under max_price to cart","status":"passed","testResultsByEnv":{"default":"35d19005237aadbfc6c12b835234401c"}}
+{"id":"710283ec84005bbc13bb76ff67ccb2e4","fullName":"tests.web-ui.test_add_to_cart.TestAddItemsToCart#test_add_items_to_cart","name":"Add items under max_price to cart","status":"passed","testResultsByEnv":{"default":"46fc57a4e6b8a1993125fc82d71a0077"}}
