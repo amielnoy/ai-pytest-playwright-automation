@@ -1,0 +1,1 @@
+{"id":"015ad142d27bd084e6e8b7d3451fce7b","fullName":"tests.unit.test_page_objects#test_cart_summary_returns_zero_when_total_is_hidden_or_unparseable","name":"test_cart_summary_returns_zero_when_total_is_hidden_or_unparseable","status":"passed","testResultsByEnv":{"default":"d324731c1b0c810e02babf056d558e19"}}
