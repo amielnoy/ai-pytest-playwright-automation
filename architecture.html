@@ -499,6 +499,7 @@
       <div class="nav-label">DevOps</div>
       <a href="#cicd">CI/CD Pipeline</a>
       <a href="#mcp">Playwright MCP</a>
+      <a href="#agents">AI Agents</a>
       <a href="#docker">Docker</a>
       <a href="#reporting">דוחות Allure</a>
     </div>
@@ -1457,11 +1458,15 @@
       <h3 class="mt-15">Job 2: Allure Report ← GitHub Pages</h3>
       <div class="ci-steps">
         <div class="ci-step"><div class="dot dot-blue"></div><div class="step-body"><div class="step-name">Download Allure results</div><div class="step-desc">artifact מ-job 1</div></div></div>
-        <div class="ci-step"><div class="dot dot-purple"></div><div class="step-body"><div class="step-name">Restore history</div><div class="step-desc">checkout gh-pages branch ← שמירת allure-history לגרפי trend</div></div></div>
-        <div class="ci-step"><div class="dot dot-yellow"></div><div class="step-body"><div class="step-name">Install Allure 3 CLI</div><div class="step-desc">npm install -g allure@3</div></div></div>
-        <div class="ci-step"><div class="dot dot-green"></div><div class="step-body"><div class="step-name">Generate report</div><div class="step-desc">allure generate allure-results</div></div></div>
-        <div class="ci-step"><div class="dot dot-cyan"></div><div class="step-body"><div class="step-name">Deploy to GitHub Pages</div><div class="step-desc">peaceiris/actions-gh-pages@v4 ← branch gh-pages</div></div></div>
-        <div class="ci-step"><div class="dot dot-blue"></div><div class="step-body"><div class="step-name">Post report link</div><div class="step-desc">סיכום ב-job summary עם link לדוח, branch, commit ו-run number</div></div></div>
+        <div class="ci-step"><div class="dot dot-purple"></div><div class="step-body"><div class="step-name">Restore Allure history</div><div class="step-desc">checkout gh-pages branch ← שמירת allure-history לגרפי trend</div></div></div>
+        <div class="ci-step"><div class="dot dot-yellow"></div><div class="step-body"><div class="step-name">Set up Node.js 20</div><div class="step-desc">actions/setup-node@v4</div></div></div>
+        <div class="ci-step"><div class="dot dot-yellow"></div><div class="step-body"><div class="step-name">Install Allure 3 CLI</div><div class="step-desc">npm ci</div></div></div>
+        <div class="ci-step"><div class="dot dot-green"></div><div class="step-body"><div class="step-name">Generate report</div><div class="step-desc">npx allure generate allure-results → allure-report/</div></div></div>
+        <div class="ci-step"><div class="dot dot-purple"></div><div class="step-body"><div class="step-name">Persist history</div><div class="step-desc">allure-history/ מועתק ל-allure-report/allure-history לגרפי trend</div></div></div>
+        <div class="ci-step"><div class="dot dot-cyan"></div><div class="step-body"><div class="step-name">Copy architecture.html</div><div class="step-desc">architecture.html מוסף ל-allure-report/ לפני ה-deploy</div></div></div>
+        <div class="ci-step"><div class="dot dot-blue"></div><div class="step-body"><div class="step-name">Post report link to job summary</div><div class="step-desc">סיכום ב-GITHUB_STEP_SUMMARY עם link לדוח Allure, architecture, branch, commit ו-run number — לפני ה-deploy</div></div></div>
+        <div class="ci-step"><div class="dot dot-green"></div><div class="step-body"><div class="step-name">Deploy to GitHub Pages</div><div class="step-desc">peaceiris/actions-gh-pages@v4 ← branch gh-pages, keep_files: false</div></div></div>
+        <div class="ci-step"><div class="dot dot-yellow"></div><div class="step-body"><div class="step-name">Ensure GitHub Pages source</div><div class="step-desc">PUT /repos/.../pages ← gh-pages / root (REST API)</div></div></div>
       </div>
 
       <div class="callout tip mt-12">
@@ -1505,7 +1510,69 @@
       </div>
     </section>
 
-    <!-- ── 14. DOCKER ── -->
+    <!-- ── 14. AGENTS ── -->
+    <section id="agents">
+      <h2><span class="icon">🤖</span> AI Agents</h2>
+      <p>תיקיית <code>agents/</code> מכילה כלי AI שמשמשים לתכנון טסטים ולאיסוף מידע מדפים חיים — ללא חיבור ל-CI ובלי צורך בהרצת הטסטים.</p>
+
+      <div class="flow">
+        <div class="flow-box blue">run_agent.py<span class="sub">entry point</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box purple">test_planner_agent.py<span class="sub">Claude API + tool loop</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box cyan">page_crawler.py<span class="sub">Playwright headless</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box green">stds/<span class="sub">STD_*.md output</span></div>
+      </div>
+
+      <h3>page_crawler.py — Playwright Page Crawler</h3>
+      <p>כלי headless שמבצע crawl לדף חי ב-TutorialsNinja ומחזיר JSON מובנה. פועל על Playwright sync API.</p>
+      <div class="tbl-wrap"><table>
+        <tr><th>פונקציה</th><th>פלט</th><th>תפקיד</th></tr>
+        <tr><td><code>crawl_page_as_json(url)</code></td><td><code>dict</code></td><td>כניסה ראשית — מחזיר JSON עם title, headings, forms, buttons, nav links, alerts.</td></tr>
+        <tr><td><code>_extract_forms(page)</code></td><td><code>list[dict]</code></td><td>כל הטפסים בדף: fields עם label, type, required; submit text.</td></tr>
+        <tr><td><code>_extract_buttons(page)</code></td><td><code>list[str]</code></td><td>טקסטי כפתורים וקישורים (dedup, עד 30).</td></tr>
+        <tr><td><code>_extract_nav_links(page)</code></td><td><code>list[dict]</code></td><td>קישורי ניווט עם text ו-href.</td></tr>
+      </table></div>
+
+      <h3>test_planner_agent.py — AI Test Planner</h3>
+      <p>Agent שמשתמש ב-Claude API (<code>claude-opus-4-7</code> עם adaptive thinking) בלולאה של tool calls כדי לייצר STD מפורט לכל דף. כותב את הפלט ל-<code>stds/</code>.</p>
+
+      <div class="tbl-wrap"><table>
+        <tr><th>Tool</th><th>תפקיד</th></tr>
+        <tr><td><code>analyze_page(url)</code></td><td>מפעיל את <code>page_crawler.py</code> על URL חי ומחזיר את ה-JSON המובנה ל-Claude.</td></tr>
+        <tr><td><code>read_existing_tests()</code></td><td>קורא את כל קבצי הטסט מ-<code>tests/</code> כדי שהמודל יתאים את הסגנון ולא ייצר כפילויות.</td></tr>
+        <tr><td><code>save_std(filename, content)</code></td><td>שומר את ה-STD שנוצר ב-<code>stds/</code> בפורמט Markdown.</td></tr>
+      </table></div>
+
+      <div class="callout info mt-12">
+        <span class="callout-icon">🧠</span>
+        <div><strong>Adaptive Thinking:</strong> ה-agent משתמש ב-<code>thinking</code> עם <code>budget_tokens</code> גבוה כדי לבצע חשיבה מעמיקה לפני כתיבת כל STD. הלולאה ממשיכה עד שה-agent קורא ל-<code>save_std</code> ומסיים.</div>
+      </div>
+
+      <h3>STD files — stds/</h3>
+      <p>קבצי Markdown שמייצגים תוכניות בדיקה מפורטות (Software Test Documents) שנוצרו על ידי ה-agent.</p>
+      <div class="tbl-wrap"><table>
+        <tr><th>קובץ</th><th>נושא</th></tr>
+        <tr><td><code>STD_Sanity.md</code></td><td>UI sanity — home header, invalid login, product detail</td></tr>
+        <tr><td><code>STD_Accessibility.md</code></td><td>נגישות: lang, labels, alt text, duplicate IDs</td></tr>
+        <tr><td><code>STD_Registration.md</code></td><td>הרשמת משתמש חדש ו-validation שדות חובה</td></tr>
+        <tr><td><code>STD_SearchUnderPrice.md</code></td><td>סינון מחיר, no-results, limit</td></tr>
+        <tr><td><code>STD_SortAlphabetically.md</code></td><td>מיון תוצאות A-Z</td></tr>
+        <tr><td><code>STD_IpodStorage.md</code></td><td>שמירת מידע מוצרי iPod, min/max price</td></tr>
+        <tr><td><code>STD_AddToCart.md</code></td><td>הוספה לעגלה דרך UI</td></tr>
+        <tr><td><code>STD_CartTotal.md</code></td><td>ודא total עגלה עם API setup</td></tr>
+        <tr><td><code>STD_API.md</code></td><td>API smoke: search, cart, session isolation</td></tr>
+        <tr><td><code>STD_APIIntegrations.md</code></td><td>API integration: multi-word, quantity, negative IDs</td></tr>
+        <tr><td><code>STD_Contract.md</code></td><td>contracts: endpoints, fields, prices, registration page</td></tr>
+        <tr><td><code>STD_Unit.md</code></td><td>unit: page objects, REST client, FastAPI server</td></tr>
+      </table></div>
+
+      <pre><span class="c"># הרצת ה-agent (מייצר STDs ב-stds/)</span>
+python run_agent.py</pre>
+    </section>
+
+    <!-- ── 15. DOCKER ── -->
     <section id="docker">
       <h2><span class="icon">🐳</span> Docker</h2>
       <p>קובץ <code>Dockerfile</code> בונה image עם Python, dependencies, ו-Chromium. משמש להרצה בסביבה מבודקת.</p>
@@ -1525,7 +1592,7 @@ docker run --rm \
       </div>
     </section>
 
-    <!-- ── 15. REPORTING ── -->
+    <!-- ── 16. REPORTING ── -->
     <section id="reporting">
       <h2><span class="icon">📊</span> דוחות Allure</h2>
       <p>כל הטסטים כתובים עם Allure decorators לדוח עשיר ואינפורמטיבי.</p>
