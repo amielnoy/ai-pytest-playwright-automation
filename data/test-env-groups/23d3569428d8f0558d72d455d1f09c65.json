@@ -1,1 +1,1 @@
-{"id":"23d3569428d8f0558d72d455d1f09c65","fullName":"tests.web-ui.test_registration.TestRegistration#test_register_new_user","name":"Successful new-user registration","status":"broken","testResultsByEnv":{"default":"dd8c08d01509a84ccfacd3bcb3fe9428"}}
+{"id":"23d3569428d8f0558d72d455d1f09c65","fullName":"tests.web-ui.test_registration.TestRegistration#test_register_new_user","name":"Successful new-user registration","status":"broken","testResultsByEnv":{"default":"e44af4a8e54d78b799676cfc33a1be81"}}
