@@ -36,7 +36,13 @@ def context(request, browser_instance: Browser, tmp_path_factory):
     ctx.tracing.stop(path=str(trace_file))
     ctx.close()
 
-    if getattr(request.node, "rep_call", None) and request.node.rep_call.failed:
+    def _node_failed(node):
+        return any(
+            getattr(node, f"rep_{when}", None) is not None and getattr(node, f"rep_{when}").failed
+            for when in ("setup", "call", "teardown")
+        )
+
+    if _node_failed(request.node):
         if trace_file.exists():
             allure.attach.file(
                 str(trace_file),
