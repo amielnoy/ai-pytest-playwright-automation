@@ -1,11 +1,12 @@
 # Playwright Python Tests -> Allure 3 Report -> GitHub Pages
 #
 # Setup (one-time):
-#   1. Repo -> Settings -> Pages -> Source: "Deploy from a branch" -> gh-pages / (root)
-#   2. Repo -> Settings -> Actions -> General -> Workflow permissions -> Read and write
-#   3. Repo -> Settings -> Secrets -> Actions -> New secret:
+#   1. Repo -> Settings -> Actions -> General -> Workflow permissions -> Read and write
+#   2. Repo -> Settings -> Secrets -> Actions -> New secret:
 #        Name:  TEST_SECRETS_JSON
 #        Value: paste the full contents of data/secrets.json
+#
+# The report job also enforces GitHub Pages source to gh-pages/root automatically.
 
 name: Playwright Tests
 
@@ -140,6 +141,16 @@ jobs:
           publish_branch: gh-pages
           keep_files: false
           commit_message: "ci: Allure report run #${{ github.run_number }} [${{ github.sha }}]"
+
+      - name: Ensure GitHub Pages source is gh-pages root
+        if: success()
+        run: |
+          curl -X PUT \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            https://api.github.com/repos/${{ github.repository }}/pages \
+            -d '{"source":{"branch":"gh-pages","path":"/"}}'
 
       - name: Post report link to job summary
         if: always()
