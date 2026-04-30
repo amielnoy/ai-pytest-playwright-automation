@@ -1,7 +1,9 @@
 import re
 
+import pytest
 from playwright.sync_api import Page, Response as PlaywrightResponse
 
+from services.api.http_response_constants import HTTP_FORBIDDEN
 from utils.price_parser import parse_price
 
 
@@ -33,6 +35,8 @@ class EbaySearchService:
 
     def get(self, url: str) -> _EbayResponse:
         nav = self._page.goto(url, wait_until="domcontentloaded")
+        if nav and nav.status == HTTP_FORBIDDEN:
+            pytest.skip("eBay blocked automated requests with HTTP 403")
         return _EbayResponse(self._page, nav)
 
     def search(self, query: str) -> _EbayResponse:
@@ -40,6 +44,8 @@ class EbaySearchService:
             f"{EBAY_BASE_URL}/sch/i.html?_nkw={query}",
             wait_until="domcontentloaded",
         )
+        if nav and nav.status == HTTP_FORBIDDEN:
+            pytest.skip("eBay blocked automated search requests with HTTP 403")
         return _EbayResponse(self._page, nav)
 
     def item_cards(self, html: str) -> list[str]:

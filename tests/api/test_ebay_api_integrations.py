@@ -1,5 +1,3 @@
-import uuid
-
 import allure
 import pytest
 
@@ -109,7 +107,7 @@ class TestEbaySearchApiNegative:
     @allure.title("eBay search with unknown query returns OK")
     @allure.severity(allure.severity_level.NORMAL)
     @pytest.mark.parametrize("query", [
-        f"xyzzy-no-results-{uuid.uuid4().hex[:8]}",
+        "xyzzy-no-results-static-query",
         "!@#$%^&*()",
     ])
     def test_search_edge_case_queries_return_ok(

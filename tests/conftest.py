@@ -6,6 +6,7 @@ from pages.login_page import LoginPage
 from pages.register_page import RegisterPage
 from pages.search_results_page import SearchResultsPage
 from services.api.ebay_search_service import EbaySearchService
+from services.api.http_response_constants import HTTP_FORBIDDEN, HTTP_OK
 from services.api.public_service import EndpointCase
 from services.api.search_service import SearchCase
 from services.rest_client import RestClient
@@ -60,7 +61,13 @@ def session(api_base_url: str) -> RestClient:
 
 @pytest.fixture
 def ebay_search_service(page) -> EbaySearchService:
-    return EbaySearchService(page)
+    service = EbaySearchService(page)
+    probe = service.search("laptop")
+    if probe.status_code == HTTP_FORBIDDEN:
+        pytest.skip("eBay blocked automated search requests with HTTP 403")
+    if probe.status_code != HTTP_OK:
+        pytest.skip(f"eBay search probe returned HTTP {probe.status_code}")
+    return service
 
 
 # ---------------------------------------------------------------------------

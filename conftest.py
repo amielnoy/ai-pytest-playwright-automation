@@ -53,7 +53,15 @@ def pytest_runtest_makereport(item):
     if rep.when == "call" and rep.failed:
         page_fixture = item.funcargs.get("page")
         if page_fixture:
-            screenshot = page_fixture.screenshot()
+            try:
+                screenshot = page_fixture.screenshot(timeout=5000)
+            except Exception as exc:
+                allure.attach(
+                    str(exc),
+                    name="screenshot_on_failure_error",
+                    attachment_type=allure.attachment_type.TEXT,
+                )
+                return
             allure.attach(
                 screenshot,
                 name="screenshot_on_failure",
