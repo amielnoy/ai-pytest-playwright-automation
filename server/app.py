@@ -138,7 +138,8 @@ def _run_job(job: Job) -> None:
 
 
 def _prune_jobs(now: float | None = None) -> None:
-    now = now or time.time()
+    if now is None:
+        now = time.time()
     stale_job_ids = [
         job_id
         for job_id, job in jobs.items()
@@ -155,7 +156,7 @@ def _prune_jobs(now: float | None = None) -> None:
     if len(finished_jobs) <= MAX_FINISHED_JOBS:
         return
 
-    finished_jobs.sort(key=lambda item: item[1] or 0)
+    finished_jobs.sort(key=lambda item: item[1])
     overflow = len(finished_jobs) - MAX_FINISHED_JOBS
     for job_id, _ in finished_jobs[:overflow]:
         jobs.pop(job_id, None)
