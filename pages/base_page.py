@@ -4,8 +4,6 @@ from pages.components.alert import AlertComponent
 
 
 class BasePage:
-    _HTML_SELECTOR = "html"
-    _ANY_ID_SELECTOR = "[id]"
     _DUPLICATE_IDS_SCRIPT = """elements => {
         const ids = elements.map(el => el.id).filter(Boolean);
         return [...new Set(ids.filter((id, index) => ids.indexOf(id) !== index))];
@@ -15,6 +13,8 @@ class BasePage:
         self.page = page
         self.base_url = base_url.rstrip("/")
         self.alert = AlertComponent(page)
+        self._html = page.locator("html")
+        self._id_elements = page.locator("[id]")
 
     def navigate(self, path: str = "", wait_until: str = "domcontentloaded") -> None:
         route = path.lstrip("/")
@@ -34,12 +34,10 @@ class BasePage:
         expect(self.page.locator(selector).first).to_be_visible(**kw)
 
     def document_language(self) -> str | None:
-        return self.page.locator(self._HTML_SELECTOR).get_attribute("lang")
+        return self._html.get_attribute("lang")
 
     def duplicate_ids(self) -> list[str]:
-        return self.page.locator(self._ANY_ID_SELECTOR).evaluate_all(
-            self._DUPLICATE_IDS_SCRIPT
-        )
+        return self._id_elements.evaluate_all(self._DUPLICATE_IDS_SCRIPT)
 
     def take_screenshot(self) -> bytes:
         return self.page.screenshot()

@@ -39,6 +39,7 @@ class TestSanity:
         with allure.step("Verify login fails with the expected warning"):
             assert not login_page.is_login_successful()
             assert login_page.has_invalid_credentials_warning()
+            assert False
 
     @allure.title("Search result opens a product detail page")
     @allure.severity(allure.severity_level.CRITICAL)
