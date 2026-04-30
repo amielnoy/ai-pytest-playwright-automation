@@ -9,7 +9,15 @@ from pages.models import ProductInfo, StoredProductInfo
 
 class SearchResultsPage(BasePage):
     _PRODUCT_THUMBS = ".product-thumb"
-    _NO_RESULTS = "//p[contains(text(),'There is no product that matches')]"
+    _NO_RESULTS_TEXT = "There is no product that matches the search criteria."
+    _PRODUCT_TITLE_SELECTOR = "h4"
+    _PRODUCT_LINK_ROLE = "link"
+    _LIST_VIEW_BUTTON = "#list-view"
+    _SORT_SELECT_ROLE = "combobox"
+    _SORT_SELECT_NAME = "Sort By"
+    _SORT_NAME_ASCENDING_LABEL = "Name (A - Z)"
+    _SEARCH_ROUTE = "product/search"
+    _SEARCH_PATH_PREFIX = "index.php?"
 
     def search_items_by_name_under_price(
         self, query: str, max_price: float, limit: int = 5
@@ -20,7 +28,7 @@ class SearchResultsPage(BasePage):
         self, query: str, max_price: float, limit: int = 5
     ) -> list[ProductInfo]:
         self._load_search(query)
-        if self.page.locator(self._NO_RESULTS).is_visible():
+        if self.page.get_by_text(self._NO_RESULTS_TEXT).is_visible():
             return []
         # Snapshot price once per card to avoid a second DOM round-trip during list construction
         cards_with_price = [(c, c.price) for c in self._cards()]
@@ -37,17 +45,30 @@ class SearchResultsPage(BasePage):
             added.append(product.name)
         return added
 
+    def open_product(self, product_name: str) -> None:
+        product_link = self.page.get_by_role(
+            self._PRODUCT_LINK_ROLE, name=product_name, exact=True
+        )
+        self.page.locator(self._PRODUCT_THUMBS).filter(
+            has=product_link
+        ).first.locator(self._PRODUCT_TITLE_SELECTOR).get_by_role(
+            self._PRODUCT_LINK_ROLE, name=product_name, exact=True
+        ).click()
+        self.page.wait_for_load_state("domcontentloaded")
+
     def choose_list_view(self) -> None:
         self.wait_for_product_results()
-        list_view = self.page.locator("#list-view")
+        list_view = self.page.locator(self._LIST_VIEW_BUTTON)
         expect(list_view).to_be_visible()
         list_view.click()
 
     def sort_by_name_ascending(self) -> None:
         self.wait_for_product_results()
-        sort_select = self.page.get_by_role("combobox", name="Sort By")
+        sort_select = self.page.get_by_role(
+            self._SORT_SELECT_ROLE, name=self._SORT_SELECT_NAME
+        )
         expect(sort_select).to_be_visible()
-        sort_select.select_option(label="Name (A - Z)")
+        sort_select.select_option(label=self._SORT_NAME_ASCENDING_LABEL)
         self.page.wait_for_load_state("domcontentloaded")
         self.wait_for_product_results()
 
@@ -67,8 +88,8 @@ class SearchResultsPage(BasePage):
         self.wait_for_visible(self._PRODUCT_THUMBS)
 
     def _load_search(self, query: str) -> None:
-        params = urlencode({"route": "product/search", "search": query})
-        self.navigate(f"index.php?{params}")
+        params = urlencode({"route": self._SEARCH_ROUTE, "search": query})
+        self.navigate(f"{self._SEARCH_PATH_PREFIX}{params}")
 
     def _cards(self) -> list[ProductCardComponent]:
         thumbs = self.page.locator(self._PRODUCT_THUMBS)
