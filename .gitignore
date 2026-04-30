@@ -13,6 +13,7 @@ data/secrets.json
 allure-results/
 allure-report/
 allure-history/
+tmp-allure/
 docker-artifacts/
 .pytest_cache/
 node_modules/
