@@ -1,1 +1,1 @@
-{"id":"7f5d21d6f04ac1b511fd7221a476553e","fullName":"tests.api.test_api.TestSearchApi#test_search_returns_positive_prices","name":"Search returns parseable positive prices for known queries","status":"passed","testResultsByEnv":{"default":"fff48089f5aa94def64d8858ebed316c"}}
+{"id":"7f5d21d6f04ac1b511fd7221a476553e","fullName":"tests.api.test_api.TestSearchApi#test_search_returns_positive_prices","name":"Search returns parseable positive prices for known queries","status":"passed","testResultsByEnv":{"default":"cba5f7adb6691107119f64026457b9b6"}}
