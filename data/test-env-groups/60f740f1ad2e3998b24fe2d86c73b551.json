@@ -1,1 +1,1 @@
-{"id":"60f740f1ad2e3998b24fe2d86c73b551","fullName":"tests.contract.test_contracts.TestPriceContract#test_all_search_prices_are_positive","name":"All prices in search results are positive numbers","status":"passed","testResultsByEnv":{"default":"f4fc685670940e147317a43b2e14ad10"}}
+{"id":"60f740f1ad2e3998b24fe2d86c73b551","fullName":"tests.contract.test_contracts.TestPriceContract#test_all_search_prices_are_positive","name":"All prices in search results are positive numbers","status":"passed","testResultsByEnv":{"default":"12776e34b91554742812cf2064c22c97"}}
