@@ -133,6 +133,9 @@ jobs:
             cp -r allure-history allure-report/allure-history
           fi
 
+      - name: Copy architecture.html into report
+        run: cp architecture.html allure-report/architecture.html
+
       - name: Post report link to job summary
         if: always()
         run: |
