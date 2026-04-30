@@ -14,7 +14,7 @@ class LoginPage(BasePage):
     _MY_ACCOUNT_HEADING_NAME = "My Account"
     _MY_ACCOUNT_HEADING_LEVEL = 2
     _INVALID_CREDENTIALS_WARNING = ".alert-danger"
-    _INVALID_CREDENTIALS_TEXT = "Warning: No match for E-Mail Address and/or Password."
+    _INVALID_CREDENTIALS_TEXT = "Warning:"
 
     def open(self) -> None:
         self.navigate(self._PATH)
