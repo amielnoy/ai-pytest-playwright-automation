@@ -177,6 +177,12 @@ Open the interactive docs at:
 http://127.0.0.1:8000/docs
 ```
 
+Also view the architecture documentation in the repo at:
+
+```text
+architecture.html
+```
+
 Useful endpoints:
 
 ```text
