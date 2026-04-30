@@ -4,6 +4,13 @@ from pages.components.alert import AlertComponent
 
 
 class BasePage:
+    _HTML_SELECTOR = "html"
+    _ANY_ID_SELECTOR = "[id]"
+    _DUPLICATE_IDS_SCRIPT = """elements => {
+        const ids = elements.map(el => el.id).filter(Boolean);
+        return [...new Set(ids.filter((id, index) => ids.indexOf(id) !== index))];
+    }"""
+
     def __init__(self, page: Page, base_url: str) -> None:
         self.page = page
         self.base_url = base_url.rstrip("/")
@@ -25,6 +32,14 @@ class BasePage:
     def wait_for_visible(self, selector: str, timeout: int | None = None) -> None:
         kw = {} if timeout is None else {"timeout": timeout}
         expect(self.page.locator(selector).first).to_be_visible(**kw)
+
+    def document_language(self) -> str | None:
+        return self.page.locator(self._HTML_SELECTOR).get_attribute("lang")
+
+    def duplicate_ids(self) -> list[str]:
+        return self.page.locator(self._ANY_ID_SELECTOR).evaluate_all(
+            self._DUPLICATE_IDS_SCRIPT
+        )
 
     def take_screenshot(self) -> bytes:
         return self.page.screenshot()

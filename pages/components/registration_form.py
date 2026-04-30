@@ -9,6 +9,14 @@ class RegistrationFormComponent(BaseComponent):
     _TELEPHONE_TEXTBOX_NAME = "Telephone"
     _PASSWORD_LABEL = "Password"
     _CONFIRM_PASSWORD_LABEL = "Password Confirm"
+    _REQUIRED_FIELD_LABELS = (
+        _FIRST_NAME_TEXTBOX_NAME,
+        _LAST_NAME_TEXTBOX_NAME,
+        _EMAIL_TEXTBOX_NAME,
+        _TELEPHONE_TEXTBOX_NAME,
+        _PASSWORD_LABEL,
+        _CONFIRM_PASSWORD_LABEL,
+    )
     _NEWSLETTER_RADIO_ROLE = "radio"
     _NEWSLETTER_YES_NAME = "Yes"
     _NEWSLETTER_NO_NAME = "No"
@@ -63,3 +71,19 @@ class RegistrationFormComponent(BaseComponent):
             name=self._SUCCESS_HEADING_NAME,
             level=self._SUCCESS_HEADING_LEVEL,
         ).is_visible()
+
+    def has_required_field_labels(self) -> bool:
+        return all(
+            self.page.get_by_label(label, exact=True).is_visible()
+            for label in self._REQUIRED_FIELD_LABELS
+        )
+
+    def has_newsletter_options(self) -> bool:
+        return (
+            self.page.get_by_role(
+                self._NEWSLETTER_RADIO_ROLE, name=self._NEWSLETTER_YES_NAME
+            ).is_visible()
+            and self.page.get_by_role(
+                self._NEWSLETTER_RADIO_ROLE, name=self._NEWSLETTER_NO_NAME
+            ).is_visible()
+        )

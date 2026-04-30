@@ -15,6 +15,14 @@ class SearchResultsPage(BasePage):
     _LIST_VIEW_BUTTON = "#list-view"
     _SORT_SELECT_ROLE = "combobox"
     _SORT_SELECT_NAME = "Sort By"
+    _SEARCH_CRITERIA_LABEL = "Search Criteria"
+    _SORT_BY_LABEL = "Sort By:"
+    _SHOW_LABEL = "Show:"
+    _FILTER_CONTROL_LABELS = (
+        _SEARCH_CRITERIA_LABEL,
+        _SORT_BY_LABEL,
+        _SHOW_LABEL,
+    )
     _SORT_NAME_ASCENDING_LABEL = "Name (A - Z)"
     _SEARCH_ROUTE = "product/search"
     _SEARCH_PATH_PREFIX = "index.php?"
@@ -75,6 +83,18 @@ class SearchResultsPage(BasePage):
     def product_names(self) -> list[str]:
         self.wait_for_product_results()
         return [card.name for card in self._cards()]
+
+    def product_title_link_names(self) -> list[str]:
+        self.wait_for_product_results()
+        return self.page.locator(
+            f"{self._PRODUCT_THUMBS} {self._PRODUCT_TITLE_SELECTOR} a"
+        ).all_inner_texts()
+
+    def has_filter_controls(self) -> bool:
+        return all(
+            self.page.get_by_label(label).is_visible()
+            for label in self._FILTER_CONTROL_LABELS
+        )
 
     def are_product_names_sorted_ascending(self) -> bool:
         names = self.product_names()

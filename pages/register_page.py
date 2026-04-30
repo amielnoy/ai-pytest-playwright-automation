@@ -26,3 +26,9 @@ class RegisterPage(BasePage):
 
     def is_registration_successful(self) -> bool:
         return self.form.is_submitted_successfully()
+
+    def has_required_field_labels(self) -> bool:
+        return self.form.has_required_field_labels()
+
+    def has_newsletter_options(self) -> bool:
+        return self.form.has_newsletter_options()

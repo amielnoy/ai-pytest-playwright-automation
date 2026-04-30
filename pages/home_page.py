@@ -5,6 +5,12 @@ from pages.components import NavBarComponent
 
 
 class HomePage(BasePage):
+    _FEATURED_PRODUCT_IMAGES = ".product-thumb img"
+    _VISIBLE_IMAGES_MISSING_ALT_SCRIPT = """elements => elements
+        .filter(el => !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length))
+        .filter(el => !el.hasAttribute('alt') || !el.getAttribute('alt').trim())
+        .map(el => el.outerHTML.slice(0, 160))"""
+
     def __init__(self, page: Page, base_url: str) -> None:
         super().__init__(page, base_url)
         self.nav = NavBarComponent(page)
@@ -18,6 +24,25 @@ class HomePage(BasePage):
 
     def has_currency_dropdown(self) -> bool:
         return self.nav.has_currency_dropdown()
+
+    def has_search_input(self) -> bool:
+        return self.nav.has_search_input()
+
+    def has_empty_cart_summary(self) -> bool:
+        return self.nav.has_empty_cart_summary()
+
+    def has_header_accessible_controls(self) -> bool:
+        return (
+            self.nav.has_account_menu()
+            and self.nav.has_currency_dropdown()
+            and self.nav.has_search_input()
+            and self.nav.has_empty_cart_summary()
+        )
+
+    def visible_featured_images_missing_alt(self) -> list[str]:
+        return self.page.locator(self._FEATURED_PRODUCT_IMAGES).evaluate_all(
+            self._VISIBLE_IMAGES_MISSING_ALT_SCRIPT
+        )
 
     def go_to_login(self) -> None:
         self.nav.go_to_login()
