@@ -50,6 +50,8 @@ jobs:
         run: |
           if [ -n "$TEST_SECRETS_JSON" ]; then
             printf '%s' "$TEST_SECRETS_JSON" > data/secrets.json
+          else
+            echo "No secrets provided — skipping secrets.json creation."  
           fi
 
       - name: Cache Playwright browsers
@@ -133,7 +135,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.PYTHON_GH_TOKEN }}
           publish_dir: allure-report
           publish_branch: gh-pages
           keep_files: false
