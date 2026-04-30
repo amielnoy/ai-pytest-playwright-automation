@@ -1,1 +1,1 @@
-{"id":"02385a7c6bbf8f22f743873558deecf8","fullName":"tests.api.test_api.TestCartApi#test_cart_accepts_products_from_search_results","name":"Cart accepts products found from known search queries","status":"passed","testResultsByEnv":{"default":"8bafb4ca9d8ece6af9d1cf454f1d7d83"}}
+{"id":"02385a7c6bbf8f22f743873558deecf8","fullName":"tests.api.test_api.TestCartApi#test_cart_accepts_products_from_search_results","name":"Cart accepts products found from known search queries","status":"passed","testResultsByEnv":{"default":"a4ce7d05634a6e224592d3bd52b82397"}}
