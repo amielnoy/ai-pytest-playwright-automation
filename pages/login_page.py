@@ -14,7 +14,7 @@ class LoginPage(BasePage):
     _MY_ACCOUNT_HEADING_NAME = "My Account"
     _MY_ACCOUNT_HEADING_LEVEL = 2
     _INVALID_CREDENTIALS_WARNING = ".alert-danger"
-    _INVALID_CREDENTIALS_TEXT = "Warning:"
+    _INVALID_LOGIN_WARNING_PREFIX = "Warning:"
 
     def open(self) -> None:
         self.navigate(self._PATH)
@@ -53,4 +53,4 @@ class LoginPage(BasePage):
             warning.wait_for(state="visible", timeout=timeout)
         except PlaywrightTimeoutError:
             return False
-        return self._INVALID_CREDENTIALS_TEXT in warning.inner_text()
+        return self._INVALID_LOGIN_WARNING_PREFIX in warning.inner_text()

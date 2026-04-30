@@ -234,7 +234,7 @@ def test_login_page_accessibility_helpers_use_class_locators():
     email.is_visible.return_value = True
     password.is_visible.return_value = True
     login_button.is_visible.return_value = True
-    warning_text.inner_text.return_value = LoginPage._INVALID_CREDENTIALS_TEXT
+    warning_text.inner_text.return_value = LoginPage._INVALID_LOGIN_WARNING_PREFIX
     page.get_by_role.side_effect = [email, login_button]
     page.get_by_label.return_value = password
     page.locator.return_value = warning_text
@@ -516,7 +516,12 @@ def test_nav_bar_search_currency_login_register_logout_and_status():
 
     search_input.fill.assert_called_once_with("iPod")
     search_button.click.assert_called_once()
-    page.wait_for_load_state.assert_called_once_with("domcontentloaded")
+    assert page.wait_for_load_state.call_args_list == [
+        call("domcontentloaded"),
+        call("domcontentloaded"),
+        call("domcontentloaded"),
+        call("domcontentloaded"),
+    ]
     assert account_link.first.click.call_count == 3
     assert expect_mock.call_count == 3
     login_link.click.assert_called_once()
