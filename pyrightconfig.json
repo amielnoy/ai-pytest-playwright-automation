@@ -2,9 +2,13 @@
   "venvPath": ".",
   "venv": ".venv",
   "include": [
+    "agents",
+    "flows",
+    "pages",
+    "server",
+    "services",
     "tests",
     "utils",
-    "pages",
     "conftest.py",
     "run_agent.py"
   ]
