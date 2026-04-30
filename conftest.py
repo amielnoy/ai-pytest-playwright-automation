@@ -28,7 +28,8 @@ def context(request, browser_instance: Browser, tmp_path_factory):
     ctx: BrowserContext = browser_instance.new_context(
         viewport=CONFIG["viewport"],
         base_url=CONFIG["base_url"],
-        record_video={"dir": str(video_dir), "size": CONFIG["viewport"]},
+        record_video_dir=video_dir,
+        record_video_size=CONFIG["viewport"],
     )
     ctx.set_default_timeout(CONFIG["timeout"])
     ctx.tracing.start(screenshots=True, snapshots=True, sources=True)
