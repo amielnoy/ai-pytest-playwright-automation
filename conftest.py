@@ -22,14 +22,35 @@ def browser_instance():
 
 
 @pytest.fixture
-def context(browser_instance: Browser):
+def context(request, browser_instance: Browser, tmp_path_factory):
+    video_dir = tmp_path_factory.mktemp(request.node.name.replace("/", "_"))
+    trace_file = video_dir / "trace.zip"
     ctx: BrowserContext = browser_instance.new_context(
         viewport=CONFIG["viewport"],
         base_url=CONFIG["base_url"],
+        record_video={"dir": str(video_dir), "size": CONFIG["viewport"]},
     )
     ctx.set_default_timeout(CONFIG["timeout"])
+    ctx.tracing.start(screenshots=True, snapshots=True, sources=True)
     yield ctx
+    ctx.tracing.stop(path=str(trace_file))
     ctx.close()
+
+    if getattr(request.node, "rep_call", None) and request.node.rep_call.failed:
+        if trace_file.exists():
+            allure.attach.file(
+                str(trace_file),
+                name="trace_on_failure",
+                attachment_type=allure.attachment_type.ZIP,
+            )
+
+        video_files = sorted(video_dir.rglob("*.webm"))
+        for index, video_path in enumerate(video_files, start=1):
+            allure.attach.file(
+                str(video_path),
+                name=f"video_on_failure_{index}",
+                attachment_type=allure.attachment_type.WEBM,
+            )
 
 
 @pytest.fixture
@@ -45,9 +66,10 @@ def app_url() -> str:
 
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
-def pytest_runtest_makereport(item):
+def pytest_runtest_makereport(item, call):
     outcome = yield
     rep = outcome.get_result()
+    setattr(item, "rep_" + rep.when, rep)
 
     if rep.when == "call" and rep.failed:
         page_fixture = item.funcargs.get("page")
