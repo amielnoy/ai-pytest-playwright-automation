@@ -121,10 +121,10 @@ jobs:
           node-version: "20"
 
       - name: Install Allure 3 CLI
-        run: npm install -g allure@3
+        run: npm ci
 
       - name: Generate Allure 3 report
-        run: allure generate allure-results
+        run: npx allure generate allure-results
 
       - name: Persist history for next run
         run: |
