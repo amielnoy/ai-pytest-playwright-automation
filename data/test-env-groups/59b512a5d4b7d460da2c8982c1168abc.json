@@ -1,1 +1,1 @@
-{"id":"59b512a5d4b7d460da2c8982c1168abc","fullName":"tests.api.test_api.TestCartApi#test_cart_page_reflects_api_add","name":"Cart page reflects the product added via API","status":"passed","testResultsByEnv":{"default":"fa1b215bc6ab3342a8be965fd1e0af1c"}}
+{"id":"59b512a5d4b7d460da2c8982c1168abc","fullName":"tests.api.test_api.TestCartApi#test_cart_page_reflects_api_add","name":"Cart page reflects the product added via API","status":"passed","testResultsByEnv":{"default":"96f1e095a1feca8dd5e5240ebbb538c4"}}

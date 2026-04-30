@@ -1,1 +1,1 @@
-{"id":"f9100bbd877744535ee28596ef0ddb2a","fullName":"tests.contract.test_contracts.TestSearchContract#test_search_product_ids_are_integers","name":"Search result product IDs are parseable integers","status":"passed","testResultsByEnv":{"default":"a7b1944b122f11a6408a5dd21a08a1f5"}}
+{"id":"f9100bbd877744535ee28596ef0ddb2a","fullName":"tests.contract.test_contracts.TestSearchContract#test_search_product_ids_are_integers","name":"Search result product IDs are parseable integers","status":"passed","testResultsByEnv":{"default":"479bdee8e7884334c32c683137aaf364"}}
