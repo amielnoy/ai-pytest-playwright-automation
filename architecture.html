@@ -482,6 +482,7 @@
     <div class="nav-section">
       <div class="nav-label">ארכיטקטורה</div>
       <a href="#pom">Page Object Model</a>
+      <a href="#flows">Flows Layer</a>
       <a href="#services">שכבת ה-API</a>
       <a href="#server">FastAPI Server</a>
       <a href="#fixtures">Fixtures</a>
@@ -497,6 +498,7 @@
     <div class="nav-section">
       <div class="nav-label">DevOps</div>
       <a href="#cicd">CI/CD Pipeline</a>
+      <a href="#mcp">Playwright MCP</a>
       <a href="#docker">Docker</a>
       <a href="#reporting">דוחות Allure</a>
     </div>
@@ -510,11 +512,11 @@
       <h2><span class="icon">🗂</span> סקירה כללית</h2>
 
       <div class="stats-row">
-        <div class="stat-box stat-blue"><div class="num">6</div><div class="lbl">קבצי UI Test</div></div>
-        <div class="stat-box stat-cyan"><div class="num">2</div><div class="lbl">API Test files</div></div>
-        <div class="stat-box stat-purple"><div class="num">4</div><div class="lbl">Contract Suites</div></div>
-        <div class="stat-box stat-green"><div class="num">2</div><div class="lbl">Unit Test files</div></div>
-        <div class="stat-box stat-yellow"><div class="num">5</div><div class="lbl">Page Objects</div></div>
+        <div class="stat-box stat-blue"><div class="num">25</div><div class="lbl">UI Test cases</div></div>
+        <div class="stat-box stat-cyan"><div class="num">26</div><div class="lbl">API Test cases</div></div>
+        <div class="stat-box stat-purple"><div class="num">14</div><div class="lbl">Contract cases</div></div>
+        <div class="stat-box stat-green"><div class="num">37</div><div class="lbl">Unit Test cases</div></div>
+        <div class="stat-box stat-yellow"><div class="num">102</div><div class="lbl">Total collected tests</div></div>
       </div>
 
       <p>הפרויקט הוא <strong>מסגרת בדיקות אוטומטיות רב-שכבתית</strong> שנבנתה עבור אתר ה-demo של TutorialsNinja — אתר e-commerce לדוגמה.</p>
@@ -526,6 +528,11 @@
           <div class="card-icon">🎭</div>
           <div class="card-title">Playwright (Python)</div>
           <div class="card-desc">אוטומציה של דפדפן Chromium לטסטי ה-UI. כל בדיקה פועלת בהקשר (context) נפרד.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🧭</div>
+          <div class="card-title">Playwright MCP</div>
+          <div class="card-desc">כלי inspection ותכנון טסטים: default, Chrome, Firefox ו-WebKit MCP servers זמינים ל-Codex.</div>
         </div>
         <div class="card">
           <div class="card-icon">🧪</div>
@@ -564,25 +571,25 @@
         <div class="pyramid-row">
           <div class="pyramid-bar pyr-ui">
             <span class="label">🎭 UI Tests (Playwright)</span>
-            <span class="count">6 files · web-ui/</span>
+            <span class="count">8 files · 25 cases · web-ui/</span>
           </div>
         </div>
         <div class="pyramid-row">
           <div class="pyramid-bar pyr-contract">
             <span class="label">📋 Contract Tests</span>
-            <span class="count">4 suites · contract/</span>
+            <span class="count">4 suites · 14 cases · contract/</span>
           </div>
         </div>
         <div class="pyramid-row">
           <div class="pyramid-bar pyr-api">
             <span class="label">🔌 API Tests</span>
-            <span class="count">2 files · 18 cases · api/</span>
+            <span class="count">2 files · 26 cases · api/</span>
           </div>
         </div>
         <div class="pyramid-row">
           <div class="pyramid-bar pyr-unit">
             <span class="label">⚙️ Unit Tests</span>
-            <span class="count">2 files · unit/</span>
+            <span class="count">3 files · 37 cases · unit/</span>
           </div>
         </div>
       </div>
@@ -620,9 +627,59 @@
           <tr>
             <td><span class="badge badge-blue">UI</span></td>
             <td><code>tests/web-ui/</code></td>
-            <td>בדיקות E2E מלאות בדפדפן — חיפוש, הוספה לעגלה, רישום משתמש</td>
-            <td><code>@pytest.mark.search / cart / registration</code></td>
+            <td>בדיקות E2E מלאות בדפדפן — sanity, accessibility, חיפוש, הוספה לעגלה, רישום משתמש</td>
+            <td><code>@pytest.mark.sanity / accessibility / search / cart / registration</code></td>
             <td>🐢 איטי יחסית</td>
+          </tr>
+        </table>
+      </div>
+
+      <h3>pytest markers</h3>
+      <p>הפרויקט משתמש ב-<code>--strict-markers</code>, לכן כל marker מותאם אישית חייב להיות רשום ב-<code>pytest.ini</code>. זה מונע טעויות כתיב שקטות בהרצת subset של בדיקות.</p>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Marker</th><th>תיקייה / קבצים</th><th>שימוש</th><th>פקודת הרצה לדוגמה</th></tr>
+          <tr>
+            <td><code>@pytest.mark.sanity</code></td>
+            <td><code>tests/web-ui/test_sanity.py</code></td>
+            <td>בדיקות smoke קצרות לזמינות UI קריטית לפני regression מלא.</td>
+            <td><code>pytest -m sanity</code></td>
+          </tr>
+          <tr>
+            <td><code>@pytest.mark.accessibility</code></td>
+            <td><code>tests/web-ui/test_accessibility_sanity.py</code></td>
+            <td>בדיקות sanity לנגישות בסיסית: language, labels, alt text, שמות נגישים וקישורי מוצר.</td>
+            <td><code>pytest -m accessibility</code></td>
+          </tr>
+          <tr>
+            <td><code>@pytest.mark.registration</code></td>
+            <td><code>tests/web-ui/test_registration.py</code></td>
+            <td>רישום משתמש ו-validation של שדות חובה.</td>
+            <td><code>pytest -m registration</code></td>
+          </tr>
+          <tr>
+            <td><code>@pytest.mark.search</code></td>
+            <td><code>tests/web-ui/</code></td>
+            <td>חיפוש, סינון מחיר, מיון, ואיסוף מידע מוצר.</td>
+            <td><code>pytest -m search</code></td>
+          </tr>
+          <tr>
+            <td><code>@pytest.mark.cart</code></td>
+            <td><code>tests/web-ui/</code></td>
+            <td>הוספה לעגלה, עגלה לא ריקה, וחישובי total.</td>
+            <td><code>pytest -m cart</code></td>
+          </tr>
+          <tr>
+            <td><code>@pytest.mark.api</code></td>
+            <td><code>tests/api/</code></td>
+            <td>בדיקות HTTP behavior מול TutorialsNinja ללא דפדפן.</td>
+            <td><code>pytest -m api</code></td>
+          </tr>
+          <tr>
+            <td><code>@pytest.mark.contract</code></td>
+            <td><code>tests/contract/</code></td>
+            <td>בדיקות חוזה: endpoints, HTML markers, שדות חובה, ids ומחירים.</td>
+            <td><code>pytest -m contract</code></td>
           </tr>
         </table>
       </div>
@@ -651,6 +708,7 @@
         <div class="line"><span class="indent"></span>├── <code>product_names()</code></div>
         <div class="line"><span class="indent"></span>├── <code>get_products_under_price(query, max_price, limit)</code></div>
         <div class="line"><span class="indent"></span>├── <code>add_items_to_cart(products)</code> — משתמש ב-<code>self.alert</code> (בסיס)</div>
+        <div class="line"><span class="indent"></span>├── <code>open_product(product_name)</code> — פתיחת דף מוצר מתוך תוצאות חיפוש</div>
         <div class="line"><span class="indent"></span>├── <code>sort_by_name_ascending()</code></div>
         <div class="line"><span class="indent"></span>├── <code>stored_product_information()</code></div>
         <div class="line"><span class="indent"></span>└── <code>wait_for_product_results()</code> — קורא ל-<code>wait_for_visible</code> (בסיס)</div>
@@ -663,8 +721,10 @@
         <div class="line"><span class="indent"></span>├── <code>is_registration_successful()</code></div>
         <div class="line"><span class="indent"></span>└── <code>get_error_message()</code> <span class="muted">← ירושה מ-BasePage</span></div>
         <div class="line-section"><span class="page">LoginPage</span> <span class="muted">← pages/login_page.py</span></div>
+        <div class="line"><span class="indent"></span>├── <code>open()</code></div>
         <div class="line"><span class="indent"></span>├── <code>login(email, password)</code></div>
         <div class="line"><span class="indent"></span>├── <code>is_login_successful()</code></div>
+        <div class="line"><span class="indent"></span>├── <code>has_invalid_credentials_warning()</code></div>
         <div class="line"><span class="indent"></span>└── <code>get_error_message()</code> <span class="muted">← ירושה מ-BasePage</span></div>
         <div class="line-section"><span class="muted">Components (pages/components/) — ירושה מ-BaseComponent, ללא __init__ מיותר</span></div>
         <div class="line"><span class="indent"></span>├── <span class="comp">NavBarComponent</span> — חיפוש, ניווט, login status</div>
@@ -678,8 +738,64 @@
 
       <div class="callout tip mt-1">
         <span class="callout-icon">💡</span>
-        <div><strong>כלל ברזל:</strong> selectors (CSS, XPath, text) נכתבים אך ורק בתוך ה-page objects. טסט שמכיל <code>page.locator()</code> ישירות — לא עבר review.</div>
+        <div><strong>כלל ברזל:</strong> selectors, role names, labels, placeholders וטקסטים יציבים נשמרים כ-class data members בתוך ה-page objects/components. המתודות משתמשות רק ב-<code>self._...</code>, וטסט שמכיל selector ישיר — לא עבר review.</div>
       </div>
+
+      <div class="callout info mt-12">
+        <span class="callout-icon">🎯</span>
+        <div><strong>Locator strategy:</strong> עדיפות ל-Playwright locators יציבים: <code>get_by_role</code>, <code>get_by_label</code>, <code>get_by_placeholder</code>, <code>get_by_text</code>. CSS נשאר רק כאשר אין locator סמנטי יציב במרקאפ של TutorialsNinja.</div>
+      </div>
+
+      <h3>Class data members for locators</h3>
+      <p>כל locator או ערך שמזהה אלמנט נשמר כ-member קבוע במחלקה: role, name, label, placeholder, selector, route, text קבוע, attribute name וכדומה. המתודות קוראות ל-members האלה, ולא מגדירות strings חדשים inline.</p>
+      <pre><span class="k">class</span> LoginPage(BasePage):
+    _EMAIL_ROLE = <span class="s">"textbox"</span>
+    _EMAIL_NAME = <span class="s">"E-Mail Address"</span>
+    _PASSWORD_LABEL = <span class="s">"Password"</span>
+
+    <span class="k">def</span> login(self, email, password):
+        self.page.get_by_role(self._EMAIL_ROLE, name=self._EMAIL_NAME).fill(email)
+        self.page.get_by_label(self._PASSWORD_LABEL).fill(password)</pre>
+    </section>
+
+    <!-- ── FLOWS LAYER ── -->
+    <section id="flows">
+      <h2><span class="icon">🔀</span> Flows Layer</h2>
+      <p>שכבת ה-<strong>flows</strong> יושבת בין ה-Page Objects לבין הטסטים. כל flow מאגד רצף פעולות רב-שלבי שחוצה מספר דפים לכדי מתודה אחת בעלת משמעות עסקית. הטסטים מקבלים fixture של flow במקום לנהל ניווט ידנית.</p>
+
+      <div class="flow">
+        <div class="flow-box blue">Test<span class="sub">tests/web-ui/</span></div>
+        <div class="flow-arrow">←</div>
+        <div class="flow-box cyan">Flow<span class="sub">flows/</span></div>
+        <div class="flow-arrow">←</div>
+        <div class="flow-box purple">Page Object<span class="sub">pages/</span></div>
+        <div class="flow-arrow">←</div>
+        <div class="flow-box green">Playwright Page<span class="sub">playwright.sync_api.Page</span></div>
+      </div>
+
+      <div class="tbl-wrap"><table>
+        <tr><th>Flow Class</th><th>קובץ</th><th>מה הוא עושה</th></tr>
+        <tr>
+          <td><code>LoginFlow</code></td>
+          <td><code>flows/login_flow.py</code></td>
+          <td><code>login(email, password) → bool</code> — פותח דף הבית, עובר ל-login, מגיש credentials ומחזיר הצלחה/כישלון. <code>logout()</code> — מתנתק.</td>
+        </tr>
+        <tr>
+          <td><code>RegistrationFlow</code></td>
+          <td><code>flows/registration_flow.py</code></td>
+          <td><code>register(...) → bool</code> — פותח דף הבית, עובר ל-register, ממלא טופס ומחזיר הצלחה. <code>get_error_message()</code> — מחזיר הודעת שגיאה.</td>
+        </tr>
+        <tr>
+          <td><code>SearchFlow</code></td>
+          <td><code>flows/search_flow.py</code></td>
+          <td><code>search(query) → SearchResultsPage</code> — פותח דף הבית, מבצע חיפוש ומחזיר דף תוצאות. <code>search_under_price(query, max_price) → list[ProductInfo]</code> — מחזיר מוצרים בתקציב.</td>
+        </tr>
+        <tr>
+          <td><code>CartFlow</code></td>
+          <td><code>flows/cart_flow.py</code></td>
+          <td><code>add_products_by_search(query, max_price, limit) → list[str]</code> — מחפש, מוסיף לעגלה ומחזיר שמות. <code>open_cart() → CartPage</code> — פותח את דף העגלה.</td>
+        </tr>
+      </table></div>
     </section>
 
     <!-- ── 4. SERVICES ── -->
@@ -842,6 +958,10 @@
           <tr><td><code>search_service / cart_service / public_service / account_service</code></td><td>API</td><td>Service objects מחוברים ל-session ו-base_url.</td></tr>
           <tr><td><code>home_page / search_results_page / cart_page / register_page / login_page</code></td><td>UI</td><td>Page objects מחוברים ל-page ו-app_url.</td></tr>
           <tr><td><code>search_pages / cart_flow_pages / cart_pages / registration_pages</code></td><td>Composite</td><td>Named tuples (dataclasses) שמאחדים מספר page objects לפי flow.</td></tr>
+          <tr><td><code>login_flow</code></td><td>Flow</td><td><code>LoginFlow</code> — home + login page. מאפשר ניווט, מילוי credentials ו-logout בשורת קוד אחת.</td></tr>
+          <tr><td><code>registration_flow</code></td><td>Flow</td><td><code>RegistrationFlow</code> — home + register page. מאחד ניווט ומילוי טופס הרשמה.</td></tr>
+          <tr><td><code>search_flow</code></td><td>Flow</td><td><code>SearchFlow</code> — home + search results page. מבצע חיפוש מלא מדף הבית.</td></tr>
+          <tr><td><code>cart_flow</code></td><td>Flow</td><td><code>CartFlow</code> — search results + cart page. חיפוש, הוספה לעגלה ופתיחת עגלה.</td></tr>
           <tr><td><code>registration_data</code></td><td>Data</td><td>נתוני הרשמה מ-secrets.json. מדלג (<code>pytest.skip</code>) אם הסוד לא מוגדר.</td></tr>
           <tr><td><code>api_cart</code></td><td>Setup</td><td>מכין עגלה מלאה דרך API (ללא דפדפן) ומחזיר OCSESSID + products + thresholds.</td></tr>
         </table>
@@ -890,6 +1010,89 @@
     <section id="tests-ui">
       <h2><span class="icon">🎭</span> UI Tests (Playwright)</h2>
       <p>בדיקות E2E שמפעילות דפדפן Chromium אמיתי ומדמות משתמש. כל הבדיקות כתובות עם <strong>Allure decorators</strong> — feature, story, title, severity, ו-steps.</p>
+
+      <h3>פקודות הרצה נפוצות</h3>
+      <pre><span class="c"># כל בדיקות ה-UI</span>
+.venv/bin/python -m pytest tests/web-ui -q
+
+<span class="c"># sanity רגיל בלבד</span>
+.venv/bin/python -m pytest -m sanity -q
+
+<span class="c"># sanity accessibility בלבד</span>
+.venv/bin/python -m pytest -m accessibility -q
+
+<span class="c"># קובץ accessibility sanity ישירות</span>
+.venv/bin/python -m pytest -n 0 tests/web-ui/test_accessibility_sanity.py -q</pre>
+
+      <h3>test_accessibility_sanity.py — בדיקות sanity לנגישות (10 tests)</h3>
+      <div class="callout info">
+        <span class="callout-icon">♿</span>
+        <div>בדיקות sanity נגישות חיוביות ללא axe חיצוני. הן בודקות יכולת בסיסית של הדפים הקריטיים להיחשף נכון לקורא מסך ולניווט סמנטי, בלי להפוך את suite ה-smoke ל-audit נגישות מלא.</div>
+      </div>
+
+      <p>מטרת בדיקות הנגישות היא לזהות במהירות שבירות בסיסיות שמפריעות לשימוש באתר דרך טכנולוגיות מסייעות: שדות בלי label, כפתורים או קישורים בלי שם נגיש, תמונות מוצר בלי <code>alt</code>, duplicate ids, או טקסטי שגיאה שלא חשופים כטקסט נראה. הבדיקות רצות כחלק מ-sanity ולכן הן קצרות, ממוקדות בדפים הקריטיים, ולא תלויות בכלי חיצוני.</p>
+
+      <p>הגישה המועדפת היא להשתמש ב-locators הסמנטיים של Playwright כמו <code>get_by_role</code>, <code>get_by_label</code>, <code>get_by_placeholder</code> ו-<code>get_by_text</code>. זה נותן שתי שכבות ערך: הטסט קריא יותר, ובאותו זמן הוא מאמת שהאלמנט באמת נגיש לפי שם, label או role שהמשתמש אמור לקבל גם דרך reader או ניווט מקלדת.</p>
+
+      <div class="callout warn mt-12">
+        <span class="callout-icon">⚠️</span>
+        <div><strong>גבול הכיסוי:</strong> אלו בדיקות sanity בלבד. הן לא מחליפות WCAG audit מלא, בדיקות contrast, בדיקת keyboard trap מלאה, בדיקה ידנית עם screen reader, או סריקה אוטומטית עם axe. הן נועדו לתפוס regressions בסיסיים מהר לפני regression רחב יותר.</div>
+      </div>
+
+      <div class="tbl-wrap"><table>
+        <tr><th>כיסוי</th><th>מה נבדק</th></tr>
+        <tr><td>Document language</td><td>דף הבית מצהיר <code>lang="en"</code>.</td></tr>
+        <tr><td>Header controls</td><td>My Account, Currency, Search ו-cart summary זמינים עם שמות נגישים.</td></tr>
+        <tr><td>Images</td><td>תמונות featured products בדף הבית כוללות <code>alt</code> לא ריק.</td></tr>
+        <tr><td>Login</td><td>שדות E-Mail ו-Password מזוהים דרך labels; הודעת invalid login גלויה כטקסט.</td></tr>
+        <tr><td>Registration</td><td>שדות חובה ו-newsletter radios ניתנים לאיתור לפי label/name.</td></tr>
+        <tr><td>Search</td><td>Search Criteria, Sort By ו-Show מחוברים ל-labels; קישורי כותרת מוצר אינם ריקים.</td></tr>
+        <tr><td>Product detail</td><td>Qty, Your Name ו-Your Review מחוברים ל-labels, ואין duplicate ids בדף.</td></tr>
+      </table></div>
+
+      <div class="callout tip mt-12">
+        <span class="callout-icon">🧪</span>
+        <div><strong>אימות אחרון:</strong> <code>tests/web-ui/test_accessibility_sanity.py</code> רץ בהצלחה עם <code>10 passed</code>. הבדיקות מסומנות גם <code>@pytest.mark.sanity</code> וגם <code>@pytest.mark.accessibility</code>.</div>
+      </div>
+
+      <h3>test_sanity.py — בדיקות sanity קריטיות</h3>
+      <div class="callout tip">
+        <span class="callout-icon">📄</span>
+        <div>תוכניות הבדיקות המפורטות נשמרות בתיקיית <code>stds/</code>:
+          <ul style="margin-top:6px;padding-right:1.2rem;line-height:2">
+            <li><code>STD_Sanity.md</code> — UI sanity (home header, invalid login, product detail)</li>
+            <li><code>STD_Accessibility.md</code> — נגישות: lang, labels, alt text, duplicate IDs</li>
+            <li><code>STD_Registration.md</code> — הרשמת משתמש חדש ו-validation שדות חובה</li>
+            <li><code>STD_SearchUnderPrice.md</code> — סינון מחיר, no-results, limit</li>
+            <li><code>STD_SortAlphabetically.md</code> — מיון תוצאות A-Z</li>
+            <li><code>STD_IpodStorage.md</code> — שמירת מידע מוצרי iPod, min/max price</li>
+            <li><code>STD_AddToCart.md</code> — הוספה לעגלה דרך UI</li>
+            <li><code>STD_CartTotal.md</code> — ודא total עגלה עם API setup</li>
+            <li><code>STD_API.md</code> — API smoke: search, cart, session isolation</li>
+            <li><code>STD_APIIntegrations.md</code> — API integration: multi-word, quantity, negative IDs</li>
+            <li><code>STD_Contract.md</code> — contracts: endpoints, fields, prices, registration page</li>
+            <li><code>STD_Unit.md</code> — unit: page objects, REST client, FastAPI server</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tbl-wrap"><table>
+        <tr><th>שם הטסט</th><th>Severity</th><th>מה נבדק</th></tr>
+        <tr>
+          <td><code>test_home_page_header_controls</code></td>
+          <td><span class="badge badge-red">CRITICAL</span></td>
+          <td>פתיחת דף הבית ← ודא title, currency dropdown, שדה חיפוש ו-cart summary ריק.</td>
+        </tr>
+        <tr>
+          <td><code>test_invalid_login_warning</code></td>
+          <td><span class="badge badge-red">CRITICAL</span></td>
+          <td>פתיחת login ← הזנת credentials לא תקינים ← ודא שהמשתמש לא מחובר ומופיעה הודעת warning.</td>
+        </tr>
+        <tr>
+          <td><code>test_product_detail_opens_from_search</code></td>
+          <td><span class="badge badge-red">CRITICAL</span></td>
+          <td>חיפוש MacBook ← פתיחת מוצר מתוצאות החיפוש ← ודא דף מוצר, quantity=1 וכפתור Add to Cart.</td>
+        </tr>
+      </table></div>
 
       <h3>test_registration.py — רישום משתמש</h3>
       <div class="tbl-wrap"><table>
@@ -1068,6 +1271,16 @@
             <td><span class="badge badge-yellow">NORMAL</span></td>
             <td>חיפוש MacBook ← לכל product card יש שם, ויש לפחות product ID אחד לכל כרטיס.</td>
           </tr>
+          <tr>
+            <td><code>test_search_multi_word_query_returns_expected_product</code></td>
+            <td><span class="badge badge-yellow">NORMAL</span></td>
+            <td>חיפוש MacBook Pro ← ודא שה-query מרובה מילים מחזיר את המוצר המדויק.</td>
+          </tr>
+          <tr>
+            <td><code>test_search_page_exposes_refine_search_controls</code></td>
+            <td><span class="badge badge-yellow">NORMAL</span></td>
+            <td>חיפוש MacBook ← ודא שב-HTML קיימים input חיפוש, בחירת קטגוריה וכפתור refine search.</td>
+          </tr>
         </table></div>
 
         <h4 class="test-suite-title">TestCartApiIntegration</h4>
@@ -1087,6 +1300,16 @@
             <td><code>test_cart_keeps_multiple_products_in_same_session</code></td>
             <td><span class="badge badge-yellow">NORMAL</span></td>
             <td>הוספת MacBook ו-iPhone באותו session ← row sum ו-grand total חיוביים.</td>
+          </tr>
+          <tr>
+            <td><code>test_cart_add_response_contains_success_and_total</code></td>
+            <td><span class="badge badge-yellow">NORMAL</span></td>
+            <td>POST ל-cart/add ← תגובת JSON כוללת success ו-total עם סיכום עגלה.</td>
+          </tr>
+          <tr>
+            <td><code>test_cart_add_response_total_matches_cart_page_total</code></td>
+            <td><span class="badge badge-yellow">NORMAL</span></td>
+            <td>הוספת MacBook בכמות 2 ← total מתגובת cart/add תואם ל-grand total בדף העגלה.</td>
           </tr>
         </table></div>
       </div>
@@ -1135,7 +1358,16 @@
     <!-- ── 11. UNIT TESTS ── -->
     <section id="tests-unit">
       <h2><span class="icon">⚙️</span> Unit Tests</h2>
-      <p>בדיקות מהירות שלא צריכות רשת, Playwright, Docker, או secrets. משתמשות ב-fakes ו-monkeypatching.</p>
+      <p>בדיקות מהירות שלא צריכות רשת, דפדפן אמיתי, Docker, או secrets. משתמשות ב-fakes, mocks ו-monkeypatching כדי לבדוק לוגיקה ו-delegation ללא הרצת Playwright browser.</p>
+
+      <div class="callout info">
+        <span class="callout-icon">✅</span>
+        <div><strong>Page Object unit coverage:</strong> לכל page object ולכל component תחת <code>pages/</code> יש בדיקות יחידה ב-<code>tests/unit/test_page_objects.py</code>. הבדיקות לא פותחות browser; הן מאמתות delegation, routes, locator members, parsing, וקריאות ל-Playwright API דרך mocks.</div>
+      </div>
+
+      <h3>פקודת אימות</h3>
+      <pre><span class="c"># הרצת כל בדיקות היחידה, כולל Page Objects</span>
+.venv/bin/python -m pytest -n 0 tests/unit -q</pre>
 
       <h3>test_rest_client.py — RestClient behavior</h3>
       <div class="tbl-wrap"><table>
@@ -1157,6 +1389,38 @@
         <tr><td><code>test_mock_cart_add_calculates_total_from_quantity</code> <span class="badge badge-blue">×2</span></td><td>MacBook×1=602, iPhone×3=369.6</td></tr>
         <tr><td><code>test_mock_cart_add_returns_404_for_unknown_product</code></td><td>product_id לא קיים ← 404</td></tr>
         <tr><td><code>test_run_pytest_rejects_unsafe_arguments</code></td><td>args עם <code>&&</code> ← 400 + "Unsafe pytest arg"</td></tr>
+      </table></div>
+
+      <h3>test_page_objects.py — Page Objects &amp; Components (23 tests)</h3>
+      <div class="tbl-wrap"><table>
+        <tr><th>אזור</th><th>מה נבדק</th></tr>
+        <tr><td><code>BasePage / BaseComponent</code></td><td>שמירת page, בניית URL ב-<code>navigate()</code>, title/url/screenshot, והמתנה לאלמנט גלוי דרך <code>expect</code>.</td></tr>
+        <tr><td><code>HomePage / CartPage / RegisterPage / LoginPage</code></td><td>Delegation ל-components, פתיחת routes, login flow, בדיקת הצלחה והודעת invalid credentials.</td></tr>
+        <tr><td><code>SearchResultsPage</code></td><td>טעינת חיפוש, no-results, סינון מחיר+limit, הוספה לעגלה, פתיחת מוצר, list view, sort, product names ו-stored info.</td></tr>
+        <tr><td><code>AlertComponent / CartSummaryComponent / NavBarComponent</code></td><td>קריאת banners ושגיאות, סיכום עגלה, חיפוש header, currency dropdown, account menu ו-login status.</td></tr>
+        <tr><td><code>RegistrationFormComponent / ProductCardComponent</code></td><td>מילוי טופס, privacy policy, submit, success heading, שם/תמונה/תיאור/מחיר מוצר, stored info ו-add-to-cart.</td></tr>
+      </table></div>
+
+      <h3>Page Object coverage matrix</h3>
+      <div class="tbl-wrap"><table>
+        <tr><th>קובץ</th><th>מחלקה</th><th>כיסוי יחידה מרכזי</th></tr>
+        <tr><td><code>pages/base_page.py</code></td><td><code>BasePage</code></td><td>ניווט, properties, screenshot, error delegation, wait helper.</td></tr>
+        <tr><td><code>pages/home_page.py</code></td><td><code>HomePage</code></td><td>פתיחת דף הבית ו-delegation ל-<code>NavBarComponent</code>.</td></tr>
+        <tr><td><code>pages/login_page.py</code></td><td><code>LoginPage</code></td><td>פתיחת login, מילוי credentials, לחיצה על Login, בדיקת הצלחה והודעת warning.</td></tr>
+        <tr><td><code>pages/register_page.py</code></td><td><code>RegisterPage</code></td><td>רצף register מלא: fill, privacy policy, submit, success state.</td></tr>
+        <tr><td><code>pages/search_results_page.py</code></td><td><code>SearchResultsPage</code></td><td>חיפוש, no-results, סינון מחיר, add-to-cart, open product, list view, sort, product names.</td></tr>
+        <tr><td><code>pages/cart_page.py</code></td><td><code>CartPage</code></td><td>פתיחת route העגלה ו-delegation ל-<code>CartSummaryComponent</code>.</td></tr>
+      </table></div>
+
+      <h3>Component coverage matrix</h3>
+      <div class="tbl-wrap"><table>
+        <tr><th>קובץ</th><th>מחלקה</th><th>כיסוי יחידה מרכזי</th></tr>
+        <tr><td><code>pages/components/base_component.py</code></td><td><code>BaseComponent</code></td><td>שמירת reference ל-Playwright page.</td></tr>
+        <tr><td><code>pages/components/alert.py</code></td><td><code>AlertComponent</code></td><td>success/error banners, field errors, wait-for-success.</td></tr>
+        <tr><td><code>pages/components/nav_bar.py</code></td><td><code>NavBarComponent</code></td><td>חיפוש, currency, account menu, login/register/logout, login status.</td></tr>
+        <tr><td><code>pages/components/cart_summary.py</code></td><td><code>CartSummaryComponent</code></td><td>total parsing, item count, empty-cart state.</td></tr>
+        <tr><td><code>pages/components/registration_form.py</code></td><td><code>RegistrationFormComponent</code></td><td>שדות טופס, newsletter, privacy policy, submit, success heading.</td></tr>
+        <tr><td><code>pages/components/product_card.py</code></td><td><code>ProductCardComponent</code></td><td>שם מוצר, clean name, image URL, description, price, stored info, add-to-cart.</td></tr>
       </table></div>
     </section>
 
@@ -1198,7 +1462,42 @@
       </div>
     </section>
 
-    <!-- ── 13. DOCKER ── -->
+    <!-- ── 13. PLAYWRIGHT MCP ── -->
+    <section id="mcp">
+      <h2><span class="icon">🧭</span> Playwright MCP</h2>
+      <p>Codex מחובר ל-Playwright MCP לצורך inspection של אפליקציה חיה, אימות selectors, ותכנון sanity tests לפני מימוש.</p>
+
+      <div class="tbl-wrap"><table>
+        <tr><th>שם MCP</th><th>Command</th><th>תפקיד</th></tr>
+        <tr>
+          <td><code>playwright</code></td>
+          <td><code>npx @playwright/mcp@latest</code></td>
+          <td>שרת Playwright MCP ברירת מחדל.</td>
+        </tr>
+        <tr>
+          <td><code>playwright-chrome</code></td>
+          <td><code>npx @playwright/mcp@latest --browser=chrome</code></td>
+          <td>בדיקות/inspection מול Chrome.</td>
+        </tr>
+        <tr>
+          <td><code>playwright-firefox</code></td>
+          <td><code>npx @playwright/mcp@latest --browser=firefox</code></td>
+          <td>בדיקות/inspection מול Firefox.</td>
+        </tr>
+        <tr>
+          <td><code>playwright-webkit</code></td>
+          <td><code>npx @playwright/mcp@latest --browser=webkit</code></td>
+          <td>בדיקות/inspection מול WebKit.</td>
+        </tr>
+      </table></div>
+
+      <div class="callout info mt-12">
+        <span class="callout-icon">✅</span>
+        <div><strong>שימוש מומלץ:</strong> MCP משמש לאיסוף מבנה דף ותכנון צעדים. מימוש הטסטים נשאר ב-pytest + Page Objects, כדי שהרצה ב-CI תהיה עקבית ולא תלויה ב-Codex.</div>
+      </div>
+    </section>
+
+    <!-- ── 14. DOCKER ── -->
     <section id="docker">
       <h2><span class="icon">🐳</span> Docker</h2>
       <p>קובץ <code>Dockerfile</code> בונה image עם Python, dependencies, ו-Chromium. משמש להרצה בסביבה מבודקת.</p>
@@ -1218,7 +1517,7 @@ docker run --rm \
       </div>
     </section>
 
-    <!-- ── 14. REPORTING ── -->
+    <!-- ── 15. REPORTING ── -->
     <section id="reporting">
       <h2><span class="icon">📊</span> דוחות Allure</h2>
       <p>כל הטסטים כתובים עם Allure decorators לדוח עשיר ואינפורמטיבי.</p>
@@ -1226,8 +1525,8 @@ docker run --rm \
       <h3>Decorators שבשימוש</h3>
       <div class="tbl-wrap"><table>
         <tr><th>Decorator</th><th>תפקיד</th><th>ערכים לדוגמה</th></tr>
-        <tr><td><code>@allure.feature</code></td><td>קיבוץ טסטים לפי feature</td><td>Search, Cart, Registration, API Tests, Contract Tests</td></tr>
-        <tr><td><code>@allure.story</code></td><td>story בתוך feature</td><td>Search with price filter, addItemsToCart</td></tr>
+        <tr><td><code>@allure.feature</code></td><td>קיבוץ טסטים לפי feature</td><td>Accessibility, Sanity, Search, Cart, Registration, API Tests, Contract Tests</td></tr>
+        <tr><td><code>@allure.story</code></td><td>story בתוך feature</td><td>Sanity accessibility checks, Critical UI availability, Search with price filter, addItemsToCart</td></tr>
         <tr><td><code>@allure.title</code></td><td>שם קריא לאדם</td><td>"Search returns 200 and non-empty HTML"</td></tr>
         <tr><td><code>@allure.severity</code></td><td>רמת חשיבות</td><td>CRITICAL, NORMAL</td></tr>
         <tr><td><code>with allure.step(...)</code></td><td>שלבים פנימיים בטסט</td><td>מה שרואים בדוח כ-nested steps</td></tr>
