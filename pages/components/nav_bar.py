@@ -75,3 +75,4 @@ class NavBarComponent(BaseComponent):
         ).first.click()
         expect(link).to_be_visible()
         link.click()
+        self.page.wait_for_load_state("domcontentloaded")
