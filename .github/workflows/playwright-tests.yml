@@ -133,25 +133,6 @@ jobs:
             cp -r allure-history allure-report/allure-history
           fi
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: allure-report
-          publish_branch: gh-pages
-          keep_files: false
-          commit_message: "ci: Allure report run #${{ github.run_number }} [${{ github.sha }}]"
-
-      - name: Ensure GitHub Pages source is gh-pages root
-        if: success()
-        run: |
-          curl -X PUT \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Content-Type: application/json" \
-            https://api.github.com/repos/${{ github.repository }}/pages \
-            -d '{"source":{"branch":"gh-pages","path":"/"}}'
-
       - name: Post report link to job summary
         if: always()
         run: |
@@ -171,10 +152,29 @@ jobs:
           | **Allure Report** | [Open report]($PAGES_URL) |
           | **GitHub Pages URL** | https://amielnoy.github.io/ai-pytest-playwright-automation/ |
           | **Architecture docs** | [architecture.html](https://amielnoy.github.io/ai-pytest-playwright-automation/architecture.html) |
-          | **Branch** | `$BRANCH` |
+          | **Branch** | \`$BRANCH\` |
           | **Commit** | [\`$COMMIT_SHORT\`](${REPO_URL}/commit/${{ github.sha }}) |
           | **Run** | [#${RUN_NUM}]($RUN_URL) |
 
           > [!NOTE]
           > The report may take a minute to appear after the first deploy while GitHub Pages activates.
           EOF
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: allure-report
+          publish_branch: gh-pages
+          keep_files: false
+          commit_message: "ci: Allure report run #${{ github.run_number }} [${{ github.sha }}]"
+
+      - name: Ensure GitHub Pages source is gh-pages root
+        if: success()
+        run: |
+          curl -X PUT \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            https://api.github.com/repos/${{ github.repository }}/pages \
+            -d '{"source":{"branch":"gh-pages","path":"/"}}'
