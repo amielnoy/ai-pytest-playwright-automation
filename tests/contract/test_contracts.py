@@ -80,8 +80,9 @@ class TestSearchContract:
     def test_search_response_has_names_and_prices(
         self, search_service: SearchService
     ):
-        resp = search_service.search("MacBook")
-        html = resp.text
+        with allure.step("GET search results for 'MacBook'"):
+            resp = search_service.search("MacBook")
+            html = resp.text
 
         with allure.step("Assert HTTP OK"):
             assert resp.status_code == HTTP_OK
@@ -97,23 +98,33 @@ class TestSearchContract:
     @allure.title("Search for non-existent product returns no product cards")
     @allure.severity(allure.severity_level.NORMAL)
     def test_search_no_results_contract(self, search_service: SearchService):
-        resp = search_service.search(f"xyznonexistent{uuid.uuid4().hex[:6]}")
-        assert resp.status_code == HTTP_OK
-        assert not search_service.product_cards(resp.text), (
-            "Expected no product cards for a nonsense query"
-        )
+        query = f"xyznonexistent{uuid.uuid4().hex[:6]}"
+
+        with allure.step("GET search results for a nonsense query"):
+            resp = search_service.search(query)
+
+        with allure.step("Assert response is OK and contains no product cards"):
+            assert resp.status_code == HTTP_OK
+            assert not search_service.product_cards(resp.text), (
+                "Expected no product cards for a nonsense query"
+            )
 
     @allure.title("Search result product IDs are parseable integers")
     @allure.severity(allure.severity_level.NORMAL)
     def test_search_product_ids_are_integers(
         self, search_service: SearchService
     ):
-        resp = search_service.search("Apple")
-        assert resp.status_code == HTTP_OK
-        pids = search_service.product_ids(resp.text)
-        assert pids, "No product IDs found via cart.add() pattern"
-        for pid in pids:
-            assert pid.isdigit(), f"Product ID '{pid}' is not a digit string"
+        with allure.step("GET search results for 'Apple'"):
+            resp = search_service.search("Apple")
+
+        with allure.step("Assert response is OK"):
+            assert resp.status_code == HTTP_OK
+
+        with allure.step("Parse and validate product IDs"):
+            pids = search_service.product_ids(resp.text)
+            assert pids, "No product IDs found via cart.add() pattern"
+            for pid in pids:
+                assert pid.isdigit(), f"Product ID '{pid}' is not a digit string"
 
 
 @allure.feature("Contract Tests")
@@ -148,11 +159,14 @@ class TestRegistrationPageContract:
     def test_registration_page_has_privacy_checkbox(
         self, account_service: AccountService
     ):
-        resp = account_service.get_register_page()
-        assert resp.status_code == HTTP_OK
-        assert 'name="agree"' in resp.text, (
-            "Privacy policy checkbox not found on registration page"
-        )
+        with allure.step("Open registration page"):
+            resp = account_service.get_register_page()
+
+        with allure.step("Assert registration page has privacy policy checkbox"):
+            assert resp.status_code == HTTP_OK
+            assert 'name="agree"' in resp.text, (
+                "Privacy policy checkbox not found on registration page"
+            )
 
 
 @allure.feature("Contract Tests")
@@ -165,9 +179,12 @@ class TestPriceContract:
     def test_all_search_prices_are_positive(
         self, search_service: SearchService
     ):
-        resp = search_service.search("MacBook")
-        assert resp.status_code == HTTP_OK
-        prices = search_service.prices(resp.text)
+        with allure.step("GET search results for 'MacBook'"):
+            resp = search_service.search("MacBook")
+            prices = search_service.prices(resp.text)
+
+        with allure.step("Assert HTTP OK"):
+            assert resp.status_code == HTTP_OK
 
         with allure.step(f"Assert all {len(prices)} prices are > 0"):
             non_positive = [price for price in prices if price <= 0]
@@ -179,10 +196,13 @@ class TestPriceContract:
         self, search_service: SearchService, cart_service: CartService
     ):
         data = get_test_data("search")
-        pid = search_service.first_product_id(data["query"])
 
-        add_resp = cart_service.add_product(pid)
-        assert add_resp.status_code == HTTP_OK
+        with allure.step(f"Find first product ID for {data['query']}"):
+            pid = search_service.first_product_id(data["query"])
+
+        with allure.step(f"POST product_id={pid} to cart"):
+            add_resp = cart_service.add_product(pid)
+            assert add_resp.status_code == HTTP_OK
 
         with allure.step("Fetch cart page and parse individual row prices and total"):
             cart_resp = cart_service.get_cart()
