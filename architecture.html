@@ -515,8 +515,8 @@
         <div class="stat-box stat-blue"><div class="num">25</div><div class="lbl">UI Test cases</div></div>
         <div class="stat-box stat-cyan"><div class="num">26</div><div class="lbl">API Test cases</div></div>
         <div class="stat-box stat-purple"><div class="num">14</div><div class="lbl">Contract cases</div></div>
-        <div class="stat-box stat-green"><div class="num">37</div><div class="lbl">Unit Test cases</div></div>
-        <div class="stat-box stat-yellow"><div class="num">102</div><div class="lbl">Total collected tests</div></div>
+        <div class="stat-box stat-green"><div class="num">44</div><div class="lbl">Unit Test cases</div></div>
+        <div class="stat-box stat-yellow"><div class="num">109</div><div class="lbl">Total collected tests</div></div>
       </div>
 
       <p>הפרויקט הוא <strong>מסגרת בדיקות אוטומטיות רב-שכבתית</strong> שנבנתה עבור אתר ה-demo של TutorialsNinja — אתר e-commerce לדוגמה.</p>
@@ -589,7 +589,7 @@
         <div class="pyramid-row">
           <div class="pyramid-bar pyr-unit">
             <span class="label">⚙️ Unit Tests</span>
-            <span class="count">3 files · 37 cases · unit/</span>
+            <span class="count">3 files · 44 cases · unit/</span>
           </div>
         </div>
       </div>
@@ -697,11 +697,13 @@
         <div class="line"><span class="indent"></span>├── <code class="base">title</code> <span class="muted">@property</span> — כותרת הדף הנוכחי</div>
         <div class="line"><span class="indent"></span>├── <code class="base">url</code> <span class="muted">@property</span> — URL הדף הנוכחי</div>
         <div class="line"><span class="indent"></span>├── <code class="base">wait_for_visible(selector, timeout?)</code> — ציפייה לאלמנט גלוי</div>
+        <div class="line"><span class="indent"></span>├── <code class="base">document_language() / duplicate_ids()</code> — בדיקות נגישות בסיסיות</div>
         <div class="line"><span class="indent"></span>├── <code class="base">take_screenshot()</code> ← bytes — צילום מסך</div>
         <div class="line"><span class="indent"></span>└── <code class="base">get_error_message()</code> — שגיאת banner/field (דרך self.alert)</div>
         <div class="line-section"><span class="page">HomePage</span> <span class="muted">← pages/home_page.py</span></div>
         <div class="line"><span class="indent"></span>├── <code>open()</code></div>
         <div class="line"><span class="indent"></span>├── <code>search(query)</code></div>
+        <div class="line"><span class="indent"></span>├── <code>has_header_accessible_controls()</code></div>
         <div class="line"><span class="indent"></span>├── <code>go_to_login() / go_to_register()</code></div>
         <div class="line"><span class="indent"></span>└── <code>is_logged_in() / logout()</code></div>
         <div class="line-section"><span class="page">SearchResultsPage</span> <span class="muted">← pages/search_results_page.py</span></div>
@@ -709,9 +711,14 @@
         <div class="line"><span class="indent"></span>├── <code>get_products_under_price(query, max_price, limit)</code></div>
         <div class="line"><span class="indent"></span>├── <code>add_items_to_cart(products)</code> — משתמש ב-<code>self.alert</code> (בסיס)</div>
         <div class="line"><span class="indent"></span>├── <code>open_product(product_name)</code> — פתיחת דף מוצר מתוך תוצאות חיפוש</div>
+        <div class="line"><span class="indent"></span>├── <code>has_filter_controls() / product_title_link_names()</code></div>
         <div class="line"><span class="indent"></span>├── <code>sort_by_name_ascending()</code></div>
         <div class="line"><span class="indent"></span>├── <code>stored_product_information()</code></div>
         <div class="line"><span class="indent"></span>└── <code>wait_for_product_results()</code> — קורא ל-<code>wait_for_visible</code> (בסיס)</div>
+        <div class="line-section"><span class="page">ProductDetailPage</span> <span class="muted">← pages/product_detail_page.py</span></div>
+        <div class="line"><span class="indent"></span>├── <code>has_product_heading(product_name)</code></div>
+        <div class="line"><span class="indent"></span>├── <code>has_default_quantity() / has_add_to_cart_button()</code></div>
+        <div class="line"><span class="indent"></span>└── <code>open_reviews_tab() / has_review_form_fields()</code></div>
         <div class="line-section"><span class="page">CartPage</span> <span class="muted">← pages/cart_page.py</span></div>
         <div class="line"><span class="indent"></span>├── <code>open()</code></div>
         <div class="line"><span class="indent"></span>├── <code>get_cart_total()</code></div>
@@ -1391,12 +1398,12 @@
         <tr><td><code>test_run_pytest_rejects_unsafe_arguments</code></td><td>args עם <code>&&</code> ← 400 + "Unsafe pytest arg"</td></tr>
       </table></div>
 
-      <h3>test_page_objects.py — Page Objects &amp; Components (23 tests)</h3>
+      <h3>test_page_objects.py — Page Objects &amp; Components (30 tests)</h3>
       <div class="tbl-wrap"><table>
         <tr><th>אזור</th><th>מה נבדק</th></tr>
-        <tr><td><code>BasePage / BaseComponent</code></td><td>שמירת page, בניית URL ב-<code>navigate()</code>, title/url/screenshot, והמתנה לאלמנט גלוי דרך <code>expect</code>.</td></tr>
-        <tr><td><code>HomePage / CartPage / RegisterPage / LoginPage</code></td><td>Delegation ל-components, פתיחת routes, login flow, בדיקת הצלחה והודעת invalid credentials.</td></tr>
-        <tr><td><code>SearchResultsPage</code></td><td>טעינת חיפוש, no-results, סינון מחיר+limit, הוספה לעגלה, פתיחת מוצר, list view, sort, product names ו-stored info.</td></tr>
+        <tr><td><code>BasePage / BaseComponent</code></td><td>שמירת page, בניית URL ב-<code>navigate()</code>, title/url/screenshot, שפת מסמך, duplicate ids, והמתנה לאלמנט גלוי דרך <code>expect</code>.</td></tr>
+        <tr><td><code>HomePage / CartPage / RegisterPage / LoginPage</code></td><td>Delegation ל-components, פתיחת routes, login flow, בדיקת הצלחה, הודעת invalid credentials, ו-accessibility helpers.</td></tr>
+        <tr><td><code>SearchResultsPage / ProductDetailPage</code></td><td>טעינת חיפוש, no-results, סינון מחיר+limit, הוספה לעגלה, פתיחת מוצר, list view, sort, product names, review fields ו-stored info.</td></tr>
         <tr><td><code>AlertComponent / CartSummaryComponent / NavBarComponent</code></td><td>קריאת banners ושגיאות, סיכום עגלה, חיפוש header, currency dropdown, account menu ו-login status.</td></tr>
         <tr><td><code>RegistrationFormComponent / ProductCardComponent</code></td><td>מילוי טופס, privacy policy, submit, success heading, שם/תמונה/תיאור/מחיר מוצר, stored info ו-add-to-cart.</td></tr>
       </table></div>
@@ -1404,11 +1411,12 @@
       <h3>Page Object coverage matrix</h3>
       <div class="tbl-wrap"><table>
         <tr><th>קובץ</th><th>מחלקה</th><th>כיסוי יחידה מרכזי</th></tr>
-        <tr><td><code>pages/base_page.py</code></td><td><code>BasePage</code></td><td>ניווט, properties, screenshot, error delegation, wait helper.</td></tr>
-        <tr><td><code>pages/home_page.py</code></td><td><code>HomePage</code></td><td>פתיחת דף הבית ו-delegation ל-<code>NavBarComponent</code>.</td></tr>
-        <tr><td><code>pages/login_page.py</code></td><td><code>LoginPage</code></td><td>פתיחת login, מילוי credentials, לחיצה על Login, בדיקת הצלחה והודעת warning.</td></tr>
-        <tr><td><code>pages/register_page.py</code></td><td><code>RegisterPage</code></td><td>רצף register מלא: fill, privacy policy, submit, success state.</td></tr>
-        <tr><td><code>pages/search_results_page.py</code></td><td><code>SearchResultsPage</code></td><td>חיפוש, no-results, סינון מחיר, add-to-cart, open product, list view, sort, product names.</td></tr>
+        <tr><td><code>pages/base_page.py</code></td><td><code>BasePage</code></td><td>ניווט, properties, screenshot, error delegation, wait helper, document language, duplicate ids.</td></tr>
+        <tr><td><code>pages/home_page.py</code></td><td><code>HomePage</code></td><td>פתיחת דף הבית, delegation ל-<code>NavBarComponent</code>, header accessibility, ותמונות featured עם alt.</td></tr>
+        <tr><td><code>pages/login_page.py</code></td><td><code>LoginPage</code></td><td>פתיחת login, מילוי credentials, לחיצה על Login, בדיקת הצלחה, controls נגישים והודעת warning.</td></tr>
+        <tr><td><code>pages/register_page.py</code></td><td><code>RegisterPage</code></td><td>רצף register מלא: fill, privacy policy, submit, success state, labels ושדות newsletter.</td></tr>
+        <tr><td><code>pages/search_results_page.py</code></td><td><code>SearchResultsPage</code></td><td>חיפוש, no-results, סינון מחיר, add-to-cart, open product, list view, sort, product names, filter labels.</td></tr>
+        <tr><td><code>pages/product_detail_page.py</code></td><td><code>ProductDetailPage</code></td><td>כותרת מוצר, quantity ברירת מחדל, Add to Cart, Reviews tab ושדות review נגישים.</td></tr>
         <tr><td><code>pages/cart_page.py</code></td><td><code>CartPage</code></td><td>פתיחת route העגלה ו-delegation ל-<code>CartSummaryComponent</code>.</td></tr>
       </table></div>
 
