@@ -36,7 +36,7 @@ def test_successful_login_redirects_to_inventory(page: Page):
     page.get_by_role("button", name="Login").click()
 
     expect(page).to_have_url(f"{BASE}/inventory.html")
-    expect(page.locator(".inventory_list")).to_be_visible()
+    expect(page.get_by_role("button", name="Add to cart").first).to_be_visible()
 
 
 def test_failed_login_does_not_set_session_cookie(page: Page, context):
