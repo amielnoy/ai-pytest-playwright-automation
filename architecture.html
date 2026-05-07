@@ -693,6 +693,7 @@
 
       <div class="pom-tree">
         <div class="line"><span class="base">BasePage</span> <span class="muted">← pages/base_page.py</span></div>
+        <div class="line"><span class="indent"></span>├── <code class="base">_HTML_SELECTOR / _ANY_ID_SELECTOR / _DUPLICATE_IDS_SCRIPT</code> — class constants (BasePage עצמה עוקבת אחרי מוסכמת ה-class data members)</div>
         <div class="line"><span class="indent"></span>├── <code class="base">self.alert</code> — AlertComponent זמין לכל הדפים (ירושה)</div>
         <div class="line"><span class="indent"></span>├── <code class="base">navigate(path, wait_until)</code> — ניווט בסיסי</div>
         <div class="line"><span class="indent"></span>├── <code class="base">title</code> <span class="muted">@property</span> — כותרת הדף הנוכחי</div>
@@ -755,8 +756,16 @@
       </div>
 
       <h3>Class data members for locators</h3>
-      <p>כל locator או ערך שמזהה אלמנט נשמר כ-member קבוע במחלקה: role, name, label, placeholder, selector, route, text קבוע, attribute name וכדומה. המתודות קוראות ל-members האלה, ולא מגדירות strings חדשים inline.</p>
-      <pre><span class="k">class</span> LoginPage(BasePage):
+      <p>כל locator או ערך שמזהה אלמנט נשמר כ-member קבוע במחלקה: role, name, label, placeholder, selector, route, text קבוע, attribute name וכדומה. המתודות קוראות ל-members האלה, ולא מגדירות strings חדשים inline. <strong>BasePage עצמה עוקבת אחרי הכלל</strong> — הסלקטורים <code>"html"</code> ו-<code>"[id]"</code> הוגדרו כ-<code>_HTML_SELECTOR</code> ו-<code>_ANY_ID_SELECTOR</code>.</p>
+      <pre><span class="k">class</span> BasePage:
+    _HTML_SELECTOR = <span class="s">"html"</span>
+    _ANY_ID_SELECTOR = <span class="s">"[id]"</span>
+
+    <span class="k">def</span> __init__(self, page, base_url):
+        self._html = page.locator(self._HTML_SELECTOR)
+        self._id_elements = page.locator(self._ANY_ID_SELECTOR)
+
+<span class="k">class</span> LoginPage(BasePage):
     _EMAIL_ROLE = <span class="s">"textbox"</span>
     _EMAIL_NAME = <span class="s">"E-Mail Address"</span>
     _PASSWORD_LABEL = <span class="s">"Password"</span>

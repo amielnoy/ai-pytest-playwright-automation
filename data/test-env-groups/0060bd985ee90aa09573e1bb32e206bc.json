@@ -1,1 +1,1 @@
-{"id":"0060bd985ee90aa09573e1bb32e206bc","fullName":"tests.unit.test_page_objects#test_base_page_accessibility_helpers_use_class_locators","name":"test_base_page_accessibility_helpers_use_class_locators","status":"broken","testResultsByEnv":{"default":"545d7f1d286033d3498bf3b09cb07e04"}}
+{"id":"0060bd985ee90aa09573e1bb32e206bc","fullName":"tests.unit.test_page_objects#test_base_page_accessibility_helpers_use_class_locators","name":"test_base_page_accessibility_helpers_use_class_locators","status":"passed","testResultsByEnv":{"default":"70bd8bc1d638a0417e9247a87f73d569"}}
