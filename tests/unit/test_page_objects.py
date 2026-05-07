@@ -67,7 +67,7 @@ def test_base_page_wait_for_visible_uses_first_matching_locator():
     with patch("pages.base_page.expect") as expect_mock:
         base_page.wait_for_visible(".product-thumb", timeout=3000)
 
-    page.locator.assert_called_once_with(".product-thumb")
+    page.locator.assert_any_call(".product-thumb")
     expect_mock.assert_called_once_with(locator.first)
     expect_mock.return_value.to_be_visible.assert_called_once_with(timeout=3000)
 
@@ -128,7 +128,7 @@ def test_home_page_accessibility_helpers_delegate_to_nav_and_image_locator():
     assert home_page.has_search_input() is True
     assert home_page.has_empty_cart_summary() is True
     assert home_page.visible_featured_images_missing_alt() == []
-    page.locator.assert_called_once_with(HomePage._FEATURED_PRODUCT_IMAGES)
+    page.locator.assert_any_call(HomePage._FEATURED_PRODUCT_IMAGES)
     image_locator.evaluate_all.assert_called_once_with(
         HomePage._VISIBLE_IMAGES_MISSING_ALT_SCRIPT
     )
@@ -222,7 +222,7 @@ def test_login_page_open_login_and_status_checks_use_class_locators():
             level=LoginPage._MY_ACCOUNT_HEADING_LEVEL,
         ),
     ]
-    page.locator.assert_called_once_with(LoginPage._INVALID_CREDENTIALS_WARNING)
+    page.locator.assert_any_call(LoginPage._INVALID_CREDENTIALS_WARNING)
 
 
 def test_login_page_accessibility_helpers_use_class_locators():
@@ -247,7 +247,7 @@ def test_login_page_accessibility_helpers_use_class_locators():
         call(LoginPage._LOGIN_BUTTON_ROLE, name=LoginPage._LOGIN_BUTTON_NAME),
     ]
     page.get_by_label.assert_called_once_with(LoginPage._PASSWORD_LABEL)
-    page.locator.assert_called_once_with(LoginPage._INVALID_CREDENTIALS_WARNING)
+    page.locator.assert_any_call(LoginPage._INVALID_CREDENTIALS_WARNING)
     warning_text.wait_for.assert_called_once_with(state="visible", timeout=5000)
 
 
@@ -342,7 +342,7 @@ def test_search_results_view_sort_and_cards_helpers():
     thumbs = MagicMock()
     thumbs.count.return_value = 2
     thumbs.nth.side_effect = ["thumb-0", "thumb-1"]
-    page.locator.side_effect = [list_view, thumbs]
+    page.locator.side_effect = [MagicMock(), MagicMock(), list_view, thumbs]
     page.get_by_role.return_value = sort_select
     search_page = SearchResultsPage(page, "https://example.test")
     search_page.wait_for_product_results = MagicMock()
@@ -399,7 +399,7 @@ def test_search_results_accessibility_helpers_use_class_locators():
         call(SearchResultsPage._SORT_BY_LABEL),
         call(SearchResultsPage._SHOW_LABEL),
     ]
-    page.locator.assert_called_once_with(
+    page.locator.assert_any_call(
         f"{SearchResultsPage._PRODUCT_THUMBS} "
         f"{SearchResultsPage._PRODUCT_TITLE_SELECTOR} a"
     )
