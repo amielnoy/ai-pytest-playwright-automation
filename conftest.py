@@ -10,6 +10,13 @@ CONFIG = get_config()
 _IN_CI = os.environ.get("CI", "").lower() in ("true", "1")
 
 
+def _node_failed(node) -> bool:
+    return any(
+        getattr(node, f"rep_{when}", None) is not None and getattr(node, f"rep_{when}").failed
+        for when in ("setup", "call", "teardown")
+    )
+
+
 @pytest.fixture(scope="session")
 def browser_instance():
     with sync_playwright() as pw:
@@ -36,12 +43,6 @@ def context(request, browser_instance: Browser, tmp_path_factory):
     yield ctx
     ctx.tracing.stop(path=str(trace_file))
     ctx.close()
-
-    def _node_failed(node):
-        return any(
-            getattr(node, f"rep_{when}", None) is not None and getattr(node, f"rep_{when}").failed
-            for when in ("setup", "call", "teardown")
-        )
 
     if _node_failed(request.node):
         if trace_file.exists():
@@ -81,9 +82,12 @@ def pytest_runtest_makereport(item, call):
     if rep.when == "call" and rep.failed:
         page_fixture = item.funcargs.get("page")
         if page_fixture:
-            screenshot = page_fixture.screenshot()
-            allure.attach(
-                screenshot,
-                name="screenshot_on_failure",
-                attachment_type=allure.attachment_type.PNG,
-            )
+            try:
+                screenshot = page_fixture.screenshot()
+                allure.attach(
+                    screenshot,
+                    name="screenshot_on_failure",
+                    attachment_type=allure.attachment_type.PNG,
+                )
+            except Exception:
+                pass

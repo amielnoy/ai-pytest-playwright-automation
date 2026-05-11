@@ -22,6 +22,7 @@ class NavBarComponent(BaseComponent):
         self.page.locator(self._SEARCH_CONTAINER).get_by_role(
             self._SEARCH_BUTTON_ROLE
         ).click()
+        self.page.wait_for_load_state("domcontentloaded")
 
     def has_currency_dropdown(self) -> bool:
         return self.page.get_by_role(
@@ -74,3 +75,4 @@ class NavBarComponent(BaseComponent):
         ).first.click()
         expect(link).to_be_visible()
         link.click()
+        self.page.wait_for_load_state("domcontentloaded")

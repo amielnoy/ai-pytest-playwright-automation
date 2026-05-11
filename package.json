@@ -3,8 +3,13 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "test": "pytest tests/",
+    "test:smoke": "pytest tests/ -m smoke",
+    "test:web": "pytest tests/web-ui/",
+    "test:api": "pytest tests/api/",
+    "test:unit": "pytest tests/unit/",
+    "test:report": "pytest tests/ && npm run allure:generate && npm run allure:open",
     "allure:version": "allure --version",
-    "allure:run": "allure run -- pytest",
     "allure:generate": "allure generate allure-results",
     "allure:open": "allure open allure-report",
     "allure:watch": "allure watch allure-results"

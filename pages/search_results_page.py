@@ -62,6 +62,7 @@ class SearchResultsPage(BasePage):
         ).first.locator(self._PRODUCT_TITLE_SELECTOR).get_by_role(
             self._PRODUCT_LINK_ROLE, name=product_name, exact=True
         ).click()
+        self.page.wait_for_load_state("domcontentloaded")
 
     def choose_list_view(self) -> None:
         self.wait_for_product_results()
@@ -76,6 +77,7 @@ class SearchResultsPage(BasePage):
         )
         expect(sort_select).to_be_visible()
         sort_select.select_option(label=self._SORT_NAME_ASCENDING_LABEL)
+        self.page.wait_for_load_state("domcontentloaded")
         self.wait_for_product_results()
 
     def product_names(self) -> list[str]:
