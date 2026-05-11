@@ -1,1 +1,1 @@
-{"id":"562d230ec2634317c66fa47c098d547a","fullName":"tests.unit.test_fastapi_app#test_mock_cart_add_calculates_total_from_quantity","name":"test_mock_cart_add_calculates_total_from_quantity[40-3-369.6]","status":"passed","testResultsByEnv":{"default":"2614b8ed650073ccac1d52097345ff5f"}}
+{"id":"562d230ec2634317c66fa47c098d547a","fullName":"tests.unit.test_fastapi_app#test_mock_cart_add_calculates_total_from_quantity","name":"test_mock_cart_add_calculates_total_from_quantity[40-3-369.6]","status":"passed","testResultsByEnv":{"default":"29da5f7bfa8e2d55ecc94979d5035e08"}}
