@@ -1599,21 +1599,34 @@ docker run --rm \
   ness-automation-tests \
   pytest tests/ --alluredir=/app/test-artifacts/allure-results</pre>
 
-      <h3>Docker helper script</h3>
-      <p><code>scripts/run_all_tests_docker.sh</code> הוא המסלול המומלץ להרצת Docker ידנית. הסקריפט בונה את ה-image, מריץ עם <code>CI=true</code>, ממפה את <code>docker-artifacts/</code> ל-<code>/app/test-artifacts</code>, ומחבר את <code>data/secrets.json</code> אוטומטית אם הקובץ קיים.</p>
+      <h3>Docker helper scripts</h3>
+      <p><code>scripts/run_all_tests_docker.sh</code> מריץ את הטסטים בדוקר בלבד. <code>scripts/run_docker_tests_with_allure.sh</code> עוטף אותו, ואז יוצר ופותח דוח Allure חדש מתוך <code>docker-artifacts/allure-results</code>. שני הסקריפטים בונים את ה-image דרך helper הבסיס, מריצים עם <code>CI=true</code>, ממפים את <code>docker-artifacts/</code> ל-<code>/app/test-artifacts</code>, ומחברים את <code>data/secrets.json</code> אוטומטית אם הקובץ קיים.</p>
 
-      <pre><span class="c"># הרצת כל הסוויטה בדוקר וכתיבת Allure results ל-docker-artifacts/allure-results</span>
+      <pre><span class="c"># הרצת כל הסוויטה בדוקר בלבד וכתיבת Allure results</span>
 ./scripts/run_all_tests_docker.sh
 
-<span class="c"># העברת pytest args לסקריפט</span>
+<span class="c"># הרצת Docker + יצירת דוח Allure חדש + פתיחה בדפדפן</span>
+./scripts/run_docker_tests_with_allure.sh
+
+<span class="c"># אותו דבר דרך npm</span>
+npm run test:docker:report
+
+<span class="c"># העברת pytest args לסקריפטים</span>
 ./scripts/run_all_tests_docker.sh tests/web-ui
 ./scripts/run_all_tests_docker.sh tests/web-ui/test_add_to_cart.py
 ./scripts/run_all_tests_docker.sh -m cart
+./scripts/run_docker_tests_with_allure.sh tests/web-ui
+./scripts/run_docker_tests_with_allure.sh -m cart
 
-<span class="c"># יצירת דוח Allure מתוצאות Docker ופתיחה</span>
+<span class="c"># אם רוצים ליצור/לפתוח ידנית מתוצאות Docker קיימות</span>
 rm -rf docker-artifacts/allure-report
 npx allure generate docker-artifacts/allure-results -o docker-artifacts/allure-report
 npx allure open docker-artifacts/allure-report</pre>
+
+      <div class="callout tip">
+        <span class="callout-icon">📊</span>
+        <div><strong>Allure path note:</strong> בהרצת Docker משתמשים ב-path יחסי (<code>docker-artifacts/allure-report</code>) עבור <code>npx allure open</code>. כך נמנע מצב שבו Allure 3 מפרש absolute path כ-pattern יחסי ומכפיל את נתיב הפרויקט.</div>
+      </div>
 
       <div class="callout info">
         <span class="callout-icon">🔒</span>
