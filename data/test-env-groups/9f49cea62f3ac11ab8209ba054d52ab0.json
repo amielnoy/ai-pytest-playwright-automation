@@ -1,1 +1,1 @@
-{"id":"9f49cea62f3ac11ab8209ba054d52ab0","fullName":"tests.web-ui.test_sanity.TestSanity#test_invalid_login_warning","name":"Invalid login keeps the user on login page with a warning","status":"passed","testResultsByEnv":{"default":"03254f308295e3cc4ae7058b0eb52ac0"}}
+{"id":"9f49cea62f3ac11ab8209ba054d52ab0","fullName":"tests.web-ui.test_sanity.TestSanity#test_invalid_login_warning","name":"Invalid login keeps the user on login page with a warning","status":"broken","testResultsByEnv":{"default":"7b17bb0afc4d1fedab58f81361dfbf38"}}

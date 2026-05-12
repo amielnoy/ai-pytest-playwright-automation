@@ -1,2 +1,0 @@
-Cart total: $602.00
-Max allowed: $2000.00
