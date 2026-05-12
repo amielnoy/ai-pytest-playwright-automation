@@ -1526,7 +1526,7 @@
     <!-- ── 14. AGENTS ── -->
     <section id="agents">
       <h2><span class="icon">🤖</span> AI Agents</h2>
-      <p>תיקיית <code>agents/</code> מכילה כלי AI שמשמשים לתכנון טסטים ולאיסוף מידע מדפים חיים — ללא חיבור ל-CI ובלי צורך בהרצת הטסטים.</p>
+      <p>תיקיית <code>agents/</code> מכילה כלי תכנון טסטים ואיסוף מידע מדפים חיים — ללא חיבור ל-CI ובלי צורך בהרצת הטסטים.</p>
 
       <div class="flow">
         <div class="flow-box blue">run_agent.py<span class="sub">entry point</span></div>
@@ -1536,6 +1536,16 @@
         <div class="flow-box cyan">page_crawler.py<span class="sub">Playwright headless</span></div>
         <div class="flow-arrow">→</div>
         <div class="flow-box green">stds/<span class="sub">STD_*.md output</span></div>
+      </div>
+
+      <div class="flow mt-12">
+        <div class="flow-box blue">run_playwright_cli_std_agent.py<span class="sub">URL input</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box purple">playwright_cli_std_agent.py<span class="sub">CLI screenshot + crawler</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box cyan">artifacts/std_page_snapshots/<span class="sub">PNG evidence</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box green">stds/<span class="sub">detailed STD</span></div>
       </div>
 
       <h3>page_crawler.py — Playwright Page Crawler</h3>
@@ -1562,6 +1572,24 @@
         <span class="callout-icon">🧠</span>
         <div><strong>Adaptive Thinking:</strong> ה-agent משתמש ב-<code>thinking</code> עם <code>budget_tokens</code> גבוה כדי לבצע חשיבה מעמיקה לפני כתיבת כל STD. הלולאה ממשיכה עד שה-agent קורא ל-<code>save_std</code> ומסיים.</div>
       </div>
+
+      <h3>playwright_cli_std_agent.py — Playwright CLI STD Agent</h3>
+      <p>Agent דטרמיניסטי שלא דורש מפתח LLM. הוא מקבל URL, מפעיל <code>python -m playwright screenshot</code> כדי לוודא שהדף נטען ולשמור evidence, מפעיל את <code>page_crawler.py</code> לאיסוף מבנה הדף, ואז יוצר STD מפורט עם צעדים לכל test case.</p>
+
+      <div class="tbl-wrap"><table>
+        <tr><th>פלט</th><th>תפקיד</th></tr>
+        <tr><td><code>artifacts/std_page_snapshots/&lt;feature&gt;.png</code></td><td>צילום מסך שנוצר דרך Playwright CLI ומשמש evidence לדף שנבדק.</td></tr>
+        <tr><td><code>stds/STD_*.md</code></td><td>STD שנוצר מהמבנה החי של הדף: page load, navigation, forms, validation, happy path, buttons/commands.</td></tr>
+      </table></div>
+
+      <pre><span class="c"># יצירת STD מפורט מ-URL אחד</span>
+python run_playwright_cli_std_agent.py https://tutorialsninja.com/demo
+
+<span class="c"># שם feature וקובץ פלט מותאמים</span>
+python run_playwright_cli_std_agent.py \
+  "https://tutorialsninja.com/demo/index.php?route=account/login" \
+  --feature Login \
+  --output STD_LoginCli.md</pre>
 
       <h3>STD files — stds/</h3>
       <p>קבצי Markdown שמייצגים תוכניות בדיקה מפורטות (Software Test Documents) שנוצרו על ידי ה-agent.</p>
