@@ -959,7 +959,7 @@
         <table>
           <tr><th>Fixture</th><th>Scope</th><th>תפקיד</th></tr>
           <tr><td><code>browser_instance</code></td><td><span class="badge badge-yellow">session</span></td><td>מופע Chromium יחיד לכל הריצה. מאותחל עם הגדרות מ-config.json.</td></tr>
-          <tr><td><code>context</code></td><td><span class="badge badge-blue">request</span></td><td>BrowserContext חדש לכל טסט — viewport, base_url, timeout. הקלטת וידאו ו-trace מופעלת רק ב-CI או עם <code>PW_RECORD_ARTIFACTS=true</code>, ומצורפת ל-Allure בכישלון.</td></tr>
+          <tr><td><code>context</code></td><td><span class="badge badge-blue">request</span></td><td>BrowserContext חדש לכל טסט — viewport, base_url, timeout. הקלטת וידאו ו-trace מופעלת כברירת מחדל, ניתנת לכיבוי עם <code>PW_RECORD_ARTIFACTS=false</code>, ומצורפת ל-Allure רק בכישלון לאחר סגירת ה-context.</td></tr>
           <tr><td><code>page</code></td><td><span class="badge badge-green">function</span></td><td>Page חדשה לכל פונקציית טסט. נסגרת אוטומטית.</td></tr>
           <tr><td><code>app_url</code></td><td><span class="badge badge-green">function</span></td><td>base_url מה-config — לשימוש ב-page objects וב-cookie injection.</td></tr>
         </table>
@@ -967,7 +967,7 @@
 
       <div class="callout info">
         <span class="callout-icon">📸</span>
-        <div><strong>Failure artifacts:</strong> בכל כישלון מצורף ל-Allure <strong>screenshot</strong> (PNG) דרך <code>pytest_runtest_makereport</code>. בנוסף, ב-CI או כאשר מריצים עם <code>PW_RECORD_ARTIFACTS=true</code>, ה-<code>context</code> fixture מקליט ומצרף <strong>וידאו</strong> (.webm) ו-<strong>trace</strong> Playwright (.zip). כך הרצה מקומית נשארת מהירה, ועדיין יש artifacts מלאים בהרצות חשובות.</div>
+        <div><strong>Failure artifacts:</strong> בכל כישלון מצורף ל-Allure <strong>screenshot</strong> (PNG) דרך <code>pytest_runtest_makereport</code>. בנוסף, ה-<code>context</code> fixture מקליט <strong>וידאו</strong> (.webm) ו-<strong>trace</strong> Playwright (.zip) כברירת מחדל, וסוגר את ה-context לפני הצירוף כדי שהווידאו יהיה קובץ מלא ולא ריק. בדוח Allure ה-screenshot מופיע בגוף הכישלון, והווידאו וה-trace מופיעים תחת <code>Tear down → context::0</code>. להרצות מהירות בלי artifacts מלאים אפשר להריץ עם <code>PW_RECORD_ARTIFACTS=false</code>.</div>
       </div>
 
       <h3>tests/conftest.py — Services &amp; Page Objects</h3>
@@ -1599,6 +1599,22 @@ docker run --rm \
   ness-automation-tests \
   pytest tests/ --alluredir=/app/test-artifacts/allure-results</pre>
 
+      <h3>Docker helper script</h3>
+      <p><code>scripts/run_all_tests_docker.sh</code> הוא המסלול המומלץ להרצת Docker ידנית. הסקריפט בונה את ה-image, מריץ עם <code>CI=true</code>, ממפה את <code>docker-artifacts/</code> ל-<code>/app/test-artifacts</code>, ומחבר את <code>data/secrets.json</code> אוטומטית אם הקובץ קיים.</p>
+
+      <pre><span class="c"># הרצת כל הסוויטה בדוקר וכתיבת Allure results ל-docker-artifacts/allure-results</span>
+./scripts/run_all_tests_docker.sh
+
+<span class="c"># העברת pytest args לסקריפט</span>
+./scripts/run_all_tests_docker.sh tests/web-ui
+./scripts/run_all_tests_docker.sh tests/web-ui/test_add_to_cart.py
+./scripts/run_all_tests_docker.sh -m cart
+
+<span class="c"># יצירת דוח Allure מתוצאות Docker ופתיחה</span>
+rm -rf docker-artifacts/allure-report
+npx allure generate docker-artifacts/allure-results -o docker-artifacts/allure-report
+npx allure open docker-artifacts/allure-report</pre>
+
       <div class="callout info">
         <span class="callout-icon">🔒</span>
         <div><strong>.dockerignore:</strong> מוגדר כדי לא לכלול <code>allure-results/</code>, <code>allure-report/</code>, <code>docker-artifacts/</code>, <code>data/secrets.json</code>, ו-caches.</div>
@@ -1622,18 +1638,22 @@ docker run --rm \
       </table></div>
 
       <h3>הרצה מקומית</h3>
-      <pre><span class="c"># הרצה עם שמירת תוצאות</span>
-pytest
+      <pre><span class="c"># הרצת טסטים, יצירת דוח חדש ופתיחה בדפדפן</span>
+./scripts/run_tests_with_allure.sh
 
-<span class="c"># יצירת דוח</span>
+<span class="c"># הרצת subset עם דוח חדש</span>
+./scripts/run_tests_with_allure.sh tests/web-ui
+
+<span class="c"># שימוש דרך npm</span>
+npm run test:report
+
+<span class="c"># יצירה/פתיחה ידנית מתוצאות קיימות</span>
 npm run allure:generate
-
-<span class="c"># פתיחת דוח בדפדפן</span>
 npm run allure:open</pre>
 
       <div class="callout tip">
         <span class="callout-icon">🖼️</span>
-        <div><strong>Failure artifacts אוטומטיים:</strong> בכל כישלון מצורף ל-Allure <strong>screenshot</strong> (PNG) מה-hook <code>pytest_runtest_makereport</code>. וידאו (.webm) ו-trace Playwright (.zip) מוקלטים ומצורפים רק ב-CI או בהרצה מקומית עם <code>PW_RECORD_ARTIFACTS=true</code>, כדי לשמור על הרצה מקומית מהירה.</div>
+        <div><strong>Failure artifacts אוטומטיים:</strong> בכל כישלון מצורף ל-Allure <strong>screenshot</strong> (PNG) מה-hook <code>pytest_runtest_makereport</code>. וידאו (.webm) ו-trace Playwright (.zip) מוקלטים כברירת מחדל ומצורפים לאחר <code>ctx.close()</code>, כדי לוודא שהווידאו הסתיים ונשמר כקובץ תקין. ניתן לכבות הקלטה מלאה עם <code>PW_RECORD_ARTIFACTS=false</code>.</div>
       </div>
     </section>
 
