@@ -1,1 +1,1 @@
-{"id":"b59b4f35ba613cdfd61a28d6c13b480e","fullName":"tests.api.test_api.TestSearchApi#test_search_returns_numeric_product_ids","name":"Search returns numeric product IDs for known queries","status":"passed","testResultsByEnv":{"default":"631dc56394e943d5d7287bbd070bc7f8"}}
+{"id":"b59b4f35ba613cdfd61a28d6c13b480e","fullName":"tests.api.test_api.TestSearchApi#test_search_returns_numeric_product_ids","name":"Search returns numeric product IDs for known queries","status":"passed","testResultsByEnv":{"default":"0db540ecaf99a4ae283860e39b63f4bb"}}
