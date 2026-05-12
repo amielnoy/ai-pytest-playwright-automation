@@ -10,6 +10,7 @@
     "tests",
     "utils",
     "conftest.py",
-    "run_agent.py"
+    "run_agent.py",
+    "run_playwright_cli_std_agent.py"
   ]
 }
