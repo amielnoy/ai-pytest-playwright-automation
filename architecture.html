@@ -467,7 +467,7 @@
     <h1>Ness Automation — תיעוד ארכיטקטורה</h1>
     <p>מסגרת בדיקות אוטומטיות ל־TutorialsNinja Demo Store</p>
   </div>
-  <span class="pill">עדכון אחרון: אפריל 2026</span>
+  <span class="pill">עדכון אחרון: מאי 2026</span>
 </header>
 
 <div class="layout">
@@ -502,6 +502,7 @@
       <a href="#agents">AI Agents</a>
       <a href="#docker">Docker</a>
       <a href="#reporting">דוחות Allure</a>
+      <a href="#course">Course Roadmap</a>
     </div>
   </nav>
 
@@ -516,8 +517,8 @@
         <div class="stat-box stat-blue"><div class="num">25</div><div class="lbl">UI Test cases</div></div>
         <div class="stat-box stat-cyan"><div class="num">26</div><div class="lbl">API Test cases</div></div>
         <div class="stat-box stat-purple"><div class="num">14</div><div class="lbl">Contract cases</div></div>
-        <div class="stat-box stat-green"><div class="num">44</div><div class="lbl">Unit Test cases</div></div>
-        <div class="stat-box stat-yellow"><div class="num">109</div><div class="lbl">Total collected tests</div></div>
+        <div class="stat-box stat-green"><div class="num">45</div><div class="lbl">Unit Test cases</div></div>
+        <div class="stat-box stat-yellow"><div class="num">110</div><div class="lbl">Total collected tests</div></div>
       </div>
 
       <p>הפרויקט הוא <strong>מסגרת בדיקות אוטומטיות רב-שכבתית</strong> שנבנתה עבור אתר ה-demo של TutorialsNinja — אתר e-commerce לדוגמה.</p>
@@ -590,7 +591,7 @@
         <div class="pyramid-row">
           <div class="pyramid-bar pyr-unit">
             <span class="label">⚙️ Unit Tests</span>
-            <span class="count">3 files · 44 cases · unit/</span>
+            <span class="count">3 files · 45 cases · unit/</span>
           </div>
         </div>
       </div>
@@ -724,6 +725,7 @@
         <div class="line-section"><span class="page">CartPage</span> <span class="muted">← pages/cart_page.py</span></div>
         <div class="line"><span class="indent"></span>├── <code>open()</code></div>
         <div class="line"><span class="indent"></span>├── <code>get_cart_total()</code></div>
+        <div class="line"><span class="indent"></span>├── <code>get_item_count()</code></div>
         <div class="line"><span class="indent"></span>└── <code>is_empty()</code></div>
         <div class="line-section"><span class="page">RegisterPage</span> <span class="muted">← pages/register_page.py</span></div>
         <div class="line"><span class="indent"></span>├── <code>register(first_name, last_name, email, …)</code></div>
@@ -833,7 +835,7 @@
       </div>
 
       <h3>RestClient — services/rest_client.py</h3>
-      <p>Wrapper סביב <code>requests.Session</code> עם retry logic מובנה:</p>
+      <p>Wrapper סביב <code>requests.Session</code> עם retry logic מובנה. ברירת המחדל בטוחה לכתיבות: retry מופעל רק עבור פעולות idempotent, כדי למנוע POST כפול לעגלה.</p>
       <div class="tbl-wrap">
         <table>
           <tr><th>פרמטר</th><th>ברירת מחדל</th><th>תפקיד</th></tr>
@@ -841,6 +843,7 @@
           <tr><td><code>retries</code></td><td>3</td><td>ניסיונות חוזרים אוטומטיים</td></tr>
           <tr><td><code>backoff_factor</code></td><td>0.5</td><td>השהייה אקספוננציאלית בין ניסיונות</td></tr>
           <tr><td><code>status_forcelist</code></td><td>429, 500, 502, 503, 504</td><td>קודי שגיאה שמפעילים retry</td></tr>
+          <tr><td><code>allowed_retry_methods</code></td><td>GET, HEAD, OPTIONS</td><td>POST/PUT/DELETE לא עוברים retry כברירת מחדל כדי למנוע פעולות כתיבה כפולות</td></tr>
         </table>
       </div>
 
@@ -956,7 +959,7 @@
         <table>
           <tr><th>Fixture</th><th>Scope</th><th>תפקיד</th></tr>
           <tr><td><code>browser_instance</code></td><td><span class="badge badge-yellow">session</span></td><td>מופע Chromium יחיד לכל הריצה. מאותחל עם הגדרות מ-config.json.</td></tr>
-          <tr><td><code>context</code></td><td><span class="badge badge-blue">request</span></td><td>BrowserContext חדש לכל טסט — viewport, base_url, timeout. מבדיל בין טסטים.</td></tr>
+          <tr><td><code>context</code></td><td><span class="badge badge-blue">request</span></td><td>BrowserContext חדש לכל טסט — viewport, base_url, timeout. הקלטת וידאו ו-trace מופעלת רק ב-CI או עם <code>PW_RECORD_ARTIFACTS=true</code>, ומצורפת ל-Allure בכישלון.</td></tr>
           <tr><td><code>page</code></td><td><span class="badge badge-green">function</span></td><td>Page חדשה לכל פונקציית טסט. נסגרת אוטומטית.</td></tr>
           <tr><td><code>app_url</code></td><td><span class="badge badge-green">function</span></td><td>base_url מה-config — לשימוש ב-page objects וב-cookie injection.</td></tr>
         </table>
@@ -964,7 +967,7 @@
 
       <div class="callout info">
         <span class="callout-icon">📸</span>
-        <div><strong>pytest hook:</strong> <code>pytest_runtest_makereport</code> מצלם screenshot אוטומטית בכל כישלון ומצרף אותה לדוח Allure. לא דורש שינוי בטסטים.</div>
+        <div><strong>Failure artifacts:</strong> בכל כישלון מצורף ל-Allure <strong>screenshot</strong> (PNG) דרך <code>pytest_runtest_makereport</code>. בנוסף, ב-CI או כאשר מריצים עם <code>PW_RECORD_ARTIFACTS=true</code>, ה-<code>context</code> fixture מקליט ומצרף <strong>וידאו</strong> (.webm) ו-<strong>trace</strong> Playwright (.zip). כך הרצה מקומית נשארת מהירה, ועדיין יש artifacts מלאים בהרצות חשובות.</div>
       </div>
 
       <h3>tests/conftest.py — Services &amp; Page Objects</h3>
@@ -1177,7 +1180,7 @@
         <tr>
           <td><code>test_add_items_to_cart</code></td>
           <td><span class="badge badge-red">CRITICAL</span></td>
-          <td>חיפוש מוצרים ← הוספה לעגלה ← פתיחת עגלה ← ודא לא ריקה.</td>
+          <td>חיפוש מוצרים ← הוספה לעגלה ← פתיחת עגלה ← ודא שהעגלה לא ריקה ושמספר הפריטים בעגלה תואם למספר המוצרים שנבחרו.</td>
         </tr>
         <tr>
           <td><code>test_no_items_added_when_nothing_matches</code></td>
@@ -1368,7 +1371,7 @@
       <div class="tbl-wrap"><table>
         <tr><th>שם הטסט</th><th>Severity</th><th>מה נבדק</th></tr>
         <tr><td><code>test_all_search_prices_are_positive</code></td><td><span class="badge badge-red">CRITICAL</span></td><td>כל המחירים בתוצאות חיפוש MacBook > 0.</td></tr>
-        <tr><td><code>test_cart_total_matches_item_sum</code></td><td><span class="badge badge-red">CRITICAL</span></td><td>הוספת מוצר ← row sum מול grand total — סטייה < $1.00.</td></tr>
+        <tr><td><code>test_cart_total_matches_item_sum</code></td><td><span class="badge badge-red">CRITICAL</span></td><td>הוספת מוצר ← row sum מול grand total — סטייה עד סנט אחד בלבד (<code>&lt; 0.01</code>).</td></tr>
       </table></div>
     </section>
 
@@ -1391,6 +1394,7 @@
         <tr><th>שם הטסט</th><th>מה נבדק</th></tr>
         <tr><td><code>test_rest_client_methods_delegate_to_request_with_default_timeout</code></td><td>GET/POST/PUT/DELETE — כולם מעבירים timeout ברירת מחדל (7s) ל-session.request</td></tr>
         <tr><td><code>test_rest_client_allows_per_request_timeout_override</code></td><td>timeout per-request (30s) מחליף את ברירת המחדל</td></tr>
+        <tr><td><code>test_rest_client_retries_only_idempotent_methods_by_default</code></td><td>ברירת המחדל של retry מוגבלת ל-GET/HEAD/OPTIONS ולא מפעילה retry על POST/PUT/DELETE</td></tr>
       </table></div>
 
       <h3>test_fastapi_app.py — FastAPI Server (12 tests)</h3>
@@ -1614,7 +1618,7 @@ docker run --rm \
         <tr><td><code>@allure.title</code></td><td>שם קריא לאדם</td><td>"Search returns 200 and non-empty HTML"</td></tr>
         <tr><td><code>@allure.severity</code></td><td>רמת חשיבות</td><td>CRITICAL, NORMAL</td></tr>
         <tr><td><code>with allure.step(...)</code></td><td>שלבים פנימיים בטסט</td><td>מה שרואים בדוח כ-nested steps</td></tr>
-        <tr><td><code>allure.attach(...)</code></td><td>צירוף artifacts</td><td>screenshots, JSON, TEXT</td></tr>
+        <tr><td><code>allure.attach(...)</code></td><td>צירוף artifacts</td><td>screenshots (PNG), וידאו (WEBM), trace (ZIP), JSON, TEXT</td></tr>
       </table></div>
 
       <h3>הרצה מקומית</h3>
@@ -1629,7 +1633,36 @@ npm run allure:open</pre>
 
       <div class="callout tip">
         <span class="callout-icon">🖼️</span>
-        <div><strong>Screenshot אוטומטי:</strong> ה-hook <code>pytest_runtest_makereport</code> ב-root conftest מצרף screenshot ל-Allure בכל כישלון — ללא צורך בשינוי בטסטים עצמם.</div>
+        <div><strong>Failure artifacts אוטומטיים:</strong> בכל כישלון מצורף ל-Allure <strong>screenshot</strong> (PNG) מה-hook <code>pytest_runtest_makereport</code>. וידאו (.webm) ו-trace Playwright (.zip) מוקלטים ומצורפים רק ב-CI או בהרצה מקומית עם <code>PW_RECORD_ARTIFACTS=true</code>, כדי לשמור על הרצה מקומית מהירה.</div>
+      </div>
+    </section>
+
+    <!-- ── 17. COURSE ROADMAP ── -->
+    <section id="course">
+      <h2><span class="icon">🎓</span> Course Roadmap</h2>
+      <p>התיקייה <code>course/</code> מכילה מסלול לימוד בן 19 מפגשים. המסלול מתקדם מבסיס QA ידני, דרך Playwright ו-pytest fixtures, ועד AI agents, CI, code review ו-capstone סופי.</p>
+
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Session</th><th>Topic</th><th>Outcome</th></tr>
+          <tr><td>1</td><td>QA Foundations</td><td>Test cases, bug reports, risk analysis, exploratory testing.</td></tr>
+          <tr><td>2</td><td>QA in the AI Era</td><td>Prompting and reviewing AI-generated QA output.</td></tr>
+          <tr><td>3</td><td>Playwright Basics</td><td>First browser tests, assertions, fixtures, trace viewer.</td></tr>
+          <tr><td>4</td><td>Playwright Locators</td><td>Role, label, text, test-id, filtering, and locator anti-patterns.</td></tr>
+          <tr><td>5</td><td>pytest Fixtures</td><td>Scoped setup, teardown, parametrized fixtures, autouse rules.</td></tr>
+          <tr><td>6</td><td>POM + UI + API</td><td>Page objects, fluent API, and API setup.</td></tr>
+          <tr><td>7</td><td>Test Data Strategy</td><td>Static data, factories, unique data, API-created state, secrets.</td></tr>
+          <tr><td>8</td><td>Mini Project</td><td>One complete feature slice before advanced topics.</td></tr>
+          <tr><td>9</td><td>Debugging Playwright</td><td>Selector, timing, data, environment, and product-failure diagnosis.</td></tr>
+          <tr><td>10-17</td><td>AI, MCP, CI, Reporting, CLI</td><td>AI tools, agents, CI analysis, Allure, learning plan, Playwright CLI.</td></tr>
+          <tr><td>18</td><td>Automation Code Review</td><td>Review tests for flake risk, layering, assertions, fixtures, and reports.</td></tr>
+          <tr><td>19</td><td>Capstone</td><td>Final production framework delivery in <code>pages/</code>, <code>services/</code>, <code>flows/</code>, and <code>tests/</code>.</td></tr>
+        </table>
+      </div>
+
+      <div class="callout info">
+        <span class="callout-icon">📚</span>
+        <div><strong>Support files:</strong> בנוסף למפגשים קיימים <code>course/RUBRICS.md</code>, <code>course/BEFORE_AFTER_EXAMPLES.md</code>, <code>course/INSTRUCTOR_NOTES.md</code> ו-<code>course/PROJECT_CHECKLIST.md</code>.</div>
       </div>
     </section>
 
@@ -1638,7 +1671,7 @@ npm run allure:open</pre>
 
 <footer>
   <span>Ness Automation Test Suite — Architecture Docs</span>
-  <span>נוצר: אפריל 2026</span>
+  <span>עודכן: מאי 2026</span>
 </footer>
 
 <script>

@@ -45,6 +45,10 @@ class TestAddItemsToCart:
         with allure.step("Open cart and verify item count"):
             cart_flow_pages.cart.open()
             assert not cart_flow_pages.cart.is_empty(), "Cart is empty after adding items"
+            item_count = cart_flow_pages.cart.get_item_count()
+            assert item_count == len(products), (
+                f"Expected {len(products)} cart item(s), got {item_count}"
+            )
 
     @allure.title("No items added when no products match the price filter")
     @allure.severity(allure.severity_level.NORMAL)

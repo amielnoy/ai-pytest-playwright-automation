@@ -14,6 +14,10 @@ UI and API test automation for the TutorialsNinja demo store, built with:
 - A virtual environment with the project dependencies installed
 - Playwright Chromium installed
 
+## Course Materials
+
+This repository also includes a nineteen-session automation QA course under [`course/`](course/README.md). Start there for the learning path, session order, exercise workflow, and guidance on when to use the teaching scaffold versus the production framework.
+
 ## Setup
 
 Install dependencies:

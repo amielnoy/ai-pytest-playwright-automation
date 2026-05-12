@@ -8,6 +8,7 @@ from utils.data_loader import get_config
 
 CONFIG = get_config()
 _IN_CI = os.environ.get("CI", "").lower() in ("true", "1")
+_RECORD_ARTIFACTS = os.environ.get("PW_RECORD_ARTIFACTS", "").lower() in ("true", "1")
 
 
 def _node_failed(node) -> bool:
@@ -30,22 +31,36 @@ def browser_instance():
 
 @pytest.fixture
 def context(request, browser_instance: Browser, tmp_path_factory):
-    video_dir = tmp_path_factory.mktemp(request.node.name.replace("/", "_"))
-    trace_file = video_dir / "trace.zip"
-    ctx: BrowserContext = browser_instance.new_context(
-        viewport=CONFIG["viewport"],
-        base_url=CONFIG["base_url"],
-        record_video_dir=video_dir,
-        record_video_size=CONFIG["viewport"],
+    should_record_artifacts = _IN_CI or _RECORD_ARTIFACTS
+    video_dir = (
+        tmp_path_factory.mktemp(request.node.name.replace("/", "_"))
+        if should_record_artifacts
+        else None
     )
+    trace_file = video_dir / "trace.zip" if video_dir else None
+    context_options = {
+        "viewport": CONFIG["viewport"],
+        "base_url": CONFIG["base_url"],
+    }
+    if video_dir:
+        context_options.update(
+            {
+                "record_video_dir": video_dir,
+                "record_video_size": CONFIG["viewport"],
+            }
+        )
+
+    ctx: BrowserContext = browser_instance.new_context(**context_options)
     ctx.set_default_timeout(CONFIG["timeout"])
-    ctx.tracing.start(screenshots=True, snapshots=True, sources=True)
+    if should_record_artifacts:
+        ctx.tracing.start(screenshots=True, snapshots=True, sources=True)
     yield ctx
-    ctx.tracing.stop(path=str(trace_file))
+    if should_record_artifacts and trace_file:
+        ctx.tracing.stop(path=str(trace_file))
     ctx.close()
 
-    if _node_failed(request.node):
-        if trace_file.exists():
+    if should_record_artifacts and video_dir and _node_failed(request.node):
+        if trace_file and trace_file.exists():
             allure.attach.file(
                 str(trace_file),
                 name="trace_on_failure",

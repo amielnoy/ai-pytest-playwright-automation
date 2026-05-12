@@ -10,6 +10,7 @@ DEFAULT_TIMEOUT = 15
 DEFAULT_RETRIES = 3
 DEFAULT_BACKOFF_FACTOR = 0.5
 DEFAULT_RETRY_STATUSES = (429, 500, 502, 503, 504)
+DEFAULT_RETRY_METHODS = frozenset({"GET", "HEAD", "OPTIONS"})
 
 
 class RestClient:
@@ -20,6 +21,7 @@ class RestClient:
         retries: int = DEFAULT_RETRIES,
         backoff_factor: float = DEFAULT_BACKOFF_FACTOR,
         status_forcelist: tuple[int, ...] = DEFAULT_RETRY_STATUSES,
+        allowed_retry_methods: frozenset[str] | set[str] | None = DEFAULT_RETRY_METHODS,
     ):
         self.timeout = timeout
         self.session = requests.Session()
@@ -33,7 +35,7 @@ class RestClient:
             status=retries,
             backoff_factor=backoff_factor,
             status_forcelist=status_forcelist,
-            allowed_methods={"GET", "POST", "PUT", "DELETE"},
+            allowed_methods=allowed_retry_methods,
             raise_on_status=False,
         )
         adapter = HTTPAdapter(max_retries=retry_config)

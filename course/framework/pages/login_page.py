@@ -1,4 +1,4 @@
-"""Session 4 — LoginPage."""
+"""Session 6 — LoginPage."""
 from __future__ import annotations
 from typing import TYPE_CHECKING
 from playwright.sync_api import Page, expect

@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pytest --collect-only*)",
+      "Bash(pytest --lf*)",
+      "Bash(pytest -v*)",
+      "Bash(pytest -n 0*)",
+      "Bash(pytest -k*)",
+      "Bash(git status)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git branch*)",
+      "Bash(playwright show-trace*)"
+    ]
+  },
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp", "--headless"]
+    }
+  }
+}

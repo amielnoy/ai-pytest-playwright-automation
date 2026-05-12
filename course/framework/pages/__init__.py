@@ -1,4 +1,4 @@
-# Added in Session 4 — Page Object Model layer
+# Added in Session 6 — Page Object Model layer
 from .base_page import BasePage
 from .login_page import LoginPage
 from .inventory_page import InventoryPage

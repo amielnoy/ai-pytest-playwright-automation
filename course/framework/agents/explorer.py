@@ -1,5 +1,5 @@
 """
-Session 6 — Browser exploration agent.
+Session 11 — Browser exploration agent.
 Claude drives Playwright via tool calls to accomplish a natural-language goal.
 """
 import os

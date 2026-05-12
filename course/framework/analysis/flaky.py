@@ -1,4 +1,4 @@
-"""Session 7 — flaky test detector: scans workflow runs and opens a GitHub issue."""
+"""Session 12 — flaky test detector: scans workflow runs and opens a GitHub issue."""
 import collections
 import os
 import requests

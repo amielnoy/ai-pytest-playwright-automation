@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/playwright/python:v1.44.0-jammy
+FROM mcr.microsoft.com/playwright/python:v1.51.0-jammy
 
 ENV CI=true \
     PYTHONDONTWRITEBYTECODE=1 \

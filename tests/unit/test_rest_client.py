@@ -51,3 +51,10 @@ def test_rest_client_allows_per_request_timeout_override():
     assert fake_session.calls == [
         ("GET", "https://example.test/slow", {"timeout": 30}),
     ]
+
+
+def test_rest_client_retries_only_idempotent_methods_by_default():
+    client = RestClient()
+    retry_config = client.session.adapters["https://"].max_retries
+
+    assert retry_config.allowed_methods == frozenset({"GET", "HEAD", "OPTIONS"})

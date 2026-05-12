@@ -216,6 +216,6 @@ class TestPriceContract:
         with allure.step(
             f"Assert row sum ${row_sum:.2f} approximately equals grand total ${grand_total:.2f}"
         ):
-            assert abs(row_sum - grand_total) < 1.0, (
+            assert abs(row_sum - grand_total) < 0.01, (
                 f"Row sum ${row_sum:.2f} diverges from grand total ${grand_total:.2f}"
             )

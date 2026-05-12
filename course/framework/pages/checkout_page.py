@@ -1,4 +1,4 @@
-"""Session 4 — CheckoutPage (two-step checkout flow)."""
+"""Session 6 — CheckoutPage (two-step checkout flow)."""
 from playwright.sync_api import Page, expect
 from .base_page import BasePage
 

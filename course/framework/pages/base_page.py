@@ -1,5 +1,5 @@
 """
-Session 4 — BasePage: navigate, wait, screenshot.
+Session 6 — BasePage: navigate, wait, screenshot.
 Every page class extends this. Tests never call it directly.
 """
 from playwright.sync_api import Page
