@@ -55,6 +55,30 @@ npm run allure:generate
 npm run allure:open
 ```
 
+## Slash Commands
+
+Project-specific slash commands are in `.claude/commands/`. Invoke them in Claude Code with `/command-name [arguments]`.
+
+| Command | Example | What it does |
+|---|---|---|
+| `/generate-test` | `/generate-test user can add to cart` | Generates a complete pytest + Playwright test file following project conventions |
+| `/review-tests` | `/review-tests tests/web-ui/` | Audits test files for 8 anti-patterns and outputs file:line findings |
+| `/create-page-object` | `/create-page-object product detail page` | Navigates the live site via MCP, inspects elements, writes `pages/<name>_page.py` |
+| `/analyze-failures` | `/analyze-failures results.xml` | Buckets failures by type and produces a root-cause Markdown report |
+| `/add-allure` | `/add-allure tests/web-ui/test_cart.py` | Adds all Allure decorators to an existing test file without changing logic |
+| `/fix-selectors` | `/fix-selectors pages/` | Audits locators by stability rank and replaces brittle ones |
+
+## MCP Servers
+
+The Playwright MCP server is configured in `.claude/settings.json`. It lets Claude navigate, click, and inspect any live page directly from a slash command.
+
+**Setup (one-time):**
+```bash
+npm install -g @playwright/mcp
+```
+
+The server starts automatically when a slash command needs browser access. Remove `--headless` from `.claude/settings.json` to watch the browser in real time.
+
 ## Claude Skills
 
 Use these repo-specific skills when changing code:
