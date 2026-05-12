@@ -8,7 +8,7 @@
     "test:web": "pytest tests/web-ui/",
     "test:api": "pytest tests/api/",
     "test:unit": "pytest tests/unit/",
-    "test:report": "pytest tests/ && npm run allure:generate && npm run allure:open",
+    "test:report": "./scripts/run_tests_with_allure.sh",
     "allure:version": "allure --version",
     "allure:generate": "allure generate allure-results",
     "allure:open": "allure open allure-report",

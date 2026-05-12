@@ -8,7 +8,8 @@ from utils.data_loader import get_config
 
 CONFIG = get_config()
 _IN_CI = os.environ.get("CI", "").lower() in ("true", "1")
-_RECORD_ARTIFACTS = os.environ.get("PW_RECORD_ARTIFACTS", "").lower() in ("true", "1")
+_ARTIFACTS_SETTING = os.environ.get("PW_RECORD_ARTIFACTS", "true").lower()
+_RECORD_ARTIFACTS = _ARTIFACTS_SETTING in ("true", "1", "yes", "on")
 
 
 def _node_failed(node) -> bool:
@@ -16,6 +17,43 @@ def _node_failed(node) -> bool:
         getattr(node, f"rep_{when}", None) is not None and getattr(node, f"rep_{when}").failed
         for when in ("setup", "call", "teardown")
     )
+
+
+def _attach_failure_artifacts(node) -> None:
+    if getattr(node, "_pw_artifacts_attached", False) or not _node_failed(node):
+        return
+
+    trace_file = getattr(node, "_pw_trace_file", None)
+    video_dir = getattr(node, "_pw_video_dir", None)
+
+    if trace_file and trace_file.exists():
+        allure.attach.file(
+            str(trace_file),
+            name="trace_on_failure",
+            attachment_type=allure.attachment_type.ZIP,
+        )
+
+    if video_dir:
+        video_files = sorted(video_dir.rglob("*.webm"))
+        for index, video_path in enumerate(video_files, start=1):
+            allure.attach.file(
+                str(video_path),
+                name=f"video_on_failure_{index}",
+                attachment_type=allure.attachment_type.WEBM,
+            )
+
+    node._pw_artifacts_attached = True
+
+
+def _stop_tracing(node, context: BrowserContext) -> None:
+    trace_file = getattr(node, "_pw_trace_file", None)
+    if (
+        getattr(node, "_pw_should_record_artifacts", False)
+        and trace_file
+        and not getattr(node, "_pw_trace_stopped", False)
+    ):
+        context.tracing.stop(path=str(trace_file))
+        node._pw_trace_stopped = True
 
 
 @pytest.fixture(scope="session")
@@ -38,6 +76,11 @@ def context(request, browser_instance: Browser, tmp_path_factory):
         else None
     )
     trace_file = video_dir / "trace.zip" if video_dir else None
+    request.node._pw_should_record_artifacts = should_record_artifacts
+    request.node._pw_video_dir = video_dir
+    request.node._pw_trace_file = trace_file
+    request.node._pw_trace_stopped = False
+    request.node._pw_artifacts_attached = False
     context_options = {
         "viewport": CONFIG["viewport"],
         "base_url": CONFIG["base_url"],
@@ -55,25 +98,10 @@ def context(request, browser_instance: Browser, tmp_path_factory):
     if should_record_artifacts:
         ctx.tracing.start(screenshots=True, snapshots=True, sources=True)
     yield ctx
-    if should_record_artifacts and trace_file:
-        ctx.tracing.stop(path=str(trace_file))
+    _stop_tracing(request.node, ctx)
     ctx.close()
-
-    if should_record_artifacts and video_dir and _node_failed(request.node):
-        if trace_file and trace_file.exists():
-            allure.attach.file(
-                str(trace_file),
-                name="trace_on_failure",
-                attachment_type=allure.attachment_type.ZIP,
-            )
-
-        video_files = sorted(video_dir.rglob("*.webm"))
-        for index, video_path in enumerate(video_files, start=1):
-            allure.attach.file(
-                str(video_path),
-                name=f"video_on_failure_{index}",
-                attachment_type=allure.attachment_type.WEBM,
-            )
+    if should_record_artifacts:
+        _attach_failure_artifacts(request.node)
 
 
 @pytest.fixture
@@ -93,6 +121,11 @@ def pytest_runtest_makereport(item, call):
     outcome = yield
     rep = outcome.get_result()
     setattr(item, "rep_" + rep.when, rep)
+
+    if rep.skipped:
+        reason = rep.longrepr[2] if isinstance(rep.longrepr, tuple) else str(rep.longrepr)
+        allure.dynamic.status(allure.status.SKIPPED)
+        allure.dynamic.description(reason)
 
     if rep.when == "call" and rep.failed:
         page_fixture = item.funcargs.get("page")
