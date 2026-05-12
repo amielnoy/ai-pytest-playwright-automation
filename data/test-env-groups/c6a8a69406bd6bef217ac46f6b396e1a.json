@@ -1,1 +1,1 @@
-{"id":"c6a8a69406bd6bef217ac46f6b396e1a","fullName":"tests.api.test_api.TestCartApi#test_sessions_are_isolated","name":"Two concurrent sessions have independent carts","status":"passed","testResultsByEnv":{"default":"3544db76a76625e8b81a808dd89d5683"}}
+{"id":"c6a8a69406bd6bef217ac46f6b396e1a","fullName":"tests.api.test_api.TestCartApi#test_sessions_are_isolated","name":"Two concurrent sessions have independent carts","status":"passed","testResultsByEnv":{"default":"dc56beceaea09995d71766df3c5f57ec"}}
