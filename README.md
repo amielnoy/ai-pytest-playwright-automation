@@ -62,6 +62,19 @@ docker run --rm -v "$PWD/docker-artifacts:/app/test-artifacts" \
   ness-automation-tests pytest tests/ --alluredir=/app/test-artifacts/allure-results
 ```
 
+Or use the helper script, which builds the image, mounts `docker-artifacts/`, mounts `data/secrets.json` when present, and runs the full suite:
+
+```bash
+./scripts/run_all_tests_docker.sh
+```
+
+Pass extra pytest arguments after the script name:
+
+```bash
+./scripts/run_all_tests_docker.sh -m cart
+./scripts/run_all_tests_docker.sh tests/web-ui/test_add_to_cart.py
+```
+
 Run a specific test file or marker by passing pytest arguments:
 
 ```bash
