@@ -435,6 +435,7 @@
     .stat-cyan   .num { color: var(--cyan); }
     .stat-purple .num { color: var(--accent2); }
     .stat-yellow .num { color: var(--yellow); }
+    .stat-red    .num { color: var(--red); }
 
     /* ── FOOTER ── */
     footer {
@@ -492,13 +493,15 @@
       <div class="nav-label">טסטים</div>
       <a href="#tests-ui">UI Tests</a>
       <a href="#tests-api">API Tests</a>
+      <a href="#tests-security">Security Tests</a>
+      <a href="#tests-pentest">Penetration Tests</a>
       <a href="#tests-contract">Contract Tests</a>
       <a href="#tests-unit">Unit Tests</a>
     </div>
     <div class="nav-section">
       <div class="nav-label">DevOps</div>
       <a href="#cicd">CI/CD Pipeline</a>
-      <a href="#mcp">Playwright MCP</a>
+      <a href="#mcp">MCP Servers</a>
       <a href="#agents">AI Agents</a>
       <a href="#docker">Docker</a>
       <a href="#reporting">דוחות Allure</a>
@@ -514,11 +517,12 @@
       <h2><span class="icon">🗂</span> סקירה כללית</h2>
 
       <div class="stats-row">
-        <div class="stat-box stat-blue"><div class="num">25</div><div class="lbl">UI Test cases</div></div>
-        <div class="stat-box stat-cyan"><div class="num">26</div><div class="lbl">API Test cases</div></div>
+        <div class="stat-box stat-blue"><div class="num">30</div><div class="lbl">UI Test cases</div></div>
+        <div class="stat-box stat-cyan"><div class="num">58</div><div class="lbl">API Test cases</div></div>
         <div class="stat-box stat-purple"><div class="num">14</div><div class="lbl">Contract cases</div></div>
-        <div class="stat-box stat-green"><div class="num">45</div><div class="lbl">Unit Test cases</div></div>
-        <div class="stat-box stat-yellow"><div class="num">110</div><div class="lbl">Total collected tests</div></div>
+        <div class="stat-box stat-green"><div class="num">65</div><div class="lbl">Unit Test cases</div></div>
+        <div class="stat-box stat-red"><div class="num">32</div><div class="lbl">Security + Pentest</div></div>
+        <div class="stat-box stat-yellow"><div class="num">167</div><div class="lbl">Total collected tests</div></div>
       </div>
 
       <p>הפרויקט הוא <strong>מסגרת בדיקות אוטומטיות רב-שכבתית</strong> שנבנתה עבור אתר ה-demo של TutorialsNinja — אתר e-commerce לדוגמה.</p>
@@ -573,7 +577,7 @@
         <div class="pyramid-row">
           <div class="pyramid-bar pyr-ui">
             <span class="label">🎭 UI Tests (Playwright)</span>
-            <span class="count">8 files · 25 cases · web-ui/</span>
+            <span class="count">9 files · 30 cases · web-ui/</span>
           </div>
         </div>
         <div class="pyramid-row">
@@ -629,7 +633,7 @@
           <tr>
             <td><span class="badge badge-blue">UI</span></td>
             <td><code>tests/web-ui/</code></td>
-            <td>בדיקות E2E מלאות בדפדפן — sanity, accessibility, חיפוש, הוספה לעגלה, רישום משתמש</td>
+            <td>בדיקות E2E מלאות בדפדפן — sanity, accessibility, navigation, empty states, חיפוש, הוספה לעגלה, רישום משתמש</td>
             <td><code>@pytest.mark.sanity / accessibility / search / cart / registration</code></td>
             <td>🐢 איטי יחסית</td>
           </tr>
@@ -643,8 +647,8 @@
           <tr><th>Marker</th><th>תיקייה / קבצים</th><th>שימוש</th><th>פקודת הרצה לדוגמה</th></tr>
           <tr>
             <td><code>@pytest.mark.sanity</code></td>
-            <td><code>tests/web-ui/test_sanity.py</code></td>
-            <td>בדיקות smoke קצרות לזמינות UI קריטית לפני regression מלא.</td>
+            <td><code>tests/web-ui/test_sanity.py</code>, <code>test_navigation_and_empty_states.py</code></td>
+            <td>בדיקות smoke קצרות לזמינות UI קריטית, חיפוש header, account menu ו-empty cart.</td>
             <td><code>pytest -m sanity</code></td>
           </tr>
           <tr>
@@ -714,6 +718,7 @@
         <div class="line"><span class="indent"></span>├── <code>get_products_under_price(query, max_price, limit)</code></div>
         <div class="line"><span class="indent"></span>├── <code>add_items_to_cart(products)</code> — משתמש ב-<code>self.alert</code> (בסיס)</div>
         <div class="line"><span class="indent"></span>├── <code>open_product(product_name)</code> — פתיחת דף מוצר מתוך תוצאות חיפוש</div>
+        <div class="line"><span class="indent"></span>├── <code>choose_list_view()</code> — מעבר ל-list view בלי לאבד תוצאות</div>
         <div class="line"><span class="indent"></span>├── <code>has_filter_controls() / product_title_link_names()</code></div>
         <div class="line"><span class="indent"></span>├── <code>sort_by_name_ascending()</code></div>
         <div class="line"><span class="indent"></span>├── <code>stored_product_information()</code></div>
@@ -740,7 +745,7 @@
         <div class="line-section"><span class="muted">Components (pages/components/) — ירושה מ-BaseComponent, ללא __init__ מיותר</span></div>
         <div class="line"><span class="indent"></span>├── <span class="comp">NavBarComponent</span> — חיפוש, ניווט, login status</div>
         <div class="line"><span class="indent"></span>├── <span class="comp">AlertComponent</span> — banner ושגיאות inline (חי ב-BasePage)</div>
-        <div class="line"><span class="indent"></span>├── <span class="comp">CartSummaryComponent</span> — תקציר עגלה</div>
+        <div class="line"><span class="indent"></span>├── <span class="comp">CartSummaryComponent</span> — תקציר עגלה ו-empty state scoped ל-<code>#content</code></div>
         <div class="line"><span class="indent"></span>├── <span class="comp">ProductCardComponent</span> — כרטיס מוצר (scoped ל-Locator, לא לדף)</div>
         <div class="line"><span class="indent"></span>└── <span class="comp">RegistrationFormComponent</span> — טופס הרשמה</div>
         <div class="line-section"><span class="model">ProductInfo / StoredProductInfo (dataclasses)</span> <span class="muted">← pages/models.py</span></div>
@@ -1114,6 +1119,31 @@
         </tr>
       </table></div>
 
+      <h3>test_navigation_and_empty_states.py — ניווט ו-empty states</h3>
+      <div class="tbl-wrap"><table>
+        <tr><th>שם הטסט</th><th>Severity</th><th>מה נבדק</th></tr>
+        <tr>
+          <td><code>test_header_search_submits_query_and_shows_matching_results</code></td>
+          <td><span class="badge badge-red">CRITICAL</span></td>
+          <td>פתיחת דף הבית ← חיפוש דרך header ← ודא מעבר לדף search, query ב-URL ותוצאות MacBook.</td>
+        </tr>
+        <tr>
+          <td><code>test_empty_cart_page_shows_empty_state</code></td>
+          <td><span class="badge badge-yellow">NORMAL</span></td>
+          <td>פתיחת עגלה ריקה ← ודא empty-state אמיתי מתוך <code>#content</code>, בלי שורות מוצר ועם total אפס.</td>
+        </tr>
+        <tr>
+          <td><code>test_account_menu_opens_login_page</code></td>
+          <td><span class="badge badge-red">CRITICAL</span></td>
+          <td>פתיחת account menu מדף הבית ← ניווט ל-login ← ודא טופס login ושדות נגישים.</td>
+        </tr>
+        <tr>
+          <td><code>test_list_view_keeps_search_results_available</code></td>
+          <td><span class="badge badge-yellow">NORMAL</span></td>
+          <td>חיפוש iPod ← מעבר ל-list view ← ודא שהתוצאות עדיין זמינות ולא התרוקנו אחרי שינוי התצוגה.</td>
+        </tr>
+      </table></div>
+
       <h3>test_registration.py — רישום משתמש</h3>
       <div class="tbl-wrap"><table>
         <tr><th>שם הטסט</th><th>Severity</th><th>מה נבדק</th></tr>
@@ -1335,6 +1365,134 @@
       </div>
     </section>
 
+    <!-- ── SECURITY TESTS ── -->
+    <section id="tests-security">
+      <h2><span class="icon">🔒</span> Security Tests</h2>
+      <p class="section-intro">20 בדיקות אבטחה מחולקות לשני קבצים: 12 בדיקות אינטגרציה חיות מול האתר ו-8 בדיקות יחידה שמוודאות אבטחה ברמת הקוד. כל שלב משתמש גם ב-<code>allure.step</code> וגם ב-<code>LOGGER.info</code>.</p>
+
+      <div class="doc-block">
+        <h3>test_security_api.py — 12 integration security tests</h3>
+        <p class="doc-note">בדיקות HTTP חיות נגד TutorialsNinja. מסומנות <code>@pytest.mark.api @pytest.mark.security</code>.</p>
+
+        <h4 class="test-suite-title">TestSearchSecurity</h4>
+        <div class="tbl-wrap"><table>
+          <tr><th>שם הטסט</th><th>Severity</th><th>מה נבדק</th></tr>
+          <tr><td><code>test_sql_injection_in_search_returns_200_without_db_error</code></td><td><span class="badge badge-red">CRITICAL</span></td><td>SQL injection <code>' OR '1'='1'--</code> ← 200 + ללא stack trace של DB.</td></tr>
+          <tr><td><code>test_xss_script_tag_in_search_is_encoded_in_response</code></td><td><span class="badge badge-red">CRITICAL</span></td><td><code>&lt;script&gt;alert(1)&lt;/script&gt;</code> ← לא מוחזר raw בתגובה.</td></tr>
+          <tr><td><code>test_html_injection_img_tag_in_search_is_encoded</code></td><td><span class="badge badge-red">CRITICAL</span></td><td><code>&lt;img onerror=alert(1)&gt;</code> ← tag שלם לא מוחזר unencoded.</td></tr>
+          <tr><td><code>test_null_byte_in_search_is_handled_gracefully</code></td><td><span class="badge badge-yellow">NORMAL</span></td><td>null byte <code>\x00</code> בחיפוש ← 200, ללא קריסת שרת.</td></tr>
+          <tr><td><code>test_oversized_search_query_is_handled_gracefully</code></td><td><span class="badge badge-yellow">NORMAL</span></td><td>query בגודל 4KB ← 200, ללא Fatal error.</td></tr>
+          <tr><td><code>test_path_traversal_in_search_does_not_expose_file_content</code></td><td><span class="badge badge-red">CRITICAL</span></td><td><code>../../etc/passwd</code> ← 200, ללא תוכן מערכת קבצים.</td></tr>
+        </table></div>
+
+        <h4 class="test-suite-title">TestCartSecurity</h4>
+        <div class="tbl-wrap"><table>
+          <tr><th>שם הטסט</th><th>Severity</th><th>מה נבדק</th></tr>
+          <tr><td><code>test_cart_add_with_sql_injection_product_id</code></td><td><span class="badge badge-red">CRITICAL</span></td><td>SQL injection כ-product_id ← 200, ללא שגיאת DB.</td></tr>
+          <tr><td><code>test_cart_add_with_xss_product_id</code></td><td><span class="badge badge-red">CRITICAL</span></td><td>XSS כ-product_id ← tag לא מוחזר unencoded בתגובה.</td></tr>
+          <tr><td><code>test_get_to_cart_add_endpoint_does_not_add_item</code></td><td><span class="badge badge-yellow">NORMAL</span></td><td>GET במקום POST ל-cart/add ← עגלה נשארת ריקה (verb tampering).</td></tr>
+        </table></div>
+
+        <h4 class="test-suite-title">TestSessionSecurity</h4>
+        <div class="tbl-wrap"><table>
+          <tr><th>שם הטסט</th><th>Severity</th><th>מה נבדק</th></tr>
+          <tr><td><code>test_ocsessid_cookie_is_set_with_root_path_scope</code></td><td><span class="badge badge-red">CRITICAL</span></td><td>OCSESSID מוגדר עם <code>path=/</code> בכותרת Set-Cookie.</td></tr>
+          <tr><td><code>test_independent_sessions_receive_distinct_ocsessid</code></td><td><span class="badge badge-red">CRITICAL</span></td><td>שני sessions עצמאיים ← OCSESSID שונים (ללא session fixation).</td></tr>
+          <tr><td><code>test_unauthenticated_account_page_does_not_expose_account_data</code></td><td><span class="badge badge-red">CRITICAL</span></td><td>גישה ל-account/account ללא auth ← מפנה ל-login, ללא פרטי חשבון.</td></tr>
+        </table></div>
+      </div>
+
+      <div class="doc-block">
+        <h3>test_security_unit.py — 8 unit security tests</h3>
+        <p class="doc-note">בדיקות מהירות ללא רשת. מסומנות <code>@pytest.mark.security</code>.</p>
+        <div class="tbl-wrap"><table>
+          <tr><th>שם הטסט</th><th>מה נבדק</th></tr>
+          <tr><td><code>test_rest_client_sends_no_authorization_header_by_default</code></td><td>RestClient ברירת מחדל — ללא כותרת Authorization.</td></tr>
+          <tr><td><code>test_rest_client_custom_headers_do_not_inject_credential_headers</code></td><td>headers מותאמים — Authorization ו-Cookie לא מוזרקים.</td></tr>
+          <tr><td><code>test_rest_client_timeout_is_always_forwarded_on_every_request</code></td><td>timeout מועבר לכל קריאת GET ו-POST.</td></tr>
+          <tr><td><code>test_search_service_product_names_does_not_raise_on_xss_html</code></td><td><code>product_names()</code> מחזיר list ולא קורס על XSS HTML.</td></tr>
+          <tr><td><code>test_search_service_product_ids_does_not_raise_on_malformed_html</code></td><td><code>product_ids()</code> מחזיר list ולא קורס על HTML שבור.</td></tr>
+          <tr><td><code>test_cart_service_is_empty_returns_false_when_html_has_product_rows</code></td><td><code>is_empty()</code> מחזיר False כאשר יש שורות מוצר ב-HTML.</td></tr>
+          <tr><td><code>test_cart_service_total_returns_none_on_truncated_html</code></td><td><code>total()</code> מחזיר None על HTML חתוך — ללא exception.</td></tr>
+          <tr><td><code>test_rest_client_post_is_excluded_from_default_retry_methods</code></td><td>POST לא ב-<code>allowed_methods</code> — ללא retry על mutations.</td></tr>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- ── PENETRATION TESTS ── -->
+    <section id="tests-pentest">
+      <h2><span class="icon">🕵️</span> Penetration Tests</h2>
+      <p class="section-intro">20 בדיקות חדירה חיות מול TutorialsNinja. מסומנות <code>@pytest.mark.api @pytest.mark.pentest</code>. שני טסטים מסומנים <code>xfail</code> — הם מתעדים פגיעויות אמיתיות שנמצאו ב-probe phase.</p>
+
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <div><strong>ממצאים:</strong> open redirect דרך פרמטר <code>redirect</code> ב-currency endpoint (<code>TestPentestFindings#test_open_redirect_...</code>), וחסרון כותרת <code>X-Frame-Options</code> (clickjacking risk) — שניהם מסומנים <code>xfail(strict=False)</code> עם תיעוד מלא.</div>
+      </div>
+
+      <div class="doc-block">
+        <h3>TestInjectionPentest — 5 injection probes</h3>
+        <div class="tbl-wrap"><table>
+          <tr><th>שם הטסט</th><th>Severity</th><th>וקטור התקפה</th></tr>
+          <tr><td><code>test_ssti_jinja2_payload_not_evaluated_in_search</code></td><td><span class="badge badge-red">CRITICAL</span></td><td>SSTI Jinja2/Twig <code>{{9999*9999}}</code> ← לא מוערך ב-title.</td></tr>
+          <tr><td><code>test_ssti_erb_payload_html_encoded_not_executed_in_search</code></td><td><span class="badge badge-red">CRITICAL</span></td><td>SSTI ERB <code>&lt;%=7*7%&gt;</code> ← מוחזר HTML-encoded, לא <code>49</code>.</td></tr>
+          <tr><td><code>test_command_injection_in_search_produces_no_os_output</code></td><td><span class="badge badge-red">CRITICAL</span></td><td>OS command injection <code>$(whoami)</code> ← ללא uid/root בתגובה.</td></tr>
+          <tr><td><code>test_ldap_injection_in_search_handled_safely</code></td><td><span class="badge badge-red">CRITICAL</span></td><td>LDAP injection <code>*)(uid=*))(|(uid=*</code> ← 200, ללא שגיאת DB/LDAP.</td></tr>
+          <tr><td><code>test_backup_config_file_is_blocked</code></td><td><span class="badge badge-red">CRITICAL</span></td><td><code>/config.php.bak</code> ← לא 200; ללא פרטי DB בתגובה.</td></tr>
+        </table></div>
+      </div>
+
+      <div class="doc-block">
+        <h3>TestAuthenticationPentest — 4 auth probes</h3>
+        <div class="tbl-wrap"><table>
+          <tr><th>שם הטסט</th><th>Severity</th><th>מה נבדק</th></tr>
+          <tr><td><code>test_login_empty_credentials_returns_warning_not_crash</code></td><td><span class="badge badge-red">CRITICAL</span></td><td>credentials ריקים ← 200 + Warning, ללא PHP error או 5xx.</td></tr>
+          <tr><td><code>test_login_oversized_password_does_not_crash</code></td><td><span class="badge badge-red">CRITICAL</span></td><td>סיסמה בגודל 10KB ← 200, ללא PHP error (DoS probe).</td></tr>
+          <tr><td><code>test_login_error_does_not_reveal_email_existence</code></td><td><span class="badge badge-red">CRITICAL</span></td><td>שגיאת login גנרית — לא חושפת אם email קיים (account enumeration).</td></tr>
+          <tr><td><code>test_login_endpoint_operates_over_https</code></td><td><span class="badge badge-red">CRITICAL</span></td><td>base URL ו-form action ← HTTPS; credentials לא נשלחים בטקסט גלוי.</td></tr>
+        </table></div>
+      </div>
+
+      <div class="doc-block">
+        <h3>TestInfoDisclosurePentest — 4 information disclosure probes</h3>
+        <div class="tbl-wrap"><table>
+          <tr><th>שם הטסט</th><th>Severity</th><th>מה נבדק</th></tr>
+          <tr><td><code>test_server_header_does_not_expose_version</code></td><td><span class="badge badge-yellow">NORMAL</span></td><td>כותרת Server ← רק <code>nginx</code>, ללא מספר גרסה.</td></tr>
+          <tr><td><code>test_x_powered_by_header_absent</code></td><td><span class="badge badge-yellow">NORMAL</span></td><td>כותרת X-Powered-By — לא קיימת; גרסת PHP לא נחשפת.</td></tr>
+          <tr><td><code>test_git_directory_is_blocked</code></td><td><span class="badge badge-red">CRITICAL</span></td><td><code>/.git/</code> ← לא 200; ללא תוכן git index.</td></tr>
+          <tr><td><code>test_phpinfo_page_not_accessible</code></td><td><span class="badge badge-red">CRITICAL</span></td><td><code>/phpinfo.php</code> ← 404; ללא PHP Version בתגובה.</td></tr>
+        </table></div>
+      </div>
+
+      <div class="doc-block">
+        <h3>TestAccessControlPentest — 5 access control probes</h3>
+        <div class="tbl-wrap"><table>
+          <tr><th>שם הטסט</th><th>Severity</th><th>מה נבדק</th></tr>
+          <tr><td><code>test_order_history_requires_authentication</code></td><td><span class="badge badge-red">CRITICAL</span></td><td>account/order ללא auth ← מפנה ל-login, ללא "Your Orders".</td></tr>
+          <tr><td><code>test_account_edit_requires_authentication</code></td><td><span class="badge badge-red">CRITICAL</span></td><td>account/edit ללא auth ← מפנה ל-login, ללא "Your Personal Details".</td></tr>
+          <tr><td><code>test_wishlist_requires_authentication</code></td><td><span class="badge badge-yellow">NORMAL</span></td><td>account/wishlist ללא auth ← מפנה ל-login, ללא "My Wish List".</td></tr>
+          <tr><td><code>test_admin_panel_does_not_expose_interface</code></td><td><span class="badge badge-red">CRITICAL</span></td><td><code>/admin/</code> ← ללא Dashboard/Sales/Catalog בתגובה.</td></tr>
+          <tr><td><code>test_checkout_page_is_not_accessible_with_empty_cart</code></td><td><span class="badge badge-yellow">NORMAL</span></td><td>checkout ללא פריטים בעגלה ← ללא Billing Details / Payment Method.</td></tr>
+        </table></div>
+      </div>
+
+      <div class="doc-block">
+        <h3>TestPentestFindings — 2 documented vulnerabilities (xfail)</h3>
+        <div class="tbl-wrap"><table>
+          <tr><th>שם הטסט</th><th>Severity</th><th>פגיעות</th></tr>
+          <tr>
+            <td><code>test_open_redirect_via_currency_redirect_parameter_is_blocked</code> <span class="badge badge-yellow">xfail</span></td>
+            <td><span class="badge badge-red">CRITICAL</span></td>
+            <td>POST ל-currency/currency עם <code>redirect=https://evil.example.com</code> ← Location מפנה ל-URL חיצוני. פגיע ל-phishing.</td>
+          </tr>
+          <tr>
+            <td><code>test_x_frame_options_header_present_to_prevent_clickjacking</code> <span class="badge badge-yellow">xfail</span></td>
+            <td><span class="badge badge-yellow">NORMAL</span></td>
+            <td>כותרת X-Frame-Options חסרה — האתר ניתן להטמעה ב-iframe (clickjacking).</td>
+          </tr>
+        </table></div>
+      </div>
+    </section>
+
     <!-- ── 10. CONTRACT TESTS ── -->
     <section id="tests-contract">
       <h2><span class="icon">📋</span> Contract Tests</h2>
@@ -1389,6 +1547,20 @@
       <pre><span class="c"># הרצת כל בדיקות היחידה, כולל Page Objects</span>
 .venv/bin/python -m pytest -n 0 tests/unit -q</pre>
 
+      <h3>test_report_test_status.py — MCP reporter unit tests (9 tests)</h3>
+      <div class="tbl-wrap"><table>
+        <tr><th>שם הטסט</th><th>מה נבדק</th></tr>
+        <tr><td><code>test_load_results_reads_only_result_json_files</code></td><td>רק קבצי <code>*-result.json</code> נטענים; JSON לא תקין נדלג בשקט.</td></tr>
+        <tr><td><code>test_classify_maps_statuses_correctly</code></td><td>כל 5 סטטוסים (passed/failed/broken/skipped/flaky) ממופים נכון.</td></tr>
+        <tr><td><code>test_classify_detects_flaky_when_same_history_has_mixed_statuses</code></td><td>historyId אחד עם pass+fail ← מסווג כ-flaky.</td></tr>
+        <tr><td><code>test_terminal_report_contains_status_icons_for_all_non_zero_statuses</code></td><td>✅❌⚠️⏭️🔁 נמצאים בפלט הטרמינל.</td></tr>
+        <tr><td><code>test_html_report_creates_file_with_badge_per_status</code></td><td>קובץ HTML נוצר עם badge colours לכל סטטוס.</td></tr>
+        <tr><td><code>test_write_allure_entry_creates_result_json_and_both_attachments</code></td><td>3 קבצים נוצרים ב-allure_dir; JSON מפנה לשני attachments.</td></tr>
+        <tr><td><code>test_report_test_status_returns_error_message_when_dir_does_not_exist</code></td><td>תיקייה לא קיימת ← הודעת שגיאה עם ❌.</td></tr>
+        <tr><td><code>test_report_test_status_end_to_end_with_mixed_results</code></td><td>זרימה מלאה: HTML נוצר + Allure entry נכתב + כל הסטטוסים בפלט.</td></tr>
+        <tr><td><code>test_overall_status_reflects_worst_case</code></td><td>failed > broken > passed — עדיפות סטטוס גרוע ביותר.</td></tr>
+      </table></div>
+
       <h3>test_rest_client.py — RestClient behavior</h3>
       <div class="tbl-wrap"><table>
         <tr><th>שם הטסט</th><th>מה נבדק</th></tr>
@@ -1416,9 +1588,9 @@
       <div class="tbl-wrap"><table>
         <tr><th>אזור</th><th>מה נבדק</th></tr>
         <tr><td><code>BasePage / BaseComponent</code></td><td>שמירת page, בניית URL ב-<code>navigate()</code>, title/url/screenshot, שפת מסמך, duplicate ids, והמתנה לאלמנט גלוי דרך <code>expect</code>.</td></tr>
-        <tr><td><code>HomePage / CartPage / RegisterPage / LoginPage</code></td><td>Delegation ל-components, פתיחת routes, login flow, בדיקת הצלחה, הודעת invalid credentials, ו-accessibility helpers.</td></tr>
+        <tr><td><code>HomePage / CartPage / RegisterPage / LoginPage</code></td><td>Delegation ל-components, פתיחת routes, login flow, empty-cart state, בדיקת הצלחה, הודעת invalid credentials, ו-accessibility helpers.</td></tr>
         <tr><td><code>SearchResultsPage / ProductDetailPage</code></td><td>טעינת חיפוש, no-results, סינון מחיר+limit, הוספה לעגלה, פתיחת מוצר, list view, sort, product names, review fields ו-stored info.</td></tr>
-        <tr><td><code>AlertComponent / CartSummaryComponent / NavBarComponent</code></td><td>קריאת banners ושגיאות, סיכום עגלה, חיפוש header, currency dropdown, account menu ו-login status.</td></tr>
+        <tr><td><code>AlertComponent / CartSummaryComponent / NavBarComponent</code></td><td>קריאת banners ושגיאות, סיכום עגלה, empty state scoped ל-<code>#content</code>, חיפוש header, currency dropdown, account menu ו-login status.</td></tr>
         <tr><td><code>RegistrationFormComponent / ProductCardComponent</code></td><td>מילוי טופס, privacy policy, submit, success heading, שם/תמונה/תיאור/מחיר מוצר, stored info ו-add-to-cart.</td></tr>
       </table></div>
 
@@ -1431,7 +1603,7 @@
         <tr><td><code>pages/register_page.py</code></td><td><code>RegisterPage</code></td><td>רצף register מלא: fill, privacy policy, submit, success state, labels ושדות newsletter.</td></tr>
         <tr><td><code>pages/search_results_page.py</code></td><td><code>SearchResultsPage</code></td><td>חיפוש, no-results, סינון מחיר, add-to-cart, open product, list view, sort, product names, filter labels.</td></tr>
         <tr><td><code>pages/product_detail_page.py</code></td><td><code>ProductDetailPage</code></td><td>כותרת מוצר, quantity ברירת מחדל, Add to Cart, Reviews tab ושדות review נגישים.</td></tr>
-        <tr><td><code>pages/cart_page.py</code></td><td><code>CartPage</code></td><td>פתיחת route העגלה ו-delegation ל-<code>CartSummaryComponent</code>.</td></tr>
+        <tr><td><code>pages/cart_page.py</code></td><td><code>CartPage</code></td><td>פתיחת route העגלה, delegation ל-<code>CartSummaryComponent</code>, וזיהוי עגלה ריקה.</td></tr>
       </table></div>
 
       <h3>Component coverage matrix</h3>
@@ -1440,7 +1612,7 @@
         <tr><td><code>pages/components/base_component.py</code></td><td><code>BaseComponent</code></td><td>שמירת reference ל-Playwright page.</td></tr>
         <tr><td><code>pages/components/alert.py</code></td><td><code>AlertComponent</code></td><td>success/error banners, field errors, wait-for-success.</td></tr>
         <tr><td><code>pages/components/nav_bar.py</code></td><td><code>NavBarComponent</code></td><td>חיפוש, currency, account menu, login/register/logout, login status.</td></tr>
-        <tr><td><code>pages/components/cart_summary.py</code></td><td><code>CartSummaryComponent</code></td><td>total parsing, item count, empty-cart state.</td></tr>
+        <tr><td><code>pages/components/cart_summary.py</code></td><td><code>CartSummaryComponent</code></td><td>total parsing, item count, empty-cart state scoped ל-<code>#content</code>.</td></tr>
         <tr><td><code>pages/components/registration_form.py</code></td><td><code>RegistrationFormComponent</code></td><td>שדות טופס, newsletter, privacy policy, submit, success heading.</td></tr>
         <tr><td><code>pages/components/product_card.py</code></td><td><code>ProductCardComponent</code></td><td>שם מוצר, clean name, image URL, description, price, stored info, add-to-cart.</td></tr>
       </table></div>
@@ -1490,43 +1662,62 @@
 
     <!-- ── 13. PLAYWRIGHT MCP ── -->
     <section id="mcp">
-      <h2><span class="icon">🧭</span> Playwright MCP</h2>
-      <p>Codex מחובר ל-Playwright MCP לצורך inspection של אפליקציה חיה, אימות selectors, ותכנון sanity tests לפני מימוש.</p>
+      <h2><span class="icon">🧭</span> MCP Servers</h2>
+      <p>שני שרתי MCP מוגדרים ב-<code>.claude/settings.json</code>: Playwright לבדיקה חיה של האפליקציה, ו-test-reporter לדיווח על סטטוס הטסטים.</p>
 
       <div class="tbl-wrap"><table>
         <tr><th>שם MCP</th><th>Command</th><th>תפקיד</th></tr>
         <tr>
           <td><code>playwright</code></td>
-          <td><code>npx @playwright/mcp@latest</code></td>
-          <td>שרת Playwright MCP ברירת מחדל.</td>
+          <td><code>npx @playwright/mcp --headless</code></td>
+          <td>inspection של אפליקציה חיה, אימות selectors, תכנון sanity tests.</td>
         </tr>
         <tr>
-          <td><code>playwright-chrome</code></td>
-          <td><code>npx @playwright/mcp@latest --browser=chrome</code></td>
-          <td>בדיקות/inspection מול Chrome.</td>
-        </tr>
-        <tr>
-          <td><code>playwright-firefox</code></td>
-          <td><code>npx @playwright/mcp@latest --browser=firefox</code></td>
-          <td>בדיקות/inspection מול Firefox.</td>
-        </tr>
-        <tr>
-          <td><code>playwright-webkit</code></td>
-          <td><code>npx @playwright/mcp@latest --browser=webkit</code></td>
-          <td>בדיקות/inspection מול WebKit.</td>
+          <td><code>test-reporter</code></td>
+          <td><code>.venv/bin/python mcp_servers/test_reporter.py</code></td>
+          <td>קריאת <code>allure-results/</code> ודיווח צבעוני על סטטוס הטסטים.</td>
         </tr>
       </table></div>
 
+      <div class="doc-block">
+        <h3>mcp_servers/test_reporter.py — Test Status Reporter</h3>
+        <p class="doc-note">שרת MCP בפייתון שחושף tool אחד: <code>report_test_status()</code>. קורא <code>allure-results/*.json</code> ומפיק דוח טרמינל צבעוני + HTML + Allure entry.</p>
+
+        <h4 class="test-suite-title">סיווג סטטוסים</h4>
+        <div class="tbl-wrap"><table>
+          <tr><th>סטטוס Allure</th><th>צבע</th><th>אייקון</th><th>משמעות</th></tr>
+          <tr><td><code>passed</code></td><td style="color:#28a745">ירוק</td><td>✅</td><td>טסט עבר</td></tr>
+          <tr><td><code>failed</code></td><td style="color:#dc3545">אדום</td><td>❌</td><td>assertion נכשל</td></tr>
+          <tr><td><code>broken</code></td><td style="color:#ffc107">צהוב</td><td>⚠️</td><td>exception — לא assertion</td></tr>
+          <tr><td><code>skipped</code></td><td style="color:#ffc107">צהוב</td><td>⏭️</td><td>טסט דולג</td></tr>
+          <tr><td><code>flaky</code></td><td style="color:#dc3545">אדום</td><td>🔁</td><td>אותו historyId עם pass+fail</td></tr>
+        </table></div>
+
+        <h4 class="test-suite-title">פלטים</h4>
+        <div class="tbl-wrap"><table>
+          <tr><th>פלט</th><th>תיאור</th></tr>
+          <tr><td>טקסט ANSI בטרמינל</td><td>טבלה צבעונית עם כל הטסטים, איקונים וסיכום.</td></tr>
+          <tr><td><code>test-status-report.html</code></td><td>דוח HTML עצמאי עם badge צבעוני לכל סטטוס.</td></tr>
+          <tr><td><code>allure-results/&lt;uuid&gt;-result.json</code></td><td>Allure entry עם steps לכל סטטוס + שני attachments (txt + html).</td></tr>
+        </table></div>
+
+        <pre><span class="c"># קריאה ישירה מ-Claude Code (אחרי הרצת pytest)</span>
+report_test_status()
+
+<span class="c"># עם תיקייה מותאמת, ללא כתיבה ל-allure-results</span>
+report_test_status(allure_dir="custom/path", write_allure_entry=False)</pre>
+      </div>
+
       <div class="callout info mt-12">
         <span class="callout-icon">✅</span>
-        <div><strong>שימוש מומלץ:</strong> MCP משמש לאיסוף מבנה דף ותכנון צעדים. מימוש הטסטים נשאר ב-pytest + Page Objects, כדי שהרצה ב-CI תהיה עקבית ולא תלויה ב-Codex.</div>
+        <div><strong>שימוש מומלץ:</strong> Playwright MCP לאיסוף מבנה דף ותכנון צעדים. test-reporter לאחר כל הרצת pytest כדי לקבל סיכום מיידי בצ'אט ודוח HTML. מימוש הטסטים נשאר ב-pytest + Page Objects.</div>
       </div>
     </section>
 
     <!-- ── 14. AGENTS ── -->
     <section id="agents">
       <h2><span class="icon">🤖</span> AI Agents</h2>
-      <p>תיקיית <code>agents/</code> מכילה כלי תכנון טסטים ואיסוף מידע מדפים חיים — ללא חיבור ל-CI ובלי צורך בהרצת הטסטים.</p>
+      <p>תיקיית <code>agents/</code> מכילה כלי תכנון טסטים ואיסוף מידע מדפים חיים — ללא חיבור ל-CI ובלי צורך בהרצת הטסטים. קבצי ה-root כמו <code>run_agent.py</code> ו-<code>run_playwright_cli_std_agent.py</code> הם entry points דקים שמפעילים את המימוש מתוך <code>agents/</code>.</p>
 
       <div class="flow">
         <div class="flow-box blue">run_agent.py<span class="sub">entry point</span></div>
@@ -1541,14 +1732,14 @@
       <div class="flow mt-12">
         <div class="flow-box blue">run_playwright_cli_std_agent.py<span class="sub">URL input</span></div>
         <div class="flow-arrow">→</div>
-        <div class="flow-box purple">playwright_cli_std_agent.py<span class="sub">CLI screenshot + crawler</span></div>
+        <div class="flow-box purple">agents/playwright_cli_std_agent.py<span class="sub">CLI screenshot + crawler</span></div>
         <div class="flow-arrow">→</div>
         <div class="flow-box cyan">artifacts/std_page_snapshots/<span class="sub">PNG evidence</span></div>
         <div class="flow-arrow">→</div>
         <div class="flow-box green">stds/<span class="sub">detailed STD</span></div>
       </div>
 
-      <h3>page_crawler.py — Playwright Page Crawler</h3>
+      <h3>agents/page_crawler.py — Playwright Page Crawler</h3>
       <p>כלי headless שמבצע crawl לדף חי ב-TutorialsNinja ומחזיר JSON מובנה. פועל על Playwright sync API.</p>
       <div class="tbl-wrap"><table>
         <tr><th>פונקציה</th><th>פלט</th><th>תפקיד</th></tr>
@@ -1558,12 +1749,12 @@
         <tr><td><code>_extract_nav_links(page)</code></td><td><code>list[dict]</code></td><td>קישורי ניווט עם text ו-href.</td></tr>
       </table></div>
 
-      <h3>test_planner_agent.py — AI Test Planner</h3>
+      <h3>agents/test_planner_agent.py — AI Test Planner</h3>
       <p>Agent שמשתמש ב-Claude API (<code>claude-opus-4-7</code> עם adaptive thinking) בלולאה של tool calls כדי לייצר STD מפורט לכל דף. כותב את הפלט ל-<code>stds/</code>.</p>
 
       <div class="tbl-wrap"><table>
         <tr><th>Tool</th><th>תפקיד</th></tr>
-        <tr><td><code>analyze_page(url)</code></td><td>מפעיל את <code>page_crawler.py</code> על URL חי ומחזיר את ה-JSON המובנה ל-Claude.</td></tr>
+        <tr><td><code>analyze_page(url)</code></td><td>מפעיל את <code>agents/page_crawler.py</code> על URL חי ומחזיר את ה-JSON המובנה ל-Claude.</td></tr>
         <tr><td><code>read_existing_tests()</code></td><td>קורא את כל קבצי הטסט מ-<code>tests/</code> כדי שהמודל יתאים את הסגנון ולא ייצר כפילויות.</td></tr>
         <tr><td><code>save_std(filename, content)</code></td><td>שומר את ה-STD שנוצר ב-<code>stds/</code> בפורמט Markdown.</td></tr>
       </table></div>
@@ -1573,8 +1764,8 @@
         <div><strong>Adaptive Thinking:</strong> ה-agent משתמש ב-<code>thinking</code> עם <code>budget_tokens</code> גבוה כדי לבצע חשיבה מעמיקה לפני כתיבת כל STD. הלולאה ממשיכה עד שה-agent קורא ל-<code>save_std</code> ומסיים.</div>
       </div>
 
-      <h3>playwright_cli_std_agent.py — Playwright CLI STD Agent</h3>
-      <p>Agent דטרמיניסטי שלא דורש מפתח LLM. הוא מקבל URL, מפעיל <code>python -m playwright screenshot</code> כדי לוודא שהדף נטען ולשמור evidence, מפעיל את <code>page_crawler.py</code> לאיסוף מבנה הדף, ואז יוצר STD מפורט עם צעדים לכל test case.</p>
+      <h3>agents/playwright_cli_std_agent.py — Playwright CLI STD Agent</h3>
+      <p>Agent דטרמיניסטי שלא דורש מפתח LLM. הוא מקבל URL, מפעיל <code>python -m playwright screenshot</code> כדי לוודא שהדף נטען ולשמור evidence, מפעיל את <code>agents/page_crawler.py</code> לאיסוף מבנה הדף, ואז יוצר STD מפורט עם צעדים לכל test case.</p>
 
       <div class="tbl-wrap"><table>
         <tr><th>פלט</th><th>תפקיד</th></tr>
@@ -1584,6 +1775,9 @@
 
       <pre><span class="c"># יצירת STD מפורט מ-URL אחד</span>
 python run_playwright_cli_std_agent.py https://tutorialsninja.com/demo
+
+<span class="c"># ניתן להריץ גם ישירות כ-module מתוך תיקיית agents</span>
+python -m agents.playwright_cli_std_agent https://tutorialsninja.com/demo
 
 <span class="c"># שם feature וקובץ פלט מותאמים</span>
 python run_playwright_cli_std_agent.py \
@@ -1651,6 +1845,24 @@ rm -rf docker-artifacts/allure-report
 npx allure generate docker-artifacts/allure-results -o docker-artifacts/allure-report
 npx allure open docker-artifacts/allure-report</pre>
 
+      <h3>Docker Compose + monitoring</h3>
+      <p><code>docker-compose.automation.yml</code> מפעיל stack מלא: <code>db</code>, <code>automation-server</code>, <code>automation-tests</code>, <code>postgres-exporter</code>, <code>prometheus</code>, ו-<code>grafana</code>. הסקריפט <code>scripts/run_compose_tests_with_allure.sh</code> מעלה את שירותי התמיכה, מריץ את כל הטסטים ב-container, מייצר דוח Allure מתוך <code>docker-artifacts/allure-results</code>, ופותח אותו.</p>
+
+      <pre><span class="c"># Compose stack + all tests + Allure report</span>
+./scripts/run_compose_tests_with_allure.sh
+
+<span class="c"># אותו דבר דרך npm</span>
+npm run test:compose:report
+
+<span class="c"># subset דרך Compose</span>
+./scripts/run_compose_tests_with_allure.sh tests/api tests/contract -q
+./scripts/run_compose_tests_with_allure.sh -m cart
+
+<span class="c"># dashboards אחרי ההרצה</span>
+http://localhost:3000/d/automation/automation-runs
+http://localhost:9090
+http://localhost:8000/docs</pre>
+
       <div class="callout tip">
         <span class="callout-icon">📊</span>
         <div><strong>Allure path note:</strong> בהרצת Docker משתמשים ב-path יחסי (<code>docker-artifacts/allure-report</code>) עבור <code>npx allure open</code>. כך נמנע מצב שבו Allure 3 מפרש absolute path כ-pattern יחסי ומכפיל את נתיב הפרויקט.</div>
@@ -1670,8 +1882,8 @@ npx allure open docker-artifacts/allure-report</pre>
       <h3>Decorators שבשימוש</h3>
       <div class="tbl-wrap"><table>
         <tr><th>Decorator</th><th>תפקיד</th><th>ערכים לדוגמה</th></tr>
-        <tr><td><code>@allure.feature</code></td><td>קיבוץ טסטים לפי feature</td><td>Accessibility, Sanity, Search, Cart, Registration, API Tests, Contract Tests</td></tr>
-        <tr><td><code>@allure.story</code></td><td>story בתוך feature</td><td>Sanity accessibility checks, Critical UI availability, Search with price filter, addItemsToCart</td></tr>
+        <tr><td><code>@allure.feature</code></td><td>קיבוץ טסטים לפי feature</td><td>Accessibility, Sanity, Navigation, Search, Cart, Registration, API Tests, Contract Tests</td></tr>
+        <tr><td><code>@allure.story</code></td><td>story בתוך feature</td><td>Sanity accessibility checks, Critical UI availability, Header search navigation, Empty cart state, Search with price filter, addItemsToCart</td></tr>
         <tr><td><code>@allure.title</code></td><td>שם קריא לאדם</td><td>"Search returns 200 and non-empty HTML"</td></tr>
         <tr><td><code>@allure.severity</code></td><td>רמת חשיבות</td><td>CRITICAL, NORMAL</td></tr>
         <tr><td><code>with allure.step(...)</code></td><td>שלבים פנימיים בטסט</td><td>מה שרואים בדוח כ-nested steps</td></tr>
@@ -1700,30 +1912,258 @@ npm run allure:open</pre>
 
     <!-- ── 17. COURSE ROADMAP ── -->
     <section id="course">
-      <h2><span class="icon">🎓</span> Course Roadmap</h2>
-      <p>התיקייה <code>course/</code> מכילה מסלול לימוד בן 19 מפגשים. המסלול מתקדם מבסיס QA ידני, דרך Playwright ו-pytest fixtures, ועד AI agents, CI, code review ו-capstone סופי.</p>
+      <h2><span class="icon">🎓</span> קורס פיתוח אוטומציה עם AI — Python + Playwright</h2>
 
-      <div class="tbl-wrap">
-        <table>
-          <tr><th>Session</th><th>Topic</th><th>Outcome</th></tr>
-          <tr><td>1</td><td>QA Foundations</td><td>Test cases, bug reports, risk analysis, exploratory testing.</td></tr>
-          <tr><td>2</td><td>QA in the AI Era</td><td>Prompting and reviewing AI-generated QA output.</td></tr>
-          <tr><td>3</td><td>Playwright Basics</td><td>First browser tests, assertions, fixtures, trace viewer.</td></tr>
-          <tr><td>4</td><td>Playwright Locators</td><td>Role, label, text, test-id, filtering, and locator anti-patterns.</td></tr>
-          <tr><td>5</td><td>pytest Fixtures</td><td>Scoped setup, teardown, parametrized fixtures, autouse rules.</td></tr>
-          <tr><td>6</td><td>POM + UI + API</td><td>Page objects, fluent API, and API setup.</td></tr>
-          <tr><td>7</td><td>Test Data Strategy</td><td>Static data, factories, unique data, API-created state, secrets.</td></tr>
-          <tr><td>8</td><td>Mini Project</td><td>One complete feature slice before advanced topics.</td></tr>
-          <tr><td>9</td><td>Debugging Playwright</td><td>Selector, timing, data, environment, and product-failure diagnosis.</td></tr>
-          <tr><td>10-17</td><td>AI, MCP, CI, Reporting, CLI</td><td>AI tools, agents, CI analysis, Allure, learning plan, Playwright CLI.</td></tr>
-          <tr><td>18</td><td>Automation Code Review</td><td>Review tests for flake risk, layering, assertions, fixtures, and reports.</td></tr>
-          <tr><td>19</td><td>Capstone</td><td>Final production framework delivery in <code>pages/</code>, <code>services/</code>, <code>flows/</code>, and <code>tests/</code>.</td></tr>
-        </table>
+      <!-- JOIN CTA -->
+      <div style="
+        background: linear-gradient(135deg, #1a2e1a 0%, #0f1f2e 100%);
+        border: 1px solid #25d366;
+        border-radius: 14px;
+        padding: 1.5rem 2rem;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      ">
+        <div style="font-size: 2.5rem; flex-shrink:0">📲</div>
+        <div style="flex:1; min-width: 200px">
+          <div style="font-size: 1.15rem; font-weight: 700; color: #25d366; margin-bottom: 0.3rem">
+            להצטרף לקורס — חינם!
+          </div>
+          <div style="color: var(--muted); font-size: 0.9rem; margin-bottom: 0.75rem">
+            מלאו את הסקר והצטרפו לקבוצת הלימוד בוואטסאפ 👇
+          </div>
+          <a href="https://chat.whatsapp.com/Bwjb01CGfxqIE04lkz2us0?mode=gi_t"
+             target="_blank"
+             rel="noopener noreferrer"
+             style="
+               display: inline-flex;
+               align-items: center;
+               gap: 0.5rem;
+               background: #25d366;
+               color: #fff;
+               font-weight: 700;
+               font-size: 0.95rem;
+               padding: 0.55rem 1.3rem;
+               border-radius: 8px;
+               text-decoration: none;
+               transition: opacity 0.15s;
+             "
+             onmouseover="this.style.opacity='0.85'"
+             onmouseout="this.style.opacity='1'"
+          >
+            💬 הצטרפו לקבוצת הלימוד
+          </a>
+        </div>
+        <div style="
+          background: rgba(37,211,102,0.08);
+          border: 1px solid rgba(37,211,102,0.25);
+          border-radius: 10px;
+          padding: 0.75rem 1.2rem;
+          font-size: 0.82rem;
+          color: var(--muted);
+          min-width: 160px;
+          text-align: center;
+        ">
+          <div style="font-size: 1.4rem">🎓</div>
+          <div style="margin-top: 0.2rem"><strong style="color:var(--text)">חינמי לחלוטין</strong></div>
+          <div>בתמורה לשיתוף ידע</div>
+        </div>
       </div>
 
-      <div class="callout info">
+      <div class="callout info" style="margin-bottom:1.5rem">
+        <span class="callout-icon">🚀</span>
+        <div>
+          <strong>קורס חינמי | 6–8 שבועות | 29 מפגשים</strong><br>
+          <span style="color:var(--muted)">המטרה: לעבור מ-QA ידני → Automation Engineer מתקדם שמשלב Playwright + Python + AI.<br>
+          AI לא מחליף QA — הוא <em>מכפיל כוח</em>. היתרון האמיתי הוא שילוב של Automation + Architecture + AI.</span>
+        </div>
+      </div>
+
+      <!-- TOPIC BLOCKS -->
+      <div class="stats-row" style="flex-wrap:wrap;gap:0.75rem;margin-bottom:2rem">
+        <div class="stat-box stat-blue"  style="min-width:140px"><div class="num" style="font-size:1.1rem">📋</div><div class="lbl">QA Foundations</div></div>
+        <div class="stat-box stat-cyan"  style="min-width:140px"><div class="num" style="font-size:1.1rem">🤖</div><div class="lbl">QA + AI</div></div>
+        <div class="stat-box stat-purple"style="min-width:140px"><div class="num" style="font-size:1.1rem">🔧</div><div class="lbl">AI Tools for QA</div></div>
+        <div class="stat-box stat-green" style="min-width:140px"><div class="num" style="font-size:1.1rem">🎭</div><div class="lbl">Playwright Framework</div></div>
+        <div class="stat-box stat-red"   style="min-width:140px"><div class="num" style="font-size:1.1rem">🧭</div><div class="lbl">MCP + AI Agents</div></div>
+        <div class="stat-box stat-yellow"style="min-width:140px"><div class="num" style="font-size:1.1rem">🔄</div><div class="lbl">CI/CD + DevOps</div></div>
+        <div class="stat-box stat-blue"  style="min-width:140px"><div class="num" style="font-size:1.1rem">🧠</div><div class="lbl">Advanced AI</div></div>
+        <div class="stat-box stat-green" style="min-width:140px"><div class="num" style="font-size:1.1rem">🏆</div><div class="lbl">Capstone</div></div>
+      </div>
+
+      <!-- BLOCK 1: QA FOUNDATIONS -->
+      <div class="doc-block">
+        <h3>📋 בלוק 1 — יסודות QA קלאסי (Sessions 1–3)</h3>
+        <p class="doc-note">כתיבת test cases ברמה מקצועית, הבנת תהליכי בדיקות מקצה לקצה (STLC), ובניית בסיס נכון לאוטומציה.</p>
+        <div class="tbl-wrap"><table>
+          <tr><th>#</th><th>נושא</th><th>תוצרי מפגש</th><th>סטטוס</th></tr>
+          <tr>
+            <td>1</td><td><strong>QA Foundations &amp; Manual Testing</strong></td>
+            <td>כתיבת test cases, bug reports, risk analysis, ו-exploratory charters ברמה מקצועית.</td>
+            <td><span class="badge badge-green">✅ מוכן</span></td>
+          </tr>
+          <tr>
+            <td>2</td><td><strong>QA in the AI Era</strong></td>
+            <td>שימוש ב-AI ליצירת test cases, edge cases, ו-requirements → tests. שמירה על discipline בוורפיקציה.</td>
+            <td><span class="badge badge-green">✅ מוכן</span></td>
+          </tr>
+          <tr>
+            <td>3</td><td><strong>Python Foundations</strong></td>
+            <td>Python syntax, data structures, functions, dataclasses, ו-helper patterns לאוטומציה.</td>
+            <td><span class="badge badge-green">✅ מוכן</span></td>
+          </tr>
+        </table></div>
+      </div>
+
+      <!-- BLOCK 2: PLAYWRIGHT FRAMEWORK -->
+      <div class="doc-block">
+        <h3>🎭 בלוק 2 — Playwright Framework ב-Python (Sessions 4–13)</h3>
+        <p class="doc-note">בניית framework מודרני עם Page Object Model, שילוב UI + API, exception handling, fixtures, ו-debugging.</p>
+        <div class="tbl-wrap"><table>
+          <tr><th>#</th><th>נושא</th><th>תוצרי מפגש</th><th>סטטוס</th></tr>
+          <tr><td>4</td><td><strong>Playwright Basics</strong></td><td>טסטי browser ראשונים, assertions, fixtures, ו-trace viewer.</td><td><span class="badge badge-green">✅ מוכן</span></td></tr>
+          <tr><td>5</td><td><strong>Playwright Locators</strong></td><td>role, label, text, test-id, filtering, ו-locator anti-patterns.</td><td><span class="badge badge-green">✅ מוכן</span></td></tr>
+          <tr><td>6</td><td><strong>Exception Handling</strong></td><td>Clear framework exceptions, specific catches, chained causes, safe retries.</td><td><span class="badge badge-green">✅ מוכן</span></td></tr>
+          <tr><td>7</td><td><strong>pytest Fixtures</strong></td><td>Scoped setup/teardown, parametrized fixtures, autouse, parallel-safe.</td><td><span class="badge badge-green">✅ מוכן</span></td></tr>
+          <tr><td>8</td><td><strong>Database Testing</strong></td><td>Schema constraints, isolated DB fixtures, migrations, API-to-DB assertions.</td><td><span class="badge badge-green">✅ מוכן</span></td></tr>
+          <tr><td>9</td><td><strong>API Testing</strong></td><td>Smoke, contract, negative, state, ו-integration coverage ללא דפדפן.</td><td><span class="badge badge-green">✅ מוכן</span></td></tr>
+          <tr><td>10</td><td><strong>POM + UI + API</strong></td><td>Page objects, fluent API, ו-API setup לבדיקות UI מהירות.</td><td><span class="badge badge-green">✅ מוכן</span></td></tr>
+          <tr><td>11</td><td><strong>Test Data Strategy</strong></td><td>Static, factories, API-created state, secrets — ניהול בטוח.</td><td><span class="badge badge-green">✅ מוכן</span></td></tr>
+          <tr><td>12</td><td><strong>Mini Project</strong></td><td>feature slice מלא אחד לפני הנושאים המתקדמים.</td><td><span class="badge badge-green">✅ מוכן</span></td></tr>
+          <tr><td>13</td><td><strong>Debugging Playwright</strong></td><td>Selector, timing, data, environment, ו-product failures — diagnosis מלא.</td><td><span class="badge badge-green">✅ מוכן</span></td></tr>
+        </table></div>
+      </div>
+
+      <!-- BLOCK 3: AI TOOLS -->
+      <div class="doc-block">
+        <h3>🔧 בלוק 3 — כלי AI ל-QA (Sessions 14 + 21)</h3>
+        <p class="doc-note">Test generators, locator generators, self-healing selectors, ו-CLI ליצירת בדיקות בלחיצת כפתור.</p>
+        <div class="tbl-wrap"><table>
+          <tr><th>#</th><th>נושא</th><th>תוצרי מפגש</th><th>סטטוס</th></tr>
+          <tr>
+            <td>14</td><td><strong>AI Tools for QA</strong></td>
+            <td>Self-healing selectors, heal report, CLI לניתוח failures, test generator עם AI.</td>
+            <td><span class="badge badge-green">✅ מוכן</span></td>
+          </tr>
+          <tr>
+            <td>21</td><td><strong>Playwright CLI</strong></td>
+            <td>codegen, screenshots, trace viewer — כלי learning ו-debugging.</td>
+            <td><span class="badge badge-green">✅ מוכן</span></td>
+          </tr>
+        </table></div>
+      </div>
+
+      <!-- BLOCK 4: MCP + AGENTS -->
+      <div class="doc-block">
+        <h3>🧭 בלוק 4 — MCP + AI Agents — הדור הבא (Sessions 15, 19–20, 24–27)</h3>
+        <p class="doc-note">יצירת בדיקות מתוך UI, הרצת תרחישים באמצעות agents, Claude Code, Claude Skills, Codex CLI ו-Connectors.</p>
+        <div class="tbl-wrap"><table>
+          <tr><th>#</th><th>נושא</th><th>תוצרי מפגש</th><th>סטטוס</th></tr>
+          <tr><td>15</td><td><strong>MCP &amp; AI Agents</strong></td><td>Agent-driven regression planning, Playwright MCP, codebase inspection.</td><td><span class="badge badge-green">✅ מוכן</span></td></tr>
+          <tr><td>19</td><td><strong>AI Agents for Testing</strong></td><td>Agents לתכנון טסטים, exploration, ו-QA review עם guardrails.</td><td><span class="badge badge-green">✅ מוכן</span></td></tr>
+          <tr><td>20</td><td><strong>Agentic Automation Testing</strong></td><td>Supervised agent workflows לחקירת failures ו-CI analysis.</td><td><span class="badge badge-green">✅ מוכן</span></td></tr>
+          <tr><td>24</td><td><strong>Claude Code Integration</strong></td><td>Slash commands, Playwright MCP, interactive QA workflows ב-Claude Code.</td><td><span class="badge badge-green">✅ מוכן</span></td></tr>
+          <tr><td>25</td><td><strong>Claude Skills &amp; Plugins</strong></td><td>Skills, plugins, MCP servers, slash commands, permissions, fallback design.</td><td><span class="badge badge-green">✅ מוכן</span></td></tr>
+          <tr><td>26</td><td><strong>Codex CLI</strong></td><td>Scoped codebase edits, test generation, failure fixing, verification gates.</td><td><span class="badge badge-green">✅ מוכן</span></td></tr>
+          <tr><td>27</td><td><strong>Claude Connectors</strong></td><td>GitHub, docs, chat, email, calendar — connectors לQA workflows בגבולות read/write.</td><td><span class="badge badge-green">✅ מוכן</span></td></tr>
+        </table></div>
+      </div>
+
+      <!-- BLOCK 5: CI/CD + DEVOPS -->
+      <div class="doc-block">
+        <h3>🔄 בלוק 5 — CI/CD ו-DevOps (Sessions 16–17, 29)</h3>
+        <p class="doc-note">שילוב עם GitHub Actions, הרצות אוטומטיות בכל PR, דוחות Allure ותחקור תקלות.</p>
+        <div class="tbl-wrap"><table>
+          <tr><th>#</th><th>נושא</th><th>תוצרי מפגש</th><th>סטטוס</th></tr>
+          <tr><td>16</td><td><strong>CI/CD &amp; Failure Analysis</strong></td><td>Flaky test detection, CI failure analysis עם tooling חוזר.</td><td><span class="badge badge-green">✅ מוכן</span></td></tr>
+          <tr><td>17</td><td><strong>Allure 3 + GitHub Pages</strong></td><td>דוחות קריאים עם trend history דרך CI — GitHub Pages.</td><td><span class="badge badge-green">✅ מוכן</span></td></tr>
+          <tr><td>29</td><td><strong>Docker Compose + Grafana</strong></td><td>הרצת אוטומציה ב-Docker Compose, Prometheus scraping, ו-Grafana dashboards.</td><td><span class="badge badge-green">✅ מוכן</span></td></tr>
+        </table></div>
+      </div>
+
+      <!-- BLOCK 6: ADVANCED AI -->
+      <div class="doc-block">
+        <h3>🧠 בלוק 6 — Advanced AI (Sessions 16, 18, 19–20, 28)</h3>
+        <p class="doc-note">זיהוי flaky tests, תיקון אוטומטי, ניתוח failures עם AI, Ollama local models, ותוכנית לימוד אישית.</p>
+        <div class="tbl-wrap"><table>
+          <tr><th>#</th><th>נושא</th><th>תוצרי מפגש</th><th>סטטוס</th></tr>
+          <tr><td>16</td><td><strong>CI/CD &amp; AI Failure Analysis</strong></td><td>זיהוי flaky tests, ניתוח failures עם AI, repeatable tooling.</td><td><span class="badge badge-green">✅ מוכן</span></td></tr>
+          <tr><td>18</td><td><strong>Automation Learning Plan</strong></td><td>הפיכת עבודת הקורס לתוכנית לימוד מובנית ו-portfolio מקצועי.</td><td><span class="badge badge-green">✅ מוכן</span></td></tr>
+          <tr><td>19</td><td><strong>AI Agents for Testing</strong></td><td>Agent-guided exploration, test generation, QA review עם guardrails.</td><td><span class="badge badge-green">✅ מוכן</span></td></tr>
+          <tr><td>20</td><td><strong>Agentic Automation</strong></td><td>Supervised agents לחקירת failures — תיקון אוטומטי מבוקר.</td><td><span class="badge badge-green">✅ מוכן</span></td></tr>
+          <tr><td>28</td><td><strong>Ollama Local AI</strong></td><td>Local models לסיכומים, test ideas, failure classification, privacy checks.</td><td><span class="badge badge-green">✅ מוכן</span></td></tr>
+        </table></div>
+      </div>
+
+      <!-- BLOCK 7: CAPSTONE -->
+      <div class="doc-block">
+        <h3>🏆 בלוק 7 — Capstone + Code Review (Sessions 22–23)</h3>
+        <p class="doc-note">Framework מלא ברמת Production: Playwright + Python + AI, UI + API + CI/CD + Agents.</p>
+        <div class="tbl-wrap"><table>
+          <tr><th>#</th><th>נושא</th><th>תוצרי מפגש</th><th>סטטוס</th></tr>
+          <tr>
+            <td>22</td><td><strong>Automation Code Review</strong></td>
+            <td>Review לטסטים: flake risk, layering, assertions, fixtures, reports — כמו code review אמיתי.</td>
+            <td><span class="badge badge-green">✅ מוכן</span></td>
+          </tr>
+          <tr>
+            <td>23</td><td><strong>Capstone Framework</strong></td>
+            <td>מסירת framework ברמת production ב-<code>pages/</code>, <code>services/</code>, <code>flows/</code>, <code>tests/</code> — הפרויקט הזה.</td>
+            <td><span class="badge badge-green">✅ מוכן</span></td>
+          </tr>
+        </table></div>
+      </div>
+
+      <!-- SUPPORT FILES -->
+      <div class="callout info" style="margin-top:1.5rem">
         <span class="callout-icon">📚</span>
-        <div><strong>Support files:</strong> בנוסף למפגשים קיימים <code>course/RUBRICS.md</code>, <code>course/BEFORE_AFTER_EXAMPLES.md</code>, <code>course/INSTRUCTOR_NOTES.md</code> ו-<code>course/PROJECT_CHECKLIST.md</code>.</div>
+        <div>
+          <strong>קבצי תמיכה:</strong> כל מפגש כולל <code>lecture.md</code> + <code>EXERCISES.md</code> + קוד הדגמה.<br>
+          בנוסף: <code>course/RUBRICS.md</code>, <code>BEFORE_AFTER_EXAMPLES.md</code>, <code>INSTRUCTOR_NOTES.md</code>, <code>PROJECT_CHECKLIST.md</code>.<br>
+          Framework examples: <code>course/framework/</code> — agents, analysis, data factory, pages, reporting, tools.
+        </div>
+      </div>
+
+      <div class="callout warn" style="margin-top:1rem">
+        <span class="callout-icon">💡</span>
+        <div>
+          <strong>Takeaway מרכזי:</strong> AI לא מחליף QA — הוא מכפיל כוח. היתרון האמיתי הוא שילוב של <strong>Automation + Architecture + AI</strong>.
+        </div>
+      </div>
+
+      <!-- BOTTOM JOIN CTA -->
+      <div style="
+        margin-top: 2rem;
+        text-align: center;
+        padding: 2rem;
+        background: linear-gradient(135deg, #12182e 0%, #1a1d27 100%);
+        border: 1px solid rgba(37,211,102,0.3);
+        border-radius: 14px;
+      ">
+        <div style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.4rem">
+          מוכנים להתחיל? 🚀
+        </div>
+        <div style="color: var(--muted); font-size: 0.9rem; margin-bottom: 1rem">
+          מלאו את הסקר והצטרפו לקבוצת הלימוד בוואטסאפ
+        </div>
+        <a href="https://chat.whatsapp.com/Bwjb01CGfxqIE04lkz2us0?mode=gi_t"
+           target="_blank"
+           rel="noopener noreferrer"
+           style="
+             display: inline-flex;
+             align-items: center;
+             gap: 0.5rem;
+             background: #25d366;
+             color: #fff;
+             font-weight: 700;
+             font-size: 1rem;
+             padding: 0.7rem 1.8rem;
+             border-radius: 10px;
+             text-decoration: none;
+           "
+        >💬 הצטרפו לקבוצת הלימוד</a>
       </div>
     </section>
 

@@ -1,0 +1,1 @@
+{"id":"022e3d751b1e53e74bd111a0fcb6df30","fullName":"tests.unit.test_security_unit#test_cart_service_is_empty_returns_false_when_html_has_product_rows","name":"test_cart_service_is_empty_returns_false_when_html_has_product_rows","status":"passed","testResultsByEnv":{"default":"73abc8e42881aa2c6dcdec5c15d8af55"}}

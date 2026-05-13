@@ -1,0 +1,1 @@
+{"id":"890ba523c7f0be84589c5dbb725c5cd3","fullName":"tests.api.test_pentest.TestInfoDisclosurePentest#test_server_header_does_not_expose_version","name":"Server header does not expose software version string","status":"passed","testResultsByEnv":{"default":"4836a9bd8a6912cd6a3646d58cc891db"}}
