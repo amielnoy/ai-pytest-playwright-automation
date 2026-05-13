@@ -1,1 +1,1 @@
-{"id":"588728384e0a445932156813a5091d24","fullName":"tests.unit.test_fastapi_app#test_health_returns_ok","name":"test_health_returns_ok","status":"passed","testResultsByEnv":{"default":"2e5932a1488d0091b6c1804b58d11a06"}}
+{"id":"588728384e0a445932156813a5091d24","fullName":"tests.unit.test_fastapi_app#test_health_returns_ok","name":"test_health_returns_ok","status":"passed","testResultsByEnv":{"default":"46353483299fb5e881f4c46553a2fd05"}}

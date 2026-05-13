@@ -1,1 +1,1 @@
-{"id":"dedd41e0ee2e50ebe11ad7d1adacaa58","fullName":"tests.unit.test_page_objects#test_product_card_reads_fields_and_adds_to_cart","name":"test_product_card_reads_fields_and_adds_to_cart","status":"passed","testResultsByEnv":{"default":"166e882d7929fc59aa5b06b498e65462"}}
+{"id":"dedd41e0ee2e50ebe11ad7d1adacaa58","fullName":"tests.unit.test_page_objects#test_product_card_reads_fields_and_adds_to_cart","name":"test_product_card_reads_fields_and_adds_to_cart","status":"passed","testResultsByEnv":{"default":"23a219a7b8180a52c1a37e7a285ca15a"}}

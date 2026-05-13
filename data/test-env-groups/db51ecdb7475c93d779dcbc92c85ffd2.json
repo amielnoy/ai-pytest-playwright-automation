@@ -1,1 +1,1 @@
-{"id":"db51ecdb7475c93d779dcbc92c85ffd2","fullName":"tests.api.test_api.TestCartApi#test_cart_add_returns_ok_and_sets_session","name":"POST to cart/add returns OK and issues an OCSESSID cookie","status":"passed","testResultsByEnv":{"default":"92e05054a6b904c49d934e4a29330b47"}}
+{"id":"db51ecdb7475c93d779dcbc92c85ffd2","fullName":"tests.api.test_api.TestCartApi#test_cart_add_returns_ok_and_sets_session","name":"POST to cart/add returns OK and issues an OCSESSID cookie","status":"passed","testResultsByEnv":{"default":"9fafdf732b1fa55f7ec4f83fcdbcebed"}}

@@ -1,1 +1,1 @@
-{"id":"ca1248b625e4181a40a71ad08f532288","fullName":"tests.api.test_pentest.TestInfoDisclosurePentest#test_phpinfo_page_not_accessible","name":"phpinfo.php is not accessible on the server","status":"passed","testResultsByEnv":{"default":"5990f255c24966bce5576d3ef89d78d8"}}
+{"id":"ca1248b625e4181a40a71ad08f532288","fullName":"tests.api.test_pentest.TestInfoDisclosurePentest#test_phpinfo_page_not_accessible","name":"phpinfo.php is not accessible on the server","status":"passed","testResultsByEnv":{"default":"d3e96f448dc3d6aa4b6ab9f84b76e567"}}
