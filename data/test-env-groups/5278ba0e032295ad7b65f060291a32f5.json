@@ -1,1 +1,0 @@
-{"id":"5278ba0e032295ad7b65f060291a32f5","fullName":"tests.api.test_security_api.TestCartSecurity#test_cart_add_with_xss_product_id","name":"Cart add with XSS product_id is handled safely","status":"passed","testResultsByEnv":{"default":"f3ab37e8409e2ee2b3b58a7b3369d828"}}

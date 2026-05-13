@@ -1,1 +1,0 @@
-{"id":"ab964245496dac5ebaf88d7629249f5f","fullName":"tests.api.test_pentest.TestAccessControlPentest#test_checkout_page_is_not_accessible_with_empty_cart","name":"Checkout page bypasses to cart when no items — payment not reachable","status":"passed","testResultsByEnv":{"default":"f6865789dd110292c94b78da14ee8724"}}

@@ -1,1 +1,0 @@
-{"id":"86dca6fa038de9e8fe35beaeedfcd829","fullName":"tests.api.test_pentest.TestAuthenticationPentest#test_login_endpoint_operates_over_https","name":"Login endpoint operates over HTTPS — credentials not sent in plaintext","status":"passed","testResultsByEnv":{"default":"6104a1cbfc842b2bab08aafb13bb10b1"}}

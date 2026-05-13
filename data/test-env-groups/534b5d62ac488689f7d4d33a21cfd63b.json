@@ -1,1 +1,0 @@
-{"id":"534b5d62ac488689f7d4d33a21cfd63b","fullName":"tests.web-ui.test_navigation_and_empty_states.TestNavigationAndEmptyStates#test_empty_cart_page_shows_empty_state","name":"Empty cart page exposes empty state without item rows","status":"passed","testResultsByEnv":{"default":"4170bfcd17ed6d1e8fc14f09429bf814"}}

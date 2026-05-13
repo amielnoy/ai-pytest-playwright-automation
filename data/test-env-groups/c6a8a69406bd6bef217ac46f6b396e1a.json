@@ -1,1 +1,0 @@
-{"id":"c6a8a69406bd6bef217ac46f6b396e1a","fullName":"tests.api.test_api.TestCartApi#test_sessions_are_isolated","name":"Two concurrent sessions have independent carts","status":"passed","testResultsByEnv":{"default":"a05179c6e68d5585faf86fe2fe3ebe8d"}}
