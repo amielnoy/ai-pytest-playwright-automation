@@ -160,3 +160,8 @@ def pytest_runtest_makereport(item: Any, call: pytest.CallInfo[Any]) -> Generato
                 )
             except Exception:
                 pass
+
+    if rep.when == "teardown":
+        # Attach trace + video here, after all fixture teardowns have run and written
+        # their files, but while the allure test lifecycle is still open.
+        _attach_pw_artifacts(item)
