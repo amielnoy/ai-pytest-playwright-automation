@@ -123,18 +123,20 @@ KEPT=$(ls -1d "${ARCHIVE_DIR}"/run_* 2>/dev/null | wc -l | tr -d ' ')
 ok "Merged ${KEPT} run(s)"
 
 # ── 6. Write run summary as an Allure entry (appears inside the report) ───────
-step "Writing run summary entry into merged results..."
+step "Writing run summary entry + environment links into merged results..."
 VENV_PYTHON="${PROJECT_ROOT}/.venv/bin/python"
 [[ -x "${VENV_PYTHON}" ]] || VENV_PYTHON="python3"
-"${VENV_PYTHON}" - "${ALLURE_RESULTS}" "${MERGED}" "${RUN_LABEL}" << 'PYEOF'
+ALLURE_PORT="${ALLURE_PORT:-4040}"
+"${VENV_PYTHON}" - "${ALLURE_RESULTS}" "${MERGED}" "${RUN_LABEL}" "${ALLURE_PORT}" << 'PYEOF'
 import sys, json, uuid, time
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
-results_dir = Path(sys.argv[1])
-merged_dir  = Path(sys.argv[2])
-run_label   = sys.argv[3]
+results_dir  = Path(sys.argv[1])
+merged_dir   = Path(sys.argv[2])
+run_label    = sys.argv[3]
+allure_port  = sys.argv[4]
 
 counts: Counter = Counter()
 for f in results_dir.glob("*-result.json"):
@@ -157,15 +159,36 @@ now_ms = int(time.time() * 1000)
 entry_uuid = str(uuid.uuid4())
 ts = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
 
+# ── environment.properties → shown in Allure report "Environment" section ──
+env_lines = [
+    f"Allure_Report=http://localhost:{allure_port}",
+    f"Architecture_Docs=http://localhost:{allure_port}/architecture.html",
+    f"Grafana_Dashboard=http://localhost:3000/d/automation/automation-runs",
+    f"Prometheus=http://localhost:9090",
+    f"Run_Label={run_label}",
+    f"Total_Tests={total}",
+    f"Passed={counts.get('passed', 0)}",
+    f"Failed={counts.get('failed', 0)}",
+    f"Skipped={counts.get('skipped', 0)}",
+    f"Broken={counts.get('broken', 0)}",
+]
+(merged_dir / "environment.properties").write_text("\n".join(env_lines), encoding="utf-8")
+
+# ── Text attachment ────────────────────────────────────────────────────────────
 lines = [f"Test Run Summary — {ts}", f"Run: {run_label}", ""]
 for s in ("passed", "failed", "broken", "skipped", "flaky"):
     n = counts.get(s, 0)
     if n:
         lines.append(f"{ICONS.get(s, '?')}  {s.upper():<8}  {n}")
-lines.append(f"\nTotal: {total}")
+lines += [f"\nTotal: {total}", "",
+          f"Allure Report  → http://localhost:{allure_port}",
+          f"Architecture   → http://localhost:{allure_port}/architecture.html",
+          f"Grafana        → http://localhost:3000/d/automation/automation-runs",
+          f"Prometheus     → http://localhost:9090"]
 txt_src = f"{entry_uuid}-txt-attachment.txt"
 (merged_dir / txt_src).write_text("\n".join(lines), encoding="utf-8")
 
+# ── Steps + links ─────────────────────────────────────────────────────────────
 steps = [
     {"name": f"{ICONS.get(s,'?')} {s.capitalize()}: {counts[s]}",
      "status": STEP_STATUS.get(s, "passed"),
@@ -174,10 +197,18 @@ steps = [
     if counts.get(s, 0)
 ]
 
+links = [
+    {"name": "Allure Report",      "url": f"http://localhost:{allure_port}",                              "type": "link"},
+    {"name": "Architecture Docs",  "url": f"http://localhost:{allure_port}/architecture.html",            "type": "link"},
+    {"name": "Grafana Dashboard",  "url": "http://localhost:3000/d/automation/automation-runs",           "type": "link"},
+    {"name": "Prometheus",         "url": "http://localhost:9090",                                        "type": "link"},
+]
+
 result = {
     "name": f"Test Run Summary [{run_label}]",
     "status": overall(counts),
     "steps": steps,
+    "links": links,
     "attachments": [{"name": "Run Summary", "source": txt_src, "type": "text/plain"}],
     "start": now_ms, "stop": now_ms + 1,
     "uuid": entry_uuid,
@@ -195,7 +226,8 @@ result = {
 (merged_dir / f"{entry_uuid}-result.json").write_text(
     json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8"
 )
-print(f"  ✔ Summary entry written ({overall(counts).upper()} — {total} tests)")
+print(f"  ✔ environment.properties written  (Environment section in report)")
+print(f"  ✔ Summary entry + links written   ({overall(counts).upper()} — {total} tests)")
 PYEOF
 
 # ── 7. Generate Allure report ─────────────────────────────────────────────────
@@ -258,8 +290,8 @@ fi
 
 KEPT_RUNS=$(ls -1d "${ARCHIVE_DIR}"/run_* 2>/dev/null | wc -l | tr -d ' ')
 echo ""
-echo -e "  ${CYAN}Allure report:${RESET}    ${ALLURE_REPORT}"
-echo -e "  ${CYAN}Architecture:${RESET}     ${ALLURE_REPORT}/architecture.html"
+echo -e "  ${CYAN}Allure report:${RESET}    http://localhost:${ALLURE_PORT}"
+echo -e "  ${CYAN}Architecture:${RESET}     http://localhost:${ALLURE_PORT}/architecture.html"
 echo -e "  ${CYAN}History depth:${RESET}    ${KEPT_RUNS} run(s) in archive (max ${MAX_RUNS})"
 echo -e "  ${CYAN}Grafana:${RESET}          http://localhost:3000"
 echo -e "  ${CYAN}Prometheus:${RESET}       http://localhost:9090"
@@ -279,7 +311,7 @@ if [[ "${OPEN_ALLURE:-true}" == "false" ]]; then
 else
   step "Opening Allure report in browser..."
   # Use relative path — Allure 3 CLI prepends CWD to absolute paths (bug)
-  npx allure open "${ALLURE_REPORT_REL}"
+  npx allure open --port "${ALLURE_PORT}" "${ALLURE_REPORT_REL}"
 fi
 
 exit "${TEST_EXIT}"

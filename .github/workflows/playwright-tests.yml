@@ -75,6 +75,63 @@ jobs:
         env:
           CI: "true"
 
+      - name: Post test status to job summary
+        if: always()
+        run: |
+          PAGES_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}"
+          ARCH_URL="${PAGES_URL}/architecture.html"
+          REPO_URL="https://github.com/${{ github.repository }}"
+          RUN_URL="${REPO_URL}/actions/runs/${{ github.run_id }}"
+          COMMIT_SHORT=$(echo "${{ github.sha }}" | cut -c1-7)
+          BRANCH="${{ github.ref_name }}"
+          RUN_NUM="${{ github.run_number }}"
+
+          PASSED=0; FAILED=0; BROKEN=0; SKIPPED=0
+          if [ -d allure-results ]; then
+            for f in allure-results/*-result.json; do
+              [ -f "$f" ] || continue
+              status=$(python3 -c "import json; print(json.load(open('$f')).get('status',''))" 2>/dev/null)
+              case "$status" in
+                passed)  PASSED=$((PASSED+1))  ;;
+                failed)  FAILED=$((FAILED+1))  ;;
+                broken)  BROKEN=$((BROKEN+1))  ;;
+                skipped) SKIPPED=$((SKIPPED+1)) ;;
+              esac
+            done
+          fi
+          TOTAL=$((PASSED+FAILED+BROKEN+SKIPPED))
+
+          if [ "$FAILED" -gt 0 ] || [ "$BROKEN" -gt 0 ]; then
+            BADGE="🔴 FAILED"
+          else
+            BADGE="🟢 PASSED"
+          fi
+
+          {
+            echo "## 🧪 Test Run \#${RUN_NUM} — ${BADGE}"
+            echo ""
+            echo "| Metric | Value |"
+            echo "|--------|-------|"
+            echo "| ✅ Passed  | ${PASSED} |"
+            echo "| ❌ Failed  | ${FAILED} |"
+            echo "| ⚠️  Broken  | ${BROKEN} |"
+            echo "| ⏭️  Skipped | ${SKIPPED} |"
+            echo "| 📊 Total   | ${TOTAL} |"
+            echo ""
+            echo "## 🔗 Links"
+            echo ""
+            echo "| Resource | Link |"
+            echo "|----------|------|"
+            echo "| 📈 Allure Report | [Open report](${PAGES_URL}) |"
+            echo "| 🏗️ Architecture | [architecture.html](${ARCH_URL}) |"
+            echo "| 🌿 Branch | \`${BRANCH}\` |"
+            echo "| 🔖 Commit | [\`${COMMIT_SHORT}\`](${REPO_URL}/commit/${{ github.sha }}) |"
+            echo "| 🔄 Run | [#${RUN_NUM}](${RUN_URL}) |"
+            echo ""
+            echo "> [!NOTE]"
+            echo "> Allure report publishes after the **report** job — refresh in ~30s if not live yet."
+          } >> "$GITHUB_STEP_SUMMARY"
+
       - name: Upload raw Allure results
         uses: actions/upload-artifact@v4
         if: always()
