@@ -1,1 +1,1 @@
-{"id":"9c3b95d598f1c55f8088cff498702505","fullName":"tests.unit.test_fastapi_app#test_mock_cart_add_returns_404_for_unknown_product","name":"test_mock_cart_add_returns_404_for_unknown_product","status":"passed","testResultsByEnv":{"default":"82469f3d575c2ebfd7049432af163894"}}
+{"id":"9c3b95d598f1c55f8088cff498702505","fullName":"tests.unit.test_fastapi_app#test_mock_cart_add_returns_404_for_unknown_product","name":"test_mock_cart_add_returns_404_for_unknown_product","status":"passed","testResultsByEnv":{"default":"478315316592ebb31f5572afa90f8dd4"}}

@@ -1,1 +1,1 @@
-{"id":"edb98d9a97cd2ebf4ac6c7ba1b5bd401","fullName":"tests.unit.test_logger#test_build_daily_file_handler_rotates_every_24_hours","name":"test_build_daily_file_handler_rotates_every_24_hours","status":"passed","testResultsByEnv":{"default":"1bf005825ccb029d2d821aba20be8c04"}}
+{"id":"edb98d9a97cd2ebf4ac6c7ba1b5bd401","fullName":"tests.unit.test_logger#test_build_daily_file_handler_rotates_every_24_hours","name":"test_build_daily_file_handler_rotates_every_24_hours","status":"passed","testResultsByEnv":{"default":"c86f8430abb493a5e93945af7172ff95"}}
