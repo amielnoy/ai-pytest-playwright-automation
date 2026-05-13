@@ -1,1 +1,1 @@
-{"id":"8587bd1575550e0671c90463190eed54","fullName":"tests.api.test_pentest.TestAccessControlPentest#test_wishlist_requires_authentication","name":"Wishlist page redirects to login without authentication","status":"passed","testResultsByEnv":{"default":"073b5997d7fb64b214c66af34ddfb0fb"}}
+{"id":"8587bd1575550e0671c90463190eed54","fullName":"tests.api.test_pentest.TestAccessControlPentest#test_wishlist_requires_authentication","name":"Wishlist page redirects to login without authentication","status":"passed","testResultsByEnv":{"default":"3c9d7723b1634ae62ae5427637fbaa75"}}

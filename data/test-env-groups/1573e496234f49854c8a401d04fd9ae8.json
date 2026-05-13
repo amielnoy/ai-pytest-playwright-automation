@@ -1,1 +1,1 @@
-{"id":"1573e496234f49854c8a401d04fd9ae8","fullName":"tests.contract.test_contracts.TestSearchContract#test_search_response_has_names_and_prices","name":"Search results contain product names and prices","status":"passed","testResultsByEnv":{"default":"a8171aa2816ad245d0ef3b44d34174ec"}}
+{"id":"1573e496234f49854c8a401d04fd9ae8","fullName":"tests.contract.test_contracts.TestSearchContract#test_search_response_has_names_and_prices","name":"Search results contain product names and prices","status":"passed","testResultsByEnv":{"default":"558c0951a7ebee9962fd97881d661085"}}
