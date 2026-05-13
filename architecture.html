@@ -1637,6 +1637,7 @@
         <div class="ci-step"><div class="dot dot-purple"></div><div class="step-body"><div class="step-name">Cache Playwright browsers</div><div class="step-desc">cache key: hash של requirements.txt</div></div></div>
         <div class="ci-step"><div class="dot dot-purple"></div><div class="step-body"><div class="step-name">Install Playwright + Chromium</div><div class="step-desc">רק אם cache miss</div></div></div>
         <div class="ci-step"><div class="dot dot-green"></div><div class="step-body"><div class="step-name">Run tests</div><div class="step-desc">pytest tests/ -n auto --dist loadscope (CI=true ← headless)</div></div></div>
+        <div class="ci-step"><div class="dot dot-blue"></div><div class="step-body"><div class="step-name">Post test status to job summary</div><div class="step-desc">סיכום מיידי ב-GITHUB_STEP_SUMMARY: טבלת passed/failed/broken/skipped, badge 🟢/🔴, links לדוח Allure, architecture.html, branch, commit ו-run — if: always()</div></div></div>
         <div class="ci-step"><div class="dot dot-cyan"></div><div class="step-body"><div class="step-name">Upload Allure results</div><div class="step-desc">artifact: allure-results (7 ימי retention), if: always()</div></div></div>
       </div>
 
@@ -1846,22 +1847,46 @@ npx allure generate docker-artifacts/allure-results -o docker-artifacts/allure-r
 npx allure open docker-artifacts/allure-report</pre>
 
       <h3>Docker Compose + monitoring</h3>
-      <p><code>docker-compose.automation.yml</code> מפעיל stack מלא: <code>db</code>, <code>automation-server</code>, <code>automation-tests</code>, <code>postgres-exporter</code>, <code>prometheus</code>, ו-<code>grafana</code>. הסקריפט <code>scripts/run_compose_tests_with_allure.sh</code> מעלה את שירותי התמיכה, מריץ את כל הטסטים ב-container, מייצר דוח Allure מתוך <code>docker-artifacts/allure-results</code>, ופותח אותו.</p>
+      <p><code>docker-compose.automation.yml</code> מפעיל stack מלא: <code>db</code>, <code>automation-server</code>, <code>automation-tests</code>, <code>postgres-exporter</code>, <code>prometheus</code>, ו-<code>grafana</code>. שני סקריפטים זמינים — <code>run_compose_tests_with_allure.sh</code> (תומך ב-pytest args) ו-<code>compose_test_report.sh</code> (ברירת מחדל לכל הסוויטה). שניהם מיישמים את אותו pipeline מלא כולל rolling archive, link injection, ו-architecture.html embedding.</p>
 
-      <pre><span class="c"># Compose stack + all tests + Allure report</span>
+      <div class="tbl-wrap"><table>
+        <tr><th>שלב</th><th>תיאור</th></tr>
+        <tr><td>① Start services</td><td>db, automation-server, postgres-exporter, prometheus, grafana</td></tr>
+        <tr><td>② Run tests</td><td>pytest בתוך container עם <code>--override-ini</code> כדי לבטל alluredir מ-pytest.ini</td></tr>
+        <tr><td>③ Archive run</td><td><code>allure-results-archive/run_YYYYMMDD_HHMMSS/</code> — שמירת כל result JSON לפירוט מלא בלשונית Retries</td></tr>
+        <tr><td>④ Merge runs</td><td>מיזוג last 5 runs ל-<code>allure-results-merged/</code> לפני generation</td></tr>
+        <tr><td>⑤ Write summary + env</td><td>כתיבת <code>environment.properties</code> ו-Allure entry עם steps ו-links לשירותים</td></tr>
+        <tr><td>⑥ Inject links</td><td>הוספת links ל-Allure Report, Architecture, Grafana, Prometheus לכל <code>*-result.json</code></td></tr>
+        <tr><td>⑦ Generate report</td><td><code>npx allure generate</code> — Allure 3 קורא <code>allure-history/</code> מ-CWD אוטומטית לגרפי trend</td></tr>
+        <tr><td>⑧ Copy architecture.html</td><td>architecture.html מוטמע ב-allure-report/ (כמו CI)</td></tr>
+        <tr><td>⑨ Open report</td><td><code>npx allure open --port 4040</code> — <code>OPEN_ALLURE=false</code> לדלג</td></tr>
+      </table></div>
+
+      <pre><span class="c"># Compose stack + all tests + Allure report (full pipeline)</span>
 ./scripts/run_compose_tests_with_allure.sh
+./scripts/compose_test_report.sh
 
-<span class="c"># אותו דבר דרך npm</span>
-npm run test:compose:report
+<span class="c"># דרך npm</span>
+npm run test:docker          <span class="c"># compose_test_report.sh</span>
+npm run test:docker:ci       <span class="c"># OPEN_ALLURE=false</span>
+npm run test:docker:down     <span class="c"># COMPOSE_DOWN=true OPEN_ALLURE=false</span>
+npm run test:compose:report  <span class="c"># run_compose_tests_with_allure.sh</span>
 
-<span class="c"># subset דרך Compose</span>
+<span class="c"># subset tests (רק run_compose_tests_with_allure.sh תומך args)</span>
 ./scripts/run_compose_tests_with_allure.sh tests/api tests/contract -q
 ./scripts/run_compose_tests_with_allure.sh -m cart
 
 <span class="c"># dashboards אחרי ההרצה</span>
-http://localhost:3000/d/automation/automation-runs
-http://localhost:9090
-http://localhost:8000/docs</pre>
+http://localhost:4040                               <span class="c"># Allure report</span>
+http://localhost:4040/architecture.html             <span class="c"># Architecture docs</span>
+http://localhost:3000/d/automation/automation-runs  <span class="c"># Grafana</span>
+http://localhost:9090                               <span class="c"># Prometheus</span>
+http://localhost:8000/docs                          <span class="c"># FastAPI</span></pre>
+
+      <div class="callout tip">
+        <span class="callout-icon">🔗</span>
+        <div><strong>Links בכל טסט:</strong> אחרי ה-merge, הסקריפט מזריק links לכל <code>*-result.json</code> — Allure Report, Architecture, Grafana, Prometheus. הלינקים מופיעים כ-badges לחיצים בכל דף פירוט טסט ב-Overview page.</div>
+      </div>
 
       <div class="callout tip">
         <span class="callout-icon">📊</span>
@@ -1870,7 +1895,7 @@ http://localhost:8000/docs</pre>
 
       <div class="callout info">
         <span class="callout-icon">🔒</span>
-        <div><strong>.dockerignore:</strong> מוגדר כדי לא לכלול <code>allure-results/</code>, <code>allure-report/</code>, <code>docker-artifacts/</code>, <code>data/secrets.json</code>, ו-caches.</div>
+        <div><strong>.dockerignore:</strong> מוגדר כדי לא לכלול <code>allure-results/</code>, <code>allure-report/</code>, <code>docker-artifacts/</code>, <code>data/secrets.json</code>, ו-caches. <code>allure-results-archive/</code> ו-<code>allure-history/</code> נשמרים בין ריצות ב-gitignore.</div>
       </div>
     </section>
 
@@ -1907,6 +1932,11 @@ npm run allure:open</pre>
       <div class="callout tip">
         <span class="callout-icon">🖼️</span>
         <div><strong>Failure artifacts אוטומטיים:</strong> בכל כישלון מצורף ל-Allure <strong>screenshot</strong> (PNG) מה-hook <code>pytest_runtest_makereport</code>. וידאו (.webm) ו-trace Playwright (.zip) מוקלטים כברירת מחדל ומצורפים לאחר <code>ctx.close()</code>, כדי לוודא שהווידאו הסתיים ונשמר כקובץ תקין. ניתן לכבות הקלטה מלאה עם <code>PW_RECORD_ARTIFACTS=false</code>.</div>
+      </div>
+
+      <div class="callout tip">
+        <span class="callout-icon">🔗</span>
+        <div><strong>Server links בכל טסט (Docker Compose):</strong> בהרצת Compose, הסקריפט מזריק links לכל <code>*-result.json</code> לפני <code>allure generate</code>: Allure Report, Architecture, Grafana Dashboard, Prometheus. הלינקים מופיעים כ-badges לחיצים בכל דף טסט ב-Allure. ה-Overview page מציג גם את <code>environment.properties</code> עם כל ה-URLs וסיכום הריצה.</div>
       </div>
     </section>
 
