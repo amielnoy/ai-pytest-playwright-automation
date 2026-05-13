@@ -1,1 +1,1 @@
-{"id":"c7a8ffb752fffbc6b95ff85826c84ab0","fullName":"tests.web-ui.test_sanity.TestSanity#test_product_detail_opens_from_search","name":"Search result opens a product detail page","status":"passed","testResultsByEnv":{"default":"1fb4d08bc367710069b1cebeca178a1f"}}
+{"id":"c7a8ffb752fffbc6b95ff85826c84ab0","fullName":"tests.web-ui.test_sanity.TestSanity#test_product_detail_opens_from_search","name":"Search result opens a product detail page","status":"passed","testResultsByEnv":{"default":"3ef6a9b4a32e06edb81d9f0a99d7ff77"}}

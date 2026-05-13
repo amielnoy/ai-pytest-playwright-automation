@@ -522,6 +522,7 @@
       <a href="#services">שכבת ה-API</a>
       <a href="#server">FastAPI Server</a>
       <a href="#fixtures">Fixtures</a>
+      <a href="#logging">Logger</a>
       <a href="#data">נתוני בדיקה</a>
     </div>
     <div class="nav-section">
@@ -579,12 +580,17 @@
         <div class="card">
           <div class="card-icon">🧪</div>
           <div class="card-title">pytest + pytest-xdist</div>
-          <div class="card-desc">מנוע הרצה ראשי. תמיכה ב-parallel execution עם <code>-n auto --dist loadscope</code>.</div>
+          <div class="card-desc">מנוע הרצה ראשי. תמיכה ב-parallel execution עם <code>-n auto --dist loadgroup</code>, כאשר UI tests מקובצים ל-worker אחד.</div>
         </div>
         <div class="card">
           <div class="card-icon">📊</div>
           <div class="card-title">Allure 3</div>
           <div class="card-desc">דוחות עשירים עם היסטוריה, screenshots בכישלון, ו-GitHub Pages deployment.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🧾</div>
+          <div class="card-title">Daily Logger</div>
+          <div class="card-desc">לוג מרכזי לכל טסט עם rotation כל 24 שעות וגיבויים יומיים.</div>
         </div>
         <div class="card">
           <div class="card-icon">⚡</div>
@@ -1029,7 +1035,32 @@
       </div>
     </section>
 
-    <!-- ── 7. DATA ── -->
+    <!-- ── 7. LOGGING ── -->
+    <section id="logging">
+      <h2><span class="icon">🧾</span> Logger</h2>
+      <p>הפרויקט משתמש ב-<code>utils/logger.py</code> כדי להגדיר logger מרכזי בשם <code>ness_automation</code>. הלוג נכתב כברירת מחדל ל-<code>logs/automation.log</code>, עם rotation יומי כל 24 שעות ושמירת גיבויים.</p>
+
+      <div class="tbl-wrap"><table>
+        <tr><th>רכיב</th><th>תפקיד</th></tr>
+        <tr><td><code>TimedRotatingFileHandler</code></td><td>rotation לפי זמן: <code>when="D"</code>, <code>interval=1</code> — קובץ חדש כל 24 שעות.</td></tr>
+        <tr><td><code>LOG_BACKUP_COUNT</code></td><td>מספר גיבויים לשמירה. ברירת מחדל: <code>14</code>.</td></tr>
+        <tr><td><code>LOG_DIR</code></td><td>תיקיית לוגים מותאמת. ברירת מחדל: <code>logs/</code>.</td></tr>
+        <tr><td><code>LOG_LEVEL</code></td><td>רמת לוג. ברירת מחדל: <code>INFO</code>.</td></tr>
+      </table></div>
+
+      <h3>Per-test logging</h3>
+      <p><code>conftest.py</code> מחבר hooks של pytest כדי לרשום כל טסט: התחלה, סטטוס, phase ו-duration. בהרצות xdist הלוגים מה-controller מסוננים כדי למנוע כפילויות, וה-worker שרץ בפועל כותב את שורת התוצאה.</p>
+
+      <pre>2026-05-13 16:54:07 | INFO | ness_automation.pytest | test started: tests/unit/test_logger.py::test_get_logger_returns_child_logger
+2026-05-13 16:54:07 | INFO | ness_automation.pytest | test passed: tests/unit/test_logger.py::test_get_logger_returns_child_logger phase=call duration=0.000s</pre>
+
+      <div class="callout info">
+        <span class="callout-icon">🧪</span>
+        <div><strong>Unit coverage:</strong> <code>tests/unit/test_logger.py</code> בודק שה-handler מסתובב כל 24 שעות, שהגדרת logger היא idempotent, וש-<code>get_logger()</code> מחזיר child logger עקבי.</div>
+      </div>
+    </section>
+
+    <!-- ── 8. DATA ── -->
     <section id="data">
       <h2><span class="icon">📦</span> נתוני בדיקה וקונפיגורציה</h2>
 
@@ -1672,7 +1703,7 @@
         <div class="ci-step"><div class="dot dot-yellow"></div><div class="step-body"><div class="step-name">Write secrets.json</div><div class="step-desc">מ-GitHub Secret TEST_SECRETS_JSON — אם קיים</div></div></div>
         <div class="ci-step"><div class="dot dot-purple"></div><div class="step-body"><div class="step-name">Cache Playwright browsers</div><div class="step-desc">cache key: hash של requirements.txt</div></div></div>
         <div class="ci-step"><div class="dot dot-purple"></div><div class="step-body"><div class="step-name">Install Playwright + Chromium</div><div class="step-desc">רק אם cache miss</div></div></div>
-        <div class="ci-step"><div class="dot dot-green"></div><div class="step-body"><div class="step-name">Run tests</div><div class="step-desc">pytest tests/ -n auto --dist loadscope (CI=true ← headless)</div></div></div>
+        <div class="ci-step"><div class="dot dot-green"></div><div class="step-body"><div class="step-name">Run tests</div><div class="step-desc">pytest tests/ -n auto --dist loadgroup (CI=true ← headless, web-ui grouped to one worker)</div></div></div>
         <div class="ci-step"><div class="dot dot-blue"></div><div class="step-body"><div class="step-name">Post test status to job summary</div><div class="step-desc">סיכום מיידי ב-GITHUB_STEP_SUMMARY: טבלת passed/failed/broken/skipped, badge 🟢/🔴, links לדוח Allure, architecture.html, branch, commit ו-run — if: always()</div></div></div>
         <div class="ci-step"><div class="dot dot-cyan"></div><div class="step-body"><div class="step-name">Upload Allure results</div><div class="step-desc">artifact: allure-results (7 ימי retention), if: always()</div></div></div>
       </div>
@@ -1887,7 +1918,7 @@ npx allure open docker-artifacts/allure-report</pre>
 
       <div class="tbl-wrap"><table>
         <tr><th>שלב</th><th>תיאור</th></tr>
-        <tr><td>① Start services</td><td>db, automation-server, postgres-exporter, prometheus, pushgateway, grafana</td></tr>
+        <tr><td>① Start services</td><td>db, automation-server, postgres-exporter, pushgateway, prometheus, grafana. הסקריפט מפעיל גם <code>docker compose restart prometheus grafana</code> כדי לטעון config/dashboard מעודכנים.</td></tr>
         <tr><td>② Run tests</td><td>pytest בתוך container עם <code>--override-ini</code> כדי לבטל alluredir מ-pytest.ini</td></tr>
         <tr><td>③ Archive run</td><td><code>allure-results-archive/run_YYYYMMDD_HHMMSS/</code> — שמירת כל result JSON לפירוט מלא בלשונית Retries</td></tr>
         <tr><td>④ Push metrics</td><td>דחיפת total/passed/failed/broken/skipped/pass_rate ל-Pushgateway עם label <code>run_label</code> — Grafana מציג כל run בנפרד</td></tr>
@@ -1918,6 +1949,7 @@ http://localhost:4040                               <span class="c"># Allure rep
 http://localhost:4040/architecture.html             <span class="c"># Architecture docs</span>
 http://localhost:3000/d/automation/automation-runs  <span class="c"># Grafana</span>
 http://localhost:9090                               <span class="c"># Prometheus</span>
+http://localhost:9091                               <span class="c"># Pushgateway</span>
 http://localhost:8000/docs                          <span class="c"># FastAPI</span></pre>
 
       <div class="callout tip">
@@ -1944,10 +1976,10 @@ http://localhost:8000/docs                          <span class="c"># FastAPI</s
       <h3>שורה 1 — 🏥 Service Health</h3>
       <div class="tbl-wrap"><table>
         <tr><th>Panel</th><th>מקור</th><th>צבע</th></tr>
-        <tr><td>PostgreSQL</td><td><code>pg_up</code></td><td>🟢 UP / 🔴 DOWN — background color</td></tr>
-        <tr><td>Automation Server</td><td><code>up{job="automation-server"}</code> — endpoint <code>/metrics</code></td><td>🟢 UP / 🔴 DOWN</td></tr>
-        <tr><td>Prometheus</td><td><code>up{job="prometheus"}</code></td><td>🟢 UP / 🔴 DOWN</td></tr>
-        <tr><td>Pushgateway</td><td><code>up{job="pushgateway"}</code></td><td>🟢 UP / 🔴 DOWN</td></tr>
+        <tr><td>PostgreSQL</td><td><code>max(pg_up) or vector(0)</code></td><td>🟢 UP / 🔴 DOWN — background color, בלי <code>No data</code></td></tr>
+        <tr><td>Automation Server</td><td><code>max(up{job="automation-server"}) or vector(0)</code> — endpoint <code>/metrics</code></td><td>🟢 UP / 🔴 DOWN</td></tr>
+        <tr><td>Prometheus</td><td><code>max(up{job="prometheus"}) or vector(0)</code></td><td>🟢 UP / 🔴 DOWN</td></tr>
+        <tr><td>Pushgateway</td><td><code>max(up{job="pushgateway"}) or vector(0)</code></td><td>🟢 UP / 🔴 DOWN</td></tr>
       </table></div>
 
       <h3>שורה 2 — 🗃️ Database</h3>
@@ -1988,7 +2020,7 @@ automation-server /metrics             →  prometheus scrapes Python process me
 
       <div class="callout tip">
         <span class="callout-icon">🔄</span>
-        <div><strong>Grafana auto-provisions:</strong> הדשבורד נטען אוטומטית מ-<code>monitoring/grafana/dashboards/automation-runs.json</code> בכל הפעלה. שינויים בקובץ ה-JSON נכנסים לתוקף לאחר <code>docker compose restart grafana</code>.</div>
+        <div><strong>Grafana auto-provisions:</strong> הדשבורד נטען אוטומטית מ-<code>monitoring/grafana/dashboards/automation-runs.json</code> בכל הפעלה. שינויים בקובץ ה-JSON או ב-<code>monitoring/prometheus.yml</code> נכנסים לתוקף לאחר <code>docker compose restart prometheus grafana</code>.</div>
       </div>
     </section>
 
