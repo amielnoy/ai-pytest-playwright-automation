@@ -73,7 +73,7 @@ fi
 # ── 3. Start support services ─────────────────────────────────────────────────
 step "Starting Docker Compose support containers..."
 docker compose -f "${COMPOSE_FILE}" up -d --build \
-  db automation-server postgres-exporter prometheus grafana
+  db automation-server postgres-exporter pushgateway prometheus grafana
 ok "Services started"
 
 # ── 4. Run tests ──────────────────────────────────────────────────────────────
@@ -112,6 +112,8 @@ if [[ ${TOTAL_RUNS} -gt ${MAX_RUNS} ]]; then
 fi
 
 # ── 5b. Push test metrics to Prometheus Pushgateway ──────────────────────────
+VENV_PYTHON="${PROJECT_ROOT}/.venv/bin/python"
+[[ -x "${VENV_PYTHON}" ]] || VENV_PYTHON="python3"
 step "Pushing test metrics to Pushgateway..."
 PUSHGATEWAY_HOST="${PUSHGATEWAY_HOST:-localhost:9091}"
 "${VENV_PYTHON}" - "${ALLURE_RESULTS_DIR}" "${RUN_LABEL}" "${PUSHGATEWAY_HOST}" << 'PYEOF'
@@ -176,8 +178,6 @@ ok "Merged ${KEPT} run(s)"
 
 # ── 7. Write run summary as an Allure entry (appears inside the report) ───────
 step "Writing run summary entry + environment links into merged results..."
-VENV_PYTHON="${PROJECT_ROOT}/.venv/bin/python"
-[[ -x "${VENV_PYTHON}" ]] || VENV_PYTHON="python3"
 ALLURE_PORT="${ALLURE_PORT:-4040}"
 "${VENV_PYTHON}" - "${ALLURE_RESULTS_DIR}" "${MERGED}" "${RUN_LABEL}" "${ALLURE_PORT}" << 'PYEOF'
 import sys, json, uuid, time

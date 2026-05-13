@@ -71,7 +71,7 @@ ok "Directories ready  (history: ./${HISTORY_DIR_REL}/)"
 # ── 2. Start support services ─────────────────────────────────────────────────
 step "Starting support services (db, automation-server, monitoring)..."
 docker compose -f "${COMPOSE_FILE}" up -d --build \
-  db automation-server postgres-exporter prometheus grafana
+  db automation-server postgres-exporter pushgateway prometheus grafana
 ok "Services started — Grafana: http://localhost:3000 | Prometheus: http://localhost:9090"
 
 # ── 3. Run tests ──────────────────────────────────────────────────────────────
