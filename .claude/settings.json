@@ -16,11 +16,19 @@
   "mcpServers": {
     "playwright": {
       "command": "npx",
-      "args": ["@playwright/mcp", "--headless"]
+      "args": [
+        "@playwright/mcp",
+        "--headless"
+      ]
     },
     "test-reporter": {
       "command": ".venv/bin/python",
-      "args": ["mcp_servers/test_reporter.py"]
+      "args": [
+        "mcp_servers/test_reporter.py"
+      ]
     }
+  },
+  "enabledPlugins": {
+    "context-mode@context-mode": true
   }
 }

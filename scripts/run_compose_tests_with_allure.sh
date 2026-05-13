@@ -4,36 +4,50 @@
 # Run tests via Docker Compose and produce a full Allure report that matches
 # the GitHub Actions pipeline output:
 #   • Rolling archive of previous runs → full step/attachment detail in retries
-#   • Allure history restored for trend charts
-#   • architecture.html embedded in the report (same as CI deploy)
+#   • Allure history in ./allure-history/ for trend charts (CI-identical pattern)
+#   • architecture.html embedded in the report (same as CI deploy step)
 #   • Coloured summary printed to the terminal
 #
-# Archive layout (persisted between runs, git-ignored):
+# History pattern (mirrors .github/workflows/playwright-tests.yml exactly):
+#   Allure 3 reads  ./allure-history/  from CWD before generating the report
+#   Allure 3 writes ./allure-history/  in-place during generation (updates trends)
+#   No copy in / copy out required — the directory persists naturally between runs.
+#
+# Archive layout (git-ignored, persists between runs):
 #   allure-results-archive/
-#     run_20260513_101500/   ← oldest kept run
+#     run_20260513_101500/   ← full result JSONs + attachments (oldest kept)
 #     run_20260513_180000/   ← most recent previous run
-#   allure-history/          ← history/ dir for trend charts
+#   allure-history/          ← managed by Allure 3 automatically
 #
 # Environment variables (all optional):
-#   COMPOSE_FILE   docker-compose file               default: docker-compose.automation.yml
-#   ARTIFACTS_DIR  host artifact root                default: docker-artifacts
-#   ARCHIVE_DIR    rolling archive root              default: allure-results-archive
-#   HISTORY_DIR    allure history/ for trends        default: allure-history
-#   MAX_RUNS       past runs to keep for detail      default: 5
-#   OPEN_ALLURE    open browser after report         default: true
-#   COMPOSE_DOWN   stop stack after tests            default: false
+#   COMPOSE_FILE   docker-compose file              default: docker-compose.automation.yml
+#   ARTIFACTS_DIR  host artifact root               default: docker-artifacts
+#   ARCHIVE_DIR    rolling archive root             default: allure-results-archive
+#   HISTORY_DIR    allure history dir (in CWD)      default: allure-history
+#   MAX_RUNS       past runs to keep for detail     default: 5
+#   OPEN_ALLURE    open browser after report        default: true
+#   COMPOSE_DOWN   stop stack after tests           default: false
 
 set -Eeuo pipefail
 
 # ── Paths ────────────────────────────────────────────────────────────────────
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 COMPOSE_FILE="${COMPOSE_FILE:-docker-compose.automation.yml}"
-ARTIFACTS_DIR="${PROJECT_ROOT}/${ARTIFACTS_DIR:-docker-artifacts}"
-ALLURE_RESULTS_DIR="${ARTIFACTS_DIR}/allure-results"
-ALLURE_REPORT_DIR="${ARTIFACTS_DIR}/allure-report"
-ARCHIVE_DIR="${PROJECT_ROOT}/${ARCHIVE_DIR:-allure-results-archive}"
-HISTORY_DIR="${PROJECT_ROOT}/${HISTORY_DIR:-allure-history}"
+
+# Keep these as RELATIVE paths from PROJECT_ROOT — Allure 3 CLI requires
+# relative paths; absolute paths cause the CWD to be prepended a second time.
+ARTIFACTS_DIR_REL="${ARTIFACTS_DIR:-docker-artifacts}"
+ALLURE_RESULTS_REL="${ARTIFACTS_DIR_REL}/allure-results"
+ALLURE_REPORT_REL="${ARTIFACTS_DIR_REL}/allure-report"
+ARCHIVE_DIR_REL="${ARCHIVE_DIR:-allure-results-archive}"
+HISTORY_DIR_REL="${HISTORY_DIR:-allure-history}"          # read/written by Allure 3 in CWD
 MAX_RUNS="${MAX_RUNS:-5}"
+
+# Absolute equivalents for shell operations (cp, mkdir, find, etc.)
+ALLURE_RESULTS_DIR="${PROJECT_ROOT}/${ALLURE_RESULTS_REL}"
+ALLURE_REPORT_DIR="${PROJECT_ROOT}/${ALLURE_REPORT_REL}"
+ARCHIVE_DIR="${PROJECT_ROOT}/${ARCHIVE_DIR_REL}"
+HISTORY_DIR="${PROJECT_ROOT}/${HISTORY_DIR_REL}"
 
 cd "${PROJECT_ROOT}" || exit 1
 
@@ -47,7 +61,8 @@ warn() { echo -e "${YELLOW}  ⚠ $*${RESET}"; }
 
 # ── 1. Prepare directories ────────────────────────────────────────────────────
 step "Preparing artifact directories..."
-mkdir -p "${ARTIFACTS_DIR}" "${ARCHIVE_DIR}" "${HISTORY_DIR}"
+mkdir -p "${ALLURE_RESULTS_DIR}" "${ARCHIVE_DIR}" "${HISTORY_DIR}"
+ok "Directories ready  (history: ./${HISTORY_DIR_REL}/)"
 
 # ── 2. Accept custom pytest args ─────────────────────────────────────────────
 pytest_args=("$@")
@@ -70,7 +85,8 @@ docker compose -f "${COMPOSE_FILE}" run --rm \
   pytest "${pytest_args[@]}" \
   --alluredir=/app/test-artifacts/allure-results \
   --clean-alluredir \
-  -n auto --dist loadscope
+  --override-ini="addopts=-v --strict-config --strict-markers -n auto --dist loadgroup" \
+  -n auto --dist loadgroup
 pytest_exit_code=$?
 set -e
 
@@ -80,14 +96,14 @@ else
   warn "Tests finished with exit code ${pytest_exit_code}"
 fi
 
-# ── 5. Archive the current run (pure results, before any merging) ─────────────
-step "Archiving current run → ${ARCHIVE_DIR}..."
+# ── 5. Archive current run (pure results before merging) ──────────────────────
+step "Archiving current run → ${ARCHIVE_DIR_REL}/..."
 RUN_LABEL="run_$(date +%Y%m%d_%H%M%S)"
 mkdir -p "${ARCHIVE_DIR}/${RUN_LABEL}"
 cp -r "${ALLURE_RESULTS_DIR}/." "${ARCHIVE_DIR}/${RUN_LABEL}/"
 ok "Archived as ${RUN_LABEL}"
 
-# Prune runs older than MAX_RUNS
+# Prune oldest runs beyond MAX_RUNS
 TOTAL_RUNS=$(ls -1d "${ARCHIVE_DIR}"/run_* 2>/dev/null | wc -l | tr -d ' ')
 if [[ ${TOTAL_RUNS} -gt ${MAX_RUNS} ]]; then
   TO_DELETE=$(( TOTAL_RUNS - MAX_RUNS ))
@@ -95,10 +111,10 @@ if [[ ${TOTAL_RUNS} -gt ${MAX_RUNS} ]]; then
   ok "Pruned ${TO_DELETE} old run(s) — keeping last ${MAX_RUNS}"
 fi
 
-# ── 6. Merge current + all kept previous runs ─────────────────────────────────
-# Allure groups files by testCaseId → shows as Retries with full step details.
-step "Merging last ${MAX_RUNS} run(s) for full historical detail..."
-MERGED="${ARTIFACTS_DIR}/allure-results-merged"
+# ── 6. Merge current + all kept runs (full detail for Retries tab) ─────────────
+step "Merging last ${MAX_RUNS} run(s) for full historical step/attachment detail..."
+MERGED_REL="${ARTIFACTS_DIR_REL}/allure-results-merged"
+MERGED="${PROJECT_ROOT}/${MERGED_REL}"
 rm -rf "${MERGED}"
 mkdir -p "${MERGED}"
 for run_dir in $(ls -1d "${ARCHIVE_DIR}"/run_* 2>/dev/null | sort); do
@@ -107,22 +123,92 @@ done
 KEPT=$(ls -1d "${ARCHIVE_DIR}"/run_* 2>/dev/null | wc -l | tr -d ' ')
 ok "Merged ${KEPT} run(s)"
 
-# ── 7. Restore allure history for trend charts ────────────────────────────────
-step "Restoring Allure history for trend charts..."
-HISTORY_DEST="${MERGED}/history"
-mkdir -p "${HISTORY_DEST}"
-if [[ -d "${HISTORY_DIR}" && "$(ls -A "${HISTORY_DIR}" 2>/dev/null)" ]]; then
-  cp -r "${HISTORY_DIR}/." "${HISTORY_DEST}/"
-  ok "History restored ($(ls "${HISTORY_DIR}" | wc -l | tr -d ' ') files)"
-else
-  ok "No previous history — first run in trend charts"
-fi
+# ── 7. Write run summary as an Allure entry (appears inside the report) ───────
+step "Writing run summary entry into merged results..."
+VENV_PYTHON="${PROJECT_ROOT}/.venv/bin/python"
+[[ -x "${VENV_PYTHON}" ]] || VENV_PYTHON="python3"
+"${VENV_PYTHON}" - "${ALLURE_RESULTS_DIR}" "${MERGED}" "${RUN_LABEL}" << 'PYEOF'
+import sys, json, uuid, time
+from collections import Counter
+from datetime import datetime, timezone
+from pathlib import Path
+
+results_dir = Path(sys.argv[1])
+merged_dir  = Path(sys.argv[2])
+run_label   = sys.argv[3]
+
+counts: Counter = Counter()
+for f in results_dir.glob("*-result.json"):
+    try:
+        counts[json.loads(f.read_text()).get("status", "unknown")] += 1
+    except Exception:
+        pass
+
+total = sum(counts.values())
+ICONS = {"passed": "✅", "failed": "❌", "broken": "⚠️ ", "skipped": "⏭️ ", "flaky": "🔁"}
+STEP_STATUS = {"passed": "passed", "skipped": "passed", "broken": "broken",
+               "failed": "failed", "flaky": "failed"}
+
+def overall(c):
+    if c.get("failed", 0) or c.get("flaky", 0): return "failed"
+    if c.get("broken", 0): return "broken"
+    return "passed"
+
+now_ms = int(time.time() * 1000)
+entry_uuid = str(uuid.uuid4())
+ts = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+
+# Plain-text summary attachment
+lines = [f"Test Run Summary — {ts}", f"Run: {run_label}", ""]
+for s in ("passed", "failed", "broken", "skipped", "flaky"):
+    n = counts.get(s, 0)
+    if n:
+        lines.append(f"{ICONS.get(s, '?')}  {s.upper():<8}  {n}")
+lines.append(f"\nTotal: {total}")
+txt_src = f"{entry_uuid}-txt-attachment.txt"
+(merged_dir / txt_src).write_text("\n".join(lines), encoding="utf-8")
+
+# Steps — one per non-zero status
+steps = [
+    {"name": f"{ICONS.get(s,'?')} {s.capitalize()}: {counts[s]}",
+     "status": STEP_STATUS.get(s, "passed"),
+     "start": now_ms, "stop": now_ms}
+    for s in ("passed", "failed", "broken", "skipped", "flaky")
+    if counts.get(s, 0)
+]
+
+result = {
+    "name": f"Test Run Summary [{run_label}]",
+    "status": overall(counts),
+    "steps": steps,
+    "attachments": [{"name": "Run Summary", "source": txt_src, "type": "text/plain"}],
+    "start": now_ms, "stop": now_ms + 1,
+    "uuid": entry_uuid,
+    "historyId": "compose-run-summary",
+    "testCaseId": "compose-run-summary",
+    "fullName": "scripts.run_compose#test_run_summary",
+    "labels": [
+        {"name": "feature",     "value": "Test Run Summary"},
+        {"name": "story",       "value": "Docker Compose Run"},
+        {"name": "severity",    "value": "normal"},
+        {"name": "suite",       "value": "summary"},
+        {"name": "parentSuite", "value": "scripts"},
+    ],
+}
+(merged_dir / f"{entry_uuid}-result.json").write_text(
+    json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8"
+)
+print(f"  ✔ Summary entry written ({overall(counts).upper()} — {total} tests)")
+PYEOF
 
 # ── 8. Generate Allure report ─────────────────────────────────────────────────
-step "Generating Allure report → ${ALLURE_REPORT_DIR}"
+# Allure 3 automatically reads ./allure-history/ from CWD for trend charts
+# and updates it in-place — no explicit restore/save needed (matches CI pattern).
+step "Generating Allure report → ${ALLURE_REPORT_REL}/"
 rm -rf "${ALLURE_REPORT_DIR}"
 set +e
-npx allure generate "${MERGED}" -o "${ALLURE_REPORT_DIR}"
+# Use RELATIVE paths — Allure 3 CLI prepends CWD to absolute paths (bug)
+npx allure generate "${MERGED_REL}" -o "${ALLURE_REPORT_REL}"
 allure_exit_code=$?
 set -e
 
@@ -134,24 +220,12 @@ if [[ ${allure_exit_code} -ne 0 ]]; then
 fi
 ok "Allure report generated"
 
-# ── 9. Embed architecture.html (mirrors the CI deploy step) ──────────────────
+# ── 8. Embed architecture.html (mirrors CI deploy step) ──────────────────────
 step "Embedding architecture.html into report..."
 cp "${PROJECT_ROOT}/architecture.html" "${ALLURE_REPORT_DIR}/architecture.html"
-ok "architecture.html → ${ALLURE_REPORT_DIR}/architecture.html"
+ok "architecture.html → ${ALLURE_REPORT_REL}/architecture.html"
 
-# ── 10. Persist allure history for the next run ───────────────────────────────
-step "Saving history for trend charts → ${HISTORY_DIR}"
-GENERATED_HISTORY="${ALLURE_REPORT_DIR}/history"
-if [[ -d "${GENERATED_HISTORY}" ]]; then
-  rm -rf "${HISTORY_DIR}"
-  mkdir -p "${HISTORY_DIR}"
-  cp -r "${GENERATED_HISTORY}/." "${HISTORY_DIR}/"
-  ok "History saved ($(ls "${HISTORY_DIR}" | wc -l | tr -d ' ') files)"
-else
-  warn "No history directory in generated report"
-fi
-
-# ── 11. Coloured summary ──────────────────────────────────────────────────────
+# ── 9. Coloured summary ───────────────────────────────────────────────────────
 echo ""
 echo -e "${BOLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}"
 echo -e "${BOLD}  TEST RUN SUMMARY${RESET}   $(date '+%Y-%m-%d %H:%M')   [${RUN_LABEL}]"
@@ -189,24 +263,25 @@ KEPT_RUNS=$(ls -1d "${ARCHIVE_DIR}"/run_* 2>/dev/null | wc -l | tr -d ' ')
 echo ""
 echo -e "  ${CYAN}Allure report:${RESET}    ${ALLURE_REPORT_DIR}"
 echo -e "  ${CYAN}Architecture:${RESET}     ${ALLURE_REPORT_DIR}/architecture.html"
-echo -e "  ${CYAN}History depth:${RESET}    ${KEPT_RUNS} run(s) kept (max ${MAX_RUNS})"
+echo -e "  ${CYAN}History depth:${RESET}    ${KEPT_RUNS} run(s) in archive (max ${MAX_RUNS})"
 echo -e "  ${CYAN}Grafana:${RESET}          http://localhost:3000/d/automation/automation-runs"
 echo -e "  ${CYAN}Prometheus:${RESET}       http://localhost:9090"
 echo -e "${BOLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}"
 echo ""
 
-# ── 12. Optionally stop Compose stack ─────────────────────────────────────────
+# ── 10. Optionally stop Compose stack ─────────────────────────────────────────
 if [[ "${COMPOSE_DOWN:-false}" == "true" ]]; then
   step "Stopping Compose stack (COMPOSE_DOWN=true)..."
   docker compose -f "${COMPOSE_FILE}" down
 fi
 
-# ── 13. Open report ───────────────────────────────────────────────────────────
+# ── 11. Open report ───────────────────────────────────────────────────────────
 if [[ "${OPEN_ALLURE:-true}" == "false" ]]; then
   ok "Report ready — skipping browser open (OPEN_ALLURE=false)"
 else
   step "Opening Allure report in browser..."
-  npx allure open "${ALLURE_REPORT_DIR}"
+  # Use relative path — Allure 3 CLI prepends CWD to absolute paths (bug)
+  npx allure open "${ALLURE_REPORT_REL}"
 fi
 
 exit "${pytest_exit_code}"
