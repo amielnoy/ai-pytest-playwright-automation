@@ -1,0 +1,1 @@
+{"id":"893fdbd23159b974e7ddf791b452b83a","fullName":"tests.contract.test_contracts.TestPublicEndpointContract#test_public_endpoint_map_returns_expected_marker","name":"Mapped public endpoints return OK and expected page markers","status":"passed","testResultsByEnv":{"default":"32eb05af662bc77843ff55b4579c7ac4"}}

@@ -1,0 +1,1 @@
+{"id":"b1e65c647af4f566262e36bed77b85ca","fullName":"tests.api.test_pentest.TestPentestFindings#test_open_redirect_via_currency_redirect_parameter_is_blocked","name":"FINDING: Open redirect via redirect parameter in currency endpoint is blocked","status":"skipped","testResultsByEnv":{"default":"ff543a8bed74f32bc07956afbee38158"}}

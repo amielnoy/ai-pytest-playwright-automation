@@ -1,0 +1,1 @@
+{"id":"fcd306d75abf80cfb4a1b276a3bddf6e","fullName":"tests.api.test_pentest.TestAccessControlPentest#test_account_edit_requires_authentication","name":"Account edit page redirects to login without authentication","status":"passed","testResultsByEnv":{"default":"afc7a67c6671f9558bca82c223754855"}}

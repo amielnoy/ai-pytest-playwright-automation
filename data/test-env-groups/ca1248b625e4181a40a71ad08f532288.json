@@ -1,0 +1,1 @@
+{"id":"ca1248b625e4181a40a71ad08f532288","fullName":"tests.api.test_pentest.TestInfoDisclosurePentest#test_phpinfo_page_not_accessible","name":"phpinfo.php is not accessible on the server","status":"passed","testResultsByEnv":{"default":"2bf9798dcdd517bff631633e0c3f4910"}}

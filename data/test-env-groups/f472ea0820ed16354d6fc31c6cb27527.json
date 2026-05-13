@@ -1,0 +1,1 @@
+{"id":"f472ea0820ed16354d6fc31c6cb27527","fullName":"tests.api.test_api_integrations.TestCartApiIntegration#test_cart_total_positive_after_adding_quantity_two","name":"Cart total is positive after adding quantity greater than one","status":"passed","testResultsByEnv":{"default":"ba434d24dc8382a9ff765a6a4cfe9532"}}

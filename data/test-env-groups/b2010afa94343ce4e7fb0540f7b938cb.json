@@ -1,0 +1,1 @@
+{"id":"b2010afa94343ce4e7fb0540f7b938cb","fullName":"tests.web-ui.test_search_under_price.TestSearchUnderPrice#test_search_items_under_price","name":"searchItemsByNameUnderPrice returns items at or below max_price","status":"passed","testResultsByEnv":{"default":"c3197e6ee34af1c4eb8e7c7d103082e4"}}

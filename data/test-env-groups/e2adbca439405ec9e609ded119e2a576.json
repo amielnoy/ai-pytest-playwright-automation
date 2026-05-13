@@ -1,0 +1,1 @@
+{"id":"e2adbca439405ec9e609ded119e2a576","fullName":"tests.api.test_pentest.TestPentestFindings#test_x_frame_options_header_present_to_prevent_clickjacking","name":"FINDING: X-Frame-Options header is present to prevent clickjacking","status":"skipped","testResultsByEnv":{"default":"6eb53a5eda7a095c1b052a8eeba7ee1d"}}

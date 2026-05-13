@@ -1,0 +1,1 @@
+{"id":"76ed15554926df8b9ff59819dee84228","fullName":"tests.api.test_pentest.TestInfoDisclosurePentest#test_git_directory_is_blocked","name":".git/ directory is blocked by the server","status":"passed","testResultsByEnv":{"default":"7ee9b6ea60ace675d27f29376520bac6"}}

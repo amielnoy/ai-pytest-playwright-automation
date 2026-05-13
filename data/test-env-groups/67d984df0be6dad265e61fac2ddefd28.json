@@ -1,0 +1,1 @@
+{"id":"67d984df0be6dad265e61fac2ddefd28","fullName":"tests.api.test_security_api.TestSessionSecurity#test_independent_sessions_receive_distinct_ocsessid","name":"Two independent sessions receive distinct OCSESSID values","status":"passed","testResultsByEnv":{"default":"614593b4a3cc8cda11f7374d16934b6d"}}

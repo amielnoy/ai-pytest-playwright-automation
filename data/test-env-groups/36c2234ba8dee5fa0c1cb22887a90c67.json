@@ -1,1 +1,1 @@
-{"id":"36c2234ba8dee5fa0c1cb22887a90c67","fullName":"tests.unit.test_fastapi_app#test_allure_summary_returns_404_when_summary_missing","name":"test_allure_summary_returns_404_when_summary_missing","status":"passed","testResultsByEnv":{"default":"7da3410fe4052aa97efa75208b3bf88e"}}
+{"id":"36c2234ba8dee5fa0c1cb22887a90c67","fullName":"tests.unit.test_fastapi_app#test_allure_summary_returns_404_when_summary_missing","name":"test_allure_summary_returns_404_when_summary_missing","status":"passed","testResultsByEnv":{"default":"43e9b6a75fe24c96793855b6f23c1dcb"}}

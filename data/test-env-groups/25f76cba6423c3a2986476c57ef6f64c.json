@@ -1,0 +1,1 @@
+{"id":"25f76cba6423c3a2986476c57ef6f64c","fullName":"tests.api.test_api_integrations.TestSearchApiIntegration#test_search_unknown_query_returns_no_product_cards","name":"Search returns OK with no product cards for an unknown query","status":"passed","testResultsByEnv":{"default":"eccb1041b2c2a9da850a8fc68c573927"}}

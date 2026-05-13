@@ -1,0 +1,1 @@
+{"id":"f8b988cb3ddb5976ba187838dd281744","fullName":"tests.api.test_api_integrations.TestCartApiIntegration#test_cart_keeps_multiple_products_in_same_session","name":"Cart keeps multiple products in the same API session","status":"passed","testResultsByEnv":{"default":"958bfe5f788cb424c4327b1dba2a2414"}}
