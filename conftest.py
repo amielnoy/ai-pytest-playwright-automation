@@ -15,9 +15,13 @@ _IN_CI = os.environ.get("CI", "").lower() in ("true", "1")
 _ARTIFACTS_SETTING = os.environ.get("PW_RECORD_ARTIFACTS", "true").lower()
 _RECORD_ARTIFACTS = _ARTIFACTS_SETTING in ("true", "1", "yes", "on")
 _WEB_UI_TEST_ROOT = "tests/web-ui"
+_IS_XDIST_CONTROLLER = False
 
 
 def pytest_configure(config: pytest.Config) -> None:
+    global _IS_XDIST_CONTROLLER
+    worker_count = getattr(config.option, "numprocesses", None)
+    _IS_XDIST_CONTROLLER = bool(worker_count) and not hasattr(config, "workerinput")
     configure_logging()
     LOGGER.info("pytest configured: %s", config.rootpath)
 
@@ -26,6 +30,28 @@ def pytest_collection_modifyitems(items: list[pytest.Item]) -> None:
     for item in items:
         if item.path.as_posix().endswith(".py") and _WEB_UI_TEST_ROOT in item.path.as_posix():
             item.add_marker(pytest.mark.xdist_group("web-ui"))
+
+
+def pytest_runtest_logstart(nodeid: str, location: tuple[str, int | None, str]) -> None:
+    del location
+    if _IS_XDIST_CONTROLLER:
+        return
+    LOGGER.info("test started: %s", nodeid)
+
+
+def pytest_runtest_logreport(report: pytest.TestReport) -> None:
+    if _IS_XDIST_CONTROLLER:
+        return
+    if report.when != "call" and report.outcome not in {"failed", "skipped"}:
+        return
+
+    LOGGER.info(
+        "test %s: %s phase=%s duration=%.3fs",
+        report.outcome,
+        report.nodeid,
+        report.when,
+        report.duration,
+    )
 
 
 def _node_failed(node) -> bool:

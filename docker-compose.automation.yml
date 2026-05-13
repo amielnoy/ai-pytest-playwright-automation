@@ -78,6 +78,7 @@ services:
     depends_on:
       - postgres-exporter
       - automation-server
+      - pushgateway
 
   grafana:
     image: grafana/grafana:11.1.4

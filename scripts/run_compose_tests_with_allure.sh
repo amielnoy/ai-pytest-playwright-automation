@@ -74,6 +74,7 @@ fi
 step "Starting Docker Compose support containers..."
 docker compose -f "${COMPOSE_FILE}" up -d --build \
   db automation-server postgres-exporter pushgateway prometheus grafana
+docker compose -f "${COMPOSE_FILE}" restart prometheus grafana
 ok "Services started"
 
 # ── 4. Run tests ──────────────────────────────────────────────────────────────

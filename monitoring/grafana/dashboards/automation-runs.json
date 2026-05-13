@@ -14,7 +14,7 @@
         "y": 0
       },
       "id": 100,
-      "title": "🏥 Service Health",
+      "title": "\ud83c\udfe5 Service Health",
       "type": "row"
     },
     {
@@ -85,7 +85,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "pg_up",
+          "expr": "max(pg_up) or vector(0)",
           "instant": true,
           "refId": "A"
         }
@@ -161,7 +161,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "up{job=\"automation-server\"}",
+          "expr": "max(up{job=\"automation-server\"}) or vector(0)",
           "instant": true,
           "refId": "A"
         }
@@ -237,7 +237,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "up{job=\"prometheus\"}",
+          "expr": "max(up{job=\"prometheus\"}) or vector(0)",
           "instant": true,
           "refId": "A"
         }
@@ -313,7 +313,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "up{job=\"pushgateway\"}",
+          "expr": "max(up{job=\"pushgateway\"}) or vector(0)",
           "instant": true,
           "refId": "A"
         }
@@ -330,7 +330,7 @@
         "y": 6
       },
       "id": 101,
-      "title": "🗃️ Database",
+      "title": "\ud83d\uddc3\ufe0f Database",
       "type": "row"
     },
     {
@@ -514,7 +514,7 @@
         "y": 12
       },
       "id": 102,
-      "title": "🧪 Test Run: $run_label",
+      "title": "\ud83e\uddea Test Run: $run_label",
       "type": "row"
     },
     {
@@ -630,7 +630,7 @@
           "refId": "A"
         }
       ],
-      "title": "✅ Passed",
+      "title": "\u2705 Passed",
       "type": "stat"
     },
     {
@@ -691,7 +691,7 @@
           "refId": "A"
         }
       ],
-      "title": "❌ Failed",
+      "title": "\u274c Failed",
       "type": "stat"
     },
     {
@@ -752,7 +752,7 @@
           "refId": "A"
         }
       ],
-      "title": "⚠️ Broken",
+      "title": "\u26a0\ufe0f Broken",
       "type": "stat"
     },
     {
@@ -810,7 +810,7 @@
           "refId": "A"
         }
       ],
-      "title": "⏭️ Skipped",
+      "title": "\u23ed\ufe0f Skipped",
       "type": "stat"
     },
     {
@@ -888,7 +888,7 @@
         "y": 19
       },
       "id": 103,
-      "title": "📋 All Runs History",
+      "title": "\ud83d\udccb All Runs History",
       "type": "row"
     },
     {
