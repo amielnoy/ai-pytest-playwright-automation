@@ -1,1 +1,1 @@
-{"id":"5485311fcae25ded5ea4a1b64d232e5a","fullName":"tests.contract.test_contracts.TestSearchContract#test_search_no_results_contract","name":"Search for non-existent product returns no product cards","status":"passed","testResultsByEnv":{"default":"51e91911a9a8b6deeea8b45c7175f97d"}}
+{"id":"5485311fcae25ded5ea4a1b64d232e5a","fullName":"tests.contract.test_contracts.TestSearchContract#test_search_no_results_contract","name":"Search for non-existent product returns no product cards","status":"passed","testResultsByEnv":{"default":"e89e95180903ef3ed095f9b9a39c2b3e"}}

@@ -1,1 +1,1 @@
-{"id":"8eea9a61fad6884bb226e343007f8229","fullName":"tests.api.test_pentest.TestInjectionPentest#test_backup_config_file_is_blocked","name":"Backup config file config.php.bak is blocked by the server","status":"passed","testResultsByEnv":{"default":"49318c7517677718b049dea8cbe9f337"}}
+{"id":"8eea9a61fad6884bb226e343007f8229","fullName":"tests.api.test_pentest.TestInjectionPentest#test_backup_config_file_is_blocked","name":"Backup config file config.php.bak is blocked by the server","status":"passed","testResultsByEnv":{"default":"c729e7d515a85b422f689e81100534f8"}}
