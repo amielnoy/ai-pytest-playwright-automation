@@ -31,13 +31,42 @@
       font-size: 15px;
     }
 
+    /* ── STUDY GROUP BANNER ── */
+    .study-banner {
+      background: linear-gradient(90deg, #1a1d27 0%, #12182e 50%, #1a1d27 100%);
+      border-bottom: 1px solid rgba(108,139,239,0.4);
+      padding: 0.65rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      font-size: 0.88rem;
+      direction: rtl;
+      position: sticky;
+      top: 0;
+      z-index: 101;
+    }
+    .study-banner .banner-text { color: var(--muted); }
+    .study-banner .banner-link {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: white;
+      text-decoration: none;
+      border-radius: 20px;
+      padding: 3px 14px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+    .study-banner .banner-link:hover { opacity: 0.85; }
+
     /* ── HEADER ── */
     header {
       background: linear-gradient(135deg, #1a1d27 0%, #12182e 100%);
       border-bottom: 1px solid var(--border);
       padding: 2.5rem 4rem;
       position: sticky;
-      top: 0;
+      top: 38px;
       z-index: 100;
       display: flex;
       align-items: center;
@@ -460,6 +489,12 @@
   </style>
 </head>
 <body>
+
+<!-- ══════════════════════════════════════════ STUDY GROUP BANNER ══ -->
+<div class="study-banner">
+  <span class="banner-text">🎓 רוצה ללמוד אוטומציה מהתחלה? הצטרף לקבוצת הלימוד של Ness Automation</span>
+  <a class="banner-link" href="https://chat.whatsapp.com/NessAutomation" target="_blank" rel="noopener">הצטרף עכשיו →</a>
+</div>
 
 <!-- ══════════════════════════════════════════ HEADER ══ -->
 <header>
