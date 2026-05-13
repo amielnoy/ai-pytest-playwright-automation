@@ -117,7 +117,7 @@ VENV_PYTHON="${PROJECT_ROOT}/.venv/bin/python"
 [[ -x "${VENV_PYTHON}" ]] || VENV_PYTHON="python3"
 step "Pushing test metrics to Pushgateway..."
 PUSHGATEWAY_HOST="${PUSHGATEWAY_HOST:-localhost:9091}"
-"${VENV_PYTHON}" - "${ALLURE_RESULTS_DIR}" "${RUN_LABEL}" "${PUSHGATEWAY_HOST}" << 'PYEOF'
+"${VENV_PYTHON}" - "${ALLURE_RESULTS_DIR}" "${RUN_LABEL}" "${PUSHGATEWAY_HOST}" "${ARCHIVE_DIR}" << 'PYEOF'
 import sys, json, urllib.request
 from collections import Counter
 from pathlib import Path
@@ -125,6 +125,7 @@ from pathlib import Path
 results_dir      = Path(sys.argv[1])
 run_label        = sys.argv[2]
 pushgateway_host = sys.argv[3]
+archive_dir      = Path(sys.argv[4])
 
 counts = Counter()
 for f in results_dir.glob("*-result.json"):
@@ -138,6 +139,31 @@ passed  = counts.get("passed", 0)
 failed  = counts.get("failed", 0)
 broken  = counts.get("broken", 0)
 skipped = counts.get("skipped", 0)
+
+def _result_identity(data):
+    return data.get("historyId") or data.get("testCaseId") or data.get("fullName") or data.get("name")
+
+def _flaky_count() -> int:
+    statuses_by_test = {}
+    run_dirs = sorted(archive_dir.glob("run_*"))
+    for run_dir in run_dirs:
+        for result_file in run_dir.glob("*-result.json"):
+            try:
+                data = json.loads(result_file.read_text())
+            except Exception:
+                continue
+            test_id = _result_identity(data)
+            status = data.get("status")
+            if not test_id or not status:
+                continue
+            statuses_by_test.setdefault(test_id, set()).add(status)
+    return sum(
+        1
+        for statuses in statuses_by_test.values()
+        if "passed" in statuses and ({"failed", "broken"} & statuses)
+    )
+
+flaky  = _flaky_count()
 rate    = passed / total if total else 0.0
 
 body = f"""\
@@ -151,6 +177,8 @@ automation_tests_failed {failed}
 automation_tests_broken {broken}
 # TYPE automation_tests_skipped gauge
 automation_tests_skipped {skipped}
+# TYPE automation_tests_flaky gauge
+automation_tests_flaky {flaky}
 # TYPE automation_tests_pass_rate gauge
 automation_tests_pass_rate {rate:.6f}
 """.encode()
@@ -160,7 +188,7 @@ try:
     req = urllib.request.Request(url, data=body, method="PUT",
                                   headers={"Content-Type": "text/plain"})
     urllib.request.urlopen(req, timeout=5)
-    print(f"  ✔ Pushed to Pushgateway  (run={run_label}, total={total}, pass={rate:.0%})")
+    print(f"  ✔ Pushed to Pushgateway  (run={run_label}, total={total}, flaky={flaky}, pass={rate:.0%})")
 except Exception as e:
     print(f"  ⚠ Pushgateway unavailable — skipping push: {e}")
 PYEOF

@@ -1921,7 +1921,7 @@ npx allure open docker-artifacts/allure-report</pre>
         <tr><td>① Start services</td><td>db, automation-server, postgres-exporter, pushgateway, prometheus, grafana. הסקריפט מפעיל גם <code>docker compose restart prometheus grafana</code> כדי לטעון config/dashboard מעודכנים.</td></tr>
         <tr><td>② Run tests</td><td>pytest בתוך container עם <code>--override-ini</code> כדי לבטל alluredir מ-pytest.ini</td></tr>
         <tr><td>③ Archive run</td><td><code>allure-results-archive/run_YYYYMMDD_HHMMSS/</code> — שמירת כל result JSON לפירוט מלא בלשונית Retries</td></tr>
-        <tr><td>④ Push metrics</td><td>דחיפת total/passed/failed/broken/skipped/pass_rate ל-Pushgateway עם label <code>run_label</code> — Grafana מציג כל run בנפרד</td></tr>
+        <tr><td>④ Push metrics</td><td>דחיפת total/passed/failed/broken/skipped/flaky/pass_rate ל-Pushgateway עם label <code>run_label</code> — Grafana מציג כל run בנפרד</td></tr>
         <tr><td>⑤ Merge runs</td><td>מיזוג last 5 runs ל-<code>allure-results-merged/</code> לפני generation</td></tr>
         <tr><td>⑥ Write summary + env</td><td>כתיבת <code>environment.properties</code> ו-Allure entry עם steps ו-links לשירותים</td></tr>
         <tr><td>⑦ Inject links</td><td>הוספת links ל-Allure Report, Architecture, Grafana, Prometheus לכל <code>*-result.json</code></td></tr>
@@ -1990,7 +1990,21 @@ http://localhost:8000/docs                          <span class="c"># FastAPI</s
         <tr><td>DB Connections Over Time</td><td>timeseries: active + total connections</td></tr>
       </table></div>
 
-      <h3>שורה 3 — 🧪 Test Run: $run_label</h3>
+      <h3>שורה 3 — 🖥️ Server Monitoring</h3>
+      <div class="tbl-wrap"><table>
+        <tr><th>Panel</th><th>PromQL</th><th>מה רואים</th></tr>
+        <tr><td>Automation Server Memory</td><td><code>max(process_resident_memory_bytes{job="automation-server"}) or vector(0)</code></td><td>צריכת זיכרון של FastAPI automation server.</td></tr>
+        <tr><td>Automation Server CPU / sec</td><td><code>max(rate(process_cpu_seconds_total{job="automation-server"}[5m])) or vector(0)</code></td><td>CPU seconds per second בחלון 5 דקות.</td></tr>
+        <tr><td>Prometheus Memory</td><td><code>max(process_resident_memory_bytes{job="prometheus"}) or vector(0)</code></td><td>צריכת זיכרון של Prometheus.</td></tr>
+        <tr><td>Pushgateway Memory</td><td><code>max(process_resident_memory_bytes{job="pushgateway"}) or vector(0)</code></td><td>צריכת זיכרון של Pushgateway.</td></tr>
+        <tr><td>Postgres Exporter Memory/CPU</td><td><code>process_resident_memory_bytes{job="postgres"}</code>, <code>rate(process_cpu_seconds_total{job="postgres"}[5m])</code></td><td>משאבים של exporter שמנטר את PostgreSQL.</td></tr>
+        <tr><td>Prometheus CPU / sec</td><td><code>max(rate(process_cpu_seconds_total{job="prometheus"}[5m])) or vector(0)</code></td><td>CPU של Prometheus.</td></tr>
+        <tr><td>Pushgateway CPU / sec</td><td><code>max(rate(process_cpu_seconds_total{job="pushgateway"}[5m])) or vector(0)</code></td><td>CPU של Pushgateway.</td></tr>
+        <tr><td>Scrape Health By Job</td><td><code>max by (job) (up{job=~"postgres|automation-server|prometheus|pushgateway"})</code></td><td>מצב scrape לכל service מנוטר.</td></tr>
+        <tr><td>Scrape Duration By Job</td><td><code>max by (job) (scrape_duration_seconds{job=~"postgres|automation-server|prometheus|pushgateway"})</code></td><td>זמן scrape לפי service לזיהוי איטיות במוניטורינג.</td></tr>
+      </table></div>
+
+      <h3>שורה 4 — 🧪 Test Run: $run_label</h3>
       <p>Grafana variable dropdown בחירת run — <code>label_values(automation_tests_total, run_label)</code>. כל ריצה נדחפת ל-Pushgateway עם label <code>run_label=run_YYYYMMDD_HHMMSS</code>.</p>
       <div class="tbl-wrap"><table>
         <tr><th>Panel</th><th>PromQL</th><th>צבע</th></tr>
@@ -1999,21 +2013,23 @@ http://localhost:8000/docs                          <span class="c"># FastAPI</s
         <tr><td>❌ Failed</td><td><code>automation_tests_failed{run_label="$run_label"}</code></td><td>🟢 0 / 🔴 ≥1</td></tr>
         <tr><td>⚠️ Broken</td><td><code>automation_tests_broken{run_label="$run_label"}</code></td><td>🟢 0 / 🟠 ≥1</td></tr>
         <tr><td>⏭️ Skipped</td><td><code>automation_tests_skipped{run_label="$run_label"}</code></td><td>צהוב</td></tr>
+        <tr><td>🔁 Flaky</td><td><code>automation_tests_flaky{run_label="$run_label"}</code></td><td>🟢 0 / 🔴 ≥1</td></tr>
         <tr><td>Pass Rate % (gauge)</td><td><code>automation_tests_pass_rate{run_label="$run_label"} * 100</code></td><td>🔴 &lt;70% / 🟠 &lt;95% / 🟢 ≥95%</td></tr>
       </table></div>
 
-      <h3>שורה 4 — 📋 All Runs History</h3>
-      <p>טבלה המציגה את כל הריצות. כל שורה = run אחד עם total, passed, failed, broken, skipped, pass_rate. pass_rate מוצג עם color-background (אדום/כתום/ירוק). ממוין לפי run_label (chronological).</p>
+      <h3>שורה 5 — 📋 All Runs History</h3>
+      <p>טבלה המציגה את כל הריצות. כל שורה = run אחד עם total, passed, failed, broken, skipped, flaky, pass_rate. pass_rate מוצג עם color-background (אדום/כתום/ירוק). ממוין לפי run_label (chronological).</p>
       <pre>PromQL per column:  last_over_time(automation_tests_total[30d])
                     last_over_time(automation_tests_passed[30d])
                     last_over_time(automation_tests_failed[30d])
                     last_over_time(automation_tests_broken[30d])
                     last_over_time(automation_tests_skipped[30d])
+                    last_over_time(automation_tests_flaky[30d])
                     last_over_time(automation_tests_pass_rate[30d])
 Grafana Transform:  joinByField(run_label) → columns per metric</pre>
 
       <h3>Pushgateway — איך עובד</h3>
-      <p>בסיום כל ריצת Docker Compose, הסקריפט דוחף metrics ל-Pushgateway ב-<code>PUT /metrics/job/automation-tests/run_label/{run_label}</code>. Prometheus מגרד את Pushgateway כל 10 שניות. כל ריצה נשמרת כסדרת זמן נפרדת כל עוד הנתונים ב-Pushgateway.</p>
+      <p>בסיום כל ריצת Docker Compose, הסקריפט דוחף metrics ל-Pushgateway ב-<code>PUT /metrics/job/automation-tests/run_label/{run_label}</code>. Prometheus מגרד את Pushgateway כל 10 שניות. כל ריצה נשמרת כסדרת זמן נפרדת כל עוד הנתונים ב-Pushgateway. מדד <code>automation_tests_flaky</code> מחושב לפי <code>historyId</code>/<code>testCaseId</code> שמופיע גם כ-passed וגם כ-failed/broken בתוך הארכיון האחרון של הריצות.</p>
       <pre><span class="c"># שירותים שמתווספים לstack</span>
 pushgateway:  prom/pushgateway:v1.9.0  →  http://localhost:9091
 automation-server /metrics             →  prometheus scrapes Python process metrics</pre>
