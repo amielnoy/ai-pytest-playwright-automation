@@ -1,15 +1,31 @@
 import os
+from collections.abc import Generator
+from typing import Any, cast
 
 import allure
 import pytest
 from playwright.sync_api import Browser, BrowserContext, Page, sync_playwright
 
 from utils.data_loader import get_config
+from utils.logger import configure_logging, get_logger
 
 CONFIG = get_config()
+LOGGER = get_logger("pytest")
 _IN_CI = os.environ.get("CI", "").lower() in ("true", "1")
 _ARTIFACTS_SETTING = os.environ.get("PW_RECORD_ARTIFACTS", "true").lower()
 _RECORD_ARTIFACTS = _ARTIFACTS_SETTING in ("true", "1", "yes", "on")
+_WEB_UI_TEST_ROOT = "tests/web-ui"
+
+
+def pytest_configure(config: pytest.Config) -> None:
+    configure_logging()
+    LOGGER.info("pytest configured: %s", config.rootpath)
+
+
+def pytest_collection_modifyitems(items: list[pytest.Item]) -> None:
+    for item in items:
+        if item.path.as_posix().endswith(".py") and _WEB_UI_TEST_ROOT in item.path.as_posix():
+            item.add_marker(pytest.mark.xdist_group("web-ui"))
 
 
 def _node_failed(node) -> bool:
@@ -57,7 +73,7 @@ def _stop_tracing(node, context: BrowserContext) -> None:
 
 
 @pytest.fixture(scope="session")
-def browser_instance():
+def browser_instance() -> Generator[Browser, None, None]:
     with sync_playwright() as pw:
         browser: Browser = getattr(pw, CONFIG["browser"]).launch(
             headless=_IN_CI or CONFIG["headless"],
@@ -68,7 +84,11 @@ def browser_instance():
 
 
 @pytest.fixture
-def context(request, browser_instance: Browser, tmp_path_factory):
+def context(
+    request: pytest.FixtureRequest,
+    browser_instance: Browser,
+    tmp_path_factory: pytest.TempPathFactory,
+) -> Generator[BrowserContext, None, None]:
     should_record_artifacts = _IN_CI or _RECORD_ARTIFACTS
     video_dir = (
         tmp_path_factory.mktemp(request.node.name.replace("/", "_"))
@@ -105,7 +125,7 @@ def context(request, browser_instance: Browser, tmp_path_factory):
 
 
 @pytest.fixture
-def page(context: BrowserContext) -> Page:
+def page(context: BrowserContext) -> Generator[Page, None, None]:
     p = context.new_page()
     yield p
     p.close()
@@ -117,18 +137,18 @@ def app_url() -> str:
 
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
-def pytest_runtest_makereport(item, call):
+def pytest_runtest_makereport(item: Any, call: pytest.CallInfo[Any]) -> Generator[None, Any, None]:
+    del call
     outcome = yield
     rep = outcome.get_result()
     setattr(item, "rep_" + rep.when, rep)
 
     if rep.skipped:
         reason = rep.longrepr[2] if isinstance(rep.longrepr, tuple) else str(rep.longrepr)
-        allure.dynamic.status(allure.status.SKIPPED)
         allure.dynamic.description(reason)
 
     if rep.when == "call" and rep.failed:
-        page_fixture = item.funcargs.get("page")
+        page_fixture = cast(Page | None, item.funcargs.get("page"))
         if page_fixture:
             try:
                 screenshot = page_fixture.screenshot()

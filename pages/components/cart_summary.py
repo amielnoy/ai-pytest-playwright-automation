@@ -5,6 +5,7 @@ from utils.price_parser import parse_price
 class CartSummaryComponent(BaseComponent):
     _TOTAL_ROW = "tr:has(strong:has-text('Total:')) td:last-child"
     _ITEMS = "table:has-text('Product Name') tbody tr"
+    _CONTENT = "#content"
     _EMPTY_CART_TEXT = "Your shopping cart is empty!"
 
     def get_total(self) -> float:
@@ -17,4 +18,6 @@ class CartSummaryComponent(BaseComponent):
         return self.page.locator(self._ITEMS).count()
 
     def is_empty(self) -> bool:
-        return self.page.get_by_text(self._EMPTY_CART_TEXT).is_visible()
+        return self.page.locator(self._CONTENT).get_by_text(
+            self._EMPTY_CART_TEXT
+        ).is_visible()

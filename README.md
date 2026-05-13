@@ -16,7 +16,7 @@ UI and API test automation for the TutorialsNinja demo store, built with:
 
 ## Course Materials
 
-This repository also includes a nineteen-session automation QA course under [`course/`](course/README.md). Start there for the learning path, session order, exercise workflow, and guidance on when to use the teaching scaffold versus the production framework.
+This repository also includes a twenty-eight-session automation QA course under [`course/`](course/README.md). Start there for the learning path, session order, exercise workflow, and guidance on when to use the teaching scaffold versus the production framework.
 
 ## Setup
 
@@ -66,6 +66,34 @@ Or use the helper script, which builds the image, mounts `docker-artifacts/`, mo
 
 ```bash
 ./scripts/run_all_tests_docker.sh
+```
+
+Run the Compose stack with database, automation server, Prometheus, Grafana, all tests, and a fresh Allure report:
+
+```bash
+./scripts/run_compose_tests_with_allure.sh
+```
+
+Or through npm:
+
+```bash
+npm run test:compose:report
+```
+
+Useful URLs after the Compose script starts the support containers:
+
+```text
+Grafana:    http://localhost:3000/d/automation/automation-runs
+Prometheus: http://localhost:9090
+Server:     http://localhost:8000/docs
+Allure:     opened automatically from docker-artifacts/allure-report
+```
+
+Pass pytest arguments after the script name:
+
+```bash
+./scripts/run_compose_tests_with_allure.sh tests/api tests/contract -q
+./scripts/run_compose_tests_with_allure.sh -m cart
 ```
 
 Pass extra pytest arguments after the script name:

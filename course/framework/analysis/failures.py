@@ -1,4 +1,4 @@
-"""Session 12 — parse JUnit XML failures and send them to Claude for analysis."""
+"""Session 16 — parse JUnit XML failures and send them to Claude for analysis."""
 import glob
 import os
 import xml.etree.ElementTree as ET

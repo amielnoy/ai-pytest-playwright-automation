@@ -1,0 +1,95 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: automation
+      POSTGRES_USER: automation
+      POSTGRES_PASSWORD: automation
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U automation -d automation"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    volumes:
+      - automation-db-data:/var/lib/postgresql/data
+
+  automation-server:
+    build: .
+    image: ness-automation-tests:latest
+    command: ["uvicorn", "server.app:app", "--host", "0.0.0.0", "--port", "8000"]
+    environment:
+      CI: "true"
+      DATABASE_URL: postgresql://automation:automation@db:5432/automation
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./docker-artifacts:/app/test-artifacts
+
+  automation-tests:
+    build: .
+    image: ness-automation-tests:latest
+    environment:
+      CI: "true"
+      PW_RECORD_ARTIFACTS: "true"
+      DATABASE_URL: postgresql://automation:automation@db:5432/automation
+      AUTOMATION_SERVER_URL: http://automation-server:8000
+    depends_on:
+      db:
+        condition: service_healthy
+      automation-server:
+        condition: service_started
+    volumes:
+      - ./docker-artifacts:/app/test-artifacts
+      - ./data:/app/data:ro
+    command: ["pytest", "tests/", "--alluredir=/app/test-artifacts/allure-results"]
+    profiles:
+      - test
+
+  postgres-exporter:
+    image: prometheuscommunity/postgres-exporter:v0.15.0
+    environment:
+      DATA_SOURCE_NAME: postgresql://automation:automation@db:5432/automation?sslmode=disable
+    ports:
+      - "9187:9187"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  prometheus:
+    image: prom/prometheus:v2.54.1
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    depends_on:
+      - postgres-exporter
+      - automation-server
+
+  grafana:
+    image: grafana/grafana:11.1.4
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_USERS_DEFAULT_THEME: light
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      - prometheus
+
+volumes:
+  automation-db-data:
+  prometheus-data:
+  grafana-data:

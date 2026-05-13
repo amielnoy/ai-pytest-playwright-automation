@@ -1,5 +1,5 @@
 """
-Session 10 — Self-healing selector wrapper.
+Session 14 — Self-healing selector wrapper.
 Try the primary selector; if it times out, ask Claude for a replacement.
 Every heal is logged so engineers can update stale Page Object selectors later.
 """

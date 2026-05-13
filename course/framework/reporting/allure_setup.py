@@ -1,4 +1,4 @@
-"""Session 13 — write Allure categories/environment and validate decorator coverage."""
+"""Session 17 — write Allure categories/environment and validate decorator coverage."""
 import json
 import os
 import re

@@ -448,13 +448,14 @@ def test_cart_summary_reads_total_count_and_empty_state():
     page = MagicMock()
     total_cell = MagicMock()
     item_rows = MagicMock()
+    content = MagicMock()
     empty_message = MagicMock()
     total_cell.last.is_visible.return_value = True
     total_cell.last.inner_text.return_value = "$602.00"
     item_rows.count.return_value = 2
     empty_message.is_visible.return_value = True
-    page.locator.side_effect = [total_cell, item_rows]
-    page.get_by_text.return_value = empty_message
+    content.get_by_text.return_value = empty_message
+    page.locator.side_effect = [total_cell, item_rows, content]
     summary = CartSummaryComponent(page)
 
     assert summary.get_total() == 602.0

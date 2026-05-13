@@ -10,9 +10,11 @@ __pycache__/
 data/secrets.json
 
 # Test artifacts
+logs/
 allure-results/
 allure-report/
 allure-history/
+allure-results-archive/
 tmp-allure/
 docker-artifacts/
 .pytest_cache/

@@ -1,4 +1,4 @@
-"""Session 6 — typed test-data factories using Faker."""
+"""Session 10 — typed test-data factories using Faker."""
 from dataclasses import dataclass
 from faker import Faker
 

@@ -1,8 +1,10 @@
 import allure
+import pytest
 
 from pages.home_page import HomePage
 
 
+@pytest.mark.skip(reason="Demo-only intentional failure; keep skipped so full suite stays green")
 @allure.feature("Intentional Failure")
 @allure.story("Failing web UI script")
 class TestIntentionalFailure:

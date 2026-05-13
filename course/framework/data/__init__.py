@@ -1,4 +1,4 @@
-# Added in Session 6 — typed test-data factories
+# Added in Session 10 — typed test-data factories
 from .factory import (
     CheckoutInfo, UserCredentials,
     make_checkout_info, make_user,

@@ -11,7 +11,7 @@ By the end of this session you will be able to:
 - Identify at least four common hallucination risks in AI-generated test suites.
 
 > **New to coding?** This session focuses on prompting and reviewing AI output — no Python required yet.
-> If you find the prompt examples abstract, come back after Session 5 once you have written real tests
+> If you find the prompt examples abstract, come back after Session 6 once you have written real tests
 > and the patterns will be much more concrete.
 
 ---
