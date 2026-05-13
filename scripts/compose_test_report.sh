@@ -230,6 +230,40 @@ print(f"  ✔ environment.properties written  (Environment section in report)")
 print(f"  ✔ Summary entry + links written   ({overall(counts).upper()} — {total} tests)")
 PYEOF
 
+# ── 6b. Inject server links into every test result (appear as badges on each test) ──
+step "Injecting server links into all test result files..."
+"${VENV_PYTHON}" - "${MERGED}" "${ALLURE_PORT}" << 'PYEOF'
+import sys, json
+from pathlib import Path
+
+merged_dir  = Path(sys.argv[1])
+allure_port = sys.argv[2]
+
+server_links = [
+    {"name": "Allure Report",     "url": f"http://localhost:{allure_port}",                           "type": "link"},
+    {"name": "Architecture",      "url": f"http://localhost:{allure_port}/architecture.html",         "type": "link"},
+    {"name": "Grafana",           "url": "http://localhost:3000/d/automation/automation-runs",        "type": "link"},
+    {"name": "Prometheus",        "url": "http://localhost:9090",                                     "type": "link"},
+]
+
+patched = 0
+for f in merged_dir.glob("*-result.json"):
+    try:
+        data = json.loads(f.read_text())
+        if data.get("historyId") == "compose-run-summary":
+            continue
+        existing_urls = {lnk.get("url") for lnk in data.get("links", [])}
+        new_links = [lnk for lnk in server_links if lnk["url"] not in existing_urls]
+        if new_links:
+            data.setdefault("links", []).extend(new_links)
+            f.write_text(json.dumps(data, indent=2, ensure_ascii=False))
+            patched += 1
+    except Exception:
+        pass
+
+print(f"  ✔ Server links injected into {patched} test result(s)")
+PYEOF
+
 # ── 7. Generate Allure report ─────────────────────────────────────────────────
 # Allure 3 automatically reads ./allure-history/ from CWD for trend charts
 # and updates it in-place — no explicit restore/save needed (matches CI pattern).
