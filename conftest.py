@@ -35,13 +35,13 @@ def _node_failed(node) -> bool:
     )
 
 
-def _attach_failure_artifacts(node) -> None:
+def _attach_pw_artifacts(node) -> None:
+    """Attach trace + video saved on the node. Must be called from a pytest hook
+    (not a fixture teardown) so allure writes into the test result, not a fixture container."""
     if getattr(node, "_pw_artifacts_attached", False) or not _node_failed(node):
         return
 
     trace_file = getattr(node, "_pw_trace_file", None)
-    video_dir = getattr(node, "_pw_video_dir", None)
-
     if trace_file and trace_file.exists():
         allure.attach.file(
             str(trace_file),
@@ -49,9 +49,8 @@ def _attach_failure_artifacts(node) -> None:
             attachment_type=allure.attachment_type.ZIP,
         )
 
-    if video_dir:
-        video_files = sorted(video_dir.rglob("*.webm"))
-        for index, video_path in enumerate(video_files, start=1):
+    for index, video_path in enumerate(getattr(node, "_pw_video_files", []), start=1):
+        if video_path.exists():
             allure.attach.file(
                 str(video_path),
                 name=f"video_on_failure_{index}",
@@ -120,8 +119,10 @@ def context(
     yield ctx
     _stop_tracing(request.node, ctx)
     ctx.close()
-    if should_record_artifacts:
-        _attach_failure_artifacts(request.node)
+    # Save video files on the node — actual attachment happens in makereport(teardown)
+    # so allure writes into the test result scope, not the fixture container scope.
+    if should_record_artifacts and video_dir:
+        request.node._pw_video_files = sorted(video_dir.rglob("*.webm"))
 
 
 @pytest.fixture
