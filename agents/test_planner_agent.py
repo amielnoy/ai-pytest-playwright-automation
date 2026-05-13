@@ -237,14 +237,14 @@ def run(pages: list[str] | None = None) -> None:
                 }
             ],
             tools=cast(Any, TOOLS),
-            messages=messages,
+            messages=cast(Any, messages),
         ) as stream:
             for event in stream:
                 # Print text deltas as they arrive
                 if hasattr(event, "type"):
                     if event.type == "content_block_delta":
                         delta = event.delta
-                        if hasattr(delta, "text"):
+                        if delta.type == "text_delta":
                             print(delta.text, end="", flush=True)
                             collected_text += delta.text
 
