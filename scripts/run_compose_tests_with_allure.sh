@@ -396,6 +396,8 @@ if [[ "${OPEN_ALLURE:-true}" == "false" ]]; then
   ok "Report ready at http://localhost:${ALLURE_PORT} — skipping browser open (OPEN_ALLURE=false)"
 else
   step "Opening Allure report at http://localhost:${ALLURE_PORT} ..."
+  # Kill any existing process holding the port (e.g. a previous Allure server)
+  lsof -ti :"${ALLURE_PORT}" | xargs kill -9 2>/dev/null || true
   # Use relative path — Allure 3 CLI prepends CWD to absolute paths (bug)
   npx allure open --port "${ALLURE_PORT}" "${ALLURE_REPORT_REL}"
 fi
