@@ -111,6 +111,57 @@ if [[ ${TOTAL_RUNS} -gt ${MAX_RUNS} ]]; then
   ok "Pruned ${TO_DELETE} old run(s) — keeping last ${MAX_RUNS}"
 fi
 
+# ── 5b. Push test metrics to Prometheus Pushgateway ──────────────────────────
+step "Pushing test metrics to Pushgateway..."
+PUSHGATEWAY_HOST="${PUSHGATEWAY_HOST:-localhost:9091}"
+"${VENV_PYTHON}" - "${ALLURE_RESULTS_DIR}" "${RUN_LABEL}" "${PUSHGATEWAY_HOST}" << 'PYEOF'
+import sys, json, urllib.request
+from collections import Counter
+from pathlib import Path
+
+results_dir      = Path(sys.argv[1])
+run_label        = sys.argv[2]
+pushgateway_host = sys.argv[3]
+
+counts = Counter()
+for f in results_dir.glob("*-result.json"):
+    try:
+        counts[json.loads(f.read_text()).get("status", "unknown")] += 1
+    except Exception:
+        pass
+
+total   = sum(counts.values())
+passed  = counts.get("passed", 0)
+failed  = counts.get("failed", 0)
+broken  = counts.get("broken", 0)
+skipped = counts.get("skipped", 0)
+rate    = passed / total if total else 0.0
+
+body = f"""\
+# TYPE automation_tests_total gauge
+automation_tests_total {total}
+# TYPE automation_tests_passed gauge
+automation_tests_passed {passed}
+# TYPE automation_tests_failed gauge
+automation_tests_failed {failed}
+# TYPE automation_tests_broken gauge
+automation_tests_broken {broken}
+# TYPE automation_tests_skipped gauge
+automation_tests_skipped {skipped}
+# TYPE automation_tests_pass_rate gauge
+automation_tests_pass_rate {rate:.6f}
+""".encode()
+
+url = f"http://{pushgateway_host}/metrics/job/automation-tests/run_label/{run_label}"
+try:
+    req = urllib.request.Request(url, data=body, method="PUT",
+                                  headers={"Content-Type": "text/plain"})
+    urllib.request.urlopen(req, timeout=5)
+    print(f"  ✔ Pushed to Pushgateway  (run={run_label}, total={total}, pass={rate:.0%})")
+except Exception as e:
+    print(f"  ⚠ Pushgateway unavailable — skipping push: {e}")
+PYEOF
+
 # ── 6. Merge current + all kept runs (full detail for Retries tab) ─────────────
 step "Merging last ${MAX_RUNS} run(s) for full historical step/attachment detail..."
 MERGED_REL="${ARTIFACTS_DIR_REL}/allure-results-merged"

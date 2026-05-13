@@ -504,6 +504,7 @@
       <a href="#mcp">MCP Servers</a>
       <a href="#agents">AI Agents</a>
       <a href="#docker">Docker</a>
+      <a href="#grafana">Grafana Dashboard</a>
       <a href="#reporting">דוחות Allure</a>
       <a href="#course">Course Roadmap</a>
     </div>
@@ -1847,19 +1848,20 @@ npx allure generate docker-artifacts/allure-results -o docker-artifacts/allure-r
 npx allure open docker-artifacts/allure-report</pre>
 
       <h3>Docker Compose + monitoring</h3>
-      <p><code>docker-compose.automation.yml</code> מפעיל stack מלא: <code>db</code>, <code>automation-server</code>, <code>automation-tests</code>, <code>postgres-exporter</code>, <code>prometheus</code>, ו-<code>grafana</code>. שני סקריפטים זמינים — <code>run_compose_tests_with_allure.sh</code> (תומך ב-pytest args) ו-<code>compose_test_report.sh</code> (ברירת מחדל לכל הסוויטה). שניהם מיישמים את אותו pipeline מלא כולל rolling archive, link injection, ו-architecture.html embedding.</p>
+      <p><code>docker-compose.automation.yml</code> מפעיל stack מלא: <code>db</code>, <code>automation-server</code>, <code>automation-tests</code>, <code>postgres-exporter</code>, <code>prometheus</code>, <code>pushgateway</code>, ו-<code>grafana</code>. שני סקריפטים זמינים — <code>run_compose_tests_with_allure.sh</code> (תומך ב-pytest args) ו-<code>compose_test_report.sh</code> (ברירת מחדל לכל הסוויטה). שניהם מיישמים את אותו pipeline מלא.</p>
 
       <div class="tbl-wrap"><table>
         <tr><th>שלב</th><th>תיאור</th></tr>
-        <tr><td>① Start services</td><td>db, automation-server, postgres-exporter, prometheus, grafana</td></tr>
+        <tr><td>① Start services</td><td>db, automation-server, postgres-exporter, prometheus, pushgateway, grafana</td></tr>
         <tr><td>② Run tests</td><td>pytest בתוך container עם <code>--override-ini</code> כדי לבטל alluredir מ-pytest.ini</td></tr>
         <tr><td>③ Archive run</td><td><code>allure-results-archive/run_YYYYMMDD_HHMMSS/</code> — שמירת כל result JSON לפירוט מלא בלשונית Retries</td></tr>
-        <tr><td>④ Merge runs</td><td>מיזוג last 5 runs ל-<code>allure-results-merged/</code> לפני generation</td></tr>
-        <tr><td>⑤ Write summary + env</td><td>כתיבת <code>environment.properties</code> ו-Allure entry עם steps ו-links לשירותים</td></tr>
-        <tr><td>⑥ Inject links</td><td>הוספת links ל-Allure Report, Architecture, Grafana, Prometheus לכל <code>*-result.json</code></td></tr>
-        <tr><td>⑦ Generate report</td><td><code>npx allure generate</code> — Allure 3 קורא <code>allure-history/</code> מ-CWD אוטומטית לגרפי trend</td></tr>
-        <tr><td>⑧ Copy architecture.html</td><td>architecture.html מוטמע ב-allure-report/ (כמו CI)</td></tr>
-        <tr><td>⑨ Open report</td><td><code>npx allure open --port 4040</code> — <code>OPEN_ALLURE=false</code> לדלג</td></tr>
+        <tr><td>④ Push metrics</td><td>דחיפת total/passed/failed/broken/skipped/pass_rate ל-Pushgateway עם label <code>run_label</code> — Grafana מציג כל run בנפרד</td></tr>
+        <tr><td>⑤ Merge runs</td><td>מיזוג last 5 runs ל-<code>allure-results-merged/</code> לפני generation</td></tr>
+        <tr><td>⑥ Write summary + env</td><td>כתיבת <code>environment.properties</code> ו-Allure entry עם steps ו-links לשירותים</td></tr>
+        <tr><td>⑦ Inject links</td><td>הוספת links ל-Allure Report, Architecture, Grafana, Prometheus לכל <code>*-result.json</code></td></tr>
+        <tr><td>⑧ Generate report</td><td><code>npx allure generate</code> — Allure 3 קורא <code>allure-history/</code> מ-CWD אוטומטית לגרפי trend</td></tr>
+        <tr><td>⑨ Copy architecture.html</td><td>architecture.html מוטמע ב-allure-report/ (כמו CI)</td></tr>
+        <tr><td>⑩ Open report</td><td><code>npx allure open --port 4040</code> — <code>OPEN_ALLURE=false</code> לדלג</td></tr>
       </table></div>
 
       <pre><span class="c"># Compose stack + all tests + Allure report (full pipeline)</span>
@@ -1899,7 +1901,63 @@ http://localhost:8000/docs                          <span class="c"># FastAPI</s
       </div>
     </section>
 
-    <!-- ── 16. REPORTING ── -->
+    <!-- ── 16. GRAFANA ── -->
+    <section id="grafana">
+      <h2><span class="icon">📊</span> Grafana Dashboard</h2>
+      <p>הדשבורד <code>monitoring/grafana/dashboards/automation-runs.json</code> מוטען אוטומטית ב-startup דרך provisioning. פנה אל <code>http://localhost:3000/d/automation/automation-runs</code> (admin/admin).</p>
+
+      <h3>שורה 1 — 🏥 Service Health</h3>
+      <div class="tbl-wrap"><table>
+        <tr><th>Panel</th><th>מקור</th><th>צבע</th></tr>
+        <tr><td>PostgreSQL</td><td><code>pg_up</code></td><td>🟢 UP / 🔴 DOWN — background color</td></tr>
+        <tr><td>Automation Server</td><td><code>up{job="automation-server"}</code> — endpoint <code>/metrics</code></td><td>🟢 UP / 🔴 DOWN</td></tr>
+        <tr><td>Prometheus</td><td><code>up{job="prometheus"}</code></td><td>🟢 UP / 🔴 DOWN</td></tr>
+        <tr><td>Pushgateway</td><td><code>up{job="pushgateway"}</code></td><td>🟢 UP / 🔴 DOWN</td></tr>
+      </table></div>
+
+      <h3>שורה 2 — 🗃️ Database</h3>
+      <div class="tbl-wrap"><table>
+        <tr><th>Panel</th><th>PromQL</th></tr>
+        <tr><td>Active DB Connections</td><td><code>pg_stat_activity_count{state="active"}</code></td></tr>
+        <tr><td>DB Size</td><td><code>pg_database_size_bytes{datname="automation"}</code> — displayed in MB/GB</td></tr>
+        <tr><td>DB Connections Over Time</td><td>timeseries: active + total connections</td></tr>
+      </table></div>
+
+      <h3>שורה 3 — 🧪 Test Run: $run_label</h3>
+      <p>Grafana variable dropdown בחירת run — <code>label_values(automation_tests_total, run_label)</code>. כל ריצה נדחפת ל-Pushgateway עם label <code>run_label=run_YYYYMMDD_HHMMSS</code>.</p>
+      <div class="tbl-wrap"><table>
+        <tr><th>Panel</th><th>PromQL</th><th>צבע</th></tr>
+        <tr><td>Total</td><td><code>automation_tests_total{run_label="$run_label"}</code></td><td>כחול</td></tr>
+        <tr><td>✅ Passed</td><td><code>automation_tests_passed{run_label="$run_label"}</code></td><td>ירוק</td></tr>
+        <tr><td>❌ Failed</td><td><code>automation_tests_failed{run_label="$run_label"}</code></td><td>🟢 0 / 🔴 ≥1</td></tr>
+        <tr><td>⚠️ Broken</td><td><code>automation_tests_broken{run_label="$run_label"}</code></td><td>🟢 0 / 🟠 ≥1</td></tr>
+        <tr><td>⏭️ Skipped</td><td><code>automation_tests_skipped{run_label="$run_label"}</code></td><td>צהוב</td></tr>
+        <tr><td>Pass Rate % (gauge)</td><td><code>automation_tests_pass_rate{run_label="$run_label"} * 100</code></td><td>🔴 &lt;70% / 🟠 &lt;95% / 🟢 ≥95%</td></tr>
+      </table></div>
+
+      <h3>שורה 4 — 📋 All Runs History</h3>
+      <p>טבלה המציגה את כל הריצות. כל שורה = run אחד עם total, passed, failed, broken, skipped, pass_rate. pass_rate מוצג עם color-background (אדום/כתום/ירוק). ממוין לפי run_label (chronological).</p>
+      <pre>PromQL per column:  last_over_time(automation_tests_total[30d])
+                    last_over_time(automation_tests_passed[30d])
+                    last_over_time(automation_tests_failed[30d])
+                    last_over_time(automation_tests_broken[30d])
+                    last_over_time(automation_tests_skipped[30d])
+                    last_over_time(automation_tests_pass_rate[30d])
+Grafana Transform:  joinByField(run_label) → columns per metric</pre>
+
+      <h3>Pushgateway — איך עובד</h3>
+      <p>בסיום כל ריצת Docker Compose, הסקריפט דוחף metrics ל-Pushgateway ב-<code>PUT /metrics/job/automation-tests/run_label/{run_label}</code>. Prometheus מגרד את Pushgateway כל 10 שניות. כל ריצה נשמרת כסדרת זמן נפרדת כל עוד הנתונים ב-Pushgateway.</p>
+      <pre><span class="c"># שירותים שמתווספים לstack</span>
+pushgateway:  prom/pushgateway:v1.9.0  →  http://localhost:9091
+automation-server /metrics             →  prometheus scrapes Python process metrics</pre>
+
+      <div class="callout tip">
+        <span class="callout-icon">🔄</span>
+        <div><strong>Grafana auto-provisions:</strong> הדשבורד נטען אוטומטית מ-<code>monitoring/grafana/dashboards/automation-runs.json</code> בכל הפעלה. שינויים בקובץ ה-JSON נכנסים לתוקף לאחר <code>docker compose restart grafana</code>.</div>
+      </div>
+    </section>
+
+    <!-- ── 17. REPORTING ── -->
     <section id="reporting">
       <h2><span class="icon">📊</span> דוחות Allure</h2>
       <p>כל הטסטים כתובים עם Allure decorators לדוח עשיר ואינפורמטיבי.</p>
