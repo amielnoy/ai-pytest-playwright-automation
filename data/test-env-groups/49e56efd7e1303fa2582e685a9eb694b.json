@@ -1,1 +1,1 @@
-{"id":"49e56efd7e1303fa2582e685a9eb694b","fullName":"tests.unit.test_fastapi_app#test_run_pytest_rejects_unsafe_arguments","name":"test_run_pytest_rejects_unsafe_arguments","status":"passed","testResultsByEnv":{"default":"3760cefc308060da027e053ceaa1397f"}}
+{"id":"49e56efd7e1303fa2582e685a9eb694b","fullName":"tests.unit.test_fastapi_app#test_run_pytest_rejects_unsafe_arguments","name":"test_run_pytest_rejects_unsafe_arguments","status":"passed","testResultsByEnv":{"default":"95f381994efdfe403b7e92cbaa5e67b4"}}
