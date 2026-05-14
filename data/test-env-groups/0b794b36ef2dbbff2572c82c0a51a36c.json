@@ -1,1 +1,1 @@
-{"id":"0b794b36ef2dbbff2572c82c0a51a36c","fullName":"tests.unit.test_logger#test_get_logger_returns_child_logger","name":"test_get_logger_returns_child_logger","status":"passed","testResultsByEnv":{"default":"1f6390e5482d4613cb151ac1faf3a682"}}
+{"id":"0b794b36ef2dbbff2572c82c0a51a36c","fullName":"tests.unit.test_logger#test_get_logger_returns_child_logger","name":"test_get_logger_returns_child_logger","status":"passed","testResultsByEnv":{"default":"696093bf1f0c9fe551853b9ecaadbf97"}}
