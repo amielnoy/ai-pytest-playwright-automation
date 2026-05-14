@@ -14,7 +14,7 @@ from utils.logger import configure_logging, get_logger
 CONFIG = get_config()
 LOGGER = get_logger("pytest")
 _IN_CI = os.environ.get("CI", "").lower() in ("true", "1")
-_ARTIFACTS_SETTING = os.environ.get("PW_RECORD_ARTIFACTS", "true").lower()
+_ARTIFACTS_SETTING = os.environ.get("PW_RECORD_ARTIFACTS", "false").lower()
 _RECORD_ARTIFACTS = _ARTIFACTS_SETTING in ("true", "1", "yes", "on")
 _WEB_UI_TEST_ROOT = "tests/web-ui"
 _IS_XDIST_CONTROLLER = False
