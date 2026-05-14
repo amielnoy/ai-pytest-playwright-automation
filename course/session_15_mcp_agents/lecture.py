@@ -30,12 +30,21 @@ TOOLS = {
     "done":          "Signal task completion + summary string.",
 }
 
+MCP_TOOLS = {
+    "playwright": "Browser control tools exposed by @playwright/mcp.",
+    "plan_flow_from_images": (
+        "Receives ordered screenshots/wireframes and returns a detailed "
+        "step-level QA test plan."
+    ),
+}
+
 # ── When to use agents in a test suite ────────────────────────────────────────
 AGENT_USE_CASES = [
     "Exploratory testing: discover flows you haven't scripted yet.",
     "Regression diffing: replay a recorded flow on a new build and compare snapshots.",
     "Smoke tests on unknown pages: 'Is there a login form? Can I submit it?'",
     "Test generation: agent explores → produces a session transcript → CLI writes tests.",
+    "Flow planning: screenshots/wireframes → step-level manual and automation plan.",
 ]
 
 # ── Agent pitfalls ─────────────────────────────────────────────────────────────
@@ -58,6 +67,9 @@ if __name__ == "__main__":
     print("\nWhen to use agents:")
     for uc in AGENT_USE_CASES:
         print(f"  • {uc}")
+    print("\nMCP tools:")
+    for name, description in MCP_TOOLS.items():
+        print(f"  {name}: {description}")
     print("\nPitfalls:")
     for p in PITFALLS:
         print(f"  ⚠  {p}")

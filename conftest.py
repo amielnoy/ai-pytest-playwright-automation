@@ -1,4 +1,6 @@
+import json
 import os
+import pathlib
 from collections.abc import Generator
 from typing import Any, cast
 
@@ -42,6 +44,18 @@ def pytest_runtest_logstart(nodeid: str, location: tuple[str, int | None, str]) 
 def pytest_runtest_logreport(report: pytest.TestReport) -> None:
     if _IS_XDIST_CONTROLLER:
         return
+
+    if report.outcome == "rerun":
+        rerun_num = getattr(report, "rerun", 0)
+        LOGGER.warning(
+            "test rerun #%d: %s phase=%s duration=%.3fs",
+            rerun_num,
+            report.nodeid,
+            report.when,
+            report.duration,
+        )
+        return
+
     if report.when != "call" and report.outcome not in {"failed", "skipped"}:
         return
 
@@ -52,6 +66,41 @@ def pytest_runtest_logreport(report: pytest.TestReport) -> None:
         report.when,
         report.duration,
     )
+
+
+def pytest_sessionfinish(session: pytest.Session, exitstatus: object) -> None:
+    """Mark tests that passed after a retry as flaky in the allure results.
+
+    allure-pytest writes a separate result file per attempt (same historyId).
+    Allure 3 reads statusDetails.flaky from the JSON, so we set it here on the
+    passing attempt whenever a failed attempt exists for the same test.
+    """
+    del session, exitstatus
+    results_dir = pathlib.Path("allure-results")
+    if not results_dir.exists():
+        return
+
+    by_history: dict[str, list[tuple[pathlib.Path, dict]]] = {}
+    for path in results_dir.glob("*-result.json"):
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+            hid = data.get("historyId")
+            if hid:
+                by_history.setdefault(hid, []).append((path, data))
+        except Exception:
+            pass
+
+    for entries in by_history.values():
+        if len(entries) < 2:
+            continue
+        statuses = {d["status"] for _, d in entries}
+        if "failed" not in statuses or "passed" not in statuses:
+            continue
+        for path, data in entries:
+            if data["status"] == "passed":
+                data.setdefault("statusDetails", {})["flaky"] = True
+                path.write_text(json.dumps(data), encoding="utf-8")
+                LOGGER.info("flaky marker written: %s", data.get("fullName", path.name))
 
 
 def _node_failed(node) -> bool:

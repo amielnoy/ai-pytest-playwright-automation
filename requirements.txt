@@ -2,6 +2,7 @@ playwright==1.51.0
 pytest==8.2.2
 pytest-playwright==0.5.0
 pytest-xdist>=3.5.0
+pytest-rerunfailures>=14.0
 allure-pytest==2.16.0
 faker==25.2.0
 requests>=2.31.0

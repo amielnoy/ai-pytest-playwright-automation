@@ -44,9 +44,9 @@ pytest tests/web-ui
 
 **Run tests with Docker:**
 ```bash
-docker build -t ness-automation-tests .
+docker build -t ai-automation-testing .
 docker run --rm -v "$PWD/docker-artifacts:/app/test-artifacts" \
-  ness-automation-tests pytest tests/ --alluredir=/app/test-artifacts/allure-results
+  ai-automation-testing pytest tests/ --alluredir=/app/test-artifacts/allure-results
 ```
 
 **Generate and view Allure report:**

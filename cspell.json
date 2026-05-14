@@ -1,8 +1,25 @@
 {
   "version": "0.2",
+  "language": "en",
   "words": [
-    "OCSESSID",
-    "pids",
-    "xyznonexistent"
+    "OCSESSID", "pids", "xyznonexistent",
+    "pytest", "xdist", "pycache", "venv", "mypy", "htmlcov",
+    "alluredir", "allurereport", "allurerc", "allurepath",
+    "loadgroup", "addopts", "rerunfailures", "testpaths",
+    "pentest", "nodeid", "exitstatus", "sessionfinish",
+    "logreport", "logstart", "modifyitems", "workerinput",
+    "numprocesses", "hookwrapper", "tryfirst", "longrepr",
+    "funcargs", "teardowns", "makereport",
+    "fastapi", "uvicorn"
+  ],
+  "ignorePaths": [
+    "architecture.html",
+    ".venv/**",
+    "node_modules/**",
+    "allure-results/**",
+    "allure-report/**",
+    "allure-history/**",
+    "docker-artifacts/**",
+    "course/**"
   ]
 }

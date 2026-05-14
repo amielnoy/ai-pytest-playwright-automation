@@ -1,4 +1,4 @@
-# Playwright Python Test Suite
+# AI_AUTOMATION_TESTING
 
 UI and API test automation for the TutorialsNinja demo store, built with:
 
@@ -17,6 +17,28 @@ UI and API test automation for the TutorialsNinja demo store, built with:
 ## Course Materials
 
 This repository also includes a twenty-eight-session automation QA course under [`course/`](course/README.md). Start there for the learning path, session order, exercise workflow, and guidance on when to use the teaching scaffold versus the production framework.
+
+## Project Layout
+
+```text
+agents/       Agent runners and planning helpers
+config/       Runtime configuration
+data/         Test data and local-only secrets
+flows/        Business-level UI/API workflows
+mcp_servers/  Local MCP tools, including the test reporter
+pages/        Playwright page objects and components
+scripts/      Test, Docker, Compose, and report helper scripts
+server/       FastAPI automation service
+services/     API service clients
+stds/         Test standards and generated page snapshot source docs
+tests/        API, contract, unit, and web UI tests
+utils/        Shared utilities
+course/       Training material and teaching examples
+artifacts/    Generated or captured artifacts kept out of core code paths
+monitoring/   Prometheus and Grafana configuration
+```
+
+Generated outputs such as `allure-results/`, `allure-report/`, `docker-artifacts/`, `logs/`, and `artifacts/reports/*.html` are ignored by git.
 
 ## Setup
 
@@ -52,14 +74,14 @@ pytest
 Build the test image:
 
 ```bash
-docker build -t ness-automation-tests .
+docker build -t ai-automation-testing .
 ```
 
 Run the full suite:
 
 ```bash
 docker run --rm -v "$PWD/docker-artifacts:/app/test-artifacts" \
-  ness-automation-tests pytest tests/ --alluredir=/app/test-artifacts/allure-results
+  ai-automation-testing pytest tests/ --alluredir=/app/test-artifacts/allure-results
 ```
 
 Or use the helper script, which builds the image, mounts `docker-artifacts/`, mounts `data/secrets.json` when present, and runs the full suite:
@@ -107,9 +129,9 @@ Run a specific test file or marker by passing pytest arguments:
 
 ```bash
 docker run --rm -v "$PWD/docker-artifacts:/app/test-artifacts" \
-  ness-automation-tests pytest tests/web-ui/test_search_under_price.py --alluredir=/app/test-artifacts/allure-results
+  ai-automation-testing pytest tests/web-ui/test_search_under_price.py --alluredir=/app/test-artifacts/allure-results
 docker run --rm -v "$PWD/docker-artifacts:/app/test-artifacts" \
-  ness-automation-tests pytest -m cart --alluredir=/app/test-artifacts/allure-results
+  ai-automation-testing pytest -m cart --alluredir=/app/test-artifacts/allure-results
 ```
 
 If registration tests need private data, mount your local secrets file:
@@ -118,7 +140,7 @@ If registration tests need private data, mount your local secrets file:
 docker run --rm \
   -v "$PWD/data/secrets.json:/app/data/secrets.json:ro" \
   -v "$PWD/docker-artifacts:/app/test-artifacts" \
-  ness-automation-tests pytest tests/ --alluredir=/app/test-artifacts/allure-results
+  ai-automation-testing pytest tests/ --alluredir=/app/test-artifacts/allure-results
 ```
 
 Run a specific file in parallel:

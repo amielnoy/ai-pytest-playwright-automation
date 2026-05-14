@@ -46,3 +46,54 @@ Set `max_steps=3` in the explorer agent and run it on a goal that requires at le
 2. Update `test_agent.py` to use the MCP server instead of the custom `execute()` function.
 3. Confirm the agent completes the same goals as before.
 4. Explain in two sentences what you removed from the codebase by switching to MCP.
+
+---
+
+## Exercise 6: Image Flow Test Planner MCP Agent
+
+Use `flow_test_planner_mcp.py` to generate a detailed test plan from a series of images that describe a product flow.
+
+1. Collect 3-5 screenshots or wireframes for one flow, such as registration, login, add-to-cart, checkout, or password reset.
+2. Start the MCP server:
+
+   ```bash
+   python course/session_15_mcp_agents/flow_test_planner_mcp.py
+   ```
+
+3. Call `plan_flow_from_images` with:
+
+   ```json
+   {
+     "feature": "Registration",
+     "flow_goal": "A new user creates an account and reaches the logged-in home page.",
+     "images": [
+       {
+         "path": "artifacts/registration_01_empty_form.png",
+         "title": "Empty registration form",
+         "note": "No validation errors yet"
+       },
+       {
+         "path": "artifacts/registration_02_validation.png",
+         "title": "Validation errors",
+         "note": "Required fields missing"
+       },
+       {
+         "path": "artifacts/registration_03_success.png",
+         "title": "Successful registration",
+         "note": "User sees welcome state"
+       }
+     ],
+     "assumptions": [
+       "Images are ordered by user journey.",
+       "Email verification is not part of this flow."
+     ]
+   }
+   ```
+
+4. Review the generated plan and mark:
+   - Steps that are directly supported by the images.
+   - Steps that are assumptions.
+   - Missing assertions that a human QA should add.
+   - Which steps should become automated Playwright tests.
+
+5. Rewrite one generated step as a framework task: target page object, test file, test data, and expected assertion.

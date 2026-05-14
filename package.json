@@ -1,5 +1,5 @@
 {
-  "name": "ness-automation-test-suite",
+  "name": "ai-automation-testing",
   "private": true,
   "type": "module",
   "scripts": {
@@ -16,7 +16,7 @@
     "test:docker:ci": "OPEN_ALLURE=false ./scripts/compose_test_report.sh",
     "test:docker:down": "COMPOSE_DOWN=true OPEN_ALLURE=false ./scripts/compose_test_report.sh",
     "allure:version": "allure --version",
-    "allure:generate": "allure generate allure-results",
+    "allure:generate": "rm -rf allure-report && allure generate ./allure-results -o ./allure-report",
     "allure:open": "allure open allure-report",
     "allure:watch": "allure watch allure-results"
   },

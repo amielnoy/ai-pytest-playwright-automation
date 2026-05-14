@@ -131,7 +131,7 @@ def create_monitoring_stack() -> MonitoringStack:
     )
     server = AutomationService(
         name="automation-server",
-        image="ness-automation-tests:latest",
+        image="ai-automation-testing:latest",
         command=("uvicorn", "server.app:app", "--host", "0.0.0.0", "--port", "8000"),
         ports=("8000:8000",),
         volumes=("./docker-artifacts:/app/test-artifacts",),
@@ -139,7 +139,7 @@ def create_monitoring_stack() -> MonitoringStack:
     )
     tests = AutomationService(
         name="automation-tests",
-        image="ness-automation-tests:latest",
+        image="ai-automation-testing:latest",
         command=build_pytest_service_command(),
         volumes=("./docker-artifacts:/app/test-artifacts", "./data:/app/data:ro"),
         environment={

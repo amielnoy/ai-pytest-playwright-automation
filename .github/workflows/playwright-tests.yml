@@ -210,8 +210,8 @@ jobs:
           | | |
           |---|---|
           | **Allure Report** | [Open report]($PAGES_URL) |
-          | **GitHub Pages URL** | https://amielnoy.github.io/ai-pytest-playwright-automation/ |
-          | **Architecture docs** | [architecture.html](https://amielnoy.github.io/ai-pytest-playwright-automation/architecture.html) |
+          | **GitHub Pages URL** | https://amielnoy.github.io/AI_AUTOMATION_TESTING/ |
+          | **Architecture docs** | [architecture.html](https://amielnoy.github.io/AI_AUTOMATION_TESTING/architecture.html) |
           | **Branch** | \`$BRANCH\` |
           | **Commit** | [\`$COMMIT_SHORT\`](${REPO_URL}/commit/${{ github.sha }}) |
           | **Run** | [#${RUN_NUM}]($RUN_URL) |

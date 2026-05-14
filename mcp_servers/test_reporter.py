@@ -3,7 +3,7 @@ MCP server: test status reporter.
 
 Reads allure-results/ JSON files and produces:
   - A colour-coded terminal summary (returned as tool output)
-  - A standalone HTML file at <project-root>/test-status-report.html
+  - A standalone HTML file at <project-root>/artifacts/reports/test-status-report.html
   - An Allure result entry (JSON + attachments) written back into allure-results/
     so the summary appears inside the Allure HTML report on next generation
 
@@ -34,7 +34,7 @@ mcp = FastMCP("test-reporter")
 
 _PROJECT_ROOT = Path(__file__).resolve().parent.parent
 _DEFAULT_ALLURE_DIR = _PROJECT_ROOT / "allure-results"
-_DEFAULT_HTML_OUT = _PROJECT_ROOT / "test-status-report.html"
+_DEFAULT_HTML_OUT = _PROJECT_ROOT / "artifacts" / "reports" / "test-status-report.html"
 
 _ANSI_RE = re.compile(r"\033\[[0-9;]*m")
 
@@ -208,6 +208,7 @@ def _terminal_report(classified: list[dict]) -> str:
 # --------------------------------------------------------------------------- #
 
 def _html_report(classified: list[dict], out_path: Path) -> None:
+    out_path.parent.mkdir(parents=True, exist_ok=True)
     counts: dict[str, int] = defaultdict(int)
     for r in classified:
         counts[r["status"]] += 1
@@ -367,7 +368,7 @@ def report_test_status(
     Read Allure result JSON files and return a colour-coded test status report.
 
     By default also:
-      - Writes a standalone HTML file (test-status-report.html)
+      - Writes a standalone HTML file (artifacts/reports/test-status-report.html)
       - Writes an Allure result entry back into allure-results/ so the summary
         appears in the Allure HTML report on next `allure generate`
 
@@ -382,7 +383,7 @@ def report_test_status(
         allure_dir:         Path to the allure-results directory.
                             Defaults to <project-root>/allure-results.
         html_out:           Path where the standalone HTML report is written.
-                            Defaults to <project-root>/test-status-report.html.
+                            Defaults to <project-root>/artifacts/reports/test-status-report.html.
         write_allure_entry: When True (default) a result JSON + attachments are
                             written into allure_dir so the report appears in
                             the generated Allure HTML.

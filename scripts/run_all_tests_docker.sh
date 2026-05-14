@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-IMAGE_NAME="${IMAGE_NAME:-ness-automation-tests}"
+IMAGE_NAME="${IMAGE_NAME:-ai-automation-testing}"
 ARTIFACTS_DIR="${ARTIFACTS_DIR:-docker-artifacts}"
 ALLURE_RESULTS_DIR="/app/test-artifacts/allure-results"
 
