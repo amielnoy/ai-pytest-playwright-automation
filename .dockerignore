@@ -9,5 +9,10 @@ __pycache__
 .DS_Store
 allure-report
 allure-results
+allure-history
+allure-results-archive
+tmp-allure
 docker-artifacts
+logs
+artifacts/reports
 data/secrets.json

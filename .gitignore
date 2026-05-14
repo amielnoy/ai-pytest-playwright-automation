@@ -17,6 +17,7 @@ allure-history/
 allure-results-archive/
 tmp-allure/
 docker-artifacts/
+artifacts/reports/*.html
 .pytest_cache/
 node_modules/
 
