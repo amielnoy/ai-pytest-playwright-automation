@@ -1,3 +1,7 @@
+networks:
+  default:
+    name: db_automationtest25_4_2025_default
+
 services:
   db:
     image: postgres:16-alpine
