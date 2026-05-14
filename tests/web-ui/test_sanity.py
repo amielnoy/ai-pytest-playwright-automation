@@ -1,5 +1,6 @@
 import allure
 import pytest
+import pytest_check as check
 
 from pages.home_page import HomePage
 from pages.login_page import LoginPage
@@ -20,10 +21,12 @@ class TestSanity:
             home_page.open()
 
         with allure.step("Verify page title and primary header controls are available"):
+            # Hard assert: the title is a prerequisite — wrong page means nothing else is valid.
             assert home_page.title == "Your Store"
-            assert home_page.has_currency_dropdown(), "Currency dropdown is not visible"
-            assert home_page.has_search_input(), "Search input is not visible"
-            assert home_page.has_empty_cart_summary(), "Empty cart summary is not visible"
+            # Soft assertions: the three controls are independent — report ALL missing ones.
+            check.is_true(home_page.has_currency_dropdown(), "Currency dropdown is not visible")
+            check.is_true(home_page.has_search_input(), "Search input is not visible")
+            check.is_true(home_page.has_empty_cart_summary(), "Empty cart summary is not visible")
 
     @allure.title("Invalid login keeps the user on login page with a warning")
     @allure.severity(allure.severity_level.CRITICAL)

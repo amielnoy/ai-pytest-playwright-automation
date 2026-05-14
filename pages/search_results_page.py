@@ -24,6 +24,7 @@ class SearchResultsPage(BasePage):
         _SHOW_LABEL,
     )
     _SORT_NAME_ASCENDING_LABEL = "Name (A - Z)"
+    _SORT_NAME_DESCENDING_LABEL = "Name (Z - A)"
     _SEARCH_ROUTE = "product/search"
     _SEARCH_PATH_PREFIX = "index.php?"
 
@@ -35,6 +36,8 @@ class SearchResultsPage(BasePage):
     def get_products_under_price(
         self, query: str, max_price: float, limit: int = 5
     ) -> list[ProductInfo]:
+        
+        
         self._load_search(query)
         if self.page.get_by_text(self._NO_RESULTS_TEXT).is_visible():
             return []
@@ -80,6 +83,16 @@ class SearchResultsPage(BasePage):
         self.page.wait_for_load_state("domcontentloaded")
         self.wait_for_product_results()
 
+    def sort_by_name_descending(self) -> None:
+        self.wait_for_product_results()
+        sort_select = self.page.get_by_role(
+            self._SORT_SELECT_ROLE, name=self._SORT_SELECT_NAME
+        )
+        expect(sort_select).to_be_visible()
+        sort_select.select_option(label=self._SORT_NAME_DESCENDING_LABEL)
+        self.page.wait_for_load_state("domcontentloaded")
+        self.wait_for_product_results()
+
     def product_names(self) -> list[str]:
         self.wait_for_product_results()
         return [card.name for card in self._cards()]
@@ -99,6 +112,10 @@ class SearchResultsPage(BasePage):
     def are_product_names_sorted_ascending(self) -> bool:
         names = self.product_names()
         return names == sorted(names, key=str.casefold)
+
+    def are_product_names_sorted_descending(self) -> bool:
+        names = self.product_names()
+        return names == sorted(names, key=str.casefold, reverse=True)
 
     def stored_product_information(self) -> list[StoredProductInfo]:
         self.wait_for_product_results()
