@@ -1,0 +1,1 @@
+{"id":"d3744ea1c69e87867ecbe02b8babedeb","fullName":"tests.api.test_prompt_injection.TestPromptInjection#test_delimiter_injection","name":"[PI-5] Delimiter injection — attempting to close and reopen the system context","status":"skipped","testResultsByEnv":{"default":"17a7a4f0c26b5a7513ae9cb3781c9e96"}}

@@ -1,0 +1,1 @@
+{"id":"affae5ff6a3772e52a0496159b41f6dd","fullName":"tests.api.test_chat_ai.TestChatEndpoint#test_chat_custom_system_prompt_is_respected","name":"Custom system prompt shapes the assistant's persona","status":"skipped","testResultsByEnv":{"default":"0809aa5cb10380b9b3a7e4e5cdef1a83"}}

@@ -1,0 +1,1 @@
+{"id":"d1adf762b4d7e370e91ce29abbab4806","fullName":"tests.api.test_chat_ai.TestChatEndpoint#test_chat_returns_200_with_response_field","name":"POST /chat returns 200 with a response field","status":"skipped","testResultsByEnv":{"default":"12a4fc8c7e70ed9126d485ecbaf20b0c"}}

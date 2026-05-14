@@ -1,0 +1,1 @@
+{"id":"6b93ca03acf0e26b0ae62f2ed6d557c0","fullName":"tests.api.test_prompt_injection.TestPromptInjection#test_direct_instruction_override","name":"[PI-1] Direct override — 'ignore previous instructions'","status":"skipped","testResultsByEnv":{"default":"9d54855afda373627f7853ebd589e632"}}

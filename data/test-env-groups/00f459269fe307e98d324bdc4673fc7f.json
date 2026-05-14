@@ -1,0 +1,1 @@
+{"id":"00f459269fe307e98d324bdc4673fc7f","fullName":"tests.api.test_prompt_injection.TestPromptInjection#test_multi_vector_injection","name":"[PI-7] Multi-vector attack — all sentinels soft-checked in one run","status":"skipped","testResultsByEnv":{"default":"686e354c41373ba674695de879848ee6"}}

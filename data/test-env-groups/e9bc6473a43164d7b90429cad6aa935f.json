@@ -1,0 +1,1 @@
+{"id":"e9bc6473a43164d7b90429cad6aa935f","fullName":"tests.api.test_prompt_injection.TestPromptInjection#test_system_prompt_extraction","name":"[PI-3] System prompt extraction — printing instructions between markers","status":"skipped","testResultsByEnv":{"default":"708db9eeb24453c814a231a68c613a58"}}

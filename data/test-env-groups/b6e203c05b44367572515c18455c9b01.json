@@ -1,0 +1,1 @@
+{"id":"b6e203c05b44367572515c18455c9b01","fullName":"tests.api.test_chat_ai.TestChatEndpoint#test_chat_response_includes_metadata","name":"Response body includes model and token usage fields","status":"skipped","testResultsByEnv":{"default":"ff2c176df932c30e5f0172d44e223159"}}

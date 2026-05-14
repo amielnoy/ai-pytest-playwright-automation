@@ -1,0 +1,1 @@
+{"id":"3dfc3a1ac6ecb16a03ef8e5acb2902e6","fullName":"tests.api.test_prompt_injection.TestPromptInjection#test_indirect_injection_in_data_field","name":"[PI-4] Indirect injection — malicious instruction hidden inside a data field","status":"skipped","testResultsByEnv":{"default":"6fc6f7ee9b7e42760d2e23b8b168b7d4"}}
