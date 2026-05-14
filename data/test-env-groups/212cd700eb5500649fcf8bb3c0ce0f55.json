@@ -1,0 +1,1 @@
+{"id":"212cd700eb5500649fcf8bb3c0ce0f55","fullName":"tests.web-ui.test_system_coverage.TestNavigationCoverage#test_register_page_accessible_via_home_nav","name":"Home nav leads to register page at the correct URL","status":"passed","testResultsByEnv":{"default":"4c06105a1f7208a96746295161f8ddbc"}}

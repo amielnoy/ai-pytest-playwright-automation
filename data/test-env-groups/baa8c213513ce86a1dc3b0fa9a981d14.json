@@ -1,0 +1,1 @@
+{"id":"baa8c213513ce86a1dc3b0fa9a981d14","fullName":"tests.web-ui.test_system_coverage.TestNavigationCoverage#test_login_empty_credentials_shows_warning","name":"Submitting empty login credentials shows a danger warning","status":"passed","testResultsByEnv":{"default":"76f2237ba63742ae20d02209e9aedbfd"}}
