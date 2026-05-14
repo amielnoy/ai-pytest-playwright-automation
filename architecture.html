@@ -486,6 +486,56 @@
       main { padding: 2rem 1.5rem; }
       nav.sidebar { display: none; }
     }
+
+    /* ── utility classes replacing inline styles ─────────────────────── */
+    .ul-std-list { margin-top: 6px; padding-right: 1.2rem; line-height: 2; }
+    .td-green  { color: #28a745; }
+    .td-red    { color: #dc3545; }
+    .td-yellow { color: #ffc107; }
+    .text-muted-span { color: var(--muted); }
+
+    .callout-mb-lg { margin-bottom: 1.5rem; }
+    .callout-mt-lg { margin-top: 1.5rem; }
+    .callout-mt-md { margin-top: 1rem; }
+
+    .stats-row-course { flex-wrap: wrap; gap: 0.75rem; margin-bottom: 2rem; }
+    .stat-box-sm { min-width: 140px; }
+    .num-sm { font-size: 1.1rem; }
+
+    .btn-wa {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: #25d366; color: #fff; font-weight: 700;
+      text-decoration: none; transition: opacity 0.15s;
+    }
+    .btn-wa:hover { opacity: 0.85; }
+    .btn-wa-sm { font-size: 0.95rem; padding: 0.55rem 1.3rem; border-radius: 8px; }
+    .btn-wa-lg { font-size: 1rem;    padding: 0.7rem  1.8rem; border-radius: 10px; }
+
+    .cta-join {
+      background: linear-gradient(135deg, #1a2e1a 0%, #0f1f2e 100%);
+      border: 1px solid #25d366; border-radius: 14px;
+      padding: 1.5rem 2rem; margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+    }
+    .cta-join-icon  { font-size: 2.5rem; flex-shrink: 0; }
+    .cta-join-body  { flex: 1; min-width: 200px; }
+    .cta-join-title { font-size: 1.15rem; font-weight: 700; color: #25d366; margin-bottom: 0.3rem; }
+    .cta-join-sub   { color: var(--muted); font-size: 0.9rem; margin-bottom: 0.75rem; }
+    .cta-join-badge {
+      background: rgba(37,211,102,0.08); border: 1px solid rgba(37,211,102,0.25);
+      border-radius: 10px; padding: 0.75rem 1.2rem;
+      font-size: 0.82rem; color: var(--muted); min-width: 160px; text-align: center;
+    }
+    .cta-join-badge-icon  { font-size: 1.4rem; }
+    .cta-join-badge-label { margin-top: 0.2rem; }
+
+    .cta-bottom {
+      margin-top: 2rem; text-align: center; padding: 2rem;
+      background: linear-gradient(135deg, #12182e 0%, #1a1d27 100%);
+      border: 1px solid rgba(37,211,102,0.3); border-radius: 14px;
+    }
+    .cta-bottom-title    { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .cta-bottom-subtitle { color: var(--muted); font-size: 0.9rem; margin-bottom: 1rem; }
   </style>
 </head>
 <body>
@@ -1151,7 +1201,7 @@
       <div class="callout tip">
         <span class="callout-icon">📄</span>
         <div>תוכניות הבדיקות המפורטות נשמרות בתיקיית <code>stds/</code>:
-          <ul style="margin-top:6px;padding-right:1.2rem;line-height:2">
+          <ul class="ul-std-list">
             <li><code>STD_Sanity.md</code> — UI sanity (home header, invalid login, product detail)</li>
             <li><code>STD_Accessibility.md</code> — נגישות: lang, labels, alt text, duplicate IDs</li>
             <li><code>STD_Registration.md</code> — הרשמת משתמש חדש ו-validation שדות חובה</li>
@@ -1754,18 +1804,18 @@
         <h4 class="test-suite-title">סיווג סטטוסים</h4>
         <div class="tbl-wrap"><table>
           <tr><th>סטטוס Allure</th><th>צבע</th><th>אייקון</th><th>משמעות</th></tr>
-          <tr><td><code>passed</code></td><td style="color:#28a745">ירוק</td><td>✅</td><td>טסט עבר</td></tr>
-          <tr><td><code>failed</code></td><td style="color:#dc3545">אדום</td><td>❌</td><td>assertion נכשל</td></tr>
-          <tr><td><code>broken</code></td><td style="color:#ffc107">צהוב</td><td>⚠️</td><td>exception — לא assertion</td></tr>
-          <tr><td><code>skipped</code></td><td style="color:#ffc107">צהוב</td><td>⏭️</td><td>טסט דולג</td></tr>
-          <tr><td><code>flaky</code></td><td style="color:#dc3545">אדום</td><td>🔁</td><td>אותו historyId עם pass+fail</td></tr>
+          <tr><td><code>passed</code></td><td class="td-green">ירוק</td><td>✅</td><td>טסט עבר</td></tr>
+          <tr><td><code>failed</code></td><td class="td-red">אדום</td><td>❌</td><td>assertion נכשל</td></tr>
+          <tr><td><code>broken</code></td><td class="td-yellow">צהוב</td><td>⚠️</td><td>exception — לא assertion</td></tr>
+          <tr><td><code>skipped</code></td><td class="td-yellow">צהוב</td><td>⏭️</td><td>טסט דולג</td></tr>
+          <tr><td><code>flaky</code></td><td class="td-red">אדום</td><td>🔁</td><td>אותו historyId עם pass+fail</td></tr>
         </table></div>
 
         <h4 class="test-suite-title">פלטים</h4>
         <div class="tbl-wrap"><table>
           <tr><th>פלט</th><th>תיאור</th></tr>
           <tr><td>טקסט ANSI בטרמינל</td><td>טבלה צבעונית עם כל הטסטים, איקונים וסיכום.</td></tr>
-          <tr><td><code>test-status-report.html</code></td><td>דוח HTML עצמאי עם badge צבעוני לכל סטטוס.</td></tr>
+          <tr><td><code>artifacts/reports/test-status-report.html</code></td><td>דוח HTML עצמאי עם badge צבעוני לכל סטטוס.</td></tr>
           <tr><td><code>allure-results/&lt;uuid&gt;-result.json</code></td><td>Allure entry עם steps לכל סטטוס + שני attachments (txt + html).</td></tr>
         </table></div>
 
@@ -1881,12 +1931,12 @@ python run_agent.py</pre>
       <p>קובץ <code>Dockerfile</code> בונה image עם Python, dependencies, ו-Chromium. משמש להרצה בסביבה מבודקת.</p>
 
       <pre><span class="c"># בנייה</span>
-docker build -t ness-automation-tests .
+docker build -t ai-automation-testing .
 
 <span class="c"># הרצה עם artifacts</span>
 docker run --rm \
   -v <span class="s">"$PWD/docker-artifacts:/app/test-artifacts"</span> \
-  ness-automation-tests \
+  ai-automation-testing \
   pytest tests/ --alluredir=/app/test-artifacts/allure-results</pre>
 
       <h3>Docker helper scripts</h3>
@@ -2086,82 +2136,43 @@ npm run allure:open</pre>
       <h2><span class="icon">🎓</span> קורס פיתוח אוטומציה עם AI — Python + Playwright</h2>
 
       <!-- JOIN CTA -->
-      <div style="
-        background: linear-gradient(135deg, #1a2e1a 0%, #0f1f2e 100%);
-        border: 1px solid #25d366;
-        border-radius: 14px;
-        padding: 1.5rem 2rem;
-        margin-bottom: 1.5rem;
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-        flex-wrap: wrap;
-      ">
-        <div style="font-size: 2.5rem; flex-shrink:0">📲</div>
-        <div style="flex:1; min-width: 200px">
-          <div style="font-size: 1.15rem; font-weight: 700; color: #25d366; margin-bottom: 0.3rem">
-            להצטרף לקורס — חינם!
-          </div>
-          <div style="color: var(--muted); font-size: 0.9rem; margin-bottom: 0.75rem">
-            מלאו את הסקר והצטרפו לקבוצת הלימוד בוואטסאפ 👇
-          </div>
+      <div class="cta-join">
+        <div class="cta-join-icon">📲</div>
+        <div class="cta-join-body">
+          <div class="cta-join-title">להצטרף לקורס — חינם!</div>
+          <div class="cta-join-sub">מלאו את הסקר והצטרפו לקבוצת הלימוד בוואטסאפ 👇</div>
           <a href="https://chat.whatsapp.com/Bwjb01CGfxqIE04lkz2us0?mode=gi_t"
              target="_blank"
              rel="noopener noreferrer"
-             style="
-               display: inline-flex;
-               align-items: center;
-               gap: 0.5rem;
-               background: #25d366;
-               color: #fff;
-               font-weight: 700;
-               font-size: 0.95rem;
-               padding: 0.55rem 1.3rem;
-               border-radius: 8px;
-               text-decoration: none;
-               transition: opacity 0.15s;
-             "
-             onmouseover="this.style.opacity='0.85'"
-             onmouseout="this.style.opacity='1'"
-          >
-            💬 הצטרפו לקבוצת הלימוד
-          </a>
+             class="btn-wa btn-wa-sm"
+          >💬 הצטרפו לקבוצת הלימוד</a>
         </div>
-        <div style="
-          background: rgba(37,211,102,0.08);
-          border: 1px solid rgba(37,211,102,0.25);
-          border-radius: 10px;
-          padding: 0.75rem 1.2rem;
-          font-size: 0.82rem;
-          color: var(--muted);
-          min-width: 160px;
-          text-align: center;
-        ">
-          <div style="font-size: 1.4rem">🎓</div>
-          <div style="margin-top: 0.2rem"><strong style="color:var(--text)">חינמי לחלוטין</strong></div>
+        <div class="cta-join-badge">
+          <div class="cta-join-badge-icon">🎓</div>
+          <div class="cta-join-badge-label"><strong style="color:var(--text)">חינמי לחלוטין</strong></div>
           <div>בתמורה לשיתוף ידע</div>
         </div>
       </div>
 
-      <div class="callout info" style="margin-bottom:1.5rem">
+      <div class="callout info callout-mb-lg">
         <span class="callout-icon">🚀</span>
         <div>
           <strong>קורס חינמי | 6–8 שבועות | 29 מפגשים</strong><br>
-          <span style="color:var(--muted)">המטרה: לעבור מ-QA ידני → Automation Engineer מתקדם שמשלב Playwright + Python + AI.<br>
+          <span class="text-muted-span">המטרה: לעבור מ-QA ידני → Automation Engineer מתקדם שמשלב Playwright + Python + AI.<br>
           AI לא מחליף QA — הוא <em>מכפיל כוח</em>. היתרון האמיתי הוא שילוב של Automation + Architecture + AI.</span>
         </div>
       </div>
 
       <!-- TOPIC BLOCKS -->
-      <div class="stats-row" style="flex-wrap:wrap;gap:0.75rem;margin-bottom:2rem">
-        <div class="stat-box stat-blue"  style="min-width:140px"><div class="num" style="font-size:1.1rem">📋</div><div class="lbl">QA Foundations</div></div>
-        <div class="stat-box stat-cyan"  style="min-width:140px"><div class="num" style="font-size:1.1rem">🤖</div><div class="lbl">QA + AI</div></div>
-        <div class="stat-box stat-purple"style="min-width:140px"><div class="num" style="font-size:1.1rem">🔧</div><div class="lbl">AI Tools for QA</div></div>
-        <div class="stat-box stat-green" style="min-width:140px"><div class="num" style="font-size:1.1rem">🎭</div><div class="lbl">Playwright Framework</div></div>
-        <div class="stat-box stat-red"   style="min-width:140px"><div class="num" style="font-size:1.1rem">🧭</div><div class="lbl">MCP + AI Agents</div></div>
-        <div class="stat-box stat-yellow"style="min-width:140px"><div class="num" style="font-size:1.1rem">🔄</div><div class="lbl">CI/CD + DevOps</div></div>
-        <div class="stat-box stat-blue"  style="min-width:140px"><div class="num" style="font-size:1.1rem">🧠</div><div class="lbl">Advanced AI</div></div>
-        <div class="stat-box stat-green" style="min-width:140px"><div class="num" style="font-size:1.1rem">🏆</div><div class="lbl">Capstone</div></div>
+      <div class="stats-row stats-row-course">
+        <div class="stat-box stat-blue   stat-box-sm"><div class="num num-sm">📋</div><div class="lbl">QA Foundations</div></div>
+        <div class="stat-box stat-cyan   stat-box-sm"><div class="num num-sm">🤖</div><div class="lbl">QA + AI</div></div>
+        <div class="stat-box stat-purple stat-box-sm"><div class="num num-sm">🔧</div><div class="lbl">AI Tools for QA</div></div>
+        <div class="stat-box stat-green  stat-box-sm"><div class="num num-sm">🎭</div><div class="lbl">Playwright Framework</div></div>
+        <div class="stat-box stat-red    stat-box-sm"><div class="num num-sm">🧭</div><div class="lbl">MCP + AI Agents</div></div>
+        <div class="stat-box stat-yellow stat-box-sm"><div class="num num-sm">🔄</div><div class="lbl">CI/CD + DevOps</div></div>
+        <div class="stat-box stat-blue   stat-box-sm"><div class="num num-sm">🧠</div><div class="lbl">Advanced AI</div></div>
+        <div class="stat-box stat-green  stat-box-sm"><div class="num num-sm">🏆</div><div class="lbl">Capstone</div></div>
       </div>
 
       <!-- BLOCK 1: QA FOUNDATIONS -->
@@ -2288,7 +2299,7 @@ npm run allure:open</pre>
       </div>
 
       <!-- SUPPORT FILES -->
-      <div class="callout info" style="margin-top:1.5rem">
+      <div class="callout info callout-mt-lg">
         <span class="callout-icon">📚</span>
         <div>
           <strong>קבצי תמיכה:</strong> כל מפגש כולל <code>lecture.md</code> + <code>EXERCISES.md</code> + קוד הדגמה.<br>
@@ -2297,7 +2308,7 @@ npm run allure:open</pre>
         </div>
       </div>
 
-      <div class="callout warn" style="margin-top:1rem">
+      <div class="callout warn callout-mt-md">
         <span class="callout-icon">💡</span>
         <div>
           <strong>Takeaway מרכזי:</strong> AI לא מחליף QA — הוא מכפיל כוח. היתרון האמיתי הוא שילוב של <strong>Automation + Architecture + AI</strong>.
@@ -2305,35 +2316,13 @@ npm run allure:open</pre>
       </div>
 
       <!-- BOTTOM JOIN CTA -->
-      <div style="
-        margin-top: 2rem;
-        text-align: center;
-        padding: 2rem;
-        background: linear-gradient(135deg, #12182e 0%, #1a1d27 100%);
-        border: 1px solid rgba(37,211,102,0.3);
-        border-radius: 14px;
-      ">
-        <div style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.4rem">
-          מוכנים להתחיל? 🚀
-        </div>
-        <div style="color: var(--muted); font-size: 0.9rem; margin-bottom: 1rem">
-          מלאו את הסקר והצטרפו לקבוצת הלימוד בוואטסאפ
-        </div>
+      <div class="cta-bottom">
+        <div class="cta-bottom-title">מוכנים להתחיל? 🚀</div>
+        <div class="cta-bottom-subtitle">מלאו את הסקר והצטרפו לקבוצת הלימוד בוואטסאפ</div>
         <a href="https://chat.whatsapp.com/Bwjb01CGfxqIE04lkz2us0?mode=gi_t"
            target="_blank"
            rel="noopener noreferrer"
-           style="
-             display: inline-flex;
-             align-items: center;
-             gap: 0.5rem;
-             background: #25d366;
-             color: #fff;
-             font-weight: 700;
-             font-size: 1rem;
-             padding: 0.7rem 1.8rem;
-             border-radius: 10px;
-             text-decoration: none;
-           "
+           class="btn-wa btn-wa-lg"
         >💬 הצטרפו לקבוצת הלימוד</a>
       </div>
     </section>
