@@ -1,0 +1,91 @@
+# Dependency directories
+node_modules/
+.venv/
+venv/
+env/
+.tox/
+
+# Python caches and build output
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+.eggs/
+build/
+dist/
+site/
+
+# Test, coverage, and type-check caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.hypothesis/
+
+# Playwright and browser automation runtime state
+.playwright-mcp/
+playwright-report/
+test-results/
+traces/
+videos/
+screenshots/
+
+# Allure and generated test reports
+allure-results/
+allure-report/
+allure-history/
+allure-results-archive/
+tmp-allure/
+docker-artifacts/
+test-status-report.html
+
+# Logs and temporary files
+logs/
+*.log
+*.tmp
+*.temp
+tmp/
+temp/
+
+# Local secrets and environment files
+.env
+.env.*
+!.env.example
+data/secrets.json
+**/secrets.json
+**/*secret*.json
+**/*credentials*.json
+**/*token*.json
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Local IDE, editor, and assistant state
+.idea/
+.vscode/
+.qodo/
+.claude/
+*.iml
+*.swp
+*.swo
+*~
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Large/generated static artifacts
+artifacts/
+architecture.html
+*.har
+*.zip
+*.tar
+*.tar.gz
+*.tgz
