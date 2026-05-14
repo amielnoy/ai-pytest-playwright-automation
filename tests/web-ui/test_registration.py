@@ -11,6 +11,7 @@ class TestRegistration:
 
     @allure.title("Successful new-user registration")
     @allure.severity(allure.severity_level.CRITICAL)
+    @allure.testcase("https://your-jira.atlassian.net/browse/TN-101", "TN-101")
     def test_register_new_user(
         self, registration_pages: RegistrationPages, registration_data: dict
     ):
@@ -37,6 +38,8 @@ class TestRegistration:
 
     @allure.title("Registration fails with missing required fields")
     @allure.severity(allure.severity_level.NORMAL)
+    @allure.testcase("https://your-jira.atlassian.net/browse/TN-102", "TN-102")
+    @allure.issue("https://your-jira.atlassian.net/browse/TN-BUG-12", "TN-BUG-12")
     def test_register_missing_fields(self, registration_pages: RegistrationPages):
         registration_pages.home.open()
         registration_pages.home.go_to_register()
@@ -53,4 +56,6 @@ class TestRegistration:
 
         with allure.step("Verify validation errors appear"):
             error = registration_pages.register.get_error_message()
-            assert error != "", "Expected validation error but got none"
+            assert "First Name must be between 1 and 32 characters!" in error, (
+                f"Expected first-name validation error, got: {error!r}"
+            )

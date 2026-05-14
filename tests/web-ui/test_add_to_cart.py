@@ -12,6 +12,7 @@ class TestAddItemsToCart:
 
     @allure.title("Add items under max_price to cart")
     @allure.severity(allure.severity_level.CRITICAL)
+    @allure.testcase("https://your-jira.atlassian.net/browse/TN-301", "TN-301")
     def test_add_items_to_cart(self, cart_flow_pages: CartFlowPages):
         search_data = get_test_data("search")
         query = search_data["query"]

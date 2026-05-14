@@ -5,6 +5,7 @@ from pages.home_page import HomePage
 from pages.login_page import LoginPage
 from pages.product_detail_page import ProductDetailPage
 from pages.search_results_page import SearchResultsPage
+from utils.data_loader import get_test_data
 
 
 @allure.feature("Sanity")
@@ -26,14 +27,17 @@ class TestSanity:
 
     @allure.title("Invalid login keeps the user on login page with a warning")
     @allure.severity(allure.severity_level.CRITICAL)
+    @allure.testcase("https://your-jira.atlassian.net/browse/TN-201", "TN-201")
+    @allure.issue("https://your-jira.atlassian.net/browse/TN-BUG-8", "TN-BUG-8")
     def test_invalid_login_warning(self, login_page: LoginPage):
         with allure.step("Open account login page"):
             login_page.open()
 
         with allure.step("Submit invalid credentials"):
+            sanity_data = get_test_data("sanity")
             login_page.login(
-                email="sanity_invalid@example.com",
-                password="bad-password",
+                email=sanity_data["invalid_email"],
+                password=sanity_data["invalid_password"],
             )
 
         with allure.step("Verify login fails with the expected warning"):
@@ -49,14 +53,15 @@ class TestSanity:
         product_detail_page: ProductDetailPage,
     ):
         with allure.step("Search for MacBook from the home page"):
+            product = get_test_data("sanity")["search_product"]
             home_page.open()
-            home_page.search("MacBook")
+            home_page.search(product)
 
         with allure.step("Open the MacBook product from search results"):
-            search_results_page.open_product("MacBook")
+            search_results_page.open_product(product)
 
         with allure.step("Verify product detail essentials are visible"):
-            assert product_detail_page.title == "MacBook"
-            assert product_detail_page.has_product_heading("MacBook")
+            assert product_detail_page.title == product
+            assert product_detail_page.has_product_heading(product)
             assert product_detail_page.has_default_quantity()
             assert product_detail_page.has_add_to_cart_button()

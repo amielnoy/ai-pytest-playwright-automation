@@ -12,6 +12,7 @@ class TestSearchUnderPrice:
 
     @allure.title("searchItemsByNameUnderPrice returns items at or below max_price")
     @allure.severity(allure.severity_level.CRITICAL)
+    @allure.testcase("https://your-jira.atlassian.net/browse/TN-401", "TN-401")
     def test_search_items_under_price(self, search_pages: SearchPages):
         data = get_test_data("search")
         query = data["query"]
