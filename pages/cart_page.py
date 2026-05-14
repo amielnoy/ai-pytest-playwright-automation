@@ -22,3 +22,6 @@ class CartPage(BasePage):
 
     def get_item_count(self) -> int:
         return self.summary.get_item_count()
+
+    def get_item_subtotals(self) -> list[float]:
+        return self.summary.get_item_subtotals()
