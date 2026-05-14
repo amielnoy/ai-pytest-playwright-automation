@@ -12,5 +12,10 @@
   },
   "cart": {
     "max_total": 2000.0
+  },
+  "sanity": {
+    "invalid_email": "sanity_invalid@example.com",
+    "invalid_password": "bad-password",
+    "search_product": "MacBook"
   }
 }
