@@ -11,6 +11,8 @@ from dataclasses import asdict
 from pathlib import Path
 from typing import Any
 
+import anthropic as anthropic_sdk
+
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import HTMLResponse, Response
 from fastapi.staticfiles import StaticFiles
@@ -42,6 +44,11 @@ class AllureGenerateRequest(BaseModel):
 class MockCartAddRequest(BaseModel):
     product_id: str
     quantity: int = Field(default=1, ge=1)
+
+
+class ChatRequest(BaseModel):
+    message: str = Field(min_length=1)
+    system: str | None = None
 
 
 class Job(BaseModel):
@@ -324,6 +331,31 @@ def create_app() -> FastAPI:
     def mock_cart_clear() -> dict[str, str]:
         mock_store.clear_cart()
         return {"status": "cleared"}
+
+    @app.post("/chat")
+    def chat(request: ChatRequest) -> dict[str, Any]:
+        api_key = os.environ.get("ANTHROPIC_API_KEY")
+        if not api_key:
+            raise HTTPException(
+                status_code=503,
+                detail="ANTHROPIC_API_KEY is not configured on this server",
+            )
+        client = anthropic_sdk.Anthropic(api_key=api_key)
+        try:
+            result = client.messages.create(
+                model="claude-haiku-4-5-20251001",
+                max_tokens=512,
+                system=request.system or "You are a helpful assistant.",
+                messages=[{"role": "user", "content": request.message}],
+            )
+        except anthropic_sdk.APIError as exc:
+            raise HTTPException(status_code=502, detail=str(exc)) from exc
+        return {
+            "response": result.content[0].text,
+            "model": result.model,
+            "input_tokens": result.usage.input_tokens,
+            "output_tokens": result.usage.output_tokens,
+        }
 
     return app
 

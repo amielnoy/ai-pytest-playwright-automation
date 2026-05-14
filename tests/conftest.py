@@ -1,4 +1,7 @@
+import os
+
 import pytest
+import requests as _requests
 
 from flows.cart_flow import CartFlow
 from flows.login_flow import LoginFlow
@@ -12,6 +15,7 @@ from pages.register_page import RegisterPage
 from pages.search_results_page import SearchResultsPage
 from services.api.account_service import AccountService
 from services.api.cart_service import CartService
+from services.api.chat_service import ChatService
 from services.api.public_service import EndpointCase, PublicService
 from services.api.search_service import SearchCase, SearchService
 from services.rest_client import RestClient
@@ -220,3 +224,39 @@ def api_cart(app_url: str):
         limit=search["limit"],
     )
     return ocsessid, products, data["cart"]["max_total"], search["max_price"]
+
+
+# ---------------------------------------------------------------------------
+# AI chat fixtures
+# ---------------------------------------------------------------------------
+
+_SERVER_URL = get_config().get("server_url", "http://127.0.0.1:8000")
+
+
+@pytest.fixture
+def server_url() -> str:
+    return _SERVER_URL
+
+
+@pytest.fixture
+def chat_service(server_url: str) -> ChatService:
+    """
+    Client for the local FastAPI /chat endpoint.
+
+    Skips automatically when:
+    - ANTHROPIC_API_KEY is not set in the environment, OR
+    - The local server is not reachable at server_url.
+
+    This keeps AI tests out of the way during regular CI runs that don't
+    have credentials configured, without requiring manual skip markers on
+    every test.
+    """
+    if not os.environ.get("ANTHROPIC_API_KEY"):
+        pytest.skip("ANTHROPIC_API_KEY not set — skipping AI chat test")
+    try:
+        _requests.get(f"{server_url}/health", timeout=3)
+    except _requests.exceptions.ConnectionError:
+        pytest.skip(f"Local server not reachable at {server_url} — start it with: python -m uvicorn server.app:app")
+    client = RestClient(timeout=60)  # AI calls can be slow
+    yield ChatService(client, server_url)
+    client.close()

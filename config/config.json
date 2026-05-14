@@ -1,5 +1,6 @@
 {
   "base_url": "https://tutorialsninja.com/demo",
+  "server_url": "http://127.0.0.1:8000",
   "browser": "chromium",
   "headless": false,
   "slow_mo": 1000,
