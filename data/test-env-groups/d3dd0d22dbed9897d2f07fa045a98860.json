@@ -1,1 +1,1 @@
-{"id":"d3dd0d22dbed9897d2f07fa045a98860","fullName":"tests.contract.test_contracts.TestPriceContract#test_cart_total_matches_item_sum","name":"Cart total matches sum of individual item prices","status":"passed","testResultsByEnv":{"default":"97daf48b99faaccda02367e748814a20"}}
+{"id":"d3dd0d22dbed9897d2f07fa045a98860","fullName":"tests.contract.test_contracts.TestPriceContract#test_cart_total_matches_item_sum","name":"Cart total matches sum of individual item prices","status":"passed","testResultsByEnv":{"default":"03e90f431f56c61c56cc30c7877d73a2"}}

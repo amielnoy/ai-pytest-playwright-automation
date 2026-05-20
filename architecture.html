@@ -832,7 +832,7 @@
 
       <div class="pom-tree">
         <div class="line"><span class="base">BasePage</span> <span class="muted">← pages/base_page.py</span></div>
-        <div class="line"><span class="indent"></span>├── <code class="base">_HTML_SELECTOR / _ANY_ID_SELECTOR / _DUPLICATE_IDS_SCRIPT</code> — class constants (BasePage עצמה עוקבת אחרי מוסכמת ה-class data members)</div>
+        <div class="line"><span class="indent"></span>├── <code class="base">_HTML_SELECTOR / _ANY_ID_SELECTOR / _DUPLICATE_IDS_SCRIPT</code> — class constants + constructor-initialized locator members</div>
         <div class="line"><span class="indent"></span>├── <code class="base">self.alert</code> — AlertComponent זמין לכל הדפים (ירושה)</div>
         <div class="line"><span class="indent"></span>├── <code class="base">navigate(path, wait_until)</code> — ניווט בסיסי</div>
         <div class="line"><span class="indent"></span>├── <code class="base">title</code> <span class="muted">@property</span> — כותרת הדף הנוכחי</div>
@@ -888,22 +888,27 @@
 
       <div class="callout tip mt-1">
         <span class="callout-icon">💡</span>
-        <div><strong>כלל ברזל:</strong> selectors, role names, labels, placeholders וטקסטים יציבים נשמרים כ-class data members בתוך ה-page objects/components. המתודות משתמשות רק ב-<code>self._...</code>, וטסט שמכיל selector ישיר — לא עבר review.</div>
+        <div><strong>כלל ברזל:</strong> selectors, role names, labels, placeholders וטקסטים יציבים נשמרים כ-class constants, וה-locators היציבים מאותחלים כ-instance members ב-<code>__init__</code>. המתודות משתמשות ב-<code>self.email_input</code>, <code>self.login_button</code> וכדומה. טסט שמכיל selector ישיר — לא עבר review.</div>
       </div>
 
       <div class="callout info mt-12">
         <span class="callout-icon">🎯</span>
-        <div><strong>Locator strategy:</strong> עדיפות ל-Playwright locators יציבים: <code>get_by_role</code>, <code>get_by_label</code>, <code>get_by_placeholder</code>, <code>get_by_text</code>. CSS נשאר רק כאשר אין locator סמנטי יציב במרקאפ של TutorialsNinja.</div>
+        <div><strong>Locator strategy:</strong> עדיפות ל-Playwright locators יציבים: <code>get_by_role</code>, <code>get_by_label</code>, <code>get_by_placeholder</code>, <code>get_by_text</code>. CSS נשאר רק כאשר אין locator סמנטי יציב במרקאפ של TutorialsNinja, ובמקרים כאלה אפשר לעטוף אותו ב-deterministic self-healing fallback מתוך <code>pages/self_healing.py</code>.</div>
       </div>
 
-      <h3>Class data members for locators</h3>
-      <p>כל locator או ערך שמזהה אלמנט נשמר כ-member קבוע במחלקה: role, name, label, placeholder, selector, route, text קבוע, attribute name וכדומה. המתודות קוראות ל-members האלה, ולא מגדירות strings חדשים inline. <strong>BasePage עצמה עוקבת אחרי הכלל</strong> — הסלקטורים <code>"html"</code> ו-<code>"[id]"</code> הוגדרו כ-<code>_HTML_SELECTOR</code> ו-<code>_ANY_ID_SELECTOR</code>.</p>
+      <h3>Constructor-initialized locator members</h3>
+      <p>כל ערך שמזהה אלמנט נשמר כ-class constant: role, name, label, placeholder, selector, route, text קבוע, attribute name וכדומה. ה-locators עצמם נוצרים פעם אחת ב-<code>__init__</code> ונשמרים כ-instance members. המתודות קוראות ל-members האלה, ולא מגדירות strings חדשים inline. Locators דינמיים שתלויים בקלט runtime, למשל שם מוצר, נשארים במתודה שמקבלת את הקלט.</p>
       <pre><span class="k">class</span> BasePage:
     _HTML_SELECTOR = <span class="s">"html"</span>
     _ANY_ID_SELECTOR = <span class="s">"[id]"</span>
 
     <span class="k">def</span> __init__(self, page, base_url):
-        self._html = page.locator(self._HTML_SELECTOR)
+        self._html = healing_locator(
+            page.locator(self._HTML_SELECTOR),
+            name=<span class="s">"document root"</span>,
+            primary_label=self._HTML_SELECTOR,
+            fallbacks=[(<span class="s">"body"</span>, page.locator(<span class="s">"body"</span>))],
+        )
         self._id_elements = page.locator(self._ANY_ID_SELECTOR)
 
 <span class="k">class</span> LoginPage(BasePage):
@@ -911,9 +916,14 @@
     _EMAIL_NAME = <span class="s">"E-Mail Address"</span>
     _PASSWORD_LABEL = <span class="s">"Password"</span>
 
+    <span class="k">def</span> __init__(self, page, base_url):
+        super().__init__(page, base_url)
+        self.email_input = page.get_by_role(self._EMAIL_ROLE, name=self._EMAIL_NAME)
+        self.password_input = page.get_by_label(self._PASSWORD_LABEL)
+
     <span class="k">def</span> login(self, email, password):
-        self.page.get_by_role(self._EMAIL_ROLE, name=self._EMAIL_NAME).fill(email)
-        self.page.get_by_label(self._PASSWORD_LABEL).fill(password)</pre>
+        self.email_input.fill(email)
+        self.password_input.fill(password)</pre>
     </section>
 
     <!-- ── FLOWS LAYER ── -->
@@ -1775,7 +1785,7 @@
 
       <div class="callout info">
         <span class="callout-icon">✅</span>
-        <div><strong>Page Object unit coverage:</strong> לכל page object ולכל component תחת <code>pages/</code> יש בדיקות יחידה ב-<code>tests/unit/test_page_objects.py</code>. הבדיקות לא פותחות browser; הן מאמתות delegation, routes, locator members, parsing, וקריאות ל-Playwright API דרך mocks.</div>
+        <div><strong>Page Object unit coverage:</strong> לכל page object ולכל component תחת <code>pages/</code> יש בדיקות יחידה ב-<code>tests/unit/test_page_objects.py</code>. הבדיקות לא פותחות browser; הן מאמתות delegation, routes, constructor-initialized locator members, deterministic self-healing fallbacks, parsing, וקריאות ל-Playwright API דרך mocks.</div>
       </div>
 
       <h3>פקודת אימות</h3>
@@ -1819,7 +1829,7 @@
         <tr><td><code>test_run_pytest_rejects_unsafe_arguments</code></td><td>args עם <code>&&</code> ← 400 + "Unsafe pytest arg"</td></tr>
       </table></div>
 
-      <h3>test_page_objects.py — Page Objects &amp; Components (30 tests)</h3>
+      <h3>test_page_objects.py — Page Objects &amp; Components (32 tests)</h3>
       <div class="tbl-wrap"><table>
         <tr><th>אזור</th><th>מה נבדק</th></tr>
         <tr><td><code>BasePage / BaseComponent</code></td><td>שמירת page, בניית URL ב-<code>navigate()</code>, title/url/screenshot, שפת מסמך, duplicate ids, והמתנה לאלמנט גלוי דרך <code>expect</code>.</td></tr>
@@ -2275,7 +2285,7 @@ npm run allure:open</pre>
       <div class="callout info callout-mb-lg">
         <span class="callout-icon">🚀</span>
         <div>
-          <strong>קורס חינמי | 6–8 שבועות | 29 מפגשים</strong><br>
+          <strong>קורס חינמי | 6–8 שבועות | 30 מפגשים</strong><br>
           <span class="text-muted-span">המטרה: לעבור מ-QA ידני → Automation Engineer מתקדם שמשלב Playwright + Python + AI.<br>
           AI לא מחליף QA — הוא <em>מכפיל כוח</em>. היתרון האמיתי הוא שילוב של Automation + Architecture + AI.</span>
         </div>
@@ -2339,7 +2349,7 @@ npm run allure:open</pre>
       <!-- BLOCK 3: AI TOOLS -->
       <div class="doc-block">
         <h3>🔧 בלוק 3 — כלי AI ל-QA (Sessions 14 + 21)</h3>
-        <p class="doc-note">Test generators, locator generators, self-healing selectors, ו-CLI ליצירת בדיקות בלחיצת כפתור.</p>
+        <p class="doc-note">Test generators, locator generators, deterministic self-healing selectors, ו-CLI ליצירת בדיקות בלחיצת כפתור.</p>
         <div class="tbl-wrap"><table>
           <tr><th>#</th><th>נושא</th><th>תוצרי מפגש</th><th>סטטוס</th></tr>
           <tr>
@@ -2373,13 +2383,14 @@ npm run allure:open</pre>
 
       <!-- BLOCK 5: CI/CD + DEVOPS -->
       <div class="doc-block">
-        <h3>🔄 בלוק 5 — CI/CD ו-DevOps (Sessions 16–17, 29)</h3>
+        <h3>🔄 בלוק 5 — CI/CD ו-DevOps (Sessions 16–17, 29–30)</h3>
         <p class="doc-note">שילוב עם GitHub Actions, הרצות אוטומטיות בכל PR, דוחות Allure ותחקור תקלות.</p>
         <div class="tbl-wrap"><table>
           <tr><th>#</th><th>נושא</th><th>תוצרי מפגש</th><th>סטטוס</th></tr>
           <tr><td>16</td><td><strong>CI/CD &amp; Failure Analysis</strong></td><td>Flaky test detection, CI failure analysis עם tooling חוזר.</td><td><span class="badge badge-green">✅ מוכן</span></td></tr>
           <tr><td>17</td><td><strong>Allure 3 + GitHub Pages</strong></td><td>דוחות קריאים עם trend history דרך CI — GitHub Pages.</td><td><span class="badge badge-green">✅ מוכן</span></td></tr>
           <tr><td>29</td><td><strong>Docker Compose + Grafana</strong></td><td>הרצת אוטומציה ב-Docker Compose, Prometheus scraping, ו-Grafana dashboards.</td><td><span class="badge badge-green">✅ מוכן</span></td></tr>
+          <tr><td>30</td><td><strong>AWS EC2 + S3 + Allure TestOps</strong></td><td>בדיקות deployment ל-Allure TestOps על EC2, אבטחת S3, Allure 3 evidence flow, ו-restore drill.</td><td><span class="badge badge-green">✅ מוכן</span></td></tr>
         </table></div>
       </div>
 
