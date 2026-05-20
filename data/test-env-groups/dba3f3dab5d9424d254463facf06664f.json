@@ -1,1 +1,1 @@
-{"id":"dba3f3dab5d9424d254463facf06664f","fullName":"tests.api.test_api_integrations.TestCartApiNegative#test_cart_add_ignores_invalid_product_id","name":"Cart add ignores missing or unknown product IDs","status":"passed","testResultsByEnv":{"default":"901ff7b033d8508abefd6b2b13c9240d"}}
+{"id":"dba3f3dab5d9424d254463facf06664f","fullName":"tests.api.test_api_integrations.TestCartApiNegative#test_cart_add_ignores_invalid_product_id","name":"Cart add ignores missing or unknown product IDs","status":"passed","testResultsByEnv":{"default":"c00878934dd9b473a1bc744c8222b3f9"}}
