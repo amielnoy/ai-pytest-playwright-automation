@@ -16,6 +16,8 @@ Tests in this file:
 import allure
 import pytest
 
+pytestmark = pytest.mark.demo
+
 # Module-level set persists across reruns in the same worker process.
 # First attempt: key absent → fail and record it.
 # Second attempt (rerun): key present → pass.

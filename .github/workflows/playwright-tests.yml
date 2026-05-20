@@ -32,6 +32,8 @@ jobs:
   test:
     name: Run Playwright Tests
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
     steps:
       - name: Checkout
@@ -75,7 +77,7 @@ jobs:
         run: playwright install-deps chromium
 
       - name: Run tests
-        run: pytest tests/ -n auto --dist loadgroup
+        run: pytest tests/ -m "not demo" -n auto --dist loadgroup
         env:
           CI: "true"
 
@@ -90,20 +92,36 @@ jobs:
           BRANCH="${{ github.ref_name }}"
           RUN_NUM="${{ github.run_number }}"
 
-          PASSED=0; FAILED=0; BROKEN=0; SKIPPED=0
+          PASSED=0; FAILED=0; BROKEN=0; SKIPPED=0; TOTAL=0
           if [ -d allure-results ]; then
-            for f in allure-results/*-result.json; do
-              [ -f "$f" ] || continue
-              status=$(python3 -c "import json; print(json.load(open('$f')).get('status',''))" 2>/dev/null)
-              case "$status" in
-                passed)  PASSED=$((PASSED+1))  ;;
-                failed)  FAILED=$((FAILED+1))  ;;
-                broken)  BROKEN=$((BROKEN+1))  ;;
-                skipped) SKIPPED=$((SKIPPED+1)) ;;
-              esac
-            done
+            read -r PASSED FAILED BROKEN SKIPPED TOTAL << EOF
+          $(python3 << 'PY'
+          import json
+          from collections import defaultdict
+          from pathlib import Path
+
+          by_history: dict[str, list[dict]] = defaultdict(list)
+          for path in Path("allure-results").glob("*-result.json"):
+              try:
+                  data = json.loads(path.read_text(encoding="utf-8"))
+                  hid = data.get("historyId") or path.name
+                  by_history[hid].append(data)
+              except Exception:
+                  pass
+
+          counts = {"passed": 0, "failed": 0, "broken": 0, "skipped": 0}
+          for entries in by_history.values():
+              latest = max(entries, key=lambda item: item.get("stop", 0))
+              status = latest.get("status", "unknown")
+              if status in counts:
+                  counts[status] += 1
+
+          total = sum(counts.values())
+          print(counts["passed"], counts["failed"], counts["broken"], counts["skipped"], total)
+          PY
+          )
+          EOF
           fi
-          TOTAL=$((PASSED+FAILED+BROKEN+SKIPPED))
 
           if [ "$FAILED" -gt 0 ] || [ "$BROKEN" -gt 0 ]; then
             BADGE="🔴 FAILED"
@@ -150,6 +168,8 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     if: always()
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
     steps:
       - name: Checkout

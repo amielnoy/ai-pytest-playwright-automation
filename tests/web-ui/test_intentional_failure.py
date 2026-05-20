@@ -1,6 +1,9 @@
 import allure
+import pytest
 
 from pages.home_page import HomePage
+
+pytestmark = pytest.mark.demo
 
 
 @allure.feature("Intentional Failure")

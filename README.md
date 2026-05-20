@@ -87,6 +87,8 @@ Before pushing, confirm nothing leaked: `git check-ignore -v data/secrets.json` 
 
 So a plain `pytest` run will use multiple workers automatically.
 
+CI runs `pytest tests/ -m "not demo"` so teaching-only tests (intentional failure, flaky Allure demo) do not fail the pipeline. Run them locally with `pytest -m demo`.
+
 ## Run Tests In Parallel
 
 Run the full suite with the default parallel configuration:
