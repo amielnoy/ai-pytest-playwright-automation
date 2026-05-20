@@ -1,1 +1,1 @@
-{"id":"a8b36b7b0df0264547e3226aa873b0dd","fullName":"tests.web-ui.test_ipod_storage.TestIpoDStorage#test_ipod_storage","name":"ipodStorage","status":"broken","testResultsByEnv":{"default":"a8f01c1fa6f39ad29134b8086d1198e5"}}
+{"id":"a8b36b7b0df0264547e3226aa873b0dd","fullName":"tests.web-ui.test_ipod_storage.TestIpoDStorage#test_ipod_storage","name":"ipodStorage","status":"passed","testResultsByEnv":{"default":"caf35a19ac53d5a07877db1ef665cb10"}}

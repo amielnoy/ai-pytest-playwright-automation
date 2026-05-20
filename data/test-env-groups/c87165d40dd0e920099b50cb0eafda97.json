@@ -1,1 +1,1 @@
-{"id":"c87165d40dd0e920099b50cb0eafda97","fullName":"tests.web-ui.test_sort_alphabetically.TestSortAlphabetically#test_sort_alphabetically_ascending","name":"Test sort alphabetically ascending","status":"broken","testResultsByEnv":{"default":"9052201cc636ae1c574cb8c4bac3494c"}}
+{"id":"c87165d40dd0e920099b50cb0eafda97","fullName":"tests.web-ui.test_sort_alphabetically.TestSortAlphabetically#test_sort_alphabetically_ascending","name":"Test sort alphabetically ascending","status":"passed","testResultsByEnv":{"default":"39566e74b25bb8b6a8ebd210c82207b1"}}
