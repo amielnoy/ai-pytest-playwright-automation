@@ -44,7 +44,7 @@ class TestAddItemsToCart:
             )
 
         with allure.step("Open cart and verify item count"):
-            cart_flow_pages.cart.open()
+            cart_flow_pages.cart.open(min_items=len(products))
             assert not cart_flow_pages.cart.is_empty(), "Cart is empty after adding items"
             item_count = cart_flow_pages.cart.get_item_count()
             assert item_count == len(products), (

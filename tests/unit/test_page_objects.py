@@ -320,6 +320,7 @@ def test_search_results_returns_empty_when_no_results_message_is_visible():
     page = MagicMock()
     page.get_by_text.return_value.is_visible.return_value = True
     search_page = SearchResultsPage(page, "https://example.test")
+    search_page._wait_for_search_outcome = MagicMock()
 
     assert search_page.get_products_under_price("missing", 10.0) == []
 
@@ -327,6 +328,7 @@ def test_search_results_returns_empty_when_no_results_message_is_visible():
         "https://example.test/index.php?route=product%2Fsearch&search=missing",
         wait_until="domcontentloaded",
     )
+    search_page._wait_for_search_outcome.assert_called_once()
 
 
 def test_search_results_filters_products_under_price_and_limit():
@@ -349,31 +351,27 @@ def test_search_results_filters_products_under_price_and_limit():
     search_page._load_search.assert_called_once_with("query")
 
 
-def test_search_results_adds_items_to_cart_and_waits_for_success():
+def test_search_results_adds_items_to_cart_by_name_and_clears_success_alert():
     page = MagicMock()
-    thumbs = MagicMock()
     search_page = SearchResultsPage(page, "https://example.test")
-    search_page.product_thumbs = thumbs
     search_page.alert = MagicMock()
     products = [
         ProductInfo(name="MacBook", price=602.0, index=0),
         ProductInfo(name="iPhone", price=123.2, index=2),
     ]
+    cards = [MagicMock(), MagicMock()]
+    search_page._card_for_product_name = MagicMock(side_effect=cards)
 
-    with patch("pages.search_results_page.ProductCardComponent") as card_class:
-        cards = [MagicMock(), MagicMock()]
-        card_class.side_effect = cards
-        added = search_page.add_items_to_cart(products)
+    added = search_page.add_items_to_cart(products)
 
     assert added == ["MacBook", "iPhone"]
-    assert thumbs.nth.call_args_list == [call(0), call(2)]
-    assert card_class.call_args_list == [
-        call(thumbs.nth.return_value, 0),
-        call(thumbs.nth.return_value, 2),
+    assert search_page._card_for_product_name.call_args_list == [
+        call("MacBook"),
+        call("iPhone"),
     ]
     cards[0].add_to_cart.assert_called_once()
     cards[1].add_to_cart.assert_called_once()
-    assert search_page.alert.wait_for_success.call_count == 2
+    assert search_page.alert.clear_success.call_count == 2
 
 
 def test_search_results_open_product_clicks_title_link_in_matching_card():
@@ -491,7 +489,7 @@ def test_alert_component_returns_banner_field_success_and_waits():
     with patch("pages.components.alert.expect") as expect_mock:
         alert.wait_for_success(timeout=1234)
 
-    expect_mock.assert_called_once_with(alert.success_alert)
+    expect_mock.assert_called_once_with(alert.success_alert.first)
     expect_mock.return_value.to_be_visible.assert_called_once_with(timeout=1234)
 
 

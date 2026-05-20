@@ -24,7 +24,7 @@ class TestCartTotalNotExceeds:
         context.add_cookies([{"name": "OCSESSID", "value": ocsessid, "url": app_url}])
 
         with allure.step("Open cart and read total"):
-            cart_pages.cart.open()
+            cart_pages.cart.open(min_items=1)
             total = cart_pages.cart.get_cart_total()
 
         allure.attach(
@@ -49,7 +49,7 @@ class TestCartTotalNotExceeds:
         context.add_cookies([{"name": "OCSESSID", "value": ocsessid, "url": app_url}])
 
         with allure.step("Open cart and verify total matches sum of item subtotals"):
-            cart_pages.cart.open()
+            cart_pages.cart.open(min_items=len(products))
             total = cart_pages.cart.get_cart_total()
             item_subtotals = cart_pages.cart.get_item_subtotals()
             assert item_subtotals, "Cart has no line items"
