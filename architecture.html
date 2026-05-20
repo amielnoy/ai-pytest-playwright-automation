@@ -23,12 +23,18 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
+    html {
+      direction: rtl;
+    }
+
     body {
       font-family: 'Segoe UI', system-ui, sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.7;
       font-size: 15px;
+      direction: rtl;
+      text-align: right;
     }
 
     /* ── STUDY GROUP BANNER ── */
@@ -97,6 +103,7 @@
     .layout {
       display: flex;
       min-height: calc(100vh - 82px);
+      direction: rtl;
     }
 
     /* ── SIDEBAR ── */
@@ -110,6 +117,8 @@
       top: 82px;
       height: calc(100vh - 82px);
       overflow-y: auto;
+      direction: rtl;
+      text-align: right;
     }
     nav.sidebar .nav-section {
       margin-bottom: 1.6rem;
@@ -144,6 +153,8 @@
       padding: 3rem 4rem;
       overflow: auto;
       max-width: 1100px;
+      direction: rtl;
+      text-align: right;
     }
 
     section { margin-bottom: 4rem; scroll-margin-top: 100px; }
@@ -183,6 +194,8 @@
       border-radius: 12px;
       padding: 1.25rem;
       transition: border-color 0.2s, box-shadow 0.2s;
+      direction: rtl;
+      text-align: right;
     }
     .card:hover {
       border-color: var(--accent);
@@ -302,6 +315,8 @@
       border-radius: 12px;
       padding: 1.2rem 1.3rem 0.2rem;
       margin: 1.4rem 0 1.8rem;
+      direction: rtl;
+      text-align: right;
     }
     .doc-block h3:first-child {
       margin-top: 0;
@@ -323,6 +338,7 @@
       width: 100%;
       border-collapse: collapse;
       font-size: 0.86rem;
+      direction: rtl;
     }
     th {
       background: var(--surface2);
@@ -339,6 +355,7 @@
       padding: 10px 14px;
       border-bottom: 1px solid var(--border);
       vertical-align: top;
+      text-align: right;
     }
     td code, th code {
       direction: ltr;
@@ -393,6 +410,8 @@
       display: flex;
       gap: 0.8rem;
       align-items: flex-start;
+      direction: rtl;
+      text-align: right;
     }
     .callout-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
     .callout.info  { background: rgba(34,211,238,0.08);  border: 1px solid rgba(34,211,238,0.3);  color: #a0e5f0; }
@@ -604,12 +623,12 @@
       <h2><span class="icon">🗂</span> סקירה כללית</h2>
 
       <div class="stats-row">
-        <div class="stat-box stat-blue"><div class="num">30</div><div class="lbl">UI Test cases</div></div>
-        <div class="stat-box stat-cyan"><div class="num">58</div><div class="lbl">API Test cases</div></div>
+        <div class="stat-box stat-blue"><div class="num">44</div><div class="lbl">UI Test cases</div></div>
+        <div class="stat-box stat-cyan"><div class="num">76</div><div class="lbl">API Test cases</div></div>
         <div class="stat-box stat-purple"><div class="num">14</div><div class="lbl">Contract cases</div></div>
-        <div class="stat-box stat-green"><div class="num">65</div><div class="lbl">Unit Test cases</div></div>
-        <div class="stat-box stat-red"><div class="num">32</div><div class="lbl">Security + Pentest</div></div>
-        <div class="stat-box stat-yellow"><div class="num">167</div><div class="lbl">Total collected tests</div></div>
+        <div class="stat-box stat-green"><div class="num">67</div><div class="lbl">Unit Test cases</div></div>
+        <div class="stat-box stat-red"><div class="num">44</div><div class="lbl">Security + AI Safety</div></div>
+        <div class="stat-box stat-yellow"><div class="num">201</div><div class="lbl">Total collected tests</div></div>
       </div>
 
       <p>הפרויקט הוא <strong>מסגרת בדיקות אוטומטיות רב-שכבתית</strong> שנבנתה עבור אתר ה-demo של TutorialsNinja — אתר e-commerce לדוגמה.</p>
@@ -633,6 +652,11 @@
           <div class="card-desc">מנוע הרצה ראשי. תמיכה ב-parallel execution עם <code>-n auto --dist loadgroup</code>, כאשר UI tests מקובצים ל-worker אחד.</div>
         </div>
         <div class="card">
+          <div class="card-icon">✅</div>
+          <div class="card-title">pytest-check</div>
+          <div class="card-desc">Soft assertions לבדיקות data integrity ו-UI audit, כדי לאסוף כמה כשלים עצמאיים באותה ריצה.</div>
+        </div>
+        <div class="card">
           <div class="card-icon">📊</div>
           <div class="card-title">Allure 3</div>
           <div class="card-desc">דוחות עשירים עם היסטוריה, screenshots בכישלון, ו-GitHub Pages deployment.</div>
@@ -645,7 +669,7 @@
         <div class="card">
           <div class="card-icon">⚡</div>
           <div class="card-title">FastAPI Server</div>
-          <div class="card-desc">שרת אוטומציה מקומי: test-data API, הרצת pytest, דוחות, ו-mock store.</div>
+          <div class="card-desc">שרת אוטומציה מקומי: test-data API, הרצת pytest, דוחות, mock store ו-/chat ל-AI safety tests.</div>
         </div>
         <div class="card">
           <div class="card-icon">🐳</div>
@@ -669,7 +693,7 @@
         <div class="pyramid-row">
           <div class="pyramid-bar pyr-ui">
             <span class="label">🎭 UI Tests (Playwright)</span>
-            <span class="count">9 files · 30 cases · web-ui/</span>
+            <span class="count">12 files · 44 cases · web-ui/</span>
           </div>
         </div>
         <div class="pyramid-row">
@@ -681,13 +705,13 @@
         <div class="pyramid-row">
           <div class="pyramid-bar pyr-api">
             <span class="label">🔌 API Tests</span>
-            <span class="count">2 files · 26 cases · api/</span>
+            <span class="count">7 files · 76 cases · api/</span>
           </div>
         </div>
         <div class="pyramid-row">
           <div class="pyramid-bar pyr-unit">
             <span class="label">⚙️ Unit Tests</span>
-            <span class="count">3 files · 45 cases · unit/</span>
+            <span class="count">7 files · 67 cases · unit/</span>
           </div>
         </div>
       </div>
@@ -778,6 +802,24 @@
             <td><code>tests/contract/</code></td>
             <td>בדיקות חוזה: endpoints, HTML markers, שדות חובה, ids ומחירים.</td>
             <td><code>pytest -m contract</code></td>
+          </tr>
+          <tr>
+            <td><code>@pytest.mark.security</code></td>
+            <td><code>tests/api/</code>, <code>tests/unit/</code></td>
+            <td>בדיקות אבטחה ברמת HTTP, parsing ו-client behavior.</td>
+            <td><code>pytest -m security</code></td>
+          </tr>
+          <tr>
+            <td><code>@pytest.mark.pentest</code></td>
+            <td><code>tests/api/test_pentest.py</code></td>
+            <td>בדיקות חדירה מבוקרות מול האתר החי.</td>
+            <td><code>pytest -m pentest</code></td>
+          </tr>
+          <tr>
+            <td><code>@pytest.mark.ai / dlp</code></td>
+            <td><code>tests/api/test_chat_*.py</code>, <code>test_prompt_injection.py</code></td>
+            <td>בדיקות AI chat, prompt injection ו-DLP. מדלגות אם אין <code>ANTHROPIC_API_KEY</code> או שרת מקומי.</td>
+            <td><code>pytest -m ai</code></td>
           </tr>
         </table>
       </div>
@@ -922,7 +964,7 @@
       <div class="flow">
         <div class="flow-box blue">Test<span class="sub">api / api_integrations / contract</span></div>
         <div class="flow-arrow">←</div>
-        <div class="flow-box purple">Service<span class="sub">SearchService / CartService</span></div>
+        <div class="flow-box purple">Service<span class="sub">Search / Cart / Account / Public / Chat</span></div>
         <div class="flow-arrow">←</div>
         <div class="flow-box cyan">RestClient<span class="sub">services/rest_client.py</span></div>
         <div class="flow-arrow">←</div>
@@ -1007,6 +1049,22 @@
             <td><code class="ret">Response</code></td>
             <td>GET לכל endpoint ציבורי — לפי EndpointCase</td>
           </tr>
+          <tr>
+            <td rowspan="3"><span class="badge badge-cyan">ChatService</span></td>
+            <td><code>chat(message, system?)</code></td>
+            <td><code class="ret">Response</code></td>
+            <td>POST לשרת המקומי <code>/chat</code> — בדיקות AI chat ו-metadata.</td>
+          </tr>
+          <tr>
+            <td><code>chat_with_dlp(message)</code></td>
+            <td><code class="ret">Response</code></td>
+            <td>מפעיל system prompt שמונע החזרת passwords, credit cards, SSN ו-API keys.</td>
+          </tr>
+          <tr>
+            <td><code>chat_with_injection_guard(message)</code></td>
+            <td><code class="ret">Response</code></td>
+            <td>מפעיל system prompt שמגן מפני role replacement, system prompt extraction ו-jailbreaks.</td>
+          </tr>
         </table>
       </div>
     </section>
@@ -1021,7 +1079,10 @@
         <table>
           <tr><th>Method</th><th>Path</th><th>תפקיד</th></tr>
           <tr><td><span class="badge badge-green">GET</span></td><td><code>/health</code></td><td>בדיקת חיות של השרת</td></tr>
+          <tr><td><span class="badge badge-green">GET</span></td><td><code>/metrics</code></td><td>Prometheus metrics של שרת האוטומציה</td></tr>
+          <tr><td><span class="badge badge-green">GET</span></td><td><code>/architecture</code></td><td>הצגת <code>architecture.html</code> מתוך השרת המקומי</td></tr>
           <tr><td><span class="badge badge-green">GET</span></td><td><code>/automation/config</code></td><td>קריאת config.json</td></tr>
+          <tr><td><span class="badge badge-green">GET</span></td><td><code>/automation/test-data</code></td><td>קריאת כל חבילת test data לאחר merge עם secrets, אם קיימים</td></tr>
           <tr><td><span class="badge badge-green">GET</span></td><td><code>/automation/test-data/{key}</code></td><td>נתוני טסט לפי מפתח (search, cart, registration)</td></tr>
           <tr><td><span class="badge badge-green">GET</span></td><td><code>/automation/secrets/status</code></td><td>האם secrets.json קיים</td></tr>
           <tr><td><span class="badge badge-green">GET</span></td><td><code>/automation/external/search</code></td><td>חיפוש live ב-TutorialsNinja ומחזיר JSON</td></tr>
@@ -1034,6 +1095,7 @@
           <tr><td><span class="badge badge-blue">POST</span></td><td><code>/mock/cart/add</code></td><td>Mock store — הוספה לעגלה</td></tr>
           <tr><td><span class="badge badge-green">GET</span></td><td><code>/mock/cart</code></td><td>Mock store — תוכן עגלה + total</td></tr>
           <tr><td><span class="badge badge-red">DELETE</span></td><td><code>/mock/cart</code></td><td>Mock store — איפוס עגלה</td></tr>
+          <tr><td><span class="badge badge-blue">POST</span></td><td><code>/chat</code></td><td>Anthropic-backed chat endpoint. דורש <code>ANTHROPIC_API_KEY</code> ומחזיר response, model ו-token usage.</td></tr>
         </table>
       </div>
 
@@ -1043,7 +1105,7 @@
       </div>
 
       <h3>Mock Store</h3>
-      <p>ה-<code>MockStore</code> מכיל 4 מוצרי דוגמה (MacBook, iPhone, Apple Cinema 30, Canon EOS 5D) ועגלה in-memory. משמש לבדיקות unit שלא צריכות רשת אמיתית.</p>
+      <p>ה-<code>MockStore</code> מכיל 4 מוצרי דוגמה (MacBook, iPhone, Apple Cinema 30, Canon EOS 5D) ועגלה in-memory. משמש לבדיקות unit שלא צריכות רשת אמיתית. Endpoint ה-<code>/chat</code> אינו mock: הוא קורא ל-Anthropic SDK בפועל, ולכן טסטי AI מדלגים כשאין מפתח או שרת מקומי.</p>
     </section>
 
     <!-- ── 6. FIXTURES ── -->
@@ -1056,7 +1118,7 @@
         <table>
           <tr><th>Fixture</th><th>Scope</th><th>תפקיד</th></tr>
           <tr><td><code>browser_instance</code></td><td><span class="badge badge-yellow">session</span></td><td>מופע Chromium יחיד לכל הריצה. מאותחל עם הגדרות מ-config.json.</td></tr>
-          <tr><td><code>context</code></td><td><span class="badge badge-blue">request</span></td><td>BrowserContext חדש לכל טסט — viewport, base_url, timeout. הקלטת וידאו ו-trace מופעלת כברירת מחדל, ניתנת לכיבוי עם <code>PW_RECORD_ARTIFACTS=false</code>, ומצורפת ל-Allure רק בכישלון לאחר סגירת ה-context.</td></tr>
+          <tr><td><code>context</code></td><td><span class="badge badge-blue">request</span></td><td>BrowserContext חדש לכל טסט — viewport, base_url, timeout. הקלטת וידאו ו-trace מופעלת רק ב-CI או כאשר <code>PW_RECORD_ARTIFACTS=true</code>, ומצורפת ל-Allure רק בכישלון לאחר סגירת ה-context.</td></tr>
           <tr><td><code>page</code></td><td><span class="badge badge-green">function</span></td><td>Page חדשה לכל פונקציית טסט. נסגרת אוטומטית.</td></tr>
           <tr><td><code>app_url</code></td><td><span class="badge badge-green">function</span></td><td>base_url מה-config — לשימוש ב-page objects וב-cookie injection.</td></tr>
         </table>
@@ -1064,7 +1126,7 @@
 
       <div class="callout info">
         <span class="callout-icon">📸</span>
-        <div><strong>Failure artifacts:</strong> בכל כישלון מצורף ל-Allure <strong>screenshot</strong> (PNG) דרך <code>pytest_runtest_makereport</code>. בנוסף, ה-<code>context</code> fixture מקליט <strong>וידאו</strong> (.webm) ו-<strong>trace</strong> Playwright (.zip) כברירת מחדל, וסוגר את ה-context לפני הצירוף כדי שהווידאו יהיה קובץ מלא ולא ריק. בדוח Allure ה-screenshot מופיע בגוף הכישלון, והווידאו וה-trace מופיעים תחת <code>Tear down → context::0</code>. להרצות מהירות בלי artifacts מלאים אפשר להריץ עם <code>PW_RECORD_ARTIFACTS=false</code>.</div>
+        <div><strong>Failure artifacts:</strong> בכל כישלון מצורף ל-Allure <strong>screenshot</strong> (PNG) דרך <code>pytest_runtest_makereport</code>. בנוסף, כאשר רצים ב-CI או עם <code>PW_RECORD_ARTIFACTS=true</code>, ה-<code>context</code> fixture מקליט <strong>וידאו</strong> (.webm) ו-<strong>trace</strong> Playwright (.zip), סוגר את ה-context לפני הצירוף כדי שהווידאו יהיה קובץ מלא, ומצרף אותם רק לטסטים שנכשלו.</div>
       </div>
 
       <h3>tests/conftest.py — Services &amp; Page Objects</h3>
@@ -1073,6 +1135,7 @@
           <tr><th>Fixture</th><th>סוג</th><th>תפקיד</th></tr>
           <tr><td><code>session</code></td><td>HTTP</td><td>RestClient חדש לכל טסט — OCSESSID נפרד, בידוד מלא.</td></tr>
           <tr><td><code>search_service / cart_service / public_service / account_service</code></td><td>API</td><td>Service objects מחוברים ל-session ו-base_url.</td></tr>
+          <tr><td><code>chat_service</code></td><td>AI API</td><td>ChatService מול <code>server_url</code>. מדלג אם אין <code>ANTHROPIC_API_KEY</code> או אם השרת המקומי לא זמין.</td></tr>
           <tr><td><code>home_page / search_results_page / cart_page / register_page / login_page</code></td><td>UI</td><td>Page objects מחוברים ל-page ו-app_url.</td></tr>
           <tr><td><code>search_pages / cart_flow_pages / cart_pages / registration_pages</code></td><td>Composite</td><td>Named tuples (dataclasses) שמאחדים מספר page objects לפי flow.</td></tr>
           <tr><td><code>login_flow</code></td><td>Flow</td><td><code>LoginFlow</code> — home + login page. מאפשר ניווט, מילוי credentials ו-logout בשורת קוד אחת.</td></tr>
@@ -1118,9 +1181,10 @@
       <p>הגדרות הדפדפן וה-URL. ב-CI מוגדר <code>headless: true</code> אוטומטית על ידי משתנה הסביבה <code>CI=true</code>.</p>
       <pre>{
   <span class="s">"base_url"</span>: <span class="s">"https://tutorialsninja.com/demo"</span>,
+  <span class="s">"server_url"</span>: <span class="s">"http://127.0.0.1:8000"</span>,
   <span class="s">"browser"</span>: <span class="s">"chromium"</span>,
   <span class="s">"headless"</span>: false,
-  <span class="s">"slow_mo"</span>: 500,
+  <span class="s">"slow_mo"</span>: 1000,
   <span class="s">"timeout"</span>: 30000,
   <span class="s">"viewport"</span>: {
     <span class="s">"width"</span>: 1280,
@@ -1129,15 +1193,22 @@
 }</pre>
 
       <h3>data/test_data.json</h3>
-      <p>כל נתוני הקלט לטסטים. תומך ב-placeholder <code>{ts}</code> שמוחלף בזמן timestamp בטעינה — מבטיח כתובות email ייחודיות בכל ריצה.</p>
+      <p>כל נתוני הקלט הלא-סודיים לטסטים. קובץ <code>data/secrets.json</code>, אם קיים, מתמזג מעליו. תומך ב-placeholder <code>{ts}</code> שמוחלף למזהה UUID קצר בטעינה — שימושי לכתובות email ייחודיות בריצות registration.</p>
       <pre>{
   <span class="s">"search"</span>: {
-    <span class="s">"query"</span>: <span class="s">"MacBook"</span>, <span class="s">"max_price"</span>: 700.0, <span class="s">"limit"</span>: 3
+    <span class="s">"query"</span>: <span class="s">"MacBook"</span>, <span class="s">"max_price"</span>: 700.0, <span class="s">"limit"</span>: 5
   },
-  <span class="s">"cart"</span>: { <span class="s">"max_total"</span>: 2100.0 },
+  <span class="s">"cart"</span>: { <span class="s">"max_total"</span>: 2000.0 },
+  <span class="s">"sanity"</span>: {
+    <span class="s">"invalid_email"</span>: <span class="s">"sanity_invalid@example.com"</span>,
+    <span class="s">"invalid_password"</span>: <span class="s">"bad-password"</span>,
+    <span class="s">"search_product"</span>: <span class="s">"MacBook"</span>
+  },
   <span class="s">"registration"</span>: {
-    <span class="s">"email"</span>: <span class="s">"test_{ts}@example.com"</span>,   <span class="c">// timestamp ייחודי</span>
-    <span class="s">"password"</span>: <span class="s">"..."</span>
+    <span class="s">"first_name"</span>: <span class="s">"Amiel"</span>,
+    <span class="s">"last_name"</span>: <span class="s">"Test"</span>,
+    <span class="s">"telephone"</span>: <span class="s">"0501234567"</span>,
+    <span class="s">"newsletter"</span>: false
   }
 }</pre>
 
@@ -1351,15 +1422,39 @@
         <tr>
           <td><code>test_cart_total_consistent_with_item_prices</code></td>
           <td><span class="badge badge-yellow">NORMAL</span></td>
-          <td>ודא total ≤ max_price × מספר פריטים (חסם עליון תיאורטי).</td>
+          <td>ודא grand total תואם לסכום item subtotals מתוך דף העגלה, עם סטייה מותרת של פחות מסנט.</td>
         </tr>
+      </table></div>
+
+      <h3>test_system_coverage.py — כיסוי מערכת משלים</h3>
+      <div class="callout info">
+        <span class="callout-icon">✅</span>
+        <div>קובץ חדש שמרחיב כיסוי על data integrity, מיון Z-A, CartFlow מלא, ניווט לדפי register/login, דפי מוצר ו-stored product data. חלק מהבדיקות משתמשות ב-<code>pytest_check</code> כדי לאסוף כמה כשלים עצמאיים באותה ריצה.</div>
+      </div>
+      <div class="tbl-wrap"><table>
+        <tr><th>Suite</th><th>מספר בדיקות</th><th>מה נבדק</th></tr>
+        <tr><td><code>TestSearchDataIntegrity</code></td><td>2</td><td>מחירים חיוביים בתוצאות MacBook ומיון Name Z-A לתוצאות iPod.</td></tr>
+        <tr><td><code>TestCartFlowCoverage</code></td><td>2</td><td>CartFlow מוסיף פריטים, total חיובי, ו-limit=1 יוצר פריט עגלה יחיד.</td></tr>
+        <tr><td><code>TestNavigationCoverage</code></td><td>2</td><td>ניווט מדף הבית ל-register ו-warning עבור login עם credentials ריקים.</td></tr>
+        <tr><td><code>TestProductDetailCoverage</code></td><td>2</td><td>דף iPhone כולל heading וכפתור cart; Reviews tab של MacBook חושף שדות review.</td></tr>
+        <tr><td><code>TestStoredProductData</code></td><td>2</td><td>מוצרי iPod שנשמרים כוללים picture URL ותיאור לא ריק.</td></tr>
+      </table></div>
+
+      <h3>test_soft_assertions_demo.py — דמו Soft vs Hard Assertions</h3>
+      <p class="doc-note">קובץ לימודי שמסומן <code>@pytest.mark.sanity</code>. הוא מדגים מתי להשתמש ב-<code>assert</code> רגיל כתנאי מקדים ומתי להשתמש ב-<code>pytest_check</code> כדי להמשיך ולאסוף כשלים נוספים.</p>
+      <div class="tbl-wrap"><table>
+        <tr><th>שם הטסט</th><th>סוג assertion</th><th>מה נבדק</th></tr>
+        <tr><td><code>test_home_header_hard</code></td><td>Hard</td><td>Header controls, עצירה בכשל הראשון.</td></tr>
+        <tr><td><code>test_home_header_soft</code></td><td>Soft</td><td>Header controls, כל הכשלים נאספים יחד.</td></tr>
+        <tr><td><code>test_product_detail_soft</code></td><td>Soft</td><td>MacBook detail: heading, quantity וכפתור Add to Cart.</td></tr>
+        <tr><td><code>test_search_prices_soft_loop</code></td><td>Hard + Soft</td><td>Hard assert לתוצאות קיימות, ואז soft checks לכל מחיר מוצר.</td></tr>
       </table></div>
     </section>
 
     <!-- ── 9. API TESTS ── -->
     <section id="tests-api">
       <h2><span class="icon">🔌</span> API Tests</h2>
-      <p class="section-intro">בדיקות HTTP ישירות לשרת TutorialsNinja — ללא דפדפן. כל טסט מקבל session חדש (OCSESSID נפרד). התיקייה מחולקת לשני קבצים: בדיקות API בסיסיות ובדיקות אינטגרציה רחבות יותר.</p>
+      <p class="section-intro">בדיקות HTTP ישירות ללא דפדפן. חלקן רצות מול TutorialsNinja עם session חדש לכל טסט (OCSESSID נפרד), וחלקן רצות מול שרת FastAPI המקומי עבור <code>/chat</code>. טסטי AI מדלגים אוטומטית כשאין <code>ANTHROPIC_API_KEY</code> או כשהשרת המקומי לא זמין.</p>
 
       <div class="doc-block">
         <h3>test_api.py — API smoke &amp; behavior</h3>
@@ -1478,6 +1573,29 @@
             <td><span class="badge badge-yellow">NORMAL</span></td>
             <td>הוספת MacBook בכמות 2 ← total מתגובת cart/add תואם ל-grand total בדף העגלה.</td>
           </tr>
+        </table></div>
+      </div>
+
+      <div class="doc-block">
+        <h3>AI API files — chat, DLP ו-prompt injection</h3>
+        <p class="doc-note">שלושה קבצים שמסומנים <code>@pytest.mark.api</code> ו-<code>@pytest.mark.ai</code>. כולם משתמשים ב-<code>ChatService</code> מול <code>server_url</code> מה-config.</p>
+
+        <h4 class="test-suite-title">test_chat_ai.py — regular chat behaviour</h4>
+        <div class="tbl-wrap"><table>
+          <tr><th>כמות</th><th>מה נבדק</th></tr>
+          <tr><td>6 tests</td><td>HTTP 200, שדה <code>response</code>, response לא ריק, metadata של model/tokens, תשובה אריתמטית בסיסית, 422 עבור message ריק, וכיבוד system prompt מותאם.</td></tr>
+        </table></div>
+
+        <h4 class="test-suite-title">test_chat_dlp.py — Data Loss Prevention</h4>
+        <div class="tbl-wrap"><table>
+          <tr><th>כמות</th><th>מה נבדק</th></tr>
+          <tr><td>5 tests</td><td>המודל לא מחזיר בחזרה password, credit card, SSN, API key או payload עם כמה סוגי PII כאשר מופעל <code>DLP_SYSTEM_PROMPT</code>.</td></tr>
+        </table></div>
+
+        <h4 class="test-suite-title">test_prompt_injection.py — injection guard</h4>
+        <div class="tbl-wrap"><table>
+          <tr><th>כמות</th><th>מה נבדק</th></tr>
+          <tr><td>7 tests</td><td>ניסיונות override ישיר, role replacement, system prompt extraction, indirect injection, delimiter injection, DAN jailbreak ו-multi-vector injection מול <code>INJECTION_GUARD_SYSTEM_PROMPT</code>.</td></tr>
         </table></div>
       </div>
     </section>
