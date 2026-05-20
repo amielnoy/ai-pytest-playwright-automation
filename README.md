@@ -16,7 +16,7 @@ UI and API test automation for the TutorialsNinja demo store, built with:
 
 ## Course Materials
 
-This repository also includes a twenty-eight-session automation QA course under [`course/`](course/README.md). Start there for the learning path, session order, exercise workflow, and guidance on when to use the teaching scaffold versus the production framework.
+This repository also includes a 30-session automation QA course plus a Git basics bridge under [`course/`](course/README.md). Start there for the learning path, session order, exercise workflow, and guidance on when to use the teaching scaffold versus the production framework. For a visual browser overview, open [`course_overview.html`](course_overview.html).
 
 ## Project Layout
 
@@ -38,7 +38,17 @@ artifacts/    Generated or captured artifacts kept out of core code paths
 monitoring/   Prometheus and Grafana configuration
 ```
 
-Generated outputs such as `allure-results/`, `allure-report/`, `docker-artifacts/`, `logs/`, and `artifacts/reports/*.html` are ignored by git.
+Generated outputs such as `allure-results/`, `allure-report/`, `docker-artifacts/`, `logs/`, `.playwright-mcp/`, `outputs/`, `test-results/`, `playwright-report/`, and `artifacts/reports/*.html` are ignored by git.
+
+## Production Page Object Rules
+
+Production UI tests use `pages/`, `pages/components/`, and `flows/`.
+
+- Page objects initialize stable locator members in `__init__`.
+- Methods reuse those members instead of rebuilding the same locator repeatedly.
+- Dynamic locators that depend on runtime input, such as a product name, stay inside the method that receives that input.
+- CSS-heavy locators use deterministic self-healing fallbacks through `pages/self_healing.py`.
+- Self-healing does not call AI or invent selectors. Fallbacks are explicitly owned by the page object and recorded through `self_heal_events()` so stale primary locators can be fixed.
 
 ## Setup
 
@@ -52,12 +62,28 @@ npm install
 
 If you want to run registration tests, create `data/secrets.json` from `data/secrets.json.example`.
 
+## Secrets (local and CI)
+
+Credentials live in `data/secrets.json`, which is **runtime-only** — never commit it.
+
+| Where | How secrets are supplied |
+|-------|-------------------------|
+| Local | Copy `data/secrets.json.example` → `data/secrets.json` and fill in real values. The file is listed in `.gitignore`. |
+| CI | GitHub Actions secret `TEST_SECRETS_JSON` (full JSON body). The workflow writes it to `data/secrets.json` on the runner only; the step does not print the secret. |
+| Docker | Mount `data/secrets.json` read-only at run time (`scripts/run_all_tests_docker.sh`); the image excludes it via `.dockerignore`. |
+
+`utils/data_loader.py` merges `secrets.json` over `data/test_data.json` when the file exists. Registration tests skip via `registration_data` if secrets are missing — they do not fail the whole suite.
+
+**Capstone / course rule:** deliverables must not include real passwords or API keys in git. Use the example file for shape only; store real values locally or in GitHub repository secrets.
+
+Before pushing, confirm nothing leaked: `git check-ignore -v data/secrets.json` and `git status` should not list `data/secrets.json`.
+
 ## Default Test Behavior
 
 `pytest.ini` is configured to run tests in parallel by default:
 
 - `-n auto`
-- `--dist loadscope`
+- `--dist loadgroup` (with `tests/web-ui` on one worker via `xdist_group`; see `pytest.ini` and root `conftest.py`)
 
 So a plain `pytest` run will use multiple workers automatically.
 

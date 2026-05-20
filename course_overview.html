@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- cSpell:words Ollama dataclasses autouse agentic codegen -->
+<!-- cSpell:words Ollama dataclasses autouse agentic codegen TestOps EC2 alluredir allure3 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -507,8 +507,8 @@
       <div class="eyebrow">Automation QA Course</div>
       <h1>Manual testing to production-grade automation, AI workflows, CI, and observability.</h1>
       <p>
-        A Git-ready 29-session learning path that starts with test design fundamentals and ends with a Docker Compose,
-        Grafana, Allure, Playwright, pytest, API, and AI-assisted QA automation stack.
+        A Git-ready 30-session learning path that starts with test design fundamentals and ends with AWS deployment testing,
+        Allure TestOps, Docker Compose, Grafana, Playwright, pytest, API, and AI-assisted QA automation.
       </p>
       <div class="hero-actions">
         <a class="button primary" href="#sessions">Browse sessions</a>
@@ -520,7 +520,7 @@
   <main>
     <section class="wrap stats" aria-label="Course stats">
       <div class="stat">
-        <strong>29+1</strong>
+        <strong>30+1</strong>
         <span>guided sessions plus Git basics</span>
       </div>
       <div class="stat">
@@ -571,9 +571,9 @@
           <p>Production-level framework delivery with clear architecture layers, ADRs, pre-commit checks, and CI quality gates.</p>
         </article>
         <article class="phase">
-          <div class="number">Sessions 24-29</div>
+          <div class="number">Sessions 24-30</div>
           <h3>Advanced Tooling</h3>
-          <p>Claude Code, skills, plugins, connectors, Codex CLI, Ollama local AI, Docker Compose, Prometheus, and Grafana.</p>
+          <p>Claude Code, skills, plugins, connectors, Codex CLI, Ollama local AI, Docker Compose, Prometheus, Grafana, AWS, and Allure TestOps.</p>
         </article>
       </div>
     </section>
@@ -644,8 +644,8 @@
         <article class="session-card" data-phase="automation" data-search="playwright locators accessibility role label test id stable selectors">
           <div class="session-top"><span class="session-number">05</span><span class="tag automation">Automation</span></div>
           <h3>Playwright Locators</h3>
-          <p>Stable locator priority, accessibility-first selectors, strict mode, fallback strategies, and refactoring raw selectors into page objects.</p>
-          <p class="outcome"><strong>Outcome:</strong> Choose maintainable locators and keep selector detail out of tests.</p>
+          <p>Stable locator priority, accessibility-first selectors, strict mode, constructor-initialized locator members, fallback strategies, and refactoring raw selectors into page objects.</p>
+          <p class="outcome"><strong>Outcome:</strong> Choose maintainable locators, keep selector detail out of tests, and make stable page object members explicit.</p>
           <div class="links"><a href="course/session_05_playwright_locators/lecture.md">Lecture</a><a href="course/session_05_playwright_locators/EXERCISES.md">Exercises</a></div>
         </article>
 
@@ -716,8 +716,8 @@
         <article class="session-card" data-phase="ai" data-search="ai tools qa cli self healing claude test generation analysis">
           <div class="session-top"><span class="session-number">14</span><span class="tag ai">AI</span></div>
           <h3>AI Tools for QA</h3>
-          <p>Command-line QA helpers, AI-generated test drafts, self-healing wrappers, evidence logging, and review boundaries for AI-produced code.</p>
-          <p class="outcome"><strong>Outcome:</strong> Add AI utilities while keeping deterministic tests as the release gate.</p>
+          <p>Command-line QA helpers, AI-generated test drafts, deterministic self-healing locator fallbacks, evidence logging, and review boundaries for AI-produced code.</p>
+          <p class="outcome"><strong>Outcome:</strong> Add QA utilities while keeping deterministic tests and reviewable heal events as the release gate.</p>
           <div class="links"><a href="course/session_14_ai_tools/lecture.md">Lecture</a><a href="course/session_14_ai_tools/EXERCISES.md">Exercises</a></div>
         </article>
 
@@ -840,6 +840,14 @@
           <p class="outcome"><strong>Outcome:</strong> Run automation through Docker Compose and monitor test health.</p>
           <div class="links"><a href="course/session_29_docker_compose_grafana/lecture.md">Lecture</a><a href="course/session_29_docker_compose_grafana/EXERCISES.md">Exercises</a></div>
         </article>
+
+        <article class="session-card" data-phase="delivery framework" data-search="aws ec2 s3 buckets allure testops allure3 docker compose deployment cloud testing backup restore">
+          <div class="session-top"><span class="session-number">30</span><span class="tag delivery">Delivery</span></div>
+          <h3>AWS EC2, S3, and Allure TestOps</h3>
+          <p>Deployment testing for Allure TestOps on EC2, S3 bucket security, Allure 3 evidence flow, smoke checks, and backup restore drills.</p>
+          <p class="outcome"><strong>Outcome:</strong> Validate a cloud reporting deployment plan before using it as a team quality system.</p>
+          <div class="links"><a href="course/session_30_aws_allure_testops/lecture.md">Lecture</a><a href="course/session_30_aws_allure_testops/EXERCISES.md">Exercises</a></div>
+        </article>
       </div>
     </section>
 
@@ -872,7 +880,7 @@
         <div class="workflow">
           <div class="workflow-step"><strong>1. Read</strong><span>Start with `lecture.md` to understand the concept and quality bar.</span></div>
           <div class="workflow-step"><strong>2. Run</strong><span>Execute `lecture.py` or the narrow session tests when available.</span></div>
-          <div class="workflow-step"><strong>3. Inspect</strong><span>Read the supporting files and matching `course/framework/` layer.</span></div>
+          <div class="workflow-step"><strong>3. Inspect</strong><span>Read the supporting files, matching `course/framework/` layer, and `course/QUALITY.html` quality gates.</span></div>
           <div class="workflow-step"><strong>4. Practice</strong><span>Complete `EXERCISES.md` with concrete evidence and review notes.</span></div>
           <div class="workflow-step"><strong>5. Verify</strong><span>Run the narrowest relevant tests before moving to the next session.</span></div>
         </div>
