@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- cSpell:words Ollama dataclasses autouse agentic codegen -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -116,6 +117,7 @@
       text-decoration: none;
       font-weight: 750;
       background: rgba(255, 255, 255, 0.18);
+      -webkit-backdrop-filter: blur(8px);
       backdrop-filter: blur(8px);
       box-shadow: 0 10px 24px rgba(39, 50, 68, 0.12);
     }
@@ -146,6 +148,7 @@
       border-radius: 8px;
       padding: 18px;
       box-shadow: var(--shadow);
+      -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
     }
 
@@ -242,6 +245,7 @@
       background: rgba(255, 250, 242, 0.9);
       border-top: 1px solid var(--line);
       border-bottom: 1px solid var(--line);
+      -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
       padding: 12px 0;
       margin-top: 8px;
@@ -412,6 +416,7 @@
       border-radius: 8px;
       padding: 22px;
       box-shadow: var(--shadow);
+      -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
     }
 
@@ -575,7 +580,7 @@
 
     <section class="toolbar" aria-label="Session filters">
       <div class="wrap toolbar-inner">
-        <div class="filters" role="list">
+        <div class="filters" aria-label="Session category filters">
           <button class="filter active" type="button" data-filter="all">All</button>
           <button class="filter" type="button" data-filter="foundations">Foundations</button>
           <button class="filter" type="button" data-filter="automation">Automation Core</button>

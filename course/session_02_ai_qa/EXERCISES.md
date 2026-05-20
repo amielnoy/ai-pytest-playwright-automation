@@ -61,7 +61,7 @@ Add requirement traceability: for every final case, write the story sentence, sp
 
 The following AI output was generated for the TutorialsNinja shopping cart. Find every hallucination and explain what the correct behaviour should be.
 
-```
+```text
 TC-H01 | Apply coupon code | 1. Add item to cart. 2. Click "Apply Coupon". 3. Enter "SAVE20". 4. Click Apply. | 20% discount is applied and cart total updates.
 TC-H02 | One-click checkout | 1. Log in. 2. Click "Buy Now". | Order is placed immediately without entering shipping info.
 TC-H03 | Wishlist to cart | 1. Add item to wishlist. 2. Click "Move to Cart". | Item moves to cart and wishlist count decrements.

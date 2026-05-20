@@ -101,12 +101,11 @@ pytest --collect-only -q
 
 Adjust the paths for the current topic. For example, Session 16 maps mostly to CI and failure analysis, while Session 17 maps to Allure reporting and pipeline validation.
 
-## Course Support Files
+## Course Support File
 
-- [`RUBRICS.md`](RUBRICS.md) — grading criteria for exercises and project work.
-- [`BEFORE_AFTER_EXAMPLES.md`](BEFORE_AFTER_EXAMPLES.md) — weak vs strong automation examples.
-- [`INSTRUCTOR_NOTES.md`](INSTRUCTOR_NOTES.md) — timing, prompts, and common student mistakes.
-- [`PROJECT_CHECKLIST.md`](PROJECT_CHECKLIST.md) — cumulative checklist that feeds the capstone.
+- [`QUALITY.html`](QUALITY.html) — grading rubric, automation quality gates, before/after examples, instructor notes, project checklist, and capstone readiness criteria.
+
+The course keeps one support guide so students have a single place to check expectations before submitting exercises or capstone work.
 
 ## Completion Criteria
 

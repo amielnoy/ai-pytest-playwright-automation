@@ -10,7 +10,7 @@ Implement the smallest complete version of that slice in the production framewor
 
 ## Exercise 3: Rubric Self-Check
 
-Grade your work against the course rubric in `course/RUBRICS.md`.
+Grade your work against the exercise rubric and automation quality gates in `course/QUALITY.html`.
 
 ## Exercise 4: Before / After Note
 
