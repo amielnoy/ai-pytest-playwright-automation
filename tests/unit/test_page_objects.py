@@ -446,16 +446,22 @@ def test_alert_component_prefers_visible_banner_and_returns_empty_without_errors
 
 def test_cart_summary_reads_total_count_and_empty_state():
     page = MagicMock()
+    total_rows = MagicMock()
+    total_row = MagicMock()
+    total_cells = MagicMock()
     total_cell = MagicMock()
     item_rows = MagicMock()
     content = MagicMock()
     empty_message = MagicMock()
-    total_cell.last.is_visible.return_value = True
-    total_cell.last.inner_text.return_value = "$602.00"
+    total_cell.is_visible.return_value = True
+    total_cell.inner_text.return_value = "$602.00"
+    total_rows.filter.return_value = total_row
+    total_row.locator.return_value = total_cells
+    total_cells.last = total_cell
     item_rows.count.return_value = 2
     empty_message.is_visible.return_value = True
     content.get_by_text.return_value = empty_message
-    page.locator.side_effect = [total_cell, item_rows, content]
+    page.locator.side_effect = [total_rows, item_rows, content]
     summary = CartSummaryComponent(page)
 
     assert summary.get_total() == 602.0
@@ -465,17 +471,23 @@ def test_cart_summary_reads_total_count_and_empty_state():
 
 def test_cart_summary_returns_zero_when_total_is_hidden_or_unparseable():
     page = MagicMock()
+    total_rows = MagicMock()
+    total_row = MagicMock()
+    total_cells = MagicMock()
     hidden_total = MagicMock()
-    hidden_total.last.is_visible.return_value = False
-    page.locator.return_value = hidden_total
+    hidden_total.is_visible.return_value = False
+    total_rows.filter.return_value = total_row
+    total_row.locator.return_value = total_cells
+    total_cells.last = hidden_total
+    page.locator.return_value = total_rows
     summary = CartSummaryComponent(page)
 
     assert summary.get_total() == 0.0
 
     visible_total = MagicMock()
-    visible_total.last.is_visible.return_value = True
-    visible_total.last.inner_text.return_value = "not a price"
-    page.locator.return_value = visible_total
+    visible_total.is_visible.return_value = True
+    visible_total.inner_text.return_value = "not a price"
+    total_cells.last = visible_total
 
     assert summary.get_total() == 0.0
 
@@ -733,8 +745,9 @@ def test_product_detail_page_uses_class_locator_members():
     add_button.is_visible.return_value = True
     for field in review_fields:
         field.is_visible.return_value = True
-    page.get_by_role.side_effect = [heading, add_button, reviews]
+    page.get_by_role.side_effect = [heading, reviews]
     page.get_by_label.side_effect = [quantity, *review_fields]
+    page.locator.return_value = add_button
     product_page = ProductDetailPage(page, "https://example.test")
 
     assert product_page.has_product_heading("MacBook") is True
@@ -746,11 +759,8 @@ def test_product_detail_page_uses_class_locator_members():
     assert page.get_by_role.call_args_list == [
         call(ProductDetailPage._HEADING_ROLE, name="MacBook"),
         call(
-            ProductDetailPage._ADD_TO_CART_BUTTON_ROLE,
-            name=ProductDetailPage._ADD_TO_CART_BUTTON_NAME,
-        ),
-        call(
             ProductDetailPage._REVIEWS_LINK_ROLE,
             name=ProductDetailPage._REVIEWS_LINK_NAME,
         ),
     ]
+    page.locator.assert_any_call(ProductDetailPage._ADD_TO_CART_BUTTON_SELECTOR)

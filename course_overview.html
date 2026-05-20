@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Automation QA Course Overview</title>
+  <style>
+    :root {
+      --bg: #fbf7f0;
+      --panel: rgba(255, 253, 249, 0.92);
+      --panel-solid: #fffdfa;
+      --panel-2: #f2f7f3;
+      --ink: #273244;
+      --muted: #68758b;
+      --line: #eadfd2;
+      --blue: #6f8fcf;
+      --blue-soft: #dce8ff;
+      --teal: #73b8ad;
+      --teal-soft: #d9f1ec;
+      --green: #86bf8f;
+      --green-soft: #e4f5df;
+      --amber: #d9aa65;
+      --amber-soft: #fff0cf;
+      --red: #dc8f90;
+      --red-soft: #ffe1e2;
+      --lavender: #b7a5df;
+      --lavender-soft: #eee7ff;
+      --shadow: 0 18px 45px rgba(107, 91, 72, 0.13);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        linear-gradient(180deg, #fff8ec 0%, #f8fbf7 45%, #fff5f3 100%);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .hero {
+      background:
+        linear-gradient(105deg, rgba(63, 82, 119, 0.72), rgba(115, 184, 173, 0.46), rgba(255, 232, 200, 0.42)),
+        url("artifacts/std_page_snapshots/login.png");
+      background-size: cover;
+      background-position: center;
+      color: #ffffff;
+      min-height: 58vh;
+      display: grid;
+      align-items: end;
+      padding: 48px 28px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.65);
+    }
+
+    .hero-inner {
+      width: min(1160px, 100%);
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fff2ca;
+      margin-bottom: 14px;
+      text-shadow: 0 1px 16px rgba(39, 50, 68, 0.34);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 780px;
+      font-size: clamp(2.35rem, 6vw, 5rem);
+      line-height: 0.96;
+      letter-spacing: 0;
+      text-shadow: 0 2px 30px rgba(39, 50, 68, 0.36);
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 22px 0 28px;
+      font-size: clamp(1rem, 2vw, 1.22rem);
+      color: #fff9f0;
+      text-shadow: 0 1px 18px rgba(39, 50, 68, 0.32);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 16px;
+      border: 1px solid rgba(255, 255, 255, 0.62);
+      border-radius: 8px;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 750;
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 10px 24px rgba(39, 50, 68, 0.12);
+    }
+
+    .button.primary {
+      background: #fff6df;
+      border-color: #fff6df;
+      color: #273244;
+    }
+
+    .wrap {
+      width: min(1160px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin: -36px auto 28px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .stat {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.9rem;
+      line-height: 1;
+      color: #5878ba;
+      margin-bottom: 6px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .section {
+      padding: 30px 0;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 22px;
+      margin-bottom: 18px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(1.55rem, 3vw, 2.2rem);
+      letter-spacing: 0;
+    }
+
+    .section-header p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      max-width: 720px;
+    }
+
+    .phase-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .phase {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      min-height: 164px;
+      box-shadow: 0 10px 24px rgba(107, 91, 72, 0.07);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .phase::before {
+      content: "";
+      display: block;
+      height: 6px;
+      margin: -18px -18px 14px;
+      background: var(--blue-soft);
+    }
+
+    .phase:nth-child(2)::before { background: var(--teal-soft); }
+    .phase:nth-child(3)::before { background: var(--amber-soft); }
+    .phase:nth-child(4)::before { background: var(--lavender-soft); }
+    .phase:nth-child(5)::before { background: var(--green-soft); }
+
+    .phase .number {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    .phase h3 {
+      margin: 8px 0 8px;
+      font-size: 1.05rem;
+    }
+
+    .phase p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255, 250, 242, 0.9);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+      padding: 12px 0;
+      margin-top: 8px;
+    }
+
+    .toolbar-inner {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter {
+      border: 1px solid var(--line);
+      background: rgba(255, 253, 249, 0.86);
+      color: var(--ink);
+      border-radius: 8px;
+      padding: 9px 12px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 1px 0 rgba(107, 91, 72, 0.05);
+    }
+
+    .filter.active {
+      background: var(--blue-soft);
+      border-color: #aec1ec;
+      color: #2f4b82;
+    }
+
+    .search {
+      width: min(340px, 100%);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font: inherit;
+      color: var(--ink);
+      background: rgba(255, 253, 249, 0.94);
+      outline-color: #aec1ec;
+    }
+
+    .sessions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      padding-top: 18px;
+    }
+
+    .session-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      min-height: 232px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: 0 10px 28px rgba(107, 91, 72, 0.07);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+
+    .session-card::before {
+      content: "";
+      display: block;
+      height: 5px;
+      margin: -18px -18px 2px;
+      background: var(--blue-soft);
+    }
+
+    .session-card:nth-child(5n + 2)::before { background: var(--teal-soft); }
+    .session-card:nth-child(5n + 3)::before { background: var(--amber-soft); }
+    .session-card:nth-child(5n + 4)::before { background: var(--lavender-soft); }
+    .session-card:nth-child(5n + 5)::before { background: var(--green-soft); }
+
+    .session-card:hover {
+      border-color: #d4c5b4;
+      box-shadow: 0 16px 36px rgba(107, 91, 72, 0.12);
+      transform: translateY(-2px);
+    }
+
+    .session-card[hidden] {
+      display: none;
+    }
+
+    .session-top {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .session-number {
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      background: var(--blue-soft);
+      color: #4565a5;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      flex: 0 0 auto;
+    }
+
+    .tag {
+      border-radius: 999px;
+      padding: 4px 9px;
+      font-size: 0.74rem;
+      font-weight: 850;
+      color: #273244;
+      white-space: nowrap;
+      border: 1px solid rgba(39, 50, 68, 0.06);
+    }
+
+    .tag.foundations { background: var(--blue-soft); color: #365990; }
+    .tag.automation { background: var(--teal-soft); color: #286f67; }
+    .tag.framework { background: var(--green-soft); color: #3f7549; }
+    .tag.ai { background: var(--amber-soft); color: #8a5b12; }
+    .tag.delivery { background: var(--red-soft); color: #934546; }
+
+    .session-card h3 {
+      margin: 0;
+      font-size: 1.06rem;
+      line-height: 1.25;
+    }
+
+    .session-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .outcome {
+      margin-top: auto;
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .links a {
+      color: #4f6fb1;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.88rem;
+      background: #f0f5ff;
+      border: 1px solid #dce8ff;
+      border-radius: 8px;
+      padding: 6px 9px;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .workflow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+
+    .workflow-step {
+      background: #f7f4ec;
+      border: 1px solid #eee4d5;
+      border-radius: 8px;
+      padding: 14px;
+      min-height: 120px;
+    }
+
+    .workflow-step:nth-child(2) { background: #eef8f5; border-color: #d9f1ec; }
+    .workflow-step:nth-child(3) { background: #f2f0fb; border-color: #eee7ff; }
+    .workflow-step:nth-child(4) { background: #fff7e5; border-color: #fff0cf; }
+    .workflow-step:nth-child(5) { background: #f0f8ed; border-color: #e4f5df; }
+
+    .workflow-step strong {
+      display: block;
+      margin-bottom: 7px;
+    }
+
+    .workflow-step span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    footer {
+      margin-top: 34px;
+      padding: 28px 0 42px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 980px) {
+      .stats,
+      .phase-grid,
+      .sessions,
+      .workflow {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .toolbar-inner {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .search {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .hero {
+        min-height: 66vh;
+        padding: 34px 20px;
+      }
+
+      .wrap {
+        width: min(100% - 28px, 1160px);
+      }
+
+      .stats,
+      .phase-grid,
+      .sessions,
+      .workflow {
+        grid-template-columns: 1fr;
+      }
+
+      .section-header {
+        display: block;
+      }
+
+      .filter {
+        flex: 1 1 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div class="eyebrow">Automation QA Course</div>
+      <h1>Manual testing to production-grade automation, AI workflows, CI, and observability.</h1>
+      <p>
+        A Git-ready 29-session learning path that starts with test design fundamentals and ends with a Docker Compose,
+        Grafana, Allure, Playwright, pytest, API, and AI-assisted QA automation stack.
+      </p>
+      <div class="hero-actions">
+        <a class="button primary" href="#sessions">Browse sessions</a>
+        <a class="button" href="course/README.md">Open course README</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="wrap stats" aria-label="Course stats">
+      <div class="stat">
+        <strong>29+1</strong>
+        <span>guided sessions plus Git basics</span>
+      </div>
+      <div class="stat">
+        <strong>5</strong>
+        <span>major learning phases</span>
+      </div>
+      <div class="stat">
+        <strong>1</strong>
+        <span>capstone framework delivery</span>
+      </div>
+      <div class="stat">
+        <strong>3</strong>
+        <span>execution modes: local, CI, Docker</span>
+      </div>
+    </section>
+
+    <section class="wrap section" id="phases">
+      <div class="section-header">
+        <div>
+          <h2>Learning Phases</h2>
+          <p>The course is designed to be followed in order. Each phase adds a capability that the next phase depends on.</p>
+        </div>
+      </div>
+      <div class="phase-grid">
+        <article class="phase">
+          <div class="number">Sessions 1-3</div>
+          <h3>Foundations</h3>
+          <p>Manual QA, AI-assisted test thinking, Python basics, and the habits needed before browser automation.</p>
+        </article>
+        <article class="phase">
+          <div class="number">After Session 3</div>
+          <h3>Git Basics</h3>
+          <p>Repository workflow, branches, commits, diffs, pull requests, merge conflicts, and safe collaboration habits.</p>
+        </article>
+        <article class="phase">
+          <div class="number">Sessions 4-13</div>
+          <h3>Automation Core</h3>
+          <p>Playwright, locators, exceptions, pytest fixtures, API testing, database testing, POM, and debugging.</p>
+        </article>
+        <article class="phase">
+          <div class="number">Sessions 14-22</div>
+          <h3>AI, CI, and Review</h3>
+          <p>AI tooling, agents, failure analysis, reporting, Playwright CLI workflows, and automation code review.</p>
+        </article>
+        <article class="phase">
+          <div class="number">Session 23</div>
+          <h3>Capstone</h3>
+          <p>Production-level framework delivery with clear architecture layers, ADRs, pre-commit checks, and CI quality gates.</p>
+        </article>
+        <article class="phase">
+          <div class="number">Sessions 24-29</div>
+          <h3>Advanced Tooling</h3>
+          <p>Claude Code, skills, plugins, connectors, Codex CLI, Ollama local AI, Docker Compose, Prometheus, and Grafana.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="toolbar" aria-label="Session filters">
+      <div class="wrap toolbar-inner">
+        <div class="filters" role="list">
+          <button class="filter active" type="button" data-filter="all">All</button>
+          <button class="filter" type="button" data-filter="foundations">Foundations</button>
+          <button class="filter" type="button" data-filter="automation">Automation Core</button>
+          <button class="filter" type="button" data-filter="ai">AI and Agents</button>
+          <button class="filter" type="button" data-filter="delivery">Delivery and Ops</button>
+          <button class="filter" type="button" data-filter="framework">Framework</button>
+        </div>
+        <input class="search" type="search" id="sessionSearch" placeholder="Search sessions" aria-label="Search sessions" />
+      </div>
+    </section>
+
+    <section class="wrap section" id="sessions">
+      <div class="section-header">
+        <div>
+          <h2>All Course Sessions</h2>
+          <p>Each card links directly to the session lecture and exercises. The outcome line describes what students should be able to do after the session.</p>
+        </div>
+      </div>
+
+      <div class="sessions" id="sessionGrid">
+        <article class="session-card" data-phase="foundations" data-search="qa foundations manual testing test cases bug reports exploratory charters">
+          <div class="session-top"><span class="session-number">01</span><span class="tag foundations">Foundations</span></div>
+          <h3>QA Foundations and Manual Testing</h3>
+          <p>Test case anatomy, test types, test pyramid, EP, BVA, decision tables, defects, risk-based testing, and exploratory charters.</p>
+          <p class="outcome"><strong>Outcome:</strong> Write clear test cases, bug reports, risk analysis, and exploratory testing notes.</p>
+          <div class="links"><a href="course/session_01_qa_foundations/lecture.md">Lecture</a><a href="course/session_01_qa_foundations/EXERCISES.md">Exercises</a></div>
+        </article>
+
+        <article class="session-card" data-phase="foundations ai" data-search="ai qa llm prompts hallucination validation few-shot zero-shot">
+          <div class="session-top"><span class="session-number">02</span><span class="tag foundations">Foundations</span></div>
+          <h3>QA in the AI Era</h3>
+          <p>Where LLMs help QA, where they fail, prompt anatomy, prompt patterns, output validation, and hallucination review.</p>
+          <p class="outcome"><strong>Outcome:</strong> Use AI for QA work while keeping verification discipline and source-of-truth traceability.</p>
+          <div class="links"><a href="course/session_02_ai_qa/lecture.md">Lecture</a><a href="course/session_02_ai_qa/EXERCISES.md">Exercises</a></div>
+        </article>
+
+        <article class="session-card" data-phase="foundations" data-search="python basics variables strings lists dictionaries dataclasses assertions pytest">
+          <div class="session-top"><span class="session-number">03</span><span class="tag foundations">Foundations</span></div>
+          <h3>Python Foundations for Automation</h3>
+          <p>Core Python data types, functions, list comprehensions, dictionaries, dataclasses, assertion helpers, and tracebacks.</p>
+          <p class="outcome"><strong>Outcome:</strong> Read and write the Python helper code used throughout the automation framework.</p>
+          <div class="links"><a href="course/session_03_python_foundations/lecture.md">Lecture</a><a href="course/session_03_python_foundations/EXERCISES.md">Exercises</a></div>
+        </article>
+
+        <article class="session-card" data-phase="foundations" data-search="git basics version control branch commit diff status pull push pull request merge conflict">
+          <div class="session-top"><span class="session-number">Git</span><span class="tag foundations">After Python</span></div>
+          <h3>Git Basics for QA Automation</h3>
+          <p>Version control workflow for students after Python foundations and before they edit browser automation or production framework files: clone, branch, status, diff, add, commit, pull, push, and pull request review.</p>
+          <p class="outcome"><strong>Outcome:</strong> Work safely in a shared automation repository without losing local changes or mixing unrelated edits.</p>
+          <div class="links"><a href="course/README.md">Course README</a><a href="#git-basics">Teaching notes</a></div>
+        </article>
+
+        <article class="session-card" data-phase="automation" data-search="playwright basics browser tests auto wait expect fixtures parametrize trace viewer">
+          <div class="session-top"><span class="session-number">04</span><span class="tag automation">Automation</span></div>
+          <h3>Playwright Basics and First Browser Tests</h3>
+          <p>Browser control, auto-waiting, locator strategy, `expect()` assertions, pytest fixtures, parametrized negative tests, and trace viewer basics.</p>
+          <p class="outcome"><strong>Outcome:</strong> Write first reliable browser tests with fixtures, locators, and assertions.</p>
+          <div class="links"><a href="course/session_04_playwright_basics/lecture.md">Lecture</a><a href="course/session_04_playwright_basics/EXERCISES.md">Exercises</a></div>
+        </article>
+
+        <article class="session-card" data-phase="automation" data-search="playwright locators accessibility role label test id stable selectors">
+          <div class="session-top"><span class="session-number">05</span><span class="tag automation">Automation</span></div>
+          <h3>Playwright Locators</h3>
+          <p>Stable locator priority, accessibility-first selectors, strict mode, fallback strategies, and refactoring raw selectors into page objects.</p>
+          <p class="outcome"><strong>Outcome:</strong> Choose maintainable locators and keep selector detail out of tests.</p>
+          <div class="links"><a href="course/session_05_playwright_locators/lecture.md">Lecture</a><a href="course/session_05_playwright_locators/EXERCISES.md">Exercises</a></div>
+        </article>
+
+        <article class="session-card" data-phase="automation" data-search="exception handling errors assertions clear failures retries stack traces">
+          <div class="session-top"><span class="session-number">06</span><span class="tag automation">Automation</span></div>
+          <h3>Exception Handling</h3>
+          <p>Expected framework failures, programmer errors, clear assertion messages, retry boundaries, exception chaining, and failure diagnostics.</p>
+          <p class="outcome"><strong>Outcome:</strong> Turn expected automation errors into clear failures without hiding real bugs.</p>
+          <div class="links"><a href="course/session_06_exception_handling/lecture.md">Lecture</a><a href="course/session_06_exception_handling/EXERCISES.md">Exercises</a></div>
+        </article>
+
+        <article class="session-card" data-phase="automation" data-search="pytest fixtures setup teardown dependency injection scopes parallel safe">
+          <div class="session-top"><span class="session-number">07</span><span class="tag automation">Automation</span></div>
+          <h3>pytest Fixtures</h3>
+          <p>Fixture dependency injection, scope selection, setup and teardown, parametrized fixtures, autouse risks, and parallel-safe design.</p>
+          <p class="outcome"><strong>Outcome:</strong> Build explicit, scoped, maintainable setup and cleanup for tests.</p>
+          <div class="links"><a href="course/session_07_pytest_fixtures/lecture.md">Lecture</a><a href="course/session_07_pytest_fixtures/EXERCISES.md">Exercises</a></div>
+        </article>
+
+        <article class="session-card" data-phase="automation framework" data-search="database testing sqlite schema constraints persistence migrations sql">
+          <div class="session-top"><span class="session-number">08</span><span class="tag framework">Framework</span></div>
+          <h3>Database Testing</h3>
+          <p>Schema constraints, persistence rules, database state, migrations, setup isolation, and API-to-database verification.</p>
+          <p class="outcome"><strong>Outcome:</strong> Validate persistence risks without coupling every UI or API test to SQL.</p>
+          <div class="links"><a href="course/session_08_database_testing/lecture.md">Lecture</a><a href="course/session_08_database_testing/EXERCISES.md">Exercises</a></div>
+        </article>
+
+        <article class="session-card" data-phase="automation framework" data-search="api testing contract negative auth state integration status code response">
+          <div class="session-top"><span class="session-number">09</span><span class="tag framework">Framework</span></div>
+          <h3>API Testing</h3>
+          <p>API smoke tests, contracts, authentication failures, validation errors, state transitions, integration assertions, and response shape checks.</p>
+          <p class="outcome"><strong>Outcome:</strong> Design API tests that validate behavior, not just status codes.</p>
+          <div class="links"><a href="course/session_09_api_testing/lecture.md">Lecture</a><a href="course/session_09_api_testing/EXERCISES.md">Exercises</a></div>
+        </article>
+
+        <article class="session-card" data-phase="automation framework" data-search="page object model pom ui api setup page classes fluent">
+          <div class="session-top"><span class="session-number">10</span><span class="tag framework">Framework</span></div>
+          <h3>POM + UI + API</h3>
+          <p>Page object responsibilities, fluent page APIs, API setup for UI tests, reusable flows, and separation between tests and implementation details.</p>
+          <p class="outcome"><strong>Outcome:</strong> Build reusable page objects and combine UI checks with API setup.</p>
+          <div class="links"><a href="course/session_10_pom_ui_api/lecture.md">Lecture</a><a href="course/session_10_pom_ui_api/EXERCISES.md">Exercises</a></div>
+        </article>
+
+        <article class="session-card" data-phase="automation framework" data-search="test data strategy faker factories secrets generated static isolated">
+          <div class="session-top"><span class="session-number">11</span><span class="tag framework">Framework</span></div>
+          <h3>Test Data Strategy</h3>
+          <p>Static data, generated data, API-created records, secrets, cleanup, uniqueness, and realistic data without shared-state failures.</p>
+          <p class="outcome"><strong>Outcome:</strong> Manage test data safely across local runs, CI, and parallel execution.</p>
+          <div class="links"><a href="course/session_11_test_data_strategy/lecture.md">Lecture</a><a href="course/session_11_test_data_strategy/EXERCISES.md">Exercises</a></div>
+        </article>
+
+        <article class="session-card" data-phase="automation framework" data-search="mini project feature slice page object fixtures tests">
+          <div class="session-top"><span class="session-number">12</span><span class="tag framework">Framework</span></div>
+          <h3>Mini Project</h3>
+          <p>A complete feature slice that combines page objects, fixtures, test data, assertions, and focused review before advanced topics.</p>
+          <p class="outcome"><strong>Outcome:</strong> Build one coherent automation feature from setup to verification.</p>
+          <div class="links"><a href="course/session_12_mini_project/lecture.md">Lecture</a><a href="course/session_12_mini_project/EXERCISES.md">Exercises</a></div>
+        </article>
+
+        <article class="session-card" data-phase="automation" data-search="debugging playwright selector timing data environment trace screenshot video">
+          <div class="session-top"><span class="session-number">13</span><span class="tag automation">Automation</span></div>
+          <h3>Debugging Playwright Tests</h3>
+          <p>Selector failures, timing failures, data problems, environment issues, product bugs, trace viewer, screenshots, and disciplined root-cause analysis.</p>
+          <p class="outcome"><strong>Outcome:</strong> Diagnose common Playwright failures without guessing.</p>
+          <div class="links"><a href="course/session_13_debugging_playwright/lecture.md">Lecture</a><a href="course/session_13_debugging_playwright/EXERCISES.md">Exercises</a></div>
+        </article>
+
+        <article class="session-card" data-phase="ai" data-search="ai tools qa cli self healing claude test generation analysis">
+          <div class="session-top"><span class="session-number">14</span><span class="tag ai">AI</span></div>
+          <h3>AI Tools for QA</h3>
+          <p>Command-line QA helpers, AI-generated test drafts, self-healing wrappers, evidence logging, and review boundaries for AI-produced code.</p>
+          <p class="outcome"><strong>Outcome:</strong> Add AI utilities while keeping deterministic tests as the release gate.</p>
+          <div class="links"><a href="course/session_14_ai_tools/lecture.md">Lecture</a><a href="course/session_14_ai_tools/EXERCISES.md">Exercises</a></div>
+        </article>
+
+        <article class="session-card" data-phase="ai" data-search="mcp ai agents tools regression planning explorer model context protocol">
+          <div class="session-top"><span class="session-number">15</span><span class="tag ai">AI</span></div>
+          <h3>MCP and AI Agents</h3>
+          <p>Agent loops, tool calls, model context protocol concepts, explorer agents, regression planning, and guardrails for delegated analysis.</p>
+          <p class="outcome"><strong>Outcome:</strong> Explore agent-driven regression planning and codebase inspection safely.</p>
+          <div class="links"><a href="course/session_15_mcp_agents/lecture.md">Lecture</a><a href="course/session_15_mcp_agents/EXERCISES.md">Exercises</a></div>
+        </article>
+
+        <article class="session-card" data-phase="delivery ai" data-search="ci cd failure analysis flaky detector github actions allure ai analysis">
+          <div class="session-top"><span class="session-number">16</span><span class="tag delivery">Delivery</span></div>
+          <h3>CI/CD and AI Failure Analysis</h3>
+          <p>GitHub Actions, CI test execution, failure classification, flaky test detection, repeatable analysis tooling, and triage summaries.</p>
+          <p class="outcome"><strong>Outcome:</strong> Analyze flaky tests and CI failures with repeatable tooling.</p>
+          <div class="links"><a href="course/session_16_ci_cd_ai_analysis/lecture.md">Lecture</a><a href="course/session_16_ci_cd_ai_analysis/EXERCISES.md">Exercises</a></div>
+        </article>
+
+        <article class="session-card" data-phase="delivery" data-search="allure reporting ci github pages trend history severity feature story">
+          <div class="session-top"><span class="session-number">17</span><span class="tag delivery">Delivery</span></div>
+          <h3>Reporting and CI: Allure 3 + GitHub Pages</h3>
+          <p>Allure metadata, attachments, test reports, trend history, GitHub Pages publishing, and report quality for non-engineering readers.</p>
+          <p class="outcome"><strong>Outcome:</strong> Publish readable automation reports with trend history through CI.</p>
+          <div class="links"><a href="course/session_17_reporting_ci/lecture.md">Lecture</a><a href="course/session_17_reporting_ci/EXERCISES.md">Exercises</a></div>
+        </article>
+
+        <article class="session-card" data-phase="foundations" data-search="automation learning plan portfolio practice roadmap growth">
+          <div class="session-top"><span class="session-number">18</span><span class="tag foundations">Foundations</span></div>
+          <h3>Automation Learning</h3>
+          <p>Learning plans, deliberate practice, project selection, portfolio evidence, skill gaps, and turning course work into daily habits.</p>
+          <p class="outcome"><strong>Outcome:</strong> Build a practical learning plan with clear weekly outcomes.</p>
+          <div class="links"><a href="course/session_18_automation_learning/lecture.md">Lecture</a><a href="course/session_18_automation_learning/EXERCISES.md">Exercises</a></div>
+        </article>
+
+        <article class="session-card" data-phase="ai" data-search="ai agents testing planning exploration review guardrails qa judgment">
+          <div class="session-top"><span class="session-number">19</span><span class="tag ai">AI</span></div>
+          <h3>AI Agents for Testing</h3>
+          <p>Agent-supported planning, exploration, QA review, source-of-truth checks, bounded delegation, and human review responsibilities.</p>
+          <p class="outcome"><strong>Outcome:</strong> Use agents for test planning and review without replacing QA judgment.</p>
+          <div class="links"><a href="course/session_19_ai_agents_for_testing/lecture.md">Lecture</a><a href="course/session_19_ai_agents_for_testing/EXERCISES.md">Exercises</a></div>
+        </article>
+
+        <article class="session-card" data-phase="ai delivery" data-search="agentic automation testing supervised workflows failure investigation ci analysis">
+          <div class="session-top"><span class="session-number">20</span><span class="tag ai">AI</span></div>
+          <h3>Agentic Automation Testing</h3>
+          <p>Supervised workflows, agent tasks, failure investigation, CI analysis, tool boundaries, escalation, and deterministic gates.</p>
+          <p class="outcome"><strong>Outcome:</strong> Design supervised agent workflows for automation testing.</p>
+          <div class="links"><a href="course/session_20_agentic_automation_testing/lecture.md">Lecture</a><a href="course/session_20_agentic_automation_testing/EXERCISES.md">Exercises</a></div>
+        </article>
+
+        <article class="session-card" data-phase="automation" data-search="playwright cli codegen screenshots trace viewer debugging install browsers">
+          <div class="session-top"><span class="session-number">21</span><span class="tag automation">Automation</span></div>
+          <h3>Playwright CLI</h3>
+          <p>Browser installation, codegen, screenshots, trace viewer, page inspection, debugging commands, and refactoring generated output.</p>
+          <p class="outcome"><strong>Outcome:</strong> Use Playwright CLI tools for discovery, debugging, and learning.</p>
+          <div class="links"><a href="course/session_21_playwright_cli/lecture.md">Lecture</a><a href="course/session_21_playwright_cli/EXERCISES.md">Exercises</a></div>
+        </article>
+
+        <article class="session-card" data-phase="automation framework" data-search="automation code review reliability maintainability fixtures data reports">
+          <div class="session-top"><span class="session-number">22</span><span class="tag framework">Framework</span></div>
+          <h3>Automation Code Review</h3>
+          <p>Reviewing behavior coverage, flakiness risks, layering, fixture scope, data isolation, maintainability, and report usefulness.</p>
+          <p class="outcome"><strong>Outcome:</strong> Review automation changes for reliability and long-term maintainability.</p>
+          <div class="links"><a href="course/session_22_automation_code_review/lecture.md">Lecture</a><a href="course/session_22_automation_code_review/EXERCISES.md">Exercises</a></div>
+        </article>
+
+        <article class="session-card" data-phase="framework delivery" data-search="capstone production framework architecture adr pre-commit ruff mypy">
+          <div class="session-top"><span class="session-number">23</span><span class="tag framework">Framework</span></div>
+          <h3>Capstone: Production-Level Framework</h3>
+          <p>Architecture layers, ADRs, pre-commit checks, `ruff`, `mypy`, ownership boundaries, and production framework completion criteria.</p>
+          <p class="outcome"><strong>Outcome:</strong> Deliver production-level framework changes in the real project structure.</p>
+          <div class="links"><a href="course/session_23_capstone/lecture.md">Lecture</a><a href="course/session_23_capstone/EXERCISES.md">Exercises</a></div>
+        </article>
+
+        <article class="session-card" data-phase="ai" data-search="claude code integration slash commands playwright mcp qa workflows">
+          <div class="session-top"><span class="session-number">24</span><span class="tag ai">AI</span></div>
+          <h3>Claude Code Integration</h3>
+          <p>Slash commands, Claude Code workflows, Playwright MCP, test generation, review commands, and failure-analysis assistance.</p>
+          <p class="outcome"><strong>Outcome:</strong> Use Claude Code for bounded QA automation workflows.</p>
+          <div class="links"><a href="course/session_24_claude_code/lecture.md">Lecture</a><a href="course/session_24_claude_code/EXERCISES.md">Exercises</a></div>
+        </article>
+
+        <article class="session-card" data-phase="ai" data-search="claude skills plugins mcp slash commands extensions">
+          <div class="session-top"><span class="session-number">25</span><span class="tag ai">AI</span></div>
+          <h3>Claude Skills and Plugins</h3>
+          <p>Skills, plugins, MCP servers, slash commands, workflow extensions, safety boundaries, and maintainable AI-assisted QA patterns.</p>
+          <p class="outcome"><strong>Outcome:</strong> Extend Claude workflows with skills and plugins safely.</p>
+          <div class="links"><a href="course/session_25_claude_skills_plugins/lecture.md">Lecture</a><a href="course/session_25_claude_skills_plugins/EXERCISES.md">Exercises</a></div>
+        </article>
+
+        <article class="session-card" data-phase="ai" data-search="codex cli qa automation code edits review fix verification">
+          <div class="session-top"><span class="session-number">26</span><span class="tag ai">AI</span></div>
+          <h3>Codex CLI</h3>
+          <p>Scoped codebase edits, reviews, fixes, verification commands, task decomposition, and responsible coding-agent workflows.</p>
+          <p class="outcome"><strong>Outcome:</strong> Use Codex CLI for practical QA automation development work.</p>
+          <div class="links"><a href="course/session_26_codex_cli/lecture.md">Lecture</a><a href="course/session_26_codex_cli/EXERCISES.md">Exercises</a></div>
+        </article>
+
+        <article class="session-card" data-phase="ai delivery" data-search="claude connectors github docs chat email calendar pr workflows">
+          <div class="session-top"><span class="session-number">27</span><span class="tag ai">AI</span></div>
+          <h3>Claude Connectors</h3>
+          <p>PRs, docs, chat, email, calendar, connector boundaries, data access controls, and connector-assisted QA workflow design.</p>
+          <p class="outcome"><strong>Outcome:</strong> Use connectors for real QA workflows without losing review discipline.</p>
+          <div class="links"><a href="course/session_27_claude_connectors/lecture.md">Lecture</a><a href="course/session_27_claude_connectors/EXERCISES.md">Exercises</a></div>
+        </article>
+
+        <article class="session-card" data-phase="ai" data-search="ollama local ai privacy offline models qa summaries classification">
+          <div class="session-top"><span class="session-number">28</span><span class="tag ai">AI</span></div>
+          <h3>Ollama Local AI</h3>
+          <p>Local model use cases, privacy tradeoffs, offline summaries, test ideas, failure classification, and small review tasks.</p>
+          <p class="outcome"><strong>Outcome:</strong> Use local AI where privacy, cost, or offline work matters.</p>
+          <div class="links"><a href="course/session_28_ollama_local_ai/lecture.md">Lecture</a><a href="course/session_28_ollama_local_ai/EXERCISES.md">Exercises</a></div>
+        </article>
+
+        <article class="session-card" data-phase="delivery framework" data-search="docker compose grafana prometheus monitoring automation observability">
+          <div class="session-top"><span class="session-number">29</span><span class="tag delivery">Delivery</span></div>
+          <h3>Docker Compose and Grafana</h3>
+          <p>Local automation stacks, Docker Compose services, Prometheus metrics, Grafana dashboards, test-health monitoring, and operational visibility.</p>
+          <p class="outcome"><strong>Outcome:</strong> Run automation through Docker Compose and monitor test health.</p>
+          <div class="links"><a href="course/session_29_docker_compose_grafana/lecture.md">Lecture</a><a href="course/session_29_docker_compose_grafana/EXERCISES.md">Exercises</a></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="wrap section" id="git-basics">
+      <div class="section-header">
+        <div>
+          <h2>Git Basics Teaching Block</h2>
+          <p>Use this short module after Session 3, once students have written basic Python and before they start editing browser automation files. The goal is practical confidence, not full Git theory.</p>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="workflow">
+          <div class="workflow-step"><strong>1. Orient</strong><span>Explain repository, working tree, staging area, commit history, remote, and branch in plain language.</span></div>
+          <div class="workflow-step"><strong>2. Inspect</strong><span>Practice `git status`, `git diff`, and reading changed files before editing or committing.</span></div>
+          <div class="workflow-step"><strong>3. Isolate</strong><span>Create a branch per task, keep edits focused, and avoid mixing course notes with framework changes.</span></div>
+          <div class="workflow-step"><strong>4. Commit</strong><span>Stage intentional files, write a clear commit message, and verify the diff before pushing.</span></div>
+          <div class="workflow-step"><strong>5. Recover</strong><span>Handle common mistakes: unstaged changes, merge conflicts, wrong branch, and pull before push.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap section" id="workflow">
+      <div class="section-header">
+        <div>
+          <h2>How to Use Each Session</h2>
+          <p>Use the same loop for every topic so learning, practice, and verification stay connected.</p>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="workflow">
+          <div class="workflow-step"><strong>1. Read</strong><span>Start with `lecture.md` to understand the concept and quality bar.</span></div>
+          <div class="workflow-step"><strong>2. Run</strong><span>Execute `lecture.py` or the narrow session tests when available.</span></div>
+          <div class="workflow-step"><strong>3. Inspect</strong><span>Read the supporting files and matching `course/framework/` layer.</span></div>
+          <div class="workflow-step"><strong>4. Practice</strong><span>Complete `EXERCISES.md` with concrete evidence and review notes.</span></div>
+          <div class="workflow-step"><strong>5. Verify</strong><span>Run the narrowest relevant tests before moving to the next session.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="wrap">
+      <p>
+        This overview links to teaching material under `course/`. Capstone deliverables belong in the production
+        directories: `pages/`, `services/`, `flows/`, `tests/`, `data/`, and configuration files.
+      </p>
+    </footer>
+  </main>
+
+  <script>
+    const filters = [...document.querySelectorAll(".filter")];
+    const cards = [...document.querySelectorAll(".session-card")];
+    const search = document.querySelector("#sessionSearch");
+    let activeFilter = "all";
+
+    function applyFilters() {
+      const query = search.value.trim().toLowerCase();
+      for (const card of cards) {
+        const phases = card.dataset.phase.split(" ");
+        const text = `${card.innerText} ${card.dataset.search}`.toLowerCase();
+        const phaseMatch = activeFilter === "all" || phases.includes(activeFilter);
+        const textMatch = !query || text.includes(query);
+        card.hidden = !(phaseMatch && textMatch);
+      }
+    }
+
+    for (const filter of filters) {
+      filter.addEventListener("click", () => {
+        activeFilter = filter.dataset.filter;
+        filters.forEach((button) => button.classList.toggle("active", button === filter));
+        applyFilters();
+      });
+    }
+
+    search.addEventListener("input", applyFilters);
+  </script>
+</body>
+</html>

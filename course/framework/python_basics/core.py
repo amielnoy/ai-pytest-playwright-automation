@@ -44,6 +44,14 @@ def affordable_products(products: list[Product], max_price: float) -> list[Produ
     ]
 
 
+def build_user_payload(email: str, password: str, first_name: str) -> dict[str, str]:
+    return {
+        "email": email,
+        "password": password,
+        "first_name": first_name,
+    }
+
+
 def assert_required_fields(payload: dict[str, Any], required_fields: list[str]) -> None:
     missing = [
         field

@@ -8,8 +8,7 @@ class ProductDetailPage(BasePage):
     _HEADING_ROLE = "heading"
     _QUANTITY_LABEL = "Qty"
     _DEFAULT_QUANTITY = "1"
-    _ADD_TO_CART_BUTTON_ROLE = "button"
-    _ADD_TO_CART_BUTTON_NAME = "Add to Cart"
+    _ADD_TO_CART_BUTTON_SELECTOR = "#button-cart"
     _REVIEWS_LINK_ROLE = "link"
     _REVIEWS_LINK_NAME: Pattern[str] = re.compile("Reviews")
     _REVIEW_FIELD_LABELS = ("Qty", "Your Name", "Your Review")
@@ -26,9 +25,7 @@ class ProductDetailPage(BasePage):
         )
 
     def has_add_to_cart_button(self) -> bool:
-        return self.page.get_by_role(
-            self._ADD_TO_CART_BUTTON_ROLE, name=self._ADD_TO_CART_BUTTON_NAME
-        ).is_visible()
+        return self.page.locator(self._ADD_TO_CART_BUTTON_SELECTOR).is_visible()
 
     def open_reviews_tab(self) -> None:
         self.page.get_by_role(

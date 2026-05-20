@@ -13,6 +13,19 @@ By the end of this session you will be able to:
 
 ---
 
+## Session Flow
+
+| Time | Activity | Output |
+| --- | --- | --- |
+| 0:00-0:15 | QA mindset and test case anatomy | Shared definition of a good test case |
+| 0:15-0:40 | Test types and test pyramid | Classify scenarios by level and purpose |
+| 0:40-1:15 | EP, BVA, decision tables, state transitions | Draft cases from a sample feature |
+| 1:15-1:35 | Defects, severity, priority, bug reports | Reproducible defect report |
+| 1:35-1:55 | Risk-based and exploratory testing | Prioritized test plan slice |
+| 1:55-2:00 | Review and exit checklist | Gaps to complete before Session 2 |
+
+---
+
 ## What Is a Test Case?
 
 A test case is a documented procedure to verify one specific behaviour.
@@ -31,6 +44,18 @@ Every test case has exactly **seven fields**: ID, title, priority, type, precond
 | Missing precondition | Steps assume a logged-in user | State it explicitly |
 | Vague expected | "The page works correctly" | "URL is /inventory.html and 6 products are visible" |
 | Testing two things | One case verifies login AND cart | Split into two cases |
+
+### Test case quality bar
+
+A test case is ready for review when another tester can execute it without asking you what you meant.
+
+Before marking a case done, check:
+
+- The title states the behaviour, not the click path.
+- The precondition includes login state, data state, browser/page state, and any required test account.
+- Every step starts with a single verb: navigate, enter, click, select, observe.
+- The expected result can be verified from the UI, API response, database row, log, or email.
+- The case has one reason to fail. If two unrelated assertions can fail, split the case.
 
 ---
 
@@ -63,6 +88,9 @@ If an E2E test covers logic that a unit test could cover, the E2E test is in the
 ---
 
 ## Test Design Techniques
+
+Test design starts from the risk or rule you need to cover, not from the screen layout.
+Use the lightest technique that gives enough confidence.
 
 ### Equivalence Partitioning (EP)
 
@@ -132,6 +160,16 @@ Pairwise reduces this by covering every **pair** of values at least once (roughl
 
 Use when: 3+ independent variables and full combinatorial is too expensive. Tools: `pairwisepy`, `allpairs`.
 
+### Technique selection guide
+
+| Situation | Best technique | Why |
+| --- | --- | --- |
+| A single input accepts ranges or categories | EP + BVA | Covers valid/invalid classes and edge mistakes |
+| Business result depends on multiple flags | Decision table | Makes missing combinations visible |
+| Workflow changes over time | State transition | Finds invalid jumps and repeated actions |
+| Many browser/device/data combinations | Pairwise | Reduces cost while keeping interaction coverage |
+| Unknown or newly changed area | Exploratory charter | Discovers risks before scripting cases |
+
 ---
 
 ## Defect Lifecycle
@@ -163,6 +201,15 @@ New --> Assigned --> In Progress --> Fixed --> Verified --> Closed
 
 See `bug_report.py` for five real examples from saucedemo.com.
 
+### Bug report review checklist
+
+- Reproduces from a clean browser session.
+- Uses exact data values, exact user account, and exact URL.
+- Separates actual and expected result.
+- Includes severity and priority with a one-sentence rationale.
+- Includes enough evidence for triage: screenshot, console error, network response, or log excerpt.
+- Names the build, environment, browser, OS, and time observed.
+
 ---
 
 ## Risk-Based Testing
@@ -176,6 +223,8 @@ When time is limited, test where **risk = likelihood × impact** is highest firs
 | Cart total | Low | High | 3 | Automated assertion |
 | Sort dropdown | Medium | Low | 2 | Regression suite only |
 | UI cosmetics | High | Low | 3 | Visual diff in CI |
+
+Use risk score to choose order, not to ignore responsibility. Low-risk areas can still need coverage before release, but they should not consume the first hour of a blocked test cycle.
 
 ---
 
@@ -246,6 +295,17 @@ A test plan answers: **what** is tested, **how**, by **whom**, by **when**, **wh
 | Coverage matrix | Feature to test case IDs to automation percentage |
 
 See `test_plan.py` for the complete plan for saucedemo.com v1.0.
+
+### Minimum viable test plan
+
+For small features, one page is enough if it answers:
+
+- Scope: what changed and what did not.
+- Risks: top three failure modes and business impact.
+- Coverage: smoke, functional, negative, edge, regression.
+- Environments: browser, device, data, account, build.
+- Entry criteria: what must be ready before testing starts.
+- Exit criteria: what must be true before release.
 
 ---
 

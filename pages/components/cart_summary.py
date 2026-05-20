@@ -3,13 +3,19 @@ from utils.price_parser import parse_price
 
 
 class CartSummaryComponent(BaseComponent):
-    _TOTAL_ROW = "tfoot tr:has(strong:has-text('Total:')) td:last-child"
-    _ITEMS = "#content table tbody tr"
+    _TOTAL_LABEL = "Total:"
+    _TOTAL_ROWS = "#content table tbody tr"
+    _ITEMS = "#content .table-responsive table tbody tr"
     _CONTENT = "#content"
     _EMPTY_CART_TEXT = "Your shopping cart is empty!"
 
     def get_total(self) -> float:
-        total_cell = self.page.locator(self._TOTAL_ROW).last
+        total_cell = (
+            self.page.locator(self._TOTAL_ROWS)
+            .filter(has_text=self._TOTAL_LABEL)
+            .locator("td")
+            .last
+        )
         if not total_cell.is_visible():
             return 0.0
         return parse_price(total_cell.inner_text()) or 0.0

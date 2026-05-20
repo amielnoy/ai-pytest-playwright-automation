@@ -11,12 +11,20 @@ data/secrets.json
 
 # Test artifacts
 logs/
+*.log
+*.tmp
+*.temp
+.playwright-mcp/
 allure-results/
 allure-report/
 allure-history/
 allure-results-archive/
 tmp-allure/
 docker-artifacts/
+outputs/
+test-results/
+playwright-report/
+cart_debug.png
 artifacts/reports/*.html
 .pytest_cache/
 node_modules/

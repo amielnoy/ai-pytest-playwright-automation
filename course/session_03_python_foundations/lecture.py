@@ -17,6 +17,7 @@ from course.framework.python_basics import (  # noqa: E402
     Product,
     affordable_products,
     assert_required_fields,
+    build_user_payload,
     format_test_id,
     normalize_text,
     parse_price,
@@ -39,8 +40,8 @@ def demo() -> None:
     print("Affordable:", product_names(affordable_products(products, max_price=200)))
     print("Test ID:", format_test_id("Search Results", "Sort A to Z"))
 
-    user = {"email": "student@example.com", "password": "secret"}
-    assert_required_fields(user, ["email", "password"])
+    user = build_user_payload("student@example.com", "secret", "Student")
+    assert_required_fields(user, ["email", "password", "first_name"])
     print("Required fields: ok")
 
 
@@ -53,6 +54,7 @@ __all__ = [
     "affordable_products",
     "assert_required_fields",
     "build_demo_products",
+    "build_user_payload",
     "format_test_id",
     "normalize_text",
     "parse_price",

@@ -6,6 +6,7 @@ from course.framework.python_basics import (
     Product,
     affordable_products,
     assert_required_fields,
+    build_user_payload,
     format_test_id,
     normalize_text,
     parse_price,
@@ -19,6 +20,11 @@ def test_normalize_text_removes_extra_spaces() -> None:
 
 def test_parse_price_converts_currency_text() -> None:
     assert parse_price("$1,202.00") == 1202.0
+
+
+def test_parse_price_rejects_non_numeric_text() -> None:
+    with pytest.raises(ValueError):
+        parse_price("free")
 
 
 def test_product_names_returns_names_in_order() -> None:
@@ -46,6 +52,14 @@ def test_assert_required_fields_accepts_complete_payload() -> None:
 def test_assert_required_fields_reports_missing_values() -> None:
     with pytest.raises(AssertionError, match="email, password"):
         assert_required_fields({"email": "", "name": "Student"}, ["email", "password"])
+
+
+def test_build_user_payload_returns_required_api_fields() -> None:
+    assert build_user_payload("user@example.com", "secret", "Student") == {
+        "email": "user@example.com",
+        "password": "secret",
+        "first_name": "Student",
+    }
 
 
 def test_format_test_id_creates_readable_identifier() -> None:

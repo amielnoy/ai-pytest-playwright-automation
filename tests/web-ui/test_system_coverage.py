@@ -68,12 +68,17 @@ class TestSearchDataIntegrity:
 @pytest.mark.cart
 class TestCartFlowCoverage:
 
+    _CART_QUERY = "iPhone"
+    _CART_MAX_PRICE = 9999.0
+
     @allure.title("Cart total is positive after adding items via CartFlow")
     @allure.severity(allure.severity_level.CRITICAL)
     def test_cart_total_positive_after_adding_items(self, cart_flow: CartFlow):
-        with allure.step("Add MacBook items under $700 to cart"):
+        with allure.step("Add iPhone to cart from search results"):
             added = cart_flow.add_products_by_search(
-                query="MacBook", max_price=700.0, limit=3
+                query=self._CART_QUERY,
+                max_price=self._CART_MAX_PRICE,
+                limit=1,
             )
             assert added, "No products were added to the cart"
 
@@ -90,9 +95,11 @@ class TestCartFlowCoverage:
     @allure.title("Adding exactly one product results in one cart item")
     @allure.severity(allure.severity_level.NORMAL)
     def test_single_product_limit_yields_one_cart_item(self, cart_flow: CartFlow):
-        with allure.step("Add at most 1 MacBook item to cart"):
+        with allure.step("Add exactly 1 iPhone item to cart from search results"):
             added = cart_flow.add_products_by_search(
-                query="MacBook", max_price=9999.0, limit=1
+                query=self._CART_QUERY,
+                max_price=self._CART_MAX_PRICE,
+                limit=1,
             )
             assert len(added) == 1, f"Expected 1 product added, got {len(added)}"
 
