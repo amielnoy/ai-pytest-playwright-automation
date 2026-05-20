@@ -2,6 +2,7 @@ from playwright.sync_api import Page
 
 from pages.base_page import BasePage
 from pages.components import NavBarComponent
+from pages.self_healing import healing_locator
 
 
 class HomePage(BasePage):
@@ -14,6 +15,16 @@ class HomePage(BasePage):
     def __init__(self, page: Page, base_url: str) -> None:
         super().__init__(page, base_url)
         self.nav = NavBarComponent(page)
+        self.featured_product_images = healing_locator(
+            page.locator(self._FEATURED_PRODUCT_IMAGES),
+            name="featured product images",
+            primary_label=self._FEATURED_PRODUCT_IMAGES,
+            fallbacks=[
+                (".product-thumb [role='img']", page.locator(".product-thumb [role='img']")),
+                (".product-thumb img", page.locator(".product-thumb img")),
+            ],
+            events=self._self_heal_events,
+        )
 
     def open(self) -> "HomePage":
         self.navigate()
@@ -40,7 +51,7 @@ class HomePage(BasePage):
         )
 
     def visible_featured_images_missing_alt(self) -> list[str]:
-        return self.page.locator(self._FEATURED_PRODUCT_IMAGES).evaluate_all(
+        return self.featured_product_images.evaluate_all(
             self._VISIBLE_IMAGES_MISSING_ALT_SCRIPT
         )
 

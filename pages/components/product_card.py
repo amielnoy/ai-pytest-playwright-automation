@@ -3,6 +3,7 @@ import re
 from playwright.sync_api import Locator
 
 from pages.models import StoredProductInfo
+from pages.self_healing import healing_locator
 from utils.price_parser import parse_price
 
 
@@ -23,17 +24,36 @@ class ProductCardComponent:
     def __init__(self, root: Locator, index: int) -> None:
         self.root = root
         self.index = index
+        self.name_heading = root.get_by_role(
+            self._NAME_HEADING_ROLE, level=self._NAME_HEADING_LEVEL
+        )
+        self.name_link = self.name_heading.get_by_role(self._NAME_LINK_ROLE)
+        self.image = root.get_by_role(self._IMAGE_ROLE)
+        self.description_text = healing_locator(
+            root.locator(self._DESCRIPTION),
+            name=f"product card {index} description",
+            primary_label=self._DESCRIPTION,
+            fallbacks=[
+                (".caption p", root.locator(".caption p")),
+                ("p", root.locator("p")),
+            ],
+        ).first
+        self.price_text = healing_locator(
+            root.locator(self._PRICE),
+            name=f"product card {index} price",
+            primary_label=self._PRICE,
+            fallbacks=[
+                ("[class*='price']", root.locator("[class*='price']")),
+                (".caption", root.locator(".caption")),
+            ],
+        )
+        self.add_to_cart_button = root.get_by_role(
+            self._ADD_TO_CART_BUTTON_ROLE, name=self._ADD_TO_CART_BUTTON_NAME
+        )
 
     @property
     def name(self) -> str:
-        return (
-            self.root.get_by_role(
-                self._NAME_HEADING_ROLE, level=self._NAME_HEADING_LEVEL
-            )
-            .get_by_role(self._NAME_LINK_ROLE)
-            .inner_text()
-            .strip()
-        )
+        return self.name_link.inner_text().strip()
 
     @property
     def cleaned_name(self) -> str:
@@ -41,21 +61,16 @@ class ProductCardComponent:
 
     @property
     def picture_url(self) -> str:
-        return (
-            self.root.get_by_role(self._IMAGE_ROLE).get_attribute(
-                self._IMAGE_SRC_ATTRIBUTE
-            )
-            or ""
-        )
+        return self.image.get_attribute(self._IMAGE_SRC_ATTRIBUTE) or ""
 
     @property
     def description(self) -> str:
-        description = self.root.locator(self._DESCRIPTION).first.inner_text()
+        description = self.description_text.inner_text()
         return " ".join(description.split())
 
     @property
     def price(self) -> float | None:
-        return parse_price(self.root.locator(self._PRICE).inner_text())
+        return parse_price(self.price_text.inner_text())
 
     def stored_info(self) -> StoredProductInfo:
         price = self.price
@@ -69,6 +84,4 @@ class ProductCardComponent:
         )
 
     def add_to_cart(self) -> None:
-        self.root.get_by_role(
-            self._ADD_TO_CART_BUTTON_ROLE, name=self._ADD_TO_CART_BUTTON_NAME
-        ).click()
+        self.add_to_cart_button.click()

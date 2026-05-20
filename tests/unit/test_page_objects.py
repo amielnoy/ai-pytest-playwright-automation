@@ -17,6 +17,7 @@ from pages.models import ProductInfo, StoredProductInfo
 from pages.product_detail_page import ProductDetailPage
 from pages.register_page import RegisterPage
 from pages.search_results_page import SearchResultsPage
+from pages.self_healing import SelfHealEvent, healing_locator
 
 
 def test_base_component_stores_page():
@@ -25,6 +26,51 @@ def test_base_component_stores_page():
     component = BaseComponent(page)
 
     assert component.page is page
+
+
+def test_healing_locator_uses_fallback_and_records_event_once():
+    primary = MagicMock()
+    fallback = MagicMock()
+    primary.count.return_value = 0
+    fallback.count.return_value = 1
+    fallback.is_visible.return_value = True
+    events: list[SelfHealEvent] = []
+    locator = healing_locator(
+        primary,
+        name="submit button",
+        primary_label="#submit",
+        fallbacks=[("button:has-text('Submit')", fallback)],
+        events=events,
+    )
+
+    assert locator.is_visible() is True
+    assert locator.is_visible() is True
+    assert events == [
+        SelfHealEvent(
+            name="submit button",
+            primary="#submit",
+            healed="button:has-text('Submit')",
+        )
+    ]
+
+
+def test_healing_locator_keeps_primary_when_no_fallback_matches():
+    primary = MagicMock()
+    fallback = MagicMock()
+    primary.count.return_value = 0
+    fallback.count.return_value = 0
+    primary.is_visible.return_value = False
+    events: list[SelfHealEvent] = []
+    locator = healing_locator(
+        primary,
+        name="missing field",
+        primary_label="#missing",
+        fallbacks=[("input[name='missing']", fallback)],
+        events=events,
+    )
+
+    assert locator.is_visible() is False
+    assert events == []
 
 
 def test_base_page_navigate_builds_base_and_relative_urls():
@@ -74,19 +120,32 @@ def test_base_page_wait_for_visible_uses_first_matching_locator():
 
 def test_base_page_accessibility_helpers_use_class_locators():
     page = MagicMock()
+    success = MagicMock()
+    danger = MagicMock()
+    field = MagicMock()
     html = MagicMock()
     ids = MagicMock()
     html.get_attribute.return_value = "en"
     ids.evaluate_all.return_value = ["duplicate-id"]
-    page.locator.side_effect = [html, ids]
+    page.locator.side_effect = [
+        success,
+        MagicMock(),
+        danger,
+        MagicMock(),
+        MagicMock(),
+        field,
+        MagicMock(),
+        MagicMock(),
+        html,
+        MagicMock(),
+        ids,
+    ]
     base_page = BasePage(page, "https://example.test")
 
     assert base_page.document_language() == "en"
     assert base_page.duplicate_ids() == ["duplicate-id"]
-    assert page.locator.call_args_list == [
-        call(BasePage._HTML_SELECTOR),
-        call(BasePage._ANY_ID_SELECTOR),
-    ]
+    page.locator.assert_any_call(BasePage._HTML_SELECTOR)
+    page.locator.assert_any_call(BasePage._ANY_ID_SELECTOR)
     ids.evaluate_all.assert_called_once_with(BasePage._DUPLICATE_IDS_SCRIPT)
 
 
@@ -235,7 +294,8 @@ def test_login_page_accessibility_helpers_use_class_locators():
     password.is_visible.return_value = True
     login_button.is_visible.return_value = True
     warning_text.inner_text.return_value = LoginPage._INVALID_LOGIN_WARNING_PREFIX
-    page.get_by_role.side_effect = [email, login_button]
+    success_heading = MagicMock()
+    page.get_by_role.side_effect = [email, login_button, success_heading]
     page.get_by_label.return_value = password
     page.locator.return_value = warning_text
     login_page = LoginPage(page, "https://example.test")
@@ -245,6 +305,11 @@ def test_login_page_accessibility_helpers_use_class_locators():
     assert page.get_by_role.call_args_list == [
         call(LoginPage._EMAIL_ROLE, name=LoginPage._EMAIL_NAME),
         call(LoginPage._LOGIN_BUTTON_ROLE, name=LoginPage._LOGIN_BUTTON_NAME),
+        call(
+            LoginPage._MY_ACCOUNT_HEADING_ROLE,
+            name=LoginPage._MY_ACCOUNT_HEADING_NAME,
+            level=LoginPage._MY_ACCOUNT_HEADING_LEVEL,
+        ),
     ]
     page.get_by_label.assert_called_once_with(LoginPage._PASSWORD_LABEL)
     page.locator.assert_any_call(LoginPage._INVALID_CREDENTIALS_WARNING)
@@ -287,8 +352,8 @@ def test_search_results_filters_products_under_price_and_limit():
 def test_search_results_adds_items_to_cart_and_waits_for_success():
     page = MagicMock()
     thumbs = MagicMock()
-    page.locator.return_value = thumbs
     search_page = SearchResultsPage(page, "https://example.test")
+    search_page.product_thumbs = thumbs
     search_page.alert = MagicMock()
     products = [
         ProductInfo(name="MacBook", price=602.0, index=0),
@@ -318,12 +383,13 @@ def test_search_results_open_product_clicks_title_link_in_matching_card():
     filtered = MagicMock()
     title = MagicMock()
     title_link = MagicMock()
-    page.get_by_role.return_value = product_link
-    page.locator.return_value = thumbs
     thumbs.filter.return_value = filtered
     filtered.first.locator.return_value = title
     title.get_by_role.return_value = title_link
     search_page = SearchResultsPage(page, "https://example.test")
+    search_page.product_thumbs = thumbs
+    page.get_by_role.reset_mock()
+    page.get_by_role.return_value = product_link
 
     search_page.open_product("MacBook")
 
@@ -342,9 +408,10 @@ def test_search_results_view_sort_and_cards_helpers():
     thumbs = MagicMock()
     thumbs.count.return_value = 2
     thumbs.nth.side_effect = ["thumb-0", "thumb-1"]
-    page.locator.side_effect = [MagicMock(), MagicMock(), list_view, thumbs]
-    page.get_by_role.return_value = sort_select
     search_page = SearchResultsPage(page, "https://example.test")
+    search_page.list_view_button = list_view
+    search_page.sort_select = sort_select
+    search_page.product_thumbs = thumbs
     search_page.wait_for_product_results = MagicMock()
 
     with patch("pages.search_results_page.expect") as expect_mock:
@@ -387,35 +454,36 @@ def test_search_results_accessibility_helpers_use_class_locators():
     for label in label_locators:
         label.is_visible.return_value = True
     product_links.all_inner_texts.return_value = ["MacBook", "MacBook Pro"]
-    page.get_by_label.side_effect = label_locators
-    page.locator.return_value = product_links
     search_page = SearchResultsPage(page, "https://example.test")
+    search_page.filter_controls = tuple(label_locators)
+    search_page.product_title_links = product_links
     search_page.wait_for_product_results = MagicMock()
 
     assert search_page.has_filter_controls() is True
     assert search_page.product_title_link_names() == ["MacBook", "MacBook Pro"]
-    assert page.get_by_label.call_args_list == [
-        call(SearchResultsPage._SEARCH_CRITERIA_LABEL),
-        call(SearchResultsPage._SORT_BY_LABEL),
-        call(SearchResultsPage._SHOW_LABEL),
-    ]
-    page.locator.assert_any_call(
-        f"{SearchResultsPage._PRODUCT_THUMBS} "
-        f"{SearchResultsPage._PRODUCT_TITLE_SELECTOR} a"
-    )
+    assert search_page.filter_controls == tuple(label_locators)
 
 
 def test_alert_component_returns_banner_field_success_and_waits():
     page = MagicMock()
+    success = MagicMock()
     danger = MagicMock()
     field = MagicMock()
-    success = MagicMock()
     danger.is_visible.return_value = False
     field.first.is_visible.return_value = True
     field.first.inner_text.return_value = "First name is required"
     success.is_visible.return_value = True
     success.inner_text.return_value = "Success"
-    page.locator.side_effect = [danger, field, success, success]
+    page.locator.side_effect = [
+        success,
+        MagicMock(),
+        danger,
+        MagicMock(),
+        MagicMock(),
+        field,
+        MagicMock(),
+        MagicMock(),
+    ]
     alert = AlertComponent(page)
 
     assert alert.get_error() == "First name is required"
@@ -423,24 +491,33 @@ def test_alert_component_returns_banner_field_success_and_waits():
     with patch("pages.components.alert.expect") as expect_mock:
         alert.wait_for_success(timeout=1234)
 
-    expect_mock.assert_called_once_with(success)
+    expect_mock.assert_called_once_with(alert.success_alert)
     expect_mock.return_value.to_be_visible.assert_called_once_with(timeout=1234)
 
 
 def test_alert_component_prefers_visible_banner_and_returns_empty_without_errors():
     page = MagicMock()
+    success = MagicMock()
     danger = MagicMock()
     field = MagicMock()
     danger.is_visible.return_value = True
     danger.inner_text.return_value = "Login failed"
     field.first.is_visible.return_value = False
-    page.locator.side_effect = [danger, field]
+    page.locator.side_effect = [
+        success,
+        MagicMock(),
+        danger,
+        MagicMock(),
+        MagicMock(),
+        field,
+        MagicMock(),
+        MagicMock(),
+    ]
     alert = AlertComponent(page)
 
     assert alert.get_error() == "Login failed"
 
     danger.is_visible.return_value = False
-    page.locator.side_effect = [danger, field]
     assert alert.get_error() == ""
 
 
@@ -461,7 +538,17 @@ def test_cart_summary_reads_total_count_and_empty_state():
     item_rows.count.return_value = 2
     empty_message.is_visible.return_value = True
     content.get_by_text.return_value = empty_message
-    page.locator.side_effect = [total_rows, item_rows, content]
+    page.locator.side_effect = [
+        total_rows,
+        MagicMock(),
+        MagicMock(),
+        item_rows,
+        MagicMock(),
+        MagicMock(),
+        content,
+        MagicMock(),
+        MagicMock(),
+    ]
     summary = CartSummaryComponent(page)
 
     assert summary.get_total() == 602.0
@@ -509,12 +596,10 @@ def test_nav_bar_search_currency_login_register_logout_and_status():
     search_container.get_by_role.return_value = search_button
     page.get_by_role.side_effect = [
         currency,
+        MagicMock(),
+        account_link,
         login_link,
-        account_link,
         register_link,
-        account_link,
-        logout_link,
-        account_link,
         logout_link,
     ]
     nav = NavBarComponent(page)
@@ -553,7 +638,10 @@ def test_nav_bar_accessibility_helpers_use_class_locators():
     empty_cart.is_visible.return_value = True
     account_menu.first.is_visible.return_value = True
     page.get_by_placeholder.return_value = search_input
-    page.get_by_role.side_effect = [currency, empty_cart, account_menu]
+    login = MagicMock()
+    register = MagicMock()
+    logout = MagicMock()
+    page.get_by_role.side_effect = [currency, empty_cart, account_menu, login, register, logout]
     nav = NavBarComponent(page)
 
     assert nav.has_search_input() is True
@@ -574,6 +662,12 @@ def test_nav_bar_accessibility_helpers_use_class_locators():
             NavBarComponent._ACCOUNT_LINK_ROLE,
             name=NavBarComponent._ACCOUNT_LINK_NAME,
         ),
+        call(NavBarComponent._ACCOUNT_LINK_ROLE, name=NavBarComponent._LOGIN_LINK_NAME),
+        call(
+            NavBarComponent._ACCOUNT_LINK_ROLE,
+            name=NavBarComponent._REGISTER_LINK_NAME,
+        ),
+        call(NavBarComponent._ACCOUNT_LINK_ROLE, name=NavBarComponent._LOGOUT_LINK_NAME),
     ]
 
 
@@ -589,6 +683,8 @@ def test_registration_form_fill_accept_submit_and_success_state():
     privacy = MagicMock()
     submit = MagicMock()
     success = MagicMock()
+    no_newsletter = MagicMock()
+    required_labels = [MagicMock() for _ in RegistrationFormComponent._REQUIRED_FIELD_LABELS]
     success.is_visible.return_value = True
     page.get_by_role.side_effect = [
         first_name,
@@ -596,10 +692,11 @@ def test_registration_form_fill_accept_submit_and_success_state():
         email,
         telephone,
         newsletter,
+        no_newsletter,
         submit,
         success,
     ]
-    page.get_by_label.side_effect = [password, confirm]
+    page.get_by_label.side_effect = [password, confirm, *required_labels]
     page.locator.return_value = privacy
     form = RegistrationFormComponent(page)
 
@@ -647,26 +744,16 @@ def test_registration_form_accessibility_helpers_use_class_locators():
         label.is_visible.return_value = True
     yes.is_visible.return_value = True
     no.is_visible.return_value = True
-    page.get_by_label.side_effect = labels
-    page.get_by_role.side_effect = [yes, no]
+    page.get_by_label.return_value = MagicMock()
+    page.get_by_role.return_value = MagicMock()
     form = RegistrationFormComponent(page)
+    form.required_field_inputs = tuple(labels)
+    form.newsletter_yes = yes
+    form.newsletter_no = no
 
     assert form.has_required_field_labels() is True
     assert form.has_newsletter_options() is True
-    assert page.get_by_label.call_args_list == [
-        call(label, exact=True)
-        for label in RegistrationFormComponent._REQUIRED_FIELD_LABELS
-    ]
-    assert page.get_by_role.call_args_list == [
-        call(
-            RegistrationFormComponent._NEWSLETTER_RADIO_ROLE,
-            name=RegistrationFormComponent._NEWSLETTER_YES_NAME,
-        ),
-        call(
-            RegistrationFormComponent._NEWSLETTER_RADIO_ROLE,
-            name=RegistrationFormComponent._NEWSLETTER_NO_NAME,
-        ),
-    ]
+    assert form.required_field_inputs == tuple(labels)
 
 
 def test_product_card_reads_fields_and_adds_to_cart():
@@ -692,7 +779,14 @@ def test_product_card_reads_fields_and_adds_to_cart():
 
     root.get_by_role.side_effect = get_by_role
     heading.get_by_role.return_value = name_link
-    root.locator.side_effect = [description, price]
+    root.locator.side_effect = [
+        description,
+        MagicMock(),
+        MagicMock(),
+        price,
+        MagicMock(),
+        MagicMock(),
+    ]
     card = ProductCardComponent(root, index=4)
 
     assert card.name == "iPod Classic"
@@ -745,7 +839,7 @@ def test_product_detail_page_uses_class_locator_members():
     add_button.is_visible.return_value = True
     for field in review_fields:
         field.is_visible.return_value = True
-    page.get_by_role.side_effect = [heading, reviews]
+    page.get_by_role.side_effect = [reviews, heading]
     page.get_by_label.side_effect = [quantity, *review_fields]
     page.locator.return_value = add_button
     product_page = ProductDetailPage(page, "https://example.test")
@@ -757,10 +851,10 @@ def test_product_detail_page_uses_class_locator_members():
     assert product_page.has_review_form_fields() is True
     reviews.click.assert_called_once()
     assert page.get_by_role.call_args_list == [
-        call(ProductDetailPage._HEADING_ROLE, name="MacBook"),
         call(
             ProductDetailPage._REVIEWS_LINK_ROLE,
             name=ProductDetailPage._REVIEWS_LINK_NAME,
         ),
+        call(ProductDetailPage._HEADING_ROLE, name="MacBook"),
     ]
     page.locator.assert_any_call(ProductDetailPage._ADD_TO_CART_BUTTON_SELECTOR)

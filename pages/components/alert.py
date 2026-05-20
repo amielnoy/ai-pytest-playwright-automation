@@ -1,6 +1,7 @@
-from playwright.sync_api import expect
+from playwright.sync_api import Page, expect
 
 from pages.components.base_component import BaseComponent
+from pages.self_healing import healing_locator
 
 
 class AlertComponent(BaseComponent):
@@ -8,19 +9,51 @@ class AlertComponent(BaseComponent):
     _DANGER = ".alert-danger"
     _FIELD_ERROR = ".text-danger"
 
+    def __init__(self, page: Page) -> None:
+        super().__init__(page)
+        self.success_alert = healing_locator(
+            page.locator(self._SUCCESS),
+            name="success alert",
+            primary_label=self._SUCCESS,
+            fallbacks=[
+                ("[class*='alert'][class*='success']", page.locator("[class*='alert'][class*='success']")),
+            ],
+            events=self._self_heal_events,
+        )
+        self.danger_alert = healing_locator(
+            page.locator(self._DANGER),
+            name="danger alert",
+            primary_label=self._DANGER,
+            fallbacks=[
+                ("[class*='alert'][class*='danger']", page.locator("[class*='alert'][class*='danger']")),
+                ("[class*='alert'][class*='warning']", page.locator("[class*='alert'][class*='warning']")),
+            ],
+            events=self._self_heal_events,
+        )
+        self.field_errors = healing_locator(
+            page.locator(self._FIELD_ERROR),
+            name="field error",
+            primary_label=self._FIELD_ERROR,
+            fallbacks=[
+                ("[class*='text-danger']", page.locator("[class*='text-danger']")),
+                ("[class*='error']", page.locator("[class*='error']")),
+            ],
+            events=self._self_heal_events,
+        )
+
     def get_error(self) -> str:
         """Return the first visible error text (banner or inline field error)."""
-        banner = self.page.locator(self._DANGER)
-        if banner.is_visible():
-            return banner.inner_text()
-        first_field = self.page.locator(self._FIELD_ERROR).first
+        if self.danger_alert.is_visible():
+            return self.danger_alert.inner_text()
+        first_field = self.field_errors.first
         if first_field.is_visible():
             return first_field.inner_text()
         return ""
 
     def get_success(self) -> str:
-        el = self.page.locator(self._SUCCESS)
-        return el.inner_text() if el.is_visible() else ""
+        if self.success_alert.is_visible():
+            return self.success_alert.inner_text()
+        return ""
 
     def wait_for_success(self, timeout: int = 8_000) -> None:
-        expect(self.page.locator(self._SUCCESS)).to_be_visible(timeout=timeout)
+        expect(self.success_alert).to_be_visible(timeout=timeout)

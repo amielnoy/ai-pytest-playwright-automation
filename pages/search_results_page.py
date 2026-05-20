@@ -1,10 +1,11 @@
 from urllib.parse import urlencode
 
-from playwright.sync_api import expect
+from playwright.sync_api import Page, expect
 
 from pages.base_page import BasePage
 from pages.components import ProductCardComponent
 from pages.models import ProductInfo, StoredProductInfo
+from pages.self_healing import healing_locator
 
 
 class SearchResultsPage(BasePage):
@@ -28,6 +29,49 @@ class SearchResultsPage(BasePage):
     _SEARCH_ROUTE = "product/search"
     _SEARCH_PATH_PREFIX = "index.php?"
 
+    def __init__(self, page: Page, base_url: str) -> None:
+        super().__init__(page, base_url)
+        self.product_thumbs = healing_locator(
+            page.locator(self._PRODUCT_THUMBS),
+            name="search result product cards",
+            primary_label=self._PRODUCT_THUMBS,
+            fallbacks=[
+                (".product-layout", page.locator(".product-layout")),
+                ("[class*='product']", page.locator("[class*='product']")),
+            ],
+            events=self._self_heal_events,
+        )
+        self.no_results_message = page.get_by_text(self._NO_RESULTS_TEXT)
+        self.list_view_button = healing_locator(
+            page.locator(self._LIST_VIEW_BUTTON),
+            name="list view button",
+            primary_label=self._LIST_VIEW_BUTTON,
+            fallbacks=[
+                ("button:has-text('List')", page.locator("button:has-text('List')")),
+                ("[title='List']", page.locator("[title='List']")),
+            ],
+            events=self._self_heal_events,
+        )
+        self.sort_select = page.get_by_role(
+            self._SORT_SELECT_ROLE, name=self._SORT_SELECT_NAME
+        )
+        self.filter_controls = tuple(
+            page.get_by_label(label) for label in self._FILTER_CONTROL_LABELS
+        )
+        product_title_selector = (
+            f"{self._PRODUCT_THUMBS} {self._PRODUCT_TITLE_SELECTOR} a"
+        )
+        self.product_title_links = healing_locator(
+            page.locator(product_title_selector),
+            name="search result product title links",
+            primary_label=product_title_selector,
+            fallbacks=[
+                (".product-layout h4 a", page.locator(".product-layout h4 a")),
+                ("h4 a", page.locator("h4 a")),
+            ],
+            events=self._self_heal_events,
+        )
+
     def search_items_by_name_under_price(
         self, query: str, max_price: float, limit: int = 5
     ) -> list[str]:
@@ -39,7 +83,7 @@ class SearchResultsPage(BasePage):
         
         
         self._load_search(query)
-        if self.page.get_by_text(self._NO_RESULTS_TEXT).is_visible():
+        if self.no_results_message.is_visible():
             return []
         # Snapshot price once per card to avoid a second DOM round-trip during list construction
         cards_with_price = [(c, c.price) for c in self._cards()]
@@ -47,10 +91,11 @@ class SearchResultsPage(BasePage):
         return [ProductInfo(name=c.name, price=p, index=c.index) for c, p in filtered[:limit]]
 
     def add_items_to_cart(self, products: list[ProductInfo]) -> list[str]:
-        thumbs = self.page.locator(self._PRODUCT_THUMBS)
         added = []
         for product in products:
-            card = ProductCardComponent(thumbs.nth(product.index), product.index)
+            card = ProductCardComponent(
+                self.product_thumbs.nth(product.index), product.index
+            )
             card.add_to_cart()
             self.alert.wait_for_success()
             added.append(product.name)
@@ -60,36 +105,29 @@ class SearchResultsPage(BasePage):
         product_link = self.page.get_by_role(
             self._PRODUCT_LINK_ROLE, name=product_name, exact=True
         )
-        self.page.locator(self._PRODUCT_THUMBS).filter(
-            has=product_link
-        ).first.locator(self._PRODUCT_TITLE_SELECTOR).get_by_role(
+        self.product_thumbs.filter(has=product_link).first.locator(
+            self._PRODUCT_TITLE_SELECTOR
+        ).get_by_role(
             self._PRODUCT_LINK_ROLE, name=product_name, exact=True
         ).click()
         self.page.wait_for_load_state("domcontentloaded")
 
     def choose_list_view(self) -> None:
         self.wait_for_product_results()
-        list_view = self.page.locator(self._LIST_VIEW_BUTTON)
-        expect(list_view).to_be_visible()
-        list_view.click()
+        expect(self.list_view_button).to_be_visible()
+        self.list_view_button.click()
 
     def sort_by_name_ascending(self) -> None:
         self.wait_for_product_results()
-        sort_select = self.page.get_by_role(
-            self._SORT_SELECT_ROLE, name=self._SORT_SELECT_NAME
-        )
-        expect(sort_select).to_be_visible()
-        sort_select.select_option(label=self._SORT_NAME_ASCENDING_LABEL)
+        expect(self.sort_select).to_be_visible()
+        self.sort_select.select_option(label=self._SORT_NAME_ASCENDING_LABEL)
         self.page.wait_for_load_state("domcontentloaded")
         self.wait_for_product_results()
 
     def sort_by_name_descending(self) -> None:
         self.wait_for_product_results()
-        sort_select = self.page.get_by_role(
-            self._SORT_SELECT_ROLE, name=self._SORT_SELECT_NAME
-        )
-        expect(sort_select).to_be_visible()
-        sort_select.select_option(label=self._SORT_NAME_DESCENDING_LABEL)
+        expect(self.sort_select).to_be_visible()
+        self.sort_select.select_option(label=self._SORT_NAME_DESCENDING_LABEL)
         self.page.wait_for_load_state("domcontentloaded")
         self.wait_for_product_results()
 
@@ -99,15 +137,10 @@ class SearchResultsPage(BasePage):
 
     def product_title_link_names(self) -> list[str]:
         self.wait_for_product_results()
-        return self.page.locator(
-            f"{self._PRODUCT_THUMBS} {self._PRODUCT_TITLE_SELECTOR} a"
-        ).all_inner_texts()
+        return self.product_title_links.all_inner_texts()
 
     def has_filter_controls(self) -> bool:
-        return all(
-            self.page.get_by_label(label).is_visible()
-            for label in self._FILTER_CONTROL_LABELS
-        )
+        return all(control.is_visible() for control in self.filter_controls)
 
     def are_product_names_sorted_ascending(self) -> bool:
         names = self.product_names()
@@ -129,5 +162,7 @@ class SearchResultsPage(BasePage):
         self.navigate(f"{self._SEARCH_PATH_PREFIX}{params}")
 
     def _cards(self) -> list[ProductCardComponent]:
-        thumbs = self.page.locator(self._PRODUCT_THUMBS)
-        return [ProductCardComponent(thumbs.nth(i), i) for i in range(thumbs.count())]
+        return [
+            ProductCardComponent(self.product_thumbs.nth(i), i)
+            for i in range(self.product_thumbs.count())
+        ]

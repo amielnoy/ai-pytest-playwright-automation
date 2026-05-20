@@ -1,4 +1,7 @@
+from playwright.sync_api import Page
+
 from pages.components.base_component import BaseComponent
+from pages.self_healing import healing_locator
 
 
 class RegistrationFormComponent(BaseComponent):
@@ -28,6 +31,53 @@ class RegistrationFormComponent(BaseComponent):
     _SUCCESS_HEADING_NAME = "Your Account Has Been Created!"
     _SUCCESS_HEADING_LEVEL = 1
 
+    def __init__(self, page: Page) -> None:
+        super().__init__(page)
+        self.first_name_input = page.get_by_role(
+            self._TEXTBOX_ROLE, name=self._FIRST_NAME_TEXTBOX_NAME
+        )
+        self.last_name_input = page.get_by_role(
+            self._TEXTBOX_ROLE, name=self._LAST_NAME_TEXTBOX_NAME
+        )
+        self.email_input = page.get_by_role(
+            self._TEXTBOX_ROLE, name=self._EMAIL_TEXTBOX_NAME
+        )
+        self.telephone_input = page.get_by_role(
+            self._TEXTBOX_ROLE, name=self._TELEPHONE_TEXTBOX_NAME
+        )
+        self.password_input = page.get_by_label(self._PASSWORD_LABEL, exact=True)
+        self.confirm_password_input = page.get_by_label(
+            self._CONFIRM_PASSWORD_LABEL
+        )
+        self.newsletter_yes = page.get_by_role(
+            self._NEWSLETTER_RADIO_ROLE, name=self._NEWSLETTER_YES_NAME
+        )
+        self.newsletter_no = page.get_by_role(
+            self._NEWSLETTER_RADIO_ROLE, name=self._NEWSLETTER_NO_NAME
+        )
+        self.privacy_policy = healing_locator(
+            page.locator(self._PRIVACY_POLICY),
+            name="privacy policy checkbox",
+            primary_label=self._PRIVACY_POLICY,
+            fallbacks=[
+                ("input[type='checkbox'][name='agree']", page.locator("input[type='checkbox'][name='agree']")),
+                ("input[type='checkbox']", page.locator("input[type='checkbox']")),
+            ],
+            events=self._self_heal_events,
+        )
+        self.submit_button = page.get_by_role(
+            self._SUBMIT_BUTTON_ROLE, name=self._SUBMIT_BUTTON_NAME
+        )
+        self.success_heading = page.get_by_role(
+            self._SUCCESS_HEADING_ROLE,
+            name=self._SUCCESS_HEADING_NAME,
+            level=self._SUCCESS_HEADING_LEVEL,
+        )
+        self.required_field_inputs = tuple(
+            page.get_by_label(label, exact=True)
+            for label in self._REQUIRED_FIELD_LABELS
+        )
+
     def fill(
         self,
         first_name: str,
@@ -38,52 +88,26 @@ class RegistrationFormComponent(BaseComponent):
         confirm_password: str,
         newsletter: bool = False,
     ) -> None:
-        self.page.get_by_role(
-            self._TEXTBOX_ROLE, name=self._FIRST_NAME_TEXTBOX_NAME
-        ).fill(first_name)
-        self.page.get_by_role(
-            self._TEXTBOX_ROLE, name=self._LAST_NAME_TEXTBOX_NAME
-        ).fill(last_name)
-        self.page.get_by_role(self._TEXTBOX_ROLE, name=self._EMAIL_TEXTBOX_NAME).fill(
-            email
-        )
-        self.page.get_by_role(
-            self._TEXTBOX_ROLE, name=self._TELEPHONE_TEXTBOX_NAME
-        ).fill(telephone)
-        self.page.get_by_label(self._PASSWORD_LABEL, exact=True).fill(password)
-        self.page.get_by_label(self._CONFIRM_PASSWORD_LABEL).fill(confirm_password)
-        newsletter_name = (
-            self._NEWSLETTER_YES_NAME if newsletter else self._NEWSLETTER_NO_NAME
-        )
-        self.page.get_by_role(self._NEWSLETTER_RADIO_ROLE, name=newsletter_name).check()
+        self.first_name_input.fill(first_name)
+        self.last_name_input.fill(last_name)
+        self.email_input.fill(email)
+        self.telephone_input.fill(telephone)
+        self.password_input.fill(password)
+        self.confirm_password_input.fill(confirm_password)
+        newsletter_option = self.newsletter_yes if newsletter else self.newsletter_no
+        newsletter_option.check()
 
     def accept_privacy_policy(self) -> None:
-        self.page.locator(self._PRIVACY_POLICY).check()
+        self.privacy_policy.check()
 
     def submit(self) -> None:
-        self.page.get_by_role(
-            self._SUBMIT_BUTTON_ROLE, name=self._SUBMIT_BUTTON_NAME
-        ).click()
+        self.submit_button.click()
 
     def is_submitted_successfully(self) -> bool:
-        return self.page.get_by_role(
-            self._SUCCESS_HEADING_ROLE,
-            name=self._SUCCESS_HEADING_NAME,
-            level=self._SUCCESS_HEADING_LEVEL,
-        ).is_visible()
+        return self.success_heading.is_visible()
 
     def has_required_field_labels(self) -> bool:
-        return all(
-            self.page.get_by_label(label, exact=True).is_visible()
-            for label in self._REQUIRED_FIELD_LABELS
-        )
+        return all(field.is_visible() for field in self.required_field_inputs)
 
     def has_newsletter_options(self) -> bool:
-        return (
-            self.page.get_by_role(
-                self._NEWSLETTER_RADIO_ROLE, name=self._NEWSLETTER_YES_NAME
-            ).is_visible()
-            and self.page.get_by_role(
-                self._NEWSLETTER_RADIO_ROLE, name=self._NEWSLETTER_NO_NAME
-            ).is_visible()
-        )
+        return self.newsletter_yes.is_visible() and self.newsletter_no.is_visible()

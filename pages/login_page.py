@@ -1,4 +1,4 @@
-from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
+from playwright.sync_api import Page, TimeoutError as PlaywrightTimeoutError
 
 from pages.base_page import BasePage
 
@@ -16,41 +16,49 @@ class LoginPage(BasePage):
     _INVALID_CREDENTIALS_WARNING = ".alert-danger"
     _INVALID_LOGIN_WARNING_PREFIX = "Warning:"
 
+    def __init__(self, page: Page, base_url: str) -> None:
+        super().__init__(page, base_url)
+        self.email_input = page.get_by_role(self._EMAIL_ROLE, name=self._EMAIL_NAME)
+        self.password_input = page.get_by_label(self._PASSWORD_LABEL)
+        self.login_button = page.get_by_role(
+            self._LOGIN_BUTTON_ROLE, name=self._LOGIN_BUTTON_NAME
+        )
+        self.my_account_heading = page.get_by_role(
+            self._MY_ACCOUNT_HEADING_ROLE,
+            name=self._MY_ACCOUNT_HEADING_NAME,
+            level=self._MY_ACCOUNT_HEADING_LEVEL,
+        )
+        self.invalid_credentials_warning = page.locator(
+            self._INVALID_CREDENTIALS_WARNING
+        )
+
     def open(self) -> None:
         self.navigate(self._PATH)
 
     def login(self, email: str, password: str) -> None:
-        self.page.get_by_role(self._EMAIL_ROLE, name=self._EMAIL_NAME).fill(email)
-        self.page.get_by_label(self._PASSWORD_LABEL).fill(password)
-        self.page.get_by_role(
-            self._LOGIN_BUTTON_ROLE, name=self._LOGIN_BUTTON_NAME
-        ).click()
+        self.email_input.fill(email)
+        self.password_input.fill(password)
+        self.login_button.click()
 
     def is_login_successful(self) -> bool:
-        return self.page.get_by_role(
-            self._MY_ACCOUNT_HEADING_ROLE,
-            name=self._MY_ACCOUNT_HEADING_NAME,
-            level=self._MY_ACCOUNT_HEADING_LEVEL,
-        ).is_visible()
+        return self.my_account_heading.is_visible()
 
     def has_accessible_login_controls(self) -> bool:
         return (
-            self.page.get_by_role(
-                self._EMAIL_ROLE, name=self._EMAIL_NAME
-            ).is_visible()
-            and self.page.get_by_label(self._PASSWORD_LABEL).is_visible()
-            and self.page.get_by_role(
-                self._LOGIN_BUTTON_ROLE, name=self._LOGIN_BUTTON_NAME
-            ).is_visible()
+            self.email_input.is_visible()
+            and self.password_input.is_visible()
+            and self.login_button.is_visible()
         )
 
     def has_invalid_credentials_warning(self) -> bool:
-        return self.page.locator(self._INVALID_CREDENTIALS_WARNING).is_visible()
+        return self.invalid_credentials_warning.is_visible()
 
     def has_invalid_credentials_warning_text(self, timeout: int = 5000) -> bool:
-        warning = self.page.locator(self._INVALID_CREDENTIALS_WARNING)
         try:
-            warning.wait_for(state="visible", timeout=timeout)
+            self.invalid_credentials_warning.wait_for(state="visible", timeout=timeout)
         except PlaywrightTimeoutError:
             return False
-        return self._INVALID_LOGIN_WARNING_PREFIX in warning.inner_text()
+        return (
+            self._INVALID_LOGIN_WARNING_PREFIX
+            in self.invalid_credentials_warning.inner_text()
+        )
