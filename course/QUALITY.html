@@ -347,6 +347,9 @@
         <li>New UI tests use page objects from <code>pages/</code>.</li>
         <li>Raw selectors do not appear in new test files.</li>
         <li>Locators follow Playwright priority: role, label, placeholder/text, test id, then attribute fallback.</li>
+        <li>Stable page object and component locators are initialized in constructors as instance members.</li>
+        <li>Dynamic locators stay inside methods only when they depend on runtime input.</li>
+        <li>CSS-heavy locators use deterministic self-healing fallbacks only when the fallback is explicit and reviewable.</li>
         <li>Setup is explicit through fixtures or API helpers.</li>
         <li>Fixture scope is intentional and parallel-safe.</li>
         <li>Test data is isolated, repeatable, and comes from JSON, factories, fixtures, API setup, or secrets as appropriate.</li>
@@ -431,7 +434,7 @@
             <tr><td>Automation core</td><td>4-13</td><td>Playwright, pytest, data, API, database, POM, debugging</td></tr>
             <tr><td>AI and delivery</td><td>14-22</td><td>AI tools, agents, CI, reporting, CLI workflows, code review</td></tr>
             <tr><td>Capstone</td><td>23</td><td>Production framework delivery</td></tr>
-            <tr><td>Advanced tooling</td><td>24-29</td><td>Claude, Codex, connectors, local AI, Docker Compose, Grafana</td></tr>
+            <tr><td>Advanced tooling</td><td>24-30</td><td>Claude, Codex, connectors, local AI, Docker Compose, Grafana, AWS EC2/S3, Allure TestOps</td></tr>
           </tbody>
         </table>
       </div>
@@ -443,8 +446,10 @@
           <li>Using CSS selectors before role or label locators.</li>
           <li>Hiding important setup in <code>autouse</code> fixtures.</li>
           <li>Sharing mutable data across parallel tests.</li>
-          <li>Adding sleeps instead of waiting for state.</li>
-          <li>Accepting AI-generated tests without verifying product behavior.</li>
+        <li>Adding sleeps instead of waiting for state.</li>
+        <li>Rebuilding the same locator repeatedly inside page object methods instead of using constructor members.</li>
+        <li>Using self-healing to hide weak locator strategy instead of fixing stale primary selectors.</li>
+        <li>Accepting AI-generated tests without verifying product behavior.</li>
           <li>Editing <code>course/framework/</code> for capstone deliverables instead of production directories.</li>
           <li>Mixing unrelated changes in one branch or commit.</li>
         </ul>
@@ -490,6 +495,8 @@
       <ul class="checklist">
         <li>Explain which test layer should cover a behavior and why.</li>
         <li>Write stable Playwright tests through page objects rather than raw selectors in tests.</li>
+        <li>Initialize stable locator members in constructors and explain when a dynamic locator belongs in a method.</li>
+        <li>Use deterministic self-healing fallbacks and review any recorded heal events.</li>
         <li>Build explicit pytest fixtures with safe scopes and cleanup.</li>
         <li>Use API setup to reduce slow or brittle UI setup.</li>
         <li>Keep test data isolated and repeatable.</li>

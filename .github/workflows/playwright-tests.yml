@@ -4,7 +4,8 @@
 #   1. Repo -> Settings -> Actions -> General -> Workflow permissions -> Read and write
 #   2. Repo -> Settings -> Secrets -> Actions -> New secret:
 #        Name:  TEST_SECRETS_JSON
-#        Value: paste the full contents of data/secrets.json
+#        Value: paste the full contents of data/secrets.json (never commit that file)
+#   GitHub masks TEST_SECRETS_JSON in logs; the write step does not echo the JSON body.
 #
 # The report job also enforces GitHub Pages source to gh-pages/root automatically.
 
@@ -49,10 +50,13 @@ jobs:
         env:
           TEST_SECRETS_JSON: ${{ secrets.TEST_SECRETS_JSON }}
         run: |
-          if [ -n "$TEST_SECRETS_JSON" ]; then
-            printf '%s' "$TEST_SECRETS_JSON" > data/secrets.json
+          set +x
+          if [ -n "${TEST_SECRETS_JSON}" ]; then
+            printf '%s' "${TEST_SECRETS_JSON}" > data/secrets.json
+            chmod 600 data/secrets.json
+            echo "secrets.json written (contents not logged)."
           else
-            echo "No secrets provided — skipping secrets.json creation."  
+            echo "No secrets provided — skipping secrets.json creation."
           fi
 
       - name: Cache Playwright browsers
@@ -71,7 +75,7 @@ jobs:
         run: playwright install-deps chromium
 
       - name: Run tests
-        run: pytest tests/ -n auto --dist loadscope
+        run: pytest tests/ -n auto --dist loadgroup
         env:
           CI: "true"
 

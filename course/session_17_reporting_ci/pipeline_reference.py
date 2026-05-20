@@ -26,7 +26,7 @@ JOBS = {
             "Write secrets.json from TEST_SECRETS_JSON secret",
             "Cache ~/.cache/ms-playwright keyed on requirements.txt hash",
             "playwright install chromium --with-deps  (only on cache miss)",
-            "pytest tests/ -n auto --dist loadscope  (parallel by module)",
+            "pytest tests/ -n auto --dist loadgroup  (parallel; web-ui grouped via xdist_group)",
             "actions/upload-artifact@v4 → allure-results/  (retention 7 days)",
         ],
     },

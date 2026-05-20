@@ -17,12 +17,12 @@ For each file listed below, identify which of the five architecture layers it be
 
 Write `docs/adrs/ADR-006-parallel-execution.md` using the format from the lecture (Status / Context / Decision / Consequences).
 
-The decision to record: "Use `pytest-xdist` with `--dist loadscope` for parallel test execution."
+The decision to record: "Use `pytest-xdist` with `-n auto` and `--dist loadgroup`, grouping `tests/web-ui` via `pytest.mark.xdist_group('web-ui')` (see `pytest.ini` and root `conftest.py`)."
 
 Your ADR must explain:
-- Why `--dist loadscope` was chosen over `--dist each` or `--dist load`.
-- What breaks if a module-scoped fixture is used without `--dist loadscope`.
-- The consequence: tests in the same module always run on the same worker.
+- Why `--dist loadgroup` plus an explicit web-ui group was chosen over `--dist loadscope`, `--dist each`, or `--dist load`.
+- What breaks if parallel workers split shared browser or session state incorrectly (and how grouping avoids it).
+- The consequence: tests in the same `xdist_group` run on the same worker; ungrouped tests still distribute across workers.
 
 ---
 

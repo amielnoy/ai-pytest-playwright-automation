@@ -6,8 +6,12 @@ __pycache__/
 *.pyd
 .Python
 
-# Secrets — never commit
+# Secrets — never commit (runtime-only; see README "Secrets")
 data/secrets.json
+**/secrets.json
+.env
+.env.*
+!.env.example
 
 # Test artifacts
 logs/

@@ -149,12 +149,13 @@ pytest -n auto
 | `-n auto` | One worker per CPU core |
 | `-n 4` | Exactly four workers |
 | `--dist loadscope` | Tests in the same module run on the same worker (safe for module-scoped fixtures) |
+| `--dist loadgroup` | Tests that share the same `pytest.mark.xdist_group("name")` marker run on the same worker |
 | `--dist loadfile` | Tests in the same file run together |
 | `-n 0` | Disable xdist — run serially (useful for debugging) |
 
 **Rule:** use `--dist loadscope` when tests in the same file share a `module`-scoped fixture. Without it, two workers may create conflicting browser contexts.
 
-The main project already has `pytest.ini` configured with `-n auto --dist loadscope` — you can override it locally with `-n 0` when debugging.
+The main project uses `-n auto --dist loadgroup` in `pytest.ini`, and `conftest.py` adds `xdist_group("web-ui")` for everything under `tests/web-ui/` so browser tests share one worker while the rest of the suite can still parallelize — you can override locally with `-n 0` when debugging.
 
 ---
 

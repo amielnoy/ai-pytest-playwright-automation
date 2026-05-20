@@ -32,6 +32,7 @@ pytest --collect-only -q
 | [1](session_01_qa_foundations/lecture.md) | QA Foundations & Manual Testing | Write clear test cases, bug reports, risk analysis, and exploratory charters. |
 | [2](session_02_ai_qa/lecture.md) | QA in the AI Era | Use AI for QA work without losing verification discipline. |
 | [3](session_03_python_foundations/lecture.md) | Python Foundations | Learn the Python syntax, data structures, and helper patterns used in automation. |
+| Git bridge | Git Basics | Work safely with branches, diffs, commits, pull, push, and pull request review before browser automation. |
 | [4](session_04_playwright_basics/lecture.md) | Playwright Basics | Write the first browser tests with fixtures, locators, and assertions. |
 | [5](session_05_playwright_locators/lecture.md) | Playwright Locators | Apply Playwright locator best practices for stable, maintainable tests. |
 | [6](session_06_exception_handling/lecture.md) | Exception Handling | Turn expected automation errors into clear failures without hiding bugs. |
@@ -58,6 +59,7 @@ pytest --collect-only -q
 | [27](session_27_claude_connectors/lecture.md) | Claude Connectors | Use connectors for PRs, docs, chat, email, and calendar QA workflows safely. |
 | [28](session_28_ollama_local_ai/lecture.md) | Ollama Local AI | Use local models for QA summaries, test ideas, failure classification, and small reviews. |
 | [29](session_29_docker_compose_grafana/lecture.md) | Docker Compose + Grafana | Run automation through Docker Compose and monitor test health with Prometheus and Grafana. |
+| [30](session_30_aws_allure_testops/lecture.md) | AWS EC2 + S3 + Allure TestOps | Test an EC2 and S3 deployment plan for Allure TestOps with Allure 3 evidence flow. |
 
 ## How To Use Each Session
 
@@ -84,6 +86,17 @@ See [`../FRAMEWORK_GUIDE.md`](../FRAMEWORK_GUIDE.md) for the full explanation of
 
 Reusable Python code introduced by a course session should evolve `course/framework/` where practical. Session files should import that framework code and demonstrate it through focused examples and tests.
 
+## Current Production Framework Expectations
+
+When a course exercise asks for production framework work:
+
+- Use `pages/`, `pages/components/`, `flows/`, `services/`, and `tests/`, not only `course/framework/`.
+- Initialize stable page object and component locators in constructors.
+- Keep dynamic locators inside methods when they depend on method input.
+- Prefer semantic Playwright locators first.
+- Use deterministic self-healing fallbacks only for CSS-heavy selectors with explicit fallback choices.
+- Review `self_heal_events()` after test runs when fallback locators were used.
+
 ## Suggested Session Workflow
 
 Use this rhythm for every session:
@@ -103,7 +116,7 @@ Adjust the paths for the current topic. For example, Session 16 maps mostly to C
 
 ## Course Support File
 
-- [`QUALITY.html`](QUALITY.html) — grading rubric, automation quality gates, before/after examples, instructor notes, project checklist, and capstone readiness criteria.
+- [`QUALITY.html`](QUALITY.html) — grading rubric, automation quality gates, before/after examples, instructor notes, project checklist, page object standards, and capstone readiness criteria.
 
 The course keeps one support guide so students have a single place to check expectations before submitting exercises or capstone work.
 
@@ -120,6 +133,7 @@ A student is ready for the capstone when they can:
 - Produce Allure reports that are useful to non-engineers.
 - Run the suite locally, in Docker, and in CI.
 - Run and observe automation through Docker Compose, Prometheus, and Grafana.
+- Validate AWS EC2 and S3 deployment checks for an Allure TestOps reporting environment.
 - Build a realistic automation learning plan based on framework gaps and feedback.
 - Use AI agents for bounded testing workflows while keeping deterministic tests as release gates.
 - Use the Playwright CLI for discovery and debugging, then refactor useful output into the framework.
