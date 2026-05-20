@@ -1,1 +1,1 @@
-{"id":"72273f94a131b6d44af6acc24663dec0","fullName":"tests.api.test_api_integrations.TestCartApiIntegration#test_new_session_cart_starts_empty","name":"New API session starts with an empty cart","status":"passed","testResultsByEnv":{"default":"59e9d11eb5c0543ecd96ba5273929ede"}}
+{"id":"72273f94a131b6d44af6acc24663dec0","fullName":"tests.api.test_api_integrations.TestCartApiIntegration#test_new_session_cart_starts_empty","name":"New API session starts with an empty cart","status":"passed","testResultsByEnv":{"default":"0b6432392ebcbc22a32480fbfe0ad83c"}}

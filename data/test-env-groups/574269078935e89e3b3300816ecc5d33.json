@@ -1,1 +1,1 @@
-{"id":"574269078935e89e3b3300816ecc5d33","fullName":"tests.api.test_chat_ai.TestChatEndpoint#test_chat_answers_arithmetic_question","name":"Simple arithmetic question is answered correctly","status":"skipped","testResultsByEnv":{"default":"17bb8ddb190c89362ec2405f9bbb4424"}}
+{"id":"574269078935e89e3b3300816ecc5d33","fullName":"tests.api.test_chat_ai.TestChatEndpoint#test_chat_answers_arithmetic_question","name":"Simple arithmetic question is answered correctly","status":"skipped","testResultsByEnv":{"default":"cff95b867716b050b7041fc8d3748b7a"}}

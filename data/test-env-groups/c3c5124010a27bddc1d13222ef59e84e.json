@@ -1,1 +1,1 @@
-{"id":"c3c5124010a27bddc1d13222ef59e84e","fullName":"tests.api.test_chat_dlp.TestChatDLP#test_ssn_not_reflected","name":"Social Security Number in prompt is not reflected in response","status":"skipped","testResultsByEnv":{"default":"c7dd4cc1283e441eba4b28b28be2a009"}}
+{"id":"c3c5124010a27bddc1d13222ef59e84e","fullName":"tests.api.test_chat_dlp.TestChatDLP#test_ssn_not_reflected","name":"Social Security Number in prompt is not reflected in response","status":"skipped","testResultsByEnv":{"default":"0c16e7479b997a30fa486f0e0aa2fbda"}}
