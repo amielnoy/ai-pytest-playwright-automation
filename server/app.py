@@ -22,6 +22,7 @@ from pydantic import BaseModel, Field
 from services.api.search_service import SearchService
 from services.rest_client import RestClient
 from utils.api_client import create_cart
+from server.chat_mock import mock_chat_response
 from utils.data_loader import get_config, get_test_data, has_secret_file
 
 
@@ -336,10 +337,7 @@ def create_app() -> FastAPI:
     def chat(request: ChatRequest) -> dict[str, Any]:
         api_key = os.environ.get("ANTHROPIC_API_KEY")
         if not api_key:
-            raise HTTPException(
-                status_code=503,
-                detail="ANTHROPIC_API_KEY is not configured on this server",
-            )
+            return mock_chat_response(request.message, request.system)
         client = anthropic_sdk.Anthropic(api_key=api_key)
         try:
             result = client.messages.create(

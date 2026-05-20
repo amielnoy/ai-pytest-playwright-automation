@@ -19,6 +19,6 @@ class CartFlow:
         )
         return self.results.add_items_to_cart(products)
 
-    def open_cart(self) -> CartPage:
-        self.cart.open()
+    def open_cart(self, min_items: int = 1) -> CartPage:
+        self.cart.open(min_items=min_items)
         return self.cart

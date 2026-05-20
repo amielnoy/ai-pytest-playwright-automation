@@ -11,8 +11,10 @@ class CartPage(BasePage):
         super().__init__(page, base_url)
         self.summary = CartSummaryComponent(page)
 
-    def open(self) -> None:
+    def open(self, min_items: int | None = None) -> None:
         self.navigate(self._PATH)
+        if min_items is not None:
+            self.summary.wait_for_item_count(min_items)
 
     def get_cart_total(self) -> float:
         return self.summary.get_total()

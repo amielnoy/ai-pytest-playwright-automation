@@ -80,8 +80,6 @@ class SearchResultsPage(BasePage):
     def get_products_under_price(
         self, query: str, max_price: float, limit: int = 5
     ) -> list[ProductInfo]:
-        
-        
         self._load_search(query)
         if self.no_results_message.is_visible():
             return []
@@ -93,11 +91,9 @@ class SearchResultsPage(BasePage):
     def add_items_to_cart(self, products: list[ProductInfo]) -> list[str]:
         added = []
         for product in products:
-            card = ProductCardComponent(
-                self.product_thumbs.nth(product.index), product.index
-            )
+            card = self._card_for_product_name(product.name)
             card.add_to_cart()
-            self.alert.wait_for_success()
+            self.alert.clear_success()
             added.append(product.name)
         return added
 
@@ -114,7 +110,7 @@ class SearchResultsPage(BasePage):
 
     def choose_list_view(self) -> None:
         self.wait_for_product_results()
-        expect(self.list_view_button).to_be_visible()
+        expect(self.list_view_button.first).to_be_visible()
         self.list_view_button.click()
 
     def sort_by_name_ascending(self) -> None:
@@ -160,6 +156,25 @@ class SearchResultsPage(BasePage):
     def _load_search(self, query: str) -> None:
         params = urlencode({"route": self._SEARCH_ROUTE, "search": query})
         self.navigate(f"{self._SEARCH_PATH_PREFIX}{params}")
+        self._wait_for_search_outcome()
+
+    def _wait_for_search_outcome(self, timeout: int | None = None) -> None:
+        """Wait until the search page shows either no-results text or product cards."""
+        kw = {} if timeout is None else {"timeout": timeout}
+        # Use the strict product-thumb selector here — not self-healing fallbacks,
+        # which can match unrelated layout nodes and cause false positives on empty search.
+        outcome = self.no_results_message.or_(
+            self.page.locator(self._PRODUCT_THUMBS).first
+        )
+        expect(outcome).to_be_visible(**kw)
+
+    def _card_for_product_name(self, product_name: str) -> ProductCardComponent:
+        product_link = self.page.get_by_role(
+            self._PRODUCT_LINK_ROLE, name=product_name, exact=True
+        )
+        thumb = self.product_thumbs.filter(has=product_link).first
+        expect(thumb).to_be_visible()
+        return ProductCardComponent(thumb, index=0)
 
     def _cards(self) -> list[ProductCardComponent]:
         return [

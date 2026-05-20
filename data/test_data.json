@@ -3,7 +3,10 @@
     "first_name": "Amiel",
     "last_name": "Test",
     "telephone": "0501234567",
-    "newsletter": false
+    "newsletter": false,
+    "email": "automation+{ts}@example.com",
+    "password": "TestPass123!",
+    "confirm_password": "TestPass123!"
   },
   "search": {
     "query": "MacBook",

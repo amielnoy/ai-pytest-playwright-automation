@@ -1,7 +1,4 @@
-import os
-
 import pytest
-import requests as _requests
 
 from flows.cart_flow import CartFlow
 from flows.login_flow import LoginFlow
@@ -21,7 +18,8 @@ from services.api.search_service import SearchCase, SearchService
 from services.rest_client import RestClient
 from tests.page_records import CartFlowPages, CartPages, RegistrationPages, SearchPages
 from utils.api_client import build_session, create_cart
-from utils.data_loader import get_config, get_test_data, has_secret_file
+from tests.conftest_server import ensure_server_running, shutdown_server
+from utils.data_loader import get_config, get_test_data
 
 
 PUBLIC_ENDPOINT_MAP = {
@@ -188,17 +186,18 @@ def cart_flow(search_results_page: SearchResultsPage, cart_page: CartPage) -> Ca
 
 @pytest.fixture
 def registration_data() -> dict:
-    """
-    Return registration test data, skipping if secrets or required fields are
-    missing.  Centralises skip logic so tests stay free of guard conditions.
-    """
-    if not has_secret_file():
-        pytest.skip("Registration secrets are not configured")
+    """Registration fields from test_data.json (secrets.json merges when present)."""
     data = get_test_data("registration")
-    required_fields = ("email", "password", "confirm_password")
-    missing = [f for f in required_fields if not data.get(f)]
-    if missing:
-        pytest.skip(f"Registration test data missing required fields: {missing}")
+    required_fields = (
+        "first_name",
+        "last_name",
+        "telephone",
+        "email",
+        "password",
+        "confirm_password",
+    )
+    missing = [field for field in required_fields if not data.get(field)]
+    assert not missing, f"Registration test data missing required fields: {missing}"
     return data
 
 
@@ -233,30 +232,22 @@ def api_cart(app_url: str):
 _SERVER_URL = get_config().get("server_url", "http://127.0.0.1:8000")
 
 
+@pytest.fixture(scope="session")
+def _local_api_server() -> str:
+    """Ensure FastAPI is up for AI tests; uses mock /chat when no API key is set."""
+    base_url = ensure_server_running(_SERVER_URL)
+    yield base_url
+    shutdown_server()
+
+
 @pytest.fixture
-def server_url() -> str:
-    return _SERVER_URL
+def server_url(_local_api_server: str) -> str:
+    return _local_api_server
 
 
 @pytest.fixture
 def chat_service(server_url: str) -> ChatService:
-    """
-    Client for the local FastAPI /chat endpoint.
-
-    Skips automatically when:
-    - ANTHROPIC_API_KEY is not set in the environment, OR
-    - The local server is not reachable at server_url.
-
-    This keeps AI tests out of the way during regular CI runs that don't
-    have credentials configured, without requiring manual skip markers on
-    every test.
-    """
-    if not os.environ.get("ANTHROPIC_API_KEY"):
-        pytest.skip("ANTHROPIC_API_KEY not set — skipping AI chat test")
-    try:
-        _requests.get(f"{server_url}/health", timeout=3)
-    except _requests.exceptions.ConnectionError:
-        pytest.skip(f"Local server not reachable at {server_url} — start it with: python -m uvicorn server.app:app")
-    client = RestClient(timeout=60)  # AI calls can be slow
+    """Client for the local FastAPI /chat endpoint (mocked when ANTHROPIC_API_KEY is unset)."""
+    client = RestClient(timeout=60)
     yield ChatService(client, server_url)
     client.close()

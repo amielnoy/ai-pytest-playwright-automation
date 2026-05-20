@@ -131,3 +131,16 @@ def test_run_pytest_rejects_unsafe_arguments():
 
     assert response.status_code == HTTP_BAD_REQUEST
     assert "Unsafe pytest arg" in response.json()["detail"]
+
+
+def test_chat_returns_mock_response_without_api_key(monkeypatch):
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+
+    response = client.post("/chat", json={"message": "What is 2 + 2? Reply with just the number."})
+
+    assert response.status_code == HTTP_OK
+    body = response.json()
+    assert body["response"] == "4"
+    assert body["model"].startswith("mock-")
+    assert body["input_tokens"] > 0
+    assert body["output_tokens"] > 0

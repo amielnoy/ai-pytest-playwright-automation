@@ -68,6 +68,11 @@ class SelfHealingLocator:
             )
 
     @property
+    def resolved(self) -> Locator:
+        """Underlying Playwright locator for expect() and multi-match assertions."""
+        return self._resolve()
+
+    @property
     def first(self) -> Locator:
         return self._resolve().first
 

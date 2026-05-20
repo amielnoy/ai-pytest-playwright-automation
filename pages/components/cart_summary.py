@@ -1,4 +1,4 @@
-from playwright.sync_api import Page
+from playwright.sync_api import Page, expect
 
 from pages.components.base_component import BaseComponent
 from pages.self_healing import healing_locator
@@ -67,3 +67,8 @@ class CartSummaryComponent(BaseComponent):
 
     def is_empty(self) -> bool:
         return self.content.get_by_text(self._EMPTY_CART_TEXT).is_visible()
+
+    def wait_for_item_count(self, count: int, timeout: int | None = None) -> None:
+        """Wait until the cart table shows the expected number of line items."""
+        kw = {} if timeout is None else {"timeout": timeout}
+        expect(self.item_rows.resolved).to_have_count(count, **kw)

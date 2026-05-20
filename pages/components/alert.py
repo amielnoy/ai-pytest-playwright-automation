@@ -56,4 +56,14 @@ class AlertComponent(BaseComponent):
         return ""
 
     def wait_for_success(self, timeout: int = 8_000) -> None:
-        expect(self.success_alert).to_be_visible(timeout=timeout)
+        # expect() requires a Playwright Locator, not SelfHealingLocator
+        expect(self.success_alert.first).to_be_visible(timeout=timeout)
+
+    def clear_success(self, timeout: int = 8_000) -> None:
+        """Wait for add-to-cart success, then dismiss or hide before the next action."""
+        self.wait_for_success(timeout=timeout)
+        alert = self.success_alert.first
+        close = alert.locator("button.close, [data-dismiss='alert']").first
+        if close.is_visible():
+            close.click()
+        expect(alert).to_be_hidden(timeout=timeout)

@@ -30,8 +30,7 @@ Attack taxonomy covered
   7. Multi-vector        — Several vectors at once; soft assertions report ALL
                            that succeed so the full blast radius is visible
 
-All tests skip automatically when ANTHROPIC_API_KEY is not set or the local
-server is not running.
+Uses the session chat_service fixture (local server + mock /chat without API key).
 
 Run only these tests:
   pytest -m "ai and security" tests/api/test_prompt_injection.py

@@ -4,12 +4,8 @@ Regular AI Chat Tests
 These tests verify the functional behaviour of the local /chat endpoint —
 the FastAPI wrapper around the Anthropic API.
 
-All tests skip automatically when:
-  - ANTHROPIC_API_KEY is not set, OR
-  - The local server is not running at config["server_url"]
-
-Run the server first:
-  python -m uvicorn server.app:app --reload
+The test session starts the local FastAPI server automatically when needed.
+When ANTHROPIC_API_KEY is unset, /chat uses deterministic mock responses.
 
 Run only these tests:
   pytest -m ai tests/api/test_chat_ai.py

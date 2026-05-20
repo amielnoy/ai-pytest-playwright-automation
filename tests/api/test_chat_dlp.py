@@ -18,7 +18,7 @@ that specific sensitive tokens are absent from the AI response.
 Soft assertions are used in the multi-field test so that ALL leaked fields
 are reported in a single run rather than stopping at the first one.
 
-All tests skip when ANTHROPIC_API_KEY is not set or the local server is down.
+Uses the session chat_service fixture (local server + mock /chat without API key).
 
 Run only these tests:
   pytest -m dlp tests/api/test_chat_dlp.py
