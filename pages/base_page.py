@@ -1,6 +1,7 @@
 from playwright.sync_api import Page, expect
 
 from pages.components.alert import AlertComponent
+from pages.self_healing import SelfHealEvent, healing_locator
 
 
 class BasePage:
@@ -14,8 +15,15 @@ class BasePage:
     def __init__(self, page: Page, base_url: str) -> None:
         self.page = page
         self.base_url = base_url.rstrip("/")
+        self._self_heal_events: list[SelfHealEvent] = []
         self.alert = AlertComponent(page)
-        self._html = page.locator(self._HTML_SELECTOR)
+        self._html = healing_locator(
+            page.locator(self._HTML_SELECTOR),
+            name="document root",
+            primary_label=self._HTML_SELECTOR,
+            fallbacks=[("body", page.locator("body"))],
+            events=self._self_heal_events,
+        )
         self._id_elements = page.locator(self._ANY_ID_SELECTOR)
 
     def navigate(self, path: str = "", wait_until: str = "domcontentloaded") -> None:
@@ -46,3 +54,6 @@ class BasePage:
 
     def get_error_message(self) -> str:
         return self.alert.get_error()
+
+    def self_heal_events(self) -> list[SelfHealEvent]:
+        return [*self._self_heal_events, *self.alert.self_heal_events()]
