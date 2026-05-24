@@ -1,1 +1,1 @@
-{"id":"076b2302cb18ca629529bfb5fe7092dc","fullName":"tests.api.test_api_data_driven.TestSearchApiInline#test_search_returns_expected_product_inline","name":"Search [iPhone] returns 200 and finds [iPhone]","status":"passed","testResultsByEnv":{"default":"de78f369d3b3aba705c2ea8e7ceba478"}}
+{"id":"076b2302cb18ca629529bfb5fe7092dc","fullName":"tests.api.test_api_data_driven.TestSearchApiInline#test_search_returns_expected_product_inline","name":"Search [MacBook] returns 200 and finds [MacBook]","status":"passed","testResultsByEnv":{"default":"ce84fab4b15500b78b2ce7ec708a2afd"}}

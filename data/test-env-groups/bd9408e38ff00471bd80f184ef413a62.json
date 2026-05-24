@@ -1,1 +1,1 @@
-{"id":"bd9408e38ff00471bd80f184ef413a62","fullName":"tests.web-ui.test_cart_total.TestCartTotalNotExceeds#test_cart_total_not_exceeds","name":"Cart total does not exceed the configured maximum","status":"failed","testResultsByEnv":{"default":"f28cb4711b9a5b62a8ae99429badfab3"}}
+{"id":"bd9408e38ff00471bd80f184ef413a62","fullName":"tests.web-ui.test_cart_total.TestCartTotalNotExceeds#test_cart_total_not_exceeds","name":"Cart total does not exceed the configured maximum","status":"failed","testResultsByEnv":{"default":"8b3df7b3d88da608a07b064a9cee75ec"}}
