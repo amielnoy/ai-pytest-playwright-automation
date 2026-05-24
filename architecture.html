@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ארכיטקטורה ותיעוד טסטים — Ness Automation</title>
+  <title>ארכיטקטורה ותיעוד טסטים — AI Automation</title>
   <style>
     :root {
       --bg: #0f1117;
@@ -561,15 +561,15 @@
 
 <!-- ══════════════════════════════════════════ STUDY GROUP BANNER ══ -->
 <div class="study-banner">
-  <span class="banner-text">🎓 רוצה ללמוד אוטומציה מהתחלה? הצטרף לקבוצת הלימוד של Ness Automation</span>
+  <span class="banner-text">🎓 רוצה ללמוד אוטומציה מהתחלה? הצטרף לקבוצת הלימוד של AI Automation</span>
   <a class="banner-link" href="https://chat.whatsapp.com/Bwjb01CGfxqIE04lkz2us0?mode=gi_t" target="_blank" rel="noopener">הצטרף עכשיו →</a>
 </div>
 
 <!-- ══════════════════════════════════════════ HEADER ══ -->
 <header>
-  <div class="logo">N</div>
+  <div class="logo">A</div>
   <div>
-    <h1>Ness Automation — תיעוד ארכיטקטורה</h1>
+    <h1>AI Automation — תיעוד ארכיטקטורה</h1>
     <p>מסגרת בדיקות אוטומטיות ל־TutorialsNinja Demo Store</p>
   </div>
   <span class="pill">עדכון אחרון: מאי 2026</span>
@@ -1162,7 +1162,7 @@
     <!-- ── 7. LOGGING ── -->
     <section id="logging">
       <h2><span class="icon">🧾</span> Logger</h2>
-      <p>הפרויקט משתמש ב-<code>utils/logger.py</code> כדי להגדיר logger מרכזי בשם <code>ness_automation</code>. הלוג נכתב כברירת מחדל ל-<code>logs/automation.log</code>, עם rotation יומי כל 24 שעות ושמירת גיבויים.</p>
+      <p>הפרויקט משתמש ב-<code>utils/logger.py</code> כדי להגדיר logger מרכזי בשם <code>ai_automation</code>. הלוג נכתב כברירת מחדל ל-<code>logs/automation.log</code>, עם rotation יומי כל 24 שעות ושמירת גיבויים.</p>
 
       <div class="tbl-wrap"><table>
         <tr><th>רכיב</th><th>תפקיד</th></tr>
@@ -1175,8 +1175,8 @@
       <h3>Per-test logging</h3>
       <p><code>conftest.py</code> מחבר hooks של pytest כדי לרשום כל טסט: התחלה, סטטוס, phase ו-duration. בהרצות xdist הלוגים מה-controller מסוננים כדי למנוע כפילויות, וה-worker שרץ בפועל כותב את שורת התוצאה.</p>
 
-      <pre>2026-05-13 16:54:07 | INFO | ness_automation.pytest | test started: tests/unit/test_logger.py::test_get_logger_returns_child_logger
-2026-05-13 16:54:07 | INFO | ness_automation.pytest | test passed: tests/unit/test_logger.py::test_get_logger_returns_child_logger phase=call duration=0.000s</pre>
+      <pre>2026-05-13 16:54:07 | INFO | ai_automation.pytest | test started: tests/unit/test_logger.py::test_get_logger_returns_child_logger
+2026-05-13 16:54:07 | INFO | ai_automation.pytest | test passed: tests/unit/test_logger.py::test_get_logger_returns_child_logger phase=call duration=0.000s</pre>
 
       <div class="callout info">
         <span class="callout-icon">🧪</span>
@@ -2581,7 +2581,7 @@ npm run allure:open</pre>
 </div>
 
 <footer>
-  <span>Ness Automation Test Suite — Architecture Docs</span>
+  <span>AI Automation Test Suite — Architecture Docs</span>
   <span>עודכן: מאי 2026</span>
 </footer>
 

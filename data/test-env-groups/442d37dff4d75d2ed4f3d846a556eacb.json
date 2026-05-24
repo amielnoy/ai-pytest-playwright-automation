@@ -1,1 +1,1 @@
-{"id":"442d37dff4d75d2ed4f3d846a556eacb","fullName":"tests.api.test_chat_ai.TestChatEndpoint#test_chat_empty_message_returns_422","name":"Empty message returns 422 Unprocessable Entity","status":"passed","testResultsByEnv":{"default":"c94c276abf1a21b7132f8674a050acd7"}}
+{"id":"442d37dff4d75d2ed4f3d846a556eacb","fullName":"tests.api.test_chat_ai.TestChatEndpoint#test_chat_empty_message_returns_422","name":"Empty message returns 422 Unprocessable Entity","status":"passed","testResultsByEnv":{"default":"5f5af3c943a9e1eb621cbad8b5a1c5ae"}}
