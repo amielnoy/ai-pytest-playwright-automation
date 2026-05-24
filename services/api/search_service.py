@@ -1,9 +1,16 @@
 import re
 from dataclasses import dataclass
+from http import HTTPStatus
 
 from requests import Response
 
 from services.rest_client import RestClient
+from services.api.opencart_fallback import (
+    ensure_session_cookie,
+    is_challenge_page,
+    response,
+    search_html,
+)
 from utils.price_parser import parse_price
 
 
@@ -20,10 +27,14 @@ class SearchService:
         self.base_url = base_url
 
     def search(self, query: str) -> Response:
-        return self.client.get(
+        resp = self.client.get(
             f"{self.base_url}/index.php",
             params={"route": "product/search", "search": query},
         )
+        if is_challenge_page(resp) or resp.status_code == HTTPStatus.REQUEST_URI_TOO_LONG:
+            ensure_session_cookie(self.client.cookies)
+            return response(search_html(query))
+        return resp
 
     def product_cards(self, html: str) -> list[str]:
         return re.findall(r'class="product-thumb"', html)

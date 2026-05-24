@@ -9,16 +9,16 @@ from pages.self_healing import healing_locator
 
 class ProductDetailPage(BasePage):
     _HEADING_ROLE = "heading"
-    _QUANTITY_LABEL = "Qty"
+    _QUANTITY_INPUT_SELECTOR = "#input-quantity"
     _DEFAULT_QUANTITY = "1"
     _ADD_TO_CART_BUTTON_SELECTOR = "#button-cart"
     _REVIEWS_LINK_ROLE = "link"
     _REVIEWS_LINK_NAME: Pattern[str] = re.compile("Reviews")
-    _REVIEW_FIELD_LABELS = ("Qty", "Your Name", "Your Review")
+    _REVIEW_FIELD_LABELS = ("Your Name", "Your Review")
 
     def __init__(self, page: Page, base_url: str) -> None:
         super().__init__(page, base_url)
-        self.quantity_input = page.get_by_label(self._QUANTITY_LABEL)
+        self.quantity_input = page.locator(self._QUANTITY_INPUT_SELECTOR)
         self.add_to_cart_button = healing_locator(
             page.locator(self._ADD_TO_CART_BUTTON_SELECTOR),
             name="product detail add-to-cart button",

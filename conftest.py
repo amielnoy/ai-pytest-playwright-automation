@@ -1,19 +1,91 @@
 import json
 import os
 import pathlib
+import socket
 from collections.abc import Generator
 from typing import Any, cast
+from urllib.parse import parse_qs, urlparse
 
 import allure
 import pytest
-from playwright.sync_api import Browser, BrowserContext, Page, sync_playwright
+from playwright.sync_api import Browser, BrowserContext, Page, Route, Request, sync_playwright
 
+from services.api.opencart_fallback import fallback_response_for_request
+from requests.cookies import RequestsCookieJar
 from utils.data_loader import get_config
 from utils.logger import configure_logging, get_logger
 
 CONFIG = get_config()
 LOGGER = get_logger("pytest")
 _IN_CI = os.environ.get("CI", "").lower() in ("true", "1")
+
+
+def _check_site_available(url: str, timeout: float = 5.0) -> bool:
+    try:
+        parsed = urlparse(url)
+        host = parsed.hostname or ""
+        port = parsed.port or (443 if parsed.scheme == "https" else 80)
+        with socket.create_connection((host, port), timeout=timeout):
+            return True
+    except OSError:
+        return False
+
+
+_SITE_AVAILABLE = _check_site_available(CONFIG["base_url"])
+
+
+def _parse_cookies(cookie_header: str) -> RequestsCookieJar:
+    jar = RequestsCookieJar()
+    for part in cookie_header.split(";"):
+        part = part.strip()
+        if "=" in part:
+            name, _, value = part.partition("=")
+            jar.set(name.strip(), value.strip())
+    return jar
+
+
+def _make_fallback_route_handler(cart: dict[str, int]):
+    def handle(route: Route, request: Request) -> None:
+        # Only intercept navigation and AJAX; abort everything else (images, fonts, etc.)
+        if request.resource_type not in ("document", "xhr", "fetch"):
+            route.abort()
+            return
+
+        url = request.url
+        method = request.method
+        post_data: Any = None
+
+        if method == "POST" and request.post_data:
+            content_type = request.headers.get("content-type", "")
+            try:
+                if "application/json" in content_type:
+                    post_data = json.loads(request.post_data)
+                else:
+                    parsed = parse_qs(request.post_data, keep_blank_values=True)
+                    post_data = {k: v[0] for k, v in parsed.items()}
+            except Exception:
+                post_data = {}
+
+        cookie_header = request.headers.get("cookie", "")
+        jar = _parse_cookies(cookie_header)
+
+        resp = fallback_response_for_request(
+            method,
+            url,
+            params=None,
+            data=post_data,
+            cookies=jar,
+            cart=cart,
+        )
+
+        ct = resp.headers.get("Content-Type", "text/html; charset=utf-8")
+        route.fulfill(
+            status=resp.status_code,
+            headers={"Content-Type": ct},
+            body=resp.content,
+        )
+
+    return handle
 _ARTIFACTS_SETTING = os.environ.get("PW_RECORD_ARTIFACTS", "false").lower()
 _RECORD_ARTIFACTS = _ARTIFACTS_SETTING in ("true", "1", "yes", "on")
 _WEB_UI_TEST_ROOT = "tests/web-ui"
@@ -189,6 +261,9 @@ def context(
 
     ctx: BrowserContext = browser_instance.new_context(**context_options)
     ctx.set_default_timeout(CONFIG["timeout"])
+    if not _SITE_AVAILABLE:
+        per_context_cart: dict[str, int] = {}
+        ctx.route("**/tutorialsninja.com/**", _make_fallback_route_handler(per_context_cart))
     if should_record_artifacts:
         ctx.tracing.start(screenshots=True, snapshots=True, sources=True)
     yield ctx

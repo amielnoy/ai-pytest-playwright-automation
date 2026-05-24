@@ -114,8 +114,8 @@ class TestSearchContract:
     def test_search_product_ids_are_integers(
         self, search_service: SearchService
     ):
-        with allure.step("GET search results for 'Apple'"):
-            resp = search_service.search("Apple")
+        with allure.step("GET search results for 'MacBook'"):
+            resp = search_service.search("MacBook")
 
         with allure.step("Assert response is OK"):
             assert resp.status_code == HTTP_OK
