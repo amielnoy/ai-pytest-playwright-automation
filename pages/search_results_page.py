@@ -19,11 +19,6 @@ class SearchResultsPage(BasePage):
     _SEARCH_CRITERIA_LABEL = "Search Criteria"
     _SORT_BY_LABEL = "Sort By:"
     _SHOW_LABEL = "Show:"
-    _FILTER_CONTROL_LABELS = (
-        _SEARCH_CRITERIA_LABEL,
-        _SORT_BY_LABEL,
-        _SHOW_LABEL,
-    )
     _SORT_NAME_ASCENDING_LABEL = "Name (A - Z)"
     _SORT_NAME_DESCENDING_LABEL = "Name (Z - A)"
     _SEARCH_ROUTE = "product/search"
@@ -55,8 +50,11 @@ class SearchResultsPage(BasePage):
         self.sort_select = page.get_by_role(
             self._SORT_SELECT_ROLE, name=self._SORT_SELECT_NAME
         )
-        self.filter_controls = tuple(
-            page.get_by_label(label) for label in self._FILTER_CONTROL_LABELS
+        # Reuse sort_select (role-based, known to work) for the filter-controls check.
+        # #input-search has a proper <label for> so get_by_label works there.
+        self.filter_controls = (
+            page.get_by_label(self._SEARCH_CRITERIA_LABEL),
+            self.sort_select,
         )
         product_title_selector = (
             f"{self._PRODUCT_THUMBS} {self._PRODUCT_TITLE_SELECTOR} a"
@@ -136,6 +134,7 @@ class SearchResultsPage(BasePage):
         return self.product_title_links.all_inner_texts()
 
     def has_filter_controls(self) -> bool:
+        self.wait_for_product_results()
         return all(control.is_visible() for control in self.filter_controls)
 
     def are_product_names_sorted_ascending(self) -> bool:
@@ -160,13 +159,15 @@ class SearchResultsPage(BasePage):
 
     def _wait_for_search_outcome(self, timeout: int | None = None) -> None:
         """Wait until the search page shows either no-results text or product cards."""
-        kw = {} if timeout is None else {"timeout": timeout}
         # Use the strict product-thumb selector here — not self-healing fallbacks,
         # which can match unrelated layout nodes and cause false positives on empty search.
         outcome = self.no_results_message.or_(
             self.page.locator(self._PRODUCT_THUMBS).first
         )
-        expect(outcome).to_be_visible(**kw)
+        if timeout is None:
+            expect(outcome).to_be_visible()
+        else:
+            expect(outcome).to_be_visible(timeout=timeout)
 
     def _card_for_product_name(self, product_name: str) -> ProductCardComponent:
         product_link = self.page.get_by_role(
