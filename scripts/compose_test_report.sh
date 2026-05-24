@@ -124,12 +124,20 @@ run_label        = sys.argv[2]
 pushgateway_host = sys.argv[3]
 archive_dir      = Path(sys.argv[4])
 
-counts = Counter()
+by_history: dict = {}
 for f in results_dir.glob("*-result.json"):
     try:
-        counts[json.loads(f.read_text()).get("status", "unknown")] += 1
+        data = json.loads(f.read_text())
+        hid = data.get("historyId") or f.name
+        existing = by_history.get(hid)
+        if existing is None or data.get("stop", 0) > existing.get("stop", 0):
+            by_history[hid] = data
     except Exception:
         pass
+
+counts = Counter()
+for data in by_history.values():
+    counts[data.get("status", "unknown")] += 1
 
 total   = sum(counts.values())
 passed  = counts.get("passed", 0)
@@ -382,12 +390,20 @@ from collections import Counter
 from pathlib import Path
 
 results_dir = Path(sys.argv[1])
-counts = Counter()
+by_history: dict = {}
 for f in results_dir.glob("*-result.json"):
     try:
-        counts[json.loads(f.read_text()).get("status", "unknown")] += 1
+        data = json.loads(f.read_text())
+        hid = data.get("historyId") or f.name
+        existing = by_history.get(hid)
+        if existing is None or data.get("stop", 0) > existing.get("stop", 0):
+            by_history[hid] = data
     except Exception:
         pass
+
+counts = Counter()
+for data in by_history.values():
+    counts[data.get("status", "unknown")] += 1
 
 total = sum(counts.values())
 ICONS = {"passed": "✅", "failed": "❌", "broken": "⚠️ ", "skipped": "⏭️ "}

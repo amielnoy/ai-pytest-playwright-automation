@@ -5,6 +5,7 @@ providers:
     orgId: 1
     folder: Automation
     type: file
+    updateIntervalSeconds: 10
     disableDeletion: false
     editable: true
     options:
