@@ -1,0 +1,22 @@
+{
+  "search_cases": [
+    {"query": "MacBook", "expected_product": "MacBook", "min_cards": 1},
+    {"query": "iPhone",  "expected_product": "iPhone",  "min_cards": 1},
+    {"query": "Canon",   "expected_product": "Canon",   "min_cards": 1},
+    {"query": "Samsung", "expected_product": "Samsung", "min_cards": 1}
+  ],
+  "price_filter_cases": [
+    {"query": "MacBook", "max_price": 2000.0},
+    {"query": "iPhone",  "max_price": 1000.0},
+    {"query": "Canon",   "max_price": 500.0}
+  ],
+  "cart_add_cases": [
+    {"query": "MacBook", "note": "flagship laptop"},
+    {"query": "iPhone",  "note": "smartphone"},
+    {"query": "Canon",   "note": "camera product"}
+  ],
+  "empty_search_cases": [
+    {"query": "__nonexistent_product_xyz_999__"},
+    {"query": "zzz_no_such_item_abc"}
+  ]
+}

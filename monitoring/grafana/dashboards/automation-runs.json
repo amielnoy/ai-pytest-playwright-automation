@@ -1661,6 +1661,7 @@
             "uid": "prometheus"
           },
           "expr": "last_over_time(automation_tests_total[30d])",
+          "format": "table",
           "instant": true,
           "legendFormat": "{{run_label}}",
           "refId": "A"
@@ -1671,6 +1672,7 @@
             "uid": "prometheus"
           },
           "expr": "last_over_time(automation_tests_passed[30d])",
+          "format": "table",
           "instant": true,
           "legendFormat": "{{run_label}}",
           "refId": "B"
@@ -1681,6 +1683,7 @@
             "uid": "prometheus"
           },
           "expr": "last_over_time(automation_tests_failed[30d])",
+          "format": "table",
           "instant": true,
           "legendFormat": "{{run_label}}",
           "refId": "C"
@@ -1691,6 +1694,7 @@
             "uid": "prometheus"
           },
           "expr": "last_over_time(automation_tests_broken[30d])",
+          "format": "table",
           "instant": true,
           "legendFormat": "{{run_label}}",
           "refId": "D"
@@ -1701,6 +1705,7 @@
             "uid": "prometheus"
           },
           "expr": "last_over_time(automation_tests_skipped[30d])",
+          "format": "table",
           "instant": true,
           "legendFormat": "{{run_label}}",
           "refId": "E"
@@ -1713,7 +1718,7 @@
           "expr": "last_over_time(automation_tests_flaky[30d])",
           "format": "table",
           "instant": true,
-          "legendFormat": "flaky",
+          "legendFormat": "{{run_label}}",
           "refId": "F"
         },
         {
@@ -1722,6 +1727,7 @@
             "uid": "prometheus"
           },
           "expr": "last_over_time(automation_tests_pass_rate[30d])",
+          "format": "table",
           "instant": true,
           "legendFormat": "{{run_label}}",
           "refId": "G"
@@ -1738,13 +1744,20 @@
         {
           "id": "organize",
           "options": {
+            "excludeByName": {
+              "Time": true,
+              "__name__": true,
+              "job": true,
+              "instance": true
+            },
             "renameByName": {
               "Value #A": "total",
               "Value #B": "passed",
               "Value #C": "failed",
               "Value #D": "broken",
               "Value #E": "skipped",
-              "Value #F": "pass_rate"
+              "Value #F": "flaky",
+              "Value #G": "pass_rate"
             }
           }
         }
