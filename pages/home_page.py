@@ -15,6 +15,8 @@ class HomePage(BasePage):
     def __init__(self, page: Page, base_url: str) -> None:
         super().__init__(page, base_url)
         self.nav = NavBarComponent(page)
+        self.page_heading = page.get_by_role("heading", level=1)
+        self.cart_link = page.get_by_role("link", name="Shopping Cart")
         self.featured_product_images = healing_locator(
             page.locator(self._FEATURED_PRODUCT_IMAGES),
             name="featured product images",

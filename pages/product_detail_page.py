@@ -15,10 +15,14 @@ class ProductDetailPage(BasePage):
     _REVIEWS_LINK_ROLE = "link"
     _REVIEWS_LINK_NAME: Pattern[str] = re.compile("Reviews")
     _REVIEW_FIELD_LABELS = ("Your Name", "Your Review")
+    _PRICE_SELECTOR = ".price-new, #product-price .price, h2.price"
+    _PRODUCT_IMAGE_SELECTOR = "#product img.img-thumbnail"
 
     def __init__(self, page: Page, base_url: str) -> None:
         super().__init__(page, base_url)
         self.quantity_input = page.locator(self._QUANTITY_INPUT_SELECTOR)
+        self.price = page.locator(self._PRICE_SELECTOR).first
+        self.product_image = page.locator(self._PRODUCT_IMAGE_SELECTOR).first
         self.add_to_cart_button = healing_locator(
             page.locator(self._ADD_TO_CART_BUTTON_SELECTOR),
             name="product detail add-to-cart button",

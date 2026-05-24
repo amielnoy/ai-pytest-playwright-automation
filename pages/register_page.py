@@ -4,9 +4,19 @@ from pages.components import RegistrationFormComponent
 
 
 class RegisterPage(BasePage):
+    _ERROR_WARNING_SELECTOR = ".alert-danger"
+    _CONTINUE_AFTER_SUCCESS_ROLE = "link"
+    _CONTINUE_AFTER_SUCCESS_NAME = "Continue"
+
     def __init__(self, page: Page, base_url: str) -> None:
         super().__init__(page, base_url)
         self.form = RegistrationFormComponent(page)
+        # Promote the success heading to the page level for direct assertion.
+        self.success_heading = self.form.success_heading
+        self.error_warning = page.locator(self._ERROR_WARNING_SELECTOR)
+        self.continue_button = page.get_by_role(
+            self._CONTINUE_AFTER_SUCCESS_ROLE, name=self._CONTINUE_AFTER_SUCCESS_NAME
+        )
 
     def register(
         self,
