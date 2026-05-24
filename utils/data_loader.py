@@ -56,6 +56,11 @@ def get_test_data(key: str | None = None) -> Any:
     return _resolve_placeholders(section)
 
 
+def get_data_file(filename: str) -> Any:
+    """Load any JSON file from the data/ directory by filename (without path)."""
+    return _load_json(_data_path(filename))
+
+
 @lru_cache(maxsize=1)
 def get_config() -> dict:
     return _load_json(_CONFIG_DIR / "config.json")
