@@ -184,7 +184,7 @@ def _start_job(command: list[str]) -> Job:
 
 def create_app() -> FastAPI:
     app = FastAPI(
-        title="Ness Automation API",
+        title="AI Automation API",
         version="1.0.0",
         description="Local API for test data, pytest runs, Allure reports, and mocks.",
     )

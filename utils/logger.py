@@ -8,7 +8,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_LOG_DIR = PROJECT_ROOT / "logs"
 DEFAULT_LOG_FILE = "automation.log"
 DEFAULT_BACKUP_COUNT = 14
-LOGGER_NAME = "ness_automation"
+LOGGER_NAME = "ai_automation"
 
 
 def _log_level_from_env() -> int:

@@ -44,4 +44,4 @@ def test_configure_logging_adds_one_daily_file_handler(tmp_path):
 def test_get_logger_returns_child_logger():
     logger = get_logger("unit")
 
-    assert logger.name == "ness_automation.unit"
+    assert logger.name == "ai_automation.unit"
