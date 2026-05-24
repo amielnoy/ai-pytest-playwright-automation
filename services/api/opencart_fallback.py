@@ -194,6 +194,9 @@ def search_html(query: str, sort: str = "", order: str = "ASC") -> str:
   <div class="well">
     <label for="input-search">Search Criteria</label>
     <input id="input-search" type="text" name="search" value="{escape(query)}">
+    <select name="category_id" id="input-category">
+      <option value="0">All Categories</option>
+    </select>
     <button type="button" id="button-search"
             onclick="window.location.href='index.php?route=product/search&amp;search='+encodeURIComponent(document.getElementById('input-search').value)">Search</button>
   </div>

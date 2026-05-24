@@ -831,15 +831,20 @@ def test_product_detail_page_uses_class_locator_members():
     quantity = MagicMock()
     add_button = MagicMock()
     reviews = MagicMock()
-    review_fields = [MagicMock(), MagicMock(), MagicMock()]
+    review_fields = [MagicMock(), MagicMock()]  # Your Name + Your Review only
     heading.is_visible.return_value = True
     quantity.input_value.return_value = ProductDetailPage._DEFAULT_QUANTITY
     add_button.is_visible.return_value = True
     for field in review_fields:
         field.is_visible.return_value = True
     page.get_by_role.side_effect = [reviews, heading]
-    page.get_by_label.side_effect = [quantity, *review_fields]
-    page.locator.return_value = add_button
+    page.get_by_label.side_effect = review_fields  # no longer used for quantity
+    # quantity_input now uses locator("#input-quantity"); everything else → add_button
+    def _locator(selector, **_):
+        if selector == ProductDetailPage._QUANTITY_INPUT_SELECTOR:
+            return quantity
+        return add_button
+    page.locator.side_effect = _locator
     product_page = ProductDetailPage(page, "https://example.test")
 
     assert product_page.has_product_heading("MacBook") is True
