@@ -81,6 +81,24 @@ Use deterministic self-healing only for CSS-heavy selectors that have a clear, e
 **"I want to add more search queries or security payloads without editing Python."**
 Add cases to the relevant `data/*.json` file. `get_data_file("filename.json")` in `utils/data_loader.py` loads it at import time into a `@pytest.mark.parametrize` list. The shipped corpora are `data/api_test_cases.json` (search, price, cart cases) and `data/pentest_cases.json` (injection, auth, ACL, file-exposure vectors).
 
+**"Why do API/contract/pentest tests pass even when tutorialsninja.com is down?"**
+All HTTP calls to `tutorialsninja.com` are intercepted by `services/rest_client.py` before hitting the network and routed through `services/api/opencart_fallback.py`. The fallback is a complete in-process OpenCart simulation: search results, cart state, home page, login, and registration. This makes those suites instant and fully network-independent. Web-UI tests still use a real Playwright browser and need the live site.
+
+**"Web-UI tests fail in parallel but pass serially. Why?"**
+Concurrent headless Chromium instances hitting the same demo site trigger rate-limiting or bot-protection responses. `tests/web-ui/conftest.py` pins every web-UI test to a single `xdist_group("web-ui")` worker so only one browser is active at a time. API, contract, and unit tests remain distributed across all workers.
+
+**"Why does `get_by_label("Sort By:")` fail on the search page?"**
+OpenCart renders the Sort By and Show controls with `<span class="input-group-addon">` labels, not `<label for>` elements. Playwright's `get_by_label` requires a proper `<label>` binding. Use `page.get_by_role("combobox", name="Sort By:")` or reuse the `sort_select` member already initialized in `SearchResultsPage.__init__`.
+
+**"How do I expose a locator from a component at the page level?"**
+Assign it as a page-level attribute in `__init__`. Example from `RegisterPage`:
+
+```python
+self.success_heading = self.form.success_heading  # promote from component
+```
+
+This keeps test assertions clean (`register_page.success_heading.is_visible()`) without re-querying the component.
+
 ## Capstone Rule
 
 For the capstone project, all deliverables must live in the production directories (`pages/`, `services/`, `flows/`, `tests/`). Work in `course/framework/` does not count toward the capstone checklist.

@@ -90,9 +90,15 @@ Before pushing, confirm nothing leaked: `git check-ignore -v data/secrets.json` 
 `pytest.ini` is configured to run tests in parallel by default:
 
 - `-n auto`
-- `--dist loadgroup` (with `tests/web-ui` on one worker via `xdist_group`; see `pytest.ini` and root `conftest.py`)
+- `--dist loadgroup` — API, contract, and unit tests are distributed across workers; **all web-UI tests share a single worker** (via `xdist_group("web-ui")` in `tests/web-ui/conftest.py`) to avoid concurrent headless-browser bot-protection triggers.
 
-So a plain `pytest` run will use multiple workers automatically.
+So a plain `pytest` run uses multiple workers automatically.
+
+### Offline Fallback for Live-Site Tests
+
+All HTTP requests to `tutorialsninja.com` are transparently intercepted by `services/api/opencart_fallback.py` via `services/rest_client.py`. The fallback simulates a complete OpenCart store — search results, cart state, home page, login, and registration — without a real network connection. This makes the API, contract, and pentest suites instant and network-independent.
+
+Web-UI tests (Playwright) still use a real browser. When the site is accessible, tests run against live pages. When unreachable, the browser's connection attempt times out and those tests are retried or skipped by the CI `--reruns=1` policy.
 
 CI runs `pytest tests/ -m "not demo"` so teaching-only tests (intentional failure, flaky Allure demo) do not fail the pipeline. Run them locally with `pytest -m demo`.
 

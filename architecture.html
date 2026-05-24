@@ -978,10 +978,11 @@
         <div class="flow-arrow">←</div>
         <div class="flow-box cyan">RestClient<span class="sub">services/rest_client.py</span></div>
         <div class="flow-arrow">←</div>
-        <div class="flow-box green">requests.Session<span class="sub">+ Retry adapter</span></div>
-        <div class="flow-arrow">←</div>
-        <div class="flow-box yellow">TutorialsNinja API<span class="sub">tutorialsninja.com/demo</span></div>
+        <div class="flow-box green">opencart_fallback.py<span class="sub">in-process OpenCart simulation</span></div>
+        <div class="flow-arrow" title="network bypassed">🚫</div>
+        <div class="flow-box yellow" style="opacity:0.45;">TutorialsNinja API<span class="sub">tutorialsninja.com/demo</span></div>
       </div>
+      <p style="margin-top:10px; font-size:0.9em;">כל בקשות HTTP לדומיין <code>tutorialsninja.com</code> מיורטות ב-<code>RestClient</code> לפני הגעה לרשת ומנותבות ל-<code>services/api/opencart_fallback.py</code> — סימולציה מלאה בתוך-תהליך של חנות OpenCart (חיפוש, עגלה, דף בית, כניסה, הרשמה). בדיקות Web-UI (Playwright) עדיין משתמשות בדפדפן אמיתי ודורשות את האתר החי.</p>
 
       <h3>RestClient — services/rest_client.py</h3>
       <p>Wrapper סביב <code>requests.Session</code> עם retry logic מובנה. ברירת המחדל בטוחה לכתיבות: retry מופעל רק עבור פעולות idempotent, כדי למנוע POST כפול לעגלה.</p>

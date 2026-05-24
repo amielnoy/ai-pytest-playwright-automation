@@ -404,7 +404,7 @@
         <div class="stat stat-amber"> <div class="stat-num">14</div>  <div class="stat-lbl">Contract</div></div>
         <div class="stat stat-green"> <div class="stat-num">67</div>  <div class="stat-lbl">Unit tests</div></div>
         <div class="stat stat-rose">  <div class="stat-num">44</div>  <div class="stat-lbl">Security</div></div>
-        <div class="stat stat-lavender"><div class="stat-num">295</div><div class="stat-lbl">Total</div></div>
+        <div class="stat stat-lavender"><div class="stat-num">297</div><div class="stat-lbl">Total</div></div>
       </div>
     </div>
   </header>
@@ -552,7 +552,12 @@ npm install</code></pre>
 
         <div class="callout info">
           <span class="callout-icon">⚡</span>
-          <p><code>pytest.ini</code> runs tests in parallel by default: <code>-n auto --dist loadgroup</code>. Web-UI tests share one worker via <code>xdist_group</code>. CI uses <code>pytest tests/ -m "not demo"</code> to skip teaching-only tests.</p>
+          <p><code>pytest.ini</code> runs tests in parallel by default: <code>-n auto --dist loadgroup</code>. All web-UI tests share a single worker (via <code>xdist_group("web-ui")</code> in <code>tests/web-ui/conftest.py</code>) to avoid concurrent headless-browser bot-protection triggers. API, contract, and unit tests are distributed across all workers. CI uses <code>pytest tests/ -m "not demo"</code> to skip teaching-only tests.</p>
+        </div>
+
+        <div class="callout tip" style="margin-top:10px;">
+          <span class="callout-icon">🌐</span>
+          <p><strong>Offline fallback:</strong> All HTTP requests to tutorialsninja.com are transparently intercepted by <code>services/api/opencart_fallback.py</code> via <code>services/rest_client.py</code>. The fallback simulates a complete OpenCart store — search results, cart state, home page, login, and registration — without a real network connection. Web-UI tests (Playwright) still use a real browser and need the live site.</p>
         </div>
 
         <div class="grid-2" style="margin-top:16px; gap:16px;">
