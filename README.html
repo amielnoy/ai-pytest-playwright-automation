@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Automation Testing — Project README</title>
+  <style>
+    :root {
+      --bg: #fbf7f0;
+      --panel: #fffdfa;
+      --ink: #273244;
+      --muted: #68758b;
+      --line: #eadfd2;
+      --blue: #dce8ff;
+      --blue-ink: #365990;
+      --teal: #d9f1ec;
+      --teal-ink: #286f67;
+      --green: #e4f5df;
+      --green-ink: #3f7549;
+      --amber: #fff0cf;
+      --amber-ink: #8a5b12;
+      --rose: #ffe1e2;
+      --rose-ink: #934546;
+      --lavender: #eee7ff;
+      --lavender-ink: #5b4d82;
+      --shadow: 0 18px 45px rgba(107, 91, 72, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #fff8ec 0%, #f8fbf7 45%, #fff5f3 100%);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    a { color: var(--blue-ink); font-weight: 700; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    code {
+      background: #f4efe7;
+      border: 1px solid #eadfd2;
+      border-radius: 6px;
+      padding: 1px 6px;
+      font-size: 0.92em;
+      font-family: "Fira Code", "Cascadia Code", ui-monospace, monospace;
+    }
+
+    pre {
+      background: #2c3342;
+      color: #f9fafb;
+      border-radius: 10px;
+      padding: 16px 20px;
+      overflow-x: auto;
+      line-height: 1.5;
+      margin: 12px 0 0;
+      font-size: 0.88rem;
+      font-family: "Fira Code", "Cascadia Code", ui-monospace, monospace;
+    }
+
+    pre code {
+      background: transparent;
+      border: 0;
+      padding: 0;
+      color: inherit;
+      font-size: inherit;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 56px 24px 40px;
+      background: linear-gradient(120deg,
+        rgba(220,232,255,0.95),
+        rgba(217,241,236,0.92),
+        rgba(255,240,207,0.9));
+      border-bottom: 1px solid var(--line);
+    }
+
+    .wrap { width: min(1140px, calc(100% - 36px)); margin: 0 auto; }
+
+    .eyebrow {
+      color: var(--teal-ink);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      max-width: 820px;
+    }
+
+    .hero-sub {
+      margin: 16px 0 0;
+      color: #4d5b70;
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      max-width: 680px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 22px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border-radius: 999px;
+      padding: 5px 13px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .badge-blue    { background: var(--blue);    color: var(--blue-ink); }
+    .badge-teal    { background: var(--teal);    color: var(--teal-ink); }
+    .badge-green   { background: var(--green);   color: var(--green-ink); }
+    .badge-amber   { background: var(--amber);   color: var(--amber-ink); }
+    .badge-rose    { background: var(--rose);    color: var(--rose-ink); }
+    .badge-lavender{ background: var(--lavender);color: var(--lavender-ink); }
+
+    /* ── STATS BAR ── */
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .stat {
+      background: rgba(255,253,249,0.85);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 14px 20px;
+      text-align: center;
+      min-width: 100px;
+      box-shadow: 0 4px 12px rgba(107,91,72,0.07);
+    }
+
+    .stat-num {
+      font-size: 1.7rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .stat-lbl {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .stat-blue    .stat-num { color: var(--blue-ink); }
+    .stat-teal    .stat-num { color: var(--teal-ink); }
+    .stat-green   .stat-num { color: var(--green-ink); }
+    .stat-amber   .stat-num { color: var(--amber-ink); }
+    .stat-rose    .stat-num { color: var(--rose-ink); }
+    .stat-lavender .stat-num { color: var(--lavender-ink); }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255, 250, 242, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 10px 0;
+    }
+
+    .nav a {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 7px 12px;
+      color: var(--ink);
+      font-size: 0.87rem;
+      font-weight: 600;
+    }
+
+    .nav a:hover { background: var(--blue); color: var(--blue-ink); text-decoration: none; }
+
+    /* ── MAIN LAYOUT ── */
+    main { padding: 28px 0 56px; }
+
+    section { scroll-margin-top: 74px; margin-bottom: 20px; }
+
+    .card {
+      background: rgba(255,253,249,0.94);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 26px 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .card.soft-blue    { background: linear-gradient(180deg, var(--blue), var(--panel)); }
+    .card.soft-teal    { background: linear-gradient(180deg, var(--teal), var(--panel)); }
+    .card.soft-green   { background: linear-gradient(180deg, var(--green), var(--panel)); }
+    .card.soft-amber   { background: linear-gradient(180deg, var(--amber), var(--panel)); }
+    .card.soft-rose    { background: linear-gradient(180deg, var(--rose), var(--panel)); }
+    .card.soft-lavender{ background: linear-gradient(180deg, var(--lavender), var(--panel)); }
+
+    h2 {
+      margin: 0 0 16px;
+      font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+    }
+
+    h3 { margin: 22px 0 8px; font-size: 1.05rem; color: var(--ink); }
+
+    p { margin: 0 0 12px; color: var(--muted); }
+
+    ul { margin: 0 0 12px; padding-left: 20px; color: var(--muted); }
+    li + li { margin-top: 6px; }
+
+    /* ── TWO-COLUMN GRID ── */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    /* ── TABLES ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: 8px;
+      overflow: hidden;
+      font-size: 0.93rem;
+      margin-bottom: 8px;
+    }
+
+    th, td {
+      border: 1px solid var(--line);
+      padding: 10px 14px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th { background: #f4efe7; color: var(--ink); font-weight: 700; }
+    td { background: rgba(255,253,249,0.72); color: var(--muted); }
+
+    /* ── DIRECTORY TREE ── */
+    .dir-tree {
+      background: #2c3342;
+      color: #f9fafb;
+      border-radius: 10px;
+      padding: 18px 22px;
+      font-family: "Fira Code", "Cascadia Code", ui-monospace, monospace;
+      font-size: 0.87rem;
+      line-height: 1.8;
+      margin: 8px 0 0;
+    }
+
+    .dir-tree .dir  { color: #93c5fd; font-weight: 600; }
+    .dir-tree .note { color: #94a3b8; }
+
+    /* ── COMMAND BLOCKS ── */
+    .cmd-group { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+
+    .cmd-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+
+    /* ── CALLOUT ── */
+    .callout {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 14px 16px;
+      border-radius: 8px;
+      margin: 14px 0;
+      font-size: 0.93rem;
+    }
+
+    .callout.tip  { background: var(--teal);   color: var(--teal-ink); }
+    .callout.warn { background: var(--amber);  color: var(--amber-ink); }
+    .callout.info { background: var(--lavender); color: var(--lavender-ink); }
+    .callout.danger { background: var(--rose); color: var(--rose-ink); }
+
+    .callout-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+    .callout p { margin: 0; color: inherit; }
+    .callout code { background: rgba(0,0,0,0.1); border-color: rgba(0,0,0,0.12); }
+
+    /* ── ENDPOINT LIST ── */
+    .endpoint-list {
+      background: #2c3342;
+      color: #f9fafb;
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-family: "Fira Code", "Cascadia Code", ui-monospace, monospace;
+      font-size: 0.86rem;
+      line-height: 2;
+    }
+
+    .ep-get    { color: #6ee7b7; font-weight: 700; }
+    .ep-post   { color: #93c5fd; font-weight: 700; }
+    .ep-delete { color: #fca5a5; font-weight: 700; }
+    .ep-path   { color: #e2e8f0; }
+    .ep-group  { color: #94a3b8; font-size: 0.78rem; letter-spacing: 0.05em; text-transform: uppercase; margin-top: 8px; display: block; }
+
+    /* ── URL CHIPS ── */
+    .url-chip {
+      display: inline-flex;
+      align-items: center;
+      background: #2c3342;
+      color: #6ee7b7;
+      border-radius: 6px;
+      padding: 3px 10px;
+      font-family: "Fira Code", ui-monospace, monospace;
+      font-size: 0.85rem;
+      margin: 2px 0;
+    }
+
+    /* ── RULES LIST ── */
+    .rule-list {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0 0;
+    }
+
+    .rule-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .rule-list li:last-child { border-bottom: none; }
+    .rule-list .rule-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      th, td { min-width: 140px; }
+      pre { white-space: pre-wrap; word-break: break-word; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── HERO ── -->
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow">AI Automation Testing</div>
+      <h1>UI &amp; API Test Automation<br>for TutorialsNinja</h1>
+      <p class="hero-sub">
+        Multi-layer test framework built with pytest, Playwright, and Allure —
+        covering UI, API, contract, unit, security, and penetration testing.
+      </p>
+
+      <div class="badge-row">
+        <span class="badge badge-blue">pytest</span>
+        <span class="badge badge-teal">playwright</span>
+        <span class="badge badge-green">pytest-xdist</span>
+        <span class="badge badge-amber">allure-pytest</span>
+        <span class="badge badge-rose">data-driven</span>
+        <span class="badge badge-lavender">pentest</span>
+      </div>
+
+      <div class="stats">
+        <div class="stat stat-blue">  <div class="stat-num">44</div>  <div class="stat-lbl">UI tests</div></div>
+        <div class="stat stat-teal">  <div class="stat-num">170</div> <div class="stat-lbl">API tests</div></div>
+        <div class="stat stat-amber"> <div class="stat-num">14</div>  <div class="stat-lbl">Contract</div></div>
+        <div class="stat stat-green"> <div class="stat-num">67</div>  <div class="stat-lbl">Unit tests</div></div>
+        <div class="stat stat-rose">  <div class="stat-num">44</div>  <div class="stat-lbl">Security</div></div>
+        <div class="stat stat-lavender"><div class="stat-num">295</div><div class="stat-lbl">Total</div></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── NAV ── -->
+  <nav class="nav" aria-label="Page sections">
+    <div class="wrap nav-inner">
+      <a href="#prerequisites">Prerequisites</a>
+      <a href="#layout">Project layout</a>
+      <a href="#pom-rules">Page object rules</a>
+      <a href="#setup">Setup</a>
+      <a href="#secrets">Secrets &amp; data</a>
+      <a href="#running">Running tests</a>
+      <a href="#docker">Docker</a>
+      <a href="#reports">Reports</a>
+      <a href="#server">FastAPI service</a>
+      <a href="#course">Course</a>
+      <a href="architecture.html">Architecture →</a>
+      <a href="course/QUALITY.html">Quality guide →</a>
+    </div>
+  </nav>
+
+  <!-- ── MAIN ── -->
+  <main>
+    <div class="wrap">
+
+      <!-- Prerequisites + Course side by side -->
+      <div class="grid-2" style="margin-bottom:20px;">
+
+        <section id="prerequisites" class="card soft-blue">
+          <h2>Prerequisites</h2>
+          <ul class="rule-list">
+            <li><span class="rule-icon">🐍</span> Python 3.12+ recommended</li>
+            <li><span class="rule-icon">🟢</span> Node.js 18+ for the Allure 3 report CLI</li>
+            <li><span class="rule-icon">🌐</span> Playwright Chromium browser</li>
+            <li><span class="rule-icon">📦</span> A virtual environment with project dependencies installed</li>
+          </ul>
+        </section>
+
+        <section id="course" class="card soft-teal">
+          <h2>Course Materials</h2>
+          <p>This repository includes a <strong>30-session automation QA course</strong> plus a Git basics bridge under <a href="course/README.md"><code>course/</code></a>.</p>
+          <p>Start there for the learning path, session order, exercise workflow, and guidance on when to use the teaching scaffold versus the production framework.</p>
+          <a href="course_overview.html" class="badge badge-teal" style="display:inline-flex; text-decoration:none;">Open course overview →</a>
+        </section>
+
+      </div>
+
+      <!-- Project Layout -->
+      <section id="layout" class="card soft-green">
+        <h2>Project Layout</h2>
+        <div class="dir-tree">
+          <span class="dir">agents/</span>       <span class="note">Agent runners and planning helpers</span><br>
+          <span class="dir">config/</span>       <span class="note">Runtime configuration</span><br>
+          <span class="dir">data/</span>         <span class="note">Test data, parametrize corpora, and local-only secrets</span><br>
+          <span class="dir">flows/</span>        <span class="note">Business-level UI/API workflows</span><br>
+          <span class="dir">mcp_servers/</span>  <span class="note">Local MCP tools, including the test reporter</span><br>
+          <span class="dir">pages/</span>        <span class="note">Playwright page objects and components</span><br>
+          <span class="dir">scripts/</span>      <span class="note">Test, Docker, Compose, and report helper scripts</span><br>
+          <span class="dir">server/</span>       <span class="note">FastAPI automation service</span><br>
+          <span class="dir">services/</span>     <span class="note">API service clients</span><br>
+          <span class="dir">stds/</span>         <span class="note">Test standards and generated page snapshot source docs</span><br>
+          <span class="dir">tests/</span>        <span class="note">API, contract, unit, and web UI tests</span><br>
+          <span class="dir">utils/</span>        <span class="note">Shared utilities</span><br>
+          <span class="dir">course/</span>       <span class="note">Training material and teaching examples</span><br>
+          <span class="dir">artifacts/</span>    <span class="note">Generated or captured artifacts kept out of core code paths</span><br>
+          <span class="dir">monitoring/</span>   <span class="note">Prometheus and Grafana configuration</span>
+        </div>
+        <div class="callout info" style="margin-top:14px;">
+          <span class="callout-icon">🚫</span>
+          <p>Generated outputs are git-ignored: <code>allure-results/</code>, <code>allure-report/</code>, <code>docker-artifacts/</code>, <code>logs/</code>, <code>.playwright-mcp/</code>, <code>outputs/</code>, <code>test-results/</code>, <code>playwright-report/</code>, and <code>artifacts/reports/*.html</code>.</p>
+        </div>
+      </section>
+
+      <!-- POM Rules -->
+      <section id="pom-rules" class="card soft-amber">
+        <h2>Production Page Object Rules</h2>
+        <p>Production UI tests use <code>pages/</code>, <code>pages/components/</code>, and <code>flows/</code>.</p>
+        <ul class="rule-list">
+          <li><span class="rule-icon">🏗️</span> Page objects initialize stable locator members in <code>__init__</code>.</li>
+          <li><span class="rule-icon">♻️</span> Methods reuse those members instead of rebuilding the same locator repeatedly.</li>
+          <li><span class="rule-icon">🎯</span> Dynamic locators that depend on runtime input, such as a product name, stay inside the method that receives that input.</li>
+          <li><span class="rule-icon">🛡️</span> CSS-heavy locators use deterministic self-healing fallbacks through <code>pages/self_healing.py</code>.</li>
+          <li><span class="rule-icon">📋</span> Self-healing does not call AI or invent selectors. Fallbacks are explicitly owned by the page object and recorded through <code>self_heal_events()</code> so stale primary locators can be fixed.</li>
+        </ul>
+      </section>
+
+      <!-- Setup -->
+      <section id="setup" class="card soft-teal">
+        <h2>Setup</h2>
+        <p>Install all dependencies in one go:</p>
+        <pre><code>pip install -r requirements.txt
+playwright install chromium
+npm install</code></pre>
+        <div class="callout tip" style="margin-top:14px;">
+          <span class="callout-icon">🔑</span>
+          <p>To run registration tests, create <code>data/secrets.json</code> from <code>data/secrets.json.example</code> and fill in real credentials.</p>
+        </div>
+      </section>
+
+      <!-- Secrets & Data -->
+      <section id="secrets" class="card soft-rose">
+        <h2>Secrets &amp; Test Data</h2>
+
+        <h3>Secrets (<code>data/secrets.json</code>)</h3>
+        <p>Credentials are <strong>runtime-only</strong> — never commit <code>data/secrets.json</code>.</p>
+
+        <table>
+          <thead><tr><th>Where</th><th>How secrets are supplied</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Local</strong></td><td>Copy <code>data/secrets.json.example</code> → <code>data/secrets.json</code> and fill in real values. Listed in <code>.gitignore</code>.</td></tr>
+            <tr><td><strong>CI</strong></td><td>GitHub Actions secret <code>TEST_SECRETS_JSON</code> (full JSON body). Workflow writes it to <code>data/secrets.json</code> on the runner only; the step does not print the secret.</td></tr>
+            <tr><td><strong>Docker</strong></td><td>Mount <code>data/secrets.json</code> read-only at run time (<code>scripts/run_all_tests_docker.sh</code>); excluded via <code>.dockerignore</code>.</td></tr>
+          </tbody>
+        </table>
+
+        <p style="margin-top:12px;"><code>utils/data_loader.py</code> merges <code>secrets.json</code> over <code>data/test_data.json</code> when the file exists. Registration tests skip via <code>registration_data</code> if secrets are missing — they do not fail the whole suite.</p>
+
+        <h3>Data-driven parametrize corpora</h3>
+        <p>Data-driven tests load their parametrize corpus via <code>get_data_file(filename)</code>, which reads any JSON file from <code>data/</code> by name.</p>
+
+        <table>
+          <thead><tr><th>File</th><th>Used by</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>data/api_test_cases.json</code></td>
+              <td><code>tests/api/test_api_data_driven.py</code> — search, price-filter, cart, and empty-search cases</td>
+            </tr>
+            <tr>
+              <td><code>data/pentest_cases.json</code></td>
+              <td><code>tests/api/test_pentest_data_driven.py</code> — injection, auth attacks, access-control routes, and file-exposure vectors</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn">
+          <span class="callout-icon">⚠️</span>
+          <p>Before pushing: <code>git check-ignore -v data/secrets.json</code> and <code>git status</code> must not list <code>data/secrets.json</code>. Capstone deliverables must not include real passwords or API keys.</p>
+        </div>
+      </section>
+
+      <!-- Running Tests -->
+      <section id="running" class="card">
+        <h2>Running Tests</h2>
+
+        <div class="callout info">
+          <span class="callout-icon">⚡</span>
+          <p><code>pytest.ini</code> runs tests in parallel by default: <code>-n auto --dist loadgroup</code>. Web-UI tests share one worker via <code>xdist_group</code>. CI uses <code>pytest tests/ -m "not demo"</code> to skip teaching-only tests.</p>
+        </div>
+
+        <div class="grid-2" style="margin-top:16px; gap:16px;">
+
+          <div>
+            <h3>By test layer</h3>
+            <div class="cmd-group">
+              <div>
+                <div class="cmd-label">All tests (parallel)</div>
+                <pre><code>pytest</code></pre>
+              </div>
+              <div>
+                <div class="cmd-label">UI tests only</div>
+                <pre><code>pytest tests/web-ui</code></pre>
+              </div>
+              <div>
+                <div class="cmd-label">API tests only</div>
+                <pre><code>pytest tests/api</code></pre>
+              </div>
+              <div>
+                <div class="cmd-label">Contract tests</div>
+                <pre><code>pytest tests/contract</code></pre>
+              </div>
+              <div>
+                <div class="cmd-label">Unit tests</div>
+                <pre><code>pytest tests/unit</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3>By marker</h3>
+            <div class="cmd-group">
+              <div>
+                <div class="cmd-label">Search tests</div>
+                <pre><code>pytest -m search</code></pre>
+              </div>
+              <div>
+                <div class="cmd-label">Cart tests</div>
+                <pre><code>pytest -m cart</code></pre>
+              </div>
+              <div>
+                <div class="cmd-label">Security tests</div>
+                <pre><code>pytest -m security</code></pre>
+              </div>
+              <div>
+                <div class="cmd-label">Pentest</div>
+                <pre><code>pytest -m pentest</code></pre>
+              </div>
+              <div>
+                <div class="cmd-label">Sanity smoke</div>
+                <pre><code>pytest -m sanity</code></pre>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <h3>Data-driven tests</h3>
+        <div class="grid-2" style="gap:16px;">
+          <div>
+            <div class="cmd-label">API (inline + JSON params)</div>
+            <pre><code>pytest tests/api/test_api_data_driven.py</code></pre>
+          </div>
+          <div>
+            <div class="cmd-label">Pentest data-driven</div>
+            <pre><code>pytest tests/api/test_pentest_data_driven.py</code></pre>
+          </div>
+        </div>
+
+        <h3>Serial mode</h3>
+        <div class="grid-2" style="gap:16px;">
+          <div>
+            <div class="cmd-label">Full suite, one process</div>
+            <pre><code>pytest -n 0</code></pre>
+          </div>
+          <div>
+            <div class="cmd-label">Single test, serial</div>
+            <pre><code>pytest -n 0 tests/web-ui/test_cart_total.py \
+  -k cart_total_not_exceeds</code></pre>
+          </div>
+        </div>
+
+        <h3>Useful options</h3>
+        <div class="grid-2" style="gap:16px;">
+          <div>
+            <div class="cmd-label">Verbose output</div>
+            <pre><code>pytest -n 0 -v</code></pre>
+          </div>
+          <div>
+            <div class="cmd-label">Run specific subset + parallel files</div>
+            <pre><code>pytest tests/web-ui/test_search_under_price.py \
+  tests/web-ui/test_add_to_cart.py</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Docker -->
+      <section id="docker" class="card soft-teal">
+        <h2>Docker &amp; Compose</h2>
+
+        <div class="grid-2" style="gap:16px;">
+          <div>
+            <h3>Build &amp; run</h3>
+            <div class="cmd-group">
+              <div>
+                <div class="cmd-label">Build image</div>
+                <pre><code>docker build -t ai-automation-testing .</code></pre>
+              </div>
+              <div>
+                <div class="cmd-label">Full suite</div>
+                <pre><code>docker run --rm \
+  -v "$PWD/docker-artifacts:/app/test-artifacts" \
+  ai-automation-testing pytest tests/ \
+  --alluredir=/app/test-artifacts/allure-results</code></pre>
+              </div>
+              <div>
+                <div class="cmd-label">Helper script (builds + mounts secrets)</div>
+                <pre><code>./scripts/run_all_tests_docker.sh</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3>Compose stack</h3>
+            <p>Starts database, automation server, Prometheus, Grafana, runs all tests, and generates a fresh Allure report.</p>
+            <div class="cmd-group">
+              <div>
+                <div class="cmd-label">Via script</div>
+                <pre><code>./scripts/run_compose_tests_with_allure.sh</code></pre>
+              </div>
+              <div>
+                <div class="cmd-label">Via npm</div>
+                <pre><code>npm run test:compose:report</code></pre>
+              </div>
+              <div>
+                <div class="cmd-label">Pass extra args</div>
+                <pre><code>./scripts/run_compose_tests_with_allure.sh \
+  tests/api tests/contract -q</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3>Compose service URLs</h3>
+        <div class="endpoint-list">
+          <span class="ep-get">Grafana</span>    <span class="ep-path">http://localhost:3000/d/automation/automation-runs</span><br>
+          <span class="ep-get">Prometheus</span> <span class="ep-path">http://localhost:9090</span><br>
+          <span class="ep-get">API docs</span>   <span class="ep-path">http://localhost:8000/docs</span><br>
+          <span class="ep-get">Allure</span>     <span class="ep-path">opened automatically from docker-artifacts/allure-report</span>
+        </div>
+
+        <h3>With secrets (registration tests)</h3>
+        <pre><code>docker run --rm \
+  -v "$PWD/data/secrets.json:/app/data/secrets.json:ro" \
+  -v "$PWD/docker-artifacts:/app/test-artifacts" \
+  ai-automation-testing pytest tests/ \
+  --alluredir=/app/test-artifacts/allure-results</code></pre>
+      </section>
+
+      <!-- Reports -->
+      <section id="reports" class="card soft-blue">
+        <h2>Allure Reports</h2>
+        <p>Results are written to <code>allure-results/</code>. This project uses Allure Report 3 through the local npm package — avoid the global <code>allure</code> command if it reports a <code>2.x</code> version.</p>
+
+        <div class="grid-3" style="gap:12px; margin-top:12px;">
+          <div>
+            <div class="cmd-label">Check version</div>
+            <pre><code>npm run allure:version</code></pre>
+          </div>
+          <div>
+            <div class="cmd-label">Generate report</div>
+            <pre><code>npm run allure:generate</code></pre>
+          </div>
+          <div>
+            <div class="cmd-label">Open in browser</div>
+            <pre><code>npm run allure:open</code></pre>
+          </div>
+        </div>
+
+        <div class="callout tip" style="margin-top:14px;">
+          <span class="callout-icon">🔄</span>
+          <p>For live report updates while rerunning tests: <code>npm run allure:watch</code></p>
+        </div>
+      </section>
+
+      <!-- FastAPI Service -->
+      <section id="server" class="card soft-amber">
+        <h2>FastAPI Automation Service</h2>
+
+        <div class="grid-2" style="gap:16px;">
+          <div>
+            <h3>Start the server</h3>
+            <pre><code>uvicorn server.app:app --reload</code></pre>
+            <div class="callout tip" style="margin-top:12px;">
+              <span class="callout-icon">📖</span>
+              <p>Interactive Swagger docs: <a href="http://127.0.0.1:8000/docs">http://127.0.0.1:8000/docs</a><br>
+              Architecture view: <a href="http://127.0.0.1:8000/architecture">http://127.0.0.1:8000/architecture</a></p>
+            </div>
+          </div>
+
+          <div>
+            <h3>Useful endpoints</h3>
+            <div class="endpoint-list">
+              <span class="ep-group">Health &amp; config</span>
+              <span class="ep-get">GET </span><span class="ep-path">/health</span><br>
+              <span class="ep-get">GET </span><span class="ep-path">/automation/config</span><br>
+              <span class="ep-get">GET </span><span class="ep-path">/automation/test-data</span><br>
+              <span class="ep-get">GET </span><span class="ep-path">/automation/test-data/{key}</span><br>
+              <span class="ep-group">External (live site)</span>
+              <span class="ep-get">GET </span><span class="ep-path">/automation/external/search?query=MacBook</span><br>
+              <span class="ep-post">POST</span><span class="ep-path">/automation/external/cart</span><br>
+              <span class="ep-group">Test runs</span>
+              <span class="ep-post">POST</span><span class="ep-path">/runs/pytest</span><br>
+              <span class="ep-get">GET </span><span class="ep-path">/runs/{job_id}</span><br>
+              <span class="ep-group">Allure reports</span>
+              <span class="ep-get">GET </span><span class="ep-path">/reports/allure/status</span><br>
+              <span class="ep-get">GET </span><span class="ep-path">/reports/allure/summary</span><br>
+              <span class="ep-post">POST</span><span class="ep-path">/reports/allure/generate</span><br>
+              <span class="ep-get">GET </span><span class="ep-path">/reports/allure/view/index.html</span><br>
+              <span class="ep-group">Mock endpoints</span>
+              <span class="ep-get">GET </span><span class="ep-path">/mock/products/search?query=MacBook</span><br>
+              <span class="ep-post">POST</span><span class="ep-path">/mock/cart/add</span><br>
+              <span class="ep-get">GET </span><span class="ep-path">/mock/cart</span><br>
+              <span class="ep-delete">DEL </span><span class="ep-path">/mock/cart</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <p>
+          See <a href="architecture.html">architecture.html</a> for the full system architecture and test catalogue,
+          <a href="course/QUALITY.html">QUALITY.html</a> for the review rubric, and
+          <a href="FRAMEWORK_GUIDE.md">FRAMEWORK_GUIDE.md</a> for production vs course directory guidance.
+        </p>
+      </footer>
+
+    </div><!-- /.wrap -->
+  </main>
+</body>
+</html>

@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Framework Guide — AI Automation Testing</title>
+  <style>
+    :root {
+      --bg: #fbf7f0;
+      --panel: #fffdfa;
+      --ink: #273244;
+      --muted: #68758b;
+      --line: #eadfd2;
+      --blue: #dce8ff;
+      --blue-ink: #365990;
+      --teal: #d9f1ec;
+      --teal-ink: #286f67;
+      --green: #e4f5df;
+      --green-ink: #3f7549;
+      --amber: #fff0cf;
+      --amber-ink: #8a5b12;
+      --rose: #ffe1e2;
+      --rose-ink: #934546;
+      --lavender: #eee7ff;
+      --lavender-ink: #5b4d82;
+      --shadow: 0 18px 45px rgba(107, 91, 72, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #fff8ec 0%, #f8fbf7 45%, #fff5f3 100%);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    a { color: var(--blue-ink); font-weight: 700; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    code {
+      background: #f4efe7;
+      border: 1px solid #eadfd2;
+      border-radius: 6px;
+      padding: 1px 6px;
+      font-size: 0.92em;
+      font-family: "Fira Code", "Cascadia Code", ui-monospace, monospace;
+    }
+
+    pre {
+      background: #2c3342;
+      color: #f9fafb;
+      border-radius: 10px;
+      padding: 16px 20px;
+      overflow-x: auto;
+      line-height: 1.55;
+      margin: 10px 0 0;
+      font-size: 0.87rem;
+      font-family: "Fira Code", "Cascadia Code", ui-monospace, monospace;
+    }
+
+    pre code { background: transparent; border: 0; padding: 0; color: inherit; font-size: inherit; }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 52px 24px 38px;
+      background: linear-gradient(120deg,
+        rgba(228,245,223,0.95),
+        rgba(217,241,236,0.92),
+        rgba(255,240,207,0.9));
+      border-bottom: 1px solid var(--line);
+    }
+
+    .wrap { width: min(1100px, calc(100% - 36px)); margin: 0 auto; }
+
+    .eyebrow {
+      color: var(--green-ink);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4.5vw, 3.6rem);
+      line-height: 1.02;
+      max-width: 780px;
+    }
+
+    .hero-sub {
+      margin: 14px 0 0;
+      color: #4d5b70;
+      font-size: clamp(1rem, 2vw, 1.12rem);
+      max-width: 640px;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255, 250, 242, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 10px 0;
+    }
+
+    .nav a {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 7px 12px;
+      color: var(--ink);
+      font-size: 0.87rem;
+      font-weight: 600;
+    }
+
+    .nav a:hover { background: var(--green); color: var(--green-ink); text-decoration: none; }
+
+    /* ── LAYOUT ── */
+    main { padding: 28px 0 56px; }
+    section { scroll-margin-top: 74px; margin-bottom: 20px; }
+
+    .card {
+      background: rgba(255,253,249,0.94);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 26px 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .card.soft-blue    { background: linear-gradient(180deg, var(--blue),    var(--panel)); }
+    .card.soft-teal    { background: linear-gradient(180deg, var(--teal),    var(--panel)); }
+    .card.soft-green   { background: linear-gradient(180deg, var(--green),   var(--panel)); }
+    .card.soft-amber   { background: linear-gradient(180deg, var(--amber),   var(--panel)); }
+    .card.soft-rose    { background: linear-gradient(180deg, var(--rose),    var(--panel)); }
+    .card.soft-lavender{ background: linear-gradient(180deg, var(--lavender),var(--panel)); }
+
+    .grid-2 { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
+
+    h2 { margin: 0 0 16px; font-size: clamp(1.3rem, 2.5vw, 1.7rem); }
+    h3 { margin: 20px 0 8px; font-size: 1.05rem; }
+    p  { margin: 0 0 12px; color: var(--muted); }
+    ul { margin: 0 0 12px; padding-left: 20px; color: var(--muted); }
+    li + li { margin-top: 6px; }
+
+    /* ── DIRECTORY TABLE ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.93rem;
+      margin-bottom: 8px;
+    }
+
+    th, td { border: 1px solid var(--line); padding: 10px 14px; text-align: left; vertical-align: top; }
+    th { background: #f4efe7; color: var(--ink); font-weight: 700; }
+    td { background: rgba(255,253,249,0.72); color: var(--muted); }
+
+    /* ── ANSWER BLOCKS ── */
+    .faq-list { display: flex; flex-direction: column; gap: 14px; }
+
+    .faq-item {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .faq-q {
+      background: var(--panel);
+      padding: 12px 16px;
+      font-weight: 700;
+      color: var(--ink);
+      font-size: 0.95rem;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .faq-q .icon { font-size: 1rem; flex-shrink: 0; }
+
+    .faq-a {
+      padding: 12px 16px;
+      color: var(--muted);
+      font-size: 0.93rem;
+      background: rgba(255,253,249,0.72);
+    }
+
+    .faq-a p { margin: 0 0 8px; color: inherit; }
+    .faq-a p:last-child { margin-bottom: 0; }
+
+    /* ── CALLOUT ── */
+    .callout {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 13px 15px;
+      border-radius: 8px;
+      margin: 12px 0;
+      font-size: 0.93rem;
+    }
+
+    .callout.tip    { background: var(--teal);    color: var(--teal-ink); }
+    .callout.warn   { background: var(--amber);   color: var(--amber-ink); }
+    .callout.info   { background: var(--lavender);color: var(--lavender-ink); }
+    .callout.danger { background: var(--rose);    color: var(--rose-ink); }
+
+    .callout-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+    .callout p { margin: 0; color: inherit; }
+    .callout code { background: rgba(0,0,0,0.1); border-color: rgba(0,0,0,0.12); }
+
+    /* ── DIR TREE ── */
+    .dir-tree {
+      background: #2c3342;
+      color: #f9fafb;
+      border-radius: 10px;
+      padding: 18px 22px;
+      font-family: "Fira Code", "Cascadia Code", ui-monospace, monospace;
+      font-size: 0.86rem;
+      line-height: 1.85;
+    }
+
+    .dir-tree .prod  { color: #6ee7b7; font-weight: 700; }
+    .dir-tree .teach { color: #93c5fd; }
+    .dir-tree .cmt   { color: #94a3b8; }
+    .dir-tree .sec-hd{ color: #fbbf24; font-size: 0.76rem; letter-spacing: 0.06em; text-transform: uppercase; display: block; margin-top: 8px; }
+
+    /* ── RULE STRIP ── */
+    .rule-list { list-style: none; padding: 0; margin: 10px 0 0; }
+
+    .rule-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .rule-list li:last-child { border-bottom: none; }
+    .rule-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 820px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      th, td { min-width: 140px; }
+      pre { white-space: pre-wrap; word-break: break-word; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── HERO ── -->
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Framework Guide</div>
+      <h1>course/framework vs Production Directories</h1>
+      <p class="hero-sub">
+        Know exactly where to read, write, and run code —
+        and never confuse the teaching scaffold with the production framework.
+      </p>
+    </div>
+  </header>
+
+  <!-- ── NAV ── -->
+  <nav class="nav" aria-label="Guide sections">
+    <div class="wrap nav-inner">
+      <a href="#short-answer">Short answer</a>
+      <a href="#why-two">Why two implementations</a>
+      <a href="#pom-rules">POM conventions</a>
+      <a href="#what-goes-where">What goes where</a>
+      <a href="#faq">Common questions</a>
+      <a href="#secrets">Secrets</a>
+      <a href="README.html">README →</a>
+      <a href="architecture.html">Architecture →</a>
+      <a href="course/QUALITY.html">Quality guide →</a>
+    </div>
+  </nav>
+
+  <!-- ── MAIN ── -->
+  <main>
+    <div class="wrap">
+
+      <!-- Short answer table -->
+      <section id="short-answer" class="card soft-green">
+        <h2>The Short Answer</h2>
+        <table>
+          <thead>
+            <tr><th>Directory</th><th>Purpose</th><th>Use it when…</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>course/framework/</code></td>
+              <td>Teaching scaffold, session-by-session reference</td>
+              <td>Reading / studying patterns per session</td>
+            </tr>
+            <tr>
+              <td><code>pages/</code></td>
+              <td>Production page objects</td>
+              <td>Writing or extending real tests</td>
+            </tr>
+            <tr>
+              <td><code>services/</code></td>
+              <td>Production API service layer</td>
+              <td>Calling backend endpoints in tests</td>
+            </tr>
+            <tr>
+              <td><code>flows/</code></td>
+              <td>Multi-step reusable UI flows</td>
+              <td>Composing longer user journeys</td>
+            </tr>
+            <tr>
+              <td><code>tests/</code></td>
+              <td>Production test suite</td>
+              <td>Writing, running, and debugging real tests</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn" style="margin-top:14px;">
+          <span class="callout-icon">🏆</span>
+          <p><strong>Capstone rule:</strong> all deliverables must live in the production directories (<code>pages/</code>, <code>services/</code>, <code>flows/</code>, <code>tests/</code>). Work in <code>course/framework/</code> does not count toward the capstone checklist.</p>
+        </div>
+      </section>
+
+      <!-- Why two implementations -->
+      <section id="why-two" class="card soft-blue">
+        <h2>Why Two Implementations Exist</h2>
+        <p>Each course session builds on the one before it. <code>course/framework/</code> grows incrementally session by session — this lets you read each session's framework code in isolation and understand exactly what was introduced.</p>
+
+        <p>The <code>pages/</code> / <code>services/</code> / <code>tests/</code> directories contain the <strong>final, fully integrated version</strong> — the state the framework reaches after all sessions are applied. This is the codebase you run in CI, extend for new features, and submit for the capstone.</p>
+
+        <div class="dir-tree">
+          <span class="sec-hd">Session highlights</span>
+          <span class="teach">Session 3</span>  <span class="cmt">→ Python foundations and helper patterns</span><br>
+          <span class="teach">Session 4</span>  <span class="cmt">→ Basic browser tests with fixtures and locators</span><br>
+          <span class="teach">Session 5</span>  <span class="cmt">→ Playwright locator best practices</span><br>
+          <span class="teach">Session 7</span>  <span class="cmt">→ pytest fixtures design</span><br>
+          <span class="teach">Session 9</span>  <span class="cmt">→ API contracts and service helpers</span><br>
+          <span class="teach">Session 10</span> <span class="cmt">→ POM + fluent API layer</span><br>
+          <span class="teach">Session 11</span> <span class="cmt">→ Test data strategy: static, generated, API-created, secrets</span><br>
+          <span class="teach">Session 14</span> <span class="cmt">→ AI utilities and self-healing</span><br>
+          <span class="teach">Session 25</span> <span class="cmt">→ Claude skills, plugins, MCP, and slash commands</span><br>
+          <span class="teach">Session 26</span> <span class="cmt">→ Codex CLI codebase workflows</span><br>
+          <span class="teach">Session 29</span> <span class="cmt">→ Docker Compose, Prometheus, Grafana</span><br>
+          <span class="teach">Session 30</span> <span class="cmt">→ AWS EC2/S3, TestOps, Allure 3 checks</span>
+        </div>
+      </section>
+
+      <!-- POM Rules -->
+      <section id="pom-rules" class="card soft-amber">
+        <h2>Production Page Object Conventions</h2>
+        <ul class="rule-list">
+          <li>
+            <span class="rule-icon">🏗️</span>
+            <span>Stable locators are initialized as <strong>instance data members in each page object or component constructor</strong>.</span>
+          </li>
+          <li>
+            <span class="rule-icon">♻️</span>
+            <span>Methods call those initialized members instead of reconstructing the same locator.</span>
+          </li>
+          <li>
+            <span class="rule-icon">🎯</span>
+            <span>Locators that require runtime data stay close to the method input. Example: opening a product by <code>product_name</code>.</span>
+          </li>
+          <li>
+            <span class="rule-icon">🛡️</span>
+            <span>CSS-only locators should use deterministic self-healing fallbacks from <code>pages/self_healing.py</code> when there is a reasonable backup selector.</span>
+          </li>
+          <li>
+            <span class="rule-icon">📋</span>
+            <span>Self-healing is reviewable, not silent: fallback usage is recorded as <code>SelfHealEvent</code> and exposed through <code>self_heal_events()</code>.</span>
+          </li>
+        </ul>
+        <p style="margin-top:12px;">This keeps tests readable, makes locator ownership explicit, and gives reviewers a concrete signal when a primary selector has drifted.</p>
+      </section>
+
+      <!-- What Goes Where -->
+      <section id="what-goes-where" class="card soft-teal">
+        <h2>What Goes Where</h2>
+
+        <div class="grid-2">
+          <div>
+            <h3>Teaching scaffold (<code>course/</code>)</h3>
+            <div class="dir-tree">
+              <span class="teach">session_03_python_foundations/</span><br>
+              <span class="teach">session_04_playwright_basics/</span><br>
+              <span class="teach">session_05_playwright_locators/</span><br>
+              <span class="teach">session_06_exception_handling/</span><br>
+              <span class="teach">session_07_pytest_fixtures/</span><br>
+              <span class="teach">session_08_database_testing/</span><br>
+              <span class="teach">session_09_api_testing/</span><br>
+              <span class="teach">session_10_pom_ui_api/</span><br>
+              <span class="teach">session_14_ai_tools/</span><br>
+              <span class="teach">session_15_mcp_agents/</span><br>
+              <span class="teach">session_25_claude_skills_plugins/</span><br>
+              <span class="teach">session_26_codex_cli/</span><br>
+              <span class="teach">session_27_claude_connectors/</span><br>
+              <span class="teach">session_28_ollama_local_ai/</span><br>
+              <span class="teach">session_29_docker_compose_grafana/</span><br>
+              <span class="teach">session_30_aws_allure_testops/</span><br>
+              <span class="teach">framework/</span> <span class="cmt">(read-only reference)</span>
+            </div>
+          </div>
+
+          <div>
+            <h3>Production directories</h3>
+            <div class="dir-tree">
+              <span class="sec-hd">Extend these for new coverage</span>
+              <span class="prod">pages/</span>    <span class="cmt">New page objects go here</span><br>
+              <span class="prod">services/</span> <span class="cmt">New API services go here</span><br>
+              <span class="prod">flows/</span>    <span class="cmt">New user flows go here</span><br>
+              <span class="prod">tests/</span>    <span class="cmt">Write and run real tests here</span><br>
+              <span class="sec-hd">Data</span>
+              <span class="prod">data/test_data.json</span>      <span class="cmt">Non-secret test inputs</span><br>
+              <span class="prod">data/api_test_cases.json</span> <span class="cmt">API parametrize corpus</span><br>
+              <span class="prod">data/pentest_cases.json</span>  <span class="cmt">Pentest attack corpus</span><br>
+              <span class="prod">data/secrets.json</span>        <span class="cmt">Runtime only — gitignored</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout tip" style="margin-top:14px;">
+          <span class="callout-icon">📐</span>
+          <p><strong>Evolving framework rule:</strong> when a session introduces reusable Python behavior, put that behavior in <code>course/framework/</code> first and let the session file import it. Session directories should demonstrate and exercise the framework, not become parallel mini-frameworks.</p>
+        </div>
+      </section>
+
+      <!-- Common Questions (FAQ) -->
+      <section id="faq" class="card">
+        <h2>Common Questions</h2>
+
+        <div class="faq-list">
+
+          <div class="faq-item">
+            <div class="faq-q"><span class="icon">❓</span> Should I import from <code>course/framework/</code> in my test?</div>
+            <div class="faq-a">
+              <p>No. Production tests import from <code>pages/</code>, <code>services/</code>, and <code>flows/</code>. <code>course/framework/</code> is a read-only reference.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q"><span class="icon">❓</span> The session code has a <code>LoginPage</code> and <code>pages/login_page.py</code> also has one. Which do I use?</div>
+            <div class="faq-a">
+              <p>Use <code>pages/login_page.py</code>. The session version demonstrates the pattern; the production version is wired into fixtures and kept up to date.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q"><span class="icon">❓</span> I want to add a new page object. Where does it go?</div>
+            <div class="faq-a">
+              <p><code>pages/your_new_page.py</code>. Extend <code>BasePage</code> from <code>pages/base_page.py</code>, initialize stable locators in <code>__init__</code>, and expose business-level actions from methods.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q"><span class="icon">❓</span> When should I add self-healing?</div>
+            <div class="faq-a">
+              <p>Use deterministic self-healing only for CSS-heavy selectors that have a clear, explicit fallback. Do not use it to hide a weak locator strategy. Prefer semantic Playwright locators first: <code>get_by_role</code>, <code>get_by_label</code>, <code>get_by_placeholder</code>.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q"><span class="icon">❓</span> I want to add a new API service. Where does it go?</div>
+            <div class="faq-a">
+              <p><code>services/api/your_new_service.py</code>. Use <code>services/rest_client.py</code> for all HTTP calls.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q"><span class="icon">❓</span> I want to add more search queries or security payloads without editing Python.</div>
+            <div class="faq-a">
+              <p>Add cases to the relevant <code>data/*.json</code> file. <code>get_data_file("filename.json")</code> in <code>utils/data_loader.py</code> loads it at import time into a <code>@pytest.mark.parametrize</code> list. The shipped corpora are:</p>
+              <ul>
+                <li><code>data/api_test_cases.json</code> — search, price-filter, cart, and empty-search cases for <code>test_api_data_driven.py</code></li>
+                <li><code>data/pentest_cases.json</code> — injection, auth attacks, ACL routes, and file-exposure vectors for <code>test_pentest_data_driven.py</code></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q"><span class="icon">❓</span> When should test inputs live in a JSON file rather than inline in <code>@pytest.mark.parametrize</code>?</div>
+            <div class="faq-a">
+              <p>Use a JSON file when:</p>
+              <ul>
+                <li>The corpus is expected to grow without Python changes (e.g. security payloads, product queries).</li>
+                <li>A non-engineer (QA, security team) needs to maintain the data.</li>
+                <li>The same data set is shared across multiple test files.</li>
+              </ul>
+              <p>Use inline <code>parametrize</code> when the cases are few, stable, and intrinsically coupled to the test logic (e.g. two specific HTTP status codes).</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Secrets -->
+      <section id="secrets" class="card soft-rose">
+        <h2>Secrets</h2>
+        <ul class="rule-list">
+          <li>
+            <span class="rule-icon">🔒</span>
+            <span><code>data/secrets.json</code> is gitignored and created only at runtime — local copy or CI from <code>TEST_SECRETS_JSON</code>.</span>
+          </li>
+          <li>
+            <span class="rule-icon">📄</span>
+            <span>Commit <code>data/secrets.json.example</code> for structure only; never commit real credentials.</span>
+          </li>
+          <li>
+            <span class="rule-icon">🚫</span>
+            <span>Do not log passwords in Allure step names. The production registration test only names the email in steps.</span>
+          </li>
+        </ul>
+      </section>
+
+      <footer>
+        <p>
+          See <a href="README.html">README.html</a> for setup, run commands, and Docker,
+          <a href="architecture.html">architecture.html</a> for the full test catalogue,
+          and <a href="course/QUALITY.html">QUALITY.html</a> for the review rubric and capstone checklist.
+        </p>
+      </footer>
+
+    </div><!-- /.wrap -->
+  </main>
+</body>
+</html>

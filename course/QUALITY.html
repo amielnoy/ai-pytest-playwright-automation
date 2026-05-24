@@ -356,6 +356,8 @@
         <li>Assertions are specific and behavior-focused.</li>
         <li>Failures produce useful evidence: message, screenshot, trace, response body, log, or Allure attachment.</li>
         <li>Allure names, features, stories, and steps help a non-author understand the failure.</li>
+        <li>Accessibility tests use semantic Playwright locators (<code>get_by_role</code>, <code>get_by_label</code>, <code>get_by_alt_text</code>) that simultaneously verify assistive-technology exposure — not CSS selectors.</li>
+        <li>Accessibility sanity tests do not claim full WCAG coverage; contrast, keyboard trap, focus order, and screen-reader UX require separate audit tooling and manual review.</li>
       </ul>
     </section>
 
@@ -450,6 +452,7 @@
         <li>Rebuilding the same locator repeatedly inside page object methods instead of using constructor members.</li>
         <li>Using self-healing to hide weak locator strategy instead of fixing stale primary selectors.</li>
         <li>Accepting AI-generated tests without verifying product behavior.</li>
+        <li>Hardcoding security payloads or API vectors inline when a <code>data/*.json</code> file keeps the corpus maintainable without touching Python.</li>
           <li>Editing <code>course/framework/</code> for capstone deliverables instead of production directories.</li>
           <li>Mixing unrelated changes in one branch or commit.</li>
         </ul>
@@ -463,8 +466,12 @@
         <li>What makes a locator stable?</li>
         <li>What evidence proves a failure is a product bug?</li>
         <li>Which tests should not be automated?</li>
+        <li>What is the difference between an accessibility sanity test and a WCAG audit?</li>
+        <li>Which accessibility failures can Playwright catch, and which require manual review or axe/Lighthouse?</li>
         <li>What work should an AI agent never perform without approval?</li>
         <li>What belongs in a page object, API client, fixture, flow, or test?</li>
+        <li>When should test inputs live in a JSON data file rather than inline in <code>@pytest.mark.parametrize</code>?</li>
+        <li>What makes a security test corpus maintainable by a non-engineer?</li>
       </ul>
     </section>
 
@@ -478,6 +485,7 @@
         <li>Locators follow Playwright best practices.</li>
         <li>Fixtures are explicit, scoped correctly, and parallel-safe.</li>
         <li>Test data comes from JSON, factories, fixtures, or secrets as appropriate.</li>
+        <li>Data-driven tests load parametrize inputs from <code>data/*.json</code> via <code>get_data_file()</code> rather than hardcoding vectors in test files.</li>
         <li>At least one API setup or API assertion is used.</li>
         <li>At least one failure was debugged with artifact evidence.</li>
         <li>Allure labels or steps improve report readability.</li>
@@ -486,6 +494,7 @@
         <li>At least one code review finding was written with risk and fix.</li>
         <li>Git workflow is clean: focused branch, reviewed diff, intentional commit.</li>
         <li>Capstone changes are in production directories, not only <code>course/</code>.</li>
+        <li>At least one data-driven test uses <code>get_data_file()</code> to load parametrize inputs from <code>data/*.json</code>.</li>
       </ul>
     </section>
 
@@ -505,6 +514,8 @@
         <li>Run the suite locally, in Docker, and in CI.</li>
         <li>Use AI agents for bounded testing workflows while keeping deterministic tests as release gates.</li>
         <li>Review automation code with a concrete risk, impact, and fix.</li>
+        <li>Explain the difference between an accessibility regression sanity test and a full WCAG audit, and name one failure each approach catches that the other misses.</li>
+        <li>Write an accessibility test using <code>get_by_role</code> or <code>get_by_label</code> and explain which WCAG criterion it covers.</li>
       </ul>
     </section>
 

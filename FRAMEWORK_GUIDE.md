@@ -3,7 +3,7 @@
 ## The Short Answer
 
 | Directory | Purpose | Use it when… |
-|---|---|---|
+| --------- | ------- | ------------ |
 | `course/framework/` | Teaching scaffold, session-by-session reference | Reading / studying patterns per session |
 | `pages/` | Production page objects | Writing or extending real tests |
 | `services/` | Production API service layer | Calling backend endpoints in tests |
@@ -30,7 +30,7 @@ This keeps tests readable, makes locator ownership explicit, and gives reviewers
 
 ## What Goes Where
 
-```
+```text
 course/
   session_03_python_foundations/  ← illustrates Python helpers for automation
   session_04_playwright_basics/   ← illustrates basic fixtures and locators
@@ -77,6 +77,9 @@ Use deterministic self-healing only for CSS-heavy selectors that have a clear, e
 
 **"I want to add a new API service. Where does it go?"**
 `services/api/your_new_service.py`. Use `services/rest_client.py` for all HTTP calls.
+
+**"I want to add more search queries or security payloads without editing Python."**
+Add cases to the relevant `data/*.json` file. `get_data_file("filename.json")` in `utils/data_loader.py` loads it at import time into a `@pytest.mark.parametrize` list. The shipped corpora are `data/api_test_cases.json` (search, price, cart cases) and `data/pentest_cases.json` (injection, auth, ACL, file-exposure vectors).
 
 ## Capstone Rule
 

@@ -624,11 +624,11 @@
 
       <div class="stats-row">
         <div class="stat-box stat-blue"><div class="num">44</div><div class="lbl">UI Test cases</div></div>
-        <div class="stat-box stat-cyan"><div class="num">76</div><div class="lbl">API Test cases</div></div>
+        <div class="stat-box stat-cyan"><div class="num">170</div><div class="lbl">API Test cases</div></div>
         <div class="stat-box stat-purple"><div class="num">14</div><div class="lbl">Contract cases</div></div>
         <div class="stat-box stat-green"><div class="num">67</div><div class="lbl">Unit Test cases</div></div>
         <div class="stat-box stat-red"><div class="num">44</div><div class="lbl">Security + AI Safety</div></div>
-        <div class="stat-box stat-yellow"><div class="num">201</div><div class="lbl">Total collected tests</div></div>
+        <div class="stat-box stat-yellow"><div class="num">295</div><div class="lbl">Total collected tests</div></div>
       </div>
 
       <p>הפרויקט הוא <strong>מסגרת בדיקות אוטומטיות רב-שכבתית</strong> שנבנתה עבור אתר ה-demo של TutorialsNinja — אתר e-commerce לדוגמה.</p>
@@ -705,7 +705,7 @@
         <div class="pyramid-row">
           <div class="pyramid-bar pyr-api">
             <span class="label">🔌 API Tests</span>
-            <span class="count">7 files · 76 cases · api/</span>
+            <span class="count">9 files · 170 cases · api/</span>
           </div>
         </div>
         <div class="pyramid-row">
@@ -811,8 +811,8 @@
           </tr>
           <tr>
             <td><code>@pytest.mark.pentest</code></td>
-            <td><code>tests/api/test_pentest.py</code></td>
-            <td>בדיקות חדירה מבוקרות מול האתר החי.</td>
+            <td><code>tests/api/test_pentest.py</code>, <code>test_pentest_data_driven.py</code></td>
+            <td>בדיקות חדירה מבוקרות מול האתר החי — כולל גרסאות data-driven (inline + JSON).</td>
             <td><code>pytest -m pentest</code></td>
           </tr>
           <tr>
@@ -1222,10 +1222,21 @@
   }
 }</pre>
 
+      <h3>data/api_test_cases.json</h3>
+      <p>מקרי בדיקה לטסטי API data-driven: חיפוש (query, expected_product, min_cards), סינון מחיר (query, max_price), הוספה לעגלה (query), וחיפוש ריק (קלטים שלא מחזירים תוצאות). ניתן להרחיב ללא שינוי Python.</p>
+
+      <h3>data/pentest_cases.json</h3>
+      <p>מאגר וקטורי התקפה לטסטי pentest data-driven: injection_payloads (SQL, XSS, SSTI, command, LDAP, path traversal), auth_attack_cases (empty creds, oversized password, SQLi/XSS בשדות email/password), access_control_routes (routes מוגנים), file_exposure_paths (נתיבים רגישים). מאפשר לצוות האבטחה להרחיב את הקורפוס ללא שינוי Python.</p>
+
       <h3>utils/data_loader.py — Entry Points</h3>
       <div class="callout tip">
         <span class="callout-icon">📌</span>
-        <div>הפונקציות <code>get_config()</code> ו-<code>get_test_data(key)</code> הן <strong>נקודות הכניסה היחידות</strong> לנתוני הקונפיגורציה. אין לקרוא קבצי JSON/YAML ישירות בטסטים.</div>
+        <div>
+          <strong>שלוש נקודות כניסה — אין לקרוא JSON ישירות בטסטים:</strong><br/>
+          <code>get_config()</code> — הגדרות דפדפן ו-URL מ-<code>config/config.json</code>.<br/>
+          <code>get_test_data(key)</code> — נתוני קלט מ-<code>data/test_data.json</code> עם merge של secrets.<br/>
+          <code>get_data_file(filename)</code> — טעינת כל קובץ JSON מ-<code>data/</code> לפי שם — משמש לפרמטרים data-driven כמו <code>api_test_cases.json</code> ו-<code>pentest_cases.json</code>.
+        </div>
       </div>
     </section>
 
@@ -1248,30 +1259,82 @@
 .venv/bin/python -m pytest -n 0 tests/web-ui/test_accessibility_sanity.py -q</pre>
 
       <h3>test_accessibility_sanity.py — בדיקות sanity לנגישות (10 tests)</h3>
+
       <div class="callout info">
         <span class="callout-icon">♿</span>
-        <div>בדיקות sanity נגישות חיוביות ללא axe חיצוני. הן בודקות יכולת בסיסית של הדפים הקריטיים להיחשף נכון לקורא מסך ולניווט סמנטי, בלי להפוך את suite ה-smoke ל-audit נגישות מלא.</div>
+        <div><strong>מה זה נגישות ולמה זה חשוב?</strong> נגישות (Accessibility / a11y) היא היכולת של אנשים עם מוגבלויות — עיוורים, לקויי ראייה, משתמשי מקלדת בלבד, עם לקויות מוטוריות — להשתמש באתר. תקן WCAG 2.1 (Web Content Accessibility Guidelines) מגדיר שלושה רמות: A, AA, AAA. בישראל חוק נגישות שירותי אינטרנט (תקנות שיויון זכויות לאנשים עם מוגבלות) מחייב עמידה ב-AA לאתרים ציבוריים וממשלתיים. כישלון נגישות הוא גם כשל משפטי וגם כשל UX שפוגע במשתמשים אמיתיים.</div>
       </div>
 
-      <p>מטרת בדיקות הנגישות היא לזהות במהירות שבירות בסיסיות שמפריעות לשימוש באתר דרך טכנולוגיות מסייעות: שדות בלי label, כפתורים או קישורים בלי שם נגיש, תמונות מוצר בלי <code>alt</code>, duplicate ids, או טקסטי שגיאה שלא חשופים כטקסט נראה. הבדיקות רצות כחלק מ-sanity ולכן הן קצרות, ממוקדות בדפים הקריטיים, ולא תלויות בכלי חיצוני.</p>
+      <h4 class="test-suite-title">איך Playwright בודק נגישות?</h4>
+      <p>Playwright חושף את ה-<strong>Accessibility Tree</strong> — העץ הסמנטי שדפדפן בונה ומועבר לטכנולוגיות מסייעות כמו NVDA, JAWS, ו-VoiceOver. בניגוד ל-DOM הגולמי, ה-Accessibility Tree מכיל רק אלמנטים חשופים, עם roles, names, states, ו-properties שיקורא מסך קורא למשתמש.</p>
+      <p>ב-Playwright, הגישה הנכונה היא שימוש ב-locators סמנטיים שמשקפים את ה-tree הזה:</p>
+      <div class="tbl-wrap"><table>
+        <tr><th>Locator</th><th>מה הוא מאמת</th><th>דוגמה</th></tr>
+        <tr><td><code>get_by_role("button", name="...")</code></td><td>כפתור עם ARIA role ושם נגיש — קורא מסך יכריז את השם</td><td><code>get_by_role("button", name="Add to Cart")</code></td></tr>
+        <tr><td><code>get_by_label("Email Address")</code></td><td>שדה עם <code>&lt;label&gt;</code> מחובר — קורא מסך ישייך שם לשדה</td><td><code>get_by_label("E-Mail Address")</code></td></tr>
+        <tr><td><code>get_by_placeholder("...")</code></td><td>placeholder נגיש — גלוי גם דרך ARIA</td><td><code>get_by_placeholder("Search")</code></td></tr>
+        <tr><td><code>get_by_alt_text("...")</code></td><td>תמונה עם <code>alt</code> תקין — קורא מסך יתאר את התמונה</td><td><code>get_by_alt_text("MacBook")</code></td></tr>
+      </table></div>
 
-      <p>הגישה המועדפת היא להשתמש ב-locators הסמנטיים של Playwright כמו <code>get_by_role</code>, <code>get_by_label</code>, <code>get_by_placeholder</code> ו-<code>get_by_text</code>. זה נותן שתי שכבות ערך: הטסט קריא יותר, ובאותו זמן הוא מאמת שהאלמנט באמת נגיש לפי שם, label או role שהמשתמש אמור לקבל גם דרך reader או ניווט מקלדת.</p>
+      <div class="callout tip mt-12">
+        <span class="callout-icon">💡</span>
+        <div><strong>שני ציפורים במכה אחת:</strong> כשטסט משתמש ב-<code>get_by_role</code> או <code>get_by_label</code>, הוא גם <em>קורא</em> לאלמנט בצורה שמשתמש-קורא-מסך היה קורא אותו, <em>וגם</em> מאמת שהמפתח קישר label, role, או alt נכון. אם הבדיקה נכשלת, זה אומר שקורא מסך לא היה יכול למצוא את האלמנט הזה.</div>
+      </div>
+
+      <h4 class="test-suite-title">כיסוי הבדיקות הנוכחיות</h4>
+      <div class="tbl-wrap"><table>
+        <tr><th>כיסוי</th><th>מה נבדק</th><th>WCAG criterion</th></tr>
+        <tr>
+          <td>Document language</td>
+          <td><code>lang="en"</code> מוגדר ב-<code>&lt;html&gt;</code> — קורא מסך בוחר pronunciation engine לפי שפה</td>
+          <td>3.1.1 Language of Page (A)</td>
+        </tr>
+        <tr>
+          <td>Header controls</td>
+          <td>My Account, Currency, Search ו-cart summary נגישים דרך role/name — ניתן לניווט מקלדת</td>
+          <td>4.1.2 Name, Role, Value (A)</td>
+        </tr>
+        <tr>
+          <td>Images with alt</td>
+          <td>תמונות featured products כוללות <code>alt</code> לא ריק — קורא מסך מתאר את המוצר</td>
+          <td>1.1.1 Non-text Content (A)</td>
+        </tr>
+        <tr>
+          <td>Login form labels</td>
+          <td>E-Mail ו-Password מחוברים ל-labels; הודעת שגיאה חשופה כטקסט נראה</td>
+          <td>1.3.1 Info and Relationships (A), 3.3.1 Error Identification (A)</td>
+        </tr>
+        <tr>
+          <td>Registration form</td>
+          <td>שדות חובה ו-newsletter radios ניתנים לאיתור לפי label/name</td>
+          <td>1.3.1 Info and Relationships (A)</td>
+        </tr>
+        <tr>
+          <td>Search results</td>
+          <td>Search Criteria, Sort By ו-Show מחוברים ל-labels; קישורי כותרת מוצר לא ריקים</td>
+          <td>2.4.6 Headings and Labels (AA), 2.4.4 Link Purpose (A)</td>
+        </tr>
+        <tr>
+          <td>Product detail</td>
+          <td>Qty, Your Name ו-Your Review מחוברים ל-labels; ללא duplicate IDs בדף</td>
+          <td>1.3.1 Info and Relationships (A), 4.1.1 Parsing (A)</td>
+        </tr>
+      </table></div>
 
       <div class="callout warn mt-12">
         <span class="callout-icon">⚠️</span>
-        <div><strong>גבול הכיסוי:</strong> אלו בדיקות sanity בלבד. הן לא מחליפות WCAG audit מלא, בדיקות contrast, בדיקת keyboard trap מלאה, בדיקה ידנית עם screen reader, או סריקה אוטומטית עם axe. הן נועדו לתפוס regressions בסיסיים מהר לפני regression רחב יותר.</div>
+        <div>
+          <strong>גבולות הכיסוי — מה הבדיקות האלו לא בודקות:</strong>
+          <ul style="margin-top:6px; padding-right:16px;">
+            <li><strong>Color contrast</strong> — יחס ניגודיות בין טקסט לרקע (WCAG 1.4.3). דורש כלי ייעודי כמו axe או Lighthouse.</li>
+            <li><strong>Keyboard trap</strong> — האם ניתן לצאת מ-modal או component בלי עכבר (WCAG 2.1.2). דורש בדיקה ידנית.</li>
+            <li><strong>Focus order</strong> — האם Tab זזה בסדר הגיוני (WCAG 2.4.3). דורש ניווט ידני.</li>
+            <li><strong>Screen reader UX</strong> — האם announcements שמיעים נכון. דורש בדיקה ידנית עם NVDA/VoiceOver.</li>
+            <li><strong>Motion / animation</strong> — prefers-reduced-motion (WCAG 2.3.3). דורש בדיקה ב-CSS media query.</li>
+          </ul>
+          אלו בדיקות <em>regression sanity</em> בלבד — נועדו לתפוס שבירות בסיסיות מהר. WCAG audit מלא דורש שילוב של כלי אוטומציה (axe-playwright, Lighthouse CI) ובדיקות ידניות.
+        </div>
       </div>
-
-      <div class="tbl-wrap"><table>
-        <tr><th>כיסוי</th><th>מה נבדק</th></tr>
-        <tr><td>Document language</td><td>דף הבית מצהיר <code>lang="en"</code>.</td></tr>
-        <tr><td>Header controls</td><td>My Account, Currency, Search ו-cart summary זמינים עם שמות נגישים.</td></tr>
-        <tr><td>Images</td><td>תמונות featured products בדף הבית כוללות <code>alt</code> לא ריק.</td></tr>
-        <tr><td>Login</td><td>שדות E-Mail ו-Password מזוהים דרך labels; הודעת invalid login גלויה כטקסט.</td></tr>
-        <tr><td>Registration</td><td>שדות חובה ו-newsletter radios ניתנים לאיתור לפי label/name.</td></tr>
-        <tr><td>Search</td><td>Search Criteria, Sort By ו-Show מחוברים ל-labels; קישורי כותרת מוצר אינם ריקים.</td></tr>
-        <tr><td>Product detail</td><td>Qty, Your Name ו-Your Review מחוברים ל-labels, ואין duplicate ids בדף.</td></tr>
-      </table></div>
 
       <div class="callout tip mt-12">
         <span class="callout-icon">🧪</span>
@@ -1465,6 +1528,31 @@
     <section id="tests-api">
       <h2><span class="icon">🔌</span> API Tests</h2>
       <p class="section-intro">בדיקות HTTP ישירות ללא דפדפן. חלקן רצות מול TutorialsNinja עם session חדש לכל טסט (OCSESSID נפרד), וחלקן רצות מול שרת FastAPI המקומי עבור <code>/chat</code>. טסטי AI מדלגים אוטומטית כשאין <code>ANTHROPIC_API_KEY</code> או כשהשרת המקומי לא זמין.</p>
+
+      <div class="doc-block">
+        <h3>test_api_data_driven.py — Data-driven API tests (31 cases)</h3>
+        <p class="doc-note">מדגים שתי אסטרטגיות parametrization זו לצד זו. <strong>Inline params</strong> — ערכים מוגדרים ישירות בקובץ Python. <strong>JSON params</strong> — מקרים נטענים מ-<code>data/api_test_cases.json</code> בזמן import, כך שהצוות יכול להרחיב את המטריצה ללא שינוי Python.</p>
+
+        <h4 class="test-suite-title">TestSearchApiInline — inline parametrize (5 × N)</h4>
+        <div class="tbl-wrap"><table>
+          <tr><th>שם הטסט</th><th>IDs</th><th>מה נבדק</th></tr>
+          <tr><td><code>test_search_returns_expected_product_inline</code></td><td>MacBook, iPhone, Canon, Samsung</td><td>GET חיפוש ← 200 + שם המוצר הצפוי בתוצאות.</td></tr>
+          <tr><td><code>test_search_returns_positive_prices_inline</code></td><td>MacBook, iPhone, Canon</td><td>כל המחירים המפורסרים חיוביים.</td></tr>
+          <tr><td><code>test_search_prices_within_budget_inline</code></td><td>MacBook/2000, iPhone/1000, Canon/500</td><td>אף מחיר לא חורג מה-max_price.</td></tr>
+          <tr><td><code>test_empty_search_returns_200_no_cards_inline</code></td><td>2 unknown queries</td><td>200 + אפס product cards לשאילתה שלא קיימת.</td></tr>
+          <tr><td><code>test_search_returns_numeric_ids_inline</code></td><td>MacBook, iPhone</td><td>כל product IDs הם מחרוזות מספריות.</td></tr>
+        </table></div>
+
+        <h4 class="test-suite-title">TestCartApiInline — inline parametrize</h4>
+        <div class="tbl-wrap"><table>
+          <tr><th>שם הטסט</th><th>IDs</th><th>מה נבדק</th></tr>
+          <tr><td><code>test_cart_add_from_search_inline</code></td><td>MacBook, iPhone, Canon</td><td>POST לעגלה ← 200 + עגלה לא ריקה.</td></tr>
+          <tr><td><code>test_cart_total_positive_after_add_inline</code></td><td>MacBook, iPhone</td><td>cart total חיובי אחרי הוספה.</td></tr>
+        </table></div>
+
+        <h4 class="test-suite-title">TestSearchApiJson / TestCartApiJson — JSON params</h4>
+        <p class="doc-note">אותן בדיקות בדיוק, אך הפרמטרים נטענים מ-<code>data/api_test_cases.json</code> ב-import time. הוספת קייס חדש = שינוי בקובץ JSON בלבד.</p>
+      </div>
 
       <div class="doc-block">
         <h3>test_api.py — API smoke &amp; behavior</h3>
@@ -1667,11 +1755,43 @@
     <!-- ── PENETRATION TESTS ── -->
     <section id="tests-pentest">
       <h2><span class="icon">🕵️</span> Penetration Tests</h2>
-      <p class="section-intro">20 בדיקות חדירה חיות מול TutorialsNinja. מסומנות <code>@pytest.mark.api @pytest.mark.pentest</code>. שני טסטים מסומנים <code>xfail</code> — הם מתעדים פגיעויות אמיתיות שנמצאו ב-probe phase.</p>
+      <p class="section-intro">83 בדיקות חדירה חיות מול TutorialsNinja (20 classic + 63 data-driven). מסומנות <code>@pytest.mark.api @pytest.mark.pentest</code>. שני טסטים מסומנים <code>xfail</code> — הם מתעדים פגיעויות אמיתיות שנמצאו ב-probe phase.</p>
 
       <div class="callout warn">
         <span class="callout-icon">⚠️</span>
         <div><strong>ממצאים:</strong> open redirect דרך פרמטר <code>redirect</code> ב-currency endpoint (<code>TestPentestFindings#test_open_redirect_...</code>), וחסרון כותרת <code>X-Frame-Options</code> (clickjacking risk) — שניהם מסומנים <code>xfail(strict=False)</code> עם תיעוד מלא.</div>
+      </div>
+
+      <div class="doc-block">
+        <h3>test_pentest_data_driven.py — Data-driven pentest (63 cases)</h3>
+        <p class="doc-note">מדגים שתי אסטרטגיות: <strong>inline params</strong> (וקטורים מוגדרים ב-Python) ו-<strong>JSON params</strong> (נטענים מ-<code>data/pentest_cases.json</code>). הצוות יכול להרחיב את קורפוס ההתקפות ללא שינוי Python.</p>
+
+        <h4 class="test-suite-title">Inline — Injection</h4>
+        <div class="tbl-wrap"><table>
+          <tr><th>Class</th><th>IDs</th><th>מה נבדק</th></tr>
+          <tr><td><code>TestInjectionInline::test_sql_injection_in_search_inline</code></td><td>4 SQL variants</td><td>SQL injection בחיפוש ← 200, ללא DB error markers.</td></tr>
+          <tr><td><code>TestInjectionInline::test_xss_in_search_not_reflected_inline</code></td><td>4 XSS payloads</td><td>XSS בחיפוש ← tag לא מוחזר raw (script, img, svg, javascript:).</td></tr>
+          <tr><td><code>TestInjectionInline::test_ssti_in_search_not_evaluated_inline</code></td><td>4 SSTI templates</td><td>Jinja2/ERB/EL ← תוצאת הביטוי לא מופיעה בתגובה.</td></tr>
+          <tr><td><code>TestInjectionInline::test_command_injection_in_search_inline</code></td><td>4 shell payloads</td><td>OS command injection ← ללא uid/root/shell output.</td></tr>
+          <tr><td><code>TestInjectionInline::test_oversized_search_handled_inline</code></td><td>4K, 16K, 1K&lt;</td><td>קלט oversized ← 200 + ללא PHP crash.</td></tr>
+        </table></div>
+
+        <h4 class="test-suite-title">Inline — Auth, Access Control, File Exposure</h4>
+        <div class="tbl-wrap"><table>
+          <tr><th>Class</th><th>IDs</th><th>מה נבדק</th></tr>
+          <tr><td><code>TestAuthAttackInline::test_login_malformed_input_no_crash_inline</code></td><td>5 combos</td><td>קלט שבור בlogin ← 200, ללא PHP/DB errors.</td></tr>
+          <tr><td><code>TestAuthAttackInline::test_login_error_is_generic_inline</code></td><td>3 fake emails</td><td>הודעת שגיאה גנרית ← ללא user enumeration.</td></tr>
+          <tr><td><code>TestAccessControlInline::test_protected_route_requires_auth_inline</code></td><td>5 routes</td><td>Routes מוגנים ← login gate מוצג, תוכן מוגן נסתר.</td></tr>
+          <tr><td><code>TestFileExposureInline::test_sensitive_path_blocked_inline</code></td><td>6 paths</td><td>.git/, phpinfo, config.bak, .env, .htpasswd, server-status ← ללא תוכן רגיש.</td></tr>
+        </table></div>
+
+        <h4 class="test-suite-title">JSON-driven — כל הקטגוריות</h4>
+        <p class="doc-note">
+          <code>TestInjectionJson</code> — 12 payloads מ-<code>pentest_cases.json</code>: SQL, SSTI, command, LDAP, path traversal, null byte, XSS (script/img/svg).<br/>
+          <code>TestAuthAttackJson</code> — 4 מקרי התקפה: empty creds, oversized password, SQLi email, XSS email.<br/>
+          <code>TestAccessControlJson</code> — 4 routes מוגנים.<br/>
+          <code>TestFileExposureJson</code> — 5 נתיבי חשיפה רגישים.
+        </p>
       </div>
 
       <div class="doc-block">

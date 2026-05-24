@@ -23,7 +23,7 @@ This repository also includes a 30-session automation QA course plus a Git basic
 ```text
 agents/       Agent runners and planning helpers
 config/       Runtime configuration
-data/         Test data and local-only secrets
+data/         Test data, parametrize corpora, and local-only secrets
 flows/        Business-level UI/API workflows
 mcp_servers/  Local MCP tools, including the test reporter
 pages/        Playwright page objects and components
@@ -67,12 +67,19 @@ If you want to run registration tests, create `data/secrets.json` from `data/sec
 Credentials live in `data/secrets.json`, which is **runtime-only** — never commit it.
 
 | Where | How secrets are supplied |
-|-------|-------------------------|
+| ----- | ------------------------ |
 | Local | Copy `data/secrets.json.example` → `data/secrets.json` and fill in real values. The file is listed in `.gitignore`. |
 | CI | GitHub Actions secret `TEST_SECRETS_JSON` (full JSON body). The workflow writes it to `data/secrets.json` on the runner only; the step does not print the secret. |
 | Docker | Mount `data/secrets.json` read-only at run time (`scripts/run_all_tests_docker.sh`); the image excludes it via `.dockerignore`. |
 
 `utils/data_loader.py` merges `secrets.json` over `data/test_data.json` when the file exists. Registration tests skip via `registration_data` if secrets are missing — they do not fail the whole suite.
+
+Data-driven tests load their parametrize corpus via `get_data_file(filename)`, which reads any JSON file from `data/` by name. The corpora shipped with the project are:
+
+| File | Used by |
+| ---- | ------- |
+| `data/api_test_cases.json` | `tests/api/test_api_data_driven.py` — search, price, cart, empty-search cases |
+| `data/pentest_cases.json` | `tests/api/test_pentest_data_driven.py` — injection, auth, ACL, and file-exposure vectors |
 
 **Capstone / course rule:** deliverables must not include real passwords or API keys in git. Use the example file for shape only; store real values locally or in GitHub repository secrets.
 
@@ -187,6 +194,19 @@ Run only API tests:
 
 ```bash
 pytest tests/api
+```
+
+Run data-driven API tests (inline and JSON-parametrized):
+
+```bash
+pytest tests/api/test_api_data_driven.py
+```
+
+Run data-driven penetration tests:
+
+```bash
+pytest tests/api/test_pentest_data_driven.py
+pytest -m pentest
 ```
 
 Run only contract tests:
