@@ -1,1 +1,1 @@
-{"id":"e915cfe7e4cf39ede5b8fa339c435f81","fullName":"tests.api.test_pentest_data_driven.TestAuthAttackJson#test_login_attack_no_crash_json","name":"Login attack [xss_email] does not crash server – JSON","status":"passed","testResultsByEnv":{"default":"510c77981c40cb6daaa5c7f266b6d5b5"}}
+{"id":"e915cfe7e4cf39ede5b8fa339c435f81","fullName":"tests.api.test_pentest_data_driven.TestAuthAttackJson#test_login_attack_no_crash_json","name":"Login attack [empty_creds] does not crash server – JSON","status":"passed","testResultsByEnv":{"default":"64f30fd216a8423839a685b734f42841"}}
