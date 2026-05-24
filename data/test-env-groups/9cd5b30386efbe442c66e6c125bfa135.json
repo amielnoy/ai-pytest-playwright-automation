@@ -1,0 +1,1 @@
+{"id":"9cd5b30386efbe442c66e6c125bfa135","fullName":"tests.api.test_pentest_data_driven.TestInjectionJson#test_injection_payload_in_search_json","name":"[XSS] payload in search — forbidden markers absent – JSON","status":"passed","testResultsByEnv":{"default":"c92b4e6fa140ba976af55ce7f4ac94b3"}}

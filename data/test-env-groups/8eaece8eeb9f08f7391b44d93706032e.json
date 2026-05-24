@@ -1,0 +1,1 @@
+{"id":"8eaece8eeb9f08f7391b44d93706032e","fullName":"tests.api.test_api_data_driven.TestSearchApiInline#test_search_prices_within_budget_inline","name":"Search [iPhone] with max_price 1000.0 — all results within budget – inline","status":"passed","testResultsByEnv":{"default":"740bdb20fba39e11d81d01071e75de5e"}}

@@ -1,0 +1,1 @@
+{"id":"c1d374b5a9911e72c6035b958b0bfeb2","fullName":"tests.api.test_pentest_data_driven.TestAuthAttackInline#test_login_malformed_input_no_crash_inline","name":"Login with malformed email [] does not crash server","status":"passed","testResultsByEnv":{"default":"4f137c2be5d355fbfd2bc8935e4327c7"}}
