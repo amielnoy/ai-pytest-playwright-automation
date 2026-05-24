@@ -1,1 +1,1 @@
-{"id":"b6e203c05b44367572515c18455c9b01","fullName":"tests.api.test_chat_ai.TestChatEndpoint#test_chat_response_includes_metadata","name":"Response body includes model and token usage fields","status":"passed","testResultsByEnv":{"default":"7c74575415272d16a5a596e52652247b"}}
+{"id":"b6e203c05b44367572515c18455c9b01","fullName":"tests.api.test_chat_ai.TestChatEndpoint#test_chat_response_includes_metadata","name":"Response body includes model and token usage fields","status":"passed","testResultsByEnv":{"default":"58ab3aa5edc09b8707c14d003e009997"}}
