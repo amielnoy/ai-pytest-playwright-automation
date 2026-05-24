@@ -1,6 +1,9 @@
 # Session 18 - Exercises
 
-## Exercise 1: Build Your Four-Week Plan
+> ✏️ **Exercises** · [session_18_automation_learning](.) · [Lecture notes](lecture.md)
+
+
+## ✏️ Exercise 1: Build Your Four-Week Plan
 
 Create a file named `learning_plan.md` with a four-week automation learning plan.
 
@@ -19,7 +22,7 @@ Example measurable outputs:
 
 ---
 
-## Exercise 2: Convert Manual Work to Automation Work
+## ✏️ Exercise 2: Convert Manual Work to Automation Work
 
 Choose one manual test case from Session 1.
 
@@ -35,7 +38,7 @@ Do not write code yet. The goal is to prove that the automation plan is sound be
 
 ---
 
-## Exercise 3: Improve One Existing Test
+## ✏️ Exercise 3: Improve One Existing Test
 
 Pick one test from `tests/web-ui/`.
 
@@ -51,7 +54,7 @@ Run the narrowest relevant test command and record the result in your learning n
 
 ---
 
-## Exercise 4: Debugging Drill
+## ✏️ Exercise 4: Debugging Drill
 
 Intentionally break one locator in a page object.
 
@@ -67,7 +70,7 @@ Restore the locator and confirm the test passes again.
 
 ---
 
-## Exercise 5: Automation Portfolio Entry
+## ✏️ Exercise 5: Automation Portfolio Entry
 
 Write a short portfolio entry for the work you completed in this session.
 

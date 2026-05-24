@@ -1,6 +1,9 @@
 # Session 4 — Exercises
 
-## Exercise 1: Locator Audit
+> ✏️ **Exercises** · [session_04_playwright_basics](.) · [Lecture notes](lecture.md)
+
+
+## ✏️ Exercise 1: Locator Audit
 
 Open `test_login.py` and inspect every locator used.
 
@@ -10,7 +13,7 @@ Open `test_login.py` and inspect every locator used.
 
 ---
 
-## Exercise 2: Fix the Assertion
+## ✏️ Exercise 2: Fix the Assertion
 
 The following test uses a bare `assert` that reads the DOM once. Rewrite it using `expect()`.
 
@@ -26,7 +29,7 @@ Explain in one sentence why the original is flaky.
 
 ---
 
-## Exercise 3: Add a Parametrized Negative Test
+## ✏️ Exercise 3: Add a Parametrized Negative Test
 
 In `test_login.py`, add a parametrized test that covers:
 
@@ -38,7 +41,7 @@ Use `@pytest.mark.parametrize` with a tuple of `(username, password, expected_ms
 
 ---
 
-## Exercise 4: Debug with the Trace Viewer
+## ✏️ Exercise 4: Debug with the Trace Viewer
 
 1. Intentionally break a locator in `test_add_to_cart.py` (rename it to something that does not exist).
 2. Run the test with tracing enabled (add the tracing fixture from the lecture).
@@ -47,7 +50,7 @@ Use `@pytest.mark.parametrize` with a tuple of `(username, password, expected_ms
 
 ---
 
-## Exercise 5: Parallel Execution Timing
+## ✏️ Exercise 5: Parallel Execution Timing
 
 1. Run the full session test suite serially: `pytest -n 0` — record the elapsed time.
 2. Run it in parallel: `pytest -n auto` — record the elapsed time.

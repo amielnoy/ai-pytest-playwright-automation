@@ -1,6 +1,9 @@
 # Session 22 - Automation Code Review: Raising the Quality Bar
 
-## Learning Objectives
+> 📚 **Lecture** · [session_22_automation_code_review](.) · [Learning path](../README.md)
+
+
+## 🎯 Learning Objectives
 
 - Review automation changes for behavior, isolation, maintainability, and report quality.
 - Identify flaky locators, weak assertions, hidden setup, and unsafe data.
@@ -39,7 +42,7 @@ tests/web-ui/test_cart.py:42 uses `.nth(1)` to choose a product. This can add th
 
 ---
 
-## Session Completion Checklist
+## ✅ Session Completion Checklist
 
 - [ ] I reviewed one test for locator quality.
 - [ ] I reviewed one fixture for scope and cleanup.

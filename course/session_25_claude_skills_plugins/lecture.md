@@ -1,6 +1,9 @@
 # Session 25 - Claude Skills & Plugins For QA Automation
 
-## Learning Objectives
+> 📚 **Lecture** · [session_25_claude_skills_plugins](.) · [Learning path](../README.md)
+
+
+## 🎯 Learning Objectives
 
 By the end of this session you will be able to:
 
@@ -96,7 +99,7 @@ The reusable reference implementation lives in `course/framework/claude/`.
 
 ---
 
-## Session Completion Checklist
+## ✅ Session Completion Checklist
 
 - [ ] I can explain when to use a skill instead of a plugin.
 - [ ] I can explain when MCP is required.

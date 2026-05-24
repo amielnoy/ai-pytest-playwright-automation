@@ -1,6 +1,9 @@
 # Session 5 - Playwright Locators: Best Practices for Stable Tests
 
-## Learning Objectives
+> 📚 **Lecture** · [session_05_playwright_locators](.) · [Learning path](../README.md)
+
+
+## 🎯 Learning Objectives
 
 By the end of this session you will be able to:
 
@@ -229,7 +232,7 @@ The test describes the behavior. The page object owns the locator strategy.
 
 ---
 
-## Session Completion Checklist
+## ✅ Session Completion Checklist
 
 - [ ] I can list the recommended locator priority order.
 - [ ] I replaced at least one CSS or XPath selector with a user-facing locator.

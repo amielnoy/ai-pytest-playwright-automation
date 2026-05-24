@@ -1,6 +1,9 @@
 # Session 14 — Building AI Tools for QA
 
-## Learning Objectives
+> 📚 **Lecture** · [session_14_ai_tools](.) · [Learning path](../README.md)
+
+
+## 🎯 Learning Objectives
 
 By the end of this session you will be able to:
 
@@ -75,7 +78,7 @@ Each finding must include file:line, severity (HIGH / MED / LOW), and a one-line
 
 ---
 
-## Session Completion Checklist
+## ✅ Session Completion Checklist
 
 Before moving to Session 15, verify you can answer yes to each item:
 

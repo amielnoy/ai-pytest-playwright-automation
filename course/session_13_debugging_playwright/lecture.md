@@ -1,6 +1,9 @@
 # Session 13 - Debugging Playwright Tests
 
-## Learning Objectives
+> 📚 **Lecture** · [session_13_debugging_playwright](.) · [Learning path](../README.md)
+
+
+## 🎯 Learning Objectives
 
 - Diagnose selector, timing, data, environment, and product failures.
 - Use headed mode, slow motion, screenshots, videos, traces, console logs, and network logs.
@@ -51,7 +54,7 @@ Do not patch timing with sleeps. Wait for specific state.
 
 ---
 
-## Session Completion Checklist
+## ✅ Session Completion Checklist
 
 - [ ] I reproduced one failure with a narrow command.
 - [ ] I inspected at least one artifact.

@@ -1,6 +1,9 @@
 # Session 11 - Test Data Strategy: Stable, Isolated, and Meaningful Data
 
-## Learning Objectives
+> 📚 **Lecture** · [session_11_test_data_strategy](.) · [Learning path](../README.md)
+
+
+## 🎯 Learning Objectives
 
 - Choose between static data, factories, API-created data, and secrets.
 - Keep tests parallel-safe with unique values and cleanup.
@@ -61,7 +64,7 @@ The test reuses the project data loader and stays isolated.
 
 ---
 
-## Session Completion Checklist
+## ✅ Session Completion Checklist
 
 - [ ] I identified which tests need unique data.
 - [ ] I moved hardcoded reusable data into `data/test_data.json`.

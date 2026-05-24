@@ -1,6 +1,9 @@
 # Session 8 - Exercises
 
-## Exercise 1: Run the Database Demo
+> ✏️ **Exercises** · [session_08_database_testing](.) · [Lecture notes](lecture.md)
+
+
+## ✏️ Exercise 1: Run the Database Demo
 
 Run:
 
@@ -16,7 +19,7 @@ Record:
 
 ---
 
-## Exercise 2: Write a Schema Constraint Test
+## ✏️ Exercise 2: Write a Schema Constraint Test
 
 Create a test that proves invalid product data is rejected.
 
@@ -35,7 +38,7 @@ pytest course/session_08_database_testing -q
 
 ---
 
-## Exercise 3: Test Foreign Key Behavior
+## ✏️ Exercise 3: Test Foreign Key Behavior
 
 Create a test for `cart_items.product_id`.
 
@@ -50,7 +53,7 @@ Explain why `PRAGMA foreign_keys = ON` matters in SQLite.
 
 ---
 
-## Exercise 4: Test Cart Upsert Behavior
+## ✏️ Exercise 4: Test Cart Upsert Behavior
 
 Write a test that:
 
@@ -64,7 +67,7 @@ This proves that duplicate cart lines are merged instead of inserted twice.
 
 ---
 
-## Exercise 5: API + Database Test Design
+## ✏️ Exercise 5: API + Database Test Design
 
 Write a short test design, not code, for this scenario:
 
@@ -81,7 +84,7 @@ Include:
 
 ---
 
-## Exercise 6: Migration Review
+## ✏️ Exercise 6: Migration Review
 
 Imagine a migration adds:
 

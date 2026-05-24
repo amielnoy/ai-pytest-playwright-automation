@@ -1,6 +1,9 @@
 # Session 10 — Advanced Playwright: POM + UI + API
 
-## Learning Objectives
+> 📚 **Lecture** · [session_10_pom_ui_api](.) · [Learning path](../README.md)
+
+
+## 🎯 Learning Objectives
 
 By the end of this session you will be able to:
 
@@ -91,7 +94,7 @@ This keeps test data out of test functions and eliminates magic strings.
 
 ---
 
-## Session Completion Checklist
+## ✅ Session Completion Checklist
 
 Before moving to Session 11, verify you can answer yes to each item:
 

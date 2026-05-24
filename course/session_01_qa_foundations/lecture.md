@@ -1,6 +1,9 @@
 # Session 1 — QA Foundations & Manual Testing
 
-## Learning Objectives
+> 📚 **Lecture** · [session_01_qa_foundations](.) · [Learning path](../README.md)
+
+
+## 🎯 Learning Objectives
 
 By the end of this session you will be able to:
 
@@ -13,7 +16,7 @@ By the end of this session you will be able to:
 
 ---
 
-## Session Flow
+## 🗓 Session Flow
 
 | Time | Activity | Output |
 | --- | --- | --- |
@@ -26,7 +29,7 @@ By the end of this session you will be able to:
 
 ---
 
-## What Is a Test Case?
+## 📝 What Is a Test Case?
 
 A test case is a documented procedure to verify one specific behaviour.
 Every test case has exactly **seven fields**: ID, title, priority, type, precondition, steps, and expected result.
@@ -59,7 +62,7 @@ Before marking a case done, check:
 
 ---
 
-## Test Types
+## 🏷️ Test Types
 
 | Type | When to write |
 |---|---|
@@ -74,7 +77,7 @@ Before marking a case done, check:
 
 ---
 
-## The Test Pyramid
+## 🔺 The Test Pyramid
 
 ```
         /\  E2E / UI    (10%)  — slow, expensive, few
@@ -87,7 +90,7 @@ If an E2E test covers logic that a unit test could cover, the E2E test is in the
 
 ---
 
-## Test Design Techniques
+## 🔬 Test Design Techniques
 
 Test design starts from the risk or rule you need to cover, not from the screen layout.
 Use the lightest technique that gives enough confidence.
@@ -172,7 +175,7 @@ Use when: 3+ independent variables and full combinatorial is too expensive. Tool
 
 ---
 
-## Defect Lifecycle
+## 🐛 Defect Lifecycle
 
 ```
 New --> Assigned --> In Progress --> Fixed --> Verified --> Closed
@@ -212,7 +215,7 @@ See `bug_report.py` for five real examples from saucedemo.com.
 
 ---
 
-## Risk-Based Testing
+## ⚡ Risk-Based Testing
 
 When time is limited, test where **risk = likelihood × impact** is highest first.
 
@@ -228,7 +231,7 @@ Use risk score to choose order, not to ignore responsibility. Low-risk areas can
 
 ---
 
-## Exploratory Testing
+## 🔍 Exploratory Testing
 
 Exploratory testing is **simultaneous learning, design, and execution** — not random clicking.
 It is structured through **charters** and time-boxed sessions.
@@ -321,7 +324,7 @@ For small features, one page is enough if it answers:
 
 ---
 
-## When NOT to Automate
+## ⚠️ When NOT to Automate
 
 Automation is an investment. It only pays off when the test runs frequently enough to recoup the authoring and maintenance cost.
 
@@ -347,7 +350,7 @@ If `savings` is negative, keep it manual.
 
 ---
 
-## Session Completion Checklist
+## ✅ Session Completion Checklist
 
 Before moving to Session 2, verify you can answer yes to each item:
 
@@ -361,7 +364,7 @@ Before moving to Session 2, verify you can answer yes to each item:
 
 ---
 
-## Files in this session
+## 📁 Files in this session
 
 | File | Purpose |
 |---|---|

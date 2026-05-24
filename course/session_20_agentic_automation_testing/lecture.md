@@ -1,6 +1,9 @@
 # Session 20 - Agentic Automation Testing: From Scripts to Supervised Workflows
 
-## Learning Objectives
+> 📚 **Lecture** · [session_20_agentic_automation_testing](.) · [Learning path](../README.md)
+
+
+## 🎯 Learning Objectives
 
 By the end of this session you will be able to:
 
@@ -158,7 +161,7 @@ Avoid pipelines where an agent silently edits code or changes test results durin
 
 ---
 
-## Session Completion Checklist
+## ✅ Session Completion Checklist
 
 - [ ] I designed one supervised agent workflow for automation testing.
 - [ ] I classified safe and risky agent tasks for my project.

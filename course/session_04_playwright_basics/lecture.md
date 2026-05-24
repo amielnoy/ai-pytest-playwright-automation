@@ -1,6 +1,9 @@
 # Session 4 — Playwright Basics & First Browser Tests
 
-## Learning Objectives
+> 📚 **Lecture** · [session_04_playwright_basics](.) · [Learning path](../README.md)
+
+
+## 🎯 Learning Objectives
 
 By the end of this session you will be able to:
 
@@ -174,7 +177,7 @@ Decorate your tests with `@allure.feature`, `@allure.story`, and `@allure.title`
 
 ---
 
-## Session Completion Checklist
+## ✅ Session Completion Checklist
 
 Before moving to Session 5, verify you can answer yes to each item:
 

@@ -1,6 +1,9 @@
 # Session 8 - Database Testing
 
-## Learning Objectives
+> 📚 **Lecture** · [session_08_database_testing](.) · [Learning path](../README.md)
+
+
+## 🎯 Learning Objectives
 
 By the end of this session you will be able to:
 
@@ -216,7 +219,7 @@ Migration tests are especially valuable when production data already exists.
 
 ---
 
-## Common Mistakes
+## 🚫 Common Mistakes
 
 - Sharing one mutable database across parallel tests.
 - Cleaning data by broad patterns instead of unique test identifiers.
@@ -228,7 +231,7 @@ Migration tests are especially valuable when production data already exists.
 
 ---
 
-## Session Completion Checklist
+## ✅ Session Completion Checklist
 
 - [ ] I can explain which database risks belong below UI/API tests.
 - [ ] I created an isolated database fixture.

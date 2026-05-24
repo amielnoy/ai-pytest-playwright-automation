@@ -1,6 +1,9 @@
 # Session 16 — Exercises
 
-## Exercise 1: Write the GitHub Actions Workflow
+> ✏️ **Exercises** · [session_16_ci_cd_ai_analysis](.) · [Lecture notes](lecture.md)
+
+
+## ✏️ Exercise 1: Write the GitHub Actions Workflow
 
 Write a `.github/workflows/test.yml` that:
 
@@ -13,7 +16,7 @@ Run the workflow by pushing a commit and confirm it passes in the Actions tab.
 
 ---
 
-## Exercise 2: AI Failure Analysis
+## ✏️ Exercise 2: AI Failure Analysis
 
 1. Intentionally break a test (change a selector to something that does not exist).
 2. Push to CI so it fails and the JUnit XML is generated.
@@ -22,7 +25,7 @@ Run the workflow by pushing a commit and confirm it passes in the Actions tab.
 
 ---
 
-## Exercise 3: Add a New Failure Bucket
+## ✏️ Exercise 3: Add a New Failure Bucket
 
 The current bucketing logic does not handle `AssertionError` separately from generic `assert` failures.
 
@@ -32,7 +35,7 @@ The current bucketing logic does not handle `AssertionError` separately from gen
 
 ---
 
-## Exercise 4: Secrets Audit
+## ✏️ Exercise 4: Secrets Audit
 
 1. Run `git log --all -S "password" --oneline` in this repo. If anything appears, identify whether it contains a real secret.
 2. Check that `data/secrets.json` is listed in `.gitignore`.
@@ -41,7 +44,7 @@ The current bucketing logic does not handle `AssertionError` separately from gen
 
 ---
 
-## Exercise 5: Flaky Detector Threshold
+## ✏️ Exercise 5: Flaky Detector Threshold
 
 In `flaky_detector.py`, the threshold is 95% and the minimum run count is 5.
 

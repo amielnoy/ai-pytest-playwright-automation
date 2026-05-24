@@ -1,6 +1,9 @@
 # Session 9 - API Testing
 
-## Learning Objectives
+> 📚 **Lecture** · [session_09_api_testing](.) · [Learning path](../README.md)
+
+
+## 🎯 Learning Objectives
 
 By the end of this session you will be able to:
 
@@ -195,7 +198,7 @@ pytest tests/contract -q
 
 ---
 
-## Session Completion Checklist
+## ✅ Session Completion Checklist
 
 - [ ] I can explain the difference between API smoke, contract, negative, state, and integration tests.
 - [ ] I wrote status, body, and business-rule assertions in one API test.

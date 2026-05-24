@@ -1,6 +1,9 @@
 # Session 6 - Exception Handling: Clear Failures Without Hiding Bugs
 
-## Learning Objectives
+> 📚 **Lecture** · [session_06_exception_handling](.) · [Learning path](../README.md)
+
+
+## 🎯 Learning Objectives
 
 By the end of this session you will be able to:
 
@@ -109,7 +112,7 @@ The reusable implementation lives in `course/framework/exceptions/`.
 
 ---
 
-## Session Completion Checklist
+## ✅ Session Completion Checklist
 
 - [ ] I created at least one custom framework exception.
 - [ ] I replaced a broad `except Exception` with a specific exception type.

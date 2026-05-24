@@ -1,6 +1,9 @@
 # Session 24 — Exercises
 
-## Exercise 1: Generate a Test with /generate-test
+> ✏️ **Exercises** · [session_24_claude_code](.) · [Lecture notes](lecture.md)
+
+
+## ✏️ Exercise 1: Generate a Test with /generate-test
 
 1. Run `/generate-test user can sort products from Z to A` in Claude Code.
 2. Inspect the output:
@@ -12,7 +15,7 @@
 
 ---
 
-## Exercise 2: Review Your Own Tests with /review-tests
+## ✏️ Exercise 2: Review Your Own Tests with /review-tests
 
 1. Run `/review-tests tests/web-ui/` against the full UI test directory.
 2. For each HIGH finding:
@@ -23,7 +26,7 @@
 
 ---
 
-## Exercise 3: Create a Page Object with /create-page-object
+## ✏️ Exercise 3: Create a Page Object with /create-page-object
 
 1. Run `/create-page-object wish list page` (the wishlist is accessible after logging in).
 2. Verify Claude navigated the real site before writing the locators (check the Playwright MCP tool calls).
@@ -32,7 +35,7 @@
 
 ---
 
-## Exercise 4: Analyze Failures with /analyze-failures
+## ✏️ Exercise 4: Analyze Failures with /analyze-failures
 
 1. Intentionally break two tests in different ways:
    - Break one locator (selector issue)
@@ -46,7 +49,7 @@
 
 ---
 
-## Exercise 5: Write a Custom Slash Command
+## ✏️ Exercise 5: Write a Custom Slash Command
 
 Write a new command `.claude/commands/std-to-test.md` that:
 

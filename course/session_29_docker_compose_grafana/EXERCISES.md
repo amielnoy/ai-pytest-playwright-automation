@@ -1,5 +1,8 @@
 # Session 29 Exercises - Docker Compose And Grafana
 
+> ✏️ **Exercises** · [session_29_docker_compose_grafana](.) · [Lecture notes](lecture.md)
+
+
 ## Exercise 1 - Compose Command Review
 
 Run:

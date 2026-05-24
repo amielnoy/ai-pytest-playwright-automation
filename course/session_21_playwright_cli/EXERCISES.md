@@ -1,6 +1,9 @@
 # Session 21 - Exercises
 
-## Exercise 1: Verify CLI Availability
+> ✏️ **Exercises** · [session_21_playwright_cli](.) · [Lecture notes](lecture.md)
+
+
+## ✏️ Exercise 1: Verify CLI Availability
 
 Run:
 
@@ -22,7 +25,7 @@ Record:
 
 ---
 
-## Exercise 2: Use Codegen for Locator Discovery
+## ✏️ Exercise 2: Use Codegen for Locator Discovery
 
 Run:
 
@@ -47,7 +50,7 @@ Explain why.
 
 ---
 
-## Exercise 3: Refactor Codegen Into the Framework
+## ✏️ Exercise 3: Refactor Codegen Into the Framework
 
 Take one generated interaction from Exercise 2.
 
@@ -61,7 +64,7 @@ Run the narrowest relevant test after the change.
 
 ---
 
-## Exercise 4: Capture Visual Evidence
+## ✏️ Exercise 4: Capture Visual Evidence
 
 Create an `artifacts/` directory if needed, then run:
 
@@ -77,7 +80,7 @@ Use the screenshot to write a short observation:
 
 ---
 
-## Exercise 5: Trace Debugging Plan
+## ✏️ Exercise 5: Trace Debugging Plan
 
 Find or create a Playwright trace from a failing test run.
 

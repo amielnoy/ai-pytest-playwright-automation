@@ -1,6 +1,9 @@
 # Session 3 — Python Foundations For Automation Testing
 
-## Learning Objectives
+> 📚 **Lecture** · [session_03_python_foundations](.) · [Learning path](../README.md)
+
+
+## 🎯 Learning Objectives
 
 By the end of this session you will be able to:
 
@@ -13,7 +16,7 @@ By the end of this session you will be able to:
 
 ---
 
-## Session Flow
+## 🗓 Session Flow
 
 | Time | Activity | Output |
 | --- | --- | --- |
@@ -230,7 +233,7 @@ Expected result:
 
 ---
 
-## Session Completion Checklist
+## ✅ Session Completion Checklist
 
 - [ ] I can explain the difference between a list and a dictionary.
 - [ ] I wrote one function that returns a value.

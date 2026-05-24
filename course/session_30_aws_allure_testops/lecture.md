@@ -1,8 +1,11 @@
 # Session 30 - AWS EC2 & S3 Testing For Allure TestOps With Allure 3
 
+> 📚 **Lecture** · [session_30_aws_allure_testops](.) · [Learning path](../README.md)
+
+
 <!-- cSpell:words TestOps alluredir Playwright server-side pytest -->
 
-## Learning Objectives
+## 🎯 Learning Objectives
 
 By the end of this session you will be able to:
 
@@ -104,7 +107,7 @@ They do not contact AWS, Docker, or TestOps.
 
 ---
 
-## Session Completion Checklist
+## ✅ Session Completion Checklist
 
 - [ ] I can explain why TestOps deployment testing is different from UI test reporting.
 - [ ] I can validate S3 public access, encryption, versioning, and lifecycle requirements.

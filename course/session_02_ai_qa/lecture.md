@@ -1,6 +1,9 @@
 # Session 2 — QA in the AI Era
 
-## Learning Objectives
+> 📚 **Lecture** · [session_02_ai_qa](.) · [Learning path](../README.md)
+
+
+## 🎯 Learning Objectives
 
 By the end of this session you will be able to:
 
@@ -16,7 +19,7 @@ By the end of this session you will be able to:
 
 ---
 
-## Session Flow
+## 🗓 Session Flow
 
 | Time | Activity | Output |
 | --- | --- | --- |
@@ -202,7 +205,7 @@ Problems to find:
 
 ---
 
-## Session Completion Checklist
+## ✅ Session Completion Checklist
 
 Before moving to Session 3, verify you can answer yes to each item:
 

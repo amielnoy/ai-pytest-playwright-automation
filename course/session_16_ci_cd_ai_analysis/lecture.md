@@ -1,6 +1,9 @@
 # Session 16 — CI/CD & AI Failure Analysis
 
-## Learning Objectives
+> 📚 **Lecture** · [session_16_ci_cd_ai_analysis](.) · [Learning path](../README.md)
+
+
+## 🎯 Learning Objectives
 
 By the end of this session you will be able to:
 
@@ -106,7 +109,7 @@ Add `.env` to `.gitignore`. Never add `secrets.json` to git (check `.gitignore` 
 
 ---
 
-## Session Completion Checklist
+## ✅ Session Completion Checklist
 
 Before moving to Session 17, verify you can answer yes to each item:
 

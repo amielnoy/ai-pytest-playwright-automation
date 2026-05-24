@@ -1,11 +1,14 @@
 # Session 2 — Exercises
 
-## How to Submit
+> ✏️ **Exercises** · [session_02_ai_qa](.) · [Lecture notes](lecture.md)
+
+
+## 📤 How to Submit
 
 Create one Markdown file named `session_02_answers.md`.
 Paste prompts and AI output, but keep the final reviewed test cases separate from the raw AI output.
 
-## Review Criteria
+## ✔️ Review Criteria
 
 Your work is complete when:
 
@@ -17,7 +20,7 @@ Your work is complete when:
 
 ---
 
-## Exercise 1: Zero-Shot vs Few-Shot Comparison
+## ✏️ Exercise 1: Zero-Shot vs Few-Shot Comparison
 
 Pick a feature from the TutorialsNinja demo (e.g. "Add to cart", "Search by keyword", "User registration").
 
@@ -37,7 +40,7 @@ Use this comparison table:
 
 ---
 
-## Exercise 2: Build a Well-Formed Prompt
+## ✏️ Exercise 2: Build a Well-Formed Prompt
 
 Write a prompt with all six anatomy components for this user story:
 
@@ -49,7 +52,7 @@ If the demo site does not actually support price filtering, state that as a prod
 
 ---
 
-## Exercise 3: Validate AI Output
+## ✏️ Exercise 3: Validate AI Output
 
 Paste the AI output from Exercise 1 or 2 and apply the five-item validation checklist from the lecture. For each item: pass or fail, and if fail, rewrite the offending test case.
 
@@ -57,7 +60,7 @@ Add requirement traceability: for every final case, write the story sentence, sp
 
 ---
 
-## Exercise 4: Spot the Hallucination
+## ✏️ Exercise 4: Spot the Hallucination
 
 The following AI output was generated for the TutorialsNinja shopping cart. Find every hallucination and explain what the correct behaviour should be.
 
@@ -77,7 +80,7 @@ For each row, classify the issue as one of:
 
 ---
 
-## Exercise 5: Chain-of-Thought Prompting
+## ✏️ Exercise 5: Chain-of-Thought Prompting
 
 Write a chain-of-thought prompt for the registration feature. The prompt must instruct the model to reason through: actors, happy paths, failure modes, edge cases, security concerns — before writing any test cases.
 
@@ -85,7 +88,7 @@ Compare the output to a direct (zero-shot) prompt for the same feature.
 
 ---
 
-## Exercise 6: Prompt Repair
+## ✏️ Exercise 6: Prompt Repair
 
 Take one flawed AI-generated test case from any exercise and write a repair prompt that changes only that test case.
 

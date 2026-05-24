@@ -1,6 +1,9 @@
 # Session 21 - Playwright CLI: Codegen, Debugging, Screenshots, and Traces
 
-## Learning Objectives
+> 📚 **Lecture** · [session_21_playwright_cli](.) · [Learning path](../README.md)
+
+
+## 🎯 Learning Objectives
 
 By the end of this session you will be able to:
 
@@ -138,7 +141,7 @@ The CLI is a workshop tool. The automated suite is the product.
 
 ---
 
-## Session Completion Checklist
+## ✅ Session Completion Checklist
 
 - [ ] I installed Chromium with the Playwright CLI.
 - [ ] I ran `codegen` against the demo store.

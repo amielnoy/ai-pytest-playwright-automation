@@ -1,6 +1,9 @@
 # Session 20 - Exercises
 
-## Exercise 1: Design a Supervised Agent Workflow
+> ✏️ **Exercises** · [session_20_agentic_automation_testing](.) · [Lecture notes](lecture.md)
+
+
+## ✏️ Exercise 1: Design a Supervised Agent Workflow
 
 Design an agent workflow for one of these goals:
 
@@ -20,7 +23,7 @@ Define:
 
 ---
 
-## Exercise 2: Classify Agent Tasks
+## ✏️ Exercise 2: Classify Agent Tasks
 
 Create a table with at least ten testing tasks.
 
@@ -34,7 +37,7 @@ Include one sentence explaining the guardrail.
 
 ---
 
-## Exercise 3: Build a Failure Investigation Record
+## ✏️ Exercise 3: Build a Failure Investigation Record
 
 Use a real failing test, or intentionally break a small assertion.
 
@@ -54,7 +57,7 @@ Restore any intentional break before finishing.
 
 ---
 
-## Exercise 4: Review an Agent-Created Test
+## ✏️ Exercise 4: Review an Agent-Created Test
 
 Ask an AI tool to draft a test for cart, search, login, or registration.
 
@@ -71,7 +74,7 @@ Mark each gate as pass or fail, then rewrite the weakest part of the test.
 
 ---
 
-## Exercise 5: Agentic CI Proposal
+## ✏️ Exercise 5: Agentic CI Proposal
 
 Write a short proposal for adding read-only agent analysis to CI.
 

@@ -1,6 +1,9 @@
 # Session 18 - Automation Learning: From Course Work to Daily Practice
 
-## Learning Objectives
+> 📚 **Lecture** · [session_18_automation_learning](.) · [Learning path](../README.md)
+
+
+## 🎯 Learning Objectives
 
 By the end of this session you will be able to:
 
@@ -136,7 +139,7 @@ Good backlog items are small enough to complete in one focused session.
 
 ---
 
-## Session Completion Checklist
+## ✅ Session Completion Checklist
 
 - [ ] I created a four-week automation learning plan.
 - [ ] I converted one manual scenario into automation tasks.

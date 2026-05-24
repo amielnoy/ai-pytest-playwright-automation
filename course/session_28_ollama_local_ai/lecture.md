@@ -1,6 +1,9 @@
 # Session 28 - Ollama Local AI For QA Automation
 
-## Learning Objectives
+> 📚 **Lecture** · [session_28_ollama_local_ai](.) · [Learning path](../README.md)
+
+
+## 🎯 Learning Objectives
 
 By the end of this session you will be able to:
 
@@ -91,7 +94,7 @@ The reusable reference implementation lives in `course/framework/ollama/`.
 
 ---
 
-## Session Completion Checklist
+## ✅ Session Completion Checklist
 
 - [ ] I can explain when Ollama is useful and when it is not.
 - [ ] I can choose a model for summaries, test ideas, failure classification, and small diff review.

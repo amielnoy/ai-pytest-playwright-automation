@@ -1,5 +1,8 @@
 # Session 12 - Mini Project: One Complete Feature Slice
 
+> 📚 **Lecture** · [session_12_mini_project](.) · [Learning path](../README.md)
+
+
 ## Goal
 
 Build one complete automation slice before moving into advanced AI and CI topics.
@@ -36,7 +39,7 @@ Your slice must include:
 
 ---
 
-## Session Completion Checklist
+## ✅ Session Completion Checklist
 
 - [ ] I chose one feature slice.
 - [ ] I implemented or improved page behavior.

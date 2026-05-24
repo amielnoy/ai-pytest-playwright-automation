@@ -1,6 +1,9 @@
 # Session 27 - Claude Connectors For QA Workflows
 
-## Learning Objectives
+> 📚 **Lecture** · [session_27_claude_connectors](.) · [Learning path](../README.md)
+
+
+## 🎯 Learning Objectives
 
 By the end of this session you will be able to:
 
@@ -86,7 +89,7 @@ The reusable reference implementation lives in `course/framework/claude/connecto
 
 ---
 
-## Session Completion Checklist
+## ✅ Session Completion Checklist
 
 - [ ] I can explain the difference between a connector and a skill.
 - [ ] I can choose a connector for PR review, requirements review, and release coordination.

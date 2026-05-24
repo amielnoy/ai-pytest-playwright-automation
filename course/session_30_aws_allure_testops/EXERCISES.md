@@ -1,5 +1,8 @@
 # Session 30 Exercises - AWS EC2, S3, Allure TestOps, And Allure 3
 
+> ✏️ **Exercises** · [session_30_aws_allure_testops](.) · [Lecture notes](lecture.md)
+
+
 <!-- cSpell:words TestOps alluredir pytest server-side -->
 
 ## Exercise 1 - Deployment Plan Review

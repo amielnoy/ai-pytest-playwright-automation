@@ -1,6 +1,9 @@
 # Session 15 — MCP & AI Agents
 
-## Learning Objectives
+> 📚 **Lecture** · [session_15_mcp_agents](.) · [Learning path](../README.md)
+
+
+## 🎯 Learning Objectives
 
 By the end of this session you will be able to:
 
@@ -147,7 +150,7 @@ This agent is intentionally read-only. It should produce planning material, not 
 
 ---
 
-## Session Completion Checklist
+## ✅ Session Completion Checklist
 
 Before moving to Session 16, verify you can answer yes to each item:
 

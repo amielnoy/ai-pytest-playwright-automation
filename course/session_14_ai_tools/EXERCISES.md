@@ -1,6 +1,9 @@
 # Session 14 — Exercises
 
-## Exercise 1: Improve the Generation Prompt
+> ✏️ **Exercises** · [session_14_ai_tools](.) · [Lecture notes](lecture.md)
+
+
+## ✏️ Exercise 1: Improve the Generation Prompt
 
 Run `cli.py test` for the feature "User can sort products alphabetically (A to Z and Z to A)".
 
@@ -10,7 +13,7 @@ Run `cli.py test` for the feature "User can sort products alphabetically (A to Z
 
 ---
 
-## Exercise 2: Batch Generation
+## ✏️ Exercise 2: Batch Generation
 
 Create a file `features.txt` with five feature descriptions (one per line), covering different areas of the demo site.
 
@@ -20,7 +23,7 @@ Run `cli.py batch features.txt` and inspect the five generated files. For each f
 
 ---
 
-## Exercise 3: Trigger Self-Healing
+## ✏️ Exercise 3: Trigger Self-Healing
 
 1. In `test_with_healing.py`, change one locator to a selector that does not exist (e.g. `[data-test="nonexistent"]`).
 2. Run the test and confirm the `[self-heal]` line appears in output.
@@ -29,7 +32,7 @@ Run `cli.py batch features.txt` and inspect the five generated files. For each f
 
 ---
 
-## Exercise 4: Heal Report Analysis
+## ✏️ Exercise 4: Heal Report Analysis
 
 Generate a heal report by running the suite several times after introducing multiple broken selectors.
 
@@ -39,7 +42,7 @@ Produce the Markdown table from `heal_report.py`. Answer:
 
 ---
 
-## Exercise 5: Review an Existing Test File
+## ✏️ Exercise 5: Review an Existing Test File
 
 Run `cli.py review` on `tests/web-ui/test_registration.py`. For each finding:
 - Does the finding accurately identify a real problem?

@@ -1,6 +1,9 @@
 # Session 26 - Codex CLI For QA Automation
 
-## Learning Objectives
+> 📚 **Lecture** · [session_26_codex_cli](.) · [Learning path](../README.md)
+
+
+## 🎯 Learning Objectives
 
 By the end of this session you will be able to:
 
@@ -98,7 +101,7 @@ The reusable reference implementation lives in `course/framework/codex/`.
 
 ---
 
-## Session Completion Checklist
+## ✅ Session Completion Checklist
 
 - [ ] I wrote one Codex CLI prompt with goal, scope, constraints, and verification.
 - [ ] I asked Codex to inspect existing tests before editing.

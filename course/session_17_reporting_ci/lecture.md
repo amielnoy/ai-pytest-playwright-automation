@@ -1,6 +1,9 @@
 # Session 17 — Reporting & CI: Allure 3 + GitHub Pages
 
-## Learning Objectives
+> 📚 **Lecture** · [session_17_reporting_ci](.) · [Learning path](../README.md)
+
+
+## 🎯 Learning Objectives
 
 By the end of this session you will be able to:
 
@@ -79,7 +82,7 @@ The `if: always()` condition ensures the report is published even when tests fai
 
 ---
 
-## Session Completion Checklist
+## ✅ Session Completion Checklist
 
 You have finished the course. Before calling the project done, verify:
 

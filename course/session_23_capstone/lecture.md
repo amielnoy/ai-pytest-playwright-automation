@@ -1,6 +1,9 @@
 # Session 23 — Capstone: Production-Level Framework
 
-## Learning Objectives
+> 📚 **Lecture** · [session_23_capstone](.) · [Learning path](../README.md)
+
+
+## 🎯 Learning Objectives
 
 By the end of this session you will be able to:
 

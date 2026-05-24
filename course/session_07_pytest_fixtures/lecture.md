@@ -1,6 +1,9 @@
 # Session 7 - pytest Fixtures: Reliable Setup, Teardown, and Dependency Injection
 
-## Learning Objectives
+> 📚 **Lecture** · [session_07_pytest_fixtures](.) · [Learning path](../README.md)
+
+
+## 🎯 Learning Objectives
 
 By the end of this session you will be able to:
 
@@ -133,7 +136,7 @@ The setup is named, reusable, and visible.
 
 ---
 
-## Session Completion Checklist
+## ✅ Session Completion Checklist
 
 - [ ] I wrote one function-scoped fixture.
 - [ ] I wrote one `yield` fixture with cleanup.

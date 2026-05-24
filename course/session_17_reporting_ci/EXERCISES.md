@@ -1,6 +1,9 @@
 # Session 17 — Exercises
 
-## Exercise 1: Decorate a Full Test Class
+> ✏️ **Exercises** · [session_17_reporting_ci](.) · [Lecture notes](lecture.md)
+
+
+## ✏️ Exercise 1: Decorate a Full Test Class
 
 Pick one test file from `tests/web-ui/` that is missing Allure decorators.
 
@@ -15,7 +18,7 @@ Generate the report and verify the decorators appear correctly.
 
 ---
 
-## Exercise 2: categories.json
+## ✏️ Exercise 2: categories.json
 
 Create `allure-results/categories.json` that defines two custom categories:
 
@@ -26,7 +29,7 @@ Trigger one of each failure type, generate the report, and confirm the failures 
 
 ---
 
-## Exercise 3: environment.properties
+## ✏️ Exercise 3: environment.properties
 
 Create `allure-results/environment.properties` with the following keys:
 
@@ -39,7 +42,7 @@ Generate the report and verify the environment table appears on the Overview tab
 
 ---
 
-## Exercise 4: Trend History
+## ✏️ Exercise 4: Trend History
 
 1. Run the suite once and generate the report.
 2. Copy `allure-report/history/` to `allure-results/history/`.
@@ -49,7 +52,7 @@ Generate the report and verify the environment table appears on the Overview tab
 
 ---
 
-## Exercise 5: End-to-End Pipeline Verification
+## ✏️ Exercise 5: End-to-End Pipeline Verification
 
 Push a commit that intentionally fails one test. Verify:
 

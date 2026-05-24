@@ -1,5 +1,8 @@
 # Automation QA Course
 
+> 🎓 **30-session automation QA course** — pytest · Playwright · Allure · AI tools
+
+
 This course teaches practical QA automation from manual test design through a production-ready Playwright, pytest, API, AI tooling, CI, and reporting framework.
 
 The course is designed to be followed in order. Each session contains:
@@ -9,7 +12,7 @@ The course is designed to be followed in order. Each session contains:
 - `EXERCISES.md` — hands-on work for students.
 - Supporting Python files — focused examples for that session.
 
-## Prerequisites
+## 📋 Prerequisites
 
 Before starting, set up the repository from the project root:
 
@@ -25,7 +28,7 @@ Run a quick verification:
 pytest --collect-only -q
 ```
 
-## Learning Path
+## 🗺️ Learning Path
 
 | Session | Topic | Main outcome |
 |---|---|---|

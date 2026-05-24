@@ -1,12 +1,15 @@
 # Session 1 — Exercises
 
-## How to Submit
+> ✏️ **Exercises** · [session_01_qa_foundations](.) · [Lecture notes](lecture.md)
+
+
+## 📤 How to Submit
 
 Create one Markdown file named `session_01_answers.md`.
 Use the same headings as the exercises below.
 Where a task asks for test cases or bug reports, write them as tables so they can be reviewed quickly.
 
-## Review Criteria
+## ✔️ Review Criteria
 
 Your work is complete when:
 
@@ -18,7 +21,7 @@ Your work is complete when:
 
 ---
 
-## Exercise 1: Write a Test Case from Scratch
+## ✏️ Exercise 1: Write a Test Case from Scratch
 
 **Scenario:** A registered user tries to log in with a correct username but wrong password.
 
@@ -28,7 +31,7 @@ Write a complete test case with all seven fields: ID, title, priority, type, pre
 
 ---
 
-## Exercise 2: Apply EP and BVA
+## ✏️ Exercise 2: Apply EP and BVA
 
 The registration form requires a username between 3 and 20 characters.
 
@@ -40,7 +43,39 @@ The registration form requires a username between 3 and 20 characters.
 
 ---
 
-## Exercise 3: Decision Table
+### 🔐 Cybersecurity Variant
+
+A password-reset API accepts a one-time token that must be **exactly 64 hexadecimal characters** long.  
+Tokens that are too short, too long, contain non-hex characters, or are reused must be rejected.
+
+1. List the equivalence partitions for the token field (valid, too short, too long, invalid charset, already used).
+2. Identify the boundaries and write one test case per boundary value.
+3. Add one negative case for a structurally valid token that has already been consumed.
+
+**Expected boundary set:** 63 chars, 64 chars (valid), 65 chars — plus one non-hex input and one reused token.
+
+> [!TIP]
+> A token that is the right length but contains `g`, `z`, or spaces is a separate partition from "too long" — length passes, charset fails. Keep partitions clean.
+
+---
+
+### 💳 FinTech Variant
+
+A wire-transfer form accepts an amount in USD with the rule:  
+**minimum $0.01 — maximum $999,999.99** (two decimal places, no negative values, no zero).
+
+1. List all equivalence partitions (valid range, below minimum, above maximum, zero, negative, non-numeric, too many decimal places).
+2. For each boundary write the exact input value and expected result.
+3. Write one test case per boundary value.
+
+**Expected boundary set:** `$0.00`, `$0.01`, `$999,999.99`, `$1,000,000.00` — plus `$0.001` (too many decimals) and `-$1.00` (negative).
+
+> [!TIP]
+> Formatting edge cases (`1000000` vs `1,000,000.00` vs `1.000.000,00`) are a separate partition from the numeric range — they test input parsing, not business logic. List them separately.
+
+---
+
+## ✏️ Exercise 3: Decision Table
 
 The site applies a 10% discount when:
 - The user is a premium member, **and**
@@ -52,7 +87,7 @@ Build a full decision table (all combinations) and write one test case per colum
 
 ---
 
-## Exercise 4: Bug Report
+## ✏️ Exercise 4: Bug Report
 
 Go to `https://tutorialsninja.com/demo` and intentionally try to break something (e.g. search for an empty string, add 0 quantity, navigate directly to the checkout URL without a cart).
 
@@ -62,7 +97,7 @@ Write a complete bug report using the template from `bug_report.py`. Include ste
 
 ---
 
-## Exercise 5: Automation ROI Decision
+## ✏️ Exercise 5: Automation ROI Decision
 
 For each scenario below, decide whether to automate. Write one sentence explaining the ROI logic.
 
@@ -74,7 +109,7 @@ For each scenario below, decide whether to automate. Write one sentence explaini
 
 ---
 
-## Exercise 6: Exploratory Charter
+## ✏️ Exercise 6: Exploratory Charter
 
 Write one 30-minute exploratory testing charter for either search, cart, or checkout.
 Use this format:

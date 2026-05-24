@@ -1,6 +1,9 @@
 # Session 19 - AI Agents for Testing: Planning, Exploration, and Review
 
-## Learning Objectives
+> 📚 **Lecture** · [session_19_ai_agents_for_testing](.) · [Learning path](../README.md)
+
+
+## 🎯 Learning Objectives
 
 By the end of this session you will be able to:
 
@@ -138,7 +141,7 @@ Use these guardrails when running AI agents for QA:
 
 ---
 
-## Session Completion Checklist
+## ✅ Session Completion Checklist
 
 - [ ] I wrote an input contract for a test-planning agent.
 - [ ] I generated a risk-based coverage inventory for one feature.

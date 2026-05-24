@@ -1,6 +1,9 @@
 # Session 29 - Running Automation With Docker Compose And Grafana
 
-## Learning Objectives
+> 📚 **Lecture** · [session_29_docker_compose_grafana](.) · [Learning path](../README.md)
+
+
+## 🎯 Learning Objectives
 
 By the end of this session you will be able to:
 
@@ -179,7 +182,7 @@ OPEN_ALLURE=false ./scripts/run_compose_tests_with_allure.sh tests/api tests/con
 
 ---
 
-## Session Completion Checklist
+## ✅ Session Completion Checklist
 
 - [ ] I can explain when Docker Compose is better than `docker run`.
 - [ ] I can run `npm run test:compose:report`.

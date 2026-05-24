@@ -1,6 +1,9 @@
 # Session 15 — Exercises
 
-## Exercise 1: Add a New Tool
+> ✏️ **Exercises** · [session_15_mcp_agents](.) · [Lecture notes](lecture.md)
+
+
+## ✏️ Exercise 1: Add a New Tool
 
 The explorer agent in `explorer.py` does not have a `scroll` tool.
 
@@ -11,7 +14,7 @@ The explorer agent in `explorer.py` does not have a `scroll` tool.
 
 ---
 
-## Exercise 2: Improve Tool Descriptions
+## ✏️ Exercise 2: Improve Tool Descriptions
 
 The `snapshot` tool currently has the description "Return the accessibility tree of the current page."
 
@@ -21,7 +24,7 @@ The `snapshot` tool currently has the description "Return the accessibility tree
 
 ---
 
-## Exercise 3: Step Limit Experiment
+## ✏️ Exercise 3: Step Limit Experiment
 
 Set `max_steps=3` in the explorer agent and run it on a goal that requires at least 5 steps.
 
@@ -31,7 +34,7 @@ Set `max_steps=3` in the explorer agent and run it on a goal that requires at le
 
 ---
 
-## Exercise 4: Regression Snapshot Diffing
+## ✏️ Exercise 4: Regression Snapshot Diffing
 
 1. Run the regression agent on the inventory page and save the "before" snapshot.
 2. Manually add a hidden element to the page DOM using browser dev tools (or intercept the response in a fixture and inject HTML).
@@ -40,7 +43,7 @@ Set `max_steps=3` in the explorer agent and run it on a goal that requires at le
 
 ---
 
-## Exercise 5: MCP Server Connection
+## ✏️ Exercise 5: MCP Server Connection
 
 1. Install `@playwright/mcp` and start the MCP server.
 2. Update `test_agent.py` to use the MCP server instead of the custom `execute()` function.
@@ -49,7 +52,7 @@ Set `max_steps=3` in the explorer agent and run it on a goal that requires at le
 
 ---
 
-## Exercise 6: Image Flow Test Planner MCP Agent
+## ✏️ Exercise 6: Image Flow Test Planner MCP Agent
 
 Use `flow_test_planner_mcp.py` to generate a detailed test plan from a series of images that describe a product flow.
 

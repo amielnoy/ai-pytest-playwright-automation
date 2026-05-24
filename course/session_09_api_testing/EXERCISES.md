@@ -1,6 +1,9 @@
 # Session 9 - Exercises
 
-## Exercise 1: Run the API Lecture Demo
+> ✏️ **Exercises** · [session_09_api_testing](.) · [Lecture notes](lecture.md)
+
+
+## ✏️ Exercise 1: Run the API Lecture Demo
 
 Run:
 
@@ -16,7 +19,7 @@ Record:
 
 ---
 
-## Exercise 2: Add a Contract Assertion
+## ✏️ Exercise 2: Add a Contract Assertion
 
 Use `assert_product_contract()` from `lecture.py`.
 
@@ -32,7 +35,7 @@ Then remove one field and assert the helper fails.
 
 ---
 
-## Exercise 3: Design a Negative API Test
+## ✏️ Exercise 3: Design a Negative API Test
 
 Write a test design for:
 
@@ -49,7 +52,7 @@ Include:
 
 ---
 
-## Exercise 4: Refactor Raw Request Logic
+## ✏️ Exercise 4: Refactor Raw Request Logic
 
 Find one production API test that performs repeated setup or repeated parsing.
 
@@ -63,7 +66,7 @@ Explain why that layer is the right place.
 
 ---
 
-## Exercise 5: API Setup For UI
+## ✏️ Exercise 5: API Setup For UI
 
 Explain how `api_cart` supports a UI cart-total test.
 
@@ -76,7 +79,7 @@ Answer:
 
 ---
 
-## Exercise 6: Run Production API Coverage
+## ✏️ Exercise 6: Run Production API Coverage
 
 Run:
 

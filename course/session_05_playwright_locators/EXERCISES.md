@@ -1,6 +1,9 @@
 # Session 5 - Exercises
 
-## Exercise 1: Locator Audit
+> ✏️ **Exercises** · [session_05_playwright_locators](.) · [Lecture notes](lecture.md)
+
+
+## ✏️ Exercise 1: Locator Audit
 
 Pick one file from `pages/` or `tests/web-ui/`.
 
@@ -15,7 +18,7 @@ Write the replacement you would use for each weak locator.
 
 ---
 
-## Exercise 2: Refactor a Raw Selector
+## ✏️ Exercise 2: Refactor a Raw Selector
 
 Find or create one raw selector in a test file.
 
@@ -29,7 +32,7 @@ Run the narrowest relevant test.
 
 ---
 
-## Exercise 3: Replace Positional Selection
+## ✏️ Exercise 3: Replace Positional Selection
 
 Find a place where a test or page object uses `first`, `last`, `nth()`, or an index-based product selection.
 
@@ -44,7 +47,7 @@ Explain why the new locator is less fragile.
 
 ---
 
-## Exercise 4: Test ID Decision
+## ✏️ Exercise 4: Test ID Decision
 
 Choose one element that is hard to locate by role, label, or text.
 
@@ -58,7 +61,7 @@ Write a short proposal for adding a test id:
 
 ---
 
-## Exercise 5: Codegen Locator Review
+## ✏️ Exercise 5: Codegen Locator Review
 
 Use Playwright codegen from Session 21 to generate a short flow.
 

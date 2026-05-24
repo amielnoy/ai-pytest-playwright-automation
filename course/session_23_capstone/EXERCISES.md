@@ -1,6 +1,9 @@
 # Session 23 — Exercises
 
-## Exercise 1: Layer Audit
+> ✏️ **Exercises** · [session_23_capstone](.) · [Lecture notes](lecture.md)
+
+
+## ✏️ Exercise 1: Layer Audit
 
 For each file listed below, identify which of the five architecture layers it belongs to (Tests / Pages / API clients / AI utilities / Fixtures & data). If it belongs to more than one layer, explain the violation and propose a refactor.
 
@@ -13,7 +16,7 @@ For each file listed below, identify which of the five architecture layers it be
 
 ---
 
-## Exercise 2: Write an ADR
+## ✏️ Exercise 2: Write an ADR
 
 Write `docs/adrs/ADR-006-parallel-execution.md` using the format from the lecture (Status / Context / Decision / Consequences).
 
@@ -26,7 +29,7 @@ Your ADR must explain:
 
 ---
 
-## Exercise 3: Pre-Commit Hook Setup
+## ✏️ Exercise 3: Pre-Commit Hook Setup
 
 1. Create `.pre-commit-config.yaml` with hooks for `ruff` (linting) and `ruff-format` (formatting).
 2. Run `pre-commit install`.
@@ -36,13 +39,13 @@ Your ADR must explain:
 
 ---
 
-## Exercise 4: Complete the Capstone Checklist
+## ✏️ Exercise 4: Complete the Capstone Checklist
 
 Work through every item in the Capstone Checklist from `lecture.md`. For each unchecked item, either complete it or write a one-sentence explanation of what is blocking it.
 
 ---
 
-## Exercise 5: Framework Mapping
+## ✏️ Exercise 5: Framework Mapping
 
 Draw (on paper or in a tool) a diagram showing which directory maps to which architecture layer and how a test call flows through the layers at runtime.
 

@@ -1,6 +1,9 @@
 # Session 24 — Claude Code Integration for QA
 
-## Learning Objectives
+> 📚 **Lecture** · [session_24_claude_code](.) · [Learning path](../README.md)
+
+
+## 🎯 Learning Objectives
 
 By the end of this session you will be able to:
 
@@ -160,7 +163,7 @@ Do not pre-approve write operations (file edits, git commits, git push) — thes
 
 ---
 
-## Session Completion Checklist
+## ✅ Session Completion Checklist
 
 - [ ] I ran `/generate-test` for a real feature and the output passes `pytest --collect-only -q`.
 - [ ] I ran `/review-tests` on at least one test file and evaluated each finding.
