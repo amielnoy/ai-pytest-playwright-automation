@@ -1,0 +1,2 @@
+INFO:     Started server process [3147]
+INFO:     Waiting for application startup.

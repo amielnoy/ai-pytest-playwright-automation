@@ -1,1 +1,1 @@
-{"id":"63f0c6faeaaa6c85845bddfbb5dc8bed","fullName":"tests.api.test_chat_dlp.TestChatDLP#test_credit_card_not_reflected","name":"Credit card number submitted in prompt is not reflected in response","status":"passed","testResultsByEnv":{"default":"757230f8a975a48b7da60f1a806dbc06"}}
+{"id":"63f0c6faeaaa6c85845bddfbb5dc8bed","fullName":"tests.api.test_chat_dlp.TestChatDLP#test_credit_card_not_reflected","name":"Credit card number submitted in prompt is not reflected in response","status":"passed","testResultsByEnv":{"default":"07d865ccbd755519e5aa9bf22f15ac36"}}

@@ -1,1 +1,1 @@
-{"id":"46659f01dffc3fe79dfd5a0e70ecf3b8","fullName":"tests.api.test_pentest_data_driven.TestFileExposureInline#test_sensitive_path_blocked_inline","name":"Sensitive path [/config.php.bak] is blocked – inline","status":"passed","testResultsByEnv":{"default":"abc47a69f695d805d72d2a5e427d8bb3"}}
+{"id":"46659f01dffc3fe79dfd5a0e70ecf3b8","fullName":"tests.api.test_pentest_data_driven.TestFileExposureInline#test_sensitive_path_blocked_inline","name":"Sensitive path [/.git/] is blocked – inline","status":"passed","testResultsByEnv":{"default":"4a8c30a836b087c024af5dda6258f9e7"}}

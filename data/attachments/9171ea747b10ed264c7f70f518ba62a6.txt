@@ -1,3 +1,0 @@
-INFO:     127.0.0.1:51248 - "POST /chat HTTP/1.1" 200 OK
-INFO:     127.0.0.1:51262 - "POST /chat HTTP/1.1" 200 OK
-INFO:     127.0.0.1:51270 - "POST /chat HTTP/1.1" 200 OK
