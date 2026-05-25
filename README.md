@@ -146,10 +146,14 @@ npm run test:compose:report
 Useful URLs after the Compose script starts the support containers:
 
 ```text
-Grafana:    http://localhost:3000/d/automation/automation-runs
-Prometheus: http://localhost:9090
-Server:     http://localhost:8000/docs
-Allure:     opened automatically from docker-artifacts/allure-report
+Grafana — Test Runs:      http://localhost:3000/d/automation/automation-runs
+Grafana — Infrastructure: http://localhost:3000/d/infra-network/infrastructure-network
+Prometheus:               http://localhost:9090
+Swagger UI:               http://localhost:8090
+cAdvisor:                 http://localhost:8081
+node-exporter:            http://localhost:9100/metrics
+Server API docs:          http://localhost:8000/docs
+Allure:                   opened automatically from docker-artifacts/allure-report
 ```
 
 Pass pytest arguments after the script name:
@@ -282,6 +286,40 @@ For live report updates while rerunning tests:
 
 ```bash
 npm run allure:watch
+```
+
+## Monitoring
+
+The Compose stack includes a full observability layer:
+
+| Service | URL | Purpose |
+| --- | --- | --- |
+| Grafana | <http://localhost:3000> | Dashboards (login: admin / admin) |
+| Prometheus | <http://localhost:9090> | Metrics storage and query |
+| Push Gateway | <http://localhost:9091> | Receives test run metrics |
+| cAdvisor | <http://localhost:8081> | Container CPU / memory / network per service |
+| node-exporter | <http://localhost:9100> | Host CPU / memory / disk / network |
+| Swagger UI | <http://localhost:8090> | Full API reference (`docs/openapi.yaml`) |
+
+**Grafana dashboards** (provisioned automatically from `monitoring/grafana/dashboards/`):
+
+- **Automation Runs** — test pass/fail/flaky counters, DB health, service uptime
+- **Infrastructure & Network** — container network I/O, per-service CPU/memory, HTTP request rate, P95 latency, error rate, host metrics
+
+HTTP metrics are collected automatically from the FastAPI server via `prometheus-fastapi-instrumentator` and appear on the Infrastructure dashboard under the *HTTP API Performance* row.
+
+To start only the monitoring stack (without running tests):
+
+```bash
+docker compose -f docker-compose.automation.yml up -d \
+  prometheus grafana pushgateway cadvisor node-exporter swagger-ui
+```
+
+To open Swagger UI standalone:
+
+```bash
+npm run swagger:up
+npm run swagger:open
 ```
 
 ## FastAPI Automation Service

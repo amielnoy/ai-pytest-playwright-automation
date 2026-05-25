@@ -17,6 +17,7 @@ from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import HTMLResponse, Response
 from fastapi.staticfiles import StaticFiles
 from prometheus_client import CONTENT_TYPE_LATEST, generate_latest
+from prometheus_fastapi_instrumentator import Instrumentator
 from pydantic import BaseModel, Field
 
 from services.api.search_service import SearchService
@@ -193,6 +194,7 @@ def create_app() -> FastAPI:
         StaticFiles(directory=ALLURE_REPORT_DIR, html=True, check_dir=False),
         name="allure-report",
     )
+    Instrumentator().instrument(app)
 
     @app.get("/architecture", response_class=HTMLResponse)
     def architecture_doc() -> str:

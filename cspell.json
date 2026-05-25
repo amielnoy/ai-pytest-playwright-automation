@@ -11,7 +11,8 @@
     "numprocesses", "hookwrapper", "tryfirst", "longrepr",
     "funcargs", "teardowns", "makereport",
     "fastapi", "uvicorn",
-    "cadvisor", "nodeexporter", "procfs", "sysfs", "diskstats", "netdev", "meminfo"
+    "cadvisor", "nodeexporter", "procfs", "sysfs", "diskstats", "netdev", "meminfo",
+    "pushgateway", "instrumentator"
   ],
   "ignorePaths": [
     "architecture.html",

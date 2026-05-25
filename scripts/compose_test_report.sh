@@ -71,8 +71,10 @@ ok "Directories ready  (history: ./${HISTORY_DIR_REL}/)"
 # ── 2. Start support services ─────────────────────────────────────────────────
 step "Starting support services (db, automation-server, monitoring)..."
 docker compose -f "${COMPOSE_FILE}" up -d --build \
-  db automation-server postgres-exporter pushgateway prometheus grafana
-ok "Services started — Grafana: http://localhost:3000 | Prometheus: http://localhost:9090"
+  db automation-server postgres-exporter pushgateway prometheus grafana swagger-ui \
+  cadvisor node-exporter
+docker compose -f "${COMPOSE_FILE}" restart prometheus grafana
+ok "Services started — Grafana: http://localhost:3000 | Prometheus: http://localhost:9090 | Swagger: http://localhost:8090"
 
 # ── 3. Run tests ──────────────────────────────────────────────────────────────
 step "Running tests inside Docker Compose (automation-tests)..."
@@ -253,7 +255,9 @@ env_lines = [
     f"Allure_Report=http://localhost:{allure_port}",
     f"Architecture_Docs=http://localhost:{allure_port}/architecture.html",
     f"Grafana_Dashboard=http://localhost:3000/d/automation/automation-runs",
+    f"Grafana_Infrastructure=http://localhost:3000/d/infra-network/infrastructure-network",
     f"Prometheus=http://localhost:9090",
+    f"Swagger_UI=http://localhost:8090",
     f"Run_Label={run_label}",
     f"Total_Tests={total}",
     f"Passed={counts.get('passed', 0)}",
@@ -273,7 +277,9 @@ lines += [f"\nTotal: {total}", "",
           f"Allure Report  → http://localhost:{allure_port}",
           f"Architecture   → http://localhost:{allure_port}/architecture.html",
           f"Grafana        → http://localhost:3000/d/automation/automation-runs",
-          f"Prometheus     → http://localhost:9090"]
+          f"Infrastructure → http://localhost:3000/d/infra-network/infrastructure-network",
+          f"Prometheus     → http://localhost:9090",
+          f"Swagger UI     → http://localhost:8090"]
 txt_src = f"{entry_uuid}-txt-attachment.txt"
 (merged_dir / txt_src).write_text("\n".join(lines), encoding="utf-8")
 
@@ -287,10 +293,12 @@ steps = [
 ]
 
 links = [
-    {"name": "Allure Report",      "url": f"http://localhost:{allure_port}",                              "type": "link"},
-    {"name": "Architecture Docs",  "url": f"http://localhost:{allure_port}/architecture.html",            "type": "link"},
-    {"name": "Grafana Dashboard",  "url": "http://localhost:3000/d/automation/automation-runs",           "type": "link"},
-    {"name": "Prometheus",         "url": "http://localhost:9090",                                        "type": "link"},
+    {"name": "Allure Report",      "url": f"http://localhost:{allure_port}",                                              "type": "link"},
+    {"name": "Architecture Docs",  "url": f"http://localhost:{allure_port}/architecture.html",                            "type": "link"},
+    {"name": "Grafana Dashboard",  "url": "http://localhost:3000/d/automation/automation-runs",                           "type": "link"},
+    {"name": "Infrastructure",     "url": "http://localhost:3000/d/infra-network/infrastructure-network",                 "type": "link"},
+    {"name": "Prometheus",         "url": "http://localhost:9090",                                                        "type": "link"},
+    {"name": "Swagger UI",         "url": "http://localhost:8090",                                                        "type": "link"},
 ]
 
 result = {
@@ -329,10 +337,12 @@ merged_dir  = Path(sys.argv[1])
 allure_port = sys.argv[2]
 
 server_links = [
-    {"name": "Allure Report",     "url": f"http://localhost:{allure_port}",                           "type": "link"},
-    {"name": "Architecture",      "url": f"http://localhost:{allure_port}/architecture.html",         "type": "link"},
-    {"name": "Grafana",           "url": "http://localhost:3000/d/automation/automation-runs",        "type": "link"},
-    {"name": "Prometheus",        "url": "http://localhost:9090",                                     "type": "link"},
+    {"name": "Allure Report",     "url": f"http://localhost:{allure_port}",                                          "type": "link"},
+    {"name": "Architecture",      "url": f"http://localhost:{allure_port}/architecture.html",                        "type": "link"},
+    {"name": "Grafana",           "url": "http://localhost:3000/d/automation/automation-runs",                       "type": "link"},
+    {"name": "Infrastructure",    "url": "http://localhost:3000/d/infra-network/infrastructure-network",             "type": "link"},
+    {"name": "Prometheus",        "url": "http://localhost:9090",                                                    "type": "link"},
+    {"name": "Swagger UI",        "url": "http://localhost:8090",                                                    "type": "link"},
 ]
 
 patched = 0
@@ -424,8 +434,10 @@ echo ""
 echo -e "  ${CYAN}Allure report:${RESET}    http://localhost:${ALLURE_PORT}"
 echo -e "  ${CYAN}Architecture:${RESET}     http://localhost:${ALLURE_PORT}/architecture.html"
 echo -e "  ${CYAN}History depth:${RESET}    ${KEPT_RUNS} run(s) in archive (max ${MAX_RUNS})"
-echo -e "  ${CYAN}Grafana:${RESET}          http://localhost:3000"
+echo -e "  ${CYAN}Grafana:${RESET}          http://localhost:3000/d/automation/automation-runs"
+echo -e "  ${CYAN}Infrastructure:${RESET}   http://localhost:3000/d/infra-network/infrastructure-network"
 echo -e "  ${CYAN}Prometheus:${RESET}       http://localhost:9090"
+echo -e "  ${CYAN}Swagger UI:${RESET}       http://localhost:8090"
 echo -e "${BOLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}"
 echo ""
 

@@ -55,6 +55,26 @@ npm run allure:generate
 npm run allure:open
 ```
 
+**Run full Compose stack (tests + monitoring + report):**
+```bash
+npm run test:compose:report
+```
+
+**Swagger UI (API reference):**
+```bash
+npm run swagger:up     # start container on http://localhost:8090
+npm run swagger:open   # open in browser
+```
+
+**Monitoring URLs (after Compose stack is up):**
+```text
+Grafana — Test Runs:      http://localhost:3000/d/automation/automation-runs
+Grafana — Infrastructure: http://localhost:3000/d/infra-network/infrastructure-network
+Prometheus:               http://localhost:9090
+Swagger UI:               http://localhost:8090
+cAdvisor:                 http://localhost:8081
+```
+
 ## Slash Commands
 
 Project-specific slash commands are in `.claude/commands/`. Invoke them in Claude Code with `/command-name [arguments]`.
@@ -118,6 +138,9 @@ Use these repo-specific skills when changing code:
 - If Docker is changed, verify with `docker build` and a containerized `pytest` run.
 - Keep generated outputs out of git: `allure-results/`, `allure-report/`, `docker-artifacts/`, caches, and secrets.
 - Prefer pinned dependency versions for reproducible CI.
+- When adding new Compose services, update: `docker-compose.automation.yml`, `monitoring/prometheus.yml` (scrape targets), both compose scripts (`compose_test_report.sh` and `run_compose_tests_with_allure.sh`), and `README.md`.
+- The OpenAPI spec lives in `docs/openapi.yaml` and is served by the `swagger-ui` Compose service on port 8090. Update it when adding or changing API endpoints.
+- HTTP metrics (request rate, latency, error rate) are auto-collected via `prometheus-fastapi-instrumentator` in `server/app.py` and visualised in the *Infrastructure & Network* Grafana dashboard.
 
 ### Review Skill
 
