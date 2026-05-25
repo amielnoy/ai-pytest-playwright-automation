@@ -72,7 +72,7 @@ Grafana — Test Runs:      http://localhost:3000/d/automation/automation-runs
 Grafana — Infrastructure: http://localhost:3000/d/infra-network/infrastructure-network
 Prometheus:               http://localhost:9090
 Swagger UI:               http://localhost:8090
-cAdvisor:                 http://localhost:8081
+cAdvisor:                 http://localhost:8082
 ```
 
 ## Slash Commands
