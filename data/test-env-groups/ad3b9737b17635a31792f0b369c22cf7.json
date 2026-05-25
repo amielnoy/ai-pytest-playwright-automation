@@ -1,1 +1,1 @@
-{"id":"ad3b9737b17635a31792f0b369c22cf7","fullName":"tests.unit.test_fastapi_app#test_chat_returns_mock_response_without_api_key","name":"test_chat_returns_mock_response_without_api_key","status":"passed","testResultsByEnv":{"default":"ff22f56bb380949109258eef5d99de31"}}
+{"id":"ad3b9737b17635a31792f0b369c22cf7","fullName":"tests.unit.test_fastapi_app#test_chat_returns_mock_response_without_api_key","name":"test_chat_returns_mock_response_without_api_key","status":"passed","testResultsByEnv":{"default":"140a51de83052594d69cb2c528a911b3"}}

@@ -1,1 +1,1 @@
-{"id":"5278ba0e032295ad7b65f060291a32f5","fullName":"tests.api.test_security_api.TestCartSecurity#test_cart_add_with_xss_product_id","name":"Cart add with XSS product_id is handled safely","status":"passed","testResultsByEnv":{"default":"45cd170ab75069a02c2994d72b9a7a50"}}
+{"id":"5278ba0e032295ad7b65f060291a32f5","fullName":"tests.api.test_security_api.TestCartSecurity#test_cart_add_with_xss_product_id","name":"Cart add with XSS product_id is handled safely","status":"passed","testResultsByEnv":{"default":"29cf9d70c30e9483f6960968f234aa57"}}

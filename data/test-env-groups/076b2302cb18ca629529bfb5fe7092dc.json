@@ -1,1 +1,1 @@
-{"id":"076b2302cb18ca629529bfb5fe7092dc","fullName":"tests.api.test_api_data_driven.TestSearchApiInline#test_search_returns_expected_product_inline","name":"Search [Samsung] returns 200 and finds [Samsung]","status":"passed","testResultsByEnv":{"default":"72bc1385f4e1e14a62a68c47a3e623a4"}}
+{"id":"076b2302cb18ca629529bfb5fe7092dc","fullName":"tests.api.test_api_data_driven.TestSearchApiInline#test_search_returns_expected_product_inline","name":"Search [iPhone] returns 200 and finds [iPhone]","status":"passed","testResultsByEnv":{"default":"3b9f17c84c72df17a14b985ebe3b5091"}}
