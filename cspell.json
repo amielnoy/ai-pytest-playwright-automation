@@ -10,7 +10,8 @@
     "logreport", "logstart", "modifyitems", "workerinput",
     "numprocesses", "hookwrapper", "tryfirst", "longrepr",
     "funcargs", "teardowns", "makereport",
-    "fastapi", "uvicorn"
+    "fastapi", "uvicorn",
+    "cadvisor", "nodeexporter", "procfs", "sysfs", "diskstats", "netdev", "meminfo"
   ],
   "ignorePaths": [
     "architecture.html",
