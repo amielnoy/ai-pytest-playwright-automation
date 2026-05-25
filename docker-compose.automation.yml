@@ -99,6 +99,47 @@ services:
     depends_on:
       - prometheus
 
+  swagger-ui:
+    image: swaggerapi/swagger-ui:latest
+    ports:
+      - "8090:8080"
+    environment:
+      SWAGGER_JSON: /spec/openapi.yaml
+      PORT: 8080
+    volumes:
+      - ./docs:/spec:ro
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    ports:
+      - "8081:8080"
+    volumes:
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker:/var/lib/docker:ro
+    privileged: true
+    command:
+      - --housekeeping_interval=10s
+      - --docker_only=true
+      - --disable_metrics=disk,diskIO,tcp,udp,percpu,sched,process
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    ports:
+      - "9100:9100"
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+    command:
+      - --path.procfs=/host/proc
+      - --path.sysfs=/host/sys
+      - --collector.disable-defaults
+      - --collector.cpu
+      - --collector.meminfo
+      - --collector.netdev
+      - --collector.diskstats
+      - --collector.filesystem
+
 volumes:
   automation-db-data:
   prometheus-data:
