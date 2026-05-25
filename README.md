@@ -150,7 +150,7 @@ Grafana — Test Runs:      http://localhost:3000/d/automation/automation-runs
 Grafana — Infrastructure: http://localhost:3000/d/infra-network/infrastructure-network
 Prometheus:               http://localhost:9090
 Swagger UI:               http://localhost:8090
-cAdvisor:                 http://localhost:8081
+cAdvisor:                 http://localhost:8082
 node-exporter:            http://localhost:9100/metrics
 Server API docs:          http://localhost:8000/docs
 Allure:                   opened automatically from docker-artifacts/allure-report
@@ -297,7 +297,7 @@ The Compose stack includes a full observability layer:
 | Grafana | <http://localhost:3000> | Dashboards (login: admin / admin) |
 | Prometheus | <http://localhost:9090> | Metrics storage and query |
 | Push Gateway | <http://localhost:9091> | Receives test run metrics |
-| cAdvisor | <http://localhost:8081> | Container CPU / memory / network per service |
+| cAdvisor | <http://localhost:8082> | Container CPU / memory / network per service |
 | node-exporter | <http://localhost:9100> | Host CPU / memory / disk / network |
 | Swagger UI | <http://localhost:8090> | Full API reference (`docs/openapi.yaml`) |
 

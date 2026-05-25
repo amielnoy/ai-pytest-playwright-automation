@@ -16,7 +16,7 @@
     {
       "id": 201, "type": "timeseries",
       "title": "Network Receive Rate (bytes/s)",
-      "description": "Bytes received per second per container",
+      "description": "Bytes received per second per host network interface",
       "datasource": { "type": "prometheus", "uid": "prometheus" },
       "gridPos": { "h": 8, "w": 12, "x": 0, "y": 2 },
       "fieldConfig": {
@@ -27,8 +27,8 @@
       },
       "options": { "legend": { "displayMode": "table", "placement": "bottom", "calcs": ["mean", "max"] } },
       "targets": [{
-        "expr": "rate(container_network_receive_bytes_total{container_label_com_docker_compose_service!=\"\"}[1m])",
-        "legendFormat": "{{container_label_com_docker_compose_service}} rx",
+        "expr": "rate(node_network_receive_bytes_total{device!~\"lo|veth.*\"}[1m])",
+        "legendFormat": "{{device}} rx",
         "refId": "A"
       }]
     },
@@ -36,7 +36,7 @@
     {
       "id": 202, "type": "timeseries",
       "title": "Network Transmit Rate (bytes/s)",
-      "description": "Bytes transmitted per second per container",
+      "description": "Bytes transmitted per second per host network interface",
       "datasource": { "type": "prometheus", "uid": "prometheus" },
       "gridPos": { "h": 8, "w": 12, "x": 12, "y": 2 },
       "fieldConfig": {
@@ -47,8 +47,8 @@
       },
       "options": { "legend": { "displayMode": "table", "placement": "bottom", "calcs": ["mean", "max"] } },
       "targets": [{
-        "expr": "rate(container_network_transmit_bytes_total{container_label_com_docker_compose_service!=\"\"}[1m])",
-        "legendFormat": "{{container_label_com_docker_compose_service}} tx",
+        "expr": "rate(node_network_transmit_bytes_total{device!~\"lo|veth.*\"}[1m])",
+        "legendFormat": "{{device}} tx",
         "refId": "A"
       }]
     },
@@ -56,7 +56,7 @@
     {
       "id": 203, "type": "timeseries",
       "title": "Network Receive Errors (packets/s)",
-      "description": "Packets dropped or errored on receive per container",
+      "description": "Errored and dropped receive packets per host interface",
       "datasource": { "type": "prometheus", "uid": "prometheus" },
       "gridPos": { "h": 8, "w": 12, "x": 0, "y": 10 },
       "fieldConfig": {
@@ -69,13 +69,13 @@
       "options": { "legend": { "displayMode": "table", "placement": "bottom", "calcs": ["mean", "max"] } },
       "targets": [
         {
-          "expr": "rate(container_network_receive_errors_total{container_label_com_docker_compose_service!=\"\"}[1m])",
-          "legendFormat": "{{container_label_com_docker_compose_service}} rx-err",
+          "expr": "rate(node_network_receive_errs_total{device!~\"lo|veth.*\"}[1m])",
+          "legendFormat": "{{device}} rx-err",
           "refId": "A"
         },
         {
-          "expr": "rate(container_network_receive_packets_dropped_total{container_label_com_docker_compose_service!=\"\"}[1m])",
-          "legendFormat": "{{container_label_com_docker_compose_service}} rx-drop",
+          "expr": "rate(node_network_receive_drop_total{device!~\"lo|veth.*\"}[1m])",
+          "legendFormat": "{{device}} rx-drop",
           "refId": "B"
         }
       ]
@@ -84,7 +84,7 @@
     {
       "id": 204, "type": "timeseries",
       "title": "Network Transmit Errors (packets/s)",
-      "description": "Packets dropped or errored on transmit per container",
+      "description": "Errored and dropped transmit packets per host interface",
       "datasource": { "type": "prometheus", "uid": "prometheus" },
       "gridPos": { "h": 8, "w": 12, "x": 12, "y": 10 },
       "fieldConfig": {
@@ -97,46 +97,48 @@
       "options": { "legend": { "displayMode": "table", "placement": "bottom", "calcs": ["mean", "max"] } },
       "targets": [
         {
-          "expr": "rate(container_network_transmit_errors_total{container_label_com_docker_compose_service!=\"\"}[1m])",
-          "legendFormat": "{{container_label_com_docker_compose_service}} tx-err",
+          "expr": "rate(node_network_transmit_errs_total{device!~\"lo|veth.*\"}[1m])",
+          "legendFormat": "{{device}} tx-err",
           "refId": "A"
         },
         {
-          "expr": "rate(container_network_transmit_packets_dropped_total{container_label_com_docker_compose_service!=\"\"}[1m])",
-          "legendFormat": "{{container_label_com_docker_compose_service}} tx-drop",
+          "expr": "rate(node_network_transmit_drop_total{device!~\"lo|veth.*\"}[1m])",
+          "legendFormat": "{{device}} tx-drop",
           "refId": "B"
         }
       ]
     },
 
-    { "id": 210, "type": "row", "title": "🖥️ Container Resources", "collapsed": false,
+    { "id": 210, "type": "row", "title": "🖥️ Host Resources (Docker VM)", "collapsed": false,
       "gridPos": { "h": 2, "w": 24, "x": 0, "y": 18 } },
 
     {
       "id": 211, "type": "timeseries",
-      "title": "CPU Usage per Container (%)",
-      "description": "CPU utilisation rate per container",
+      "title": "Host CPU Usage by Mode (%)",
+      "description": "CPU time split by mode across all cores",
       "datasource": { "type": "prometheus", "uid": "prometheus" },
       "gridPos": { "h": 8, "w": 12, "x": 0, "y": 20 },
       "fieldConfig": {
         "defaults": {
           "unit": "percentunit",
-          "min": 0,
+          "min": 0, "max": 1,
           "custom": { "lineWidth": 2, "fillOpacity": 10, "spanNulls": true }
         }
       },
       "options": { "legend": { "displayMode": "table", "placement": "bottom", "calcs": ["mean", "max"] } },
-      "targets": [{
-        "expr": "rate(container_cpu_usage_seconds_total{container_label_com_docker_compose_service!=\"\"}[1m])",
-        "legendFormat": "{{container_label_com_docker_compose_service}}",
-        "refId": "A"
-      }]
+      "targets": [
+        {
+          "expr": "avg by(mode)(rate(node_cpu_seconds_total{mode!=\"idle\"}[1m]))",
+          "legendFormat": "{{mode}}",
+          "refId": "A"
+        }
+      ]
     },
 
     {
       "id": 212, "type": "timeseries",
-      "title": "Memory Usage per Container",
-      "description": "Working set memory per container",
+      "title": "Host Memory Usage",
+      "description": "Total, used, and available memory of the Docker VM",
       "datasource": { "type": "prometheus", "uid": "prometheus" },
       "gridPos": { "h": 8, "w": 12, "x": 12, "y": 20 },
       "fieldConfig": {
@@ -146,11 +148,18 @@
         }
       },
       "options": { "legend": { "displayMode": "table", "placement": "bottom", "calcs": ["mean", "max"] } },
-      "targets": [{
-        "expr": "container_memory_working_set_bytes{container_label_com_docker_compose_service!=\"\"}",
-        "legendFormat": "{{container_label_com_docker_compose_service}}",
-        "refId": "A"
-      }]
+      "targets": [
+        {
+          "expr": "node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes",
+          "legendFormat": "used",
+          "refId": "A"
+        },
+        {
+          "expr": "node_memory_MemAvailable_bytes",
+          "legendFormat": "available",
+          "refId": "B"
+        }
+      ]
     },
 
     {

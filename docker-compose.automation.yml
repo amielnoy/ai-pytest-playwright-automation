@@ -110,13 +110,16 @@ services:
       - ./docs:/spec:ro
 
   cadvisor:
-    image: gcr.io/cadvisor/cadvisor:latest
+    image: gcr.io/cadvisor/cadvisor:v0.47.2
     ports:
       - "8082:8080"
     volumes:
+      - /:/rootfs:ro
       - /var/run:/var/run:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
       - /sys:/sys:ro
       - /var/lib/docker:/var/lib/docker:ro
+      - /dev/disk:/dev/disk:ro
     privileged: true
     command:
       - --housekeeping_interval=10s
