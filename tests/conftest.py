@@ -1,26 +1,21 @@
-import pytest
+"""tests/conftest.py — shared constants and fixture registration.
 
-from flows.cart_flow import CartFlow
-from flows.login_flow import LoginFlow
-from flows.registration_flow import RegistrationFlow
-from flows.search_flow import SearchFlow
-from pages.cart_page import CartPage
-from pages.home_page import HomePage
-from pages.login_page import LoginPage
-from pages.product_detail_page import ProductDetailPage
-from pages.register_page import RegisterPage
-from pages.search_results_page import SearchResultsPage
-from services.api.account_service import AccountService
-from services.api.cart_service import CartService
-from services.api.chat_service import ChatService
-from services.api.public_service import EndpointCase, PublicService
-from services.api.search_service import SearchCase, SearchService
-from services.rest_client import RestClient
-from tests.page_records import CartFlowPages, CartPages, RegistrationPages, SearchPages
-from utils.api_client import build_session, create_cart
-from tests.conftest_server import ensure_server_running, shutdown_server
-from utils.data_loader import get_config, get_test_data
+All fixtures live in tests/fixtures/; pytest discovers them via pytest_plugins.
+"""
+from services.api.public_service import EndpointCase
+from services.api.search_service import SearchCase
 
+pytest_plugins = [
+    "tests.fixtures.services",
+    "tests.fixtures.pages",
+    "tests.fixtures.flows",
+    "tests.fixtures.data",
+    "tests.fixtures.chat",
+]
+
+# ---------------------------------------------------------------------------
+# Shared test-case maps (used by contract tests and data-driven API tests)
+# ---------------------------------------------------------------------------
 
 PUBLIC_ENDPOINT_MAP = {
     "home": EndpointCase(path="", required_text="Your Store"),
@@ -54,200 +49,3 @@ SEARCH_QUERY_MAP = {
         min_cards=1,
     ),
 }
-
-
-# ---------------------------------------------------------------------------
-# Infrastructure
-# ---------------------------------------------------------------------------
-
-@pytest.fixture
-def api_base_url() -> str:
-    return get_config()["base_url"]
-
-
-@pytest.fixture
-def session(api_base_url: str) -> RestClient:
-    """Fresh HTTP session per test: own OCSESSID, no shared cart state."""
-    client = build_session()
-    client.get(api_base_url)
-    yield client
-    client.close()
-
-
-# ---------------------------------------------------------------------------
-# API service fixtures
-# ---------------------------------------------------------------------------
-
-@pytest.fixture
-def public_service(session: RestClient, api_base_url: str) -> PublicService:
-    return PublicService(session, api_base_url)
-
-
-@pytest.fixture
-def search_service(session: RestClient, api_base_url: str) -> SearchService:
-    return SearchService(session, api_base_url)
-
-
-@pytest.fixture
-def cart_service(session: RestClient, api_base_url: str) -> CartService:
-    return CartService(session, api_base_url)
-
-
-@pytest.fixture
-def account_service(session: RestClient, api_base_url: str) -> AccountService:
-    return AccountService(session, api_base_url)
-
-
-# ---------------------------------------------------------------------------
-# Page object fixtures
-# ---------------------------------------------------------------------------
-
-@pytest.fixture
-def home_page(page, app_url: str) -> HomePage:
-    return HomePage(page, app_url)
-
-
-@pytest.fixture
-def login_page(page, app_url: str) -> LoginPage:
-    return LoginPage(page, app_url)
-
-
-@pytest.fixture
-def register_page(page, app_url: str) -> RegisterPage:
-    return RegisterPage(page, app_url)
-
-
-@pytest.fixture
-def search_results_page(page, app_url: str) -> SearchResultsPage:
-    return SearchResultsPage(page, app_url)
-
-
-@pytest.fixture
-def cart_page(page, app_url: str) -> CartPage:
-    return CartPage(page, app_url)
-
-
-@pytest.fixture
-def product_detail_page(page, app_url: str) -> ProductDetailPage:
-    return ProductDetailPage(page, app_url)
-
-
-@pytest.fixture
-def search_pages(search_results_page: SearchResultsPage) -> SearchPages:
-    return SearchPages(search_results=search_results_page)
-
-
-@pytest.fixture
-def cart_flow_pages(
-    search_results_page: SearchResultsPage, cart_page: CartPage
-) -> CartFlowPages:
-    return CartFlowPages(search_results=search_results_page, cart=cart_page)
-
-
-@pytest.fixture
-def cart_pages(cart_page: CartPage) -> CartPages:
-    return CartPages(cart=cart_page)
-
-
-@pytest.fixture
-def registration_pages(
-    home_page: HomePage, register_page: RegisterPage
-) -> RegistrationPages:
-    return RegistrationPages(home=home_page, register=register_page)
-
-
-# ---------------------------------------------------------------------------
-# Flow fixtures
-# ---------------------------------------------------------------------------
-
-@pytest.fixture
-def login_flow(home_page: HomePage, login_page: LoginPage) -> LoginFlow:
-    return LoginFlow(home_page, login_page)
-
-
-@pytest.fixture
-def registration_flow(home_page: HomePage, register_page: RegisterPage) -> RegistrationFlow:
-    return RegistrationFlow(home_page, register_page)
-
-
-@pytest.fixture
-def search_flow(home_page: HomePage, search_results_page: SearchResultsPage) -> SearchFlow:
-    return SearchFlow(home_page, search_results_page)
-
-
-@pytest.fixture
-def cart_flow(search_results_page: SearchResultsPage, cart_page: CartPage) -> CartFlow:
-    return CartFlow(search_results_page, cart_page)
-
-
-# ---------------------------------------------------------------------------
-# Data fixtures
-# ---------------------------------------------------------------------------
-
-@pytest.fixture
-def registration_data() -> dict:
-    """Registration fields from test_data.json (secrets.json merges when present)."""
-    data = get_test_data("registration")
-    required_fields = (
-        "first_name",
-        "last_name",
-        "telephone",
-        "email",
-        "password",
-        "confirm_password",
-    )
-    missing = [field for field in required_fields if not data.get(field)]
-    assert not missing, f"Registration test data missing required fields: {missing}"
-    return data
-
-
-@pytest.fixture
-def api_cart(app_url: str):
-    """
-    Populate a cart via the OpenCart REST API (no browser) and return the
-    server session cookie plus the products that were added.
-
-    Each call gets its own OCSESSID so parallel workers never share
-    server-side cart state.  The caller must inject the cookie into the
-    Playwright BrowserContext *before* navigating to the cart page:
-
-        context.add_cookies([{"name": "OCSESSID", "value": ocsessid, "url": app_url}])
-    """
-    data = get_test_data()
-    search = data["search"]
-    # create_cart raises ValueError when no products match — no need to assert.
-    ocsessid, products = create_cart(
-        base_url=app_url,
-        query=search["query"],
-        max_price=search["max_price"],
-        limit=search["limit"],
-    )
-    return ocsessid, products, data["cart"]["max_total"], search["max_price"]
-
-
-# ---------------------------------------------------------------------------
-# AI chat fixtures
-# ---------------------------------------------------------------------------
-
-_SERVER_URL = get_config().get("server_url", "http://127.0.0.1:8000")
-
-
-@pytest.fixture(scope="session")
-def _local_api_server() -> str:
-    """Ensure FastAPI is up for AI tests; uses mock /chat when no API key is set."""
-    base_url = ensure_server_running(_SERVER_URL)
-    yield base_url
-    shutdown_server()
-
-
-@pytest.fixture
-def server_url(_local_api_server: str) -> str:
-    return _local_api_server
-
-
-@pytest.fixture
-def chat_service(server_url: str) -> ChatService:
-    """Client for the local FastAPI /chat endpoint (mocked when ANTHROPIC_API_KEY is unset)."""
-    client = RestClient(timeout=60)
-    yield ChatService(client, server_url)
-    client.close()
