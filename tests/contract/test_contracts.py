@@ -9,7 +9,7 @@ from services.api.http_response_constants import HTTP_OK
 from services.api.public_service import EndpointCase, PublicService
 from services.api.search_service import SearchCase, SearchService
 from tests.conftest import PUBLIC_ENDPOINT_MAP, SEARCH_QUERY_MAP
-from utils.data_loader import get_test_data
+from utils.factories import make_search
 
 
 @allure.feature("Contract Tests")
@@ -195,10 +195,10 @@ class TestPriceContract:
     def test_cart_total_matches_item_sum(
         self, search_service: SearchService, cart_service: CartService
     ):
-        data = get_test_data("search")
+        data = make_search(query="MacBook")
 
-        with allure.step(f"Find first product ID for {data['query']}"):
-            pid = search_service.first_product_id(data["query"])
+        with allure.step(f"Find first product ID for {data.query}"):
+            pid = search_service.first_product_id(data.query)
 
         with allure.step(f"POST product_id={pid} to cart"):
             add_resp = cart_service.add_product(pid)

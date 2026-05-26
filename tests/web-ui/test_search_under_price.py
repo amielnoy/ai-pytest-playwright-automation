@@ -2,7 +2,7 @@ import allure
 import pytest
 
 from tests.page_records import SearchPages
-from utils.data_loader import get_test_data
+from utils.factories import SearchData
 
 
 @allure.feature("Search")
@@ -13,15 +13,16 @@ class TestSearchUnderPrice:
     @allure.title("searchItemsByNameUnderPrice returns items at or below max_price")
     @allure.severity(allure.severity_level.CRITICAL)
     @allure.testcase("https://your-jira.atlassian.net/browse/TN-401", "TN-401")
-    def test_search_items_under_price(self, search_pages: SearchPages):
-        data = get_test_data("search")
-        query = data["query"]
-        max_price = data["max_price"]
-        limit = data["limit"]
-
-        with allure.step(f"Search '{query}' and filter items under ${max_price}"):
+    def test_search_items_under_price(
+        self, search_pages: SearchPages, search_data: SearchData
+    ):
+        with allure.step(
+            f"Search '{search_data.query}' and filter items under ${search_data.max_price}"
+        ):
             names = search_pages.search_results.search_items_by_name_under_price(
-                query=query, max_price=max_price, limit=limit
+                query=search_data.query,
+                max_price=search_data.max_price,
+                limit=search_data.limit,
             )
 
         allure.attach(
@@ -31,8 +32,8 @@ class TestSearchUnderPrice:
         )
 
         with allure.step("Verify result count does not exceed the limit"):
-            assert len(names) <= limit, (
-                f"Expected at most {limit} results, got {len(names)}"
+            assert len(names) <= search_data.limit, (
+                f"Expected at most {search_data.limit} results, got {len(names)}"
             )
 
         with allure.step("Verify all returned names are non-empty strings"):

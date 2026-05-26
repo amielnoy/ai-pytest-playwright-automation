@@ -6,7 +6,7 @@ from pages.home_page import HomePage
 from pages.login_page import LoginPage
 from pages.product_detail_page import ProductDetailPage
 from pages.search_results_page import SearchResultsPage
-from utils.data_loader import get_test_data
+from utils.factories import LoginCredentials
 
 
 @allure.feature("Sanity")
@@ -32,15 +32,16 @@ class TestSanity:
     @allure.severity(allure.severity_level.CRITICAL)
     @allure.testcase("https://your-jira.atlassian.net/browse/TN-201", "TN-201")
     @allure.issue("https://your-jira.atlassian.net/browse/TN-BUG-8", "TN-BUG-8")
-    def test_invalid_login_warning(self, login_page: LoginPage):
+    def test_invalid_login_warning(
+        self, login_page: LoginPage, invalid_credentials: LoginCredentials
+    ):
         with allure.step("Open account login page"):
             login_page.open()
 
         with allure.step("Submit invalid credentials"):
-            sanity_data = get_test_data("sanity")
             login_page.login(
-                email=sanity_data["invalid_email"],
-                password=sanity_data["invalid_password"],
+                email=invalid_credentials.email,
+                password=invalid_credentials.password,
             )
 
         with allure.step("Verify login fails with the expected warning"):
@@ -56,7 +57,7 @@ class TestSanity:
         product_detail_page: ProductDetailPage,
     ):
         with allure.step("Search for MacBook from the home page"):
-            product = get_test_data("sanity")["search_product"]
+            product = "MacBook"
             home_page.open()
             home_page.search(product)
 

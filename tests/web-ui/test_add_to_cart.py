@@ -2,7 +2,7 @@ import allure
 import pytest
 
 from tests.page_records import CartFlowPages
-from utils.data_loader import get_test_data
+from utils.factories import SearchData
 
 
 @allure.feature("Cart")
@@ -13,15 +13,16 @@ class TestAddItemsToCart:
     @allure.title("Add items under max_price to cart")
     @allure.severity(allure.severity_level.CRITICAL)
     @allure.testcase("https://your-jira.atlassian.net/browse/TN-301", "TN-301")
-    def test_add_items_to_cart(self, cart_flow_pages: CartFlowPages):
-        search_data = get_test_data("search")
-        query = search_data["query"]
-        max_price = search_data["max_price"]
-        limit = search_data["limit"]
-
-        with allure.step(f"Find products matching '{query}' under ${max_price}"):
+    def test_add_items_to_cart(
+        self, cart_flow_pages: CartFlowPages, search_data: SearchData
+    ):
+        with allure.step(
+            f"Find products matching '{search_data.query}' under ${search_data.max_price}"
+        ):
             products = cart_flow_pages.search_results.get_products_under_price(
-                query=query, max_price=max_price, limit=limit
+                query=search_data.query,
+                max_price=search_data.max_price,
+                limit=search_data.limit,
             )
 
         allure.attach(
@@ -31,7 +32,7 @@ class TestAddItemsToCart:
         )
 
         assert products, (
-            f"No products found for query='{query}' under ${max_price}. "
+            f"No products found for query='{search_data.query}' under ${search_data.max_price}. "
             "Cannot add to cart."
         )
 
