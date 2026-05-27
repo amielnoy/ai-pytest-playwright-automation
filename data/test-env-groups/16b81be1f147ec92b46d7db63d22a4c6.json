@@ -1,1 +1,0 @@
-{"id":"16b81be1f147ec92b46d7db63d22a4c6","fullName":"tests.unit.test_factories.TestFakerLikeProtocol#test_faker_satisfies_protocol","name":"Faker satisfies FakerLike at runtime (isinstance check)","status":"failed","testResultsByEnv":{"default":"42c37f65c4988e53431430d099d038e6"}}

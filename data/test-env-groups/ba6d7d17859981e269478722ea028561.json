@@ -1,0 +1,1 @@
+{"id":"ba6d7d17859981e269478722ea028561","fullName":"tests.web-ui.test_playwright_v160_features.TestDropAPI#test_drop_file_onto_drop_zone","name":"locator.drop() delivers a local file payload to an HTML5 drop zone","status":"passed","testResultsByEnv":{"default":"1ccf4170b0706d6846e9225ec6b71587"}}

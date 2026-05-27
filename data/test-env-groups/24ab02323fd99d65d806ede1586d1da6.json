@@ -1,1 +1,1 @@
-{"id":"24ab02323fd99d65d806ede1586d1da6","fullName":"tests.web-ui.test_registration.TestRegistration#test_register_missing_fields","name":"Registration fails with missing required fields","status":"passed","testResultsByEnv":{"default":"a60555061e18b7cdcc4a78b8535cc5da"}}
+{"id":"24ab02323fd99d65d806ede1586d1da6","fullName":"tests.web-ui.test_registration.TestRegistration#test_register_missing_fields","name":"Registration fails with missing required fields","status":"passed","testResultsByEnv":{"default":"64b3886e54feab421d64361b115b7e83"}}

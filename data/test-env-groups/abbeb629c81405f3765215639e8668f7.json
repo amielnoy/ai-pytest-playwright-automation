@@ -1,1 +1,1 @@
-{"id":"abbeb629c81405f3765215639e8668f7","fullName":"tests.unit.test_factories.TestSearchProductCoverage#test_all_known_products_reachable","name":"all known products appear at least once in 200 samples","status":"passed","testResultsByEnv":{"default":"5c62386c19619b051c52f6410698103e"}}
+{"id":"abbeb629c81405f3765215639e8668f7","fullName":"tests.unit.test_factories.TestSearchProductCoverage#test_all_known_products_reachable","name":"all known products appear at least once in 200 samples","status":"passed","testResultsByEnv":{"default":"3a4c58fc0811b4d13ffeb382203a5e80"}}

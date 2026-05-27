@@ -1,3 +1,0 @@
-INFO:     127.0.0.1:56006 - "POST /chat HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56014 - "POST /chat HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56024 - "POST /chat HTTP/1.1" 422 Unprocessable Entity

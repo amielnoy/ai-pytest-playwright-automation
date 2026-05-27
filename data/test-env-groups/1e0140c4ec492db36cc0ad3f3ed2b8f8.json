@@ -1,1 +1,1 @@
-{"id":"1e0140c4ec492db36cc0ad3f3ed2b8f8","fullName":"tests.unit.test_factories.TestMakeRegistration#test_newsletter_defaults_false","name":"newsletter defaults to False","status":"passed","testResultsByEnv":{"default":"590051408bd56de300fb0ca08a10b7a1"}}
+{"id":"1e0140c4ec492db36cc0ad3f3ed2b8f8","fullName":"tests.unit.test_factories.TestMakeRegistration#test_newsletter_defaults_false","name":"newsletter defaults to False","status":"passed","testResultsByEnv":{"default":"5bf95ff8c34a4f69a4a188c5e5b36cf8"}}
