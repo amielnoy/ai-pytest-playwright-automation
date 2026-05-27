@@ -1,0 +1,1 @@
+{"id":"28f006eac9574d34a5bd8b9dedd3c033","fullName":"tests.unit.test_factories.TestMakeRegistration#test_all_fields_present","name":"make_registration returns a fully populated RegistrationData","status":"passed","testResultsByEnv":{"default":"fa8280d5b9869b31bd3b3b9ed5711aa9"}}

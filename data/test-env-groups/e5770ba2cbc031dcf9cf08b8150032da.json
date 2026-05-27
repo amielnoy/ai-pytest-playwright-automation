@@ -1,0 +1,1 @@
+{"id":"e5770ba2cbc031dcf9cf08b8150032da","fullName":"tests.unit.test_factories.TestFactoryIsolation#test_no_shared_state_credentials","name":"two consecutive calls never share the same invalid-credentials email","status":"passed","testResultsByEnv":{"default":"5116488f1c1f5fa07325778f7df64bff"}}

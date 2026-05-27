@@ -1,0 +1,1 @@
+{"id":"b0e0e3762318b303e3140bcedcabebd4","fullName":"tests.unit.test_factories.TestMakeRegistration#test_emails_are_unique","name":"20 consecutive calls produce 20 distinct emails","status":"passed","testResultsByEnv":{"default":"08d6bdaa49974b86833e240571256cde"}}

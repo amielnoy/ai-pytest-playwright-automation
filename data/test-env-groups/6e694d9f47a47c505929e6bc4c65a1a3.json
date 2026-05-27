@@ -1,0 +1,1 @@
+{"id":"6e694d9f47a47c505929e6bc4c65a1a3","fullName":"tests.unit.test_factories.TestRegistrationPasswordComplexity#test_password_has_digit","name":"generated password contains at least one digit","status":"passed","testResultsByEnv":{"default":"5fd3c6200ee9f95e2a638d487d0907df"}}

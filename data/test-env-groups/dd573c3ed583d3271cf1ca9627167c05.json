@@ -1,0 +1,1 @@
+{"id":"dd573c3ed583d3271cf1ca9627167c05","fullName":"tests.unit.test_factories.TestMakeInvalidCredentials#test_emails_are_unique","name":"20 consecutive calls produce 20 distinct emails","status":"passed","testResultsByEnv":{"default":"5c82a9158ee9543d5b1c5503ed4dc9b3"}}

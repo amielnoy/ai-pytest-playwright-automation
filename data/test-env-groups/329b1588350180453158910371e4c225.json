@@ -1,0 +1,1 @@
+{"id":"329b1588350180453158910371e4c225","fullName":"tests.unit.test_factories.TestCrossFactorySeeding#test_seeded_credentials_are_reproducible","name":"same Faker seed produces identical LoginCredentials email","status":"passed","testResultsByEnv":{"default":"5b3187a795427a12ba4699620c4a8199"}}

@@ -1,0 +1,1 @@
+{"id":"13b99effb3e94b6d7be2c710327991b0","fullName":"tests.unit.test_factories.TestCartScenarioMath#test_max_total_always_exceeds_item_price","name":"max_total is always greater than max_price","status":"passed","testResultsByEnv":{"default":"662f81bddd9f61c24267192cdfe5b15e"}}

@@ -1,0 +1,1 @@
+{"id":"141d642eb999380789892ad762ac330b","fullName":"tests.unit.test_factories.TestRegistrationFieldLimits#test_email_max_length","name":"email is within a reasonable length (≤ 96 chars)","status":"passed","testResultsByEnv":{"default":"7314884065ad3826b1fdc1f4f077a34e"}}
