@@ -7,7 +7,6 @@ import pytest
 from faker import Faker
 
 from utils.factories import (
-    FakerLike,
     _KNOWN_PRODUCTS,
     make_cart_scenario,
     make_invalid_credentials,
