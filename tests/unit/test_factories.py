@@ -186,9 +186,19 @@ class TestMakeInvalidCredentials:
 @allure.story("FakerLike protocol")
 class TestFakerLikeProtocol:
 
-    @allure.title("Faker satisfies FakerLike at runtime (isinstance check)")
-    def test_faker_satisfies_protocol(self):
-        assert isinstance(Faker(), FakerLike)
+    @allure.title("Faker exposes every method required by FakerLike")
+    def test_faker_has_all_protocol_methods(self):
+        # Python 3.12+ isinstance() checks the class MRO, not instance attributes.
+        # Faker resolves provider methods via __getattr__ (proxy pattern), so they
+        # are never in type(Faker).__dict__ and isinstance always returns False.
+        # We verify structural compatibility via hasattr instead.
+        _required = (
+            "first_name", "last_name", "password", "numerify",
+            "uuid4", "random_element", "pyfloat", "random_int",
+        )
+        fake = Faker()
+        for method in _required:
+            assert hasattr(fake, method), f"Faker missing required method: {method}"
 
 
 @allure.feature("Factories")
