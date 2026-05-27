@@ -3,10 +3,12 @@ import re
 from dataclasses import asdict
 
 import allure
+import pytest
 from faker import Faker
 
 from utils.factories import (
     FakerLike,
+    _KNOWN_PRODUCTS,
     make_cart_scenario,
     make_invalid_credentials,
     make_registration,
@@ -187,3 +189,169 @@ class TestFakerLikeProtocol:
     @allure.title("Faker satisfies FakerLike at runtime (isinstance check)")
     def test_faker_satisfies_protocol(self):
         assert isinstance(Faker(), FakerLike)
+
+
+@allure.feature("Factories")
+@allure.story("RegistrationData factory")
+class TestRegistrationPasswordComplexity:
+
+    @allure.title("generated password is at least 12 characters long")
+    def test_password_min_length(self):
+        for _ in range(10):
+            assert len(make_registration().password) >= 12
+
+    @allure.title("generated password contains at least one uppercase letter")
+    def test_password_has_uppercase(self):
+        for _ in range(10):
+            assert any(c.isupper() for c in make_registration().password)
+
+    @allure.title("generated password contains at least one digit")
+    def test_password_has_digit(self):
+        for _ in range(10):
+            assert any(c.isdigit() for c in make_registration().password)
+
+    @allure.title("generated password contains at least one special character")
+    def test_password_has_special_char(self):
+        specials = set("!@#$%^&*()_+-=[]{}|;':\",./<>?`~")
+        for _ in range(10):
+            assert any(c in specials for c in make_registration().password)
+
+
+@allure.feature("Factories")
+@allure.story("RegistrationData factory")
+class TestRegistrationFieldLimits:
+
+    @allure.title("first_name is within OpenCart's 32-character limit")
+    def test_first_name_max_length(self):
+        for _ in range(20):
+            assert len(make_registration().first_name) <= 32
+
+    @allure.title("last_name is within OpenCart's 32-character limit")
+    def test_last_name_max_length(self):
+        for _ in range(20):
+            assert len(make_registration().last_name) <= 32
+
+    @allure.title("email is within a reasonable length (≤ 96 chars)")
+    def test_email_max_length(self):
+        for _ in range(20):
+            assert len(make_registration().email) <= 96
+
+
+@allure.feature("Factories")
+@allure.story("RegistrationData factory")
+class TestTelephoneFormat:
+
+    @allure.title("telephone starts with '05' (Israeli mobile format)")
+    def test_starts_with_05(self):
+        for _ in range(20):
+            assert make_registration().telephone.startswith("05")
+
+    @allure.title("telephone is exactly 10 digits")
+    def test_exactly_ten_digits(self):
+        for _ in range(20):
+            t = make_registration().telephone
+            assert t.isdigit() and len(t) == 10
+
+
+@allure.feature("Factories")
+@allure.story("RegistrationData factory")
+class TestParametrizedMissingFields:
+
+    @allure.title("blanking '{field}' yields empty string for that field only")
+    @pytest.mark.parametrize("field", ["first_name", "last_name", "email", "password", "telephone"])
+    def test_blank_field_is_isolated(self, field: str):
+        data = make_registration(**{field: ""})
+        assert getattr(data, field) == ""
+        other_fields = {"first_name", "last_name", "email", "telephone"} - {field}
+        for other in other_fields:
+            assert getattr(data, other), f"field '{other}' should not be blank"
+
+
+@allure.feature("Factories")
+@allure.story("Factory isolation")
+class TestFactoryIsolation:
+
+    @allure.title("two consecutive calls never share the same email")
+    def test_no_shared_state_registration(self):
+        emails = [make_registration().email for _ in range(50)]
+        assert len(set(emails)) == 50
+
+    @allure.title("two consecutive calls never share the same invalid-credentials email")
+    def test_no_shared_state_credentials(self):
+        emails = [make_invalid_credentials().email for _ in range(50)]
+        assert len(set(emails)) == 50
+
+    @allure.title("make_registration and make_invalid_credentials never collide on email")
+    def test_cross_factory_no_email_collision(self):
+        reg_emails = {make_registration().email for _ in range(20)}
+        cred_emails = {make_invalid_credentials().email for _ in range(20)}
+        assert reg_emails.isdisjoint(cred_emails)
+
+
+@allure.feature("Factories")
+@allure.story("SearchData factory")
+class TestSearchProductCoverage:
+
+    @allure.title("all known products appear at least once in 200 samples")
+    def test_all_known_products_reachable(self):
+        seen = {make_search().query for _ in range(200)}
+        assert set(_KNOWN_PRODUCTS).issubset(seen), f"missing: {set(_KNOWN_PRODUCTS) - seen}"
+
+    @allure.title("custom pool of one product always returns that product")
+    def test_single_product_pool(self):
+        for _ in range(10):
+            assert make_search(products=("OnlyThis",)).query == "OnlyThis"
+
+
+@allure.feature("Factories")
+@allure.story("CartScenario factory")
+class TestCartScenarioMath:
+
+    @allure.title("max_total is exactly 5× max_price")
+    def test_max_total_is_5x_max_price(self):
+        for _ in range(20):
+            sc = make_cart_scenario()
+            assert sc.max_total == round(sc.max_price * 5, 2)
+
+    @allure.title("overriding max_price recalculates max_total accordingly")
+    def test_override_max_price_recalculates_max_total(self):
+        sc = make_cart_scenario(max_price=100.0)
+        assert sc.max_total == 500.0
+
+    @allure.title("max_total is always greater than max_price")
+    def test_max_total_always_exceeds_item_price(self):
+        for _ in range(20):
+            sc = make_cart_scenario()
+            assert sc.max_total > sc.max_price
+
+
+@allure.feature("Factories")
+@allure.story("Seeded reproducibility")
+class TestCrossFactorySeeding:
+
+    @allure.title("same Faker seed produces identical RegistrationData email")
+    def test_seeded_registration_is_reproducible(self):
+        fake = Faker()
+        fake.seed_instance(99)
+        email_a = make_registration(fake=fake).email
+        fake.seed_instance(99)
+        email_b = make_registration(fake=fake).email
+        assert email_a == email_b
+
+    @allure.title("same Faker seed produces identical SearchData query")
+    def test_seeded_search_is_reproducible(self):
+        fake = Faker()
+        fake.seed_instance(77)
+        query_a = make_search(fake=fake).query
+        fake.seed_instance(77)
+        query_b = make_search(fake=fake).query
+        assert query_a == query_b
+
+    @allure.title("same Faker seed produces identical LoginCredentials email")
+    def test_seeded_credentials_are_reproducible(self):
+        fake = Faker()
+        fake.seed_instance(55)
+        email_a = make_invalid_credentials(fake=fake).email
+        fake.seed_instance(55)
+        email_b = make_invalid_credentials(fake=fake).email
+        assert email_a == email_b
