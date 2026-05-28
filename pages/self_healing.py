@@ -43,15 +43,38 @@ class SelfHealingLocator:
         candidates = [self._primary, *self._fallback_locators]
         labels = [self._primary_label, *self._fallback_labels]
 
-        for index, locator in enumerate(candidates):
+        # First, check if the primary is immediately available
+        try:
+            if self._primary.count() > 0:
+                return self._primary
+        except Exception:
+            pass
+
+        # If primary isn't immediately present, wait for a short duration
+        # to allow dynamic elements to render before falling back
+        try:
+            # Wait up to 1000ms for primary to attach
+            self._primary.wait_for(state="attached", timeout=1000)
+            if self._primary.count() > 0:
+                return self._primary
+        except Exception:
+            # Primary failed to attach within the grace period; proceed with fallbacks
+            pass
+
+        # Iterate through fallbacks and return the first one that is attached
+        for index in range(1, len(candidates)):
+            locator = candidates[index]
             try:
+                # Wait up to 500ms per fallback candidate
+                locator.wait_for(state="attached", timeout=500)
                 if locator.count() > 0:
-                    if index > 0:
-                        self._record_heal(labels[index])
+                    self._record_heal(labels[index])
                     return locator
             except Exception:
                 continue
 
+        # If everything fails, return primary to let the actual interaction
+        # trigger standard Playwright timeout exceptions for debugging
         return self._primary
 
     def _record_heal(self, healed_label: str) -> None:
