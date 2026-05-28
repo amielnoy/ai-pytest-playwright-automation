@@ -1,4 +1,5 @@
 import json
+import logging
 import os
 import pathlib
 import socket
@@ -13,7 +14,7 @@ from playwright.sync_api import Browser, BrowserContext, Page, Route, Request, s
 from services.api.opencart_fallback import fallback_response_for_request
 from requests.cookies import RequestsCookieJar
 from utils.data_loader import get_config
-from utils.logger import configure_logging, get_logger
+from utils.logger import configure_logging, get_logger, AllureLogHandler
 
 CONFIG = get_config()
 LOGGER = get_logger("pytest")
@@ -285,6 +286,18 @@ def page(context: BrowserContext) -> Generator[Page, None, None]:
 @pytest.fixture
 def app_url() -> str:
     return CONFIG["base_url"]
+
+
+@pytest.fixture(autouse=True)
+def log(request: pytest.FixtureRequest) -> Generator[logging.Logger, None, None]:
+    logger = get_logger(request.node.name)
+    handler = AllureLogHandler()
+    logging.getLogger().addHandler(handler)
+    logger.info("START %s", request.node.nodeid)
+    yield logger
+    logger.info("END   %s", request.node.nodeid)
+    handler.flush_to_allure(attachment_name="Logs")
+    logging.getLogger().removeHandler(handler)
 
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)

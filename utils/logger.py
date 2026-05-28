@@ -62,7 +62,7 @@ def configure_logging(
 
     logger = logging.getLogger(logger_name)
     logger.setLevel(_log_level_from_env())
-    logger.propagate = False
+    logger.propagate = True
 
     if any(handler.get_name() == "daily_file" for handler in logger.handlers):
         return logger
@@ -87,3 +87,32 @@ def get_logger(name: str | None = None) -> logging.Logger:
     if not name:
         return logging.getLogger(LOGGER_NAME)
     return logging.getLogger(f"{LOGGER_NAME}.{name}")
+
+
+class AllureLogHandler(logging.Handler):
+    """Buffers log records for one test; call flush_to_allure() to attach them."""
+
+    _FORMATTER = logging.Formatter(
+        "%(asctime)s | %(levelname)-8s | %(name)s | %(message)s"
+    )
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.setFormatter(self._FORMATTER)
+        self._records: list[logging.LogRecord] = []
+
+    def emit(self, record: logging.LogRecord) -> None:
+        self._records.append(record)
+
+    def flush_to_allure(self, attachment_name: str = "Logs") -> None:
+        if not self._records:
+            return
+        import allure  # local import — allure is a test-only dependency
+
+        content = "\n".join(self.format(r) for r in self._records)
+        allure.attach(
+            content,
+            name=attachment_name,
+            attachment_type=allure.attachment_type.TEXT,
+        )
+        self._records.clear()
