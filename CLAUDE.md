@@ -87,6 +87,7 @@ Project-specific slash commands are in `.claude/commands/`. Invoke them in Claud
 | `/analyze-failures` | `/analyze-failures results.xml` | Buckets failures by type and produces a root-cause Markdown report |
 | `/add-allure` | `/add-allure tests/web-ui/test_cart.py` | Adds all Allure decorators to an existing test file without changing logic |
 | `/fix-selectors` | `/fix-selectors pages/` | Audits locators by stability rank and replaces brittle ones |
+| `/run-allure-analyzer` | | Runs the repository RAG-enabled Allure failure analyzer (`scripts/run_allure_failure_agent.sh`) which by default uses retrieval-augmented LLM prompts to classify failing tests. Pass `--no-ai` to disable LLM calls. |
 
 ## MCP Servers
 
