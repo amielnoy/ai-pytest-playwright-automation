@@ -1,1 +1,1 @@
-{"id":"01a4836ec1696deb29615acdc8ca0408","fullName":"tests.unit.test_factories.TestFakerLikeProtocol#test_faker_has_all_protocol_methods","name":"Faker exposes every method required by FakerLike","status":"passed","testResultsByEnv":{"default":"d65c94fb990ddcfd2854fb8a381666d2"}}
+{"id":"01a4836ec1696deb29615acdc8ca0408","fullName":"tests.unit.test_factories.TestFakerLikeProtocol#test_faker_has_all_protocol_methods","name":"Faker exposes every method required by FakerLike","status":"passed","testResultsByEnv":{"default":"32b78723d0e82aa7423f9fa52eb7ecd4"}}

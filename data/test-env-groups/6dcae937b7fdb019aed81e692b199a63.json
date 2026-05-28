@@ -1,1 +1,1 @@
-{"id":"6dcae937b7fdb019aed81e692b199a63","fullName":"tests.unit.test_opencart_fallback.TestHTMLGenerators#test_home_html_contains_store_marker","name":"home_html() returns valid HTML with 'Your Store'","status":"passed","testResultsByEnv":{"default":"007d3e241e7c9bdf688be689dbe410bb"}}
+{"id":"6dcae937b7fdb019aed81e692b199a63","fullName":"tests.unit.test_opencart_fallback.TestHTMLGenerators#test_home_html_contains_store_marker","name":"home_html() returns valid HTML with 'Your Store'","status":"passed","testResultsByEnv":{"default":"696eadc5042247b7816de0b85d117ab1"}}

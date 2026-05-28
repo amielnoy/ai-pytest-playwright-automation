@@ -1,1 +1,1 @@
-{"id":"076b2302cb18ca629529bfb5fe7092dc","fullName":"tests.api.test_api_data_driven.TestSearchApiInline#test_search_returns_expected_product_inline","name":"Search [MacBook] returns 200 and finds [MacBook]","status":"passed","testResultsByEnv":{"default":"a0cf0ec9e2ec83745e8c7da81c082fbe"}}
+{"id":"076b2302cb18ca629529bfb5fe7092dc","fullName":"tests.api.test_api_data_driven.TestSearchApiInline#test_search_returns_expected_product_inline","name":"Search [Canon] returns 200 and finds [Canon]","status":"passed","testResultsByEnv":{"default":"b46674e465ff5790d99cc9b25752df43"}}
