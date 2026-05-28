@@ -1,0 +1,2 @@
+INFO     ai_automation.test_search_results_have_positive_prices:conftest.py:296 START tests/web-ui/test_system_coverage.py::TestSearchDataIntegrity::test_search_results_have_positive_prices@web-ui
+INFO     ai_automation.test_search_results_have_positive_prices:conftest.py:298 END   tests/web-ui/test_system_coverage.py::TestSearchDataIntegrity::test_search_results_have_positive_prices@web-ui

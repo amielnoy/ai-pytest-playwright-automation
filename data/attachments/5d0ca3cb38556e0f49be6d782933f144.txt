@@ -1,0 +1,5 @@
+2026-05-28 12:28:42,852 | INFO     | ai_automation.test_login_endpoint_operates_over_https | START tests/api/test_pentest.py::TestAuthenticationPentest::test_login_endpoint_operates_over_https
+2026-05-28 12:28:42,856 | INFO     | ai_automation.pentest | Step: Assert api_base_url starts with https:// — https://tutorialsninja.com/demo
+2026-05-28 12:28:42,856 | INFO     | ai_automation.pentest | Step: GET login page and check form action URL scheme
+2026-05-28 12:28:42,858 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-28 12:28:42,862 | INFO     | ai_automation.test_login_endpoint_operates_over_https | END   tests/api/test_pentest.py::TestAuthenticationPentest::test_login_endpoint_operates_over_https

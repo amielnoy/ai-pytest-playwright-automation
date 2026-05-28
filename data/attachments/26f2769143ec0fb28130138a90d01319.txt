@@ -1,0 +1,6 @@
+INFO     ai_automation.test_ssti_jinja2_payload_not_evaluated_in_search:conftest.py:296 START tests/api/test_pentest.py::TestInjectionPentest::test_ssti_jinja2_payload_not_evaluated_in_search
+INFO     ai_automation.pentest:test_pentest.py:88 Step: GET search with SSTI payload: '{{9999*9999}}'
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.pentest:test_pentest.py:92 Step: Assert '99980001' absent — payload not executed by template engine
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_ssti_jinja2_payload_not_evaluated_in_search:conftest.py:298 END   tests/api/test_pentest.py::TestInjectionPentest::test_ssti_jinja2_payload_not_evaluated_in_search

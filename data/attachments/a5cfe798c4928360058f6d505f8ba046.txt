@@ -1,0 +1,2 @@
+2026-05-28 12:28:46,958 | INFO     | ai_automation.test_search_does_not_call_filter | START tests/unit/test_flows.py::TestSearchFlow::test_search_does_not_call_filter
+2026-05-28 12:28:46,960 | INFO     | ai_automation.test_search_does_not_call_filter | END   tests/unit/test_flows.py::TestSearchFlow::test_search_does_not_call_filter

@@ -1,0 +1,2 @@
+2026-05-28 12:28:45,809 | INFO     | ai_automation.test_extract_json_reads_json_object | START tests/unit/test_allure_failure_agent.py::test_extract_json_reads_json_object
+2026-05-28 12:28:45,810 | INFO     | ai_automation.test_extract_json_reads_json_object | END   tests/unit/test_allure_failure_agent.py::test_extract_json_reads_json_object

@@ -1,0 +1,2 @@
+INFO     ai_automation.test_product_detail_opens_from_search:conftest.py:296 START tests/web-ui/test_sanity.py::TestSanity::test_product_detail_opens_from_search@web-ui
+INFO     ai_automation.test_product_detail_opens_from_search:conftest.py:298 END   tests/web-ui/test_sanity.py::TestSanity::test_product_detail_opens_from_search@web-ui

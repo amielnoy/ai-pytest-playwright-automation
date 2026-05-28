@@ -1,0 +1,6 @@
+INFO     ai_automation.test_path_traversal_in_search_does_not_expose_file_content:conftest.py:296 START tests/api/test_security_api.py::TestSearchSecurity::test_path_traversal_in_search_does_not_expose_file_content
+INFO     ai_automation.security.api:test_security_api.py:118 Step: GET search with path traversal: '../../etc/passwd'
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.security.api:test_security_api.py:122 Step: Assert no filesystem markers in response body
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_path_traversal_in_search_does_not_expose_file_content:conftest.py:298 END   tests/api/test_security_api.py::TestSearchSecurity::test_path_traversal_in_search_does_not_expose_file_content

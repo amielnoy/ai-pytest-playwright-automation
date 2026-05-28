@@ -1,0 +1,2 @@
+INFO     ai_automation.test_login_call_sequence:conftest.py:296 START tests/unit/test_flows.py::TestLoginFlow::test_login_call_sequence
+INFO     ai_automation.test_login_call_sequence:conftest.py:298 END   tests/unit/test_flows.py::TestLoginFlow::test_login_call_sequence

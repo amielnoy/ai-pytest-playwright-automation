@@ -1,0 +1,2 @@
+INFO     ai_automation.test_first_name_max_length:conftest.py:296 START tests/unit/test_factories.py::TestRegistrationFieldLimits::test_first_name_max_length
+INFO     ai_automation.test_first_name_max_length:conftest.py:298 END   tests/unit/test_factories.py::TestRegistrationFieldLimits::test_first_name_max_length

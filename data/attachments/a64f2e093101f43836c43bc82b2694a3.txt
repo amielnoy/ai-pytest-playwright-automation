@@ -1,0 +1,2 @@
+INFO     ai_automation.test_search_under_price_default_limit:conftest.py:296 START tests/unit/test_flows.py::TestSearchFlow::test_search_under_price_default_limit
+INFO     ai_automation.test_search_under_price_default_limit:conftest.py:298 END   tests/unit/test_flows.py::TestSearchFlow::test_search_under_price_default_limit

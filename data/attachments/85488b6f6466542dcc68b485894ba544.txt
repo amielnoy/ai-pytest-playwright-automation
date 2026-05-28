@@ -1,0 +1,2 @@
+2026-05-28 12:28:45,831 | INFO     | ai_automation.test_result_is_flaky_when_status_details_marks_flaky | START tests/unit/test_allure_failure_agent.py::test_result_is_flaky_when_status_details_marks_flaky
+2026-05-28 12:28:45,832 | INFO     | ai_automation.test_result_is_flaky_when_status_details_marks_flaky | END   tests/unit/test_allure_failure_agent.py::test_result_is_flaky_when_status_details_marks_flaky

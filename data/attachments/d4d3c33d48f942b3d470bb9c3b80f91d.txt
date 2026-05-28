@@ -1,0 +1,2 @@
+INFO     ai_automation.test_search_results_open_product_clicks_title_link_in_matching_card:conftest.py:296 START tests/unit/test_page_objects.py::test_search_results_open_product_clicks_title_link_in_matching_card
+INFO     ai_automation.test_search_results_open_product_clicks_title_link_in_matching_card:conftest.py:298 END   tests/unit/test_page_objects.py::test_search_results_open_product_clicks_title_link_in_matching_card

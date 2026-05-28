@@ -1,0 +1,6 @@
+INFO     ai_automation.test_cart_add_ignores_invalid_product_id[]:conftest.py:296 START tests/api/test_api_integrations.py::TestCartApiNegative::test_cart_add_ignores_invalid_product_id[]
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_cart_add_ignores_invalid_product_id[]:conftest.py:298 END   tests/api/test_api_integrations.py::TestCartApiNegative::test_cart_add_ignores_invalid_product_id[]

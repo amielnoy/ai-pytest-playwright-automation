@@ -1,0 +1,2 @@
+2026-05-28 12:28:46,753 | INFO     | ai_automation.test_max_total_always_exceeds_item_price | START tests/unit/test_factories.py::TestCartScenarioMath::test_max_total_always_exceeds_item_price
+2026-05-28 12:28:46,754 | INFO     | ai_automation.test_max_total_always_exceeds_item_price | END   tests/unit/test_factories.py::TestCartScenarioMath::test_max_total_always_exceeds_item_price

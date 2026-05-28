@@ -1,0 +1,2 @@
+INFO     ai_automation.test_product_detail_unknown_id:conftest.py:296 START tests/unit/test_opencart_fallback.py::TestRouteDispatcher::test_product_detail_unknown_id
+INFO     ai_automation.test_product_detail_unknown_id:conftest.py:298 END   tests/unit/test_opencart_fallback.py::TestRouteDispatcher::test_product_detail_unknown_id

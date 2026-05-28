@@ -1,0 +1,2 @@
+2026-05-28 12:28:46,692 | INFO     | ai_automation.test_cross_factory_no_email_collision | START tests/unit/test_factories.py::TestFactoryIsolation::test_cross_factory_no_email_collision
+2026-05-28 12:28:46,697 | INFO     | ai_automation.test_cross_factory_no_email_collision | END   tests/unit/test_factories.py::TestFactoryIsolation::test_cross_factory_no_email_collision

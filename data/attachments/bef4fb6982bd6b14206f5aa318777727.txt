@@ -1,0 +1,2 @@
+INFO     ai_automation.test_search_macbook:conftest.py:296 START tests/unit/test_opencart_fallback.py::TestSearchProducts::test_search_macbook
+INFO     ai_automation.test_search_macbook:conftest.py:298 END   tests/unit/test_opencart_fallback.py::TestSearchProducts::test_search_macbook

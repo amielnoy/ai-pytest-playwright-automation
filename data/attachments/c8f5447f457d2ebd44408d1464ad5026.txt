@@ -1,0 +1,2 @@
+2026-05-28 12:28:48,454 | INFO     | ai_automation.test_getattr_proxies_to_resolved | START tests/unit/test_self_healing.py::TestSelfHealingProxies::test_getattr_proxies_to_resolved
+2026-05-28 12:28:48,455 | INFO     | ai_automation.test_getattr_proxies_to_resolved | END   tests/unit/test_self_healing.py::TestSelfHealingProxies::test_getattr_proxies_to_resolved

@@ -1,0 +1,2 @@
+INFO     ai_automation.test_non_response_returns_false:conftest.py:296 START tests/unit/test_opencart_fallback.py::TestIsChallengedPage::test_non_response_returns_false
+INFO     ai_automation.test_non_response_returns_false:conftest.py:298 END   tests/unit/test_opencart_fallback.py::TestIsChallengedPage::test_non_response_returns_false

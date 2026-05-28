@@ -1,0 +1,2 @@
+INFO     ai_automation.test_add_products_default_limit:conftest.py:296 START tests/unit/test_flows.py::TestCartFlow::test_add_products_default_limit
+INFO     ai_automation.test_add_products_default_limit:conftest.py:298 END   tests/unit/test_flows.py::TestCartFlow::test_add_products_default_limit

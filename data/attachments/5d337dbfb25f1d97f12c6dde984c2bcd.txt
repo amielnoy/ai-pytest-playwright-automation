@@ -1,0 +1,2 @@
+INFO     ai_automation.test_build_daily_file_handler_rotates_every_24_hours:conftest.py:296 START tests/unit/test_logger.py::test_build_daily_file_handler_rotates_every_24_hours
+INFO     ai_automation.test_build_daily_file_handler_rotates_every_24_hours:conftest.py:298 END   tests/unit/test_logger.py::test_build_daily_file_handler_rotates_every_24_hours

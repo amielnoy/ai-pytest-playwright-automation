@@ -1,0 +1,2 @@
+INFO     ai_automation.test_product_reviews_tab_exposes_form_fields:conftest.py:296 START tests/web-ui/test_system_coverage.py::TestProductDetailCoverage::test_product_reviews_tab_exposes_form_fields@web-ui
+INFO     ai_automation.test_product_reviews_tab_exposes_form_fields:conftest.py:298 END   tests/web-ui/test_system_coverage.py::TestProductDetailCoverage::test_product_reviews_tab_exposes_form_fields@web-ui

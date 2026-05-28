@@ -1,0 +1,2 @@
+INFO     ai_automation.test_search_results_product_names_sort_and_stored_information:conftest.py:296 START tests/unit/test_page_objects.py::test_search_results_product_names_sort_and_stored_information
+INFO     ai_automation.test_search_results_product_names_sort_and_stored_information:conftest.py:298 END   tests/unit/test_page_objects.py::test_search_results_product_names_sort_and_stored_information

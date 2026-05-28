@@ -1,0 +1,7 @@
+INFO     ai_automation.test_sessions_are_isolated:conftest.py:296 START tests/api/test_api.py::TestCartApi::test_sessions_are_isolated
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_sessions_are_isolated:conftest.py:298 END   tests/api/test_api.py::TestCartApi::test_sessions_are_isolated

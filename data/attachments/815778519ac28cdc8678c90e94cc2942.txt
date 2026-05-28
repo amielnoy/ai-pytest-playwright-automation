@@ -1,0 +1,5 @@
+INFO     ai_automation.test_classify_maps_statuses_correctly:conftest.py:296 START tests/unit/test_report_test_status.py::test_classify_maps_statuses_correctly
+INFO     ai_automation.unit.test_report_test_status:test_report_test_status.py:111 Step: Call _classify on passed/failed/broken/skipped/flaky set
+INFO     ai_automation.unit.test_report_test_status:test_report_test_status.py:115 Step: Assert passed, failed, broken, skipped, flaky all appear
+INFO     ai_automation.unit.test_report_test_status:test_report_test_status.py:123 Step: Assert h-flaky historyId is classified as flaky
+INFO     ai_automation.test_classify_maps_statuses_correctly:conftest.py:298 END   tests/unit/test_report_test_status.py::test_classify_maps_statuses_correctly

@@ -1,0 +1,9 @@
+2026-05-28 12:28:42,769 | INFO     | ai_automation.test_login_oversized_password_does_not_crash | START tests/api/test_pentest.py::TestAuthenticationPentest::test_login_oversized_password_does_not_crash
+2026-05-28 12:28:42,771 | INFO     | ai_automation.pentest | Step: POST account/login with 10008-byte password
+2026-05-28 12:28:42,771 | INFO     | ai_automation.pentest | Step: Assert 200 and no PHP error markers in response
+2026-05-28 12:28:42,771 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-28 12:28:42,772 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-28 12:28:42,773 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-28 12:28:42,773 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-28 12:28:42,773 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-28 12:28:42,775 | INFO     | ai_automation.test_login_oversized_password_does_not_crash | END   tests/api/test_pentest.py::TestAuthenticationPentest::test_login_oversized_password_does_not_crash

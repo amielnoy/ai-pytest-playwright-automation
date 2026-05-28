@@ -1,0 +1,6 @@
+INFO     ai_automation.test_search_returns_expected_product_inline[Samsung-Samsung]:conftest.py:296 START tests/api/test_api_data_driven.py::TestSearchApiInline::test_search_returns_expected_product_inline[Samsung-Samsung]
+INFO     ai_automation.api.data_driven:test_api_data_driven.py:77 Step: search for 'Samsung'
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.api.data_driven:test_api_data_driven.py:87 Found product names: ['Samsung SyncMaster 941BW']
+INFO     ai_automation.test_search_returns_expected_product_inline[Samsung-Samsung]:conftest.py:298 END   tests/api/test_api_data_driven.py::TestSearchApiInline::test_search_returns_expected_product_inline[Samsung-Samsung]

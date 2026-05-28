@@ -1,0 +1,2 @@
+2026-05-28 12:28:47,061 | INFO     | ai_automation.test_get_logger_returns_child_logger | START tests/unit/test_logger.py::test_get_logger_returns_child_logger
+2026-05-28 12:28:47,062 | INFO     | ai_automation.test_get_logger_returns_child_logger | END   tests/unit/test_logger.py::test_get_logger_returns_child_logger

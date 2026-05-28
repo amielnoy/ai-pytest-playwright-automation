@@ -1,0 +1,2 @@
+INFO     ai_automation.test_configure_logging_adds_one_daily_file_handler:conftest.py:296 START tests/unit/test_logger.py::test_configure_logging_adds_one_daily_file_handler
+INFO     ai_automation.test_configure_logging_adds_one_daily_file_handler:conftest.py:298 END   tests/unit/test_logger.py::test_configure_logging_adds_one_daily_file_handler

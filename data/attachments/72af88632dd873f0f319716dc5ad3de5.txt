@@ -1,0 +1,2 @@
+INFO     ai_automation.test_override_email_blank:conftest.py:296 START tests/unit/test_factories.py::TestMakeRegistration::test_override_email_blank
+INFO     ai_automation.test_override_email_blank:conftest.py:298 END   tests/unit/test_factories.py::TestMakeRegistration::test_override_email_blank

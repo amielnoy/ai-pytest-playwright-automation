@@ -1,0 +1,2 @@
+INFO     ai_automation.test_duplicate_heal_event_not_recorded:conftest.py:296 START tests/unit/test_self_healing.py::TestHealEventRecording::test_duplicate_heal_event_not_recorded
+INFO     ai_automation.test_duplicate_heal_event_not_recorded:conftest.py:298 END   tests/unit/test_self_healing.py::TestHealEventRecording::test_duplicate_heal_event_not_recorded

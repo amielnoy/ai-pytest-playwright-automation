@@ -1,0 +1,5 @@
+2026-05-28 12:28:39,992 | INFO     | ai_automation.test_search_returns_numeric_ids_inline[MacBook] | START tests/api/test_api_data_driven.py::TestSearchApiInline::test_search_returns_numeric_ids_inline[MacBook]
+2026-05-28 12:28:39,994 | INFO     | ai_automation.api.data_driven | Step: search ids for 'MacBook'
+2026-05-28 12:28:39,995 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-28 12:28:39,996 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-28 12:28:39,998 | INFO     | ai_automation.test_search_returns_numeric_ids_inline[MacBook] | END   tests/api/test_api_data_driven.py::TestSearchApiInline::test_search_returns_numeric_ids_inline[MacBook]

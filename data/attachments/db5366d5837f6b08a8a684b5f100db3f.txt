@@ -1,0 +1,4 @@
+2026-05-28 12:28:48,053 | INFO     | ai_automation.test_classify_detects_flaky_when_same_history_has_mixed_statuses | START tests/unit/test_report_test_status.py::test_classify_detects_flaky_when_same_history_has_mixed_statuses
+2026-05-28 12:28:48,055 | INFO     | ai_automation.unit.test_report_test_status | Step: Call _classify on pass+fail pair with same historyId
+2026-05-28 12:28:48,057 | INFO     | ai_automation.unit.test_report_test_status | Step: Assert exactly one entry with status=flaky
+2026-05-28 12:28:48,058 | INFO     | ai_automation.test_classify_detects_flaky_when_same_history_has_mixed_statuses | END   tests/unit/test_report_test_status.py::test_classify_detects_flaky_when_same_history_has_mixed_statuses

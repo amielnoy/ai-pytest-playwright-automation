@@ -1,1 +1,1 @@
-{"id":"455401e0036f6b7e1101d2628338d5d5","fullName":"tests.unit.test_opencart_fallback.TestIsChallengedPage#test_one_moment_text_is_challenge","name":"'One moment, please' body is detected as challenge","status":"passed","testResultsByEnv":{"default":"ab04b1a0ee9e6c7dcdd3c6f1e61d3b60"}}
+{"id":"455401e0036f6b7e1101d2628338d5d5","fullName":"tests.unit.test_opencart_fallback.TestIsChallengedPage#test_one_moment_text_is_challenge","name":"'One moment, please' body is detected as challenge","status":"passed","testResultsByEnv":{"default":"463d20e64f4c17e20cb47823cb6bb403"}}

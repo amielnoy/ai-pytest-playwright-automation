@@ -1,0 +1,2 @@
+INFO     ai_automation.test_search_does_not_call_filter:conftest.py:296 START tests/unit/test_flows.py::TestSearchFlow::test_search_does_not_call_filter
+INFO     ai_automation.test_search_does_not_call_filter:conftest.py:298 END   tests/unit/test_flows.py::TestSearchFlow::test_search_does_not_call_filter

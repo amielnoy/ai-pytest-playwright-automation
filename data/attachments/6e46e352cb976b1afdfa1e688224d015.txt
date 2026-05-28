@@ -1,0 +1,10 @@
+INFO     ai_automation.test_login_empty_credentials_returns_warning_not_crash:conftest.py:296 START tests/api/test_pentest.py::TestAuthenticationPentest::test_login_empty_credentials_returns_warning_not_crash
+INFO     ai_automation.pentest:test_pentest.py:201 Step: POST account/login with empty email and password
+INFO     ai_automation.pentest:test_pentest.py:205 Step: Assert 200, Warning present, no Fatal error or 5xx
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_login_empty_credentials_returns_warning_not_crash:conftest.py:298 END   tests/api/test_pentest.py::TestAuthenticationPentest::test_login_empty_credentials_returns_warning_not_crash

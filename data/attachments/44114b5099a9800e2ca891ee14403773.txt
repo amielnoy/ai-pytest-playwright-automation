@@ -1,0 +1,2 @@
+INFO     ai_automation.test_no_route_returns_empty:conftest.py:296 START tests/unit/test_opencart_fallback.py::TestRouteFromRequest::test_no_route_returns_empty
+INFO     ai_automation.test_no_route_returns_empty:conftest.py:298 END   tests/unit/test_opencart_fallback.py::TestRouteFromRequest::test_no_route_returns_empty

@@ -1,0 +1,6 @@
+INFO     ai_automation.test_search_product_cards_have_ids_and_names:conftest.py:296 START tests/api/test_api_integrations.py::TestSearchApiIntegration::test_search_product_cards_have_ids_and_names
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_search_product_cards_have_ids_and_names:conftest.py:298 END   tests/api/test_api_integrations.py::TestSearchApiIntegration::test_search_product_cards_have_ids_and_names

@@ -1,0 +1,6 @@
+INFO     ai_automation.test_overall_status_reflects_worst_case:conftest.py:296 START tests/unit/test_report_test_status.py::test_overall_status_reflects_worst_case
+INFO     ai_automation.unit.test_report_test_status:test_report_test_status.py:281 Step: Assert overall=failed when failed>0
+INFO     ai_automation.unit.test_report_test_status:test_report_test_status.py:285 Step: Assert overall=broken when broken>0 and no failed/flaky
+INFO     ai_automation.unit.test_report_test_status:test_report_test_status.py:289 Step: Assert overall=passed when only passed/skipped
+INFO     ai_automation.unit.test_report_test_status:test_report_test_status.py:293 Step: Assert overall=failed when flaky>0
+INFO     ai_automation.test_overall_status_reflects_worst_case:conftest.py:298 END   tests/unit/test_report_test_status.py::test_overall_status_reflects_worst_case

@@ -1,0 +1,2 @@
+INFO     ai_automation.test_product_card_reads_fields_and_adds_to_cart:conftest.py:296 START tests/unit/test_page_objects.py::test_product_card_reads_fields_and_adds_to_cart
+INFO     ai_automation.test_product_card_reads_fields_and_adds_to_cart:conftest.py:298 END   tests/unit/test_page_objects.py::test_product_card_reads_fields_and_adds_to_cart

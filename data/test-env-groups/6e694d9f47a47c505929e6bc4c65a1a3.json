@@ -1,1 +1,1 @@
-{"id":"6e694d9f47a47c505929e6bc4c65a1a3","fullName":"tests.unit.test_factories.TestRegistrationPasswordComplexity#test_password_has_digit","name":"generated password contains at least one digit","status":"passed","testResultsByEnv":{"default":"d695c1b44c072943c6ce562aea1d1422"}}
+{"id":"6e694d9f47a47c505929e6bc4c65a1a3","fullName":"tests.unit.test_factories.TestRegistrationPasswordComplexity#test_password_has_digit","name":"generated password contains at least one digit","status":"passed","testResultsByEnv":{"default":"68ad5c3abf3b1360397c2360129096e7"}}

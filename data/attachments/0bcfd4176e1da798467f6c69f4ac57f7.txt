@@ -1,0 +1,14 @@
+INFO     ai_automation.test_admin_panel_does_not_expose_interface:conftest.py:296 START tests/api/test_pentest.py::TestAccessControlPentest::test_admin_panel_does_not_expose_interface
+INFO     ai_automation.pentest:test_pentest.py:463 Step: GET /admin/ with no credentials
+INFO     ai_automation.pentest:test_pentest.py:467 Step: Assert Dashboard, Sales, Catalog admin sections absent
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_admin_panel_does_not_expose_interface:conftest.py:298 END   tests/api/test_pentest.py::TestAccessControlPentest::test_admin_panel_does_not_expose_interface

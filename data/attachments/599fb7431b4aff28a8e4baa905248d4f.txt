@@ -1,0 +1,4 @@
+INFO     ai_automation.test_sensitive_path_blocked_json[config_bak]:conftest.py:296 START tests/api/test_pentest_data_driven.py::TestFileExposureJson::test_sensitive_path_blocked_json[config_bak]
+INFO     ai_automation.pentest.data_driven:test_pentest_data_driven.py:516 Step: JSON file exposure probe https://tutorialsninja.com/demo/config.php.bak
+INFO     ai_automation.pentest.data_driven:test_pentest_data_driven.py:522 Status for /config.php.bak: 404
+INFO     ai_automation.test_sensitive_path_blocked_json[config_bak]:conftest.py:298 END   tests/api/test_pentest_data_driven.py::TestFileExposureJson::test_sensitive_path_blocked_json[config_bak]

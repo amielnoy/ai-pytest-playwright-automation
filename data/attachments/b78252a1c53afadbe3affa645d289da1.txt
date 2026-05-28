@@ -1,0 +1,3 @@
+2026-05-28 12:28:47,491 | INFO     | ai_automation.test_register_post_empty_first_name | START tests/unit/test_opencart_fallback.py::TestRouteDispatcher::test_register_post_empty_first_name
+2026-05-28 12:28:47,493 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-28 12:28:47,494 | INFO     | ai_automation.test_register_post_empty_first_name | END   tests/unit/test_opencart_fallback.py::TestRouteDispatcher::test_register_post_empty_first_name

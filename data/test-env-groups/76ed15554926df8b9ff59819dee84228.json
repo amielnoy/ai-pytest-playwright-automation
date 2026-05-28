@@ -1,1 +1,1 @@
-{"id":"76ed15554926df8b9ff59819dee84228","fullName":"tests.api.test_pentest.TestInfoDisclosurePentest#test_git_directory_is_blocked","name":".git/ directory is blocked by the server","status":"passed","testResultsByEnv":{"default":"6c78a8245bd03d31547605d92558a751"}}
+{"id":"76ed15554926df8b9ff59819dee84228","fullName":"tests.api.test_pentest.TestInfoDisclosurePentest#test_git_directory_is_blocked","name":".git/ directory is blocked by the server","status":"passed","testResultsByEnv":{"default":"2d1a9be76f3db1418da057291fe01f8c"}}

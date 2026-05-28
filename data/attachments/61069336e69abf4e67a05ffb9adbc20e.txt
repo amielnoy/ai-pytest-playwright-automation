@@ -1,0 +1,6 @@
+INFO     ai_automation.test_wishlist_requires_authentication:conftest.py:296 START tests/api/test_pentest.py::TestAccessControlPentest::test_wishlist_requires_authentication
+INFO     ai_automation.pentest:test_pentest.py:442 Step: GET account/wishlist without credentials
+INFO     ai_automation.pentest:test_pentest.py:446 Step: Assert login page shown and My Wish List absent
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_wishlist_requires_authentication:conftest.py:298 END   tests/api/test_pentest.py::TestAccessControlPentest::test_wishlist_requires_authentication

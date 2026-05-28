@@ -1,0 +1,9 @@
+INFO     ai_automation.test_unauthenticated_account_page_does_not_expose_account_data:conftest.py:296 START tests/api/test_security_api.py::TestSessionSecurity::test_unauthenticated_account_page_does_not_expose_account_data
+INFO     ai_automation.security.api:test_security_api.py:244 Step: GET account/account with no credentials
+INFO     ai_automation.security.api:test_security_api.py:251 Step: Assert account-dashboard-only markers absent from response
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.security.api:test_security_api.py:260 Step: Assert login page markers present in response
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_unauthenticated_account_page_does_not_expose_account_data:conftest.py:298 END   tests/api/test_security_api.py::TestSessionSecurity::test_unauthenticated_account_page_does_not_expose_account_data

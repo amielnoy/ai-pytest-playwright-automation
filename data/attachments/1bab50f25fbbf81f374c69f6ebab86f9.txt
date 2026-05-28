@@ -1,0 +1,2 @@
+2026-05-28 12:28:47,353 | INFO     | ai_automation.test_search_html_no_results | START tests/unit/test_opencart_fallback.py::TestHTMLGenerators::test_search_html_no_results
+2026-05-28 12:28:47,354 | INFO     | ai_automation.test_search_html_no_results | END   tests/unit/test_opencart_fallback.py::TestHTMLGenerators::test_search_html_no_results

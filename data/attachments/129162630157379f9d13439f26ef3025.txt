@@ -1,0 +1,11 @@
+INFO     ai_automation.test_ldap_injection_in_search_handled_safely:conftest.py:296 START tests/api/test_pentest.py::TestInjectionPentest::test_ldap_injection_in_search_handled_safely
+INFO     ai_automation.pentest:test_pentest.py:152 Step: GET search with LDAP injection: '*)(uid=*))(|(uid=*'
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.pentest:test_pentest.py:156 Step: Assert 200 and no Fatal error or DB error markers
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_ldap_injection_in_search_handled_safely:conftest.py:298 END   tests/api/test_pentest.py::TestInjectionPentest::test_ldap_injection_in_search_handled_safely

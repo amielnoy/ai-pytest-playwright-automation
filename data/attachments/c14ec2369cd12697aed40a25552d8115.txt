@@ -1,0 +1,2 @@
+2026-05-28 12:28:47,512 | INFO     | ai_automation.test_blocked_path_returns_404 | START tests/unit/test_opencart_fallback.py::TestRouteDispatcher::test_blocked_path_returns_404
+2026-05-28 12:28:47,513 | INFO     | ai_automation.test_blocked_path_returns_404 | END   tests/unit/test_opencart_fallback.py::TestRouteDispatcher::test_blocked_path_returns_404

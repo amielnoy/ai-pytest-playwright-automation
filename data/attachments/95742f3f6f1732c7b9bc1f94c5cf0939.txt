@@ -1,0 +1,2 @@
+INFO     ai_automation.test_blank_field_is_isolated[last_name]:conftest.py:296 START tests/unit/test_factories.py::TestParametrizedMissingFields::test_blank_field_is_isolated[last_name]
+INFO     ai_automation.test_blank_field_is_isolated[last_name]:conftest.py:298 END   tests/unit/test_factories.py::TestParametrizedMissingFields::test_blank_field_is_isolated[last_name]

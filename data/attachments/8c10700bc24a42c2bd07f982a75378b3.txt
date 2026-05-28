@@ -1,0 +1,2 @@
+INFO     ai_automation.test_stored_products_have_descriptions:conftest.py:296 START tests/web-ui/test_system_coverage.py::TestStoredProductData::test_stored_products_have_descriptions@web-ui
+INFO     ai_automation.test_stored_products_have_descriptions:conftest.py:298 END   tests/web-ui/test_system_coverage.py::TestStoredProductData::test_stored_products_have_descriptions@web-ui

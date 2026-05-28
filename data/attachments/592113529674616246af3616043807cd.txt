@@ -1,0 +1,5 @@
+INFO     ai_automation.test_search_prices_within_budget_json[iPhone_max1000]:conftest.py:296 START tests/api/test_api_data_driven.py::TestSearchApiJson::test_search_prices_within_budget_json[iPhone_max1000]
+INFO     ai_automation.api.data_driven:test_api_data_driven.py:289 Step: JSON price-filter search for 'iPhone' (max=1000.0)
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_search_prices_within_budget_json[iPhone_max1000]:conftest.py:298 END   tests/api/test_api_data_driven.py::TestSearchApiJson::test_search_prices_within_budget_json[iPhone_max1000]

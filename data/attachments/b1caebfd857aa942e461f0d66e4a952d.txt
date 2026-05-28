@@ -1,0 +1,4 @@
+2026-05-28 12:28:43,712 | INFO     | ai_automation.test_sensitive_path_blocked_inline[server_status] | START tests/api/test_pentest_data_driven.py::TestFileExposureInline::test_sensitive_path_blocked_inline[server_status]
+2026-05-28 12:28:43,713 | INFO     | ai_automation.pentest.data_driven | Step: probe sensitive path https://tutorialsninja.com/demo/server-status
+2026-05-28 12:28:43,714 | INFO     | ai_automation.pentest.data_driven | Status for /server-status: 404
+2026-05-28 12:28:43,716 | INFO     | ai_automation.test_sensitive_path_blocked_inline[server_status] | END   tests/api/test_pentest_data_driven.py::TestFileExposureInline::test_sensitive_path_blocked_inline[server_status]

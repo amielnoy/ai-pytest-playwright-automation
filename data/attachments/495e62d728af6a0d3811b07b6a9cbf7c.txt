@@ -1,0 +1,2 @@
+INFO     ai_automation.test_fallback_used_when_primary_fails:conftest.py:296 START tests/unit/test_self_healing.py::TestSelfHealingResolution::test_fallback_used_when_primary_fails
+INFO     ai_automation.test_fallback_used_when_primary_fails:conftest.py:298 END   tests/unit/test_self_healing.py::TestSelfHealingResolution::test_fallback_used_when_primary_fails

@@ -1,0 +1,2 @@
+INFO     ai_automation.test_search_results_view_sort_and_cards_helpers:conftest.py:296 START tests/unit/test_page_objects.py::test_search_results_view_sort_and_cards_helpers
+INFO     ai_automation.test_search_results_view_sort_and_cards_helpers:conftest.py:298 END   tests/unit/test_page_objects.py::test_search_results_view_sort_and_cards_helpers

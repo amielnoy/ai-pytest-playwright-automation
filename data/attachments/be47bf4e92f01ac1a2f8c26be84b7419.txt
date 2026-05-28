@@ -1,0 +1,9 @@
+INFO     ai_automation.test_cart_add_from_search_json[iPhone]:conftest.py:296 START tests/api/test_api_data_driven.py::TestCartApiJson::test_cart_add_from_search_json[iPhone]
+INFO     ai_automation.api.data_driven:test_api_data_driven.py:337 Step: JSON cart add for 'iPhone'
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.api.data_driven:test_api_data_driven.py:341 Step: add product 40 from query 'iPhone'
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_cart_add_from_search_json[iPhone]:conftest.py:298 END   tests/api/test_api_data_driven.py::TestCartApiJson::test_cart_add_from_search_json[iPhone]

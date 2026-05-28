@@ -1,0 +1,11 @@
+INFO     ai_automation.test_command_injection_in_search_produces_no_os_output:conftest.py:296 START tests/api/test_pentest.py::TestInjectionPentest::test_command_injection_in_search_produces_no_os_output
+INFO     ai_automation.pentest:test_pentest.py:133 Step: GET search with command injection payload: 'MacBook$(whoami)'
+DEBUG    charset_normalizer:api.py:739 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.pentest:test_pentest.py:137 Step: Assert no uid=, root:, /bin/bash in response body
+DEBUG    charset_normalizer:api.py:739 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:739 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:739 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:739 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:739 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:739 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_command_injection_in_search_produces_no_os_output:conftest.py:298 END   tests/api/test_pentest.py::TestInjectionPentest::test_command_injection_in_search_produces_no_os_output

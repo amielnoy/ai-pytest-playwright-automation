@@ -1,0 +1,5 @@
+2026-05-28 12:28:39,749 | INFO     | ai_automation.test_cart_add_returns_ok_and_sets_session | START tests/api/test_api.py::TestCartApi::test_cart_add_returns_ok_and_sets_session
+2026-05-28 12:28:39,751 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-28 12:28:39,752 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-28 12:28:39,752 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-28 12:28:39,754 | INFO     | ai_automation.test_cart_add_returns_ok_and_sets_session | END   tests/api/test_api.py::TestCartApi::test_cart_add_returns_ok_and_sets_session

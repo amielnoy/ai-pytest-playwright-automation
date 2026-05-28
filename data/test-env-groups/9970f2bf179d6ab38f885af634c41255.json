@@ -1,1 +1,1 @@
-{"id":"9970f2bf179d6ab38f885af634c41255","fullName":"tests.unit.test_opencart_fallback.TestHTMLGenerators#test_login_html_has_form","name":"login_html() contains the login form elements","status":"passed","testResultsByEnv":{"default":"bcb074416be05d916ba61f867982a4d8"}}
+{"id":"9970f2bf179d6ab38f885af634c41255","fullName":"tests.unit.test_opencart_fallback.TestHTMLGenerators#test_login_html_has_form","name":"login_html() contains the login form elements","status":"passed","testResultsByEnv":{"default":"eef6404a4f37118e0d420136f82867c8"}}

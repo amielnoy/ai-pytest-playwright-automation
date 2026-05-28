@@ -1,0 +1,5 @@
+INFO     ai_automation.test_injection_payload_in_search_json[cmd_whoami]:conftest.py:296 START tests/api/test_pentest_data_driven.py::TestInjectionJson::test_injection_payload_in_search_json[cmd_whoami]
+INFO     ai_automation.pentest.data_driven:test_pentest_data_driven.py:405 Step: JSON injection search category=Command Injection payload='MacBook$(whoami)'
+DEBUG    charset_normalizer:api.py:739 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:739 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_injection_payload_in_search_json[cmd_whoami]:conftest.py:298 END   tests/api/test_pentest_data_driven.py::TestInjectionJson::test_injection_payload_in_search_json[cmd_whoami]

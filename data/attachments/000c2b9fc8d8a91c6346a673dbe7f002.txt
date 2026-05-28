@@ -1,0 +1,4 @@
+INFO     ai_automation.test_login_attack_no_crash_json[sql_email]:conftest.py:296 START tests/api/test_pentest_data_driven.py::TestAuthAttackJson::test_login_attack_no_crash_json[sql_email]
+INFO     ai_automation.pentest.data_driven:test_pentest_data_driven.py:439 Step: JSON auth attack id=sql_email email="' OR '1'='1'--@x.com"
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_login_attack_no_crash_json[sql_email]:conftest.py:298 END   tests/api/test_pentest_data_driven.py::TestAuthAttackJson::test_login_attack_no_crash_json[sql_email]

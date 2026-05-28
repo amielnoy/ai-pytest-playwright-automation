@@ -1,0 +1,2 @@
+INFO     ai_automation.test_rest_client_allows_per_request_timeout_override:conftest.py:296 START tests/unit/test_rest_client.py::test_rest_client_allows_per_request_timeout_override
+INFO     ai_automation.test_rest_client_allows_per_request_timeout_override:conftest.py:298 END   tests/unit/test_rest_client.py::test_rest_client_allows_per_request_timeout_override

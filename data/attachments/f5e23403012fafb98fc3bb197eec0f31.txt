@@ -1,0 +1,2 @@
+2026-05-28 12:28:47,594 | INFO     | ai_automation.test_healing_locator_keeps_primary_when_no_fallback_matches | START tests/unit/test_page_objects.py::test_healing_locator_keeps_primary_when_no_fallback_matches
+2026-05-28 12:28:47,596 | INFO     | ai_automation.test_healing_locator_keeps_primary_when_no_fallback_matches | END   tests/unit/test_page_objects.py::test_healing_locator_keeps_primary_when_no_fallback_matches

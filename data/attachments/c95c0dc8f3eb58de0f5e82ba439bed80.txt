@@ -1,0 +1,2 @@
+INFO     ai_automation.test_cart_summary_returns_zero_when_total_is_hidden_or_unparseable:conftest.py:296 START tests/unit/test_page_objects.py::test_cart_summary_returns_zero_when_total_is_hidden_or_unparseable
+INFO     ai_automation.test_cart_summary_returns_zero_when_total_is_hidden_or_unparseable:conftest.py:298 END   tests/unit/test_page_objects.py::test_cart_summary_returns_zero_when_total_is_hidden_or_unparseable

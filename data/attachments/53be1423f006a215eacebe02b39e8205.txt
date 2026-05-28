@@ -1,0 +1,2 @@
+INFO     ai_automation.test_self_heal_event_is_frozen_dataclass:conftest.py:296 START tests/unit/test_self_healing.py::TestHealEventRecording::test_self_heal_event_is_frozen_dataclass
+INFO     ai_automation.test_self_heal_event_is_frozen_dataclass:conftest.py:298 END   tests/unit/test_self_healing.py::TestHealEventRecording::test_self_heal_event_is_frozen_dataclass

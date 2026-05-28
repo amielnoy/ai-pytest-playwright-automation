@@ -1,0 +1,2 @@
+2026-05-28 12:28:46,240 | INFO     | ai_automation.test_asdict_has_all_keys | START tests/unit/test_factories.py::TestMakeRegistration::test_asdict_has_all_keys
+2026-05-28 12:28:46,242 | INFO     | ai_automation.test_asdict_has_all_keys | END   tests/unit/test_factories.py::TestMakeRegistration::test_asdict_has_all_keys

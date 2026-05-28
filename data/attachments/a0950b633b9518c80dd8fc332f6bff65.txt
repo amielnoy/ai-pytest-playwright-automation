@@ -1,0 +1,5 @@
+INFO     ai_automation.test_injection_payload_in_search_json[xss_img]:conftest.py:296 START tests/api/test_pentest_data_driven.py::TestInjectionJson::test_injection_payload_in_search_json[xss_img]
+INFO     ai_automation.pentest.data_driven:test_pentest_data_driven.py:405 Step: JSON injection search category=XSS payload='<img src=x onerror=alert(1)>'
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_injection_payload_in_search_json[xss_img]:conftest.py:298 END   tests/api/test_pentest_data_driven.py::TestInjectionJson::test_injection_payload_in_search_json[xss_img]

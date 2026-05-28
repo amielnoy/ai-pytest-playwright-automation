@@ -1,0 +1,2 @@
+INFO     ai_automation.test_events_list_forwarded:conftest.py:296 START tests/unit/test_self_healing.py::TestHealingLocatorFactory::test_events_list_forwarded
+INFO     ai_automation.test_events_list_forwarded:conftest.py:298 END   tests/unit/test_self_healing.py::TestHealingLocatorFactory::test_events_list_forwarded

@@ -1,0 +1,2 @@
+2026-05-28 12:28:48,471 | INFO     | ai_automation.test_no_fallbacks | START tests/unit/test_self_healing.py::TestHealingLocatorFactory::test_no_fallbacks
+2026-05-28 12:28:48,472 | INFO     | ai_automation.test_no_fallbacks | END   tests/unit/test_self_healing.py::TestHealingLocatorFactory::test_no_fallbacks

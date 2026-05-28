@@ -1,0 +1,2 @@
+INFO     ai_automation.test_search_respects_limit:conftest.py:296 START tests/web-ui/test_search_under_price.py::TestSearchUnderPrice::test_search_respects_limit@web-ui
+INFO     ai_automation.test_search_respects_limit:conftest.py:298 END   tests/web-ui/test_search_under_price.py::TestSearchUnderPrice::test_search_respects_limit@web-ui

@@ -1,0 +1,2 @@
+2026-05-28 12:28:45,913 | INFO     | ai_automation.test_filters_by_max_price | START tests/unit/test_api_client.py::TestParseCards::test_filters_by_max_price
+2026-05-28 12:28:45,914 | INFO     | ai_automation.test_filters_by_max_price | END   tests/unit/test_api_client.py::TestParseCards::test_filters_by_max_price

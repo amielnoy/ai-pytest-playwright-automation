@@ -1,0 +1,4 @@
+2026-05-28 12:28:48,113 | INFO     | ai_automation.test_report_test_status_returns_error_message_when_dir_does_not_exist | START tests/unit/test_report_test_status.py::test_report_test_status_returns_error_message_when_dir_does_not_exist
+2026-05-28 12:28:48,117 | INFO     | ai_automation.unit.test_report_test_status | Step: Call report_test_status with missing allure_dir=/tmp/pytest-of-runner/pytest-0/popen-gw3/test_report_test_status_return0/no-such-dir
+2026-05-28 12:28:48,117 | INFO     | ai_automation.unit.test_report_test_status | Step: Assert '❌' present in error response
+2026-05-28 12:28:48,118 | INFO     | ai_automation.test_report_test_status_returns_error_message_when_dir_does_not_exist | END   tests/unit/test_report_test_status.py::test_report_test_status_returns_error_message_when_dir_does_not_exist

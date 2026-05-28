@@ -1,0 +1,6 @@
+2026-05-28 12:28:48,139 | INFO     | ai_automation.test_overall_status_reflects_worst_case | START tests/unit/test_report_test_status.py::test_overall_status_reflects_worst_case
+2026-05-28 12:28:48,140 | INFO     | ai_automation.unit.test_report_test_status | Step: Assert overall=failed when failed>0
+2026-05-28 12:28:48,140 | INFO     | ai_automation.unit.test_report_test_status | Step: Assert overall=broken when broken>0 and no failed/flaky
+2026-05-28 12:28:48,140 | INFO     | ai_automation.unit.test_report_test_status | Step: Assert overall=passed when only passed/skipped
+2026-05-28 12:28:48,140 | INFO     | ai_automation.unit.test_report_test_status | Step: Assert overall=failed when flaky>0
+2026-05-28 12:28:48,145 | INFO     | ai_automation.test_overall_status_reflects_worst_case | END   tests/unit/test_report_test_status.py::test_overall_status_reflects_worst_case

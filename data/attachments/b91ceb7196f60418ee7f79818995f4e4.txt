@@ -1,0 +1,2 @@
+2026-05-28 12:28:46,015 | INFO     | ai_automation.test_raises_when_no_products | START tests/unit/test_api_client.py::TestCreateCart::test_raises_when_no_products
+2026-05-28 12:28:46,019 | INFO     | ai_automation.test_raises_when_no_products | END   tests/unit/test_api_client.py::TestCreateCart::test_raises_when_no_products

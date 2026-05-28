@@ -1,1 +1,1 @@
-{"id":"bb4ad20688aeda9a1dabfe59d004c7ac","fullName":"tests.unit.test_factories.TestMakeSearch#test_max_price_in_range","name":"default max_price is within 200–2000","status":"passed","testResultsByEnv":{"default":"178d6945086ceeaacdf73c9777ed86c3"}}
+{"id":"bb4ad20688aeda9a1dabfe59d004c7ac","fullName":"tests.unit.test_factories.TestMakeSearch#test_max_price_in_range","name":"default max_price is within 200–2000","status":"passed","testResultsByEnv":{"default":"c71ca6afae6b34a443c0d5ba27547ae3"}}

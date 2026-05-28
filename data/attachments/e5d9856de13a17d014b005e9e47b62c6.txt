@@ -1,0 +1,2 @@
+2026-05-28 12:28:56,349 | INFO     | ai_automation.test_registration_newsletter_radios_have_accessible_names | START tests/web-ui/test_accessibility_sanity.py::TestAccessibilitySanity::test_registration_newsletter_radios_have_accessible_names@web-ui
+2026-05-28 12:28:59,289 | INFO     | ai_automation.test_registration_newsletter_radios_have_accessible_names | END   tests/web-ui/test_accessibility_sanity.py::TestAccessibilitySanity::test_registration_newsletter_radios_have_accessible_names@web-ui

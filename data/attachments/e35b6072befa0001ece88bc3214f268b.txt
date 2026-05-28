@@ -1,0 +1,2 @@
+2026-05-28 12:30:51,408 | INFO     | ai_automation.test_home_header_hard | START tests/web-ui/test_soft_assertions_demo.py::TestSoftAssertionsDemo::test_home_header_hard@web-ui
+2026-05-28 12:30:54,003 | INFO     | ai_automation.test_home_header_hard | END   tests/web-ui/test_soft_assertions_demo.py::TestSoftAssertionsDemo::test_home_header_hard@web-ui

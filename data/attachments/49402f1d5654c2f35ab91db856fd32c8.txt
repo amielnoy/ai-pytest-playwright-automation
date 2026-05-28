@@ -1,0 +1,2 @@
+INFO     ai_automation.test_registration_form_accessibility_helpers_use_class_locators:conftest.py:296 START tests/unit/test_page_objects.py::test_registration_form_accessibility_helpers_use_class_locators
+INFO     ai_automation.test_registration_form_accessibility_helpers_use_class_locators:conftest.py:298 END   tests/unit/test_page_objects.py::test_registration_form_accessibility_helpers_use_class_locators

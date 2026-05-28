@@ -1,1 +1,1 @@
-{"id":"3a34e9c2fabb553cdae4ffb64947137e","fullName":"tests.unit.test_flows.TestCartFlow#test_open_cart_delegates","name":"open_cart() opens cart with min_items=1 and returns the cart page","status":"passed","testResultsByEnv":{"default":"1a2df87c51006022dbc7e4710bd698db"}}
+{"id":"3a34e9c2fabb553cdae4ffb64947137e","fullName":"tests.unit.test_flows.TestCartFlow#test_open_cart_delegates","name":"open_cart() opens cart with min_items=1 and returns the cart page","status":"passed","testResultsByEnv":{"default":"2fc77434ddbc1bdcad4990d0d0579647"}}

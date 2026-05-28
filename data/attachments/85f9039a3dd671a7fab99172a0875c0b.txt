@@ -1,0 +1,4 @@
+INFO     ai_automation.test_classify_detects_flaky_when_same_history_has_mixed_statuses:conftest.py:296 START tests/unit/test_report_test_status.py::test_classify_detects_flaky_when_same_history_has_mixed_statuses
+INFO     ai_automation.unit.test_report_test_status:test_report_test_status.py:136 Step: Call _classify on pass+fail pair with same historyId
+INFO     ai_automation.unit.test_report_test_status:test_report_test_status.py:140 Step: Assert exactly one entry with status=flaky
+INFO     ai_automation.test_classify_detects_flaky_when_same_history_has_mixed_statuses:conftest.py:298 END   tests/unit/test_report_test_status.py::test_classify_detects_flaky_when_same_history_has_mixed_statuses

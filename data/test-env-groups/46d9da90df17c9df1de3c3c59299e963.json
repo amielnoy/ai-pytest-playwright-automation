@@ -1,1 +1,1 @@
-{"id":"46d9da90df17c9df1de3c3c59299e963","fullName":"tests.api.test_api_data_driven.TestCartApiJson#test_cart_add_from_search_json","name":"Cart accepts product from [MacBook] – JSON","status":"passed","testResultsByEnv":{"default":"5ae5b40be90bcc26339f94dc8080be55"}}
+{"id":"46d9da90df17c9df1de3c3c59299e963","fullName":"tests.api.test_api_data_driven.TestCartApiJson#test_cart_add_from_search_json","name":"Cart accepts product from [Canon] – JSON","status":"passed","testResultsByEnv":{"default":"74d5cc0d8719df8285dcd68c230c5141"}}

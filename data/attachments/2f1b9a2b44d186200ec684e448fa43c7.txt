@@ -1,0 +1,2 @@
+INFO     ai_automation.test_last_property:conftest.py:296 START tests/unit/test_self_healing.py::TestSelfHealingProxies::test_last_property
+INFO     ai_automation.test_last_property:conftest.py:298 END   tests/unit/test_self_healing.py::TestSelfHealingProxies::test_last_property

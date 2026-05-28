@@ -1,0 +1,2 @@
+INFO     ai_automation.test_home_page_delegates_navigation_and_nav_actions:conftest.py:296 START tests/unit/test_page_objects.py::test_home_page_delegates_navigation_and_nav_actions
+INFO     ai_automation.test_home_page_delegates_navigation_and_nav_actions:conftest.py:298 END   tests/unit/test_page_objects.py::test_home_page_delegates_navigation_and_nav_actions

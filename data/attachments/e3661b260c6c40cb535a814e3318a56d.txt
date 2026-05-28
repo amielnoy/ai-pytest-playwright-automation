@@ -1,0 +1,2 @@
+INFO     ai_automation.test_calls_search_then_cart_add:conftest.py:296 START tests/unit/test_api_client.py::TestCreateCart::test_calls_search_then_cart_add
+INFO     ai_automation.test_calls_search_then_cart_add:conftest.py:298 END   tests/unit/test_api_client.py::TestCreateCart::test_calls_search_then_cart_add

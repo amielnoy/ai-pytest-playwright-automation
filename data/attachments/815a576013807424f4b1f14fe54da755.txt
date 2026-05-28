@@ -1,0 +1,9 @@
+INFO     ai_automation.test_login_oversized_password_does_not_crash:conftest.py:296 START tests/api/test_pentest.py::TestAuthenticationPentest::test_login_oversized_password_does_not_crash
+INFO     ai_automation.pentest:test_pentest.py:224 Step: POST account/login with 10008-byte password
+INFO     ai_automation.pentest:test_pentest.py:234 Step: Assert 200 and no PHP error markers in response
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_login_oversized_password_does_not_crash:conftest.py:298 END   tests/api/test_pentest.py::TestAuthenticationPentest::test_login_oversized_password_does_not_crash

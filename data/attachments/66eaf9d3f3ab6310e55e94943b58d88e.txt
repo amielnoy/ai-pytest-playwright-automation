@@ -1,0 +1,5 @@
+2026-05-28 12:28:43,715 | INFO     | ai_automation.test_injection_payload_in_search_json[sql_classic] | START tests/api/test_pentest_data_driven.py::TestInjectionJson::test_injection_payload_in_search_json[sql_classic]
+2026-05-28 12:28:43,717 | INFO     | ai_automation.pentest.data_driven | Step: JSON injection search category=SQL Injection payload="' OR '1'='1'--"
+2026-05-28 12:28:43,718 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-28 12:28:43,718 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-28 12:28:43,720 | INFO     | ai_automation.test_injection_payload_in_search_json[sql_classic] | END   tests/api/test_pentest_data_driven.py::TestInjectionJson::test_injection_payload_in_search_json[sql_classic]

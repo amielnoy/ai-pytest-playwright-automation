@@ -1,0 +1,2 @@
+INFO     ai_automation.test_login_returns_success_flag:conftest.py:296 START tests/unit/test_flows.py::TestLoginFlow::test_login_returns_success_flag
+INFO     ai_automation.test_login_returns_success_flag:conftest.py:298 END   tests/unit/test_flows.py::TestLoginFlow::test_login_returns_success_flag

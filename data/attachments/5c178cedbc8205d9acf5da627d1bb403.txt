@@ -1,0 +1,2 @@
+INFO     ai_automation.test_known_product_returns_total:conftest.py:296 START tests/unit/test_opencart_fallback.py::TestCartAddPayload::test_known_product_returns_total
+INFO     ai_automation.test_known_product_returns_total:conftest.py:298 END   tests/unit/test_opencart_fallback.py::TestCartAddPayload::test_known_product_returns_total

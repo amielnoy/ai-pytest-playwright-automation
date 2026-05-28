@@ -1,0 +1,2 @@
+INFO     ai_automation.test_password_matches_confirm:conftest.py:296 START tests/unit/test_factories.py::TestMakeRegistration::test_password_matches_confirm
+INFO     ai_automation.test_password_matches_confirm:conftest.py:298 END   tests/unit/test_factories.py::TestMakeRegistration::test_password_matches_confirm

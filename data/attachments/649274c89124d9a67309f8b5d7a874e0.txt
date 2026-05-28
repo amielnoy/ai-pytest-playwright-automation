@@ -1,0 +1,2 @@
+INFO     ai_automation.test_home_html_contains_store_marker:conftest.py:296 START tests/unit/test_opencart_fallback.py::TestHTMLGenerators::test_home_html_contains_store_marker
+INFO     ai_automation.test_home_html_contains_store_marker:conftest.py:298 END   tests/unit/test_opencart_fallback.py::TestHTMLGenerators::test_home_html_contains_store_marker

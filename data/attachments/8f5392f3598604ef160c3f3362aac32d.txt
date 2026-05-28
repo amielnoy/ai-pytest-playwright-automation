@@ -1,0 +1,2 @@
+INFO     ai_automation.test_invalid_login_warning:conftest.py:296 START tests/web-ui/test_sanity.py::TestSanity::test_invalid_login_warning@web-ui
+INFO     ai_automation.test_invalid_login_warning:conftest.py:298 END   tests/web-ui/test_sanity.py::TestSanity::test_invalid_login_warning@web-ui

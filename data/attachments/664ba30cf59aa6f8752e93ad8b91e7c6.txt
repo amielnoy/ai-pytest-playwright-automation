@@ -1,0 +1,2 @@
+2026-05-28 12:28:46,036 | INFO     | ai_automation.test_raises_when_all_above_max_price | START tests/unit/test_api_client.py::TestCreateCart::test_raises_when_all_above_max_price
+2026-05-28 12:28:46,040 | INFO     | ai_automation.test_raises_when_all_above_max_price | END   tests/unit/test_api_client.py::TestCreateCart::test_raises_when_all_above_max_price

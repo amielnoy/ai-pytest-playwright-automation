@@ -1,1 +1,1 @@
-{"id":"b93848bef05a53d1f5a08dfad91c6a3e","fullName":"tests.unit.test_factories.TestMakeRegistration#test_telephone_numeric","name":"telephone is 10 digits","status":"passed","testResultsByEnv":{"default":"d780207ce7d361a00868ecf03e633e65"}}
+{"id":"b93848bef05a53d1f5a08dfad91c6a3e","fullName":"tests.unit.test_factories.TestMakeRegistration#test_telephone_numeric","name":"telephone is 10 digits","status":"passed","testResultsByEnv":{"default":"e9e4ce3bbfeccbf0834473a08ecb2dff"}}

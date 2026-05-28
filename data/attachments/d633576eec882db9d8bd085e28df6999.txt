@@ -1,0 +1,2 @@
+2026-05-28 12:28:46,342 | INFO     | ai_automation.test_limit_in_range | START tests/unit/test_factories.py::TestMakeSearch::test_limit_in_range
+2026-05-28 12:28:46,344 | INFO     | ai_automation.test_limit_in_range | END   tests/unit/test_factories.py::TestMakeSearch::test_limit_in_range

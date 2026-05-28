@@ -1,0 +1,4 @@
+INFO     ai_automation.test_search_response_has_names_and_prices:conftest.py:296 START tests/contract/test_contracts.py::TestSearchContract::test_search_response_has_names_and_prices
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_search_response_has_names_and_prices:conftest.py:298 END   tests/contract/test_contracts.py::TestSearchContract::test_search_response_has_names_and_prices

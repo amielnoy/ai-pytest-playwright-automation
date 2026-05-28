@@ -1,1 +1,1 @@
-{"id":"affae5ff6a3772e52a0496159b41f6dd","fullName":"tests.api.test_chat_ai.TestChatEndpoint#test_chat_custom_system_prompt_is_respected","name":"Custom system prompt shapes the assistant's persona","status":"broken","testResultsByEnv":{"default":"8fdfdb20a7b9be7780c8a5a14b4e3b26"}}
+{"id":"affae5ff6a3772e52a0496159b41f6dd","fullName":"tests.api.test_chat_ai.TestChatEndpoint#test_chat_custom_system_prompt_is_respected","name":"Custom system prompt shapes the assistant's persona","status":"broken","testResultsByEnv":{"default":"a885cc9ab60e9b430774f0d2cfa7ead2"}}

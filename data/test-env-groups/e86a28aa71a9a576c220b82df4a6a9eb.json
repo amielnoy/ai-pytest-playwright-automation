@@ -1,1 +1,1 @@
-{"id":"e86a28aa71a9a576c220b82df4a6a9eb","fullName":"tests.unit.test_opencart_fallback.TestIsChallengedPage#test_415_is_challenge","name":"415 status code is detected as a challenge page","status":"passed","testResultsByEnv":{"default":"f353db69eced2baa0c1b506b0e246910"}}
+{"id":"e86a28aa71a9a576c220b82df4a6a9eb","fullName":"tests.unit.test_opencart_fallback.TestIsChallengedPage#test_415_is_challenge","name":"415 status code is detected as a challenge page","status":"passed","testResultsByEnv":{"default":"1b6ce1128f8278c90cf63741ecb9f4c6"}}

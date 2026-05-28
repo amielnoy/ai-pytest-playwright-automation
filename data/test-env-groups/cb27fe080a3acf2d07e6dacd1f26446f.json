@@ -1,1 +1,1 @@
-{"id":"cb27fe080a3acf2d07e6dacd1f26446f","fullName":"tests.unit.test_api_client.TestParseCards#test_extracts_fields","name":"_parse_cards extracts product_id, name, and price from valid HTML","status":"passed","testResultsByEnv":{"default":"ab561710d8323ecb854125df32bfee71"}}
+{"id":"cb27fe080a3acf2d07e6dacd1f26446f","fullName":"tests.unit.test_api_client.TestParseCards#test_extracts_fields","name":"_parse_cards extracts product_id, name, and price from valid HTML","status":"passed","testResultsByEnv":{"default":"ab93fb09dd4a6986f8d37829a79a1f52"}}

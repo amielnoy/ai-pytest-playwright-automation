@@ -1,0 +1,4 @@
+2026-05-28 12:28:43,181 | INFO     | ai_automation.test_open_redirect_via_currency_redirect_parameter_is_blocked | START tests/api/test_pentest.py::TestPentestFindings::test_open_redirect_via_currency_redirect_parameter_is_blocked
+2026-05-28 12:28:43,182 | INFO     | ai_automation.pentest | Step: POST common/currency/currency with redirect=https://evil.example.com/phishing
+2026-05-28 12:28:43,182 | INFO     | ai_automation.pentest | Step: Assert Location does not point to evil.example.com; got: 
+2026-05-28 12:28:43,183 | INFO     | ai_automation.test_open_redirect_via_currency_redirect_parameter_is_blocked | END   tests/api/test_pentest.py::TestPentestFindings::test_open_redirect_via_currency_redirect_parameter_is_blocked

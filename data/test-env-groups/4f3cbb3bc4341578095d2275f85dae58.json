@@ -1,1 +1,1 @@
-{"id":"4f3cbb3bc4341578095d2275f85dae58","fullName":"tests.unit.test_page_objects#test_registration_form_chooses_no_newsletter_by_default","name":"test_registration_form_chooses_no_newsletter_by_default","status":"passed","testResultsByEnv":{"default":"5d7f086a5fb606a4e6961a53d8baf517"}}
+{"id":"4f3cbb3bc4341578095d2275f85dae58","fullName":"tests.unit.test_page_objects#test_registration_form_chooses_no_newsletter_by_default","name":"test_registration_form_chooses_no_newsletter_by_default","status":"passed","testResultsByEnv":{"default":"6360a44485025e8f38a71191e52a7ff4"}}

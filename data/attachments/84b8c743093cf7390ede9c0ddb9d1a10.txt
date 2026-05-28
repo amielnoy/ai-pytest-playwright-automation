@@ -1,0 +1,5 @@
+INFO     ai_automation.test_terminal_report_contains_status_icons_for_all_non_zero_statuses:conftest.py:296 START tests/unit/test_report_test_status.py::test_terminal_report_contains_status_icons_for_all_non_zero_statuses
+INFO     ai_automation.unit.test_report_test_status:test_report_test_status.py:153 Step: Call _terminal_report on mixed classified results
+INFO     ai_automation.unit.test_report_test_status:test_report_test_status.py:157 Step: Assert ✅ ❌ ⚠️ ⏭️ 🔁 all present in terminal output
+INFO     ai_automation.unit.test_report_test_status:test_report_test_status.py:162 Step: Assert PASSED, FAILED, BROKEN, SKIPPED, FLAKY appear in report
+INFO     ai_automation.test_terminal_report_contains_status_icons_for_all_non_zero_statuses:conftest.py:298 END   tests/unit/test_report_test_status.py::test_terminal_report_contains_status_icons_for_all_non_zero_statuses

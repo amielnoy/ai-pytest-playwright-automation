@@ -1,0 +1,2 @@
+2026-05-28 12:28:47,656 | INFO     | ai_automation.test_home_page_delegates_navigation_and_nav_actions | START tests/unit/test_page_objects.py::test_home_page_delegates_navigation_and_nav_actions
+2026-05-28 12:28:47,660 | INFO     | ai_automation.test_home_page_delegates_navigation_and_nav_actions | END   tests/unit/test_page_objects.py::test_home_page_delegates_navigation_and_nav_actions

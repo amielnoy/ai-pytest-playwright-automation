@@ -1,0 +1,2 @@
+INFO     ai_automation.test_search_page_filter_controls_have_labels:conftest.py:296 START tests/web-ui/test_accessibility_sanity.py::TestAccessibilitySanity::test_search_page_filter_controls_have_labels@web-ui
+INFO     ai_automation.test_search_page_filter_controls_have_labels:conftest.py:298 END   tests/web-ui/test_accessibility_sanity.py::TestAccessibilitySanity::test_search_page_filter_controls_have_labels@web-ui

@@ -1,0 +1,5 @@
+2026-05-28 12:28:43,838 | INFO     | ai_automation.test_injection_payload_in_search_json[xss_script] | START tests/api/test_pentest_data_driven.py::TestInjectionJson::test_injection_payload_in_search_json[xss_script]
+2026-05-28 12:28:43,840 | INFO     | ai_automation.pentest.data_driven | Step: JSON injection search category=XSS payload='<script>alert(1)</script>'
+2026-05-28 12:28:43,840 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-28 12:28:43,841 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-28 12:28:43,844 | INFO     | ai_automation.test_injection_payload_in_search_json[xss_script] | END   tests/api/test_pentest_data_driven.py::TestInjectionJson::test_injection_payload_in_search_json[xss_script]

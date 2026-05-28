@@ -1,0 +1,2 @@
+2026-05-28 12:30:38,182 | INFO     | ai_automation.test_invalid_login_warning | START tests/web-ui/test_sanity.py::TestSanity::test_invalid_login_warning@web-ui
+2026-05-28 12:30:40,968 | INFO     | ai_automation.test_invalid_login_warning | END   tests/web-ui/test_sanity.py::TestSanity::test_invalid_login_warning@web-ui

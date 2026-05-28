@@ -1,0 +1,2 @@
+INFO     ai_automation.test_search_html_no_results:conftest.py:296 START tests/unit/test_opencart_fallback.py::TestHTMLGenerators::test_search_html_no_results
+INFO     ai_automation.test_search_html_no_results:conftest.py:298 END   tests/unit/test_opencart_fallback.py::TestHTMLGenerators::test_search_html_no_results

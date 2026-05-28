@@ -1,0 +1,8 @@
+INFO     ai_automation.test_get_to_cart_add_endpoint_does_not_add_item:conftest.py:296 START tests/api/test_security_api.py::TestCartSecurity::test_get_to_cart_add_endpoint_does_not_add_item
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.security.api:test_security_api.py:175 Step: GET to cart/add with product_id=43 - verb tampering attempt
+INFO     ai_automation.security.api:test_security_api.py:182 Step: Assert cart is still empty - GET must not add items
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_get_to_cart_add_endpoint_does_not_add_item:conftest.py:298 END   tests/api/test_security_api.py::TestCartSecurity::test_get_to_cart_add_endpoint_does_not_add_item

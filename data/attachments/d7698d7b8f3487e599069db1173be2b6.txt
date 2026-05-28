@@ -1,0 +1,2 @@
+INFO     ai_automation.test_all_known_products_reachable:conftest.py:296 START tests/unit/test_factories.py::TestSearchProductCoverage::test_all_known_products_reachable
+INFO     ai_automation.test_all_known_products_reachable:conftest.py:298 END   tests/unit/test_factories.py::TestSearchProductCoverage::test_all_known_products_reachable

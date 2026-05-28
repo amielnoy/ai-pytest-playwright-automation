@@ -1,0 +1,2 @@
+INFO     ai_automation.test_healing_locator_uses_fallback_and_records_event_once:conftest.py:296 START tests/unit/test_page_objects.py::test_healing_locator_uses_fallback_and_records_event_once
+INFO     ai_automation.test_healing_locator_uses_fallback_and_records_event_once:conftest.py:298 END   tests/unit/test_page_objects.py::test_healing_locator_uses_fallback_and_records_event_once

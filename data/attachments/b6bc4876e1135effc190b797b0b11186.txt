@@ -1,0 +1,2 @@
+2026-05-28 12:28:47,717 | INFO     | ai_automation.test_login_page_open_login_and_status_checks_use_class_locators | START tests/unit/test_page_objects.py::test_login_page_open_login_and_status_checks_use_class_locators
+2026-05-28 12:28:47,720 | INFO     | ai_automation.test_login_page_open_login_and_status_checks_use_class_locators | END   tests/unit/test_page_objects.py::test_login_page_open_login_and_status_checks_use_class_locators

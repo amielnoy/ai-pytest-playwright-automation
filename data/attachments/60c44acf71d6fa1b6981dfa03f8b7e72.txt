@@ -1,0 +1,2 @@
+INFO     ai_automation.test_overrides_forwarded:conftest.py:296 START tests/unit/test_factories.py::TestMakeCartScenario::test_overrides_forwarded
+INFO     ai_automation.test_overrides_forwarded:conftest.py:298 END   tests/unit/test_factories.py::TestMakeCartScenario::test_overrides_forwarded

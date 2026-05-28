@@ -1,0 +1,2 @@
+INFO     ai_automation.test_no_shared_state_credentials:conftest.py:296 START tests/unit/test_factories.py::TestFactoryIsolation::test_no_shared_state_credentials
+INFO     ai_automation.test_no_shared_state_credentials:conftest.py:298 END   tests/unit/test_factories.py::TestFactoryIsolation::test_no_shared_state_credentials
