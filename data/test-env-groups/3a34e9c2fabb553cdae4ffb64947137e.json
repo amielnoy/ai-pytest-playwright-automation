@@ -1,0 +1,1 @@
+{"id":"3a34e9c2fabb553cdae4ffb64947137e","fullName":"tests.unit.test_flows.TestCartFlow#test_open_cart_delegates","name":"open_cart() opens cart with min_items=1 and returns the cart page","status":"passed","testResultsByEnv":{"default":"86867a3a2efac1d21d63ecdfe311fd57"}}

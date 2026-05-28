@@ -1,0 +1,1 @@
+{"id":"de4e56ba2c7cf2c2335bb03ec69adb2b","fullName":"tests.unit.test_flows.TestLoginFlow#test_login_call_sequence","name":"login() opens home → navigates to login → submits credentials","status":"passed","testResultsByEnv":{"default":"992e396ae67e11bea60947e285cc57f1"}}

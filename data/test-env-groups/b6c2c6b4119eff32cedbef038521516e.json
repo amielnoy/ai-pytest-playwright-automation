@@ -1,0 +1,1 @@
+{"id":"b6c2c6b4119eff32cedbef038521516e","fullName":"tests.unit.test_opencart_fallback.TestSessionCookie#test_preserves_existing_cookie","name":"ensure_session_cookie returns the existing OCSESSID when present","status":"passed","testResultsByEnv":{"default":"74909ebc769b9698f3d8c8657c26a2f3"}}

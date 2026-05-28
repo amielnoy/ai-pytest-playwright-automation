@@ -1,0 +1,1 @@
+{"id":"f4f8b5b7f88d3120c473ff2d1542b370","fullName":"tests.unit.test_self_healing.TestSelfHealingResolution#test_primary_returned_after_wait_succeeds","name":"Primary count=0, wait_for succeeds and count becomes positive → primary returned","status":"passed","testResultsByEnv":{"default":"e329b119fed2a324464ba6f8fb9a41b5"}}

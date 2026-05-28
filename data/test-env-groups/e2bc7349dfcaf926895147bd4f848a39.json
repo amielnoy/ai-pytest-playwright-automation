@@ -1,0 +1,1 @@
+{"id":"e2bc7349dfcaf926895147bd4f848a39","fullName":"tests.unit.test_opencart_fallback.TestSessionCookie#test_new_sid_is_hex","name":"new OCSESSID is a non-empty hex string","status":"passed","testResultsByEnv":{"default":"816506c126a8b2b51321453078f90967"}}

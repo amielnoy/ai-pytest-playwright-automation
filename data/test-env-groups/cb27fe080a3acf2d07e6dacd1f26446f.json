@@ -1,0 +1,1 @@
+{"id":"cb27fe080a3acf2d07e6dacd1f26446f","fullName":"tests.unit.test_api_client.TestParseCards#test_extracts_fields","name":"_parse_cards extracts product_id, name, and price from valid HTML","status":"passed","testResultsByEnv":{"default":"6c46c1c2bdd6944646802fd2a9eff18e"}}

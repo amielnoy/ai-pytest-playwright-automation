@@ -1,0 +1,1 @@
+{"id":"6fa9343da15efcf0ae39f2db12488498","fullName":"tests.unit.test_opencart_fallback.TestRouteDispatcher#test_blocked_path_returns_404","name":"GET /.git/ returns 404 (blocked path)","status":"passed","testResultsByEnv":{"default":"3a849f46e0f812d34a4a2ecc400856f3"}}

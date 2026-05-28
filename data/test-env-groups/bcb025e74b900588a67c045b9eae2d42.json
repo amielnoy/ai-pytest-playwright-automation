@@ -1,0 +1,1 @@
+{"id":"bcb025e74b900588a67c045b9eae2d42","fullName":"tests.unit.test_self_healing.TestHealEventRecording#test_events_none_does_not_raise","name":"events=None → no AttributeError when fallback is used","status":"passed","testResultsByEnv":{"default":"cb96f1b1c00fbde8cabbbd47d8f5a757"}}

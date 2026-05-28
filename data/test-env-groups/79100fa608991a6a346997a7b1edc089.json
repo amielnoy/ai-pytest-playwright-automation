@@ -1,0 +1,1 @@
+{"id":"79100fa608991a6a346997a7b1edc089","fullName":"tests.unit.test_flows.TestLoginFlow#test_login_ordering","name":"login() calls home.open() before go_to_login() (ordering check)","status":"passed","testResultsByEnv":{"default":"d87903fe83f40a6f154953c12180ed30"}}

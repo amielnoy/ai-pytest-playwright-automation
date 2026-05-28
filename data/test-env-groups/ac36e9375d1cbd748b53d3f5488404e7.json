@@ -1,0 +1,1 @@
+{"id":"ac36e9375d1cbd748b53d3f5488404e7","fullName":"tests.unit.test_self_healing.TestSelfHealingResolution#test_second_fallback_used_when_first_fails","name":"First fallback fails, second fallback succeeds → second fallback returned","status":"passed","testResultsByEnv":{"default":"2b4293dd448f4fe3e0d2f95f24bae213"}}

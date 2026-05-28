@@ -1,0 +1,1 @@
+{"id":"01ba6cf388f7df6f029e51ee908b38af","fullName":"tests.unit.test_api_client.TestParseCards#test_filters_by_max_price","name":"_parse_cards filters out products above max_price","status":"passed","testResultsByEnv":{"default":"23846092858ac908eee30b1b03473e22"}}

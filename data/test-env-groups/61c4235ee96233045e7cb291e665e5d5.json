@@ -1,0 +1,1 @@
+{"id":"61c4235ee96233045e7cb291e665e5d5","fullName":"tests.unit.test_self_healing.TestHealingLocatorFactory#test_no_fallbacks","name":"healing_locator() with no fallbacks builds a SelfHealingLocator with empty lists","status":"passed","testResultsByEnv":{"default":"0d7cb13dfa281a3b63fa510a5a30aef2"}}

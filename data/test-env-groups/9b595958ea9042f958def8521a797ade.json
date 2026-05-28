@@ -1,0 +1,1 @@
+{"id":"9b595958ea9042f958def8521a797ade","fullName":"tests.unit.test_api_client.TestParseCards#test_respects_limit","name":"_parse_cards respects the limit parameter","status":"passed","testResultsByEnv":{"default":"c787d3520330347a33f30d6fd81e2183"}}

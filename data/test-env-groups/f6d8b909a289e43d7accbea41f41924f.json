@@ -1,1 +1,1 @@
-{"id":"f6d8b909a289e43d7accbea41f41924f","fullName":"tests.api.test_api_data_driven.TestSearchApiJson#test_search_returns_expected_product_json","name":"Search [Samsung] returns [Samsung] – JSON","status":"passed","testResultsByEnv":{"default":"186bf618027e1b27731f97a8e0004551"}}
+{"id":"f6d8b909a289e43d7accbea41f41924f","fullName":"tests.api.test_api_data_driven.TestSearchApiJson#test_search_returns_expected_product_json","name":"Search [Samsung] returns [Samsung] – JSON","status":"passed","testResultsByEnv":{"default":"f48ceace25cad2b93756f104a60ca484"}}

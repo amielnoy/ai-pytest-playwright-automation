@@ -1,0 +1,1 @@
+{"id":"a4c8b1412a426681157cfb7bef65ae40","fullName":"tests.unit.test_flows.TestRegistrationFlow#test_register_call_sequence","name":"register() opens home → navigates to register → submits form fields","status":"passed","testResultsByEnv":{"default":"c8f639de640961526edfa218bc4e7b5d"}}

@@ -1,0 +1,1 @@
+{"id":"06631d2a14cbdb7ada1d4ffc7256767e","fullName":"tests.unit.test_flows.TestSearchFlow#test_search_call_sequence","name":"search() opens home → submits query → returns results page","status":"passed","testResultsByEnv":{"default":"0149e1b4f31b39820c947f92803f2026"}}

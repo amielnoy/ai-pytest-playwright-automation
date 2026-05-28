@@ -1,0 +1,1 @@
+{"id":"67cbaf9f6d3f04f66c6b62f341ce34d9","fullName":"tests.unit.test_flows.TestRegistrationFlow#test_get_error_message_delegates","name":"get_error_message() delegates to register_page.get_error_message()","status":"passed","testResultsByEnv":{"default":"bb4dd2d6999db8f6b795252bb13c9454"}}

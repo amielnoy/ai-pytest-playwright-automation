@@ -1,0 +1,1 @@
+{"id":"bf4cdd8bbca58ed1f42e3a9e34871876","fullName":"tests.unit.test_api_client.TestCreateCart#test_calls_search_then_cart_add","name":"create_cart calls GET search URL then POST cart/add for each product","status":"passed","testResultsByEnv":{"default":"c5482d9e8090b79ba7a04a22c304e1ae"}}

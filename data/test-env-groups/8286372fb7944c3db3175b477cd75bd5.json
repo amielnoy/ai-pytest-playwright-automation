@@ -1,0 +1,1 @@
+{"id":"8286372fb7944c3db3175b477cd75bd5","fullName":"tests.unit.test_opencart_fallback.TestRouteDispatcher#test_cart_route","name":"GET checkout/cart returns 200 cart page","status":"passed","testResultsByEnv":{"default":"51a96065c3f2caac72037f9d3f7e6149"}}

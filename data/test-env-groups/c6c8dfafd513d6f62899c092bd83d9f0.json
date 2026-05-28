@@ -1,0 +1,1 @@
+{"id":"c6c8dfafd513d6f62899c092bd83d9f0","fullName":"tests.unit.test_flows.TestCartFlow#test_open_cart_custom_min_items","name":"open_cart() forwards min_items override to cart.open()","status":"passed","testResultsByEnv":{"default":"8157ea7f58f8a57de988bc32f79497aa"}}

@@ -1,0 +1,1 @@
+{"id":"18116c242a432c80f3dc48606e502ccb","fullName":"tests.unit.test_api_client.TestBuildSession#test_has_user_agent","name":"build_session() returns a RestClient with User-Agent header set","status":"passed","testResultsByEnv":{"default":"efd73e469c74303b737119c7f4e0dd0d"}}
