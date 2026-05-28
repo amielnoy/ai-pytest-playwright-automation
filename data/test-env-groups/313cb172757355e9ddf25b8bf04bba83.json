@@ -1,1 +1,1 @@
-{"id":"313cb172757355e9ddf25b8bf04bba83","fullName":"tests.api.test_api_data_driven.TestSearchApiJson#test_search_prices_within_budget_json","name":"Search [Canon] prices within max 500.0 – JSON","status":"passed","testResultsByEnv":{"default":"0ca4c943bc952910e495d66343e9366b"}}
+{"id":"313cb172757355e9ddf25b8bf04bba83","fullName":"tests.api.test_api_data_driven.TestSearchApiJson#test_search_prices_within_budget_json","name":"Search [MacBook] prices within max 2000.0 – JSON","status":"passed","testResultsByEnv":{"default":"0f5c323f8496a934befa0eb99a0ecc9d"}}

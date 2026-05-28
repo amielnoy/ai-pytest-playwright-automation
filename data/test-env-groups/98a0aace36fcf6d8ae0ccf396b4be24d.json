@@ -1,0 +1,1 @@
+{"id":"98a0aace36fcf6d8ae0ccf396b4be24d","fullName":"tests.unit.test_allure_failure_agent#test_result_is_flaky_when_history_contains_pass_and_fail","name":"test_result_is_flaky_when_history_contains_pass_and_fail","status":"passed","testResultsByEnv":{"default":"799c1428137f90d5dec98eba5f5880fb"}}
