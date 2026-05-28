@@ -246,15 +246,15 @@ def _build_llm_prompt(context: dict[str, Any]) -> str:
 
 
 def _classify_with_llm(context: dict[str, Any], model: str, api_key: str) -> dict[str, Any]:
-    client = anthropic.Anthropic(api_key=api_key)
+    client = Groq(api_key=api_key)
     prompt = _build_llm_prompt(context)
-    response = client.messages.create(
+    response = client.chat.completions.create(
         model=model,
         messages=[{"role": "user", "content": prompt}],
         max_tokens=600,
     )
 
-    text = response.content[0].text.strip()
+    text = response.choices[0].message.content.strip()
     data = _extract_json(text)
     if isinstance(data, dict) and data.get("category") in _CATEGORIES:
         return {
@@ -272,6 +272,16 @@ def _classify_with_llm(context: dict[str, Any], model: str, api_key: str) -> dic
     }
 
 
+def _print_banner(allure_dir: Path, use_llm: bool, model: str) -> None:
+    print("=" * 70)
+    print("  Allure Failure Analysis Agent")
+    print("=" * 70)
+    print(f"  Allure dir : {allure_dir}")
+    ai_label = f"enabled — {model or _DEFAULT_MODEL}" if use_llm else "disabled (heuristic only)"
+    print(f"  AI mode    : {ai_label}")
+    print("=" * 70)
+
+
 def analyze_allure_results(
     allure_dir: str = "",
     use_llm: bool = True,
@@ -282,30 +292,41 @@ def analyze_allure_results(
     if not resolved_dir.exists():
         raise FileNotFoundError(f"Allure results directory not found: {resolved_dir}")
 
+    _print_banner(resolved_dir, use_llm, model)
+
     results = _load_allure_results(resolved_dir)
+    if not results:
+        print("\n  No result files found in allure-results/.")
+        print("  Run your tests first:  pytest --alluredir=allure-results\n")
+        return []
+
     history_map: dict[str, list[dict[str, Any]]] = {}
     for raw in results:
         history_id = raw.get("historyId") or raw.get("uuid") or ""
         history_map.setdefault(history_id, []).append(raw)
 
+    print(f"\n  Found {len(results)} result file(s). Processing...\n")
+
     outputs: list[dict[str, Any]] = []
-    for raw in results:
+    for idx, raw in enumerate(results, 1):
         context = _extract_failure_context(raw)
-        # Build RAG context: include recent history entries and small attachment excerpts
+        name_label = (context["full_name"] or context["name"] or "unnamed")[:60]
+        status = _normalize_text(context.get("status"))
+        print(f"  [{idx:>3}/{len(results)}] {status.upper():<8}  {name_label}")
+
         history_id = raw.get("historyId") or raw.get("uuid") or ""
         related_texts: list[str] = []
         for h in history_map.get(history_id, []):
             if h is raw:
                 continue
             try:
-                name = h.get("fullName") or h.get("name") or ""
-                status = _normalize_text(h.get("status"))
-                msg = _normalize_text((h.get("statusDetails") or {}).get("message"))
-                related_texts.append(f"{name} | {status} | {msg}")
+                hname = h.get("fullName") or h.get("name") or ""
+                hstatus = _normalize_text(h.get("status"))
+                hmsg = _normalize_text((h.get("statusDetails") or {}).get("message"))
+                related_texts.append(f"{hname} | {hstatus} | {hmsg}")
             except Exception:
                 continue
 
-        # Attachments: try to read small text attachments from the allure dir
         attachments_excerpt: list[str] = []
         for att in (raw.get("attachments") or []):
             src = att.get("source") or att.get("name")
@@ -323,6 +344,7 @@ def analyze_allure_results(
             context["rag"] = "\n".join(related_texts)
         if attachments_excerpt:
             context["attachments_text"] = "\n---\n".join(attachments_excerpt)
+
         classification = "flaky" if _result_is_flaky(raw, history_map) else _classify_failure_heuristic(context)
         details = {
             "name": context["name"],
@@ -335,54 +357,84 @@ def analyze_allure_results(
             "summary": "",
         }
 
-        # By default, when AI is enabled we run the RAG LLM on any failing test
-        # (i.e., not `passed`) so that the model can provide a classification
-        # and summary informed by historical context/attachments.
-        if use_llm and _normalize_text(context.get("status")) != "passed":
+        if use_llm and status != "passed":
             if api_key is None:
-                api_key = os.environ.get("ANTHROPIC_API_KEY", "")
+                api_key = os.environ.get("GROQ_API_KEY", "")
             if api_key:
+                print(f"           -> querying AI ({model})...")
                 llm_data = _classify_with_llm(context, model=model, api_key=api_key)
                 details["classification"] = llm_data["category"]
                 details["summary"] = llm_data["summary"]
                 details["confidence"] = llm_data["confidence"]
                 details["extraction"] = llm_data.get("extraction", "")
+                print(f"           -> classified: {details['classification']} ({details['confidence']} confidence)")
             else:
-                details["summary"] = "No ANTHROPIC_API_KEY configured."
+                details["summary"] = "No GROQ_API_KEY configured."
                 details["confidence"] = "low"
+                print("           -> skipped AI (no GROQ_API_KEY)")
 
         outputs.append(details)
+
     return outputs
 
 
 def format_analysis_report(analysis: list[dict[str, Any]]) -> str:
-    lines = ["Allure failure classification report:" ]
+    if not analysis:
+        return ""
+
+    from collections import Counter
+    counts: Counter = Counter(item["classification"] for item in analysis)
+
+    lines = [
+        "",
+        "=" * 70,
+        "  RESULTS",
+        "=" * 70,
+    ]
+
     for item in analysis:
-        lines.append("""
-        ----------------------------------------
-        Test: {name}
-        Full name: {full_name}
-        Status: {status}
-        Classification: {classification}
-        Confidence: {confidence}
-        Summary: {summary}
-        Message: {message}
-        Trace: {trace}
-        """.strip().format(**item))
+        lines.append("")
+        lines.append(f"  Test       : {item['full_name'] or item['name']}")
+        lines.append(f"  Status     : {item['status'].upper()}")
+        lines.append(f"  Category   : {item['classification']}  [{item['confidence']}]")
+        if item.get("summary"):
+            lines.append(f"  Summary    : {item['summary']}")
+        if item.get("message"):
+            lines.append(f"  Message    : {item['message'][:200]}")
+        if item.get("trace"):
+            first_trace_line = item["trace"].splitlines()[0] if item["trace"] else ""
+            lines.append(f"  Trace      : {first_trace_line[:200]}")
+        lines.append("  " + "-" * 68)
+
+    lines += [
+        "",
+        "=" * 70,
+        "  SUMMARY",
+        "=" * 70,
+    ]
+    total = len(analysis)
+    for category, count in sorted(counts.items(), key=lambda x: -x[1]):
+        bar = "#" * count
+        lines.append(f"  {category:<20} {count:>4}  {bar}")
+    lines.append(f"  {'TOTAL':<20} {total:>4}")
+    lines.append("=" * 70)
+
     return "\n".join(lines)
 
 
 def run(
     allure_dir: str = "",
     no_ai: bool = False,
-    model: str = _DEFAULT_MODEL,
+    model: str | None = None,
     api_key: str | None = None,
 ) -> int:
+    resolved_model = model or _DEFAULT_MODEL
+    resolved_key = api_key or os.environ.get("GROQ_API_KEY") or None
     analysis = analyze_allure_results(
         allure_dir=allure_dir,
         use_llm=not no_ai,
-        model=model,
-        api_key=api_key,
+        model=resolved_model,
+        api_key=resolved_key,
     )
     print(format_analysis_report(analysis))
     return 0
@@ -395,8 +447,8 @@ if __name__ == "__main__":
         description="Classify Allure failure root causes using heuristics and optional AI.")
     parser.add_argument("--allure-dir", default="", help="Path to allure-results directory")
     parser.add_argument("--no-ai", action="store_true", help="Do not call Anthropic; use heuristic classification only")
-    parser.add_argument("--model", default=_DEFAULT_MODEL, help="Anthropic model to use for RAG classification")
-    parser.add_argument("--api-key", default=None, help="Anthropic API key to use instead of ANTHROPIC_API_KEY")
+    parser.add_argument("--model", default=_DEFAULT_MODEL, help="Groq model to use for RAG classification")
+    parser.add_argument("--api-key", default=None, help="Groq API key to use instead of GROQ_API_KEY")
     args = parser.parse_args()
 
     raise SystemExit(run(

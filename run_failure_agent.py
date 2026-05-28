@@ -19,17 +19,17 @@ def main() -> None:
     parser.add_argument(
         "--no-ai",
         action="store_true",
-        help="Use heuristic classification only; do not call Anthropic.",
+        help="Use heuristic classification only; do not call Groq.",
     )
     parser.add_argument(
         "--model",
         default=None,
-        help="Anthropic model to use for classification (default: claude-sonnet-4-6).",
+        help="Groq model to use for classification (default: llama-3.3-70b-versatile).",
     )
     parser.add_argument(
         "--api-key",
         default=None,
-        help="Anthropic API key to use instead of ANTHROPIC_API_KEY.",
+        help="Groq API key to use instead of GROQ_API_KEY.",
     )
     args = parser.parse_args()
 

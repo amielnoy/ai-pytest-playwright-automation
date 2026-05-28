@@ -43,6 +43,16 @@ The collected failures are sent to Claude in a single prompt:
 Claude returns a structured Markdown block ready to paste into a PR comment.
 The `post_pr_comment()` function uses the GitHub REST API to post it under the PR number from `$PR_NUMBER`.
 
+### RAG-enabled Allure failure analyzer
+
+This repository also ships a small RAG-enabled analyzer that reads `allure-results/`, gathers recent history snippets and small text attachments, and sends a retrieval-augmented prompt to an LLM for per-test classification. The analyzer runs with RAG by default and can be invoked from the repo root as:
+
+```bash
+./scripts/run_allure_failure_agent.sh --allure-dir allure-results
+```
+
+Pass `--no-ai` to run only the local heuristics without calling an LLM. Configure the LLM key with the `ANTHROPIC_API_KEY` environment variable or the `--api-key` flag.
+
 ---
 
 ## Heuristic Failure Bucketing

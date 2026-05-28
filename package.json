@@ -19,6 +19,7 @@
     "allure:generate": "rm -rf allure-report && allure generate ./allure-results -o ./allure-report",
     "allure:open": "allure open allure-report",
     "allure:watch": "allure watch allure-results",
+    "allure:analyze": "./scripts/run_allure_failure_agent.sh",
     "swagger:up": "docker compose -f docker-compose.automation.yml up swagger-ui -d",
     "swagger:open": "open http://localhost:8090"
   },

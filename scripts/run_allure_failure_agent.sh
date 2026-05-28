@@ -41,7 +41,7 @@ while [[ $# -gt 0 ]]; do
   shift
 done
 
-export ANTHROPIC_API_KEY="${API_KEY:-${ANTHROPIC_API_KEY:-}}"
+export GROQ_API_KEY="${API_KEY:-${GROQ_API_KEY:-}}"
 
 CMD=("${PYTHON_BIN}" "run_failure_agent.py" "--allure-dir" "${ALLURE_DIR}")
 if [[ -n "${NO_AI_FLAG}" ]]; then
