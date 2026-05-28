@@ -16,7 +16,7 @@ playwright install chromium
 
 **Run all tests:**
 ```bash
-pytest
+python3 -m pytest
 ```
 
 **Run by marker:**
@@ -54,6 +54,14 @@ docker run --rm -v "$PWD/docker-artifacts:/app/test-artifacts" \
 npm run allure:generate
 npm run allure:open
 ```
+
+**Run AI failure analysis agent:**
+
+```bash
+./scripts/run_allure_failure_agent.sh
+```
+
+Requires `GROQ_API_KEY` in `.env`. Pass `--no-ai` for heuristic-only mode.
 
 **Run full Compose stack (tests + monitoring + report):**
 ```bash

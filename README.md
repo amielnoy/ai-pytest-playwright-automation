@@ -293,16 +293,22 @@ Analysis CLI — RAG AI failure classifier
 
 There is a small agent that analyzes `allure-results/` and classifies failing tests using retrieval-augmented (RAG) AI by default. It gathers historical result snippets and small text attachments and includes them in the LLM prompt to improve classification accuracy.
 
+The agent uses the [Groq](https://console.groq.com) API (free tier) with `llama-3.3-70b-versatile` by default. Get a free key at console.groq.com and add it to `.env`:
+
+```text
+GROQ_API_KEY=your-key-here
+```
+
 Run from the repository root:
 
 ```bash
-./scripts/run_allure_failure_agent.sh --allure-dir allure-results
+./scripts/run_allure_failure_agent.sh
 ```
 
 Options:
 - `--no-ai` — run heuristics only (no LLM call)
-- `--model MODEL` — pass an Anthropic model name
-- `--api-key KEY` — provide an Anthropic API key for this run (or set `ANTHROPIC_API_KEY` in the environment)
+- `--model MODEL` — Groq model name to use (default: `llama-3.3-70b-versatile`)
+- `--api-key KEY` — provide a Groq API key for this run (or set `GROQ_API_KEY` in `.env`)
 
 There is also an npm shortcut:
 
