@@ -1,1 +1,1 @@
-{"id":"76a8f962d11c874200b99ecb2ee7165a","fullName":"tests.api.test_chat_ai.TestChatEndpoint#test_chat_response_is_non_empty_string","name":"Response field is a non-empty string","status":"broken","testResultsByEnv":{"default":"268016fd5c82c4e5f131475819f5dd46"}}
+{"id":"76a8f962d11c874200b99ecb2ee7165a","fullName":"tests.api.test_chat_ai.TestChatEndpoint#test_chat_response_is_non_empty_string","name":"Response field is a non-empty string","status":"broken","testResultsByEnv":{"default":"da53a5aa88a43a535c7658cbcbbd581f"}}

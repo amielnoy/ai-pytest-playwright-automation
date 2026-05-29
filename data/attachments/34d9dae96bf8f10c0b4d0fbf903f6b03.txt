@@ -1,2 +1,0 @@
-2026-05-28 12:28:47,846 | INFO     | ai_automation.test_alert_component_prefers_visible_banner_and_returns_empty_without_errors | START tests/unit/test_page_objects.py::test_alert_component_prefers_visible_banner_and_returns_empty_without_errors
-2026-05-28 12:28:47,853 | INFO     | ai_automation.test_alert_component_prefers_visible_banner_and_returns_empty_without_errors | END   tests/unit/test_page_objects.py::test_alert_component_prefers_visible_banner_and_returns_empty_without_errors

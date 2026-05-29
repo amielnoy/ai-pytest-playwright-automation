@@ -1,2 +1,0 @@
-2026-05-28 12:29:12,560 | INFO     | ai_automation.test_no_items_added_when_nothing_matches | START tests/web-ui/test_add_to_cart.py::TestAddItemsToCart::test_no_items_added_when_nothing_matches@web-ui
-2026-05-28 12:29:14,349 | INFO     | ai_automation.test_no_items_added_when_nothing_matches | END   tests/web-ui/test_add_to_cart.py::TestAddItemsToCart::test_no_items_added_when_nothing_matches@web-ui

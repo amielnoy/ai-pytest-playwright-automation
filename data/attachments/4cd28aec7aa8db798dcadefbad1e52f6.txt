@@ -1,4 +1,0 @@
-2026-05-28 12:28:43,633 | INFO     | ai_automation.test_sensitive_path_blocked_inline[git] | START tests/api/test_pentest_data_driven.py::TestFileExposureInline::test_sensitive_path_blocked_inline[git]
-2026-05-28 12:28:43,635 | INFO     | ai_automation.pentest.data_driven | Step: probe sensitive path https://tutorialsninja.com/demo/.git/
-2026-05-28 12:28:43,635 | INFO     | ai_automation.pentest.data_driven | Status for /.git/: 404
-2026-05-28 12:28:43,637 | INFO     | ai_automation.test_sensitive_path_blocked_inline[git] | END   tests/api/test_pentest_data_driven.py::TestFileExposureInline::test_sensitive_path_blocked_inline[git]

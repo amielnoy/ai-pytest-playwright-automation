@@ -1,5 +1,0 @@
-2026-05-28 12:28:43,220 | INFO     | ai_automation.test_sql_injection_in_search_inline[' UNION SELECT 1,2,3--] | START tests/api/test_pentest_data_driven.py::TestInjectionInline::test_sql_injection_in_search_inline[' UNION SELECT 1,2,3--]
-2026-05-28 12:28:43,222 | INFO     | ai_automation.pentest.data_driven | Step: SQL injection search payload="' UNION SELECT 1,2,3--"
-2026-05-28 12:28:43,224 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-28 12:28:43,225 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-28 12:28:43,227 | INFO     | ai_automation.test_sql_injection_in_search_inline[' UNION SELECT 1,2,3--] | END   tests/api/test_pentest_data_driven.py::TestInjectionInline::test_sql_injection_in_search_inline[' UNION SELECT 1,2,3--]

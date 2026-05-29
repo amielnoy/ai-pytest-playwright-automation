@@ -1,0 +1,2 @@
+2026-05-29 11:40:16,496 | INFO     | ai_automation.test_emails_are_unique | START tests/unit/test_factories.py::TestMakeInvalidCredentials::test_emails_are_unique
+2026-05-29 11:40:16,497 | INFO     | ai_automation.test_emails_are_unique | END   tests/unit/test_factories.py::TestMakeInvalidCredentials::test_emails_are_unique

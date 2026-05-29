@@ -1,1 +1,1 @@
-{"id":"23d3569428d8f0558d72d455d1f09c65","fullName":"tests.web-ui.test_registration.TestRegistration#test_register_new_user","name":"Successful new-user registration","status":"passed","testResultsByEnv":{"default":"f3ee588705e2dc7914ccb47241c9ab2c"}}
+{"id":"23d3569428d8f0558d72d455d1f09c65","fullName":"tests.web-ui.test_registration.TestRegistration#test_register_new_user","name":"Successful new-user registration","status":"passed","testResultsByEnv":{"default":"1a052c3966797cbb32cec96711748156"}}

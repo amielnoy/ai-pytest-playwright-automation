@@ -1,1 +1,1 @@
-{"id":"64332236a14a911edb0f7a1e979ac62c","fullName":"tests.web-ui.test_accessibility_sanity.TestAccessibilitySanity#test_product_detail_fields_have_labels","name":"Product detail form fields have labels","status":"passed","testResultsByEnv":{"default":"b4a571065cb16e446c6aab7e6128b7ec"}}
+{"id":"64332236a14a911edb0f7a1e979ac62c","fullName":"tests.web-ui.test_accessibility_sanity.TestAccessibilitySanity#test_product_detail_fields_have_labels","name":"Product detail form fields have labels","status":"passed","testResultsByEnv":{"default":"b875876fc22aaff1e71356b4771d3b46"}}

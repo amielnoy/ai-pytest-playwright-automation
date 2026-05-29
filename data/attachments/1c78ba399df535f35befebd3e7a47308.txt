@@ -1,0 +1,2 @@
+2026-05-29 11:40:16,537 | INFO     | ai_automation.test_password_min_length | START tests/unit/test_factories.py::TestRegistrationPasswordComplexity::test_password_min_length
+2026-05-29 11:40:16,541 | INFO     | ai_automation.test_password_min_length | END   tests/unit/test_factories.py::TestRegistrationPasswordComplexity::test_password_min_length

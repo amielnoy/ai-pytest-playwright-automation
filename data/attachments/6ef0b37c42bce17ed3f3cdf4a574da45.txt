@@ -1,0 +1,6 @@
+2026-05-29 11:40:15,365 | INFO     | ai_automation.test_path_traversal_in_search_does_not_expose_file_content | START tests/api/test_security_api.py::TestSearchSecurity::test_path_traversal_in_search_does_not_expose_file_content
+2026-05-29 11:40:15,367 | INFO     | ai_automation.security.api | Step: GET search with path traversal: '../../etc/passwd'
+2026-05-29 11:40:15,368 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:40:15,368 | INFO     | ai_automation.security.api | Step: Assert no filesystem markers in response body
+2026-05-29 11:40:15,369 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:40:15,371 | INFO     | ai_automation.test_path_traversal_in_search_does_not_expose_file_content | END   tests/api/test_security_api.py::TestSearchSecurity::test_path_traversal_in_search_does_not_expose_file_content

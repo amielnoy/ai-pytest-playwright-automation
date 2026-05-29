@@ -1,0 +1,2 @@
+2026-05-29 11:40:16,332 | INFO     | ai_automation.test_fields_present | START tests/unit/test_factories.py::TestMakeSearch::test_fields_present
+2026-05-29 11:40:16,333 | INFO     | ai_automation.test_fields_present | END   tests/unit/test_factories.py::TestMakeSearch::test_fields_present

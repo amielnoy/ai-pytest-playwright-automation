@@ -1,4 +1,0 @@
-2026-05-28 12:28:40,244 | INFO     | ai_automation.test_search_unknown_query_returns_no_product_cards | START tests/api/test_api_integrations.py::TestSearchApiIntegration::test_search_unknown_query_returns_no_product_cards
-2026-05-28 12:28:40,252 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-28 12:28:40,252 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-28 12:28:40,254 | INFO     | ai_automation.test_search_unknown_query_returns_no_product_cards | END   tests/api/test_api_integrations.py::TestSearchApiIntegration::test_search_unknown_query_returns_no_product_cards

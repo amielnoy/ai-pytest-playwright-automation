@@ -1,0 +1,2 @@
+2026-05-29 11:40:17,814 | INFO     | ai_automation.test_search_results_returns_empty_when_no_results_message_is_visible | START tests/unit/test_page_objects.py::test_search_results_returns_empty_when_no_results_message_is_visible
+2026-05-29 11:40:17,816 | INFO     | ai_automation.test_search_results_returns_empty_when_no_results_message_is_visible | END   tests/unit/test_page_objects.py::test_search_results_returns_empty_when_no_results_message_is_visible

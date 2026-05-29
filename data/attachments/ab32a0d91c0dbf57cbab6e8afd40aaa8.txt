@@ -1,0 +1,6 @@
+2026-05-29 11:40:09,996 | INFO     | ai_automation.test_search_returns_expected_product_inline[MacBook-MacBook] | START tests/api/test_api_data_driven.py::TestSearchApiInline::test_search_returns_expected_product_inline[MacBook-MacBook]
+2026-05-29 11:40:09,998 | INFO     | ai_automation.api.data_driven | Step: search for 'MacBook'
+2026-05-29 11:40:09,999 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:40:09,999 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:40:09,999 | INFO     | ai_automation.api.data_driven | Found product names: ['MacBook', 'MacBook Pro']
+2026-05-29 11:40:10,001 | INFO     | ai_automation.test_search_returns_expected_product_inline[MacBook-MacBook] | END   tests/api/test_api_data_driven.py::TestSearchApiInline::test_search_returns_expected_product_inline[MacBook-MacBook]

@@ -1,1 +1,1 @@
-{"id":"cac87c9576cd48e865f6a9a5976773ac","fullName":"tests.api.test_pentest_data_driven.TestFileExposureJson#test_sensitive_path_blocked_json","name":"Sensitive path [/.git/] blocked – JSON","status":"passed","testResultsByEnv":{"default":"7aa6afb92aa7e4e8bbab3919282fab9b"}}
+{"id":"cac87c9576cd48e865f6a9a5976773ac","fullName":"tests.api.test_pentest_data_driven.TestFileExposureJson#test_sensitive_path_blocked_json","name":"Sensitive path [/config.php.bak] blocked – JSON","status":"passed","testResultsByEnv":{"default":"8715ce1e37be8f61fee32a62120d1314"}}

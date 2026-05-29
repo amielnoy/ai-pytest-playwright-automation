@@ -1,0 +1,2 @@
+2026-05-29 11:40:17,006 | INFO     | ai_automation.test_search_under_price_delegates | START tests/unit/test_flows.py::TestSearchFlow::test_search_under_price_delegates
+2026-05-29 11:40:17,008 | INFO     | ai_automation.test_search_under_price_delegates | END   tests/unit/test_flows.py::TestSearchFlow::test_search_under_price_delegates

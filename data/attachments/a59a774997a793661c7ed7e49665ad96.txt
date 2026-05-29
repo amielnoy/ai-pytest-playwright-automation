@@ -1,0 +1,4 @@
+2026-05-29 11:40:14,204 | INFO     | ai_automation.test_sensitive_path_blocked_json[htpasswd] | START tests/api/test_pentest_data_driven.py::TestFileExposureJson::test_sensitive_path_blocked_json[htpasswd]
+2026-05-29 11:40:14,205 | INFO     | ai_automation.pentest.data_driven | Step: JSON file exposure probe https://tutorialsninja.com/demo/.htpasswd
+2026-05-29 11:40:14,205 | INFO     | ai_automation.pentest.data_driven | Status for /.htpasswd: 404
+2026-05-29 11:40:14,206 | INFO     | ai_automation.test_sensitive_path_blocked_json[htpasswd] | END   tests/api/test_pentest_data_driven.py::TestFileExposureJson::test_sensitive_path_blocked_json[htpasswd]

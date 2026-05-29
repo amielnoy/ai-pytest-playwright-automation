@@ -1,5 +1,0 @@
-2026-05-28 12:28:48,265 | INFO     | ai_automation.test_cart_service_is_empty_returns_false_when_html_has_product_rows | START tests/unit/test_security_unit.py::test_cart_service_is_empty_returns_false_when_html_has_product_rows
-2026-05-28 12:28:48,266 | INFO     | ai_automation.security.unit | Step: Build CartService with RestClient, base_url=https://example.test
-2026-05-28 12:28:48,267 | INFO     | ai_automation.security.unit | Step: Call service.is_empty on HTML with product row content
-2026-05-28 12:28:48,267 | INFO     | ai_automation.security.unit | Step: Assert result is False
-2026-05-28 12:28:48,267 | INFO     | ai_automation.test_cart_service_is_empty_returns_false_when_html_has_product_rows | END   tests/unit/test_security_unit.py::test_cart_service_is_empty_returns_false_when_html_has_product_rows

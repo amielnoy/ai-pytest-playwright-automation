@@ -1,2 +1,0 @@
-2026-05-28 12:30:29,047 | INFO     | ai_automation.test_register_missing_fields | START tests/web-ui/test_registration.py::TestRegistration::test_register_missing_fields@web-ui
-2026-05-28 12:30:35,521 | INFO     | ai_automation.test_register_missing_fields | END   tests/web-ui/test_registration.py::TestRegistration::test_register_missing_fields@web-ui

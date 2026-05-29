@@ -1,2 +1,0 @@
-2026-05-28 12:28:47,225 | INFO     | ai_automation.test_preserves_existing_cookie | START tests/unit/test_opencart_fallback.py::TestSessionCookie::test_preserves_existing_cookie
-2026-05-28 12:28:47,226 | INFO     | ai_automation.test_preserves_existing_cookie | END   tests/unit/test_opencart_fallback.py::TestSessionCookie::test_preserves_existing_cookie

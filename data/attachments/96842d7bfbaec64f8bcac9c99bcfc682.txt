@@ -1,2 +1,0 @@
-2026-05-28 12:31:15,160 | INFO     | ai_automation.test_single_product_limit_yields_one_cart_item | START tests/web-ui/test_system_coverage.py::TestCartFlowCoverage::test_single_product_limit_yields_one_cart_item@web-ui
-2026-05-28 12:31:18,777 | INFO     | ai_automation.test_single_product_limit_yields_one_cart_item | END   tests/web-ui/test_system_coverage.py::TestCartFlowCoverage::test_single_product_limit_yields_one_cart_item@web-ui

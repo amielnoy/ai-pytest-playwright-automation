@@ -1,2 +1,0 @@
-2026-05-28 12:30:35,524 | INFO     | ai_automation.test_home_page_header_controls | START tests/web-ui/test_sanity.py::TestSanity::test_home_page_header_controls@web-ui
-2026-05-28 12:30:38,179 | INFO     | ai_automation.test_home_page_header_controls | END   tests/web-ui/test_sanity.py::TestSanity::test_home_page_header_controls@web-ui

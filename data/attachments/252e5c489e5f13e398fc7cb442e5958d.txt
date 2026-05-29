@@ -1,4 +1,0 @@
-2026-05-28 12:28:45,463 | INFO     | ai_automation.test_independent_sessions_receive_distinct_ocsessid | START tests/api/test_security_api.py::TestSessionSecurity::test_independent_sessions_receive_distinct_ocsessid
-2026-05-28 12:28:45,464 | INFO     | ai_automation.security.api | Step: Create session_a and session_b, GET https://tutorialsninja.com/demo with each
-2026-05-28 12:28:45,465 | INFO     | ai_automation.security.api | Step: Compare OCSESSID values across sessions
-2026-05-28 12:28:45,466 | INFO     | ai_automation.test_independent_sessions_receive_distinct_ocsessid | END   tests/api/test_security_api.py::TestSessionSecurity::test_independent_sessions_receive_distinct_ocsessid

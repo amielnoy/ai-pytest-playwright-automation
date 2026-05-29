@@ -1,1 +1,1 @@
-{"id":"01ba6cf388f7df6f029e51ee908b38af","fullName":"tests.unit.test_api_client.TestParseCards#test_filters_by_max_price","name":"_parse_cards filters out products above max_price","status":"passed","testResultsByEnv":{"default":"dba09640ec21178ef964eddb384ae05f"}}
+{"id":"01ba6cf388f7df6f029e51ee908b38af","fullName":"tests.unit.test_api_client.TestParseCards#test_filters_by_max_price","name":"_parse_cards filters out products above max_price","status":"passed","testResultsByEnv":{"default":"e308d4a9ffcb65b9008e74698678b3ab"}}

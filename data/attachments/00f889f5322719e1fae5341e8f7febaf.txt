@@ -1,0 +1,2 @@
+2026-05-29 11:42:00,311 | INFO     | ai_automation.test_full_page_aria_snapshot | START tests/web-ui/test_playwright_v160_features.py::TestAriaSnapshotsOnPage::test_full_page_aria_snapshot@web-ui
+2026-05-29 11:42:00,626 | INFO     | ai_automation.test_full_page_aria_snapshot | END   tests/web-ui/test_playwright_v160_features.py::TestAriaSnapshotsOnPage::test_full_page_aria_snapshot@web-ui

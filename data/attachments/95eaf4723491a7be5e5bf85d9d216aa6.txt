@@ -1,0 +1,2 @@
+2026-05-29 11:40:16,768 | INFO     | ai_automation.test_all_known_products_reachable | START tests/unit/test_factories.py::TestSearchProductCoverage::test_all_known_products_reachable
+2026-05-29 11:40:16,779 | INFO     | ai_automation.test_all_known_products_reachable | END   tests/unit/test_factories.py::TestSearchProductCoverage::test_all_known_products_reachable

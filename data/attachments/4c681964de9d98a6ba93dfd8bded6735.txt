@@ -1,7 +1,0 @@
-INFO     ai_automation.test_report_test_status_end_to_end_with_mixed_results:conftest.py:296 START tests/unit/test_report_test_status.py::test_report_test_status_end_to_end_with_mixed_results
-INFO     ai_automation.unit.test_report_test_status:test_report_test_status.py:246 Step: Call report_test_status(allure_dir=/tmp/pytest-of-runner/pytest-0/popen-gw2/test_report_test_status_end_to0, html_out=/tmp/pytest-of-runner/pytest-0/popen-gw2/test_report_test_status_end_to0/status.html, write_allure_entry=True)
-INFO     ai_automation.unit.test_report_test_status:test_report_test_status.py:257 Step: Assert HTML and Allure notes in output
-INFO     ai_automation.unit.test_report_test_status:test_report_test_status.py:262 Step: Assert /tmp/pytest-of-runner/pytest-0/popen-gw2/test_report_test_status_end_to0/status.html exists on disk
-INFO     ai_automation.unit.test_report_test_status:test_report_test_status.py:266 Step: Assert new *-result.json with fullName mcp.test_reporter exists
-INFO     ai_automation.unit.test_report_test_status:test_report_test_status.py:274 Step: Assert PASSED, FAILED, BROKEN, SKIPPED, FLAKY in output
-INFO     ai_automation.test_report_test_status_end_to_end_with_mixed_results:conftest.py:298 END   tests/unit/test_report_test_status.py::test_report_test_status_end_to_end_with_mixed_results

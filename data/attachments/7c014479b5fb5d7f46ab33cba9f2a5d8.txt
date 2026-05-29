@@ -1,0 +1,5 @@
+2026-05-29 11:40:13,895 | INFO     | ai_automation.test_injection_payload_in_search_json[ssti_jinja2] | START tests/api/test_pentest_data_driven.py::TestInjectionJson::test_injection_payload_in_search_json[ssti_jinja2]
+2026-05-29 11:40:13,897 | INFO     | ai_automation.pentest.data_driven | Step: JSON injection search category=SSTI payload='{{9999*9999}}'
+2026-05-29 11:40:13,899 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:40:13,900 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:40:13,902 | INFO     | ai_automation.test_injection_payload_in_search_json[ssti_jinja2] | END   tests/api/test_pentest_data_driven.py::TestInjectionJson::test_injection_payload_in_search_json[ssti_jinja2]

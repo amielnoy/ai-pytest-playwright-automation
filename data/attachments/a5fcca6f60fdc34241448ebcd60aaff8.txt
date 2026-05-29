@@ -1,2 +1,0 @@
-2026-05-28 12:28:45,833 | INFO     | ai_automation.test_result_is_flaky_when_history_contains_pass_and_fail | START tests/unit/test_allure_failure_agent.py::test_result_is_flaky_when_history_contains_pass_and_fail
-2026-05-28 12:28:45,834 | INFO     | ai_automation.test_result_is_flaky_when_history_contains_pass_and_fail | END   tests/unit/test_allure_failure_agent.py::test_result_is_flaky_when_history_contains_pass_and_fail

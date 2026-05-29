@@ -1,2 +1,0 @@
-2026-05-28 12:28:47,911 | INFO     | ai_automation.test_registration_form_fill_accept_submit_and_success_state | START tests/unit/test_page_objects.py::test_registration_form_fill_accept_submit_and_success_state
-2026-05-28 12:28:47,928 | INFO     | ai_automation.test_registration_form_fill_accept_submit_and_success_state | END   tests/unit/test_page_objects.py::test_registration_form_fill_accept_submit_and_success_state

@@ -1,1 +1,1 @@
-{"id":"bf4cdd8bbca58ed1f42e3a9e34871876","fullName":"tests.unit.test_api_client.TestCreateCart#test_calls_search_then_cart_add","name":"create_cart calls GET search URL then POST cart/add for each product","status":"passed","testResultsByEnv":{"default":"4a25b5e4de2e0b76375389ba4789d04a"}}
+{"id":"bf4cdd8bbca58ed1f42e3a9e34871876","fullName":"tests.unit.test_api_client.TestCreateCart#test_calls_search_then_cart_add","name":"create_cart calls GET search URL then POST cart/add for each product","status":"passed","testResultsByEnv":{"default":"5f38a59304a41fd71ae46e7d09f368ab"}}

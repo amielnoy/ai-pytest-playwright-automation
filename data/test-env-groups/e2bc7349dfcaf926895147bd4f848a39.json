@@ -1,1 +1,1 @@
-{"id":"e2bc7349dfcaf926895147bd4f848a39","fullName":"tests.unit.test_opencart_fallback.TestSessionCookie#test_new_sid_is_hex","name":"new OCSESSID is a non-empty hex string","status":"passed","testResultsByEnv":{"default":"86804c6662fdc1e97eb1d63ea104e315"}}
+{"id":"e2bc7349dfcaf926895147bd4f848a39","fullName":"tests.unit.test_opencart_fallback.TestSessionCookie#test_new_sid_is_hex","name":"new OCSESSID is a non-empty hex string","status":"passed","testResultsByEnv":{"default":"08d92cb70d419dad9a6e9103651834b1"}}

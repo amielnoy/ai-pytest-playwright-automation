@@ -1,3 +1,0 @@
-2026-05-28 12:28:47,476 | INFO     | ai_automation.test_register_route | START tests/unit/test_opencart_fallback.py::TestRouteDispatcher::test_register_route
-2026-05-28 12:28:47,477 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-28 12:28:47,478 | INFO     | ai_automation.test_register_route | END   tests/unit/test_opencart_fallback.py::TestRouteDispatcher::test_register_route

@@ -1,0 +1,2 @@
+2026-05-29 11:41:50,934 | INFO     | ai_automation.test_list_view_keeps_search_results_available | START tests/web-ui/test_navigation_and_empty_states.py::TestNavigationAndEmptyStates::test_list_view_keeps_search_results_available@web-ui
+2026-05-29 11:41:54,794 | INFO     | ai_automation.test_list_view_keeps_search_results_available | END   tests/web-ui/test_navigation_and_empty_states.py::TestNavigationAndEmptyStates::test_list_view_keeps_search_results_available@web-ui

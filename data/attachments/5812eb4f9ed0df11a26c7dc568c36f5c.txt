@@ -1,2 +1,0 @@
-2026-05-28 12:28:43,227 | INFO     | ai_automation.test_home_header_controls_have_accessible_names | START tests/web-ui/test_accessibility_sanity.py::TestAccessibilitySanity::test_home_header_controls_have_accessible_names@web-ui
-2026-05-28 12:28:46,060 | INFO     | ai_automation.test_home_header_controls_have_accessible_names | END   tests/web-ui/test_accessibility_sanity.py::TestAccessibilitySanity::test_home_header_controls_have_accessible_names@web-ui

@@ -1,5 +1,0 @@
-2026-05-28 12:28:48,223 | INFO     | ai_automation.test_rest_client_timeout_is_forwarded_on_every_request | START tests/unit/test_security_unit.py::test_rest_client_timeout_is_forwarded_on_every_request
-2026-05-28 12:28:48,223 | INFO     | ai_automation.security.unit | Step: Build RestClient(timeout=5) and swap in FakeSession
-2026-05-28 12:28:48,224 | INFO     | ai_automation.security.unit | Step: Invoke client.get and client.post
-2026-05-28 12:28:48,224 | INFO     | ai_automation.security.unit | Step: Assert timeout forwarded in GET and POST kwargs
-2026-05-28 12:28:48,224 | INFO     | ai_automation.test_rest_client_timeout_is_forwarded_on_every_request | END   tests/unit/test_security_unit.py::test_rest_client_timeout_is_forwarded_on_every_request

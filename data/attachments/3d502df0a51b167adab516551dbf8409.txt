@@ -1,0 +1,2 @@
+2026-05-29 11:40:10,459 | INFO     | ai_automation.test_home_page_declares_language | START tests/web-ui/test_accessibility_sanity.py::TestAccessibilitySanity::test_home_page_declares_language@web-ui
+2026-05-29 11:40:13,850 | INFO     | ai_automation.test_home_page_declares_language | END   tests/web-ui/test_accessibility_sanity.py::TestAccessibilitySanity::test_home_page_declares_language@web-ui

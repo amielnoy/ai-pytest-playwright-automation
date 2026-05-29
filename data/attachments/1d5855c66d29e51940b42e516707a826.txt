@@ -1,6 +1,0 @@
-2026-05-28 12:28:45,354 | INFO     | ai_automation.test_cart_add_with_sql_injection_product_id | START tests/api/test_security_api.py::TestCartSecurity::test_cart_add_with_sql_injection_product_id
-2026-05-28 12:28:45,355 | INFO     | ai_automation.security.api | Step: POST cart/add with SQL injection product_id: "' OR 1=1 --"
-2026-05-28 12:28:45,358 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-28 12:28:45,358 | INFO     | ai_automation.security.api | Step: Assert 200 and no DB error markers
-2026-05-28 12:28:45,358 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-28 12:28:45,363 | INFO     | ai_automation.test_cart_add_with_sql_injection_product_id | END   tests/api/test_security_api.py::TestCartSecurity::test_cart_add_with_sql_injection_product_id

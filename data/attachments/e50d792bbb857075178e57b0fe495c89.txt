@@ -1,2 +1,0 @@
-2026-05-28 12:28:46,856 | INFO     | ai_automation.test_login_ordering | START tests/unit/test_flows.py::TestLoginFlow::test_login_ordering
-2026-05-28 12:28:46,858 | INFO     | ai_automation.test_login_ordering | END   tests/unit/test_flows.py::TestLoginFlow::test_login_ordering

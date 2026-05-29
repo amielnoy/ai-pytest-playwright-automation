@@ -1,0 +1,6 @@
+2026-05-29 11:40:15,324 | INFO     | ai_automation.test_xss_script_tag_in_search_is_encoded_in_response | START tests/api/test_security_api.py::TestSearchSecurity::test_xss_script_tag_in_search_is_encoded_in_response
+2026-05-29 11:40:15,325 | INFO     | ai_automation.security.api | Step: GET search with XSS payload: '<script>alert(1)</script>'
+2026-05-29 11:40:15,326 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:40:15,326 | INFO     | ai_automation.security.api | Step: Assert raw <script>alert(1)</script> absent from response body
+2026-05-29 11:40:15,327 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:40:15,328 | INFO     | ai_automation.test_xss_script_tag_in_search_is_encoded_in_response | END   tests/api/test_security_api.py::TestSearchSecurity::test_xss_script_tag_in_search_is_encoded_in_response

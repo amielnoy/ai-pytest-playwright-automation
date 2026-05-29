@@ -1,5 +1,0 @@
-2026-05-28 12:28:43,233 | INFO     | ai_automation.test_sql_injection_in_search_inline[1'; DROP TABLE products;--] | START tests/api/test_pentest_data_driven.py::TestInjectionInline::test_sql_injection_in_search_inline[1'; DROP TABLE products;--]
-2026-05-28 12:28:43,235 | INFO     | ai_automation.pentest.data_driven | Step: SQL injection search payload="1'; DROP TABLE products;--"
-2026-05-28 12:28:43,237 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-28 12:28:43,237 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-28 12:28:43,238 | INFO     | ai_automation.test_sql_injection_in_search_inline[1'; DROP TABLE products;--] | END   tests/api/test_pentest_data_driven.py::TestInjectionInline::test_sql_injection_in_search_inline[1'; DROP TABLE products;--]

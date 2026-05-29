@@ -1,0 +1,2 @@
+2026-05-29 11:40:17,631 | INFO     | ai_automation.test_base_component_stores_page | START tests/unit/test_page_objects.py::test_base_component_stores_page
+2026-05-29 11:40:17,632 | INFO     | ai_automation.test_base_component_stores_page | END   tests/unit/test_page_objects.py::test_base_component_stores_page

@@ -1,2 +1,0 @@
-2026-05-28 12:28:46,486 | INFO     | ai_automation.test_password_has_uppercase | START tests/unit/test_factories.py::TestRegistrationPasswordComplexity::test_password_has_uppercase
-2026-05-28 12:28:46,489 | INFO     | ai_automation.test_password_has_uppercase | END   tests/unit/test_factories.py::TestRegistrationPasswordComplexity::test_password_has_uppercase

@@ -1,0 +1,2 @@
+2026-05-29 11:40:16,455 | INFO     | ai_automation.test_overrides_forwarded | START tests/unit/test_factories.py::TestMakeCartScenario::test_overrides_forwarded
+2026-05-29 11:40:16,455 | INFO     | ai_automation.test_overrides_forwarded | END   tests/unit/test_factories.py::TestMakeCartScenario::test_overrides_forwarded

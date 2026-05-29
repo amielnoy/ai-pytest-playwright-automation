@@ -1,9 +1,0 @@
-2026-05-28 12:28:40,040 | INFO     | ai_automation.test_cart_total_positive_after_add_inline[MacBook] | START tests/api/test_api_data_driven.py::TestCartApiInline::test_cart_total_positive_after_add_inline[MacBook]
-2026-05-28 12:28:40,042 | INFO     | ai_automation.api.data_driven | Step: add 'MacBook' product to cart
-2026-05-28 12:28:40,043 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-28 12:28:40,043 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-28 12:28:40,044 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-28 12:28:40,044 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-28 12:28:40,044 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-28 12:28:40,045 | INFO     | ai_automation.api.data_driven | Cart total after adding 'MacBook': 602.0
-2026-05-28 12:28:40,047 | INFO     | ai_automation.test_cart_total_positive_after_add_inline[MacBook] | END   tests/api/test_api_data_driven.py::TestCartApiInline::test_cart_total_positive_after_add_inline[MacBook]

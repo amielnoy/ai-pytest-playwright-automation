@@ -1,0 +1,4 @@
+2026-05-29 11:40:13,352 | INFO     | ai_automation.test_x_frame_options_header_present_to_prevent_clickjacking | START tests/api/test_pentest.py::TestPentestFindings::test_x_frame_options_header_present_to_prevent_clickjacking
+2026-05-29 11:40:13,353 | INFO     | ai_automation.pentest | Step: GET account/login and check X-Frame-Options header
+2026-05-29 11:40:13,353 | INFO     | ai_automation.pentest | Step: Assert X-Frame-Options present; got: 'NOT PRESENT'
+2026-05-29 11:40:13,367 | INFO     | ai_automation.test_x_frame_options_header_present_to_prevent_clickjacking | END   tests/api/test_pentest.py::TestPentestFindings::test_x_frame_options_header_present_to_prevent_clickjacking

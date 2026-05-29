@@ -1,0 +1,2 @@
+2026-05-29 11:40:17,262 | INFO     | ai_automation.test_all_products_findable | START tests/unit/test_opencart_fallback.py::TestProductById::test_all_products_findable
+2026-05-29 11:40:17,262 | INFO     | ai_automation.test_all_products_findable | END   tests/unit/test_opencart_fallback.py::TestProductById::test_all_products_findable

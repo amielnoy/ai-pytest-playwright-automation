@@ -1,5 +1,0 @@
-2026-05-28 12:28:40,164 | INFO     | ai_automation.test_empty_search_returns_200_no_cards_json[empty_0] | START tests/api/test_api_data_driven.py::TestSearchApiJson::test_empty_search_returns_200_no_cards_json[empty_0]
-2026-05-28 12:28:40,165 | INFO     | ai_automation.api.data_driven | Step: JSON empty-result search for '__nonexistent_product_xyz_999__'
-2026-05-28 12:28:40,168 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-28 12:28:40,168 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-28 12:28:40,170 | INFO     | ai_automation.test_empty_search_returns_200_no_cards_json[empty_0] | END   tests/api/test_api_data_driven.py::TestSearchApiJson::test_empty_search_returns_200_no_cards_json[empty_0]

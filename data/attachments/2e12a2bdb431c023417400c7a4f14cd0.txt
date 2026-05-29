@@ -1,0 +1,2 @@
+2026-05-29 11:40:17,404 | INFO     | ai_automation.test_home_html_contains_store_marker | START tests/unit/test_opencart_fallback.py::TestHTMLGenerators::test_home_html_contains_store_marker
+2026-05-29 11:40:17,405 | INFO     | ai_automation.test_home_html_contains_store_marker | END   tests/unit/test_opencart_fallback.py::TestHTMLGenerators::test_home_html_contains_store_marker

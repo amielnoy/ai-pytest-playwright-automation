@@ -1,2 +1,0 @@
-2026-05-28 12:28:46,944 | INFO     | ai_automation.test_search_under_price_default_limit | START tests/unit/test_flows.py::TestSearchFlow::test_search_under_price_default_limit
-2026-05-28 12:28:46,945 | INFO     | ai_automation.test_search_under_price_default_limit | END   tests/unit/test_flows.py::TestSearchFlow::test_search_under_price_default_limit

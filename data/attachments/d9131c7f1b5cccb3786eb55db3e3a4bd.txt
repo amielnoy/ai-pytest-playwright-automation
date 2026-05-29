@@ -1,2 +1,0 @@
-2026-05-28 12:28:48,496 | INFO     | ai_automation.test_events_list_forwarded | START tests/unit/test_self_healing.py::TestHealingLocatorFactory::test_events_list_forwarded
-2026-05-28 12:28:48,497 | INFO     | ai_automation.test_events_list_forwarded | END   tests/unit/test_self_healing.py::TestHealingLocatorFactory::test_events_list_forwarded

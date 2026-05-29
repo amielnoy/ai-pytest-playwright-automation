@@ -1,0 +1,2 @@
+2026-05-29 11:40:16,891 | INFO     | ai_automation.test_login_returns_success_flag | START tests/unit/test_flows.py::TestLoginFlow::test_login_returns_success_flag
+2026-05-29 11:40:16,893 | INFO     | ai_automation.test_login_returns_success_flag | END   tests/unit/test_flows.py::TestLoginFlow::test_login_returns_success_flag

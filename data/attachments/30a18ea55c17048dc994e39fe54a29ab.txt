@@ -1,5 +1,0 @@
-2026-05-28 12:28:43,017 | INFO     | ai_automation.test_phpinfo_page_not_accessible | START tests/api/test_pentest.py::TestInfoDisclosurePentest::test_phpinfo_page_not_accessible
-2026-05-28 12:28:43,018 | INFO     | ai_automation.pentest | Step: GET https://tutorialsninja.com/demo/phpinfo.php checking for exposed phpinfo
-2026-05-28 12:28:43,018 | INFO     | ai_automation.pentest | Step: Assert 404 and no 'PHP Version' in body
-2026-05-28 12:28:43,018 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-28 12:28:43,019 | INFO     | ai_automation.test_phpinfo_page_not_accessible | END   tests/api/test_pentest.py::TestInfoDisclosurePentest::test_phpinfo_page_not_accessible

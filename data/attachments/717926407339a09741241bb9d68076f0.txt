@@ -1,2 +1,0 @@
-2026-05-28 12:28:46,548 | INFO     | ai_automation.test_last_name_max_length | START tests/unit/test_factories.py::TestRegistrationFieldLimits::test_last_name_max_length
-2026-05-28 12:28:46,552 | INFO     | ai_automation.test_last_name_max_length | END   tests/unit/test_factories.py::TestRegistrationFieldLimits::test_last_name_max_length

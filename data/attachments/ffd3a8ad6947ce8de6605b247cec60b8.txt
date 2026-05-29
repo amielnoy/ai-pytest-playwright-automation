@@ -1,0 +1,2 @@
+2026-05-29 11:40:18,217 | INFO     | ai_automation.test_rest_client_methods_delegate_to_request_with_default_timeout | START tests/unit/test_rest_client.py::test_rest_client_methods_delegate_to_request_with_default_timeout
+2026-05-29 11:40:18,218 | INFO     | ai_automation.test_rest_client_methods_delegate_to_request_with_default_timeout | END   tests/unit/test_rest_client.py::test_rest_client_methods_delegate_to_request_with_default_timeout

@@ -1,2 +1,0 @@
-2026-05-28 12:31:02,109 | INFO     | ai_automation.test_sort_alphabetically_ascending | START tests/web-ui/test_sort_alphabetically.py::TestSortAlphabetically::test_sort_alphabetically_ascending@web-ui
-2026-05-28 12:31:05,975 | INFO     | ai_automation.test_sort_alphabetically_ascending | END   tests/web-ui/test_sort_alphabetically.py::TestSortAlphabetically::test_sort_alphabetically_ascending@web-ui

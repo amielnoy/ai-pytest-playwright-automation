@@ -1,1 +1,1 @@
-{"id":"46659f01dffc3fe79dfd5a0e70ecf3b8","fullName":"tests.api.test_pentest_data_driven.TestFileExposureInline#test_sensitive_path_blocked_inline","name":"Sensitive path [/.htpasswd] is blocked – inline","status":"passed","testResultsByEnv":{"default":"29834f68b932719649fa96f0d79d383d"}}
+{"id":"46659f01dffc3fe79dfd5a0e70ecf3b8","fullName":"tests.api.test_pentest_data_driven.TestFileExposureInline#test_sensitive_path_blocked_inline","name":"Sensitive path [/.git/] is blocked – inline","status":"passed","testResultsByEnv":{"default":"5e9e64c1c7e9b8a1911bcdaca39ca723"}}

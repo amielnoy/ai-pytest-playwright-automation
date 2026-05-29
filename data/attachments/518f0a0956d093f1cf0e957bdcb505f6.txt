@@ -1,2 +1,0 @@
-2026-05-28 12:28:48,483 | INFO     | ai_automation.test_fallbacks_wired_in_order | START tests/unit/test_self_healing.py::TestHealingLocatorFactory::test_fallbacks_wired_in_order
-2026-05-28 12:28:48,488 | INFO     | ai_automation.test_fallbacks_wired_in_order | END   tests/unit/test_self_healing.py::TestHealingLocatorFactory::test_fallbacks_wired_in_order

@@ -1,0 +1,5 @@
+2026-05-29 11:40:18,340 | INFO     | ai_automation.test_cart_service_total_returns_none_on_truncated_html | START tests/unit/test_security_unit.py::test_cart_service_total_returns_none_on_truncated_html
+2026-05-29 11:40:18,340 | INFO     | ai_automation.security.unit | Step: Build CartService with RestClient, base_url=https://example.test
+2026-05-29 11:40:18,340 | INFO     | ai_automation.security.unit | Step: Call service.total on truncated HTML; expect None, no exception
+2026-05-29 11:40:18,341 | INFO     | ai_automation.security.unit | Step: Assert result is None for unparseable/truncated HTML
+2026-05-29 11:40:18,341 | INFO     | ai_automation.test_cart_service_total_returns_none_on_truncated_html | END   tests/unit/test_security_unit.py::test_cart_service_total_returns_none_on_truncated_html

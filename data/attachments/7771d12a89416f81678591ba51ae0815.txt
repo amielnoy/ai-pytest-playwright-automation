@@ -1,0 +1,2 @@
+2026-05-29 11:40:16,168 | INFO     | ai_automation.test_password_matches_confirm | START tests/unit/test_factories.py::TestMakeRegistration::test_password_matches_confirm
+2026-05-29 11:40:16,169 | INFO     | ai_automation.test_password_matches_confirm | END   tests/unit/test_factories.py::TestMakeRegistration::test_password_matches_confirm

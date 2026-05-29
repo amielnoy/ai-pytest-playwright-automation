@@ -1,4 +1,0 @@
-2026-05-28 12:28:43,685 | INFO     | ai_automation.test_sensitive_path_blocked_inline[htpasswd] | START tests/api/test_pentest_data_driven.py::TestFileExposureInline::test_sensitive_path_blocked_inline[htpasswd]
-2026-05-28 12:28:43,687 | INFO     | ai_automation.pentest.data_driven | Step: probe sensitive path https://tutorialsninja.com/demo/.htpasswd
-2026-05-28 12:28:43,687 | INFO     | ai_automation.pentest.data_driven | Status for /.htpasswd: 404
-2026-05-28 12:28:43,688 | INFO     | ai_automation.test_sensitive_path_blocked_inline[htpasswd] | END   tests/api/test_pentest_data_driven.py::TestFileExposureInline::test_sensitive_path_blocked_inline[htpasswd]

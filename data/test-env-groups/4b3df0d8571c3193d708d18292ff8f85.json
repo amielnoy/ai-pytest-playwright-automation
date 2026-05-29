@@ -1,1 +1,1 @@
-{"id":"4b3df0d8571c3193d708d18292ff8f85","fullName":"tests.unit.test_factories.TestCartScenarioMath#test_max_total_is_5x_max_price","name":"max_total is exactly 5× max_price","status":"passed","testResultsByEnv":{"default":"47251e03969b4d4d8918a599a2c0d934"}}
+{"id":"4b3df0d8571c3193d708d18292ff8f85","fullName":"tests.unit.test_factories.TestCartScenarioMath#test_max_total_is_5x_max_price","name":"max_total is exactly 5× max_price","status":"passed","testResultsByEnv":{"default":"7bfebe17e95288c9f14d96668dad46d8"}}

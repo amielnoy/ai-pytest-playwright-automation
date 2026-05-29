@@ -1,0 +1,2 @@
+2026-05-29 11:40:17,253 | INFO     | ai_automation.test_unknown_id_returns_none | START tests/unit/test_opencart_fallback.py::TestProductById::test_unknown_id_returns_none
+2026-05-29 11:40:17,254 | INFO     | ai_automation.test_unknown_id_returns_none | END   tests/unit/test_opencart_fallback.py::TestProductById::test_unknown_id_returns_none

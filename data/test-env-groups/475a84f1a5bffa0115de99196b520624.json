@@ -1,1 +1,1 @@
-{"id":"475a84f1a5bffa0115de99196b520624","fullName":"tests.unit.test_opencart_fallback.TestHTMLGenerators#test_search_html_contains_product","name":"search_html('MacBook') contains a MacBook product card","status":"passed","testResultsByEnv":{"default":"3e029fded81e589df76506267338c6e2"}}
+{"id":"475a84f1a5bffa0115de99196b520624","fullName":"tests.unit.test_opencart_fallback.TestHTMLGenerators#test_search_html_contains_product","name":"search_html('MacBook') contains a MacBook product card","status":"passed","testResultsByEnv":{"default":"b1cbc94ce9205ee344e53e5195ac14bf"}}

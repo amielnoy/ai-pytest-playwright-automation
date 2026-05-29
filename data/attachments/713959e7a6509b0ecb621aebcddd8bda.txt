@@ -1,4 +1,0 @@
-2026-05-28 12:28:40,321 | INFO     | ai_automation.test_new_session_cart_starts_empty | START tests/api/test_api_integrations.py::TestCartApiIntegration::test_new_session_cart_starts_empty
-2026-05-28 12:28:40,323 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-28 12:28:40,323 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-28 12:28:40,324 | INFO     | ai_automation.test_new_session_cart_starts_empty | END   tests/api/test_api_integrations.py::TestCartApiIntegration::test_new_session_cart_starts_empty

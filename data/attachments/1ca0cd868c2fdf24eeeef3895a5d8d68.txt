@@ -1,0 +1,5 @@
+2026-05-29 11:40:18,102 | INFO     | ai_automation.test_load_results_reads_only_result_json_files | START tests/unit/test_report_test_status.py::test_load_results_reads_only_result_json_files
+2026-05-29 11:40:18,103 | INFO     | ai_automation.unit.test_report_test_status | Step: Write result JSONs and a container JSON to tmp_path
+2026-05-29 11:40:18,103 | INFO     | ai_automation.unit.test_report_test_status | Step: Call _load_results and assert count == 2
+2026-05-29 11:40:18,104 | INFO     | ai_automation.unit.test_report_test_status | Step: Assert len == 2, invalid JSON ignored
+2026-05-29 11:40:18,104 | INFO     | ai_automation.test_load_results_reads_only_result_json_files | END   tests/unit/test_report_test_status.py::test_load_results_reads_only_result_json_files

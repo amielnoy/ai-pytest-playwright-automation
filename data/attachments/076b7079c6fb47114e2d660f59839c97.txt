@@ -1,5 +1,0 @@
-2026-05-28 12:28:40,123 | INFO     | ai_automation.test_search_prices_within_budget_json[MacBook_max2000] | START tests/api/test_api_data_driven.py::TestSearchApiJson::test_search_prices_within_budget_json[MacBook_max2000]
-2026-05-28 12:28:40,125 | INFO     | ai_automation.api.data_driven | Step: JSON price-filter search for 'MacBook' (max=2000.0)
-2026-05-28 12:28:40,126 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-28 12:28:40,127 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-28 12:28:40,129 | INFO     | ai_automation.test_search_prices_within_budget_json[MacBook_max2000] | END   tests/api/test_api_data_driven.py::TestSearchApiJson::test_search_prices_within_budget_json[MacBook_max2000]
