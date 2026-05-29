@@ -1,0 +1,5 @@
+2026-05-29 11:44:50,097 | INFO     | ai_automation.test_ssti_in_search_not_evaluated_inline[<%=7*7%>-Search - 49] | START tests/api/test_pentest_data_driven.py::TestInjectionInline::test_ssti_in_search_not_evaluated_inline[<%=7*7%>-Search - 49]
+2026-05-29 11:44:50,099 | INFO     | ai_automation.pentest.data_driven | Step: SSTI search payload='<%=7*7%>'
+2026-05-29 11:44:50,100 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:50,100 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:50,102 | INFO     | ai_automation.test_ssti_in_search_not_evaluated_inline[<%=7*7%>-Search - 49] | END   tests/api/test_pentest_data_driven.py::TestInjectionInline::test_ssti_in_search_not_evaluated_inline[<%=7*7%>-Search - 49]

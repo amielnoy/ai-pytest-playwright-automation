@@ -1,0 +1,2 @@
+2026-05-29 11:48:02,430 | INFO     | ai_automation.test_stored_products_have_descriptions | START tests/web-ui/test_system_coverage.py::TestStoredProductData::test_stored_products_have_descriptions@web-ui
+2026-05-29 11:48:06,449 | INFO     | ai_automation.test_stored_products_have_descriptions | END   tests/web-ui/test_system_coverage.py::TestStoredProductData::test_stored_products_have_descriptions@web-ui

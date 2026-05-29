@@ -1,2 +1,0 @@
-2026-05-29 11:42:39,463 | INFO     | ai_automation.test_product_detail_soft | START tests/web-ui/test_soft_assertions_demo.py::TestSoftAssertionsDemo::test_product_detail_soft@web-ui
-2026-05-29 11:42:43,630 | INFO     | ai_automation.test_product_detail_soft | END   tests/web-ui/test_soft_assertions_demo.py::TestSoftAssertionsDemo::test_product_detail_soft@web-ui

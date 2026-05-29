@@ -1,0 +1,9 @@
+2026-05-29 11:44:46,865 | INFO     | ai_automation.test_cart_total_positive_after_add_inline[iPhone] | START tests/api/test_api_data_driven.py::TestCartApiInline::test_cart_total_positive_after_add_inline[iPhone]
+2026-05-29 11:44:46,867 | INFO     | ai_automation.api.data_driven | Step: add 'iPhone' product to cart
+2026-05-29 11:44:46,867 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:46,868 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:46,868 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:46,868 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:46,869 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:46,869 | INFO     | ai_automation.api.data_driven | Cart total after adding 'iPhone': 123.2
+2026-05-29 11:44:46,871 | INFO     | ai_automation.test_cart_total_positive_after_add_inline[iPhone] | END   tests/api/test_api_data_driven.py::TestCartApiInline::test_cart_total_positive_after_add_inline[iPhone]

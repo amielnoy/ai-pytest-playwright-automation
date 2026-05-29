@@ -1,8 +1,0 @@
-2026-05-29 11:40:12,841 | INFO     | ai_automation.test_backup_config_file_is_blocked | START tests/api/test_pentest.py::TestInjectionPentest::test_backup_config_file_is_blocked
-2026-05-29 11:40:12,842 | INFO     | ai_automation.pentest | Step: GET https://tutorialsninja.com/demo/config.php.bak — looking for exposed config backup
-2026-05-29 11:40:12,843 | INFO     | ai_automation.pentest | Step: Assert status != 200 and no credential markers in body
-2026-05-29 11:40:12,843 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:40:12,843 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:40:12,843 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:40:12,843 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:40:12,844 | INFO     | ai_automation.test_backup_config_file_is_blocked | END   tests/api/test_pentest.py::TestInjectionPentest::test_backup_config_file_is_blocked

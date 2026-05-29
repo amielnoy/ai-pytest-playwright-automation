@@ -1,2 +1,0 @@
-2026-05-29 11:40:16,801 | INFO     | ai_automation.test_max_total_is_5x_max_price | START tests/unit/test_factories.py::TestCartScenarioMath::test_max_total_is_5x_max_price
-2026-05-29 11:40:16,803 | INFO     | ai_automation.test_max_total_is_5x_max_price | END   tests/unit/test_factories.py::TestCartScenarioMath::test_max_total_is_5x_max_price

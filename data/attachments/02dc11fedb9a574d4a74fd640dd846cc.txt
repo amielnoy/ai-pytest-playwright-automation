@@ -1,2 +1,0 @@
-2026-05-29 11:40:18,095 | INFO     | ai_automation.test_product_detail_page_uses_class_locator_members | START tests/unit/test_page_objects.py::test_product_detail_page_uses_class_locator_members
-2026-05-29 11:40:18,098 | INFO     | ai_automation.test_product_detail_page_uses_class_locator_members | END   tests/unit/test_page_objects.py::test_product_detail_page_uses_class_locator_members

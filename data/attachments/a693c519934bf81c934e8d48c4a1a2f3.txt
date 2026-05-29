@@ -1,0 +1,2 @@
+2026-05-29 11:44:54,666 | INFO     | ai_automation.test_product_card_stored_info_and_price_parse_error | START tests/unit/test_page_objects.py::test_product_card_stored_info_and_price_parse_error
+2026-05-29 11:44:54,669 | INFO     | ai_automation.test_product_card_stored_info_and_price_parse_error | END   tests/unit/test_page_objects.py::test_product_card_stored_info_and_price_parse_error

@@ -1,7 +1,0 @@
-2026-05-29 11:40:10,249 | INFO     | ai_automation.test_search_returns_expected_product_json[MacBook] | START tests/api/test_api_data_driven.py::TestSearchApiJson::test_search_returns_expected_product_json[MacBook]
-2026-05-29 11:40:10,250 | INFO     | ai_automation.api.data_driven | Step: JSON-driven search for 'MacBook' (min_cards=1)
-2026-05-29 11:40:10,251 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:40:10,253 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:40:10,254 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:40:10,254 | INFO     | ai_automation.api.data_driven | Cards: 2, names: ['MacBook', 'MacBook Pro']
-2026-05-29 11:40:10,257 | INFO     | ai_automation.test_search_returns_expected_product_json[MacBook] | END   tests/api/test_api_data_driven.py::TestSearchApiJson::test_search_returns_expected_product_json[MacBook]

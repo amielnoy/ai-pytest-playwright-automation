@@ -1,5 +1,0 @@
-2026-05-29 11:40:10,333 | INFO     | ai_automation.test_search_prices_within_budget_json[Canon_max500] | START tests/api/test_api_data_driven.py::TestSearchApiJson::test_search_prices_within_budget_json[Canon_max500]
-2026-05-29 11:40:10,335 | INFO     | ai_automation.api.data_driven | Step: JSON price-filter search for 'Canon' (max=500.0)
-2026-05-29 11:40:10,335 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:40:10,336 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:40:10,338 | INFO     | ai_automation.test_search_prices_within_budget_json[Canon_max500] | END   tests/api/test_api_data_driven.py::TestSearchApiJson::test_search_prices_within_budget_json[Canon_max500]

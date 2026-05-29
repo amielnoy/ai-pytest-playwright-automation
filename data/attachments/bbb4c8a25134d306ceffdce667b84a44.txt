@@ -1,0 +1,10 @@
+2026-05-29 11:44:49,476 | INFO     | ai_automation.test_login_empty_credentials_returns_warning_not_crash | START tests/api/test_pentest.py::TestAuthenticationPentest::test_login_empty_credentials_returns_warning_not_crash
+2026-05-29 11:44:49,478 | INFO     | ai_automation.pentest | Step: POST account/login with empty email and password
+2026-05-29 11:44:49,478 | INFO     | ai_automation.pentest | Step: Assert 200, Warning present, no Fatal error or 5xx
+2026-05-29 11:44:49,480 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:49,481 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:49,481 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:49,481 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:49,482 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:49,482 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:49,484 | INFO     | ai_automation.test_login_empty_credentials_returns_warning_not_crash | END   tests/api/test_pentest.py::TestAuthenticationPentest::test_login_empty_credentials_returns_warning_not_crash

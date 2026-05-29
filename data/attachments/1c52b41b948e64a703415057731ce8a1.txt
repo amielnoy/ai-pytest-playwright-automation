@@ -1,0 +1,5 @@
+2026-05-29 11:44:50,685 | INFO     | ai_automation.test_protected_route_requires_auth_json[order_history] | START tests/api/test_pentest_data_driven.py::TestAccessControlJson::test_protected_route_requires_auth_json[order_history]
+2026-05-29 11:44:50,687 | INFO     | ai_automation.pentest.data_driven | Step: JSON ACL unauthenticated GET account/order
+2026-05-29 11:44:50,687 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:50,688 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:50,690 | INFO     | ai_automation.test_protected_route_requires_auth_json[order_history] | END   tests/api/test_pentest_data_driven.py::TestAccessControlJson::test_protected_route_requires_auth_json[order_history]

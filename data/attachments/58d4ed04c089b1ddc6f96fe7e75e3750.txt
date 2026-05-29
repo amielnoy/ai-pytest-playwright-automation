@@ -1,2 +1,0 @@
-2026-05-29 11:40:17,363 | INFO     | ai_automation.test_non_response_returns_false | START tests/unit/test_opencart_fallback.py::TestIsChallengedPage::test_non_response_returns_false
-2026-05-29 11:40:17,364 | INFO     | ai_automation.test_non_response_returns_false | END   tests/unit/test_opencart_fallback.py::TestIsChallengedPage::test_non_response_returns_false

@@ -1,0 +1,2 @@
+2026-05-29 11:47:46,192 | INFO     | ai_automation.test_login_empty_credentials_shows_warning | START tests/web-ui/test_system_coverage.py::TestNavigationCoverage::test_login_empty_credentials_shows_warning@web-ui
+2026-05-29 11:47:49,866 | INFO     | ai_automation.test_login_empty_credentials_shows_warning | END   tests/web-ui/test_system_coverage.py::TestNavigationCoverage::test_login_empty_credentials_shows_warning@web-ui

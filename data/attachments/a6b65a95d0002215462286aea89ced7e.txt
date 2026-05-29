@@ -1,0 +1,4 @@
+2026-05-29 11:44:50,397 | INFO     | ai_automation.test_sensitive_path_blocked_inline[phpinfo] | START tests/api/test_pentest_data_driven.py::TestFileExposureInline::test_sensitive_path_blocked_inline[phpinfo]
+2026-05-29 11:44:50,399 | INFO     | ai_automation.pentest.data_driven | Step: probe sensitive path https://tutorialsninja.com/demo/phpinfo.php
+2026-05-29 11:44:50,399 | INFO     | ai_automation.pentest.data_driven | Status for /phpinfo.php: 404
+2026-05-29 11:44:50,401 | INFO     | ai_automation.test_sensitive_path_blocked_inline[phpinfo] | END   tests/api/test_pentest_data_driven.py::TestFileExposureInline::test_sensitive_path_blocked_inline[phpinfo]

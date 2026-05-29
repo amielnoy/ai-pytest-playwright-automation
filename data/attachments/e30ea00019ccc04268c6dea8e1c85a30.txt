@@ -1,5 +1,0 @@
-2026-05-29 11:40:13,609 | INFO     | ai_automation.test_oversized_search_handled_inline[1K_angle] | START tests/api/test_pentest_data_driven.py::TestInjectionInline::test_oversized_search_handled_inline[1K_angle]
-2026-05-29 11:40:13,617 | INFO     | ai_automation.pentest.data_driven | Step: oversized search payload char='<' len=1024
-2026-05-29 11:40:13,619 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:40:13,620 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:40:13,624 | INFO     | ai_automation.test_oversized_search_handled_inline[1K_angle] | END   tests/api/test_pentest_data_driven.py::TestInjectionInline::test_oversized_search_handled_inline[1K_angle]

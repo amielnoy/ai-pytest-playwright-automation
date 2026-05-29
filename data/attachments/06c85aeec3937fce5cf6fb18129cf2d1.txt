@@ -1,2 +1,0 @@
-2026-05-29 11:42:50,259 | INFO     | ai_automation.test_search_results_have_positive_prices | START tests/web-ui/test_system_coverage.py::TestSearchDataIntegrity::test_search_results_have_positive_prices@web-ui
-2026-05-29 11:42:52,377 | INFO     | ai_automation.test_search_results_have_positive_prices | END   tests/web-ui/test_system_coverage.py::TestSearchDataIntegrity::test_search_results_have_positive_prices@web-ui

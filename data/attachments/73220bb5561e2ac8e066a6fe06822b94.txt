@@ -1,2 +1,0 @@
-2026-05-29 11:40:47,200 | INFO     | ai_automation.test_add_items_to_cart | START tests/web-ui/test_add_to_cart.py::TestAddItemsToCart::test_add_items_to_cart@web-ui
-2026-05-29 11:40:51,461 | INFO     | ai_automation.test_add_items_to_cart | END   tests/web-ui/test_add_to_cart.py::TestAddItemsToCart::test_add_items_to_cart@web-ui

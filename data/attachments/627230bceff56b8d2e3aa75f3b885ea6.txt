@@ -1,0 +1,2 @@
+2026-05-29 11:44:54,994 | INFO     | ai_automation.test_fallback_used_when_primary_fails | START tests/unit/test_self_healing.py::TestSelfHealingResolution::test_fallback_used_when_primary_fails
+2026-05-29 11:44:54,997 | INFO     | ai_automation.test_fallback_used_when_primary_fails | END   tests/unit/test_self_healing.py::TestSelfHealingResolution::test_fallback_used_when_primary_fails

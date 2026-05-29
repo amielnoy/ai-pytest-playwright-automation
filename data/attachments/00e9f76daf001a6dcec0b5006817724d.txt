@@ -1,0 +1,2 @@
+2026-05-29 11:44:54,308 | INFO     | ai_automation.test_base_page_wait_for_visible_uses_first_matching_locator | START tests/unit/test_page_objects.py::test_base_page_wait_for_visible_uses_first_matching_locator
+2026-05-29 11:44:54,311 | INFO     | ai_automation.test_base_page_wait_for_visible_uses_first_matching_locator | END   tests/unit/test_page_objects.py::test_base_page_wait_for_visible_uses_first_matching_locator

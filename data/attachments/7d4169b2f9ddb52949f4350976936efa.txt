@@ -1,5 +1,0 @@
-2026-05-29 11:40:10,121 | INFO     | ai_automation.test_search_prices_within_budget_inline[Canon-500.0] | START tests/api/test_api_data_driven.py::TestSearchApiInline::test_search_prices_within_budget_inline[Canon-500.0]
-2026-05-29 11:40:10,124 | INFO     | ai_automation.api.data_driven | Step: search for 'Canon', max_price=500.0
-2026-05-29 11:40:10,126 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:40:10,126 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:40:10,128 | INFO     | ai_automation.test_search_prices_within_budget_inline[Canon-500.0] | END   tests/api/test_api_data_driven.py::TestSearchApiInline::test_search_prices_within_budget_inline[Canon-500.0]

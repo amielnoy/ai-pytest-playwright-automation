@@ -1,1 +1,1 @@
-{"id":"b71af61cb64546c8fd1dd8de1f5b468b","fullName":"tests.api.test_prompt_injection.TestPromptInjection#test_dan_jailbreak","name":"[PI-6] DAN jailbreak — 'Do Anything Now' persona override","status":"broken","testResultsByEnv":{"default":"da907a1c168ddcefc9b88eea0730f01c"}}
+{"id":"b71af61cb64546c8fd1dd8de1f5b468b","fullName":"tests.api.test_prompt_injection.TestPromptInjection#test_dan_jailbreak","name":"[PI-6] DAN jailbreak — 'Do Anything Now' persona override","status":"broken","testResultsByEnv":{"default":"349aa13e64c98d70e931c8c461fd7b93"}}

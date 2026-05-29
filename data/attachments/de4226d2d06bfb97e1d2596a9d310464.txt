@@ -1,9 +1,0 @@
-2026-05-29 11:40:10,409 | INFO     | ai_automation.test_cart_add_from_search_json[Canon] | START tests/api/test_api_data_driven.py::TestCartApiJson::test_cart_add_from_search_json[Canon]
-2026-05-29 11:40:10,410 | INFO     | ai_automation.api.data_driven | Step: JSON cart add for 'Canon'
-2026-05-29 11:40:10,410 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:40:10,411 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:40:10,411 | INFO     | ai_automation.api.data_driven | Step: add product 30 from query 'Canon'
-2026-05-29 11:40:10,411 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:40:10,412 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:40:10,412 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:40:10,414 | INFO     | ai_automation.test_cart_add_from_search_json[Canon] | END   tests/api/test_api_data_driven.py::TestCartApiJson::test_cart_add_from_search_json[Canon]

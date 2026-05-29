@@ -1,2 +1,0 @@
-2026-05-29 11:40:16,183 | INFO     | ai_automation.test_email_format | START tests/unit/test_factories.py::TestMakeRegistration::test_email_format
-2026-05-29 11:40:16,184 | INFO     | ai_automation.test_email_format | END   tests/unit/test_factories.py::TestMakeRegistration::test_email_format

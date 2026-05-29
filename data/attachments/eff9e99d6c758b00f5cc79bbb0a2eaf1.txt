@@ -1,2 +1,0 @@
-2026-05-29 11:40:15,963 | INFO     | ai_automation.test_extracts_fields | START tests/unit/test_api_client.py::TestParseCards::test_extracts_fields
-2026-05-29 11:40:15,964 | INFO     | ai_automation.test_extracts_fields | END   tests/unit/test_api_client.py::TestParseCards::test_extracts_fields

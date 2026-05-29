@@ -1,3 +1,0 @@
-2026-05-29 11:40:15,758 | INFO     | ai_automation.test_registration_page_has_privacy_checkbox | START tests/contract/test_contracts.py::TestRegistrationPageContract::test_registration_page_has_privacy_checkbox
-2026-05-29 11:40:15,759 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:40:15,760 | INFO     | ai_automation.test_registration_page_has_privacy_checkbox | END   tests/contract/test_contracts.py::TestRegistrationPageContract::test_registration_page_has_privacy_checkbox

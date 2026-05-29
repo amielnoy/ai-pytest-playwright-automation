@@ -1,5 +1,0 @@
-INFO     ai_automation.test_html_report_creates_file_with_badge_per_status:conftest.py:296 START tests/unit/test_report_test_status.py::test_html_report_creates_file_with_badge_per_status
-INFO     ai_automation.unit.test_report_test_status:test_report_test_status.py:175 Step: Call _html_report and write to /tmp/pytest-of-runner/pytest-0/popen-gw1/test_html_report_creates_file_0/report.html
-INFO     ai_automation.unit.test_report_test_status:test_report_test_status.py:179 Step: Assert file exists and size > 0
-INFO     ai_automation.unit.test_report_test_status:test_report_test_status.py:184 Step: Assert red, green, yellow badge colours present in HTML
-INFO     ai_automation.test_html_report_creates_file_with_badge_per_status:conftest.py:298 END   tests/unit/test_report_test_status.py::test_html_report_creates_file_with_badge_per_status

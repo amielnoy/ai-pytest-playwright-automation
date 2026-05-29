@@ -1,2 +1,0 @@
-2026-05-29 11:40:16,789 | INFO     | ai_automation.test_single_product_pool | START tests/unit/test_factories.py::TestSearchProductCoverage::test_single_product_pool
-2026-05-29 11:40:16,791 | INFO     | ai_automation.test_single_product_pool | END   tests/unit/test_factories.py::TestSearchProductCoverage::test_single_product_pool

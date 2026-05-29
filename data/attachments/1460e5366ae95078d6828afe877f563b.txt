@@ -1,2 +1,0 @@
-2026-05-29 11:40:16,953 | INFO     | ai_automation.test_get_error_message_delegates | START tests/unit/test_flows.py::TestRegistrationFlow::test_get_error_message_delegates
-2026-05-29 11:40:16,954 | INFO     | ai_automation.test_get_error_message_delegates | END   tests/unit/test_flows.py::TestRegistrationFlow::test_get_error_message_delegates

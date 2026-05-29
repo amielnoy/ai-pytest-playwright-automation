@@ -1,1 +1,1 @@
-{"id":"18116c242a432c80f3dc48606e502ccb","fullName":"tests.unit.test_api_client.TestBuildSession#test_has_user_agent","name":"build_session() returns a RestClient with User-Agent header set","status":"passed","testResultsByEnv":{"default":"fb986b21eee5870d840ae4063338fb06"}}
+{"id":"18116c242a432c80f3dc48606e502ccb","fullName":"tests.unit.test_api_client.TestBuildSession#test_has_user_agent","name":"build_session() returns a RestClient with User-Agent header set","status":"passed","testResultsByEnv":{"default":"e43e856a9e2cf683906fb17610713b24"}}

@@ -1,5 +1,0 @@
-2026-05-29 11:40:10,122 | INFO     | ai_automation.test_empty_search_returns_200_no_cards_inline[__nonexistent_product_xyz_999__] | START tests/api/test_api_data_driven.py::TestSearchApiInline::test_empty_search_returns_200_no_cards_inline[__nonexistent_product_xyz_999__]
-2026-05-29 11:40:10,125 | INFO     | ai_automation.api.data_driven | Step: empty-result search for '__nonexistent_product_xyz_999__'
-2026-05-29 11:40:10,127 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:40:10,128 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:40:10,131 | INFO     | ai_automation.test_empty_search_returns_200_no_cards_inline[__nonexistent_product_xyz_999__] | END   tests/api/test_api_data_driven.py::TestSearchApiInline::test_empty_search_returns_200_no_cards_inline[__nonexistent_product_xyz_999__]

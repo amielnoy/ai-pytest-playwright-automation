@@ -1,0 +1,2 @@
+2026-05-29 11:46:57,437 | INFO     | ai_automation.test_product_detail_opens_from_search | START tests/web-ui/test_sanity.py::TestSanity::test_product_detail_opens_from_search@web-ui
+2026-05-29 11:47:01,830 | INFO     | ai_automation.test_product_detail_opens_from_search | END   tests/web-ui/test_sanity.py::TestSanity::test_product_detail_opens_from_search@web-ui

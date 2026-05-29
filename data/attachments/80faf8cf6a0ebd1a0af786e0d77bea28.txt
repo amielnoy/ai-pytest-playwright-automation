@@ -1,4 +1,0 @@
-2026-05-29 11:40:09,861 | INFO     | ai_automation.test_search_returns_expected_product_names[iPhone-iPhone] | START tests/api/test_api.py::TestSearchApi::test_search_returns_expected_product_names[iPhone-iPhone]
-2026-05-29 11:40:09,866 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:40:09,867 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:40:09,869 | INFO     | ai_automation.test_search_returns_expected_product_names[iPhone-iPhone] | END   tests/api/test_api.py::TestSearchApi::test_search_returns_expected_product_names[iPhone-iPhone]

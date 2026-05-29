@@ -1,2 +1,0 @@
-2026-05-29 11:42:00,629 | INFO     | ai_automation.test_register_new_user | START tests/web-ui/test_registration.py::TestRegistration::test_register_new_user@web-ui
-2026-05-29 11:42:07,116 | INFO     | ai_automation.test_register_new_user | END   tests/web-ui/test_registration.py::TestRegistration::test_register_new_user@web-ui

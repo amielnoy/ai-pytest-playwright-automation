@@ -1,4 +1,0 @@
-2026-05-29 11:40:14,163 | INFO     | ai_automation.test_sensitive_path_blocked_json[phpinfo] | START tests/api/test_pentest_data_driven.py::TestFileExposureJson::test_sensitive_path_blocked_json[phpinfo]
-2026-05-29 11:40:14,164 | INFO     | ai_automation.pentest.data_driven | Step: JSON file exposure probe https://tutorialsninja.com/demo/phpinfo.php
-2026-05-29 11:40:14,164 | INFO     | ai_automation.pentest.data_driven | Status for /phpinfo.php: 404
-2026-05-29 11:40:14,165 | INFO     | ai_automation.test_sensitive_path_blocked_json[phpinfo] | END   tests/api/test_pentest_data_driven.py::TestFileExposureJson::test_sensitive_path_blocked_json[phpinfo]

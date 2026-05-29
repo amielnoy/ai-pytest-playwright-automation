@@ -1,2 +1,0 @@
-2026-05-29 11:40:17,322 | INFO     | ai_automation.test_415_is_challenge | START tests/unit/test_opencart_fallback.py::TestIsChallengedPage::test_415_is_challenge
-2026-05-29 11:40:17,323 | INFO     | ai_automation.test_415_is_challenge | END   tests/unit/test_opencart_fallback.py::TestIsChallengedPage::test_415_is_challenge

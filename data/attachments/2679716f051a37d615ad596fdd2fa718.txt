@@ -1,0 +1,2 @@
+2026-05-29 11:46:34,956 | INFO     | ai_automation.test_har_via_tracing_api | START tests/web-ui/test_playwright_v160_features.py::TestHARRecordingViaTracing::test_har_via_tracing_api@web-ui
+2026-05-29 11:46:37,492 | INFO     | ai_automation.test_har_via_tracing_api | END   tests/web-ui/test_playwright_v160_features.py::TestHARRecordingViaTracing::test_har_via_tracing_api@web-ui

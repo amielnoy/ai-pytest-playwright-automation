@@ -1,2 +1,0 @@
-2026-05-29 11:40:16,477 | INFO     | ai_automation.test_email_domain | START tests/unit/test_factories.py::TestMakeInvalidCredentials::test_email_domain
-2026-05-29 11:40:16,477 | INFO     | ai_automation.test_email_domain | END   tests/unit/test_factories.py::TestMakeInvalidCredentials::test_email_domain

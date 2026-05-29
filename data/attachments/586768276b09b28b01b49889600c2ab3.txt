@@ -1,7 +1,0 @@
-2026-05-29 11:40:09,958 | INFO     | ai_automation.test_sessions_are_isolated | START tests/api/test_api.py::TestCartApi::test_sessions_are_isolated
-2026-05-29 11:40:09,960 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:40:09,961 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:40:09,961 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:40:09,965 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:40:09,966 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:40:09,967 | INFO     | ai_automation.test_sessions_are_isolated | END   tests/api/test_api.py::TestCartApi::test_sessions_are_isolated

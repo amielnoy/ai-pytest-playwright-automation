@@ -1,0 +1,5 @@
+2026-05-29 11:44:50,386 | INFO     | ai_automation.test_protected_route_requires_auth_inline[account/address-Address Book-Returning Customer] | START tests/api/test_pentest_data_driven.py::TestAccessControlInline::test_protected_route_requires_auth_inline[account/address-Address Book-Returning Customer]
+2026-05-29 11:44:50,388 | INFO     | ai_automation.pentest.data_driven | Step: unauthenticated GET account/address
+2026-05-29 11:44:50,388 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:50,388 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:50,390 | INFO     | ai_automation.test_protected_route_requires_auth_inline[account/address-Address Book-Returning Customer] | END   tests/api/test_pentest_data_driven.py::TestAccessControlInline::test_protected_route_requires_auth_inline[account/address-Address Book-Returning Customer]

@@ -1,0 +1,4 @@
+2026-05-29 11:44:46,496 | INFO     | ai_automation.test_search_returns_positive_prices[MacBook] | START tests/api/test_api.py::TestSearchApi::test_search_returns_positive_prices[MacBook]
+2026-05-29 11:44:46,498 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:46,499 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:46,501 | INFO     | ai_automation.test_search_returns_positive_prices[MacBook] | END   tests/api/test_api.py::TestSearchApi::test_search_returns_positive_prices[MacBook]

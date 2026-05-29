@@ -1,2 +1,0 @@
-2026-05-29 11:40:16,019 | INFO     | ai_automation.test_skips_card_without_cart_add | START tests/unit/test_api_client.py::TestParseCards::test_skips_card_without_cart_add
-2026-05-29 11:40:16,020 | INFO     | ai_automation.test_skips_card_without_cart_add | END   tests/unit/test_api_client.py::TestParseCards::test_skips_card_without_cart_add

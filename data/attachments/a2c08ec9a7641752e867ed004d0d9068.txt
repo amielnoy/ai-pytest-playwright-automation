@@ -1,2 +1,0 @@
-2026-05-29 11:40:17,896 | INFO     | ai_automation.test_search_results_accessibility_helpers_use_class_locators | START tests/unit/test_page_objects.py::test_search_results_accessibility_helpers_use_class_locators
-2026-05-29 11:40:17,899 | INFO     | ai_automation.test_search_results_accessibility_helpers_use_class_locators | END   tests/unit/test_page_objects.py::test_search_results_accessibility_helpers_use_class_locators

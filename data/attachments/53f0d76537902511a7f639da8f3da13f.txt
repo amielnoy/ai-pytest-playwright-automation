@@ -1,0 +1,2 @@
+2026-05-29 11:44:52,989 | INFO     | ai_automation.test_fields_present | START tests/unit/test_factories.py::TestMakeCartScenario::test_fields_present
+2026-05-29 11:44:52,993 | INFO     | ai_automation.test_fields_present | END   tests/unit/test_factories.py::TestMakeCartScenario::test_fields_present

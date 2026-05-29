@@ -1,0 +1,5 @@
+2026-05-29 11:44:50,632 | INFO     | ai_automation.test_injection_payload_in_search_json[xss_svg] | START tests/api/test_pentest_data_driven.py::TestInjectionJson::test_injection_payload_in_search_json[xss_svg]
+2026-05-29 11:44:50,634 | INFO     | ai_automation.pentest.data_driven | Step: JSON injection search category=XSS payload='<svg onload=alert(1)>'
+2026-05-29 11:44:50,634 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:50,634 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:50,636 | INFO     | ai_automation.test_injection_payload_in_search_json[xss_svg] | END   tests/api/test_pentest_data_driven.py::TestInjectionJson::test_injection_payload_in_search_json[xss_svg]

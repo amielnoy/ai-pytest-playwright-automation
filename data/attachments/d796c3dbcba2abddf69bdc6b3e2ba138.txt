@@ -1,0 +1,8 @@
+2026-05-29 11:44:50,313 | INFO     | ai_automation.test_login_error_is_generic_inline[absolutely-unknown@no-domain.invalid] | START tests/api/test_pentest_data_driven.py::TestAuthAttackInline::test_login_error_is_generic_inline[absolutely-unknown@no-domain.invalid]
+2026-05-29 11:44:50,315 | INFO     | ai_automation.pentest.data_driven | Step: generic error check for 'absolutely-unknown@no-domain.invalid'
+2026-05-29 11:44:50,315 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:50,316 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:50,316 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:50,316 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:50,316 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:50,317 | INFO     | ai_automation.test_login_error_is_generic_inline[absolutely-unknown@no-domain.invalid] | END   tests/api/test_pentest_data_driven.py::TestAuthAttackInline::test_login_error_is_generic_inline[absolutely-unknown@no-domain.invalid]

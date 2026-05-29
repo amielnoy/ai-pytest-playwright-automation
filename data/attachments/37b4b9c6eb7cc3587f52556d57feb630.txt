@@ -1,2 +1,0 @@
-2026-05-29 11:40:16,511 | INFO     | ai_automation.test_password_length | START tests/unit/test_factories.py::TestMakeInvalidCredentials::test_password_length
-2026-05-29 11:40:16,512 | INFO     | ai_automation.test_password_length | END   tests/unit/test_factories.py::TestMakeInvalidCredentials::test_password_length

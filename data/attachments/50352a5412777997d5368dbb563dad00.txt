@@ -1,2 +1,0 @@
-2026-05-29 11:40:16,748 | INFO     | ai_automation.test_no_shared_state_credentials | START tests/unit/test_factories.py::TestFactoryIsolation::test_no_shared_state_credentials
-2026-05-29 11:40:16,755 | INFO     | ai_automation.test_no_shared_state_credentials | END   tests/unit/test_factories.py::TestFactoryIsolation::test_no_shared_state_credentials

@@ -1,2 +1,0 @@
-2026-05-29 11:40:17,745 | INFO     | ai_automation.test_home_page_accessibility_helpers_delegate_to_nav_and_image_locator | START tests/unit/test_page_objects.py::test_home_page_accessibility_helpers_delegate_to_nav_and_image_locator
-2026-05-29 11:40:17,748 | INFO     | ai_automation.test_home_page_accessibility_helpers_delegate_to_nav_and_image_locator | END   tests/unit/test_page_objects.py::test_home_page_accessibility_helpers_delegate_to_nav_and_image_locator

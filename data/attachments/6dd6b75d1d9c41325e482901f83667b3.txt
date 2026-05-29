@@ -1,0 +1,2 @@
+2026-05-29 11:44:52,864 | INFO     | ai_automation.test_override_password_blank | START tests/unit/test_factories.py::TestMakeRegistration::test_override_password_blank
+2026-05-29 11:44:52,865 | INFO     | ai_automation.test_override_password_blank | END   tests/unit/test_factories.py::TestMakeRegistration::test_override_password_blank

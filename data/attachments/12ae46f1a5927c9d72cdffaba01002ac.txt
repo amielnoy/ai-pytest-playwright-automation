@@ -1,0 +1,2 @@
+2026-05-29 11:44:53,010 | INFO     | ai_automation.test_custom_products_pool | START tests/unit/test_factories.py::TestMakeSearch::test_custom_products_pool
+2026-05-29 11:44:53,013 | INFO     | ai_automation.test_custom_products_pool | END   tests/unit/test_factories.py::TestMakeSearch::test_custom_products_pool

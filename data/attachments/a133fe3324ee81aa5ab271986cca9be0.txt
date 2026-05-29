@@ -1,2 +1,0 @@
-2026-05-29 11:40:16,149 | INFO     | ai_automation.test_all_fields_present | START tests/unit/test_factories.py::TestMakeRegistration::test_all_fields_present
-2026-05-29 11:40:16,150 | INFO     | ai_automation.test_all_fields_present | END   tests/unit/test_factories.py::TestMakeRegistration::test_all_fields_present

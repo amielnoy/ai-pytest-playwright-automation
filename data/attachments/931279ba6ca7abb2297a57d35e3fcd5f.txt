@@ -1,4 +1,0 @@
-2026-05-29 11:40:14,059 | INFO     | ai_automation.test_login_attack_no_crash_json[sql_email] | START tests/api/test_pentest_data_driven.py::TestAuthAttackJson::test_login_attack_no_crash_json[sql_email]
-2026-05-29 11:40:14,060 | INFO     | ai_automation.pentest.data_driven | Step: JSON auth attack id=sql_email email="' OR '1'='1'--@x.com"
-2026-05-29 11:40:14,060 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:40:14,061 | INFO     | ai_automation.test_login_attack_no_crash_json[sql_email] | END   tests/api/test_pentest_data_driven.py::TestAuthAttackJson::test_login_attack_no_crash_json[sql_email]

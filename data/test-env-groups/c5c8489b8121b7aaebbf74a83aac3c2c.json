@@ -1,1 +1,1 @@
-{"id":"c5c8489b8121b7aaebbf74a83aac3c2c","fullName":"tests.unit.test_factories.TestMakeRegistration#test_password_matches_confirm","name":"password and confirm_password are equal on a standard build","status":"passed","testResultsByEnv":{"default":"544be99397076311e06a0422fe5f22b8"}}
+{"id":"c5c8489b8121b7aaebbf74a83aac3c2c","fullName":"tests.unit.test_factories.TestMakeRegistration#test_password_matches_confirm","name":"password and confirm_password are equal on a standard build","status":"passed","testResultsByEnv":{"default":"68c5e62389fedce92da57bf2fcf9af00"}}

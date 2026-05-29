@@ -1,2 +1,0 @@
-2026-05-29 11:40:16,388 | INFO     | ai_automation.test_max_price_in_range | START tests/unit/test_factories.py::TestMakeSearch::test_max_price_in_range
-2026-05-29 11:40:16,389 | INFO     | ai_automation.test_max_price_in_range | END   tests/unit/test_factories.py::TestMakeSearch::test_max_price_in_range

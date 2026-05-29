@@ -1,2 +1,0 @@
-2026-05-29 11:41:33,678 | INFO     | ai_automation.test_ipod_storage | START tests/web-ui/test_ipod_storage.py::TestIpoDStorage::test_ipod_storage@web-ui
-2026-05-29 11:41:37,631 | INFO     | ai_automation.test_ipod_storage | END   tests/web-ui/test_ipod_storage.py::TestIpoDStorage::test_ipod_storage@web-ui

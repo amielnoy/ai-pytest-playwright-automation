@@ -1,0 +1,3 @@
+2026-05-29 11:44:52,126 | INFO     | ai_automation.test_public_endpoint_map_returns_expected_marker[home] | START tests/contract/test_contracts.py::TestPublicEndpointContract::test_public_endpoint_map_returns_expected_marker[home]
+2026-05-29 11:44:52,129 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:52,130 | INFO     | ai_automation.test_public_endpoint_map_returns_expected_marker[home] | END   tests/contract/test_contracts.py::TestPublicEndpointContract::test_public_endpoint_map_returns_expected_marker[home]

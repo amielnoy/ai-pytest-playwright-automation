@@ -1,1 +1,1 @@
-{"id":"2b4016b0b7e5c5567db0557bef8fa0d5","fullName":"tests.unit.test_flows.TestCartFlow#test_add_products_call_sequence","name":"add_products_by_search() searches under price then adds items to cart","status":"passed","testResultsByEnv":{"default":"ef41de2b2801971be31bfdfbb0e3e1a3"}}
+{"id":"2b4016b0b7e5c5567db0557bef8fa0d5","fullName":"tests.unit.test_flows.TestCartFlow#test_add_products_call_sequence","name":"add_products_by_search() searches under price then adds items to cart","status":"passed","testResultsByEnv":{"default":"476a1cc427f44898355f502e59307242"}}

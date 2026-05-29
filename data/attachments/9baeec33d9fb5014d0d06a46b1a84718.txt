@@ -1,0 +1,7 @@
+2026-05-29 11:44:46,577 | INFO     | ai_automation.test_cart_accepts_products_from_search_results[MacBook] | START tests/api/test_api.py::TestCartApi::test_cart_accepts_products_from_search_results[MacBook]
+2026-05-29 11:44:46,579 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:46,580 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:46,580 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:46,581 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:46,581 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:46,583 | INFO     | ai_automation.test_cart_accepts_products_from_search_results[MacBook] | END   tests/api/test_api.py::TestCartApi::test_cart_accepts_products_from_search_results[MacBook]

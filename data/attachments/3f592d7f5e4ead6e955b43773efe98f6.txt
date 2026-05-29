@@ -1,0 +1,7 @@
+2026-05-29 11:44:46,906 | INFO     | ai_automation.test_search_returns_expected_product_json[Canon] | START tests/api/test_api_data_driven.py::TestSearchApiJson::test_search_returns_expected_product_json[Canon]
+2026-05-29 11:44:46,908 | INFO     | ai_automation.api.data_driven | Step: JSON-driven search for 'Canon' (min_cards=1)
+2026-05-29 11:44:46,909 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:46,909 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:46,910 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:46,910 | INFO     | ai_automation.api.data_driven | Cards: 1, names: ['Canon EOS 5D']
+2026-05-29 11:44:46,912 | INFO     | ai_automation.test_search_returns_expected_product_json[Canon] | END   tests/api/test_api_data_driven.py::TestSearchApiJson::test_search_returns_expected_product_json[Canon]

@@ -1,0 +1,7 @@
+2026-05-29 11:44:54,789 | INFO     | ai_automation.test_report_test_status_end_to_end_with_mixed_results | START tests/unit/test_report_test_status.py::test_report_test_status_end_to_end_with_mixed_results
+2026-05-29 11:44:54,791 | INFO     | ai_automation.unit.test_report_test_status | Step: Call report_test_status(allure_dir=/tmp/pytest-of-runner/pytest-0/popen-gw3/test_report_test_status_end_to0, html_out=/tmp/pytest-of-runner/pytest-0/popen-gw3/test_report_test_status_end_to0/status.html, write_allure_entry=True)
+2026-05-29 11:44:54,792 | INFO     | ai_automation.unit.test_report_test_status | Step: Assert HTML and Allure notes in output
+2026-05-29 11:44:54,792 | INFO     | ai_automation.unit.test_report_test_status | Step: Assert /tmp/pytest-of-runner/pytest-0/popen-gw3/test_report_test_status_end_to0/status.html exists on disk
+2026-05-29 11:44:54,792 | INFO     | ai_automation.unit.test_report_test_status | Step: Assert new *-result.json with fullName mcp.test_reporter exists
+2026-05-29 11:44:54,793 | INFO     | ai_automation.unit.test_report_test_status | Step: Assert PASSED, FAILED, BROKEN, SKIPPED, FLAKY in output
+2026-05-29 11:44:54,794 | INFO     | ai_automation.test_report_test_status_end_to_end_with_mixed_results | END   tests/unit/test_report_test_status.py::test_report_test_status_end_to_end_with_mixed_results

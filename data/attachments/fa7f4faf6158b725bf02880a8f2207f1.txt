@@ -1,0 +1,2 @@
+2026-05-29 11:45:19,535 | INFO     | ai_automation.test_product_detail_fields_have_labels | START tests/web-ui/test_accessibility_sanity.py::TestAccessibilitySanity::test_product_detail_fields_have_labels@web-ui
+2026-05-29 11:45:24,000 | INFO     | ai_automation.test_product_detail_fields_have_labels | END   tests/web-ui/test_accessibility_sanity.py::TestAccessibilitySanity::test_product_detail_fields_have_labels@web-ui

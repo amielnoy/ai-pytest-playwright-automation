@@ -1,0 +1,2 @@
+2026-05-29 11:47:01,833 | INFO     | ai_automation.test_search_items_under_price | START tests/web-ui/test_search_under_price.py::TestSearchUnderPrice::test_search_items_under_price@web-ui
+2026-05-29 11:47:04,346 | INFO     | ai_automation.test_search_items_under_price | END   tests/web-ui/test_search_under_price.py::TestSearchUnderPrice::test_search_items_under_price@web-ui

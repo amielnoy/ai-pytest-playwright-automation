@@ -1,0 +1,2 @@
+2026-05-29 11:44:52,928 | INFO     | ai_automation.test_override_query | START tests/unit/test_factories.py::TestMakeSearch::test_override_query
+2026-05-29 11:44:52,930 | INFO     | ai_automation.test_override_query | END   tests/unit/test_factories.py::TestMakeSearch::test_override_query

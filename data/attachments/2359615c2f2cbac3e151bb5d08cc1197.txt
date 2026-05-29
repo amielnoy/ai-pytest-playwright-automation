@@ -1,0 +1,4 @@
+2026-05-29 11:44:50,755 | INFO     | ai_automation.test_sensitive_path_blocked_json[git_dir] | START tests/api/test_pentest_data_driven.py::TestFileExposureJson::test_sensitive_path_blocked_json[git_dir]
+2026-05-29 11:44:50,756 | INFO     | ai_automation.pentest.data_driven | Step: JSON file exposure probe https://tutorialsninja.com/demo/.git/
+2026-05-29 11:44:50,756 | INFO     | ai_automation.pentest.data_driven | Status for /.git/: 404
+2026-05-29 11:44:50,758 | INFO     | ai_automation.test_sensitive_path_blocked_json[git_dir] | END   tests/api/test_pentest_data_driven.py::TestFileExposureJson::test_sensitive_path_blocked_json[git_dir]

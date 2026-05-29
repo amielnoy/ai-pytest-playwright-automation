@@ -1,2 +1,0 @@
-2026-05-29 11:40:18,442 | INFO     | ai_automation.test_events_none_does_not_raise | START tests/unit/test_self_healing.py::TestHealEventRecording::test_events_none_does_not_raise
-2026-05-29 11:40:18,443 | INFO     | ai_automation.test_events_none_does_not_raise | END   tests/unit/test_self_healing.py::TestHealEventRecording::test_events_none_does_not_raise

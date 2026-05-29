@@ -1,0 +1,4 @@
+2026-05-29 11:44:54,842 | INFO     | ai_automation.test_rest_client_sends_no_authorization_header_by_default | START tests/unit/test_security_unit.py::test_rest_client_sends_no_authorization_header_by_default
+2026-05-29 11:44:54,843 | INFO     | ai_automation.security.unit | Step: Instantiate RestClient() with no arguments
+2026-05-29 11:44:54,843 | INFO     | ai_automation.security.unit | Step: Assert 'Authorization' not in client.session.headers
+2026-05-29 11:44:54,843 | INFO     | ai_automation.test_rest_client_sends_no_authorization_header_by_default | END   tests/unit/test_security_unit.py::test_rest_client_sends_no_authorization_header_by_default

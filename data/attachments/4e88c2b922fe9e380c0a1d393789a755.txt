@@ -1,0 +1,4 @@
+2026-05-29 11:44:50,437 | INFO     | ai_automation.test_sensitive_path_blocked_inline[env] | START tests/api/test_pentest_data_driven.py::TestFileExposureInline::test_sensitive_path_blocked_inline[env]
+2026-05-29 11:44:50,439 | INFO     | ai_automation.pentest.data_driven | Step: probe sensitive path https://tutorialsninja.com/demo/.env
+2026-05-29 11:44:50,439 | INFO     | ai_automation.pentest.data_driven | Status for /.env: 404
+2026-05-29 11:44:50,441 | INFO     | ai_automation.test_sensitive_path_blocked_inline[env] | END   tests/api/test_pentest_data_driven.py::TestFileExposureInline::test_sensitive_path_blocked_inline[env]

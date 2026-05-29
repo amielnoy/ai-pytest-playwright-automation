@@ -1,0 +1,2 @@
+2026-05-29 11:44:53,300 | INFO     | ai_automation.test_blank_field_is_isolated[telephone] | START tests/unit/test_factories.py::TestParametrizedMissingFields::test_blank_field_is_isolated[telephone]
+2026-05-29 11:44:53,302 | INFO     | ai_automation.test_blank_field_is_isolated[telephone] | END   tests/unit/test_factories.py::TestParametrizedMissingFields::test_blank_field_is_isolated[telephone]

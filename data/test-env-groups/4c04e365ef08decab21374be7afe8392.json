@@ -1,1 +1,1 @@
-{"id":"4c04e365ef08decab21374be7afe8392","fullName":"tests.unit.test_opencart_fallback.TestHTMLGenerators#test_register_html_has_form","name":"register_html() contains the registration form","status":"passed","testResultsByEnv":{"default":"e27032554d1ec19fb223b11d1816cdfa"}}
+{"id":"4c04e365ef08decab21374be7afe8392","fullName":"tests.unit.test_opencart_fallback.TestHTMLGenerators#test_register_html_has_form","name":"register_html() contains the registration form","status":"passed","testResultsByEnv":{"default":"f4bc33f0217cbe8d0f701c8e51af7e6a"}}

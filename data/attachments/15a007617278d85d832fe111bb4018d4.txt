@@ -1,0 +1,4 @@
+2026-05-29 11:44:52,312 | INFO     | ai_automation.test_search_product_ids_are_integers | START tests/contract/test_contracts.py::TestSearchContract::test_search_product_ids_are_integers
+2026-05-29 11:44:52,313 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:52,314 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-05-29 11:44:52,315 | INFO     | ai_automation.test_search_product_ids_are_integers | END   tests/contract/test_contracts.py::TestSearchContract::test_search_product_ids_are_integers

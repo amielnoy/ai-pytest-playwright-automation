@@ -1,2 +1,0 @@
-2026-05-29 11:40:18,381 | INFO     | ai_automation.test_primary_returned_after_wait_succeeds | START tests/unit/test_self_healing.py::TestSelfHealingResolution::test_primary_returned_after_wait_succeeds
-2026-05-29 11:40:18,383 | INFO     | ai_automation.test_primary_returned_after_wait_succeeds | END   tests/unit/test_self_healing.py::TestSelfHealingResolution::test_primary_returned_after_wait_succeeds
