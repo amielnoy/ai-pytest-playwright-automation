@@ -20,14 +20,27 @@
   body{font-family:"Segoe UI","Heebo",Arial,sans-serif; background:var(--bg); color:var(--text); line-height:1.7;}
   a{color:var(--accent); text-decoration:none;}
 
-  /* NAV */
-  nav{position:sticky; top:0; z-index:50; background:rgba(250,248,245,.92); backdrop-filter:blur(8px);
-      border-bottom:1px solid var(--border); display:flex; gap:4px; align-items:center;
-      padding:10px 24px; flex-wrap:wrap;}
-  nav .logo{font-weight:800; font-size:1.05rem; background:linear-gradient(90deg,var(--accent),var(--accent2));
-      -webkit-background-clip:text; background-clip:text; color:transparent; margin-inline-end:16px;}
-  nav a.link{color:var(--muted); font-size:.88rem; padding:6px 10px; border-radius:8px;}
-  nav a.link:hover{color:var(--text); background:var(--card);}
+  /* NAV — vertical sidebar docked to the right */
+  nav{position:fixed; top:0; right:0; bottom:0; width:212px; z-index:50;
+      background:rgba(250,248,245,.97); backdrop-filter:blur(8px);
+      border-left:1px solid var(--border); display:flex; flex-direction:column;
+      gap:6px; align-items:stretch; padding:22px 14px; overflow-y:auto;}
+  nav .logo{font-weight:800; font-size:1rem; background:linear-gradient(90deg,var(--accent),var(--accent2));
+      -webkit-background-clip:text; background-clip:text; color:transparent;}
+  nav a.link{color:var(--muted); font-size:.95rem; padding:10px 14px; border-radius:10px; display:block;}
+  nav a.link:hover{color:var(--text); background:var(--card); box-shadow:var(--shadow);}
+  nav a.link.active{color:var(--accent); background:var(--card); font-weight:700;
+      box-shadow:var(--shadow); border-inline-start:3px solid var(--accent);}
+  header,main,footer{margin-right:212px; margin-left:0;} /* clear the sidebar — physically on the right */
+  section{scroll-margin-top:20px;}
+  @media(max-width:900px){
+    nav{position:sticky; right:auto; bottom:auto; width:auto; flex-direction:row; flex-wrap:wrap;
+        align-items:center; gap:4px; padding:10px 16px; border-left:none;
+        border-bottom:1px solid var(--border);}
+    nav a.link{padding:6px 10px; font-size:.86rem;}
+    nav a.link.active{border-inline-start:none;}
+    header,main,footer{margin-right:0;}
+  }
 
   /* HERO */
   header{padding:72px 24px 56px; text-align:center;
@@ -120,6 +133,23 @@
 
   footer{text-align:center; color:var(--muted); font-size:.82rem; padding:30px; border-top:1px solid var(--border);}
 
+  /* videos & jobs */
+  .video-card video{width:100%; border-radius:10px; margin-top:10px; background:#000;}
+  .video-card .no-video{margin-top:10px; padding:22px 12px; border:2px dashed var(--border);
+      border-radius:10px; text-align:center; color:var(--muted); font-size:.82rem;}
+  a.job-card{display:block; color:inherit; transition:transform .15s, box-shadow .15s;}
+  a.job-card:hover{transform:translateY(-3px); box-shadow:0 6px 18px rgba(120,80,50,.15);}
+  a.job-card h4{color:var(--accent);}
+
+  /* telegram */
+  nav a.telegram-btn{background:linear-gradient(90deg,#2aabee,#229ed9); color:#fff !important;
+      font-weight:700; text-align:center;}
+  nav a.telegram-btn:hover{opacity:.9; box-shadow:0 4px 14px rgba(42,171,238,.35);}
+  .telegram-banner{display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap;
+      background:linear-gradient(90deg,#2aabee,#229ed9); color:#fff; border-radius:12px;
+      padding:14px 20px; margin:26px auto 0; max-width:560px; font-weight:700;}
+  .telegram-banner:hover{opacity:.93;}
+
   /* upload */
   .upload-zone{border:2px dashed var(--border); border-radius:12px; padding:20px; text-align:center;
       color:var(--muted); font-size:.9rem; cursor:pointer; transition:border-color .2s, background .2s;}
@@ -129,9 +159,9 @@
 <body>
 
 <nav>
-  <a href="#top" style="display:flex;align-items:center;gap:8px;margin-inline-end:16px;">
-    <img src="assets/logo-mark.svg" alt="AI × Automation × DevOps" style="height:32px;width:32px;">
-    <span class="logo" style="margin-inline-end:0;">AI × Automation × DevOps</span>
+  <a href="#top" style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+    <img src="assets/logo-mark.svg" alt="AI × Automation × DevOps" style="height:34px;width:34px;flex-shrink:0;">
+    <span class="logo">AI × Automation × DevOps</span>
   </a>
   <a class="link" href="#automation">אוטומציה</a>
   <a class="link" href="#layers">שכבות בדיקה</a>
@@ -139,6 +169,12 @@
   <a class="link" href="#reports">שרת תוצאות</a>
   <a class="link" href="#ai">בדיקות AI</a>
   <a class="link" href="#agents">🤖 הסוכנים</a>
+  <a class="link" href="#videos">🎬 סרטוני הסבר</a>
+  <a class="link" href="#jobs">💼 משרות פתוחות</a>
+  <a class="link" href="#interview-talk">🗣️ איך לדבר בראיון</a>
+  <a class="link" href="#career-entry">🚀 כניסה לשוק העבודה</a>
+  <a class="link telegram-btn" href="https://t.me/ai_automation_testing" target="_blank" rel="noopener" style="margin-top:auto;">✈️ הצטרפו לקהילה בטלגרם</a>
+  <a class="link" href="ai-testing-academy-en.html" style="border-top:1px solid var(--border); border-radius:0; padding-top:14px;">🌐 English</a>
 </nav>
 
 <header id="top">
@@ -368,11 +404,133 @@ npm run allure:open       <span class="comment"># פותח בדפדפן</span></
   </div>
 </section>
 
+<!-- ================= SECTION 7 : VIDEOS ================= -->
+<section id="videos">
+  <h2><span class="num">07</span>🎬 סרטוני הסבר</h2>
+  <p class="lead">סרטוני הדגמה לכל נושא. שים קובצי וידאו בתיקיית <code class="inline">videos/</code> בשמות שלמטה — והם יופיעו כאן אוטומטית.</p>
+  <a class="card job-card" target="_blank" rel="noopener" href="videos/intro-automation.mp4"
+     style="grid-column:1/-1; text-align:center; background:linear-gradient(160deg,#fdf4ea,#faeadb);">
+    <h4>▶️ למה חבילות בדיקות UI מתות תוך שנה? — סרטון ההסבר המלא (1:49)</h4>
+    <p>אנימציה עם סאונד: הקריסה, הפתרון, חידון קצר — לחץ לצפייה במסך מלא</p>
+  </a>
+  <div class="grid" id="videoGrid">
+    <div class="card video-card" data-src="videos/intro-automation.mp4">
+      <h4>🎭 אוטומציית UI עם Playwright</h4>
+      <p>הרצת בדיקת רישום מלאה, מבנה ה-POM וה-fixtures · <a href="docs/tutorials/ui-automation-playwright-for-beginners.md" target="_blank">📖 מדריך כתוב למתחילים</a></p>
+    </div>
+    <div class="card video-card" data-src="videos/api-contract-tests.mp4">
+      <h4>🔌 בדיקות API ו-Contract</h4>
+      <p>שכבת ה-services, בדיקות data-driven וחוזים יציבים</p>
+    </div>
+    <div class="card video-card" data-src="videos/devops-allure.mp4">
+      <h4>🐳 DevOps ושרת התוצאות</h4>
+      <p>Docker Compose, דוח Allure ודשבורדים ב-Grafana</p>
+    </div>
+    <div class="card video-card" data-src="videos/ai-agents.mp4">
+      <h4>🤖 סוכני AI לבדיקות</h4>
+      <p>סוכן ניתוח הכשלים, מתכנן הבדיקות ופקודות Slash</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SECTION 8 : JOBS ================= -->
+<section id="jobs">
+  <h2><span class="num">08</span>💼 משרות פתוחות באינטרנט</h2>
+  <p class="lead">חיפושים חיים במקורות המרכזיים למשרות QA Automation / SDET בישראל — כל קישור נפתח על תוצאות עדכניות. אחרי שההערכה כאן נותנת ציון טוב, זה השלב הבא.</p>
+  <div class="grid">
+    <a class="card job-card" target="_blank" rel="noopener" href="https://www.linkedin.com/jobs/search/?keywords=QA%20Automation%20Engineer&location=Israel&f_TPR=r604800">
+      <h4>🔗 LinkedIn Jobs</h4><p>QA Automation Engineer · ישראל · שבוע אחרון</p></a>
+    <a class="card job-card" target="_blank" rel="noopener" href="https://il.indeed.com/jobs?q=QA+Automation+Engineer&fromage=7">
+      <h4>🔎 Indeed Israel</h4><p>QA Automation · פורסמו בשבוע האחרון</p></a>
+    <a class="card job-card" target="_blank" rel="noopener" href="https://www.glassdoor.com/Job/israel-qa-automation-engineer-jobs-SRCH_IL.0,6_IN119_KO7,29.htm">
+      <h4>🏢 Glassdoor</h4><p>QA Automation Engineer · כולל שקיפות שכר</p></a>
+    <a class="card job-card" target="_blank" rel="noopener" href="https://www.alljobs.co.il/SearchResultsGuest.aspx?page=1&position=235&type=&freetxt=QA%20Automation">
+      <h4>📋 AllJobs</h4><p>אוטומציה / QA · המאגר הישראלי הגדול</p></a>
+    <a class="card job-card" target="_blank" rel="noopener" href="https://www.drushim.co.il/jobs/search/QA%20Automation/">
+      <h4>📄 דרושים IL</h4><p>QA Automation · חיפוש חופשי</p></a>
+    <a class="card job-card" target="_blank" rel="noopener" href="https://www.gotfriends.co.il/jobslobby/software/qa/">
+      <h4>🤝 GotFriends</h4><p>משרות QA ואוטומציה דרך חברת השמה</p></a>
+  </div>
+  <p class="notice">טיפ: פתח משרה שמעניינת אותך, הדבק את הדרישות בשדה "תפקיד יעד" של מעריך קורות החיים — וההערכה, הקו"ח המשופרים וה-PDF יותאמו בדיוק אליה.</p>
+</section>
+
+<!-- ================= SECTION 9 : INTERVIEW TALK ================= -->
+<section id="interview-talk">
+  <h2><span class="num">09</span>🗣️ איך לדבר בראיון</h2>
+  <p class="lead">מה שאומרים חשוב, אבל איך שאומרים את זה מכריע. העקרונות שעובדים בראיונות טכניים ל-QA Automation.</p>
+
+  <h3>שיטת STAR — לספר סיפור, לא לזרוק כותרות</h3>
+  <p>על כל שאלת "ספר לי על פעם ש..." ענה בארבעה שלבים: <b>S</b>ituation (ההקשר במשפט), <b>T</b>ask (מה היה באחריותך), <b>A</b>ction (מה עשית בפועל — כאן רוב הזמן), <b>R</b>esult (תוצאה מדידה). "צמצמתי זמן sanity מ-90 דקות ל-15 דרך מקבול ב-CI" שווה יותר מעשרה משפטי "אני חזק באוטומציה".</p>
+
+  <h3>בשאלות טכניות — לחשוב בקול</h3>
+  <ul>
+    <li>אל תרוץ לפתרון. חזור על השאלה במילים שלך וודא שהבנת — זה גם קונה זמן.</li>
+    <li>שתף את הדרך: "הייתי מתחיל מ-X כי..., החלופה Y נופלת כש...". מראיינים מעריכים תהליך חשיבה יותר מתשובה נכונה.</li>
+    <li>לא יודע? תגיד "לא נתקלתי בזה, אבל כך הייתי ניגש לבדוק" — ואז באמת תיגש. עדיף פי מאה מלאלתר ביטחון.</li>
+  </ul>
+
+  <h3>לדבר על כישלונות נכון</h3>
+  <p>שאלת "ספר על כישלון" בודקת בגרות, לא שלמות. בחר כישלון אמיתי, קח אחריות בלי להאשים, וסיים במה ששינית מאז. מי שאין לו כישלונות לספר — לא עשה כלום.</p>
+
+  <h3>שפה וניסוח</h3>
+  <ul>
+    <li>דבר בגוף ראשון על מה שעשית ("בניתי", "תכננתי") ובגוף ראשון רבים על הצלחות הצוות.</li>
+    <li>המרת ז'רגון לתועלת: לא "כתבתי fixtures", אלא "בניתי תשתית שחסכה לכל בודק שעה ביום".</li>
+    <li>הימנע ממילות הקטנה: "סתם", "קצת", "רק ניסיתי". הן שוחקות כל הישג שמגיע אחריהן.</li>
+    <li>שאלות בסוף הראיון = עניין. הכן שתיים-שלוש: על סטאק, על תהליך הפיתוח, על איך נמדדת הצלחה בתפקיד.</li>
+  </ul>
+
+  <h3>בראיון וידאו</h3>
+  <ul>
+    <li>מצלמה בגובה העיניים, רקע נקי, ובדוק מיקרופון מראש — זו בדיקת sanity של עצמך.</li>
+    <li>הסתכל למצלמה כשאתה עונה, לא למסך. השהיות קטנות זה בסדר — עדיף שקט קצר מ"אממ" ארוך.</li>
+  </ul>
+
+  <p class="notice">💡 את כל זה אפשר לתרגל עכשיו: גלול ל<a href="#agents">סוכן מעריך המוכנות לראיון</a> ונהל איתו סימולציה מלאה בחמישה שלבים.</p>
+</section>
+
+<!-- ================= SECTION 10 : CAREER ENTRY ================= -->
+<section id="career-entry">
+  <h2><span class="num">10</span>🚀 אסטרטגיות כניסה לשוק העבודה לעובדים צעירים</h2>
+  <p class="lead">איך נכנסים לתפקיד ראשון ב-QA Automation בלי ניסיון תעסוקתי — ואיך מתנהלים נכון בשנתיים הראשונות.</p>
+
+  <h3>לפני המשרה הראשונה: לבנות הוכחות במקום ניסיון</h3>
+  <ul>
+    <li><b>פורטפוליו ציבורי ב-GitHub</b> — ריפו כמו זה שהאתר הזה בנוי עליו שווה יותר מכל שורה בקו"ח: פריימוורק Playwright + pytest עם POM, דוח Allure, ו-CI ירוק. מגייסים פותחים ובודקים.</li>
+    <li><b>תרומה לקוד פתוח</b> — אפילו תיקון בדיקה שבורה בפרויקט קיים נותן לך "עבדתי בקוד של אחרים", הדבר שהכי חסר לג'וניורים.</li>
+    <li><b>הסמכות זולות, פרויקטים יקרים</b> — ISTQB נחמד לסינון קו"ח, אבל פרויקט חי עם README טוב מנצח אותו בראיון עצמו.</li>
+    <li><b>למד את הסטאק המבוקש בפועל</b> — פתח 20 משרות ג'וניור וספור טכנולוגיות. היום זה בדרך כלל: Python/TypeScript, Playwright/Selenium, API testing, Docker בסיסי, ועכשיו גם עבודה עם כלי AI.</li>
+  </ul>
+
+  <h3>ערוצי כניסה שעובדים באמת</h3>
+  <ul>
+    <li><b>קשרים לפני מודעות</b> — רוב משרות הג'וניור מאוישות בהפניה. כתוב לבוגרי הקורס/אוניברסיטה שלך שכבר בפנים; בקש שיחת ייעוץ של 15 דקות, לא "תסדר לי עבודה".</li>
+    <li><b>חברות השמה וג'וניור-פרוגרמות</b> — חברות כמו GotFriends ומסלולי students/graduates של חברות גדולות בנויים בדיוק לפרופיל שלך.</li>
+    <li><b>QA ידני כרגל בדלת</b> — תפקיד Manual QA שממנו מתקדמים לאוטומציה תוך שנה הוא מסלול לגיטימי ונפוץ; ציין בראיון שאתה כבר כותב אוטומציה בבית.</li>
+    <li><b>LinkedIn עובד כשהוא ספציפי</b> — כותרת "QA Automation | Python | Playwright" + פוסט קצר על פרויקט = פניות נכנסות. פרופיל גנרי = שקט.</li>
+  </ul>
+
+  <h3>השנתיים הראשונות: להתנהל כמו מקצוען</h3>
+  <ul>
+    <li><b>שאל הרבה, אבל תעד</b> — כל תשובה שקיבלת נכנסת לפתקים שלך. לשאול פעמיים את אותה שאלה זה הדבר היחיד שנחשב באמת לרעה.</li>
+    <li><b>קח בעלות על משהו קטן</b> — דוח ה-Allure, יציבות ה-CI, בדיקות ה-flaky. להיות "האיש של X" בונה מוניטין מהר יותר מלהיות טוב-בהכול.</li>
+    <li><b>הפוך משוב לדלק</b> — בקש code review מפורש, אל תתגונן, ותקן באותו יום. ג'וניור שמגיב טוב למשוב מקבל יותר משוב — וגדל מהר יותר.</li>
+    <li><b>נראות שקטה</b> — סכם ב-Slack מה תיקנת ולמה, שתף דשבורד שבנית. עבודה שאף אחד לא רואה לא קרתה.</li>
+    <li><b>שכר ומו"מ</b> — בתפקיד ראשון: התמקד בלמידה וסביבה, לא בעוד 2K. במעבר השני (אחרי 18–24 חודשים) קפיצות השכר הגדולות קורות — אז דע את שווי השוק שלך מ-Glassdoor ומחברים.</li>
+    <li><b>אל תישאר בנוחות</b> — אם אחרי שנתיים אתה עדיין מריץ את אותן בדיקות בלי ללמוד כלום חדש, זה הסימן לזוז — פנימית או החוצה.</li>
+  </ul>
+
+  <p class="notice">🎯 מסלול מעשי מהאתר הזה: בנה את הפרויקט (סקשנים 01–05) → העלה ל-GitHub → שפר קו"ח עם <a href="#agents">סוכן 1</a> → תרגל ראיון עם סוכן 2 → הגש דרך <a href="#jobs">המשרות הפתוחות</a>.</p>
+</section>
+
 </main>
 
 <footer>
   <img src="assets/logo-mark.svg" alt="" style="height:40px;display:block;margin:0 auto 10px;opacity:.85;">
-  AI × Automation × DevOps · מבוסס על ריפו AI_AUTOMATION_TESTING · Playwright · pytest · Allure · Docker
+  <a class="telegram-banner" href="https://t.me/ai_automation_testing" target="_blank" rel="noopener">
+    ✈️ מצטרפים לקהילת הטלגרם — שאלות, משרות ועדכונים על אוטומציה ו-AI
+  </a>
+  <div style="margin-top:16px;">AI × Automation × DevOps · מבוסס על ריפו AI_AUTOMATION_TESTING · Playwright · pytest · Allure · Docker</div>
 </footer>
 
 <script>
@@ -787,6 +945,36 @@ async function requestVerdict() {
 $("chatInput").addEventListener("keydown", e => {
   if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendAnswer(); }
 });
+
+/* ---------- explainer videos: attach players, show placeholder if the file is missing ---------- */
+document.querySelectorAll(".video-card").forEach(card => {
+  const src = card.dataset.src;
+  const v = document.createElement("video");
+  v.controls = true; v.preload = "metadata"; v.src = src;
+  v.addEventListener("loadedmetadata", () => { ph.remove(); });
+  v.addEventListener("error", () => {
+    v.remove();
+    ph.textContent = "🎬 הסרטון עדיין לא הועלה — שמור קובץ בשם " + src + " ורענן";
+  });
+  const ph = document.createElement("div");
+  ph.className = "no-video"; ph.textContent = "טוען סרטון...";
+  card.appendChild(v); card.appendChild(ph);
+});
+
+/* ---------- sidebar scroll-spy: highlight the section in view ---------- */
+(() => {
+  const links = [...document.querySelectorAll("nav a.link")].filter(a => a.getAttribute("href").startsWith("#"));
+  const byId = Object.fromEntries(links.map(a => [a.getAttribute("href").slice(1), a]));
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        links.forEach(a => a.classList.remove("active"));
+        byId[en.target.id]?.classList.add("active");
+      }
+    });
+  }, { rootMargin: "-25% 0px -65% 0px" });
+  Object.keys(byId).forEach(id => { const s = document.getElementById(id); if (s) obs.observe(s); });
+})();
 </script>
 </body>
 </html>
