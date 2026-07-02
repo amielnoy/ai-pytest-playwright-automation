@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI Testing Academy — Learn Test Automation, DevOps & AI Testing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
     /* light warm palette — red/orange accents, high contrast */
@@ -20,10 +23,10 @@
   body{font-family:"Segoe UI","Heebo",Arial,sans-serif; background:var(--bg); color:var(--text); line-height:1.7;}
   a{color:var(--accent); text-decoration:none;}
 
-  /* NAV — vertical sidebar docked to the right */
-  nav{position:fixed; top:0; right:0; bottom:0; width:212px; z-index:50;
+  /* NAV — vertical sidebar docked to the left (LTR) */
+  nav{position:fixed; top:0; left:0; bottom:0; width:212px; z-index:50;
       background:rgba(250,248,245,.97); backdrop-filter:blur(8px);
-      border-left:1px solid var(--border); display:flex; flex-direction:column;
+      border-right:1px solid var(--border); display:flex; flex-direction:column;
       gap:6px; align-items:stretch; padding:22px 14px; overflow-y:auto;}
   nav .logo{font-weight:800; font-size:1rem; background:linear-gradient(90deg,var(--accent),var(--accent2));
       -webkit-background-clip:text; background-clip:text; color:transparent;}
@@ -31,15 +34,15 @@
   nav a.link:hover{color:var(--text); background:var(--card); box-shadow:var(--shadow);}
   nav a.link.active{color:var(--accent); background:var(--card); font-weight:700;
       box-shadow:var(--shadow); border-left:3px solid var(--accent);}
-  header,main,footer{margin-right:212px;} /* clear the right sidebar */
+  header,main,footer{margin-left:212px;} /* clear the left sidebar */
   section{scroll-margin-top:20px;}
   @media(max-width:900px){
-    nav{position:sticky; right:auto; bottom:auto; width:auto; flex-direction:row; flex-wrap:wrap;
-        align-items:center; gap:4px; padding:10px 16px; border-left:none;
+    nav{position:sticky; left:auto; bottom:auto; width:auto; flex-direction:row; flex-wrap:wrap;
+        align-items:center; gap:4px; padding:10px 16px; border-right:none;
         border-bottom:1px solid var(--border);}
     nav a.link{padding:6px 10px; font-size:.86rem;}
     nav a.link.active{border-left:none;}
-    header,main,footer{margin-right:0;}
+    header,main,footer{margin-left:0;}
   }
 
   /* HERO */
@@ -154,6 +157,35 @@
   .upload-zone{border:2px dashed var(--border); border-radius:12px; padding:20px; text-align:center;
       color:var(--muted); font-size:.9rem; cursor:pointer; transition:border-color .2s, background .2s;}
   .upload-zone:hover,.upload-zone.drag{border-color:var(--accent); background:rgba(224,123,40,.08); color:var(--text);}
+
+  /* ===== polish layer ===== */
+  body{font-family:"Heebo","Segoe UI",Arial,sans-serif;}
+  ::selection{background:rgba(224,123,40,.25);}
+  html{scrollbar-width:thin; scrollbar-color:#d9c6b0 transparent;}
+  ::-webkit-scrollbar{width:10px;} ::-webkit-scrollbar-thumb{background:#d9c6b0; border-radius:8px;}
+
+  h2{display:flex; align-items:center; gap:14px; padding-bottom:14px; position:relative;}
+  h2::after{content:""; position:absolute; bottom:0; inset-inline-start:0; width:72px; height:4px;
+      border-radius:4px; background:linear-gradient(90deg,var(--accent),var(--accent2));}
+  h2 .num{background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff;
+      border-radius:10px; padding:2px 12px; font-size:1.05rem; margin:0;}
+
+  .card,.agent-box,pre,button.primary,button.ghost,.badge,nav a.link{transition:all .22s ease;}
+  .card:hover{transform:translateY(-3px); box-shadow:0 10px 24px rgba(120,80,50,.14);}
+  .badge{background:var(--card); box-shadow:var(--shadow);}
+  .badge:hover{border-color:var(--accent2); color:var(--text); transform:translateY(-2px);}
+  pre{box-shadow:var(--shadow); border:none; border-top:3px solid var(--accent2);}
+  button.primary:hover:not(:disabled){filter:brightness(1.08); box-shadow:0 6px 18px rgba(192,57,43,.30); transform:translateY(-1px);}
+  button.ghost:hover{border-color:var(--accent2); color:var(--text);}
+  .agent-box:focus-within{border-color:var(--accent2); box-shadow:0 6px 22px rgba(224,123,40,.16);}
+  table{box-shadow:var(--shadow); border-radius:12px; overflow:hidden; border-collapse:separate; border-spacing:0;}
+  tr:nth-child(even) td{background:rgba(224,123,40,.04);}
+
+  /* scroll-reveal */
+  section>*{opacity:1;}
+  .reveal{opacity:0; transform:translateY(26px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:none;}
+  @media (prefers-reduced-motion: reduce){.reveal{opacity:1; transform:none; transition:none;}}
 </style>
 </head>
 <body>
@@ -854,14 +886,15 @@ async function downloadImprovedPdf() {
     const rtl = /[֐-׿]/.test(text);
     const w = window.open("", "_blank");
     if (!w) throw new Error("The browser blocked the popup — allow popups for this page and try again.");
-    w.document.write(`<!DOCTYPE html><html lang="${rtl ? "he" : "en"}" dir="${rtl ? "rtl" : "ltr"}"><head>
-      <meta charset="UTF-8"><title>Resume — ${lastEval.role}</title>
-      <style>
-        body{font-family:'Segoe UI','Heebo',Arial,sans-serif; color:#222; max-width:800px;
-             margin:40px auto; padding:0 30px; line-height:1.55; font-size:13px; white-space:pre-wrap;}
-        @media print{ body{margin:0 auto;} }
-      </style></head><body>${text.replace(/&/g, "&amp;").replace(/</g, "&lt;")}</body></html>`);
-    w.document.close();
+    w.document.title = "Resume — " + lastEval.role;
+    w.document.documentElement.lang = rtl ? "he" : "en";
+    w.document.documentElement.dir = rtl ? "rtl" : "ltr";
+    const st = w.document.createElement("style");
+    st.textContent = "body{font-family:'Segoe UI','Heebo',Arial,sans-serif;color:#222;max-width:800px;" +
+      "margin:40px auto;padding:0 30px;line-height:1.55;font-size:13px;white-space:pre-wrap;}" +
+      "@media print{body{margin:0 auto;}}";
+    w.document.head.appendChild(st);
+    w.document.body.textContent = text;
     w.focus();
     setTimeout(() => w.print(), 400);  // in the dialog choose "Save as PDF"
   } catch (e) { $("improvedErr").textContent = e.message; }
@@ -969,6 +1002,15 @@ document.querySelectorAll(".video-card").forEach(card => {
     });
   }, { rootMargin: "-25% 0px -65% 0px" });
   Object.keys(byId).forEach(id => { const s = document.getElementById(id); if (s) obs.observe(s); });
+})();
+
+/* ---------- scroll-reveal: sections & cards float in ---------- */
+(() => {
+  const targets = document.querySelectorAll("section > h2, section > .lead, section .card, section .agent-box, section pre, section table, section h3, section ul, section p");
+  const io = new IntersectionObserver(es => es.forEach(en => {
+    if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+  }), { rootMargin: "0px 0px -8% 0px" });
+  targets.forEach(el => { el.classList.add("reveal"); io.observe(el); });
 })();
 </script>
 </body>
