@@ -316,6 +316,39 @@ There is also an npm shortcut:
 npm run allure:analyze
 ```
 
+## Logging
+
+The suite uses a shared logger (`utils/logger.py`) instead of `print()`. Get a logger with `get_logger("name")` — it returns a child of the `ai_automation` logger and configures logging on first use.
+
+Logs are written to a daily-rotating file and surfaced in Allure:
+
+- **File** — `logs/automation.log`, rotated every 24 hours with 14 daily backups (`logs/` is git-ignored).
+- **Allure** — the autouse `log` fixture buffers every log record emitted during a test and attaches them to that test's Allure report as a `Logs` attachment, so failures carry their own logs.
+
+Tune logging with environment variables:
+
+| Variable | Default | Purpose |
+| --- | --- | --- |
+| `LOG_LEVEL` | `INFO` | Root level for the automation logger |
+| `LOG_DIR` | `logs` | Directory for the rotating log file |
+| `LOG_BACKUP_COUNT` | `14` | Number of daily backups to keep |
+
+### Logging test call arguments
+
+Decorate a test (or business function) with `log_annotated_call` to log the call with its type-annotated **primitive** arguments only — parametrized `str`/`int`/`float`/`bool` inputs are recorded while noisy fixture objects are skipped. Place it below the `@pytest.mark.parametrize` decorators:
+
+```python
+from utils.logger import get_logger, log_annotated_call
+
+LOGGER = get_logger("api.data_driven")
+
+@pytest.mark.parametrize("query", ["MacBook", "iPhone"])
+@log_annotated_call(LOGGER)
+def test_search(search_service, query: str):
+    ...
+# logs: Annotated call: test_search(query='MacBook')
+```
+
 ## Monitoring
 
 The Compose stack includes a full observability layer:

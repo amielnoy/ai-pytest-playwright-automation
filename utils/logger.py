@@ -1,7 +1,11 @@
 import logging
 import os
+from collections.abc import Callable
+from functools import wraps
+from inspect import signature
 from logging.handlers import TimedRotatingFileHandler
 from pathlib import Path
+from typing import ParamSpec, TypeVar
 
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -9,6 +13,8 @@ DEFAULT_LOG_DIR = PROJECT_ROOT / "logs"
 DEFAULT_LOG_FILE = "automation.log"
 DEFAULT_BACKUP_COUNT = 14
 LOGGER_NAME = "ai_automation"
+P = ParamSpec("P")
+R = TypeVar("R")
 
 
 def _log_level_from_env() -> int:
@@ -87,6 +93,54 @@ def get_logger(name: str | None = None) -> logging.Logger:
     if not name:
         return logging.getLogger(LOGGER_NAME)
     return logging.getLogger(f"{LOGGER_NAME}.{name}")
+
+
+def log_annotated_call(
+    logger: logging.Logger | None = None,
+) -> Callable[[Callable[P, R]], Callable[P, R]]:
+    """Log calls using annotated primitive arguments from the wrapped function.
+
+    The decorator is intentionally narrow: pytest fixture objects are usually
+    type-annotated too, but their reprs are noisy. Only simple business inputs
+    are included in the log line.
+    """
+
+    primitive_types = (str, int, float, bool)
+
+    def decorator(func: Callable[P, R]) -> Callable[P, R]:
+        sig = signature(func)
+        annotated_names = {
+            name
+            for name in sig.parameters
+            if name != "self" and name in func.__annotations__
+        }
+        active_logger = logger or get_logger(func.__module__)
+
+        @wraps(func)
+        def wrapper(*args: P.args, **kwargs: P.kwargs) -> R:
+            bound = sig.bind_partial(*args, **kwargs)
+            fields = {
+                name: value
+                for name, value in bound.arguments.items()
+                if name in annotated_names and isinstance(value, primitive_types)
+            }
+            if fields:
+                rendered_fields = ", ".join(
+                    f"{name}={value!r}" for name, value in fields.items()
+                )
+                active_logger.info(
+                    "Annotated call: %s(%s)",
+                    func.__qualname__,
+                    rendered_fields,
+                )
+            else:
+                active_logger.info("Annotated call: %s", func.__qualname__)
+
+            return func(*args, **kwargs)
+
+        return wrapper
+
+    return decorator
 
 
 class AllureLogHandler(logging.Handler):

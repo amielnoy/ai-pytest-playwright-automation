@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Testing Academy — לימוד אוטומציית בדיקות, DevOps ובדיקות AI</title>
+<style>
+  :root{
+    /* light warm palette — red/orange accents, high contrast */
+    --bg:#fbf7f2; --bg2:#f8efe6; --card:#ffffff; --border:#e9dccf;
+    --text:#2e2933; --muted:#6e6473; --accent:#c0392b; --accent2:#e07b28;
+    --green:#3e8e57; --yellow:#b07c1f; --red:#c0392b;
+    --code-bg:#332f3f;            /* code blocks stay dark for contrast */
+    --field-bg:#ffffff;           /* inputs / textareas */
+    --track:#f1e4d6;              /* progress-bar track */
+    --shadow:0 2px 10px rgba(120,80,50,.08);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:"Segoe UI","Heebo",Arial,sans-serif; background:var(--bg); color:var(--text); line-height:1.7;}
+  a{color:var(--accent); text-decoration:none;}
+
+  /* NAV */
+  nav{position:sticky; top:0; z-index:50; background:rgba(250,248,245,.92); backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--border); display:flex; gap:4px; align-items:center;
+      padding:10px 24px; flex-wrap:wrap;}
+  nav .logo{font-weight:800; font-size:1.05rem; background:linear-gradient(90deg,var(--accent),var(--accent2));
+      -webkit-background-clip:text; background-clip:text; color:transparent; margin-inline-end:16px;}
+  nav a.link{color:var(--muted); font-size:.88rem; padding:6px 10px; border-radius:8px;}
+  nav a.link:hover{color:var(--text); background:var(--card);}
+
+  /* HERO */
+  header{padding:72px 24px 56px; text-align:center;
+      background:radial-gradient(ellipse at top, #f8e2cf 0%, var(--bg) 70%);}
+  header h1{font-size:2.4rem; line-height:1.25; margin-bottom:14px;}
+  header h1 span{background:linear-gradient(90deg,var(--accent),var(--accent2));
+      -webkit-background-clip:text; background-clip:text; color:transparent;}
+  header p{color:var(--muted); max-width:760px; margin:0 auto 26px; font-size:1.05rem;}
+  .badges{display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
+  .badge{border:1px solid var(--border); background:var(--card); color:var(--muted);
+      padding:6px 14px; border-radius:999px; font-size:.82rem;}
+
+  /* LAYOUT */
+  main{max-width:1000px; margin:0 auto; padding:0 24px 80px;}
+  section{padding:56px 0 8px; border-bottom:1px solid var(--border);}
+  section:last-of-type{border-bottom:none;}
+  h2{font-size:1.6rem; margin-bottom:8px;}
+  h2 .num{color:var(--accent2); font-family:monospace; margin-inline-end:8px;}
+  .lead{color:var(--muted); margin-bottom:24px;}
+  h3{font-size:1.08rem; margin:22px 0 8px; color:var(--accent);}
+  p{margin-bottom:12px;}
+  ul{margin:0 0 16px 0; padding-inline-start:22px;}
+  li{margin-bottom:6px;}
+
+  .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; margin:18px 0;}
+  .card{background:var(--card); border:1px solid var(--border); border-radius:12px; padding:18px; box-shadow:var(--shadow);}
+  .card h4{margin-bottom:8px; font-size:1rem;}
+  .card p{color:var(--muted); font-size:.9rem; margin:0;}
+  .tag{display:inline-block; font-size:.72rem; font-family:monospace; background:var(--code-bg);
+      border:1px solid var(--border); border-radius:6px; padding:1px 8px; margin-inline-end:6px; color:var(--yellow);}
+
+  pre{direction:ltr; text-align:left; background:var(--code-bg); border:1px solid var(--border);
+      border-radius:10px; padding:16px; overflow-x:auto; font-size:.83rem; line-height:1.55;
+      font-family:"JetBrains Mono",Consolas,monospace; margin:12px 0 20px;}
+  code.inline{direction:ltr; unicode-bidi:embed; background:var(--code-bg); border:1px solid var(--border);
+      border-radius:6px; padding:1px 6px; font-size:.85em; font-family:Consolas,monospace; color:#ffd28e;}
+  .comment{color:#6a737d;} .kw{color:#ff7b72;} .str{color:#a5d6ff;} .fn{color:#d2a8ff;}
+
+  table{width:100%; border-collapse:collapse; margin:14px 0 22px; font-size:.9rem;}
+  th,td{border:1px solid var(--border); padding:9px 12px; text-align:right;}
+  th{background:var(--card); color:var(--accent);}
+  td{color:var(--muted);}
+
+  /* AGENTS */
+  .agent-box{background:linear-gradient(160deg,#fdf4ea,#faeadb); border:1px solid #ecd6bd;
+      border-radius:16px; padding:24px; margin:22px 0; box-shadow:var(--shadow);}
+  .agent-box h3{margin-top:0; font-size:1.2rem; color:var(--text);}
+  .agent-box .sub{color:var(--muted); font-size:.9rem; margin-bottom:16px;}
+  textarea,input[type=password],input[type=text],select{
+      width:100%; background:var(--field-bg); color:var(--text); border:1px solid var(--border);
+      border-radius:10px; padding:12px; font-size:.92rem; font-family:inherit; resize:vertical;}
+  textarea:focus,input:focus,select:focus{outline:none; border-color:var(--accent);}
+  label{display:block; font-size:.85rem; color:var(--muted); margin:12px 0 6px;}
+  button.primary{background:linear-gradient(90deg,var(--accent),var(--accent2)); color:#fff; border:none;
+      border-radius:10px; padding:11px 26px; font-size:.95rem; font-weight:700; cursor:pointer; margin-top:14px;}
+  button.primary:disabled{opacity:.45; cursor:not-allowed;}
+  button.ghost{background:transparent; color:var(--muted); border:1px solid var(--border);
+      border-radius:10px; padding:10px 18px; cursor:pointer; margin-top:14px; margin-inline-start:8px;}
+  .keybar{display:grid; grid-template-columns:170px 1fr 220px; gap:12px; align-items:end;}
+  @media(max-width:640px){.keybar{grid-template-columns:1fr;}}
+  .notice{font-size:.8rem; color:var(--muted); margin-top:8px;}
+  .error{color:var(--red); font-size:.88rem; margin-top:10px; white-space:pre-wrap;}
+  .spinner{display:inline-block; width:16px; height:16px; border:2px solid var(--muted);
+      border-top-color:var(--accent); border-radius:50%; animation:spin .8s linear infinite; vertical-align:middle;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  /* resume result */
+  .score-wrap{display:flex; align-items:center; gap:18px; margin:16px 0;}
+  .score-circle{width:92px; height:92px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+      font-size:1.6rem; font-weight:800; border:5px solid var(--accent); flex-shrink:0;}
+  .bar-row{margin:10px 0;}
+  .bar-row .bar-label{display:flex; justify-content:space-between; font-size:.85rem; color:var(--muted); margin-bottom:4px;}
+  .bar{height:9px; background:var(--track); border-radius:6px; overflow:hidden;}
+  .bar>div{height:100%; background:linear-gradient(90deg,var(--accent),var(--accent2)); border-radius:6px; transition:width .8s;}
+  .result-cols{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px;}
+  @media(max-width:640px){.result-cols{grid-template-columns:1fr;}}
+  .result-cols .card ul{padding-inline-start:18px; margin:0;}
+  .result-cols .card li{font-size:.88rem; color:var(--muted);}
+
+  /* chat */
+  .chat{background:var(--bg2); border:1px solid var(--border); border-radius:12px;
+      height:380px; overflow-y:auto; padding:16px; margin:14px 0; display:flex; flex-direction:column; gap:12px;}
+  .msg{max-width:85%; padding:10px 14px; border-radius:12px; font-size:.92rem; white-space:pre-wrap;}
+  .msg.ai{background:var(--card); border:1px solid var(--border); align-self:flex-start;}
+  .msg.user{background:#fbe1cd; color:#5f3a1c; align-self:flex-end;}
+  .msg.sys{background:transparent; color:var(--muted); font-size:.8rem; align-self:center;}
+  .chat-input{display:flex; gap:10px;}
+  .chat-input textarea{height:56px;}
+  .chat-input button{margin-top:0;}
+
+  footer{text-align:center; color:var(--muted); font-size:.82rem; padding:30px; border-top:1px solid var(--border);}
+
+  /* upload */
+  .upload-zone{border:2px dashed var(--border); border-radius:12px; padding:20px; text-align:center;
+      color:var(--muted); font-size:.9rem; cursor:pointer; transition:border-color .2s, background .2s;}
+  .upload-zone:hover,.upload-zone.drag{border-color:var(--accent); background:rgba(224,123,40,.08); color:var(--text);}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#top" style="display:flex;align-items:center;gap:8px;margin-inline-end:16px;">
+    <img src="assets/logo-mark.svg" alt="AI × Automation × DevOps" style="height:32px;width:32px;">
+    <span class="logo" style="margin-inline-end:0;">AI × Automation × DevOps</span>
+  </a>
+  <a class="link" href="#automation">אוטומציה</a>
+  <a class="link" href="#layers">שכבות בדיקה</a>
+  <a class="link" href="#devops">DevOps</a>
+  <a class="link" href="#reports">שרת תוצאות</a>
+  <a class="link" href="#ai">בדיקות AI</a>
+  <a class="link" href="#agents">🤖 הסוכנים</a>
+</nav>
+
+<header id="top">
+  <img src="assets/logo.svg" alt="AI × Automation × DevOps — Testing Academy"
+       style="width:min(420px,85%); height:auto; margin:0 auto 26px; display:block;">
+  <h1>לומדים אוטומציית בדיקות,<br><span>DevOps ובדיקות מבוססות AI</span><br>— מפרויקט אמיתי</h1>
+  <p>מדריך מבוסס על ריפו העבודה <code class="inline">AI_AUTOMATION_TESTING</code>: פריימוורק Playwright + pytest בתבנית Page Object Model, תשתית DevOps מלאה עם Docker ו-CI, שרת תוצאות Allure + Grafana, וסוכני AI לניתוח כשלים וכתיבת בדיקות.</p>
+  <div class="badges">
+    <span class="badge">🐍 Python + pytest</span>
+    <span class="badge">🎭 Playwright</span>
+    <span class="badge">🐳 Docker Compose</span>
+    <span class="badge">📊 Allure + Grafana</span>
+    <span class="badge">🤖 סוכני AI</span>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= SECTION 1 ================= -->
+<section id="automation">
+  <h2><span class="num">01</span>אוטומציית בדיקות UI — Playwright + POM</h2>
+  <p class="lead">הבסיס: בדיקות דפדפן על אתר חנות דמו (tutorialsninja.com/demo), כשכל אינטראקציה עם הדף עוברת דרך Page Objects.</p>
+
+  <h3>העיקרון: סלקטורים לא מופיעים בבדיקות</h3>
+  <p>כל דף באתר מיוצג במחלקה תחת <code class="inline">pages/</code> שיורשת מ-<code class="inline">BasePage</code>. הבדיקה קוראת למתודות עסקיות בלבד — כשהאתר משתנה, מתקנים שורה אחת ב-Page Object במקום עשרים בדיקות.</p>
+  <pre><span class="comment"># tests/web-ui/test_registration.py — כך נראית בדיקה אמיתית</span>
+<span class="kw">@allure</span>.feature(<span class="str">"Registration"</span>)
+<span class="kw">@pytest</span>.mark.registration
+<span class="kw">class</span> <span class="fn">TestRegistration</span>:
+
+    <span class="kw">@allure</span>.title(<span class="str">"Successful new-user registration"</span>)
+    <span class="kw">def</span> <span class="fn">test_register_new_user</span>(self, registration_pages, registration_data):
+        registration_pages.home.open()
+        <span class="kw">with</span> allure.step(<span class="str">"Navigate to Register page"</span>):
+            registration_pages.home.go_to_register()
+        <span class="kw">with</span> allure.step(<span class="str">"Fill registration form"</span>):
+            registration_pages.register.register(**registration_data)</pre>
+
+  <h3>Fixtures — הזרקת התלויות של pytest</h3>
+  <p>קובץ <code class="inline">conftest.py</code> בשורש מגדיר את שרשרת הדפדפן: <code class="inline">browser_instance</code> (אחד לכל הריצה) ← <code class="inline">context</code> (חדש לכל בדיקה, לבידוד) ← <code class="inline">page</code>. Hook של <code class="inline">pytest_runtest_makereport</code> מצרף צילום מסך אוטומטי לכל כישלון.</p>
+
+  <h3>נתונים וקונפיגורציה</h3>
+  <ul>
+    <li><code class="inline">config/config.json</code> — הגדרות דפדפן (headless, timeout, viewport).</li>
+    <li><code class="inline">data/test_data.json</code> — כל קלטי הבדיקות, עם placeholder בשם <code class="inline">{ts}</code> שהופך ל-timestamp כדי שכל ריצה תקבל אימייל ייחודי.</li>
+    <li><code class="inline">utils/data_loader.py</code> — נקודת הכניסה היחידה לקריאת קונפיגורציה ונתונים.</li>
+  </ul>
+
+  <h3>עמידות: Self-Healing Locators</h3>
+  <p><code class="inline">pages/self_healing.py</code> מממש ריפוי-עצמי דטרמיניסטי: ל-locator ראשי מוגדרת רשימת fallbacks מאושרת מראש, וכל "ריפוי" נרשם כ-<code class="inline">SelfHealEvent</code> לניקוי סלקטורים בהמשך. בלי ניחושים של AI — הכול בשליטת ה-Page Object.</p>
+</section>
+
+<!-- ================= SECTION 2 ================= -->
+<section id="layers">
+  <h2><span class="num">02</span>פירמידת הבדיקות — ארבע שכבות</h2>
+  <p class="lead">בדיקות UI הן היקרות והאיטיות ביותר. רוב הכיסוי צריך לשבת בשכבות מהירות יותר.</p>
+
+  <div class="grid">
+    <div class="card"><h4>⚡ Unit — <span class="tag">tests/unit</span></h4>
+      <p>בלי Playwright, בלי רשת, בלי סודות. Mock על גבולות ה-session. דוגמאות: <code class="inline">test_rest_client.py</code>, <code class="inline">test_self_healing.py</code>.</p></div>
+    <div class="card"><h4>🔌 API — <span class="tag">tests/api</span></h4>
+      <p>דרך שכבת services בלבד: <code class="inline">rest_client.py</code> (retries, timeout) + מחלקות שירות כמו <code class="inline">search_service.py</code>. אין <code class="inline">requests</code> ישיר בבדיקות ואין קודי סטטוס קשיחים.</p></div>
+    <div class="card"><h4>📜 Contract — <span class="tag">tests/contract</span></h4>
+      <p>מוודאות חוזים יציבים: קודי סטטוס, שדות חובה, מזהי מוצר ומחירים ניתנים לפירסור. מונחות-מפה — צורת assertion אחת להרבה endpoints.</p></div>
+    <div class="card"><h4>🖥️ Web-UI — <span class="tag">tests/web-ui</span></h4>
+      <p>מעט בדיקות, על התרחישים הקריטיים. Setup איטי עובר ל-API (למשל מילוי עגלה) במקום קליקים בדפדפן.</p></div>
+  </div>
+
+  <h3>הרצה לפי שכבה או marker</h3>
+  <pre>pytest tests/unit                 <span class="comment"># מהיר — רץ בכל מקום</span>
+pytest -m registration            <span class="comment"># לפי marker מ-pytest.ini</span>
+pytest -m cart
+pytest tests/web-ui/test_registration.py::TestRegistration::test_register_new_user</pre>
+</section>
+
+<!-- ================= SECTION 3 ================= -->
+<section id="devops">
+  <h2><span class="num">03</span>ה-DevOps הנדרש</h2>
+  <p class="lead">בדיקות שרצות רק על הלפטופ שלך לא שוות הרבה. כך הפרויקט רץ בכל מקום, באופן זהה.</p>
+
+  <h3>Docker — סביבה זהה בכל מכונה</h3>
+  <pre>docker build -t ai-automation-testing .
+docker run --rm -v "$PWD/docker-artifacts:/app/test-artifacts" \
+  ai-automation-testing pytest tests/ --alluredir=/app/test-artifacts/allure-results</pre>
+
+  <h3>Docker Compose — סטאק שלם בפקודה אחת</h3>
+  <p><code class="inline">docker-compose.automation.yml</code> מרים את הבדיקות יחד עם Prometheus, Grafana, Swagger UI ו-cAdvisor:</p>
+  <pre>npm run test:compose:report</pre>
+
+  <h3>עקרונות שנאכפים בריפו</h3>
+  <ul>
+    <li><b>גרסאות נעוצות</b> ב-<code class="inline">requirements.txt</code> — ריצות CI שחזוריות.</li>
+    <li><b>תוצרים מחוץ ל-git:</b> <code class="inline">allure-results/</code>, <code class="inline">logs/</code>, caches וסודות (<code class="inline">data/secrets.json</code> עם קובץ example בלבד).</li>
+    <li><b>סנכרון תיעוד:</b> כל שינוי ב-Docker מחייב עדכון README, סקריפטים ו-GitHub Actions יחד.</li>
+    <li><b>שירות חדש ב-Compose?</b> מעדכנים גם את <code class="inline">monitoring/prometheus.yml</code> (scrape targets) ואת שני סקריפטי ה-compose.</li>
+  </ul>
+</section>
+
+<!-- ================= SECTION 4 ================= -->
+<section id="reports">
+  <h2><span class="num">04</span>שרת תוצאות בדיקות — Allure + ניטור</h2>
+  <p class="lead">תוצאה של ריצת בדיקות היא מוצר בפני עצמו: דוח קריא, מדדים לאורך זמן, והתראות.</p>
+
+  <h3>Allure — הדוח לכל ריצה</h3>
+  <ul>
+    <li>כל בדיקה מקושטת ב-<code class="inline">@allure.feature / @allure.story / @allure.title / @allure.severity</code>.</li>
+    <li>צעדים לוגיים עם <code class="inline">with allure.step(...)</code>.</li>
+    <li>לוגים מצורפים אוטומטית דרך fixture בשם <code class="inline">log</code> (מ-<code class="inline">utils/logger.py</code>), וצילום מסך על כל כישלון.</li>
+  </ul>
+  <pre>npm run allure:generate   <span class="comment"># בונה דוח מ-allure-results</span>
+npm run allure:open       <span class="comment"># פותח בדפדפן</span></pre>
+
+  <h3>ניטור מתמשך — Grafana + Prometheus</h3>
+  <table>
+    <tr><th>שירות</th><th>כתובת</th><th>תפקיד</th></tr>
+    <tr><td>Grafana — Test Runs</td><td dir="ltr">localhost:3000/d/automation/automation-runs</td><td>מגמות הצלחה/כישלון של ריצות</td></tr>
+    <tr><td>Grafana — Infrastructure</td><td dir="ltr">localhost:3000/d/infra-network</td><td>קצב בקשות, latency, שגיאות HTTP</td></tr>
+    <tr><td>Prometheus</td><td dir="ltr">localhost:9090</td><td>איסוף מדדים</td></tr>
+    <tr><td>Swagger UI</td><td dir="ltr">localhost:8090</td><td>תיעוד ה-API מ-<code class="inline">docs/openapi.yaml</code></td></tr>
+  </table>
+  <p>מדדי HTTP נאספים אוטומטית ב-<code class="inline">server/app.py</code> באמצעות <code class="inline">prometheus-fastapi-instrumentator</code>.</p>
+</section>
+
+<!-- ================= SECTION 5 ================= -->
+<section id="ai">
+  <h2><span class="num">05</span>בדיקות בעזרת AI — לשני הכיוונים</h2>
+  <p class="lead">כיוון א': המוצר שלך מכיל LLM — איך בודקים אותו דטרמיניסטית. כיוון ב': ה-AI עוזר לך לבדוק.</p>
+
+  <h3>א. בודקים את ה-AI</h3>
+  <ul>
+    <li><b>Prompt Injection</b> — <code class="inline">tests/api/test_prompt_injection.py</code> משתמש בטכניקת SENTINEL: מגדירים מחרוזת שתופיע בתשובה <i>רק אם</i> המתקפה הצליחה, ובודקים שהיא נעדרת. כישלון בבדיקה = הוכחה להזרקה אמיתית.</li>
+    <li><b>DLP</b> — <code class="inline">tests/api/test_chat_dlp.py</code> מוודא שסודות ו-PII לא דולפים בתשובות.</li>
+    <li><b>פונקציונליות</b> — <code class="inline">tests/api/test_chat_ai.py</code> מול שרת FastAPI מקומי; ללא <code class="inline">ANTHROPIC_API_KEY</code> השרת מחזיר תשובות mock דטרמיניסטיות, כך שהבדיקות רצות בכל מקום.</li>
+  </ul>
+
+  <h3>ב. ה-AI בודק בשבילנו</h3>
+  <ul>
+    <li><b>סוכן ניתוח כשלים</b> — <code class="inline">agents/allure_failure_agent.py</code> קורא את <code class="inline">allure-results/</code> ומסווג כל כישלון: <code class="inline">product_bug</code> / <code class="inline">dom_change</code> / <code class="inline">automation_bug</code> / <code class="inline">environment_issue</code> / <code class="inline">flaky</code>. הרצה: <code class="inline">./scripts/run_allure_failure_agent.sh</code> (או <code class="inline">--no-ai</code> למצב היוריסטי).</li>
+    <li><b>סוכן מתכנן בדיקות</b> — <code class="inline">agents/test_planner_agent.py</code>: Playwright סורק דף חי ל-JSON מובנה, ו-Claude כותב מסמך STD תוך קריאת הבדיקות הקיימות כדי לא לשכפל כיסוי.</li>
+    <li><b>פקודות Slash ב-Claude Code</b> — <code class="inline">/generate-test</code>, <code class="inline">/review-tests</code>, <code class="inline">/create-page-object</code> (דרך Playwright MCP), <code class="inline">/fix-selectors</code>, <code class="inline">/analyze-failures</code>.</li>
+    <li><b>העיקרון:</b> הסוכן מציע — המהנדס מאשר. וסוכנים הם תוכנה: יש להם בדיקות יחידה משלהם (<code class="inline">tests/unit/test_allure_failure_agent.py</code>).</li>
+  </ul>
+</section>
+
+<!-- ================= SECTION 6 : AGENTS ================= -->
+<section id="agents">
+  <h2><span class="num">06</span>🤖 סוכני הערכה אינטראקטיביים</h2>
+  <p class="lead">שני סוכנים חיים המחוברים ל-Anthropic API: מעריך קורות חיים לתפקיד QA Automation, וסוכן שמדמה ראיון ומעריך את סיכויי המעבר בכל שלב.</p>
+
+  <div class="agent-box">
+    <h3>🔑 הגדרת חיבור</h3>
+    <div class="keybar">
+      <div>
+        <label for="providerSel">ספק</label>
+        <select id="providerSel" dir="ltr" onchange="onProviderChange()">
+          <option value="anthropic">Anthropic (Claude)</option>
+          <option value="openai">OpenAI (GPT)</option>
+          <option value="gemini">Google Gemini (חינם)</option>
+        </select>
+      </div>
+      <div>
+        <label for="apiKey" id="apiKeyLabel">Anthropic API Key (נשמר מקומית בדפדפן בלבד)</label>
+        <input type="password" id="apiKey" placeholder="sk-ant-..." dir="ltr">
+      </div>
+      <div>
+        <label for="modelSel">מודל</label>
+        <select id="modelSel" dir="ltr"></select>
+      </div>
+    </div>
+    <p class="notice" id="keyNotice">המפתח נשלח ישירות מהדפדפן ל-API של הספק ולא לשום שרת אחר. Gemini (חינם, בלי כרטיס אשראי): aistudio.google.com/apikey · Anthropic: console.anthropic.com · OpenAI: platform.openai.com/api-keys</p>
+    <button class="ghost" onclick="testConnection()" style="margin-inline-start:0;">🔌 בדוק חיבור</button>
+    <button class="ghost" onclick="resetSettings()">♻️ אפס הגדרות שמורות</button>
+    <p class="notice" id="connStatus" style="white-space:pre-wrap;"></p>
+  </div>
+
+  <!-- AGENT 1: RESUME -->
+  <div class="agent-box">
+    <h3>📄 סוכן 1 — מעריך קורות חיים</h3>
+    <p class="sub">הדבק קורות חיים (טקסט חופשי) וקבל ציון התאמה לתפקיד QA Automation Engineer, פירוט לפי קטגוריות, חוזקות, פערים והמלצות — ביחס לסטאק הנלמד באתר הזה.</p>
+    <label for="targetRole">תפקיד יעד (אופציונלי)</label>
+    <input type="text" id="targetRole" placeholder="למשל: QA Automation Engineer / SDET">
+    <label>קורות חיים — העלה קובץ או הדבק טקסט</label>
+    <div class="upload-zone" id="uploadZone" onclick="$('resumeFile').click()">
+      <input type="file" id="resumeFile" accept=".pdf,.docx,.txt" style="display:none;" onchange="handleResumeFile(this.files[0])">
+      <span id="uploadLabel">📎 לחץ להעלאת קובץ (PDF / DOCX / TXT) או גרור לכאן</span>
+    </div>
+    <textarea id="resumeText" rows="9" placeholder="...או הדבק כאן את קורות החיים כטקסט" style="margin-top:10px;"></textarea>
+    <button class="primary" id="resumeBtn" onclick="evaluateResume()">הערך קורות חיים</button>
+    <div id="resumeErr" class="error"></div>
+    <div id="resumeResult" style="display:none;">
+      <div class="score-wrap">
+        <div class="score-circle" id="resumeScore">—</div>
+        <div style="flex:1;" id="resumeBars"></div>
+      </div>
+      <p id="resumeSummary" style="color:var(--muted);"></p>
+      <div class="result-cols">
+        <div class="card"><h4 style="color:var(--green);">✔ חוזקות</h4><ul id="resumeStrengths"></ul></div>
+        <div class="card"><h4 style="color:var(--red);">✖ פערים</h4><ul id="resumeGaps"></ul></div>
+      </div>
+      <div class="card" style="margin-top:16px;"><h4 style="color:var(--yellow);">🎯 המלצות לשיפור</h4><ul id="resumeRecs"></ul></div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+        <button class="primary" id="improveBtn" onclick="showImprovedResume()">✨ הצג קורות חיים משופרים</button>
+        <button class="ghost" id="pdfBtn" onclick="downloadImprovedPdf()">⬇️ הורד קו"ח משופרים כ-PDF למשרה</button>
+      </div>
+      <div id="improvedErr" class="error"></div>
+      <div class="card" id="improvedWrap" style="display:none; margin-top:16px;">
+        <h4 style="color:var(--green);">✨ קורות חיים משופרים</h4>
+        <div id="improvedText" style="white-space:pre-wrap; font-size:.92rem; line-height:1.7;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AGENT 2: INTERVIEW -->
+  <div class="agent-box">
+    <h3>🎤 סוכן 2 — מעריך מוכנות לראיון</h3>
+    <p class="sub">הסוכן מדמה ראיון לתפקיד QA Automation בחמישה שלבים: שיחת HR ← ידע באוטומציה ← קוד ו-API ← DevOps/CI ← בדיקות AI. ענה על השאלות, ובסיום לחץ "הפק הערכה" לקבלת דוח יכולת מעבר לכל שלב.</p>
+    <div class="chat" id="chatBox">
+      <div class="msg sys">לחץ "התחל ראיון" כדי להתחיל</div>
+    </div>
+    <div class="chat-input">
+      <textarea id="chatInput" placeholder="הקלד את תשובתך..." disabled></textarea>
+      <button class="primary" id="sendBtn" onclick="sendAnswer()" disabled>שלח</button>
+    </div>
+    <button class="primary" id="startBtn" onclick="startInterview()">התחל ראיון</button>
+    <button class="ghost" id="verdictBtn" onclick="requestVerdict()" disabled>הפק הערכה 📋</button>
+    <div id="chatErr" class="error"></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <img src="assets/logo-mark.svg" alt="" style="height:40px;display:block;margin:0 auto 10px;opacity:.85;">
+  AI × Automation × DevOps · מבוסס על ריפו AI_AUTOMATION_TESTING · Playwright · pytest · Allure · Docker
+</footer>
+
+<script>
+/* ---------- shared API plumbing ---------- */
+const $ = id => document.getElementById(id);
+
+const PROVIDERS = {
+  gemini: {
+    label: "Google Gemini API Key (נשמר מקומית בדפדפן בלבד)",
+    placeholder: "AIza...",
+    models: ["gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.5-pro"]
+  },
+  anthropic: {
+    label: "Anthropic API Key (נשמר מקומית בדפדפן בלבד)",
+    placeholder: "sk-ant-...",
+    models: ["claude-sonnet-5", "claude-haiku-4-5-20251001"]
+  },
+  openai: {
+    label: "OpenAI API Key (נשמר מקומית בדפדפן בלבד)",
+    placeholder: "sk-...",
+    models: ["gpt-5-mini", "gpt-5.4-mini", "gpt-5.4"]
+  }
+};
+
+function currentProvider() { return $("providerSel").value; }
+
+/* keys loaded from .env (works when the page is served over http, e.g. python3 -m http.server) */
+const envKeys = {};
+const ENV_VAR_BY_PROVIDER = { gemini: "GEMINI_API_KEY", anthropic: "ANTHROPIC_API_KEY", openai: "OPENAI_API_KEY" };
+
+async function loadEnvFile() {
+  try {
+    const res = await fetch(".env", { cache: "no-store" });
+    if (!res.ok) return;
+    for (const line of (await res.text()).split("\n")) {
+      const m = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.+?)\s*$/);
+      if (m && !m[1].startsWith("#")) envKeys[m[1]] = m[2].replace(/^["']|["']$/g, "");
+    }
+    onProviderChange(); // re-apply now that env keys are available
+  } catch (_) { /* file:// or no .env — manual key entry still works */ }
+}
+
+function onProviderChange() {
+  const p = PROVIDERS[currentProvider()];
+  $("apiKeyLabel").textContent = p.label;
+  $("apiKey").placeholder = p.placeholder;
+  const envKey = envKeys[ENV_VAR_BY_PROVIDER[currentProvider()]] || "";
+  $("apiKey").value = envKey || localStorage.getItem("ata_key_" + currentProvider()) || "";
+  if (envKey) $("apiKeyLabel").textContent = p.label.replace("(נשמר מקומית בדפדפן בלבד)", "(נטען מ-.env ✅)");
+  $("modelSel").innerHTML = p.models.map(m => `<option value="${m}">${m}</option>`).join("");
+}
+loadEnvFile();
+
+$("providerSel").value = localStorage.getItem("ata_provider") || "gemini";
+onProviderChange();
+$("providerSel").addEventListener("change", () => localStorage.setItem("ata_provider", currentProvider()));
+$("apiKey").addEventListener("change", () =>
+  localStorage.setItem("ata_key_" + currentProvider(), $("apiKey").value.trim()));
+
+async function callClaude(system, messages, maxTokens = 2500) {
+  const key = $("apiKey").value.trim();
+  if (!key) throw new Error("נא להזין API Key בראש הסקשן.");
+  if (currentProvider() === "anthropic" && !key.startsWith("sk-ant-"))
+    throw new Error("מפתח Anthropic חייב להתחיל ב-sk-ant- (נראה שהודבק מפתח של ספק אחר, אולי OpenAI?).\nהשג מפתח ב-console.anthropic.com/settings/keys");
+  if (currentProvider() === "openai" && key.startsWith("sk-ant-"))
+    throw new Error("זה מפתח של Anthropic (sk-ant-). לספק OpenAI צריך מפתח מ-platform.openai.com/api-keys, או החלף את הספק ל-Anthropic.");
+  const model = $("modelSel").value;
+  let url, headers, body, parse;
+
+  if (currentProvider() === "anthropic") {
+    url = "https://api.anthropic.com/v1/messages";
+    headers = {
+      "content-type": "application/json",
+      "x-api-key": key,
+      "anthropic-version": "2023-06-01",
+      "anthropic-dangerous-direct-browser-access": "true"
+    };
+    body = { model, max_tokens: maxTokens, system, messages };
+    parse = d => d.content.filter(b => b.type === "text").map(b => b.text).join("\n");
+  } else if (currentProvider() === "gemini") {
+    url = "https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent";
+    headers = { "content-type": "application/json", "x-goog-api-key": key };
+    body = {
+      system_instruction: { parts: [{ text: system }] },
+      contents: messages.map(m => ({
+        role: m.role === "assistant" ? "model" : "user",
+        parts: [{ text: m.content }]
+      })),
+      generationConfig: { maxOutputTokens: maxTokens }
+    };
+    // flash models: disable "thinking" so the token budget goes to the answer
+    if (model.includes("flash")) body.generationConfig.thinkingConfig = { thinkingBudget: 0 };
+    parse = d => (d.candidates?.[0]?.content?.parts || []).map(p => p.text || "").join("\n");
+  } else {
+    url = "https://api.openai.com/v1/chat/completions";
+    headers = {
+      "content-type": "application/json",
+      "Authorization": "Bearer " + key
+    };
+    body = {
+      model,
+      max_completion_tokens: maxTokens,
+      messages: [{ role: "system", content: system }, ...messages]
+    };
+    parse = d => (d.choices?.[0]?.message?.content) || "";
+  }
+
+  let res;
+  try {
+    res = await fetch(url, { method: "POST", headers, body: JSON.stringify(body) });
+  } catch (e) {
+    throw new Error(
+      "הבקשה ל-" + new URL(url).host + " נחסמה עוד לפני שהגיעה לשרת (Failed to fetch).\n" +
+      "סיבות נפוצות: חוסם פרסומות/תוכן, VPN או פיירוול ארגוני, או פתיחת הדף כקובץ (file://).\n" +
+      "נסה: (1) חלון פרטי ללא תוספים, (2) להריץ בתיקיית הפרויקט: python3 -m http.server 8000 " +
+      "ולפתוח http://localhost:8000/ai-testing-academy.html");
+  }
+  if (!res.ok) {
+    const errBody = await res.text();
+    let hint = "";
+    if (currentProvider() === "gemini" && [400, 401, 403].includes(res.status) && !key.startsWith("AIza"))
+      hint = "\nרמז: מפתחות Gemini מתחילים בדרך כלל ב-AIza — ודא שהעתקת מפתח מ-aistudio.google.com/apikey ולא מספק אחר.";
+    throw new Error("שגיאת API (" + res.status + "): " + errBody.slice(0, 300) + hint);
+  }
+  return parse(await res.json());
+}
+
+function resetSettings() {
+  Object.keys(localStorage).filter(k => k.startsWith("ata_")).forEach(k => localStorage.removeItem(k));
+  location.reload();
+}
+
+async function testConnection() {
+  const el = $("connStatus");
+  el.style.color = "var(--muted)"; el.textContent = "בודק חיבור...";
+  try {
+    const reply = await callClaude("ענה במילה אחת בלבד: אישור", [{ role: "user", content: "בדיקה" }], 20);
+    el.style.color = "var(--green)"; el.textContent = "✅ החיבור תקין (" + $("modelSel").value + "): " + reply.slice(0, 40);
+  } catch (e) {
+    el.style.color = "var(--red)"; el.textContent = "❌ " + e.message;
+  }
+}
+
+function extractJSON(text) {
+  const fenced = text.match(/```(?:json)?\s*([\s\S]*?)```/);
+  const raw = fenced ? fenced[1] : text;
+  const start = raw.indexOf("{"), end = raw.lastIndexOf("}");
+  if (start === -1 || end === -1) throw new Error("לא התקבל JSON תקין מהמודל.");
+  return JSON.parse(raw.slice(start, end + 1));
+}
+
+/* ---------- Resume file upload (PDF / DOCX / TXT) ---------- */
+function loadScript(src) {
+  return new Promise((ok, bad) => {
+    const existing = document.querySelector(`script[src="${src}"]`);
+    if (existing) { existing.remove(); }
+    const s = document.createElement("script");
+    s.src = src; s.onload = () => ok(src); s.onerror = () => { s.remove(); bad(new Error(src)); };
+    document.head.appendChild(s);
+  });
+}
+
+/* try several CDNs until one works */
+async function loadFirst(urls, globalName) {
+  if (window[globalName]) return null;
+  const errors = [];
+  for (const u of urls) {
+    try { await loadScript(u); if (window[globalName]) return u; }
+    catch (e) { errors.push(e.message); }
+  }
+  throw new Error("טעינת ספרייה נכשלה מכל ה-CDN. בדוק חיבור לאינטרנט / חוסם פרסומות.\n" + errors.join("\n"));
+}
+
+const PDFJS_V = "3.11.174", MAMMOTH_V = "1.8.0";
+const PDFJS_URLS = [
+  `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${PDFJS_V}/pdf.min.js`,
+  `https://cdn.jsdelivr.net/npm/pdfjs-dist@${PDFJS_V}/build/pdf.min.js`,
+  `https://unpkg.com/pdfjs-dist@${PDFJS_V}/build/pdf.min.js`
+];
+const MAMMOTH_URLS = [
+  `https://cdnjs.cloudflare.com/ajax/libs/mammoth/${MAMMOTH_V}/mammoth.browser.min.js`,
+  `https://cdn.jsdelivr.net/npm/mammoth@${MAMMOTH_V}/mammoth.browser.min.js`,
+  `https://unpkg.com/mammoth@${MAMMOTH_V}/mammoth.browser.min.js`
+];
+
+async function extractPdf(file) {
+  const loadedFrom = await loadFirst(PDFJS_URLS, "pdfjsLib");
+  if (loadedFrom) {
+    // point the worker at the same CDN that worked; pdf.js falls back to a
+    // main-thread "fake worker" automatically if the worker fails to load
+    pdfjsLib.GlobalWorkerOptions.workerSrc = loadedFrom.replace("pdf.min.js", "pdf.worker.min.js");
+  }
+  const pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise;
+  let out = [];
+  for (let i = 1; i <= pdf.numPages; i++) {
+    const content = await (await pdf.getPage(i)).getTextContent();
+    out.push(content.items.map(it => it.str).join(" "));
+  }
+  return out.join("\n\n");
+}
+
+async function extractDocx(file) {
+  await loadFirst(MAMMOTH_URLS, "mammoth");
+  const result = await mammoth.extractRawText({ arrayBuffer: await file.arrayBuffer() });
+  return result.value;
+}
+
+/* warm up the libraries in the background so failures surface early */
+window.addEventListener("load", () => {
+  loadFirst(PDFJS_URLS, "pdfjsLib").catch(() => {});
+  loadFirst(MAMMOTH_URLS, "mammoth").catch(() => {});
+});
+
+async function handleResumeFile(file) {
+  if (!file) return;
+  $("resumeErr").textContent = "";
+  $("uploadLabel").textContent = "⏳ קורא את " + file.name + "...";
+  try {
+    const ext = file.name.split(".").pop().toLowerCase();
+    let text;
+    if (ext === "pdf") text = await extractPdf(file);
+    else if (ext === "docx") text = await extractDocx(file);
+    else if (ext === "txt") text = await file.text();
+    else throw new Error("פורמט לא נתמך: ." + ext + " (נתמכים: PDF, DOCX, TXT)");
+    text = text.replace(/[ \t]+/g, " ").replace(/\n{3,}/g, "\n\n").trim();
+    if (text.length < 40) throw new Error("לא הצלחתי לחלץ טקסט מהקובץ (ייתכן שה-PDF סרוק כתמונה). הדבק את הטקסט ידנית.");
+    $("resumeText").value = text;
+    $("uploadLabel").textContent = "✅ " + file.name + " נטען (" + text.length + " תווים) — לחץ להחלפת קובץ";
+  } catch (e) {
+    $("uploadLabel").textContent = "📎 לחץ להעלאת קובץ (PDF / DOCX / TXT) או גרור לכאן";
+    $("resumeErr").textContent = e.message;
+  }
+}
+
+const zone = $("uploadZone");
+["dragover", "dragenter"].forEach(ev => zone.addEventListener(ev, e => { e.preventDefault(); zone.classList.add("drag"); }));
+["dragleave", "drop"].forEach(ev => zone.addEventListener(ev, e => { e.preventDefault(); zone.classList.remove("drag"); }));
+zone.addEventListener("drop", e => handleResumeFile(e.dataTransfer.files[0]));
+
+/* ---------- Agent 1: Resume evaluator ---------- */
+const RESUME_SYSTEM = `אתה מגייס טכני בכיר המעריך קורות חיים לתפקידי QA Automation / SDET.
+הסטאק הרלוונטי: Python, pytest, Playwright, Page Object Model, בדיקות API (requests/REST), בדיקות contract ו-unit,
+Docker ו-Docker Compose, CI (GitHub Actions), Allure, Grafana/Prometheus, ובדיקות מערכות AI (prompt injection, DLP, סוכני LLM).
+החזר אך ורק JSON תקין (ללא טקסט נוסף) במבנה:
+{
+ "overall": <0-100>,
+ "summary": "<2-3 משפטים בעברית>",
+ "categories": [{"name":"<שם בעברית>","score":<0-100>}, ... בדיוק 5 קטגוריות: ניסיון באוטומציה, תכנות (Python), DevOps ו-CI, בדיקות API, היכרות עם AI],
+ "strengths": ["..."],
+ "gaps": ["..."],
+ "recommendations": ["..."]
+}
+היה כן וביקורתי. כל הטקסט בעברית.`;
+
+async function evaluateResume() {
+  const txt = $("resumeText").value.trim();
+  $("resumeErr").textContent = "";
+  if (txt.length < 80) { $("resumeErr").textContent = "נא להדביק קורות חיים (לפחות כמה שורות)."; return; }
+  const btn = $("resumeBtn");
+  btn.disabled = true; btn.innerHTML = 'מעריך... <span class="spinner"></span>';
+  try {
+    const role = $("targetRole").value.trim() || "QA Automation Engineer";
+    const reply = await callClaude(RESUME_SYSTEM,
+      [{ role: "user", content: "תפקיד יעד: " + role + "\n\nקורות חיים:\n" + txt }]);
+    const r = extractJSON(reply);
+    $("resumeScore").textContent = r.overall;
+    $("resumeScore").style.borderColor = r.overall >= 75 ? "var(--green)" : r.overall >= 50 ? "var(--yellow)" : "var(--red)";
+    $("resumeSummary").textContent = r.summary || "";
+    $("resumeBars").innerHTML = (r.categories || []).map(c =>
+      `<div class="bar-row"><div class="bar-label"><span>${c.name}</span><span>${c.score}</span></div>
+       <div class="bar"><div style="width:${c.score}%"></div></div></div>`).join("");
+    const fill = (id, arr) => $(id).innerHTML = (arr || []).map(x => `<li>${x}</li>`).join("");
+    fill("resumeStrengths", r.strengths); fill("resumeGaps", r.gaps); fill("resumeRecs", r.recommendations);
+    lastEval = { resume: txt, role, evaluation: r };
+    improvedResume = null;                       // new evaluation → regenerate on demand
+    $("improvedWrap").style.display = "none";
+    $("resumeResult").style.display = "block";
+  } catch (e) { $("resumeErr").textContent = e.message; }
+  btn.disabled = false; btn.textContent = "הערך קורות חיים";
+}
+
+/* ---------- Improved resume: generate / show / download as PDF ---------- */
+const IMPROVE_SYSTEM = `אתה כותב קורות חיים מקצועי. שפר את קורות החיים שסופקו עבור תפקיד היעד:
+- שפר ניסוח, מבנה וסדר; הדגש הישגים מדידים והתאם את הדגשים לתפקיד.
+- אל תמציא ניסיון, טכנולוגיות או תארים שאינם קיימים במקור.
+- שלב את ההמלצות מההערכה ככל שהן ניסוחיות/מבניות.
+- כתוב באותה שפה שבה כתובים קורות החיים המקוריים.
+- החזר טקסט בלבד (ללא Markdown): כותרות סקציות בשורה משלהן באותיות גדולות/מודגשות בטקסט, ותבליטים עם "•".`;
+
+let lastEval = null;        // { resume, role, evaluation }
+let improvedResume = null;
+
+async function ensureImprovedResume() {
+  if (improvedResume) return improvedResume;
+  if (!lastEval) throw new Error("קודם הרץ הערכת קורות חיים.");
+  const reply = await callClaude(IMPROVE_SYSTEM, [{
+    role: "user",
+    content: "תפקיד יעד: " + lastEval.role +
+      "\n\nתוצאות ההערכה (פערים והמלצות):\n" + JSON.stringify({ gaps: lastEval.evaluation.gaps, recommendations: lastEval.evaluation.recommendations }) +
+      "\n\nקורות החיים המקוריים:\n" + lastEval.resume
+  }, ], 4000);
+  improvedResume = reply.trim();
+  return improvedResume;
+}
+
+async function showImprovedResume() {
+  const btn = $("improveBtn");
+  $("improvedErr").textContent = "";
+  btn.disabled = true; btn.innerHTML = 'משפר... <span class="spinner"></span>';
+  try {
+    const text = await ensureImprovedResume();
+    $("improvedText").textContent = text;
+    $("improvedText").dir = /[֐-׿]/.test(text) ? "rtl" : "ltr";
+    $("improvedWrap").style.display = "block";
+    $("improvedWrap").scrollIntoView({ behavior: "smooth", block: "start" });
+  } catch (e) { $("improvedErr").textContent = e.message; }
+  btn.disabled = false; btn.textContent = "✨ הצג קורות חיים משופרים";
+}
+
+async function downloadImprovedPdf() {
+  const btn = $("pdfBtn");
+  $("improvedErr").textContent = "";
+  btn.disabled = true; btn.textContent = "מכין PDF...";
+  try {
+    const text = await ensureImprovedResume();
+    const rtl = /[֐-׿]/.test(text);
+    const w = window.open("", "_blank");
+    if (!w) throw new Error("הדפדפן חסם חלון קופץ — אפשר חלונות קופצים לדף הזה ונסה שוב.");
+    w.document.write(`<!DOCTYPE html><html lang="${rtl ? "he" : "en"}" dir="${rtl ? "rtl" : "ltr"}"><head>
+      <meta charset="UTF-8"><title>Resume — ${lastEval.role}</title>
+      <style>
+        body{font-family:'Segoe UI','Heebo',Arial,sans-serif; color:#222; max-width:800px;
+             margin:40px auto; padding:0 30px; line-height:1.55; font-size:13px; white-space:pre-wrap;}
+        @media print{ body{margin:0 auto;} }
+      </style></head><body>${text.replace(/&/g, "&amp;").replace(/</g, "&lt;")}</body></html>`);
+    w.document.close();
+    w.focus();
+    setTimeout(() => w.print(), 400);  // in the dialog choose "Save as PDF"
+  } catch (e) { $("improvedErr").textContent = e.message; }
+  btn.disabled = false; btn.textContent = "⬇️ הורד קו\"ח משופרים כ-PDF למשרה";
+}
+
+/* ---------- Agent 2: Interview readiness ---------- */
+const INTERVIEW_SYSTEM = `אתה מראיין בכיר לתפקיד QA Automation Engineer. אתה מנהל ראיון מדומה בעברית, בחמישה שלבים:
+שלב 1 — שיחת HR (מוטיבציה, רקע). שלב 2 — ידע באוטומציית בדיקות (Playwright, POM, fixtures, flakiness).
+שלב 3 — קוד ו-API (Python, pytest, בדיקות REST). שלב 4 — DevOps ו-CI (Docker, pipelines, Allure).
+שלב 5 — בדיקות AI (prompt injection, בדיקת מערכות LLM).
+כללים: שאל שאלה אחת בכל פעם. אחרי כל תשובה תן פידבק קצר (משפט) והמשך לשאלה הבאה. 2 שאלות לכל שלב, ואז עבור לשלב הבא והכרז עליו.
+היה מקצועי אך נעים. אל תיתן הערכה סופית עד שתתבקש במפורש.
+כאשר המשתמש שולח "___VERDICT___", הפק דוח הערכה סופי בעברית: לכל אחד מחמשת השלבים — סיכוי מעבר (עובר / גבולי / לא עובר) ונימוק קצר, ואז ציון מוכנות כולל 0-100 ושלוש המלצות חידוד לפני ראיון אמיתי.`;
+
+let chat = [];
+let interviewOn = false;
+
+function addMsg(cls, text) {
+  const div = document.createElement("div");
+  div.className = "msg " + cls;
+  div.textContent = text;
+  $("chatBox").appendChild(div);
+  $("chatBox").scrollTop = $("chatBox").scrollHeight;
+  return div;
+}
+
+async function agentTurn() {
+  const thinking = addMsg("sys", "המראיין חושב...");
+  try {
+    const reply = await callClaude(INTERVIEW_SYSTEM, chat, 1500);
+    thinking.remove();
+    chat.push({ role: "assistant", content: reply });
+    addMsg("ai", reply);
+  } catch (e) {
+    thinking.remove();
+    $("chatErr").textContent = e.message;
+  }
+}
+
+async function startInterview() {
+  $("chatErr").textContent = "";
+  if (!$("apiKey").value.trim()) { $("chatErr").textContent = "נא להזין API Key בראש הסקשן."; return; }
+  $("chatBox").innerHTML = "";
+  chat = [{ role: "user", content: "שלום, אני מוכן להתחיל את הראיון." }];
+  interviewOn = true;
+  $("chatInput").disabled = false; $("sendBtn").disabled = false; $("verdictBtn").disabled = false;
+  $("startBtn").textContent = "התחל ראיון מחדש";
+  addMsg("user", "שלום, אני מוכן להתחיל את הראיון.");
+  await agentTurn();
+}
+
+async function sendAnswer() {
+  if (!interviewOn) return;
+  const val = $("chatInput").value.trim();
+  if (!val) return;
+  $("chatInput").value = "";
+  $("chatErr").textContent = "";
+  chat.push({ role: "user", content: val });
+  addMsg("user", val);
+  $("sendBtn").disabled = true;
+  await agentTurn();
+  $("sendBtn").disabled = false;
+}
+
+async function requestVerdict() {
+  if (!interviewOn) return;
+  $("chatErr").textContent = "";
+  chat.push({ role: "user", content: "___VERDICT___" });
+  addMsg("sys", "📋 מפיק דוח הערכה...");
+  $("sendBtn").disabled = true; $("verdictBtn").disabled = true;
+  await agentTurn();
+  $("verdictBtn").disabled = false; $("sendBtn").disabled = false;
+}
+
+$("chatInput").addEventListener("keydown", e => {
+  if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendAnswer(); }
+});
+</script>
+</body>
+</html>

@@ -16,7 +16,7 @@ from services.api.cart_service import CartService
 from services.api.http_response_constants import HTTP_OK
 from services.api.search_service import SearchService
 from utils.data_loader import get_data_file
-from utils.logger import get_logger
+from utils.logger import get_logger, log_annotated_call
 
 LOGGER = get_logger("api.data_driven")
 
@@ -67,6 +67,7 @@ class TestSearchApiInline:
             ("Samsung", "Samsung"),
         ],
     )
+    @log_annotated_call(LOGGER)
     def test_search_returns_expected_product_inline(
         self,
         search_service: SearchService,
@@ -92,6 +93,7 @@ class TestSearchApiInline:
     @allure.title("Search [{query}] returns parseable positive prices – inline")
     @allure.severity(allure.severity_level.NORMAL)
     @pytest.mark.parametrize("query", ["MacBook", "iPhone", "Canon"])
+    @log_annotated_call(LOGGER)
     def test_search_returns_positive_prices_inline(
         self, search_service: SearchService, query: str
     ):
@@ -118,6 +120,7 @@ class TestSearchApiInline:
             ("Canon",    500.0),
         ],
     )
+    @log_annotated_call(LOGGER)
     def test_search_prices_within_budget_inline(
         self,
         search_service: SearchService,
@@ -142,6 +145,7 @@ class TestSearchApiInline:
         "query",
         ["__nonexistent_product_xyz_999__", "zzz_no_such_item_abc"],
     )
+    @log_annotated_call(LOGGER)
     def test_empty_search_returns_200_no_cards_inline(
         self, search_service: SearchService, query: str
     ):
@@ -159,6 +163,7 @@ class TestSearchApiInline:
     @allure.title("Search [{query}] returns numeric product IDs – inline")
     @allure.severity(allure.severity_level.NORMAL)
     @pytest.mark.parametrize("query", ["MacBook", "iPhone"])
+    @log_annotated_call(LOGGER)
     def test_search_returns_numeric_ids_inline(
         self, search_service: SearchService, query: str
     ):
@@ -187,6 +192,7 @@ class TestCartApiInline:
     @allure.title("Cart accepts product from search [{query}] – inline")
     @allure.severity(allure.severity_level.CRITICAL)
     @pytest.mark.parametrize("query", ["MacBook", "iPhone", "Canon"])
+    @log_annotated_call(LOGGER)
     def test_cart_add_from_search_inline(
         self,
         search_service: SearchService,
@@ -213,6 +219,7 @@ class TestCartApiInline:
     @allure.title("Cart total is positive after adding [{query}] – inline")
     @allure.severity(allure.severity_level.NORMAL)
     @pytest.mark.parametrize("query", ["MacBook", "iPhone"])
+    @log_annotated_call(LOGGER)
     def test_cart_total_positive_after_add_inline(
         self,
         search_service: SearchService,
@@ -248,6 +255,7 @@ class TestSearchApiJson:
         ("query", "expected_product", "min_cards"),
         _JSON_SEARCH_CASES,
     )
+    @log_annotated_call(LOGGER)
     def test_search_returns_expected_product_json(
         self,
         search_service: SearchService,
@@ -279,6 +287,7 @@ class TestSearchApiJson:
         ("query", "max_price"),
         _JSON_PRICE_CASES,
     )
+    @log_annotated_call(LOGGER)
     def test_search_prices_within_budget_json(
         self,
         search_service: SearchService,
@@ -300,6 +309,7 @@ class TestSearchApiJson:
     @allure.title("Unknown search [{query}] returns 200 with no product cards – JSON")
     @allure.severity(allure.severity_level.NORMAL)
     @pytest.mark.parametrize("query", _JSON_EMPTY_CASES)
+    @log_annotated_call(LOGGER)
     def test_empty_search_returns_200_no_cards_json(
         self, search_service: SearchService, query: str
     ):
@@ -327,6 +337,7 @@ class TestCartApiJson:
     @allure.title("Cart accepts product from [{query}] – JSON")
     @allure.severity(allure.severity_level.CRITICAL)
     @pytest.mark.parametrize("query", _JSON_CART_CASES)
+    @log_annotated_call(LOGGER)
     def test_cart_add_from_search_json(
         self,
         search_service: SearchService,
