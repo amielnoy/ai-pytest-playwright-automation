@@ -7,15 +7,20 @@
 #        Value: paste the full contents of data/secrets.json (never commit that file)
 #   GitHub masks TEST_SECRETS_JSON in logs; the write step does not echo the JSON body.
 #
-# The report job also enforces GitHub Pages source to gh-pages/root automatically.
+# Publishes the automation report to the site root. The AI Testing Academy is
+# published separately by ai-testing-academy.yml under /academy/.
 
 name: Playwright Tests
 
 on:
   push:
     branches: [main, feature]
+    paths-ignore:
+      - "ai-testing-academy/**"
   pull_request:
     branches: [main, feature]
+    paths-ignore:
+      - "ai-testing-academy/**"
   workflow_dispatch:
 
 concurrency:
@@ -24,16 +29,12 @@ concurrency:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 jobs:
   # --- Job 1: run tests ---
   test:
     name: Run Playwright Tests
     runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
     steps:
       - name: Checkout
@@ -168,8 +169,9 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     if: always()
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+    concurrency:
+      group: pages
+      cancel-in-progress: false
 
     steps:
       - name: Checkout
@@ -203,15 +205,6 @@ jobs:
       - name: Copy architecture.html into report
         run: cp architecture.html allure-report/architecture.html
 
-      - name: Copy AI Testing Academy into the report (served at /academy/)
-        run: |
-          mkdir -p allure-report/academy/assets allure-report/academy/videos
-          cp ai-testing-academy/*.html allure-report/academy/
-          cp -r ai-testing-academy/assets/. allure-report/academy/assets/
-          cp ai-testing-academy/videos/*.mp4 ai-testing-academy/videos/*.html allure-report/academy/videos/ 2>/dev/null || true
-          # /academy/ serves the English page directly as index.html (Hebrew is one click away)
-          cp allure-report/academy/ai-testing-academy.html allure-report/academy/index.html
-
       - name: Post report link to job summary
         if: always()
         run: |
@@ -229,7 +222,6 @@ jobs:
           | | |
           |---|---|
           | **Allure Report** | [Open report]($PAGES_URL) |
-          | **AI Testing Academy** | [Open academy]($PAGES_URL/academy/) |
           | **GitHub Pages URL** | https://amielnoy.github.io/AI_AUTOMATION_TESTING/ |
           | **Architecture docs** | [architecture.html](https://amielnoy.github.io/AI_AUTOMATION_TESTING/architecture.html) |
           | **Branch** | \`$BRANCH\` |
@@ -248,30 +240,15 @@ jobs:
           # (a likely cause of the "Deployment failed, try again later" sync error).
           # A public report doesn't need them — pass/fail, logs and failure screenshots
           # remain, and the raw allure-results artifact still carries them for debugging.
-          # (Academy explainer clips are .mp4 under academy/, so they are untouched.)
           find allure-report -type f \( -name '*.webm' -o -name '*.zip' \) -delete 2>/dev/null || true
           AFTER=$(du -sm allure-report | cut -f1)
           echo "Trimmed published report: ${BEFORE}MB -> ${AFTER}MB"
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Deploy report to GitHub Pages
+        if: github.event_name != 'pull_request'
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: allure-report
-
-  # --- Job 3: deploy the report to GitHub Pages (official artifact flow) ---
-  deploy:
-    name: Deploy to GitHub Pages
-    needs: report
-    runs-on: ubuntu-latest
-    # Dedicated Pages concurrency so deployments serialize instead of cancelling
-    # each other mid-sync (the cause of "Deployment failed, try again later").
-    concurrency:
-      group: pages
-      cancel-in-progress: false
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-report
+          keep_files: true

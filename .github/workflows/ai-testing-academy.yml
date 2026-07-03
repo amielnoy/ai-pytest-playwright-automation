@@ -1,0 +1,90 @@
+# AI Testing Academy -> GitHub Pages /academy/
+#
+# Publishes only the static Academy site. The Playwright/Allure workflow owns
+# the Pages root; this workflow updates the academy/ subdirectory only.
+
+name: AI Testing Academy
+
+on:
+  workflow_run:
+    workflows: ["Playwright Tests"]
+    types: [completed]
+    branches: [main, feature]
+  push:
+    branches: [main, feature]
+    paths:
+      - "ai-testing-academy/**"
+      - ".github/workflows/ai-testing-academy.yml"
+  pull_request:
+    branches: [main, feature]
+    paths:
+      - "ai-testing-academy/**"
+      - ".github/workflows/ai-testing-academy.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: academy-pages-${{ github.event.workflow_run.head_branch || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    name: Validate Academy Site
+    runs-on: ubuntu-latest
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+
+      - name: Check required files
+        run: |
+          test -f ai-testing-academy/ai-testing-academy.html
+          test -d ai-testing-academy/assets
+          test -f ai-testing-academy/assets/i18n/en.js
+          test -f ai-testing-academy/assets/i18n/he.js
+          test -f ai-testing-academy/assets/academy-core.js
+
+      - name: Build Pages directory
+        run: |
+          mkdir -p academy-site/assets academy-site/videos
+          cp ai-testing-academy/*.html academy-site/
+          cp -r ai-testing-academy/assets/. academy-site/assets/
+          cp ai-testing-academy/videos/*.mp4 ai-testing-academy/videos/*.html academy-site/videos/ 2>/dev/null || true
+          cp academy-site/ai-testing-academy.html academy-site/index.html
+
+      - name: Upload Academy artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: academy-site
+          path: academy-site/
+          retention-days: 7
+
+  deploy:
+    name: Deploy Academy to GitHub Pages
+    needs: validate
+    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request' && (github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success')
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+
+    steps:
+      - name: Download Academy artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: academy-site
+          path: academy-site/
+
+      - name: Deploy Academy to /academy/
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: academy-site
+          destination_dir: academy
+          keep_files: true

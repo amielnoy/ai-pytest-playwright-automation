@@ -20,7 +20,7 @@ This repository also includes a 30-session automation QA course plus a Git basic
 
 A shorter, three-session **AI Testing Learning Series** lives under [`docs/learning/`](docs/learning/README.md), and a beginner Playwright walkthrough is in [`docs/tutorials/`](docs/tutorials/ui-automation-playwright-for-beginners.md).
 
-The **AI Testing Academy** landing pages present the framework with live in-browser AI agents (a QA-Automation resume evaluator — with an optional job description to build a job-tailored resume — and an interview-prep helper), in [`Hebrew`](ai-testing-academy/ai-testing-academy-he.html) and [`English`](ai-testing-academy/ai-testing-academy.html). Short explainer clips are kept in [`ai-testing-academy/videos/`](ai-testing-academy/videos/README.md). Run the site locally in Docker (`docker build -t ai-testing-academy ai-testing-academy && docker run --rm -p 8080:80 ai-testing-academy`), and it is published to GitHub Pages at `/academy/` alongside the Allure report.
+The **AI Testing Academy** landing pages present the framework with live in-browser AI agents (a QA-Automation resume evaluator — with an optional job description to build a job-tailored resume — and an interview-prep helper), in [`Hebrew`](ai-testing-academy/ai-testing-academy.html?lang=he) and [`English`](ai-testing-academy/ai-testing-academy.html). Short explainer clips are kept in [`ai-testing-academy/videos/`](ai-testing-academy/videos/README.md). Run the site locally in Docker (`docker build -t ai-testing-academy ai-testing-academy && docker run --rm -p 8080:80 ai-testing-academy`), and it is published to GitHub Pages at `/academy/` alongside the Allure report.
 
 ## Project Layout
 
