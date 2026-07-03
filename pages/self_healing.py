@@ -1,9 +1,10 @@
 from __future__ import annotations
 
+from collections.abc import Sequence
 from dataclasses import dataclass
 from typing import Any
 
-from playwright.sync_api import Locator
+from playwright.sync_api import Locator, Page
 
 
 @dataclass(frozen=True)
@@ -124,3 +125,32 @@ def healing_locator(
         fallback_labels=[label for label, _ in fallback_items],
         events=events,
     )
+
+
+class SelfHealingHost:
+    """Mixin for classes that own a Playwright page and a self-heal event list.
+
+    Provides `_healed()` so page objects and components build a
+    `SelfHealingLocator` from plain selector strings, instead of repeating the
+    `page.locator()` / `primary_label` / `events` plumbing at every call site.
+    """
+
+    page: Page
+    _self_heal_events: list[SelfHealEvent]
+
+    def _healed(
+        self,
+        selector: str,
+        name: str,
+        fallbacks: Sequence[str] = (),
+        *,
+        base: Locator | Page | None = None,
+    ) -> SelfHealingLocator:
+        source: Locator | Page = base if base is not None else self.page
+        return healing_locator(
+            source.locator(selector),
+            name=name,
+            primary_label=selector,
+            fallbacks=[(sel, source.locator(sel)) for sel in fallbacks],
+            events=self._self_heal_events,
+        )

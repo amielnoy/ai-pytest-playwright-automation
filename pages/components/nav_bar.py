@@ -1,7 +1,6 @@
 from playwright.sync_api import Locator, Page, expect
 
 from pages.components.base_component import BaseComponent
-from pages.self_healing import healing_locator
 
 
 class NavBarComponent(BaseComponent):
@@ -21,14 +20,9 @@ class NavBarComponent(BaseComponent):
     def __init__(self, page: Page) -> None:
         super().__init__(page)
         self.search_input = page.get_by_placeholder(self._SEARCH_PLACEHOLDER)
-        self.search_container = healing_locator(
-            page.locator(self._SEARCH_CONTAINER),
-            name="header search container",
-            primary_label=self._SEARCH_CONTAINER,
-            fallbacks=[
-                ("[class*='search']", page.locator("[class*='search']")),
-            ],
-            events=self._self_heal_events,
+        self.search_container = self._healed(
+            self._SEARCH_CONTAINER, "header search container",
+            ["[class*='search']"],
         )
         self.currency_dropdown = page.get_by_role(
             self._CURRENCY_BUTTON_ROLE, name=self._CURRENCY_BUTTON_NAME

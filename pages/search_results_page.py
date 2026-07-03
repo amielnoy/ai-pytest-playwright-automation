@@ -5,7 +5,6 @@ from playwright.sync_api import Page, expect
 from pages.base_page import BasePage
 from pages.components import ProductCardComponent
 from pages.models import ProductInfo, StoredProductInfo
-from pages.self_healing import healing_locator
 
 
 class SearchResultsPage(BasePage):
@@ -26,26 +25,14 @@ class SearchResultsPage(BasePage):
 
     def __init__(self, page: Page, base_url: str) -> None:
         super().__init__(page, base_url)
-        self.product_thumbs = healing_locator(
-            page.locator(self._PRODUCT_THUMBS),
-            name="search result product cards",
-            primary_label=self._PRODUCT_THUMBS,
-            fallbacks=[
-                (".product-layout", page.locator(".product-layout")),
-                ("[class*='product']", page.locator("[class*='product']")),
-            ],
-            events=self._self_heal_events,
+        self.product_thumbs = self._healed(
+            self._PRODUCT_THUMBS, "search result product cards",
+            [".product-layout", "[class*='product']"],
         )
         self.no_results_message = page.get_by_text(self._NO_RESULTS_TEXT)
-        self.list_view_button = healing_locator(
-            page.locator(self._LIST_VIEW_BUTTON),
-            name="list view button",
-            primary_label=self._LIST_VIEW_BUTTON,
-            fallbacks=[
-                ("button:has-text('List')", page.locator("button:has-text('List')")),
-                ("[title='List']", page.locator("[title='List']")),
-            ],
-            events=self._self_heal_events,
+        self.list_view_button = self._healed(
+            self._LIST_VIEW_BUTTON, "list view button",
+            ["button:has-text('List')", "[title='List']"],
         )
         self.sort_select = page.get_by_role(
             self._SORT_SELECT_ROLE, name=self._SORT_SELECT_NAME
@@ -59,15 +46,9 @@ class SearchResultsPage(BasePage):
         product_title_selector = (
             f"{self._PRODUCT_THUMBS} {self._PRODUCT_TITLE_SELECTOR} a"
         )
-        self.product_title_links = healing_locator(
-            page.locator(product_title_selector),
-            name="search result product title links",
-            primary_label=product_title_selector,
-            fallbacks=[
-                (".product-layout h4 a", page.locator(".product-layout h4 a")),
-                ("h4 a", page.locator("h4 a")),
-            ],
-            events=self._self_heal_events,
+        self.product_title_links = self._healed(
+            product_title_selector, "search result product title links",
+            [".product-layout h4 a", "h4 a"],
         )
 
     def search_items_by_name_under_price(

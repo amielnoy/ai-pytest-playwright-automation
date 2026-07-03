@@ -1,7 +1,6 @@
 from playwright.sync_api import Page
 
 from pages.components.base_component import BaseComponent
-from pages.self_healing import healing_locator
 
 
 class RegistrationFormComponent(BaseComponent):
@@ -55,15 +54,9 @@ class RegistrationFormComponent(BaseComponent):
         self.newsletter_no = page.get_by_role(
             self._NEWSLETTER_RADIO_ROLE, name=self._NEWSLETTER_NO_NAME
         )
-        self.privacy_policy = healing_locator(
-            page.locator(self._PRIVACY_POLICY),
-            name="privacy policy checkbox",
-            primary_label=self._PRIVACY_POLICY,
-            fallbacks=[
-                ("input[type='checkbox'][name='agree']", page.locator("input[type='checkbox'][name='agree']")),
-                ("input[type='checkbox']", page.locator("input[type='checkbox']")),
-            ],
-            events=self._self_heal_events,
+        self.privacy_policy = self._healed(
+            self._PRIVACY_POLICY, "privacy policy checkbox",
+            ["input[type='checkbox'][name='agree']", "input[type='checkbox']"],
         )
         self.submit_button = page.get_by_role(
             self._SUBMIT_BUTTON_ROLE, name=self._SUBMIT_BUTTON_NAME

@@ -4,7 +4,6 @@ from typing import Pattern
 from playwright.sync_api import Page
 
 from pages.base_page import BasePage
-from pages.self_healing import healing_locator
 
 
 class ProductDetailPage(BasePage):
@@ -23,15 +22,9 @@ class ProductDetailPage(BasePage):
         self.quantity_input = page.locator(self._QUANTITY_INPUT_SELECTOR)
         self.price = page.locator(self._PRICE_SELECTOR).first
         self.product_image = page.locator(self._PRODUCT_IMAGE_SELECTOR).first
-        self.add_to_cart_button = healing_locator(
-            page.locator(self._ADD_TO_CART_BUTTON_SELECTOR),
-            name="product detail add-to-cart button",
-            primary_label=self._ADD_TO_CART_BUTTON_SELECTOR,
-            fallbacks=[
-                ("button[name='button-cart']", page.locator("button[name='button-cart']")),
-                ("button:has-text('Add to Cart')", page.locator("button:has-text('Add to Cart')")),
-            ],
-            events=self._self_heal_events,
+        self.add_to_cart_button = self._healed(
+            self._ADD_TO_CART_BUTTON_SELECTOR, "product detail add-to-cart button",
+            ["button[name='button-cart']", "button:has-text('Add to Cart')"],
         )
         self.reviews_tab = page.get_by_role(
             self._REVIEWS_LINK_ROLE, name=self._REVIEWS_LINK_NAME

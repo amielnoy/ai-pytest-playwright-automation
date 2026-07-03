@@ -1,7 +1,6 @@
 from playwright.sync_api import Page, expect
 
 from pages.components.base_component import BaseComponent
-from pages.self_healing import healing_locator
 from utils.price_parser import parse_price
 
 
@@ -14,35 +13,17 @@ class CartSummaryComponent(BaseComponent):
 
     def __init__(self, page: Page) -> None:
         super().__init__(page)
-        self.total_rows = healing_locator(
-            page.locator(self._TOTAL_ROWS),
-            name="cart total rows",
-            primary_label=self._TOTAL_ROWS,
-            fallbacks=[
-                ("#content table tr", page.locator("#content table tr")),
-                (".table-responsive table tr", page.locator(".table-responsive table tr")),
-            ],
-            events=self._self_heal_events,
+        self.total_rows = self._healed(
+            self._TOTAL_ROWS, "cart total rows",
+            ["#content table tr", ".table-responsive table tr"],
         )
-        self.item_rows = healing_locator(
-            page.locator(self._ITEMS),
-            name="cart item rows",
-            primary_label=self._ITEMS,
-            fallbacks=[
-                ("#content table tbody tr", page.locator("#content table tbody tr")),
-                (".table-responsive tbody tr", page.locator(".table-responsive tbody tr")),
-            ],
-            events=self._self_heal_events,
+        self.item_rows = self._healed(
+            self._ITEMS, "cart item rows",
+            ["#content table tbody tr", ".table-responsive tbody tr"],
         )
-        self.content = healing_locator(
-            page.locator(self._CONTENT),
-            name="cart content",
-            primary_label=self._CONTENT,
-            fallbacks=[
-                ("main", page.locator("main")),
-                ("body", page.locator("body")),
-            ],
-            events=self._self_heal_events,
+        self.content = self._healed(
+            self._CONTENT, "cart content",
+            ["main", "body"],
         )
 
     def get_total(self) -> float:
