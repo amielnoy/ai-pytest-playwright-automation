@@ -45,9 +45,9 @@ jobs:
         run: |
           test -f ai-testing-academy/ai-testing-academy.html
           test -d ai-testing-academy/assets
-          test -f ai-testing-academy/assets/i18n/en.js
-          test -f ai-testing-academy/assets/i18n/he.js
-          test -f ai-testing-academy/assets/academy-core.js
+          test -f ai-testing-academy/assets/js/main.js
+          test -f ai-testing-academy/assets/js/locales/en.js
+          test -f ai-testing-academy/assets/js/locales/he.js
 
       - name: Build Pages directory
         run: |

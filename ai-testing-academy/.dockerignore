@@ -5,3 +5,9 @@ __pycache__/
 **/__pycache__/
 videos/_build/
 videos/*-narration.md
+# TypeScript sources & build tooling — the image serves the compiled assets/js only.
+src/
+tsconfig.json
+package.json
+package-lock.json
+node_modules/

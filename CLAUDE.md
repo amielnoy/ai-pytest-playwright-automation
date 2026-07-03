@@ -232,7 +232,9 @@ Claude + Playwright agents. The failure classifier uses Groq; the three test-aut
 
 ### The AI Testing Academy site (`ai-testing-academy/`)
 
-Bilingual (EN/HE) landing pages with in-browser AI agents (resume evaluator with optional job-description tailoring, interview prep). Serve via its `Dockerfile` (`docker build -t ai-testing-academy ai-testing-academy && docker run --rm -p 8080:80 ai-testing-academy`); CI also publishes it to GitHub Pages at `/academy/`. All page text is HTML in the two files today (a single-shell + TS/i18n refactor is planned).
+Bilingual (EN/HE) landing pages with in-browser AI agents (resume evaluator with optional job-description tailoring, interview prep). Serve via its `Dockerfile` (`docker build -t ai-testing-academy ai-testing-academy && docker run --rm -p 8080:80 ai-testing-academy`); CI also publishes it to GitHub Pages at `/academy/`.
+
+**Architecture:** one generic shell (`ai-testing-academy.html`) driven by two language resource modules and a shared **TypeScript** app in `src/` (`main.ts` → `i18n`/`providers`/`resume`/`interview`/`ux`, locales in `src/locales/{en,he}.ts`). The active language is chosen from `?lang=` / `localStorage` / the browser, then its `nav`/`hero`/`main`/`footer` fragments are injected. Build with `npm run build` in `ai-testing-academy/` (`tsc` → committed native ES modules in `assets/js/`, loaded via `<script type="module">`); serving/Docker/Pages need **no** runtime build. The `Locale` type (`src/types.ts`) makes a missing/renamed string key a compile error, so EN and HE can't drift.
 
 ### Test Markers
 
