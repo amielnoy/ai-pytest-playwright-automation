@@ -7,6 +7,7 @@ import { callClaude, extractJSON } from './providers.js';
 
 declare const pdfjsLib: any;
 declare const mammoth: any;
+declare const html2canvas: any;
 
 /* ---------- lazy CDN loaders (PDF.js / Mammoth) ---------- */
 function loadScript(src: string): Promise<string> {
@@ -41,6 +42,17 @@ const MAMMOTH_URLS = [
   `https://cdnjs.cloudflare.com/ajax/libs/mammoth/${MAMMOTH_V}/mammoth.browser.min.js`,
   `https://cdn.jsdelivr.net/npm/mammoth@${MAMMOTH_V}/mammoth.browser.min.js`,
   `https://unpkg.com/mammoth@${MAMMOTH_V}/mammoth.browser.min.js`
+];
+const JSPDF_V = '2.5.2', HTML2CANVAS_V = '1.4.1';
+const JSPDF_URLS = [
+  `https://cdnjs.cloudflare.com/ajax/libs/jspdf/${JSPDF_V}/jspdf.umd.min.js`,
+  `https://cdn.jsdelivr.net/npm/jspdf@${JSPDF_V}/dist/jspdf.umd.min.js`,
+  `https://unpkg.com/jspdf@${JSPDF_V}/dist/jspdf.umd.min.js`
+];
+const HTML2CANVAS_URLS = [
+  `https://cdnjs.cloudflare.com/ajax/libs/html2canvas/${HTML2CANVAS_V}/html2canvas.min.js`,
+  `https://cdn.jsdelivr.net/npm/html2canvas@${HTML2CANVAS_V}/dist/html2canvas.min.js`,
+  `https://unpkg.com/html2canvas@${HTML2CANVAS_V}/dist/html2canvas.min.js`
 ];
 
 async function extractPdf(file: File): Promise<string> {
@@ -151,26 +163,72 @@ export async function showImprovedResume(): Promise<void> {
   btn.disabled = false; btn.textContent = S.btnBuildResume;
 }
 
+/* A4 at 96dpi is 794px wide; render RTL to a canvas at that width so 1px ≈ 1:1. */
+function fileName(role: string): string {
+  return ('Resume - ' + role).replace(/[\\/:*?"<>|]+/g, '-').trim().slice(0, 80) + '.pdf';
+}
+
+/* English: real, selectable, ATS-parseable text via jsPDF's text API. */
+function pdfFromText(text: string): any {
+  const { jsPDF } = (window as any).jspdf;
+  const pdf = new jsPDF('p', 'mm', 'a4');
+  const margin = 15, lineH = 5;
+  const pageW = pdf.internal.pageSize.getWidth();
+  const pageH = pdf.internal.pageSize.getHeight();
+  pdf.setFont('helvetica', 'normal'); pdf.setFontSize(10.5);
+  const lines: string[] = pdf.splitTextToSize(text, pageW - margin * 2);
+  let y = margin;
+  for (const line of lines) {
+    if (y + lineH > pageH - margin) { pdf.addPage(); y = margin; }
+    pdf.text(line, margin, y);
+    y += lineH;
+  }
+  return pdf;
+}
+
+/* Hebrew: jsPDF's built-in fonts have no Hebrew glyphs, so render the browser's
+   own RTL layout to a canvas and paginate it into the PDF. */
+async function pdfFromCanvas(text: string): Promise<any> {
+  await loadFirst(HTML2CANVAS_URLS, 'html2canvas');
+  const holder = document.createElement('div');
+  holder.dir = 'rtl';
+  holder.textContent = text;
+  holder.style.cssText = 'position:fixed;left:-9999px;top:0;width:794px;background:#fff;color:#222;' +
+    "padding:48px;font-family:'Segoe UI','Heebo',Arial,sans-serif;font-size:14px;line-height:1.6;" +
+    'white-space:pre-wrap;word-wrap:break-word;';
+  document.body.appendChild(holder);
+  try {
+    const canvas = await html2canvas(holder, { scale: 2, backgroundColor: '#ffffff' });
+    const { jsPDF } = (window as any).jspdf;
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const pageW = pdf.internal.pageSize.getWidth();
+    const pageH = pdf.internal.pageSize.getHeight();
+    const imgH = canvas.height * pageW / canvas.width;
+    const imgData = canvas.toDataURL('image/png');
+    let heightLeft = imgH, position = 0;
+    pdf.addImage(imgData, 'PNG', 0, position, pageW, imgH);
+    heightLeft -= pageH;
+    while (heightLeft > 0) {
+      position -= pageH;
+      pdf.addPage();
+      pdf.addImage(imgData, 'PNG', 0, position, pageW, imgH);
+      heightLeft -= pageH;
+    }
+    return pdf;
+  } finally {
+    holder.remove();
+  }
+}
+
 export async function downloadImprovedPdf(): Promise<void> {
   const btn = $('pdfBtn');
   $('improvedErr').textContent = '';
   btn.disabled = true; btn.textContent = S.btnPreparingPdf;
   try {
     const text = await ensureImprovedResume();
-    const rtl = isRtlText(text);
-    const w = window.open('', '_blank');
-    if (!w) throw new Error(S.errPopupBlocked);
-    w.document.title = 'Resume — ' + lastEval!.role;
-    w.document.documentElement.lang = rtl ? 'he' : 'en';
-    w.document.documentElement.dir = rtl ? 'rtl' : 'ltr';
-    const st = w.document.createElement('style');
-    st.textContent = "body{font-family:'Segoe UI','Heebo',Arial,sans-serif;color:#222;max-width:800px;" +
-      'margin:40px auto;padding:0 30px;line-height:1.55;font-size:13px;white-space:pre-wrap;}' +
-      '@media print{body{margin:0 auto;}}';
-    w.document.head.appendChild(st);
-    w.document.body.textContent = text;
-    w.focus();
-    setTimeout(() => w.print(), 400);  // in the dialog choose "Save as PDF"
+    await loadFirst(JSPDF_URLS, 'jspdf');
+    const pdf = isRtlText(text) ? await pdfFromCanvas(text) : pdfFromText(text);
+    pdf.save(fileName(lastEval!.role));   // triggers a real file download
   } catch (e) { $('improvedErr').textContent = (e as Error).message; }
   btn.disabled = false; btn.textContent = S.btnDownloadPdf;
 }
