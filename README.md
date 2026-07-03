@@ -20,7 +20,7 @@ This repository also includes a 30-session automation QA course plus a Git basic
 
 A shorter, three-session **AI Testing Learning Series** lives under [`docs/learning/`](docs/learning/README.md), and a beginner Playwright walkthrough is in [`docs/tutorials/`](docs/tutorials/ui-automation-playwright-for-beginners.md).
 
-The **AI Testing Academy** landing pages present the framework with live in-browser AI agents (a QA-Automation resume evaluator and an interview-prep helper). Open [`ai-testing-academy/ai-testing-academy.html`](ai-testing-academy/ai-testing-academy.html) (Hebrew) or [`ai-testing-academy/ai-testing-academy-en.html`](ai-testing-academy/ai-testing-academy-en.html) (English). Short explainer clips for the site are kept in [`ai-testing-academy/videos/`](ai-testing-academy/videos/README.md).
+The **AI Testing Academy** landing pages present the framework with live in-browser AI agents (a QA-Automation resume evaluator — with an optional job description to build a job-tailored resume — and an interview-prep helper), in [`Hebrew`](ai-testing-academy/ai-testing-academy.html) and [`English`](ai-testing-academy/ai-testing-academy-en.html). Short explainer clips are kept in [`ai-testing-academy/videos/`](ai-testing-academy/videos/README.md). Run the site locally in Docker (`docker build -t ai-testing-academy ai-testing-academy && docker run --rm -p 8080:80 ai-testing-academy`), and it is published to GitHub Pages at `/academy/` alongside the Allure report.
 
 ## Project Layout
 
@@ -322,6 +322,18 @@ There is also an npm shortcut:
 ```bash
 npm run allure:analyze
 ```
+
+## AI test-authoring agents
+
+Beyond the failure classifier, three Claude + Playwright agents form a test-authoring pipeline where each stage's output feeds the next. They run from the repo root and need `ANTHROPIC_API_KEY` in `.env`.
+
+| Agent | Input | Output | Run |
+|---|---|---|---|
+| **Test Planner** — `agents/test_planner_agent.py` | live demo-store pages | STDs in `stds/` | `python -m agents.test_planner_agent` |
+| **Test Writer** — `agents/test_writer_agent.py` | STDs in `stds/` | tests in `tests/web-ui/` | `python -m agents.test_writer_agent [STD_Login.md]` |
+| **Test Healer** — `agents/test_healer_agent.py` | a failing test (file / node id) | repaired Page Object / test | `python -m agents.test_healer_agent test_login.py::TestLogin::test_valid` |
+
+The writer follows the project conventions (Page Object Model, shared fixtures, Allure decorators, markers) and self-validates with `pytest --collect-only`. The healer runs the failing test, prefers fixing the Page Object over the test, re-runs to verify, and regenerates from the STD (via the writer) only as a last resort. These three agents are also showcased on the AI Testing Academy site.
 
 ## Logging
 

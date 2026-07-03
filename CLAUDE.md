@@ -221,6 +221,19 @@ All API tests should go through:
 - `services/api/account_service.py` — account/registration page endpoints.
 - `services/api/public_service.py` — generic public endpoint checks.
 
+### AI Agents (`agents/`)
+
+Claude + Playwright agents. The failure classifier uses Groq; the three test-authoring agents use Anthropic (`ANTHROPIC_API_KEY` in `.env`) and share `agents/_agent_loop.py` (the tool-use loop). They form a pipeline — each stage's output feeds the next:
+
+- `agents/allure_failure_agent.py` — reads `allure-results/`, classifies failures (RAG). Run: `./scripts/run_allure_failure_agent.sh` (or `--no-ai`).
+- `agents/test_planner_agent.py` — crawls live pages → writes STDs to `stds/`. Run: `python -m agents.test_planner_agent`.
+- `agents/test_writer_agent.py` — reads STDs → writes `tests/web-ui/` tests (POM/fixtures/Allure, self-validated with `--collect-only`). Run: `python -m agents.test_writer_agent [STD_Login.md]`.
+- `agents/test_healer_agent.py` — runs a failing test, heals the Page Object over the test, re-runs, and regenerates from the STD via the writer only as a last resort. Run: `python -m agents.test_healer_agent test_login.py::TestLogin::test_valid`.
+
+### The AI Testing Academy site (`ai-testing-academy/`)
+
+Bilingual (EN/HE) landing pages with in-browser AI agents (resume evaluator with optional job-description tailoring, interview prep). Serve via its `Dockerfile` (`docker build -t ai-testing-academy ai-testing-academy && docker run --rm -p 8080:80 ai-testing-academy`); CI also publishes it to GitHub Pages at `/academy/`. All page text is HTML in the two files today (a single-shell + TS/i18n refactor is planned).
+
 ### Test Markers
 
 Tests must be tagged with the relevant marker: `registration`, `search`, `cart`, `api`, or `contract`. Markers are defined in `pytest.ini`.
