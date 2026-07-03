@@ -1170,7 +1170,21 @@
         <tr><td><code>LOG_BACKUP_COUNT</code></td><td>מספר גיבויים לשמירה. ברירת מחדל: <code>14</code>.</td></tr>
         <tr><td><code>LOG_DIR</code></td><td>תיקיית לוגים מותאמת. ברירת מחדל: <code>logs/</code>.</td></tr>
         <tr><td><code>LOG_LEVEL</code></td><td>רמת לוג. ברירת מחדל: <code>INFO</code>.</td></tr>
+        <tr><td><code>AllureLogHandler</code></td><td>צובר את רשומות הלוג של טסט בודד ומצרף אותן לדוח Allure כ-attachment בשם <code>Logs</code>.</td></tr>
+        <tr><td><code>log_annotated_call</code></td><td>דקורטור שרושם את הקריאה עם הארגומנטים ה-primitive המוערכים (type-annotated) בלבד.</td></tr>
       </table></div>
+
+      <h3>Allure log attachment</h3>
+      <p>ה-fixture האוטומטי <code>log</code> (ב-<code>conftest.py</code>) מחבר <code>AllureLogHandler</code> לכל טסט: כל רשומות הלוג שנוצרות במהלך הטסט נצברות ומצורפות לדוח Allure של אותו טסט כ-attachment בשם <code>Logs</code>, כך שכישלון נושא איתו את הלוגים שלו.</p>
+
+      <h3>log_annotated_call</h3>
+      <p>דקורטור על פונקציית טסט (או פונקציה עסקית) שרושם את הקריאה עם הארגומנטים ה-<strong>primitive</strong> המוערכים בלבד (<code>str</code>, <code>int</code>, <code>float</code>, <code>bool</code>) — קלטי <code>parametrize</code> נרשמים ואילו אובייקטי fixture רועשים מדולגים. יש למקם אותו <em>מתחת</em> לדקורטורים של <code>@pytest.mark.parametrize</code>.</p>
+
+      <pre>@pytest.mark.parametrize("query", ["MacBook", "iPhone"])
+@log_annotated_call(LOGGER)
+def test_search(search_service, query: str):
+    ...
+# logs: Annotated call: test_search(query='MacBook')</pre>
 
       <h3>Per-test logging</h3>
       <p><code>conftest.py</code> מחבר hooks של pytest כדי לרשום כל טסט: התחלה, סטטוס, phase ו-duration. בהרצות xdist הלוגים מה-controller מסוננים כדי למנוע כפילויות, וה-worker שרץ בפועל כותב את שורת התוצאה.</p>
@@ -1180,7 +1194,7 @@
 
       <div class="callout info">
         <span class="callout-icon">🧪</span>
-        <div><strong>Unit coverage:</strong> <code>tests/unit/test_logger.py</code> בודק שה-handler מסתובב כל 24 שעות, שהגדרת logger היא idempotent, וש-<code>get_logger()</code> מחזיר child logger עקבי.</div>
+        <div><strong>Unit coverage:</strong> <code>tests/unit/test_logger.py</code> בודק שה-handler מסתובב כל 24 שעות, שהגדרת logger היא idempotent, ש-<code>get_logger()</code> מחזיר child logger עקבי, וש-<code>log_annotated_call</code> רושם רק ארגומנטים primitive מוערכים ושומר על מטא-דאטה של הפונקציה.</div>
       </div>
     </section>
 

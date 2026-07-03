@@ -6,6 +6,7 @@ from utils.logger import (
     build_daily_file_handler,
     configure_logging,
     get_logger,
+    log_annotated_call,
 )
 
 
@@ -45,3 +46,27 @@ def test_get_logger_returns_child_logger():
     logger = get_logger("unit")
 
     assert logger.name == "ai_automation.unit"
+
+
+def test_log_annotated_call_logs_primitive_annotated_arguments(caplog):
+    logger = logging.getLogger("test_annotated_call")
+    logger.setLevel(logging.INFO)
+
+    @log_annotated_call(logger)
+    def sample(query: str, max_price: float, helper: object) -> str:
+        return query
+
+    with caplog.at_level(logging.INFO, logger="test_annotated_call"):
+        result = sample("MacBook", 2000.0, object())
+
+    assert result == "MacBook"
+    assert ".sample(query='MacBook', max_price=2000.0)" in caplog.text
+    assert "helper=" not in caplog.text
+
+
+def test_log_annotated_call_uses_function_metadata():
+    @log_annotated_call(logging.getLogger("test_metadata"))
+    def sample(query: str) -> str:
+        return query
+
+    assert sample.__name__ == "sample"

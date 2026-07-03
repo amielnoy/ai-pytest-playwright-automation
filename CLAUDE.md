@@ -185,8 +185,31 @@ All page interactions live in `pages/`. Every page class extends `BasePage` (`pa
 | `context` | request | Fresh browser context per test |
 | `page` | function | New page per test |
 | `app_url` | function | Base URL from config |
+| `log` | function (autouse) | Per-test logger that buffers all log records and attaches them to the Allure report as a `Logs` attachment |
 
 A `pytest_runtest_makereport` hook automatically attaches a screenshot to the Allure report on test failure.
+
+### Logging (`utils/logger.py`)
+
+Use the shared logger; do not call `print()` or configure `logging` directly in tests or page objects.
+
+- **`get_logger(name)`** — the only entry point. Returns a child of the `ai_automation` logger (e.g. `get_logger("api.cart")` → `ai_automation.api.cart`). Calling it configures logging on first use.
+- **`configure_logging()`** — attaches a `TimedRotatingFileHandler` that writes to `logs/automation.log` and rotates daily, keeping 14 days of backups. Idempotent.
+- **Environment overrides** — `LOG_LEVEL` (default `INFO`), `LOG_DIR` (default `logs/`), `LOG_BACKUP_COUNT` (default `14`).
+- **`AllureLogHandler`** — buffers records for one test and flushes them into the Allure report. Wired up by the autouse `log` fixture; tests do not use it directly.
+- **`log_annotated_call(logger=None)`** — decorator for test/business functions. It logs the call with only the type-annotated **primitive** arguments (`str`, `int`, `float`, `bool`), skipping noisy fixture objects. Apply it below the `@pytest.mark.parametrize` decorators so parametrized inputs appear in the log line. Pass an explicit logger or let it default to one named after the function's module.
+
+```python
+LOGGER = get_logger("api.data_driven")
+
+@pytest.mark.parametrize("query", ["MacBook", "iPhone"])
+@log_annotated_call(LOGGER)
+def test_search(search_service, query: str):
+    ...
+# logs: Annotated call: test_search(query='MacBook')
+```
+
+`logs/` is generated and git-ignored. `notebooks/load_logs_with_pandas.ipynb` loads `logs/automation.log` into a pandas DataFrame for quick analysis (counts per level/logger, activity over time); run a suite first so the log file exists.
 
 ### API Service Layer
 

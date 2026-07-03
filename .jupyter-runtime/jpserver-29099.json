@@ -1,0 +1,13 @@
+{
+  "base_url": "/",
+  "hostname": "127.0.0.1",
+  "password": false,
+  "pid": 29099,
+  "port": 8889,
+  "root_dir": "/Users/amielpeled/PycharmProjects/AI_AUTOMATION_TESTING/notebooks",
+  "secure": false,
+  "sock": "",
+  "token": "cbb342a501220d818cae6497b33ecbe7fdf7a59ba47fb026",
+  "url": "http://127.0.0.1:8889/",
+  "version": "2.19.0"
+}
