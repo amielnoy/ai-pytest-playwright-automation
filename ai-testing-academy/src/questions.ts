@@ -13,7 +13,7 @@ const SEED_KEYWORDS = 'AI dev, AI test automation, Playwright, pytest, Page Obje
 
 interface Stage { icon: string; title: string; items: string[]; }
 interface Bank {
-  nav: string; title: string; lead: string; note: string; videoHeading: string; stages: Stage[];
+  nav: string; title: string; lead: string; note: string; videoHeading?: string; stages: Stage[];
   enrichCta: string; enrichPlaceholder: string; enrichHint: string;
   enriching: string; enrichHeading: string; roleDefault: string; langName: string;
 }
@@ -28,7 +28,6 @@ const EN: Bank = {
   title: '❓ Real Interview Questions',
   lead: 'The questions QA-Automation candidates actually get, grouped by the five interview stages. Read them, prepare your STAR answers, then run a live mock with the agent above.',
   note: '💡 Practice these out loud with Agent 2 — turn on 🔊 Voice for a hands-free mock interview.',
-  videoHeading: '🎥 Watch a real interview first',
   enrichCta: '✨ Enrich with AI',
   enrichPlaceholder: 'Role or keywords (e.g. SDET, Playwright, CI/CD)',
   enrichHint: 'Uses Gemini with live Google Search to pull the QA / AI-test-automation interview questions most searched in the last 3 months — each with a model answer. Needs a Gemini key in the Connection Setup above.',
@@ -171,13 +170,16 @@ export function initQuestions(): void {
   const bank = activeLang === 'he' ? HE : EN;
   const section = document.createElement('section');
   section.id = 'interview-questions';
+  // a real interview to watch first — Hebrew only
+  const videoBlock = (activeLang === 'he' && bank.videoHeading)
+    ? `<h3>${esc(bank.videoHeading)}</h3>` +
+      `<div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/${INTERVIEW_VIDEO_ID}" ` +
+      `title="${esc(bank.videoHeading)}" loading="lazy" allowfullscreen ` +
+      'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe></div>'
+    : '';
   section.innerHTML =
     `<h2>${esc(bank.title)}</h2><p class="lead">${esc(bank.lead)}</p>` +
-    // a real interview to watch first
-    `<h3>${esc(bank.videoHeading)}</h3>` +
-    `<div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/${INTERVIEW_VIDEO_ID}" ` +
-      `title="${esc(bank.videoHeading)}" loading="lazy" allowfullscreen ` +
-      'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe></div>' +
+    videoBlock +
     // AI enrichment control
     '<div class="agent-box">' +
       '<div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">' +
