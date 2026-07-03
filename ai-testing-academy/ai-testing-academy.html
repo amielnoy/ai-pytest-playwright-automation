@@ -748,6 +748,10 @@ echo "ANTHROPIC_API_KEY=sk-ant-..." &gt;&gt; .env</pre>
 /* ---------- shared API plumbing ---------- */
 const $ = id => document.getElementById(id);
 
+/* HTML-escape untrusted text (e.g. LLM output) before it touches innerHTML. */
+const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g,
+  c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
 const PROVIDERS = {
   gemini: {
     label: "Google Gemini API Key (נשמר מקומית בדפדפן בלבד)",
@@ -1033,10 +1037,12 @@ async function evaluateResume() {
     $("resumeScore").textContent = r.overall;
     $("resumeScore").style.borderColor = r.overall >= 75 ? "var(--green)" : r.overall >= 50 ? "var(--yellow)" : "var(--red)";
     $("resumeSummary").textContent = r.summary || "";
-    $("resumeBars").innerHTML = (r.categories || []).map(c =>
-      `<div class="bar-row" role="img" aria-label="${c.name}: ${c.score} / 100"><div class="bar-label" aria-hidden="true"><span>${c.name}</span><span>${c.score}</span></div>
-       <div class="bar"><div style="width:${c.score}%"></div></div></div>`).join("");
-    const fill = (id, arr) => $(id).innerHTML = (arr || []).map(x => `<li>${x}</li>`).join("");
+    $("resumeBars").innerHTML = (r.categories || []).map(c => {
+      const pct = Math.max(0, Math.min(100, Number(c.score) || 0));
+      return `<div class="bar-row" role="img" aria-label="${esc(c.name)}: ${pct} / 100"><div class="bar-label" aria-hidden="true"><span>${esc(c.name)}</span><span>${pct}</span></div>
+       <div class="bar"><div style="width:${pct}%"></div></div></div>`;
+    }).join("");
+    const fill = (id, arr) => $(id).innerHTML = (arr || []).map(x => `<li>${esc(x)}</li>`).join("");
     fill("resumeStrengths", r.strengths); fill("resumeGaps", r.gaps); fill("resumeRecs", r.recommendations);
     lastEval = { resume: txt, role, evaluation: r };
     improvedResume = null;                       // new evaluation → regenerate on demand
