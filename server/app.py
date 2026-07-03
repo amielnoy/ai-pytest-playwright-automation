@@ -11,7 +11,10 @@ from dataclasses import asdict
 from pathlib import Path
 from typing import Any
 
-import anthropic as anthropic_sdk
+try:
+    import anthropic as anthropic_sdk
+except ModuleNotFoundError:  # optional: the /chat endpoint falls back to a mock without it
+    anthropic_sdk = None
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import HTMLResponse, Response
@@ -338,7 +341,7 @@ def create_app() -> FastAPI:
     @app.post("/chat")
     def chat(request: ChatRequest) -> dict[str, Any]:
         api_key = os.environ.get("ANTHROPIC_API_KEY")
-        if not api_key:
+        if not api_key or anthropic_sdk is None:
             return mock_chat_response(request.message, request.system)
         client = anthropic_sdk.Anthropic(api_key=api_key)
         try:
