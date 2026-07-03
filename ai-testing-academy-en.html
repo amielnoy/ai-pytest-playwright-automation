@@ -389,6 +389,10 @@ npm run allure:open       <span class="comment"># opens it in the browser</span>
       <div>
         <label for="apiKey" id="apiKeyLabel">Anthropic API Key (stored locally in your browser only)</label>
         <input type="password" id="apiKey" placeholder="sk-ant-...">
+        <label id="ownKeyRow" style="display:flex; align-items:center; gap:8px; margin-top:8px; cursor:pointer;">
+          <input type="checkbox" id="useOwnKey" style="width:auto; margin:0;">
+          <span>Use my own API key (override the default from <code class="inline">.env</code>)</span>
+        </label>
       </div>
       <div>
         <label for="modelSel">Model</label>
@@ -620,19 +624,44 @@ async function loadEnvFile() {
       const m = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.+?)\s*$/);
       if (m && !m[1].startsWith("#")) envKeys[m[1]] = m[2].replace(/^["']|["']$/g, "");
     }
-    onProviderChange();
+    if (!ownKeyTouched) applyKeyMode();   // re-evaluate defaults; UI-saved keys still win
   } catch (_) { /* file:// or no .env — manual key entry still works */ }
+}
+
+function envKeyFor(provider) { return envKeys[ENV_VAR_BY_PROVIDER[provider]] || ""; }
+let ownKeyTouched = false;   // becomes true once the user ticks the checkbox themselves
+
+/* Gate the key input behind the checkbox: the .env key is the locked-in default,
+   and a custom key can only be entered after ticking "Use my own API key". */
+function applyKeyMode() {
+  const p = PROVIDERS[currentProvider()];
+  const envKey = envKeyFor(currentProvider());
+  // default state (until the user touches the box): UI-saved key wins first,
+  // then the .env key; own-key mode when there's no .env key at all.
+  if (!ownKeyTouched)
+    $("useOwnKey").checked = !!localStorage.getItem("ata_key_" + currentProvider()) || !envKey;
+  const own = $("useOwnKey").checked;
+  $("useOwnKey").disabled = !envKey;                 // can't turn off what doesn't exist
+  $("ownKeyRow").style.opacity = envKey ? "1" : ".5";
+
+  $("apiKey").disabled = !own;
+  $("apiKey").placeholder = own ? p.placeholder : "Using the key from .env";
+  if (own) {
+    $("apiKey").value = localStorage.getItem("ata_key_" + currentProvider()) || "";
+    $("apiKeyLabel").textContent = p.label;
+  } else {
+    $("apiKey").value = envKey;
+    $("apiKeyLabel").textContent = p.label.replace("(stored locally in your browser only)", "(default — loaded from .env ✅)");
+  }
 }
 
 function onProviderChange() {
   const p = PROVIDERS[currentProvider()];
-  $("apiKeyLabel").textContent = p.label;
-  $("apiKey").placeholder = p.placeholder;
-  const envKey = envKeys[ENV_VAR_BY_PROVIDER[currentProvider()]] || "";
-  $("apiKey").value = envKey || localStorage.getItem("ata_key_" + currentProvider()) || "";
-  if (envKey) $("apiKeyLabel").textContent = p.label.replace("(stored locally in your browser only)", "(loaded from .env ✅)");
   $("modelSel").innerHTML = p.models.map(m => `<option value="${m}">${m}</option>`).join("");
+  ownKeyTouched = false;   // each provider re-evaluates its own default
+  applyKeyMode();
 }
+$("useOwnKey").addEventListener("change", () => { ownKeyTouched = true; applyKeyMode(); });
 loadEnvFile();
 
 $("providerSel").value = localStorage.getItem("ata_provider") || "gemini";
