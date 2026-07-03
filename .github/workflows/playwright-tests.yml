@@ -203,6 +203,16 @@ jobs:
       - name: Copy architecture.html into report
         run: cp architecture.html allure-report/architecture.html
 
+      - name: Copy AI Testing Academy into the report (served at /academy/)
+        run: |
+          mkdir -p allure-report/academy/assets allure-report/academy/videos
+          cp ai-testing-academy/*.html allure-report/academy/
+          cp -r ai-testing-academy/assets/. allure-report/academy/assets/
+          cp ai-testing-academy/videos/*.mp4 ai-testing-academy/videos/*.html allure-report/academy/videos/ 2>/dev/null || true
+          # /academy/ landing → English page (the Hebrew page is one click away)
+          printf '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=ai-testing-academy-en.html">' \
+            > allure-report/academy/index.html
+
       - name: Post report link to job summary
         if: always()
         run: |
@@ -220,6 +230,7 @@ jobs:
           | | |
           |---|---|
           | **Allure Report** | [Open report]($PAGES_URL) |
+          | **AI Testing Academy** | [Open academy]($PAGES_URL/academy/) |
           | **GitHub Pages URL** | https://amielnoy.github.io/AI_AUTOMATION_TESTING/ |
           | **Architecture docs** | [architecture.html](https://amielnoy.github.io/AI_AUTOMATION_TESTING/architecture.html) |
           | **Branch** | \`$BRANCH\` |
