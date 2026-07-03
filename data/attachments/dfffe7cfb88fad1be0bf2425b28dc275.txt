@@ -1,2 +1,0 @@
-2026-05-29 11:44:53,470 | INFO     | ai_automation.test_login_call_sequence | START tests/unit/test_flows.py::TestLoginFlow::test_login_call_sequence
-2026-05-29 11:44:53,474 | INFO     | ai_automation.test_login_call_sequence | END   tests/unit/test_flows.py::TestLoginFlow::test_login_call_sequence

@@ -1,1 +1,1 @@
-{"id":"8afaad2936f583d4e462eb98723dbce4","fullName":"tests.unit.test_factories.TestMakeSearch#test_override_max_price","name":"override max_price is forwarded unchanged","status":"passed","testResultsByEnv":{"default":"604b23cc31554ad88e24d47d8eb471ac"}}
+{"id":"8afaad2936f583d4e462eb98723dbce4","fullName":"tests.unit.test_factories.TestMakeSearch#test_override_max_price","name":"override max_price is forwarded unchanged","status":"passed","testResultsByEnv":{"default":"f63af0f3232e0be6b786a6f7b902f01c"}}

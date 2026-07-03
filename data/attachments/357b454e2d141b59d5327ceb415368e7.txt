@@ -1,6 +1,0 @@
-2026-05-29 11:44:46,668 | INFO     | ai_automation.test_search_returns_positive_prices_inline[MacBook] | START tests/api/test_api_data_driven.py::TestSearchApiInline::test_search_returns_positive_prices_inline[MacBook]
-2026-05-29 11:44:46,670 | INFO     | ai_automation.api.data_driven | Step: search for 'MacBook'
-2026-05-29 11:44:46,670 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:44:46,671 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:44:46,671 | INFO     | ai_automation.api.data_driven | Prices for 'MacBook': [602.0, 2000.0]
-2026-05-29 11:44:46,672 | INFO     | ai_automation.test_search_returns_positive_prices_inline[MacBook] | END   tests/api/test_api_data_driven.py::TestSearchApiInline::test_search_returns_positive_prices_inline[MacBook]

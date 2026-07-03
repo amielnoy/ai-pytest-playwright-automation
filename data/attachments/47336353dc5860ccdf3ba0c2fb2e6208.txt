@@ -1,0 +1,5 @@
+2026-07-03 00:54:23,163 | INFO     | ai_automation.test_protected_route_requires_auth_json[password_change] | START tests/api/test_pentest_data_driven.py::TestAccessControlJson::test_protected_route_requires_auth_json[password_change]
+2026-07-03 00:54:23,164 | INFO     | ai_automation.pentest.data_driven | Step: JSON ACL unauthenticated GET account/password
+2026-07-03 00:54:23,164 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:23,165 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:23,166 | INFO     | ai_automation.test_protected_route_requires_auth_json[password_change] | END   tests/api/test_pentest_data_driven.py::TestAccessControlJson::test_protected_route_requires_auth_json[password_change]

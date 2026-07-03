@@ -1,2 +1,0 @@
-2026-05-29 11:44:52,839 | INFO     | ai_automation.test_override_last_name_blank | START tests/unit/test_factories.py::TestMakeRegistration::test_override_last_name_blank
-2026-05-29 11:44:52,840 | INFO     | ai_automation.test_override_last_name_blank | END   tests/unit/test_factories.py::TestMakeRegistration::test_override_last_name_blank

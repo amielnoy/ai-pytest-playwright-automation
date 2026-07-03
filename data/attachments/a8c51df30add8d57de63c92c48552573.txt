@@ -1,2 +1,0 @@
-2026-05-29 11:44:52,593 | INFO     | ai_automation.test_no_products | START tests/unit/test_api_client.py::TestParseCards::test_no_products
-2026-05-29 11:44:52,594 | INFO     | ai_automation.test_no_products | END   tests/unit/test_api_client.py::TestParseCards::test_no_products

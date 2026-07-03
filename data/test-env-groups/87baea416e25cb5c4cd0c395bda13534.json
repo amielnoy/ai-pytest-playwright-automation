@@ -1,1 +1,1 @@
-{"id":"87baea416e25cb5c4cd0c395bda13534","fullName":"tests.api.test_pentest_data_driven.TestAccessControlJson#test_protected_route_requires_auth_json","name":"Route [account/order] requires auth – JSON","status":"passed","testResultsByEnv":{"default":"9173c8865d7b640b7d1c73014379158d"}}
+{"id":"87baea416e25cb5c4cd0c395bda13534","fullName":"tests.api.test_pentest_data_driven.TestAccessControlJson#test_protected_route_requires_auth_json","name":"Route [account/edit] requires auth – JSON","status":"passed","testResultsByEnv":{"default":"c98513f6eba3ca9bb2e3b77791853560"}}

@@ -1,0 +1,6 @@
+2026-07-03 00:54:24,458 | INFO     | ai_automation.test_sql_injection_in_search_returns_200_without_db_error | START tests/api/test_security_api.py::TestSearchSecurity::test_sql_injection_in_search_returns_200_without_db_error
+2026-07-03 00:54:24,459 | INFO     | ai_automation.security.api | Step: GET search with SQL injection payload: "' OR '1'='1'--"
+2026-07-03 00:54:24,460 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:24,460 | INFO     | ai_automation.security.api | Step: Assert 200 and no DB error markers
+2026-07-03 00:54:24,460 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:24,462 | INFO     | ai_automation.test_sql_injection_in_search_returns_200_without_db_error | END   tests/api/test_security_api.py::TestSearchSecurity::test_sql_injection_in_search_returns_200_without_db_error

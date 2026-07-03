@@ -1,2 +1,0 @@
-2026-05-29 11:44:52,577 | INFO     | ai_automation.test_respects_limit | START tests/unit/test_api_client.py::TestParseCards::test_respects_limit
-2026-05-29 11:44:52,578 | INFO     | ai_automation.test_respects_limit | END   tests/unit/test_api_client.py::TestParseCards::test_respects_limit

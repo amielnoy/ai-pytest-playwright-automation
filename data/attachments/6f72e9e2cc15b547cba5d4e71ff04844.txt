@@ -1,0 +1,2 @@
+2026-07-03 00:57:06,089 | INFO     | ai_automation.test_register_page_accessible_via_home_nav | START tests/web-ui/test_system_coverage.py::TestNavigationCoverage::test_register_page_accessible_via_home_nav@web-ui
+2026-07-03 00:57:09,427 | INFO     | ai_automation.test_register_page_accessible_via_home_nav | END   tests/web-ui/test_system_coverage.py::TestNavigationCoverage::test_register_page_accessible_via_home_nav@web-ui

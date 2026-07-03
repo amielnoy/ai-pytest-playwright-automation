@@ -1,2 +1,0 @@
-2026-05-29 11:44:55,047 | INFO     | ai_automation.test_self_heal_event_is_frozen_dataclass | START tests/unit/test_self_healing.py::TestHealEventRecording::test_self_heal_event_is_frozen_dataclass
-2026-05-29 11:44:55,048 | INFO     | ai_automation.test_self_heal_event_is_frozen_dataclass | END   tests/unit/test_self_healing.py::TestHealEventRecording::test_self_heal_event_is_frozen_dataclass

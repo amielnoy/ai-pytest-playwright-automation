@@ -1,2 +1,0 @@
-2026-05-29 11:44:54,379 | INFO     | ai_automation.test_cart_page_delegates_to_summary_component | START tests/unit/test_page_objects.py::test_cart_page_delegates_to_summary_component
-2026-05-29 11:44:54,382 | INFO     | ai_automation.test_cart_page_delegates_to_summary_component | END   tests/unit/test_page_objects.py::test_cart_page_delegates_to_summary_component

@@ -1,5 +1,0 @@
-2026-05-29 11:44:50,223 | INFO     | ai_automation.test_login_malformed_input_no_crash_inline[empty] | START tests/api/test_pentest_data_driven.py::TestAuthAttackInline::test_login_malformed_input_no_crash_inline[empty]
-2026-05-29 11:44:50,224 | INFO     | ai_automation.pentest.data_driven | Step: login attack email=''
-2026-05-29 11:44:50,225 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:44:50,225 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:44:50,227 | INFO     | ai_automation.test_login_malformed_input_no_crash_inline[empty] | END   tests/api/test_pentest_data_driven.py::TestAuthAttackInline::test_login_malformed_input_no_crash_inline[empty]

@@ -1,2 +1,0 @@
-2026-05-29 11:44:54,513 | INFO     | ai_automation.test_alert_component_returns_banner_field_success_and_waits | START tests/unit/test_page_objects.py::test_alert_component_returns_banner_field_success_and_waits
-2026-05-29 11:44:54,521 | INFO     | ai_automation.test_alert_component_returns_banner_field_success_and_waits | END   tests/unit/test_page_objects.py::test_alert_component_returns_banner_field_success_and_waits

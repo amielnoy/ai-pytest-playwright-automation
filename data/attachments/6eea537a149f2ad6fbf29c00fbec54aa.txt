@@ -1,5 +1,0 @@
-2026-05-29 11:44:54,708 | INFO     | ai_automation.test_classify_maps_statuses_correctly | START tests/unit/test_report_test_status.py::test_classify_maps_statuses_correctly
-2026-05-29 11:44:54,708 | INFO     | ai_automation.unit.test_report_test_status | Step: Call _classify on passed/failed/broken/skipped/flaky set
-2026-05-29 11:44:54,708 | INFO     | ai_automation.unit.test_report_test_status | Step: Assert passed, failed, broken, skipped, flaky all appear
-2026-05-29 11:44:54,709 | INFO     | ai_automation.unit.test_report_test_status | Step: Assert h-flaky historyId is classified as flaky
-2026-05-29 11:44:54,709 | INFO     | ai_automation.test_classify_maps_statuses_correctly | END   tests/unit/test_report_test_status.py::test_classify_maps_statuses_correctly

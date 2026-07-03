@@ -1,1 +1,1 @@
-{"id":"b0e0e3762318b303e3140bcedcabebd4","fullName":"tests.unit.test_factories.TestMakeRegistration#test_emails_are_unique","name":"20 consecutive calls produce 20 distinct emails","status":"passed","testResultsByEnv":{"default":"e579be2a8107be2be09a2dc0c67f10ba"}}
+{"id":"b0e0e3762318b303e3140bcedcabebd4","fullName":"tests.unit.test_factories.TestMakeRegistration#test_emails_are_unique","name":"20 consecutive calls produce 20 distinct emails","status":"passed","testResultsByEnv":{"default":"1fbf870ffc85db43e9948a53e176a96e"}}

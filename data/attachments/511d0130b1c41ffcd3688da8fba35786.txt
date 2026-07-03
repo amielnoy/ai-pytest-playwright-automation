@@ -1,2 +1,0 @@
-2026-05-29 11:44:52,511 | INFO     | ai_automation.test_basic_url | START tests/unit/test_api_client.py::TestSearchUrl::test_basic_url
-2026-05-29 11:44:52,512 | INFO     | ai_automation.test_basic_url | END   tests/unit/test_api_client.py::TestSearchUrl::test_basic_url

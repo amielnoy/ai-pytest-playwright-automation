@@ -1,1 +1,1 @@
-{"id":"399a231ca88c2a37b3d33ef799c69f37","fullName":"tests.unit.test_opencart_fallback.TestHTMLGenerators#test_login_html_with_warning","name":"login_html(warning=...) injects the warning text","status":"passed","testResultsByEnv":{"default":"e5e1ed29740bb21c3edecce2fbfca114"}}
+{"id":"399a231ca88c2a37b3d33ef799c69f37","fullName":"tests.unit.test_opencart_fallback.TestHTMLGenerators#test_login_html_with_warning","name":"login_html(warning=...) injects the warning text","status":"passed","testResultsByEnv":{"default":"989012db9288100ad719b648b810ddc7"}}

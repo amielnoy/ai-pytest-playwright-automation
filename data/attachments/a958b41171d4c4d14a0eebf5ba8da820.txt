@@ -1,2 +1,0 @@
-2026-05-29 11:46:37,496 | INFO     | ai_automation.test_drop_file_onto_drop_zone | START tests/web-ui/test_playwright_v160_features.py::TestDropAPI::test_drop_file_onto_drop_zone@web-ui
-2026-05-29 11:46:37,844 | INFO     | ai_automation.test_drop_file_onto_drop_zone | END   tests/web-ui/test_playwright_v160_features.py::TestDropAPI::test_drop_file_onto_drop_zone@web-ui

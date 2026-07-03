@@ -1,0 +1,2 @@
+2026-07-03 00:54:25,121 | INFO     | ai_automation.test_order_preserved | START tests/unit/test_api_client.py::TestParseCards::test_order_preserved
+2026-07-03 00:54:25,122 | INFO     | ai_automation.test_order_preserved | END   tests/unit/test_api_client.py::TestParseCards::test_order_preserved

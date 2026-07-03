@@ -1,0 +1,8 @@
+2026-07-03 00:54:19,632 | INFO     | ai_automation.test_cart_add_non_positive_quantity_does_not_add_items[0] | START tests/api/test_api_integrations.py::TestCartApiNegative::test_cart_add_non_positive_quantity_does_not_add_items[0]
+2026-07-03 00:54:19,633 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:19,634 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:19,634 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:19,634 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:19,635 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:19,635 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:19,638 | INFO     | ai_automation.test_cart_add_non_positive_quantity_does_not_add_items[0] | END   tests/api/test_api_integrations.py::TestCartApiNegative::test_cart_add_non_positive_quantity_does_not_add_items[0]

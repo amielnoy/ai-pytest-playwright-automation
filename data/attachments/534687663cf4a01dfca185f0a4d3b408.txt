@@ -1,5 +1,0 @@
-2026-05-29 11:44:50,603 | INFO     | ai_automation.test_injection_payload_in_search_json[xss_img] | START tests/api/test_pentest_data_driven.py::TestInjectionJson::test_injection_payload_in_search_json[xss_img]
-2026-05-29 11:44:50,605 | INFO     | ai_automation.pentest.data_driven | Step: JSON injection search category=XSS payload='<img src=x onerror=alert(1)>'
-2026-05-29 11:44:50,607 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:44:50,607 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:44:50,610 | INFO     | ai_automation.test_injection_payload_in_search_json[xss_img] | END   tests/api/test_pentest_data_driven.py::TestInjectionJson::test_injection_payload_in_search_json[xss_img]

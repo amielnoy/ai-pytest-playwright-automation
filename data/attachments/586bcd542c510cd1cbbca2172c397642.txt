@@ -1,5 +1,0 @@
-2026-05-29 11:44:50,024 | INFO     | ai_automation.test_xss_in_search_not_reflected_inline[<img src=x onerror=alert(1)>-<img src=x onerror=alert(1)>] | START tests/api/test_pentest_data_driven.py::TestInjectionInline::test_xss_in_search_not_reflected_inline[<img src=x onerror=alert(1)>-<img src=x onerror=alert(1)>]
-2026-05-29 11:44:50,026 | INFO     | ai_automation.pentest.data_driven | Step: XSS search payload='<img src=x onerror=alert(1)>'
-2026-05-29 11:44:50,029 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:44:50,029 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:44:50,034 | INFO     | ai_automation.test_xss_in_search_not_reflected_inline[<img src=x onerror=alert(1)>-<img src=x onerror=alert(1)>] | END   tests/api/test_pentest_data_driven.py::TestInjectionInline::test_xss_in_search_not_reflected_inline[<img src=x onerror=alert(1)>-<img src=x onerror=alert(1)>]

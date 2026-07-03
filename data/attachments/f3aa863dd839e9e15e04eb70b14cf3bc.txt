@@ -1,2 +1,0 @@
-2026-05-29 11:47:58,479 | INFO     | ai_automation.test_stored_products_have_picture_urls | START tests/web-ui/test_system_coverage.py::TestStoredProductData::test_stored_products_have_picture_urls@web-ui
-2026-05-29 11:48:02,427 | INFO     | ai_automation.test_stored_products_have_picture_urls | END   tests/web-ui/test_system_coverage.py::TestStoredProductData::test_stored_products_have_picture_urls@web-ui

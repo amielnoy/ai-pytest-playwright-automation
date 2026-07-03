@@ -1,0 +1,7 @@
+INFO     ai_automation.test_search_returns_expected_product_inline[iPhone-iPhone]:conftest.py:296 START tests/api/test_api_data_driven.py::TestSearchApiInline::test_search_returns_expected_product_inline[iPhone-iPhone]
+INFO     ai_automation.api.data_driven:logger.py:131 Annotated call: TestSearchApiInline.test_search_returns_expected_product_inline(query='iPhone', expected_product='iPhone')
+INFO     ai_automation.api.data_driven:test_api_data_driven.py:78 Step: search for 'iPhone'
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.api.data_driven:test_api_data_driven.py:88 Found product names: ['iPhone']
+INFO     ai_automation.test_search_returns_expected_product_inline[iPhone-iPhone]:conftest.py:298 END   tests/api/test_api_data_driven.py::TestSearchApiInline::test_search_returns_expected_product_inline[iPhone-iPhone]

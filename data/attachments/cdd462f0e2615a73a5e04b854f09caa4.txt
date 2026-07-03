@@ -1,0 +1,2 @@
+2026-07-03 00:54:25,532 | INFO     | ai_automation.test_max_total_exceeds_item_price | START tests/unit/test_factories.py::TestMakeCartScenario::test_max_total_exceeds_item_price
+2026-07-03 00:54:25,533 | INFO     | ai_automation.test_max_total_exceeds_item_price | END   tests/unit/test_factories.py::TestMakeCartScenario::test_max_total_exceeds_item_price

@@ -1,0 +1,2 @@
+2026-07-03 00:54:25,824 | INFO     | ai_automation.test_no_shared_state_credentials | START tests/unit/test_factories.py::TestFactoryIsolation::test_no_shared_state_credentials
+2026-07-03 00:54:25,826 | INFO     | ai_automation.test_no_shared_state_credentials | END   tests/unit/test_factories.py::TestFactoryIsolation::test_no_shared_state_credentials

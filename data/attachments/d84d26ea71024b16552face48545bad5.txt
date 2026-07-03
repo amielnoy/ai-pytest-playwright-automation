@@ -1,0 +1,6 @@
+INFO     ai_automation.test_search_returns_numeric_ids_inline[MacBook]:conftest.py:296 START tests/api/test_api_data_driven.py::TestSearchApiInline::test_search_returns_numeric_ids_inline[MacBook]
+INFO     ai_automation.api.data_driven:logger.py:131 Annotated call: TestSearchApiInline.test_search_returns_numeric_ids_inline(query='MacBook')
+INFO     ai_automation.api.data_driven:test_api_data_driven.py:171 Step: search ids for 'MacBook'
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_search_returns_numeric_ids_inline[MacBook]:conftest.py:298 END   tests/api/test_api_data_driven.py::TestSearchApiInline::test_search_returns_numeric_ids_inline[MacBook]

@@ -1,0 +1,2 @@
+2026-07-03 00:54:27,575 | INFO     | ai_automation.test_duplicate_heal_event_not_recorded | START tests/unit/test_self_healing.py::TestHealEventRecording::test_duplicate_heal_event_not_recorded
+2026-07-03 00:54:27,577 | INFO     | ai_automation.test_duplicate_heal_event_not_recorded | END   tests/unit/test_self_healing.py::TestHealEventRecording::test_duplicate_heal_event_not_recorded

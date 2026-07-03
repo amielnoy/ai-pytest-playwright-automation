@@ -1,0 +1,5 @@
+2026-07-03 00:54:22,668 | INFO     | ai_automation.test_login_malformed_input_no_crash_inline[xss_email] | START tests/api/test_pentest_data_driven.py::TestAuthAttackInline::test_login_malformed_input_no_crash_inline[xss_email]
+2026-07-03 00:54:22,670 | INFO     | ai_automation.pentest.data_driven | Step: login attack email='<script>alert(1)</script>@x.com'
+2026-07-03 00:54:22,670 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:22,670 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:22,672 | INFO     | ai_automation.test_login_malformed_input_no_crash_inline[xss_email] | END   tests/api/test_pentest_data_driven.py::TestAuthAttackInline::test_login_malformed_input_no_crash_inline[xss_email]

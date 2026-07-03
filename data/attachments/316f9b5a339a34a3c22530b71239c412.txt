@@ -1,0 +1,2 @@
+2026-07-03 00:54:26,564 | INFO     | ai_automation.test_login_html_with_warning | START tests/unit/test_opencart_fallback.py::TestHTMLGenerators::test_login_html_with_warning
+2026-07-03 00:54:26,565 | INFO     | ai_automation.test_login_html_with_warning | END   tests/unit/test_opencart_fallback.py::TestHTMLGenerators::test_login_html_with_warning

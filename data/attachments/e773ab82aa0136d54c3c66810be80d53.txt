@@ -1,0 +1,6 @@
+2026-07-03 00:54:22,258 | INFO     | ai_automation.test_order_history_requires_authentication | START tests/api/test_pentest.py::TestAccessControlPentest::test_order_history_requires_authentication
+2026-07-03 00:54:22,259 | INFO     | ai_automation.pentest | Step: GET account/order without credentials
+2026-07-03 00:54:22,259 | INFO     | ai_automation.pentest | Step: Assert login page shown and order history absent
+2026-07-03 00:54:22,259 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:22,259 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:22,260 | INFO     | ai_automation.test_order_history_requires_authentication | END   tests/api/test_pentest.py::TestAccessControlPentest::test_order_history_requires_authentication

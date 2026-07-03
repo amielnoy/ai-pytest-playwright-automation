@@ -1,3 +1,0 @@
-2026-05-29 11:44:53,969 | INFO     | ai_automation.test_normal_page_is_not_challenge | START tests/unit/test_opencart_fallback.py::TestIsChallengedPage::test_normal_page_is_not_challenge
-2026-05-29 11:44:53,970 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:44:53,971 | INFO     | ai_automation.test_normal_page_is_not_challenge | END   tests/unit/test_opencart_fallback.py::TestIsChallengedPage::test_normal_page_is_not_challenge

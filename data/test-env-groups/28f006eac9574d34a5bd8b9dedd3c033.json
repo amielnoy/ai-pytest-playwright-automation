@@ -1,1 +1,1 @@
-{"id":"28f006eac9574d34a5bd8b9dedd3c033","fullName":"tests.unit.test_factories.TestMakeRegistration#test_all_fields_present","name":"make_registration returns a fully populated RegistrationData","status":"passed","testResultsByEnv":{"default":"1a41b1c3e49239076044f0922f2e15ce"}}
+{"id":"28f006eac9574d34a5bd8b9dedd3c033","fullName":"tests.unit.test_factories.TestMakeRegistration#test_all_fields_present","name":"make_registration returns a fully populated RegistrationData","status":"passed","testResultsByEnv":{"default":"5e4e4e49bc65d225a4b418a07eeca334"}}

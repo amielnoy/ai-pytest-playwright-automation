@@ -1,5 +1,0 @@
-INFO     ai_automation.test_empty_search_returns_200_no_cards_json[empty_0]:conftest.py:296 START tests/api/test_api_data_driven.py::TestSearchApiJson::test_empty_search_returns_200_no_cards_json[empty_0]
-INFO     ai_automation.api.data_driven:test_api_data_driven.py:307 Step: JSON empty-result search for '__nonexistent_product_xyz_999__'
-DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
-DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
-INFO     ai_automation.test_empty_search_returns_200_no_cards_json[empty_0]:conftest.py:298 END   tests/api/test_api_data_driven.py::TestSearchApiJson::test_empty_search_returns_200_no_cards_json[empty_0]

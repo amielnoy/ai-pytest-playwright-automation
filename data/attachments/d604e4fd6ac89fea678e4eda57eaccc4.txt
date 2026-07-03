@@ -1,0 +1,8 @@
+INFO     ai_automation.test_search_returns_expected_product_json[iPhone]:conftest.py:296 START tests/api/test_api_data_driven.py::TestSearchApiJson::test_search_returns_expected_product_json[iPhone]
+INFO     ai_automation.api.data_driven:logger.py:131 Annotated call: TestSearchApiJson.test_search_returns_expected_product_json(query='iPhone', expected_product='iPhone', min_cards=1)
+INFO     ai_automation.api.data_driven:test_api_data_driven.py:267 Step: JSON-driven search for 'iPhone' (min_cards=1)
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.api.data_driven:test_api_data_driven.py:276 Cards: 1, names: ['iPhone']
+INFO     ai_automation.test_search_returns_expected_product_json[iPhone]:conftest.py:298 END   tests/api/test_api_data_driven.py::TestSearchApiJson::test_search_returns_expected_product_json[iPhone]

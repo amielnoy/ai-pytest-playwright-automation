@@ -1,0 +1,2 @@
+2026-07-03 00:54:27,369 | INFO     | ai_automation.test_rest_client_allows_per_request_timeout_override | START tests/unit/test_rest_client.py::test_rest_client_allows_per_request_timeout_override
+2026-07-03 00:54:27,370 | INFO     | ai_automation.test_rest_client_allows_per_request_timeout_override | END   tests/unit/test_rest_client.py::test_rest_client_allows_per_request_timeout_override

@@ -1,0 +1,4 @@
+2026-07-03 00:54:24,911 | INFO     | ai_automation.test_all_search_prices_are_positive | START tests/contract/test_contracts.py::TestPriceContract::test_all_search_prices_are_positive
+2026-07-03 00:54:24,912 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:24,912 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:24,914 | INFO     | ai_automation.test_all_search_prices_are_positive | END   tests/contract/test_contracts.py::TestPriceContract::test_all_search_prices_are_positive

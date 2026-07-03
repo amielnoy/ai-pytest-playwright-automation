@@ -1,2 +1,0 @@
-2026-05-29 11:44:52,798 | INFO     | ai_automation.test_emails_are_unique | START tests/unit/test_factories.py::TestMakeRegistration::test_emails_are_unique
-2026-05-29 11:44:52,803 | INFO     | ai_automation.test_emails_are_unique | END   tests/unit/test_factories.py::TestMakeRegistration::test_emails_are_unique

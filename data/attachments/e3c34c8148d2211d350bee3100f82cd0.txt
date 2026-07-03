@@ -1,0 +1,4 @@
+2026-07-03 00:54:18,933 | INFO     | ai_automation.test_search_returns_numeric_product_ids[MacBook] | START tests/api/test_api.py::TestSearchApi::test_search_returns_numeric_product_ids[MacBook]
+2026-07-03 00:54:18,937 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:18,938 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:18,940 | INFO     | ai_automation.test_search_returns_numeric_product_ids[MacBook] | END   tests/api/test_api.py::TestSearchApi::test_search_returns_numeric_product_ids[MacBook]

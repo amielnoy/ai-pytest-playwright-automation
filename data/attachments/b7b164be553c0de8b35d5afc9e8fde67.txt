@@ -1,8 +1,0 @@
-2026-05-29 11:44:49,727 | INFO     | ai_automation.test_git_directory_is_blocked | START tests/api/test_pentest.py::TestInfoDisclosurePentest::test_git_directory_is_blocked
-2026-05-29 11:44:49,728 | INFO     | ai_automation.pentest | Step: GET https://tutorialsninja.com/demo/.git/ looking for exposed .git directory
-2026-05-29 11:44:49,729 | INFO     | ai_automation.pentest | Step: Assert status != 200 and no git object markers in body
-2026-05-29 11:44:49,729 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:44:49,729 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:44:49,729 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:44:49,729 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:44:49,731 | INFO     | ai_automation.test_git_directory_is_blocked | END   tests/api/test_pentest.py::TestInfoDisclosurePentest::test_git_directory_is_blocked

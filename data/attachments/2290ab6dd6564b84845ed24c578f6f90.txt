@@ -1,0 +1,8 @@
+2026-07-03 00:54:22,738 | INFO     | ai_automation.test_login_error_is_generic_inline[probe-b@pentest-nonexistent.test] | START tests/api/test_pentest_data_driven.py::TestAuthAttackInline::test_login_error_is_generic_inline[probe-b@pentest-nonexistent.test]
+2026-07-03 00:54:22,739 | INFO     | ai_automation.pentest.data_driven | Step: generic error check for 'probe-b@pentest-nonexistent.test'
+2026-07-03 00:54:22,739 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:22,739 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:22,740 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:22,740 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:22,740 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:22,742 | INFO     | ai_automation.test_login_error_is_generic_inline[probe-b@pentest-nonexistent.test] | END   tests/api/test_pentest_data_driven.py::TestAuthAttackInline::test_login_error_is_generic_inline[probe-b@pentest-nonexistent.test]

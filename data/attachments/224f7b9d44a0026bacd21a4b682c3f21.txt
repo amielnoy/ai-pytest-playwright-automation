@@ -1,0 +1,2 @@
+2026-07-03 00:56:23,325 | INFO     | ai_automation.test_product_detail_opens_from_search | START tests/web-ui/test_sanity.py::TestSanity::test_product_detail_opens_from_search@web-ui
+2026-07-03 00:56:27,413 | INFO     | ai_automation.test_product_detail_opens_from_search | END   tests/web-ui/test_sanity.py::TestSanity::test_product_detail_opens_from_search@web-ui

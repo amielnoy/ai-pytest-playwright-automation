@@ -1,1 +1,1 @@
-{"id":"9f3f3054deec44db1dc09dc355269b04","fullName":"tests.unit.test_opencart_fallback.TestHTMLGenerators#test_search_html_no_results","name":"search_html('') contains a 'no results' message","status":"passed","testResultsByEnv":{"default":"b7389a9b18e2601bdaadc9e5572157fc"}}
+{"id":"9f3f3054deec44db1dc09dc355269b04","fullName":"tests.unit.test_opencart_fallback.TestHTMLGenerators#test_search_html_no_results","name":"search_html('') contains a 'no results' message","status":"passed","testResultsByEnv":{"default":"011acd99006d0a21255e364dbe9ca939"}}

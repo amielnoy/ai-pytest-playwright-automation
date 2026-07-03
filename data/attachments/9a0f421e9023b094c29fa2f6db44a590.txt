@@ -1,0 +1,2 @@
+2026-07-03 00:54:25,291 | INFO     | ai_automation.test_emails_are_unique | START tests/unit/test_factories.py::TestMakeRegistration::test_emails_are_unique
+2026-07-03 00:54:25,295 | INFO     | ai_automation.test_emails_are_unique | END   tests/unit/test_factories.py::TestMakeRegistration::test_emails_are_unique

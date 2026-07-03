@@ -1,8 +1,0 @@
-2026-05-29 11:44:52,331 | INFO     | ai_automation.test_registration_page_has_required_fields | START tests/contract/test_contracts.py::TestRegistrationPageContract::test_registration_page_has_required_fields
-2026-05-29 11:44:52,333 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:44:52,334 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:44:52,334 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:44:52,334 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:44:52,334 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:44:52,334 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:44:52,335 | INFO     | ai_automation.test_registration_page_has_required_fields | END   tests/contract/test_contracts.py::TestRegistrationPageContract::test_registration_page_has_required_fields

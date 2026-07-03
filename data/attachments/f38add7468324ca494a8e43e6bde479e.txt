@@ -1,0 +1,4 @@
+2026-07-03 00:54:19,505 | INFO     | ai_automation.test_search_multi_word_query_returns_expected_product | START tests/api/test_api_integrations.py::TestSearchApiIntegration::test_search_multi_word_query_returns_expected_product
+2026-07-03 00:54:19,508 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:19,509 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:19,510 | INFO     | ai_automation.test_search_multi_word_query_returns_expected_product | END   tests/api/test_api_integrations.py::TestSearchApiIntegration::test_search_multi_word_query_returns_expected_product

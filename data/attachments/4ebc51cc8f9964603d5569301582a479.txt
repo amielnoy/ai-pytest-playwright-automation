@@ -1,2 +1,0 @@
-2026-05-29 11:44:52,634 | INFO     | ai_automation.test_fields | START tests/unit/test_api_client.py::TestApiProduct::test_fields
-2026-05-29 11:44:52,635 | INFO     | ai_automation.test_fields | END   tests/unit/test_api_client.py::TestApiProduct::test_fields

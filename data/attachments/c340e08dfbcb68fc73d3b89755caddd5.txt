@@ -1,5 +1,0 @@
-2026-05-29 11:44:50,065 | INFO     | ai_automation.test_ssti_in_search_not_evaluated_inline[{{9999*9999}}-99980001] | START tests/api/test_pentest_data_driven.py::TestInjectionInline::test_ssti_in_search_not_evaluated_inline[{{9999*9999}}-99980001]
-2026-05-29 11:44:50,067 | INFO     | ai_automation.pentest.data_driven | Step: SSTI search payload='{{9999*9999}}'
-2026-05-29 11:44:50,070 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:44:50,070 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:44:50,072 | INFO     | ai_automation.test_ssti_in_search_not_evaluated_inline[{{9999*9999}}-99980001] | END   tests/api/test_pentest_data_driven.py::TestInjectionInline::test_ssti_in_search_not_evaluated_inline[{{9999*9999}}-99980001]

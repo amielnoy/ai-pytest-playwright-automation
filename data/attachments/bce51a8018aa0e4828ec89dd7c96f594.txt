@@ -1,0 +1,2 @@
+2026-07-03 00:54:26,810 | INFO     | ai_automation.test_base_page_exposes_title_url_screenshot_and_alert_error | START tests/unit/test_page_objects.py::test_base_page_exposes_title_url_screenshot_and_alert_error
+2026-07-03 00:54:26,815 | INFO     | ai_automation.test_base_page_exposes_title_url_screenshot_and_alert_error | END   tests/unit/test_page_objects.py::test_base_page_exposes_title_url_screenshot_and_alert_error

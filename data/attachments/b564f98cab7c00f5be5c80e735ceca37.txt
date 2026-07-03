@@ -1,0 +1,2 @@
+2026-07-03 00:56:31,427 | INFO     | ai_automation.test_search_price_filter_excludes_expensive | START tests/web-ui/test_search_under_price.py::TestSearchUnderPrice::test_search_price_filter_excludes_expensive@web-ui
+2026-07-03 00:56:33,515 | INFO     | ai_automation.test_search_price_filter_excludes_expensive | END   tests/web-ui/test_search_under_price.py::TestSearchUnderPrice::test_search_price_filter_excludes_expensive@web-ui

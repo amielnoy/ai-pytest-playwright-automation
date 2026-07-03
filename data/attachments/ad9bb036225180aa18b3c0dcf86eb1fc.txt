@@ -1,0 +1,8 @@
+INFO     ai_automation.test_search_returns_expected_product_json[Canon]:conftest.py:296 START tests/api/test_api_data_driven.py::TestSearchApiJson::test_search_returns_expected_product_json[Canon]
+INFO     ai_automation.api.data_driven:logger.py:131 Annotated call: TestSearchApiJson.test_search_returns_expected_product_json(query='Canon', expected_product='Canon', min_cards=1)
+INFO     ai_automation.api.data_driven:test_api_data_driven.py:267 Step: JSON-driven search for 'Canon' (min_cards=1)
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.api.data_driven:test_api_data_driven.py:276 Cards: 1, names: ['Canon EOS 5D']
+INFO     ai_automation.test_search_returns_expected_product_json[Canon]:conftest.py:298 END   tests/api/test_api_data_driven.py::TestSearchApiJson::test_search_returns_expected_product_json[Canon]

@@ -1,2 +1,0 @@
-2026-05-29 11:44:53,155 | INFO     | ai_automation.test_password_has_digit | START tests/unit/test_factories.py::TestRegistrationPasswordComplexity::test_password_has_digit
-2026-05-29 11:44:53,158 | INFO     | ai_automation.test_password_has_digit | END   tests/unit/test_factories.py::TestRegistrationPasswordComplexity::test_password_has_digit

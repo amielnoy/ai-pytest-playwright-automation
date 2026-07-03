@@ -1,2 +1,0 @@
-2026-05-29 11:44:53,542 | INFO     | ai_automation.test_register_returns_success_flag | START tests/unit/test_flows.py::TestRegistrationFlow::test_register_returns_success_flag
-2026-05-29 11:44:53,545 | INFO     | ai_automation.test_register_returns_success_flag | END   tests/unit/test_flows.py::TestRegistrationFlow::test_register_returns_success_flag

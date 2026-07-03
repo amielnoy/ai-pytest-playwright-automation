@@ -1,0 +1,4 @@
+2026-07-03 00:54:23,229 | INFO     | ai_automation.test_sensitive_path_blocked_json[env_file] | START tests/api/test_pentest_data_driven.py::TestFileExposureJson::test_sensitive_path_blocked_json[env_file]
+2026-07-03 00:54:23,231 | INFO     | ai_automation.pentest.data_driven | Step: JSON file exposure probe https://tutorialsninja.com/demo/.env
+2026-07-03 00:54:23,231 | INFO     | ai_automation.pentest.data_driven | Status for /.env: 404
+2026-07-03 00:54:23,232 | INFO     | ai_automation.test_sensitive_path_blocked_json[env_file] | END   tests/api/test_pentest_data_driven.py::TestFileExposureJson::test_sensitive_path_blocked_json[env_file]

@@ -1,2 +1,0 @@
-2026-05-29 11:44:53,292 | INFO     | ai_automation.test_blank_field_is_isolated[password] | START tests/unit/test_factories.py::TestParametrizedMissingFields::test_blank_field_is_isolated[password]
-2026-05-29 11:44:53,294 | INFO     | ai_automation.test_blank_field_is_isolated[password] | END   tests/unit/test_factories.py::TestParametrizedMissingFields::test_blank_field_is_isolated[password]

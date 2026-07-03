@@ -1,4 +1,0 @@
-2026-05-29 11:44:50,684 | INFO     | ai_automation.test_login_attack_no_crash_json[xss_email] | START tests/api/test_pentest_data_driven.py::TestAuthAttackJson::test_login_attack_no_crash_json[xss_email]
-2026-05-29 11:44:50,685 | INFO     | ai_automation.pentest.data_driven | Step: JSON auth attack id=xss_email email='<script>alert(1)</script>@x.com'
-2026-05-29 11:44:50,686 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-05-29 11:44:50,688 | INFO     | ai_automation.test_login_attack_no_crash_json[xss_email] | END   tests/api/test_pentest_data_driven.py::TestAuthAttackJson::test_login_attack_no_crash_json[xss_email]

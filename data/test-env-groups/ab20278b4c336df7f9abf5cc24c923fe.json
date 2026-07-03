@@ -1,1 +1,1 @@
-{"id":"ab20278b4c336df7f9abf5cc24c923fe","fullName":"tests.unit.test_allure_failure_agent#test_extract_json_reads_json_object","name":"test_extract_json_reads_json_object","status":"passed","testResultsByEnv":{"default":"768704806c7335a9d3af4ae693898221"}}
+{"id":"ab20278b4c336df7f9abf5cc24c923fe","fullName":"tests.unit.test_allure_failure_agent#test_extract_json_reads_json_object","name":"test_extract_json_reads_json_object","status":"passed","testResultsByEnv":{"default":"4c4831b5c09408d287cf0dfd24f4fd87"}}

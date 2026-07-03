@@ -1,1 +1,1 @@
-{"id":"9873460747d574feef9adabd9ca35445","fullName":"tests.unit.test_factories.TestMakeCartScenario#test_max_total_exceeds_item_price","name":"max_total is greater than max_price","status":"passed","testResultsByEnv":{"default":"53caec001545372bbd05bd8a1f4d8acd"}}
+{"id":"9873460747d574feef9adabd9ca35445","fullName":"tests.unit.test_factories.TestMakeCartScenario#test_max_total_exceeds_item_price","name":"max_total is greater than max_price","status":"passed","testResultsByEnv":{"default":"b363a6403f67b04a9942138a5ad89a4f"}}

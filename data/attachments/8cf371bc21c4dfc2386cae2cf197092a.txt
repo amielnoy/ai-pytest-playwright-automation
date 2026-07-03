@@ -1,0 +1,10 @@
+INFO     ai_automation.test_cart_add_from_search_inline[MacBook]:conftest.py:296 START tests/api/test_api_data_driven.py::TestCartApiInline::test_cart_add_from_search_inline[MacBook]
+INFO     ai_automation.api.data_driven:logger.py:131 Annotated call: TestCartApiInline.test_cart_add_from_search_inline(query='MacBook')
+INFO     ai_automation.api.data_driven:test_api_data_driven.py:203 Step: find product for 'MacBook'
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.api.data_driven:test_api_data_driven.py:207 Step: add product 43 to cart
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_cart_add_from_search_inline[MacBook]:conftest.py:298 END   tests/api/test_api_data_driven.py::TestCartApiInline::test_cart_add_from_search_inline[MacBook]

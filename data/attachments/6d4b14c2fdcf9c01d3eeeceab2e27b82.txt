@@ -1,0 +1,2 @@
+2026-07-03 00:54:26,018 | INFO     | ai_automation.test_login_ordering | START tests/unit/test_flows.py::TestLoginFlow::test_login_ordering
+2026-07-03 00:54:26,020 | INFO     | ai_automation.test_login_ordering | END   tests/unit/test_flows.py::TestLoginFlow::test_login_ordering
