@@ -240,6 +240,19 @@ jobs:
           > The report may take a minute to appear after the first deploy while GitHub Pages activates.
           EOF
 
+      - name: Slim the published site (drop heavy CI videos/traces)
+        run: |
+          BEFORE=$(du -sm allure-report | cut -f1)
+          # Playwright records a video (.webm) + trace (.zip) per web-ui test in CI and
+          # Allure bundles them into the report, bloating the Pages artifact to ~100MB+
+          # (a likely cause of the "Deployment failed, try again later" sync error).
+          # A public report doesn't need them — pass/fail, logs and failure screenshots
+          # remain, and the raw allure-results artifact still carries them for debugging.
+          # (Academy explainer clips are .mp4 under academy/, so they are untouched.)
+          find allure-report -type f \( -name '*.webm' -o -name '*.zip' \) -delete 2>/dev/null || true
+          AFTER=$(du -sm allure-report | cut -f1)
+          echo "Trimmed published report: ${BEFORE}MB -> ${AFTER}MB"
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
