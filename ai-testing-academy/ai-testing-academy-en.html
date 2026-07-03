@@ -11,7 +11,7 @@
   :root{
     /* light warm palette — red/orange accents, high contrast */
     --bg:#fbf7f2; --bg2:#f8efe6; --card:#ffffff; --border:#e9dccf;
-    --text:#2e2933; --muted:#6e6473; --accent:#c0392b; --accent2:#e07b28;
+    --text:#2e2933; --muted:#5a5460; --accent:#c0392b; --accent2:#e07b28;
     --green:#3e8e57; --yellow:#b07c1f; --red:#c0392b;
     --code-bg:#332f3f;
     --field-bg:#ffffff;
@@ -34,16 +34,12 @@
   nav a.link:hover{color:var(--text); background:var(--card); box-shadow:var(--shadow);}
   nav a.link.active{color:var(--accent); background:var(--card); font-weight:700;
       box-shadow:var(--shadow); border-left:3px solid var(--accent);}
+  nav .nav-group{font-size:1.1rem; letter-spacing:.03em; text-transform:uppercase; color:var(--text);
+      opacity:.85; font-weight:800; padding:16px 14px 5px;}
+  nav .nav-group:first-of-type{padding-top:2px;}
   header,main,footer{margin-left:212px;} /* clear the left sidebar */
   section{scroll-margin-top:20px;}
-  @media(max-width:900px){
-    nav{position:sticky; left:auto; bottom:auto; width:auto; flex-direction:row; flex-wrap:wrap;
-        align-items:center; gap:4px; padding:10px 16px; border-right:none;
-        border-bottom:1px solid var(--border);}
-    nav a.link{padding:6px 10px; font-size:.86rem;}
-    nav a.link.active{border-left:none;}
-    header,main,footer{margin-left:0;}
-  }
+  /* mobile nav is handled by the off-canvas drawer in the enhancement layer below */
 
   /* HERO */
   header{padding:72px 24px 56px; text-align:center;
@@ -191,6 +187,88 @@
   .reveal.in{opacity:1; transform:none;}
   @media (prefers-reduced-motion: reduce){.reveal{opacity:1; transform:none; transition:none;}}
 
+  /* ═══════════ UI/UX enhancement layer ═══════════ */
+  /* dark theme */
+  html[data-theme="dark"]{
+    --bg:#17151c; --bg2:#1e1b25; --card:#242029; --border:#37313f;
+    --text:#ece8f0; --muted:#a99fb4; --accent:#ff6f57; --accent2:#f5a35a;
+    --green:#5cc07e; --yellow:#e0b455; --red:#ff6f57;
+    --code-bg:#100e17; --field-bg:#1b1823; --track:#2a2532;
+    --shadow:0 2px 14px rgba(0,0,0,.4);
+  }
+  html[data-theme="dark"] body{background:var(--bg); color:var(--text);}
+  html[data-theme="dark"] nav{background:rgba(23,21,28,.96);}
+  html[data-theme="dark"] header{background:radial-gradient(ellipse at top,#2a2130 0%,var(--bg) 70%);}
+  html[data-theme="dark"] .badge,html[data-theme="dark"] pre{background:var(--code-bg);}
+
+  /* scroll-progress bar */
+  .scroll-progress{position:fixed; top:0; inset-inline-start:0; height:3px; width:0; z-index:200;
+      background:linear-gradient(90deg,var(--accent),var(--accent2)); transition:width .08s linear;}
+
+  /* floating action buttons (back-to-top, mobile menu) */
+  .fab{position:fixed; z-index:120; width:44px; height:44px; border-radius:50%; border:1px solid var(--border);
+      background:var(--card); color:var(--text); box-shadow:var(--shadow); cursor:pointer; font-size:1.15rem;
+      display:flex; align-items:center; justify-content:center; transition:opacity .25s, transform .2s, border-color .2s;}
+  .fab:hover{border-color:var(--accent2); transform:translateY(-2px);}
+  .to-top{bottom:20px; inset-inline-end:20px; opacity:0; pointer-events:none;}
+  .to-top.show{opacity:1; pointer-events:auto;}
+  .nav-toggle{display:none;}
+
+  /* theme toggle in the sidebar */
+  nav .theme-toggle{margin-top:8px; display:flex; align-items:center; justify-content:center; gap:8px;
+      border:1px solid var(--border); background:var(--card); color:var(--muted); border-radius:10px;
+      padding:9px; cursor:pointer; font:inherit; font-size:.9rem; font-weight:700;}
+  nav .theme-toggle:hover{color:var(--text); border-color:var(--accent2);}
+
+  /* section-number chip in nav links */
+  nav a.link .nav-num{display:inline-block; min-width:1.6em; font-family:monospace; font-size:.72rem;
+      color:var(--muted); opacity:.65; margin-inline-end:6px;}
+  .card p + p{margin-top:10px; line-height:1.85;}
+
+  /* copy-to-clipboard button on code blocks */
+  .pre-wrap{position:relative;}
+  .pre-wrap .copy-btn{position:absolute; top:10px; inset-inline-end:10px; font:inherit; font-size:.72rem;
+      cursor:pointer; background:rgba(255,255,255,.08); color:#ffd28e; border:1px solid rgba(255,255,255,.18);
+      border-radius:6px; padding:3px 9px; opacity:0; transition:opacity .18s;}
+  .pre-wrap:hover .copy-btn,.pre-wrap .copy-btn:focus{opacity:1;}
+  .pre-wrap .copy-btn.copied{color:var(--green); border-color:var(--green);}
+
+  /* collapsible agent-box (accordion) */
+  details.agent-box>summary{cursor:pointer; list-style:none; display:flex; align-items:center; gap:10px; margin:0;}
+  details.agent-box>summary::-webkit-details-marker{display:none;}
+  details.agent-box>summary h3{margin:0;}
+  details.agent-box>summary::after{content:"▾"; margin-inline-start:auto; color:var(--muted); transition:transform .2s;}
+  details.agent-box[open]>summary::after{transform:rotate(180deg);}
+  details.agent-box[open]>summary{margin-bottom:16px;}
+
+  /* hero call-to-action + TL;DR */
+  .hero-cta{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin:24px 0 4px;}
+  .hero-cta a{border-radius:10px; padding:11px 22px; font-weight:700; font-size:.95rem;
+      border:1px solid var(--border); transition:transform .18s, box-shadow .18s, filter .18s;}
+  .hero-cta a.primary{background:linear-gradient(90deg,var(--accent),var(--accent2)); color:#fff; border:none;}
+  .hero-cta a.ghost{background:var(--card); color:var(--text);}
+  .hero-cta a:hover{transform:translateY(-2px); box-shadow:var(--shadow);}
+  .tldr{max-width:660px; margin:24px auto 0; text-align:start; background:var(--card);
+      border:1px solid var(--border); border-radius:12px; padding:16px 22px; box-shadow:var(--shadow);}
+  .tldr b{color:var(--accent);}
+  .tldr ul{margin:8px 0 0; padding-inline-start:20px;}
+  .tldr li{color:var(--muted); font-size:.9rem; margin-bottom:4px;}
+
+  /* mobile: off-canvas nav drawer + tighter spacing */
+  @media(max-width:900px){
+    .nav-toggle{display:flex; position:fixed; top:12px; inset-inline-start:12px; z-index:210;}
+    nav{position:fixed; top:0; bottom:0; inset-inline-start:0; width:min(82vw,300px); flex-direction:column;
+        transform:translateX(-108%); transition:transform .26s ease; z-index:206; overflow-y:auto;
+        border-right:1px solid var(--border); box-shadow:0 0 46px rgba(0,0,0,.35);}
+    body.nav-open nav{transform:none;}
+    .nav-scrim{position:fixed; inset:0; background:rgba(0,0,0,.45); opacity:0; pointer-events:none;
+        transition:opacity .26s; z-index:205;}
+    body.nav-open .nav-scrim{opacity:1; pointer-events:auto;}
+    nav .nav-group{display:block;}
+    header{padding-top:56px;}
+    header,main,footer{margin-left:0;}
+  }
+
   /* ===== accessibility layer ===== */
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
   .skip-link{position:absolute;top:-64px;inset-inline-start:8px;z-index:100;background:var(--accent);color:#fff;
@@ -205,20 +283,29 @@
 </style>
 </head>
 <body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+<button class="fab nav-toggle" id="navToggle" aria-label="Open navigation menu" aria-expanded="false">☰</button>
+<div class="nav-scrim" id="navScrim"></div>
+<button class="fab to-top" id="toTop" aria-label="Back to top">↑</button>
 <a class="skip-link" href="#main-content">Skip to main content</a>
 
 <nav aria-label="Main navigation">
   <a href="#top" style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
-    <img src="assets/logo-mark.svg" alt="AI × Automation × DevOps" style="height:34px;width:34px;flex-shrink:0;">
-    <span class="logo">AI × Automation × DevOps</span>
+    <img src="assets/logo-mark.svg" alt="AI × Dev × Test × DevOps" style="height:34px;width:34px;flex-shrink:0;">
+    <span class="logo">AI × Dev × Test × DevOps</span>
   </a>
+  <div class="nav-group"><span aria-hidden="true">🏗️</span> Framework</div>
   <a class="link" href="#automation">Automation</a>
   <a class="link" href="#layers">Test Layers</a>
+  <a class="link" href="#patterns">Design Patterns</a>
   <a class="link" href="#devops">DevOps</a>
   <a class="link" href="#reports">Results Server</a>
   <a class="link" href="#ai">AI Testing</a>
+  <div class="nav-group"><span aria-hidden="true">🎮</span> Interactive</div>
   <a class="link" href="#agents">🤖 The Agents</a>
   <a class="link" href="#videos">🎬 Explainer Videos</a>
+  <div class="nav-group"><span aria-hidden="true">🎯</span> Career</div>
   <a class="link" href="#jobs">💼 Open Positions</a>
   <a class="link" href="#interview-talk">🗣️ Interview Talk</a>
   <a class="link" href="#career-entry">🚀 Breaking In</a>
@@ -226,10 +313,11 @@
     <svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor" style="vertical-align:-3px;margin-right:6px;"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>GitHub Repo</a>
   <a class="link telegram-btn" href="https://t.me/ai_automation_testing" target="_blank" rel="noopener">✈️ Join the Telegram Community</a>
   <a class="link" href="ai-testing-academy.html" style="border-top:1px solid var(--border); border-radius:0; padding-top:14px;">🌐 עברית</a>
+  <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span id="themeIcon" aria-hidden="true">🌙</span> <span id="themeLabel">Dark</span></button>
 </nav>
 
 <header id="top">
-  <img src="assets/logo.svg" alt="AI × Automation × DevOps — Testing Academy"
+  <img src="assets/logo.svg" alt="AI × Dev × Test × DevOps — Testing Academy"
        style="width:min(420px,85%); height:auto; margin:0 auto 26px; display:block;">
   <h1>Learn Test Automation,<br><span>DevOps & AI-Powered Testing</span><br>— from a Real Project</h1>
   <p>A guide built on the working <code class="inline">AI_AUTOMATION_TESTING</code> repo: a Playwright + pytest framework using the Page Object Model, full DevOps infrastructure with Docker and CI, an Allure + Grafana results server, and AI agents that analyze failures and write tests.</p>
@@ -239,6 +327,19 @@
     <span class="badge">🐳 Docker Compose</span>
     <span class="badge">📊 Allure + Grafana</span>
     <span class="badge">🤖 AI Agents</span>
+  </div>
+  <div class="hero-cta">
+    <a class="primary" href="#automation">Start with the framework →</a>
+    <a class="ghost" href="#agents">Try the AI agents</a>
+  </div>
+  <div class="tldr">
+    <b>What you'll learn</b>
+    <ul>
+      <li>Structure a real Playwright + pytest suite with the Page Object Model and the design patterns that keep it alive.</li>
+      <li>Balance the test pyramid — UI, API, contract, and unit layers.</li>
+      <li>Ship it with Docker, CI, and an Allure + Grafana results server.</li>
+      <li>Use AI both ways — testing LLM features, and agents that analyze failures and write tests.</li>
+    </ul>
   </div>
 </header>
 
@@ -370,13 +471,39 @@ npm run allure:open       <span class="comment"># opens it in the browser</span>
   </ul>
 </section>
 
-<!-- ================= SECTION 6 : AGENTS ================= -->
+<!-- ================= SECTION 6 : DESIGN PATTERNS ================= -->
+<section id="patterns">
+  <h2><span class="num">06</span>🧩 Design Patterns in the Codebase</h2>
+  <p class="lead">The framework isn't just tests — it's a small, deliberate set of design patterns that keep it maintainable as the site changes underneath it.</p>
+  <div class="grid">
+    <div class="card"><h4>🧩 Page Object Model</h4>
+      <p>Every page is a class under <code class="inline">pages/</code>; tests call behavior, never selectors — change the site, fix one file.</p></div>
+    <div class="card"><h4>🏭 Factory</h4>
+      <p><code class="inline">utils/factories.py</code>, the <code class="inline">healing_locator()</code> / <code class="inline">_healed()</code> builders, and <code class="inline">create_app()</code> construct fully-wired objects behind a single call.</p></div>
+    <div class="card"><h4>🧭 Strategy — Self-Healing</h4>
+      <p><code class="inline">pages/self_healing.py</code> resolves a primary locator, then a pre-approved fallback list — a deterministic recovery strategy, recorded as a <code class="inline">SelfHealEvent</code>.</p></div>
+    <div class="card"><h4>🎛️ Facade</h4>
+      <p>The <code class="inline">services/api/*</code> classes and <code class="inline">RestClient</code> hide requests, retries, timeouts and HTML parsing behind small business methods.</p></div>
+    <div class="card"><h4>🔌 Adapter / Fallback</h4>
+      <p><code class="inline">opencart_fallback.py</code> adapts requests (and browser routes) to an in-memory store when the live site is blocked, so tests stay deterministic.</p></div>
+    <div class="card"><h4>💉 Dependency Injection</h4>
+      <p>pytest fixtures inject <code class="inline">browser → context → page → services</code>; services depend on an <code class="inline">HttpClient</code> protocol, not a concrete client.</p></div>
+    <div class="card"><h4>🔒 Singleton</h4>
+      <p>One shared <code class="inline">ai_automation</code> logger (<code class="inline">utils/logger.py</code>) and one session-keyed cart registry back the whole run.</p></div>
+    <div class="card"><h4>🧱 Composite</h4>
+      <p>A page is composed of reusable components — <code class="inline">NavBar</code>, <code class="inline">Alert</code>, <code class="inline">CartSummary</code>, <code class="inline">ProductCard</code> — instead of one giant class.</p></div>
+    <div class="card"><h4>📋 Template Method</h4>
+      <p>The <code class="inline">flows/</code> classes share one skeleton — open → navigate → act → verify — with each flow filling in the steps.</p></div>
+  </div>
+</section>
+
+<!-- ================= SECTION 7 : AGENTS ================= -->
 <section id="agents">
-  <h2><span class="num">06</span>🤖 Interactive Evaluation Agents</h2>
+  <h2><span class="num">07</span>🤖 Interactive Evaluation Agents</h2>
   <p class="lead">Two live agents: a resume evaluator for QA Automation roles, and an agent that simulates an interview and scores your chances of passing each stage.</p>
 
-  <div class="agent-box">
-    <h3>🔑 Connection Setup</h3>
+  <details class="agent-box" id="connSetup">
+    <summary><h3>🔑 Connection Setup</h3></summary>
     <div class="keybar">
       <div>
         <label for="providerSel">Provider</label>
@@ -403,7 +530,7 @@ npm run allure:open       <span class="comment"># opens it in the browser</span>
     <button class="ghost" onclick="testConnection()" style="margin-left:0;">🔌 Test Connection</button>
     <button class="ghost" onclick="resetSettings()">♻️ Reset Saved Settings</button>
     <p class="notice" id="connStatus" role="status" aria-live="polite" style="white-space:pre-wrap;"></p>
-  </div>
+  </details>
 
   <!-- AGENT 1: RESUME -->
   <div class="agent-box">
@@ -411,6 +538,8 @@ npm run allure:open       <span class="comment"># opens it in the browser</span>
     <p class="sub">Paste your resume (free text) and get a fit score for a QA Automation Engineer role, a category breakdown, strengths, gaps and recommendations — measured against the stack taught on this site.</p>
     <label for="targetRole">Target role (optional)</label>
     <input type="text" id="targetRole" placeholder="e.g., QA Automation Engineer / SDET">
+    <label for="jobDesc">Job description (optional) — paste it to build a résumé tailored to this exact role</label>
+    <textarea id="jobDesc" rows="4" placeholder="Paste the full job description here..."></textarea>
     <label>Resume — upload a file or paste text</label>
     <div class="upload-zone" id="uploadZone" role="button" tabindex="0" aria-label="Upload resume file: PDF, DOCX or TXT" onclick="$('resumeFile').click()">
       <input type="file" id="resumeFile" accept=".pdf,.docx,.txt" style="display:none;" onchange="handleResumeFile(this.files[0])">
@@ -431,12 +560,12 @@ npm run allure:open       <span class="comment"># opens it in the browser</span>
       </div>
       <div class="card" style="margin-top:16px;"><h4 style="color:var(--yellow);">🎯 Recommendations</h4><ul id="resumeRecs"></ul></div>
       <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
-        <button class="primary" id="improveBtn" onclick="showImprovedResume()">✨ Show Improved Resume</button>
-        <button class="ghost" id="pdfBtn" onclick="downloadImprovedPdf()">⬇️ Download Improved Resume as PDF</button>
+        <button class="primary" id="improveBtn" onclick="showImprovedResume()">✨ Build Optimized Resume</button>
+        <button class="ghost" id="pdfBtn" onclick="downloadImprovedPdf()">⬇️ Download as PDF</button>
       </div>
       <div id="improvedErr" class="error" role="alert"></div>
       <div class="card" id="improvedWrap" style="display:none; margin-top:16px;">
-        <h4 style="color:var(--green);">✨ Improved Resume</h4>
+        <h4 style="color:var(--green);">✨ Optimized Resume (tailored honestly — no invented experience)</h4>
         <div id="improvedText" style="white-space:pre-wrap; font-size:.92rem; line-height:1.7;"></div>
       </div>
     </div>
@@ -457,11 +586,47 @@ npm run allure:open       <span class="comment"># opens it in the browser</span>
     <button class="ghost" id="verdictBtn" onclick="requestVerdict()" disabled>Generate Verdict 📋</button>
     <div id="chatErr" class="error" role="alert"></div>
   </div>
+
+  <h3>🧠 The Project's AI Testing-Pipeline Agents</h3>
+  <p class="sub">Three Claude + Playwright agents that run inside the repo (command line, not the browser) and form a full pipeline: plan → write → auto-heal the automation. Each agent's output is the next one's input.</p>
+  <p class="sub"><b>First, once:</b> install deps and set your API key — run from the project root:</p>
+  <pre>pip install -r requirements.txt
+echo "ANTHROPIC_API_KEY=sk-ant-..." &gt;&gt; .env</pre>
+
+  <div class="grid">
+    <div class="card">
+      <h4>🗺️ Test Planner Agent</h4>
+      <p>Crawls live pages with Playwright and generates Software Test Documents (STDs).</p>
+      <p><b>Input:</b> none — the page URLs are already set inside the agent.</p>
+      <p><b>Output:</b> <code class="inline">stds/*.md</code> files</p>
+      <p><b>Run:</b></p>
+      <pre>python -m agents.test_planner_agent</pre>
+    </div>
+    <div class="card">
+      <h4>✍️ Test Writer Agent</h4>
+      <p>Reads STDs and writes pytest + Playwright tests (POM, fixtures, Allure).</p>
+      <p><b>Input:</b> the STD files in <code class="inline">stds/</code> (the planner's output).</p>
+      <p><b>Output:</b> <code class="inline">tests/web-ui/test_*.py</code> files</p>
+      <p><b>Run — all STDs:</b></p>
+      <pre>python -m agents.test_writer_agent</pre>
+      <p><b>Run — a single STD:</b></p>
+      <pre>python -m agents.test_writer_agent STD_Login.md</pre>
+    </div>
+    <div class="card">
+      <h4>🩹 Test Healer Agent</h4>
+      <p>Runs a failing test, heals the Page Object, and re-runs until it's green.</p>
+      <p><b>Input:</b> the failing test — a file name or node id (passed as an argument).</p>
+      <p><b>Output:</b> a repaired Page Object / test.</p>
+      <p><b>Run:</b></p>
+      <pre>python -m agents.test_healer_agent \
+  test_login.py::TestLogin::test_valid</pre>
+    </div>
+  </div>
 </section>
 
-<!-- ================= SECTION 7 : VIDEOS ================= -->
+<!-- ================= SECTION 8 : VIDEOS ================= -->
 <section id="videos">
-  <h2><span class="num">07</span>🎬 Explainer Videos</h2>
+  <h2><span class="num">08</span>🎬 Explainer Videos</h2>
   <p class="lead">Demo videos per topic. Drop video files into the <code class="inline">videos/</code> folder using the names below — they'll appear here automatically.</p>
   <a class="card job-card" target="_blank" rel="noopener" href="videos/intro-automation.mp4"
      style="grid-column:1/-1; text-align:center; background:linear-gradient(160deg,#fdf4ea,#faeadb);">
@@ -492,9 +657,9 @@ npm run allure:open       <span class="comment"># opens it in the browser</span>
   </div>
 </section>
 
-<!-- ================= SECTION 8 : JOBS ================= -->
+<!-- ================= SECTION 9 : JOBS ================= -->
 <section id="jobs">
-  <h2><span class="num">08</span>💼 Open Positions Online</h2>
+  <h2><span class="num">09</span>💼 Open Positions Online</h2>
   <p class="lead">Live searches on the main sources for QA Automation / SDET roles in Israel — every link opens fresh results. Once your evaluation score looks good, this is the next step.</p>
   <div class="grid">
     <a class="card job-card" target="_blank" rel="noopener" href="https://www.linkedin.com/jobs/search/?keywords=QA%20Automation%20Engineer&location=Israel&f_TPR=r604800">
@@ -513,9 +678,9 @@ npm run allure:open       <span class="comment"># opens it in the browser</span>
   <p class="notice">Tip: open a position you like, paste its requirements into the resume evaluator's "Target role" field — the evaluation, improved resume and PDF will be tailored exactly to it.</p>
 </section>
 
-<!-- ================= SECTION 9 : INTERVIEW TALK ================= -->
+<!-- ================= SECTION 10 : INTERVIEW TALK ================= -->
 <section id="interview-talk">
-  <h2><span class="num">09</span>🗣️ How to Talk in an Interview</h2>
+  <h2><span class="num">10</span>🗣️ How to Talk in an Interview</h2>
   <p class="lead">What you say matters, but how you say it is decisive. The principles that work in technical QA Automation interviews.</p>
 
   <h3>The STAR method — tell a story, don't drop headlines</h3>
@@ -548,9 +713,9 @@ npm run allure:open       <span class="comment"># opens it in the browser</span>
   <p class="notice">💡 You can practice all of this right now: scroll to the <a href="#agents">interview readiness agent</a> and run a full five-stage simulation.</p>
 </section>
 
-<!-- ================= SECTION 10 : CAREER ENTRY ================= -->
+<!-- ================= SECTION 11 : CAREER ENTRY ================= -->
 <section id="career-entry">
-  <h2><span class="num">10</span>🚀 Job-Market Entry Strategies for Young Professionals</h2>
+  <h2><span class="num">11</span>🚀 Job-Market Entry Strategies for Young Professionals</h2>
   <p class="lead">How to land a first QA Automation role with no work experience — and how to operate well in your first two years.</p>
 
   <h3>Before the first job: build proof instead of experience</h3>
@@ -589,7 +754,7 @@ npm run allure:open       <span class="comment"># opens it in the browser</span>
   <a class="telegram-banner" href="https://t.me/ai_automation_testing" target="_blank" rel="noopener">
     ✈️ Join the Telegram community — questions, job leads and automation & AI updates
   </a>
-  <div style="margin-top:16px;">AI × Automation × DevOps · built on the AI_AUTOMATION_TESTING repo · Playwright · pytest · Allure · Docker</div>
+  <div style="margin-top:16px;">AI × Dev × Test × DevOps · built on the AI_AUTOMATION_TESTING repo · Playwright · pytest · Allure · Docker</div>
 </footer>
 
 <script>
@@ -896,25 +1061,35 @@ async function evaluateResume() {
 }
 
 /* ---------- Improved resume: generate / show / download as PDF ---------- */
-const IMPROVE_SYSTEM = `You are a professional resume writer. Improve the provided resume for the target role:
-- Improve phrasing, structure and ordering; highlight measurable achievements and tailor emphasis to the role.
-- Do NOT invent experience, technologies or degrees that are not in the original.
+const IMPROVE_SYSTEM = `You are a professional resume writer. Rebuild the resume to be optimal for the target role — honestly.
+- Improve phrasing, structure and ordering; lead each role with measurable achievements.
 - Incorporate the evaluation's recommendations where they are phrasing/structural.
+- If a JOB DESCRIPTION is provided, tailor to it: reorder and re-emphasise the candidate's REAL
+  experience to match the job's priorities, and mirror the job's terminology ONLY where it
+  genuinely applies to what the candidate has actually done.
+- INTEGRITY IS MANDATORY: never invent or exaggerate experience, skills, tools, employers, titles,
+  dates or metrics to fit the job. If the job requires something the candidate lacks, do NOT claim
+  it — instead surface the closest real, transferable experience, and it is fine to leave a genuine gap.
 - Write in the same language as the original resume.
 - Return plain text only (no Markdown): section headings on their own line, bullets with "•".`;
 
 async function ensureImprovedResume() {
   if (improvedResume) return improvedResume;
   if (!lastEval) throw new Error("Run a resume evaluation first.");
+  const jd = ($("jobDesc") ? $("jobDesc").value : "").trim();
   const reply = await callClaude(IMPROVE_SYSTEM, [{
     role: "user",
     content: "Target role: " + lastEval.role +
+      (jd ? "\n\nTarget JOB DESCRIPTION (tailor honestly to this — do not invent to match it):\n" + jd : "") +
       "\n\nEvaluation results (gaps and recommendations):\n" + JSON.stringify({ gaps: lastEval.evaluation.gaps, recommendations: lastEval.evaluation.recommendations }) +
       "\n\nOriginal resume:\n" + lastEval.resume
   }], 4000);
   improvedResume = reply.trim();
   return improvedResume;
 }
+
+// Editing the job description invalidates a previously-built resume so it gets rebuilt for the new role.
+if ($("jobDesc")) $("jobDesc").addEventListener("input", () => { improvedResume = null; });
 
 async function showImprovedResume() {
   const btn = $("improveBtn");
@@ -927,7 +1102,7 @@ async function showImprovedResume() {
     $("improvedWrap").style.display = "block";
     $("improvedWrap").scrollIntoView({ behavior: "smooth", block: "start" });
   } catch (e) { $("improvedErr").textContent = e.message; }
-  btn.disabled = false; btn.textContent = "✨ Show Improved Resume";
+  btn.disabled = false; btn.textContent = "✨ Build Optimized Resume";
 }
 
 async function downloadImprovedPdf() {
@@ -951,7 +1126,7 @@ async function downloadImprovedPdf() {
     w.focus();
     setTimeout(() => w.print(), 400);  // in the dialog choose "Save as PDF"
   } catch (e) { $("improvedErr").textContent = e.message; }
-  btn.disabled = false; btn.textContent = "⬇️ Download Improved Resume as PDF";
+  btn.disabled = false; btn.textContent = "⬇️ Download as PDF";
 }
 
 /* ---------- Agent 2: Interview readiness ---------- */
@@ -1065,6 +1240,70 @@ document.querySelectorAll(".video-card").forEach(card => {
     if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
   }), { rootMargin: "0px 0px -8% 0px" });
   targets.forEach(el => { el.classList.add("reveal"); io.observe(el); });
+})();
+</script>
+
+<script>
+/* ---------- UI/UX enhancement layer ---------- */
+(function(){
+  const $ = id => document.getElementById(id);
+  const root = document.documentElement;
+
+  /* theme — saved choice, else OS preference */
+  const saved = localStorage.getItem("ata_theme");
+  applyTheme(saved || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+  function applyTheme(t){
+    root.setAttribute("data-theme", t);
+    const dark = t === "dark";
+    if ($("themeIcon")) $("themeIcon").textContent = dark ? "☀️" : "🌙";
+    if ($("themeLabel")) $("themeLabel").textContent = dark ? "Light" : "Dark";
+  }
+  $("themeToggle") && $("themeToggle").addEventListener("click", () => {
+    const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    localStorage.setItem("ata_theme", next); applyTheme(next);
+  });
+
+  /* scroll progress + back-to-top */
+  const bar = $("scrollProgress"), toTop = $("toTop");
+  function onScroll(){
+    const h = root, max = h.scrollHeight - h.clientHeight;
+    if (bar) bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + "%";
+    if (toTop) toTop.classList.toggle("show", h.scrollTop > 500);
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+  toTop && toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+  /* mobile nav drawer */
+  const navToggle = $("navToggle"), scrim = $("navScrim");
+  const setNav = open => { document.body.classList.toggle("nav-open", open);
+    navToggle && navToggle.setAttribute("aria-expanded", String(open)); };
+  navToggle && navToggle.addEventListener("click", () => setNav(!document.body.classList.contains("nav-open")));
+  scrim && scrim.addEventListener("click", () => setNav(false));
+  document.querySelectorAll("nav a[href^='#']").forEach(a => a.addEventListener("click", () => setNav(false)));
+
+  /* section-number chips in the nav */
+  document.querySelectorAll("nav a.link[href^='#']").forEach(a => {
+    const sec = document.querySelector(a.getAttribute("href"));
+    const num = sec && sec.querySelector(".num") && sec.querySelector(".num").textContent.trim();
+    if (num) { const s = document.createElement("span"); s.className = "nav-num";
+      s.setAttribute("aria-hidden", "true"); s.textContent = num; a.prepend(s); }
+  });
+
+  /* copy-to-clipboard on code blocks */
+  document.querySelectorAll("main pre").forEach(pre => {
+    const wrap = document.createElement("div"); wrap.className = "pre-wrap";
+    pre.parentNode.insertBefore(wrap, pre); wrap.appendChild(pre);
+    const btn = document.createElement("button"); btn.type = "button";
+    btn.className = "copy-btn"; btn.textContent = "Copy";
+    btn.addEventListener("click", async () => {
+      try { await navigator.clipboard.writeText(pre.innerText);
+        btn.textContent = "Copied ✓"; btn.classList.add("copied");
+        setTimeout(() => { btn.textContent = "Copy"; btn.classList.remove("copied"); }, 1600);
+      } catch (_) { btn.textContent = "Copy failed"; }
+    });
+    wrap.appendChild(btn);
+  });
 })();
 </script>
 </body>

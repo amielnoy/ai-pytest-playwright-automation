@@ -37,7 +37,7 @@
   <!-- ===== Wordmark ===== -->
   <g font-family="'Segoe UI',Arial,sans-serif">
     <text x="175" y="88" font-size="52" font-weight="800" fill="url(#g2)" letter-spacing="1"
-          textLength="850" lengthAdjust="spacingAndGlyphs">AI <tspan fill="#8a7a6a" font-weight="400">×</tspan> AUTOMATION <tspan fill="#8a7a6a" font-weight="400">×</tspan> DEVOPS</text>
+          textLength="850" lengthAdjust="spacingAndGlyphs">AI <tspan fill="#8a7a6a" font-weight="400">×</tspan> DEV <tspan fill="#8a7a6a" font-weight="400">×</tspan> TEST <tspan fill="#8a7a6a" font-weight="400">×</tspan> DEVOPS</text>
     <text x="177" y="122" font-size="19" font-weight="500" fill="#7c7168" letter-spacing="6"
           textLength="848" lengthAdjust="spacing">TESTING ACADEMY · POWERED BY AI AGENTS</text>
   </g>
