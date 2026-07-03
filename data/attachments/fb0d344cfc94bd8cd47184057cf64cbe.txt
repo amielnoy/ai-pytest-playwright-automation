@@ -1,0 +1,2 @@
+INFO     ai_automation.test_login_html_with_warning:conftest.py:320 START tests/unit/test_opencart_fallback.py::TestHTMLGenerators::test_login_html_with_warning
+INFO     ai_automation.test_login_html_with_warning:conftest.py:322 END   tests/unit/test_opencart_fallback.py::TestHTMLGenerators::test_login_html_with_warning

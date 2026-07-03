@@ -1,0 +1,2 @@
+2026-07-03 13:15:13,495 | INFO     | ai_automation.test_uses_base_url | START tests/unit/test_api_client.py::TestSearchUrl::test_uses_base_url
+2026-07-03 13:15:13,496 | INFO     | ai_automation.test_uses_base_url | END   tests/unit/test_api_client.py::TestSearchUrl::test_uses_base_url

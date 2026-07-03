@@ -1,0 +1,2 @@
+INFO     ai_automation.test_order_preserved:conftest.py:320 START tests/unit/test_api_client.py::TestParseCards::test_order_preserved
+INFO     ai_automation.test_order_preserved:conftest.py:322 END   tests/unit/test_api_client.py::TestParseCards::test_order_preserved

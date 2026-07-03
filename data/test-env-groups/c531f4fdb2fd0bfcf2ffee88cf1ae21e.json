@@ -1,1 +1,1 @@
-{"id":"c531f4fdb2fd0bfcf2ffee88cf1ae21e","fullName":"tests.unit.test_flows.TestRegistrationFlow#test_register_returns_success_flag","name":"register() returns the result of is_registration_successful()","status":"passed","testResultsByEnv":{"default":"37edb3d3d159c4bb4b0ec2bd6c837d72"}}
+{"id":"c531f4fdb2fd0bfcf2ffee88cf1ae21e","fullName":"tests.unit.test_flows.TestRegistrationFlow#test_register_returns_success_flag","name":"register() returns the result of is_registration_successful()","status":"passed","testResultsByEnv":{"default":"d40cec90a04b4f3e5f958b89885a51fb"}}

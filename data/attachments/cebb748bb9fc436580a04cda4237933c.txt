@@ -1,0 +1,5 @@
+2026-07-03 13:15:16,073 | INFO     | ai_automation.test_search_service_product_ids_does_not_raise_on_malformed_html | START tests/unit/test_security_unit.py::test_search_service_product_ids_does_not_raise_on_malformed_html
+2026-07-03 13:15:16,074 | INFO     | ai_automation.security.unit | Step: Build SearchService with RestClient, base_url=https://example.test
+2026-07-03 13:15:16,074 | INFO     | ai_automation.security.unit | Step: Call service.product_ids on malformed HTML; expect list, no exception
+2026-07-03 13:15:16,075 | INFO     | ai_automation.security.unit | Step: Assert isinstance(ids, list)
+2026-07-03 13:15:16,075 | INFO     | ai_automation.test_search_service_product_ids_does_not_raise_on_malformed_html | END   tests/unit/test_security_unit.py::test_search_service_product_ids_does_not_raise_on_malformed_html

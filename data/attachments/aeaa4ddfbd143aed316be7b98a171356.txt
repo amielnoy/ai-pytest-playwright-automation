@@ -1,0 +1,2 @@
+INFO     ai_automation.test_asdict_has_all_keys:conftest.py:320 START tests/unit/test_factories.py::TestMakeRegistration::test_asdict_has_all_keys
+INFO     ai_automation.test_asdict_has_all_keys:conftest.py:322 END   tests/unit/test_factories.py::TestMakeRegistration::test_asdict_has_all_keys

@@ -1,0 +1,5 @@
+INFO     ai_automation.test_login_endpoint_operates_over_https:conftest.py:320 START tests/api/test_pentest.py::TestAuthenticationPentest::test_login_endpoint_operates_over_https
+INFO     ai_automation.pentest:test_pentest.py:282 Step: Assert api_base_url starts with https:// — https://tutorialsninja.com/demo
+INFO     ai_automation.pentest:test_pentest.py:290 Step: GET login page and check form action URL scheme
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_login_endpoint_operates_over_https:conftest.py:322 END   tests/api/test_pentest.py::TestAuthenticationPentest::test_login_endpoint_operates_over_https

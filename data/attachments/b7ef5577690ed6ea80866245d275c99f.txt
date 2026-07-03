@@ -1,0 +1,2 @@
+2026-07-03 13:15:13,816 | INFO     | ai_automation.test_override_email_blank | START tests/unit/test_factories.py::TestMakeRegistration::test_override_email_blank
+2026-07-03 13:15:13,817 | INFO     | ai_automation.test_override_email_blank | END   tests/unit/test_factories.py::TestMakeRegistration::test_override_email_blank

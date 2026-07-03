@@ -1,0 +1,4 @@
+INFO     ai_automation.test_chat_answers_arithmetic_question:conftest.py:320 START tests/api/test_chat_ai.py::TestChatEndpoint::test_chat_answers_arithmetic_question
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): 127.0.0.1:8000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://127.0.0.1:8000 "POST /chat HTTP/1.1" 200 84
+INFO     ai_automation.test_chat_answers_arithmetic_question:conftest.py:322 END   tests/api/test_chat_ai.py::TestChatEndpoint::test_chat_answers_arithmetic_question

@@ -1,0 +1,6 @@
+INFO     ai_automation.test_ssti_erb_payload_html_encoded_not_executed_in_search:conftest.py:320 START tests/api/test_pentest.py::TestInjectionPentest::test_ssti_erb_payload_html_encoded_not_executed_in_search
+INFO     ai_automation.pentest:test_pentest.py:109 Step: GET search with ERB payload: '<%=7*7%>'
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.pentest:test_pentest.py:113 Step: Assert title shows &lt;%=7*7%&gt; (encoded) not '49'
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_ssti_erb_payload_html_encoded_not_executed_in_search:conftest.py:322 END   tests/api/test_pentest.py::TestInjectionPentest::test_ssti_erb_payload_html_encoded_not_executed_in_search

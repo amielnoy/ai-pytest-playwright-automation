@@ -1,0 +1,2 @@
+2026-07-03 13:15:14,886 | INFO     | ai_automation.test_log_annotated_call_uses_function_metadata | START tests/unit/test_logger.py::test_log_annotated_call_uses_function_metadata
+2026-07-03 13:15:14,887 | INFO     | ai_automation.test_log_annotated_call_uses_function_metadata | END   tests/unit/test_logger.py::test_log_annotated_call_uses_function_metadata

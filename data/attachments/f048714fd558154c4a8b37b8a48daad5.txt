@@ -1,0 +1,4 @@
+2026-07-03 13:15:12,736 | INFO     | ai_automation.test_login_attack_no_crash_json[oversized_password] | START tests/api/test_pentest_data_driven.py::TestAuthAttackJson::test_login_attack_no_crash_json[oversized_password]
+2026-07-03 13:15:12,738 | INFO     | ai_automation.pentest.data_driven | Step: JSON auth attack id=oversized_password email='probe@pentest.test'
+2026-07-03 13:15:12,738 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:12,739 | INFO     | ai_automation.test_login_attack_no_crash_json[oversized_password] | END   tests/api/test_pentest_data_driven.py::TestAuthAttackJson::test_login_attack_no_crash_json[oversized_password]

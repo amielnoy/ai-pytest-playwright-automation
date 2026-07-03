@@ -1,0 +1,4 @@
+2026-07-03 13:15:16,033 | INFO     | ai_automation.test_rest_client_custom_headers_do_not_inject_credential_headers | START tests/unit/test_security_unit.py::test_rest_client_custom_headers_do_not_inject_credential_headers
+2026-07-03 13:15:16,033 | INFO     | ai_automation.security.unit | Step: Instantiate RestClient with X-Requested-With only
+2026-07-03 13:15:16,033 | INFO     | ai_automation.security.unit | Step: Assert Authorization and Cookie absent from session.headers
+2026-07-03 13:15:16,034 | INFO     | ai_automation.test_rest_client_custom_headers_do_not_inject_credential_headers | END   tests/unit/test_security_unit.py::test_rest_client_custom_headers_do_not_inject_credential_headers

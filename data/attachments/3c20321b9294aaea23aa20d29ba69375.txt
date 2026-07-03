@@ -1,0 +1,4 @@
+2026-07-03 13:15:14,603 | INFO     | ai_automation.test_chat_returns_mock_response_without_api_key | START tests/unit/test_fastapi_app.py::test_chat_returns_mock_response_without_api_key
+2026-07-03 13:15:14,604 | DEBUG    | asyncio | Using selector: EpollSelector
+2026-07-03 13:15:14,606 | INFO     | httpx | HTTP Request: POST http://testserver/chat "HTTP/1.1 200 OK"
+2026-07-03 13:15:14,607 | INFO     | ai_automation.test_chat_returns_mock_response_without_api_key | END   tests/unit/test_fastapi_app.py::test_chat_returns_mock_response_without_api_key

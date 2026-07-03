@@ -1,0 +1,2 @@
+2026-07-03 13:15:14,804 | INFO     | ai_automation.test_open_cart_delegates | START tests/unit/test_flows.py::TestCartFlow::test_open_cart_delegates
+2026-07-03 13:15:14,806 | INFO     | ai_automation.test_open_cart_delegates | END   tests/unit/test_flows.py::TestCartFlow::test_open_cart_delegates

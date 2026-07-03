@@ -1,0 +1,5 @@
+INFO     ai_automation.test_command_injection_in_search_inline[MacBook| cat /etc/passwd]:conftest.py:320 START tests/api/test_pentest_data_driven.py::TestInjectionInline::test_command_injection_in_search_inline[MacBook| cat /etc/passwd]
+INFO     ai_automation.pentest.data_driven:test_pentest_data_driven.py:190 Step: command injection payload='MacBook| cat /etc/passwd'
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_command_injection_in_search_inline[MacBook| cat /etc/passwd]:conftest.py:322 END   tests/api/test_pentest_data_driven.py::TestInjectionInline::test_command_injection_in_search_inline[MacBook| cat /etc/passwd]

@@ -1,0 +1,2 @@
+2026-07-03 13:17:05,086 | INFO     | ai_automation.test_home_page_header_controls | START tests/web-ui/test_sanity.py::TestSanity::test_home_page_header_controls@web-ui
+2026-07-03 13:17:08,024 | INFO     | ai_automation.test_home_page_header_controls | END   tests/web-ui/test_sanity.py::TestSanity::test_home_page_header_controls@web-ui

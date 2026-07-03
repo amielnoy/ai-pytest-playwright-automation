@@ -1,0 +1,2 @@
+INFO     ai_automation.test_case_insensitive:conftest.py:320 START tests/unit/test_opencart_fallback.py::TestSearchProducts::test_case_insensitive
+INFO     ai_automation.test_case_insensitive:conftest.py:322 END   tests/unit/test_opencart_fallback.py::TestSearchProducts::test_case_insensitive

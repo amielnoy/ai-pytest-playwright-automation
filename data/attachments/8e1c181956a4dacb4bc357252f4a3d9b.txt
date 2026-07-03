@@ -1,0 +1,2 @@
+2026-07-03 13:15:15,610 | INFO     | ai_automation.test_search_results_open_product_clicks_title_link_in_matching_card | START tests/unit/test_page_objects.py::test_search_results_open_product_clicks_title_link_in_matching_card
+2026-07-03 13:15:15,622 | INFO     | ai_automation.test_search_results_open_product_clicks_title_link_in_matching_card | END   tests/unit/test_page_objects.py::test_search_results_open_product_clicks_title_link_in_matching_card

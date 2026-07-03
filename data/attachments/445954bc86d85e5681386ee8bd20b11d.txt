@@ -1,0 +1,5 @@
+2026-07-03 13:15:12,007 | INFO     | ai_automation.test_sql_injection_in_search_inline[' OR '1'='1'--] | START tests/api/test_pentest_data_driven.py::TestInjectionInline::test_sql_injection_in_search_inline[' OR '1'='1'--]
+2026-07-03 13:15:12,008 | INFO     | ai_automation.pentest.data_driven | Step: SQL injection search payload="' OR '1'='1'--"
+2026-07-03 13:15:12,011 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:12,011 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:12,013 | INFO     | ai_automation.test_sql_injection_in_search_inline[' OR '1'='1'--] | END   tests/api/test_pentest_data_driven.py::TestInjectionInline::test_sql_injection_in_search_inline[' OR '1'='1'--]

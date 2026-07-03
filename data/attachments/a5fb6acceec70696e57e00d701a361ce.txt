@@ -1,0 +1,5 @@
+INFO     ai_automation.test_sql_injection_in_search_inline[' OR '1'='1'--]:conftest.py:320 START tests/api/test_pentest_data_driven.py::TestInjectionInline::test_sql_injection_in_search_inline[' OR '1'='1'--]
+INFO     ai_automation.pentest.data_driven:test_pentest_data_driven.py:115 Step: SQL injection search payload="' OR '1'='1'--"
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_sql_injection_in_search_inline[' OR '1'='1'--]:conftest.py:322 END   tests/api/test_pentest_data_driven.py::TestInjectionInline::test_sql_injection_in_search_inline[' OR '1'='1'--]

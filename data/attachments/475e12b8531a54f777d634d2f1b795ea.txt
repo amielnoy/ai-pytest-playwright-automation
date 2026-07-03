@@ -1,0 +1,6 @@
+INFO     ai_automation.test_cart_total_not_exceeds:conftest.py:320 START tests/web-ui/test_cart_total.py::TestCartTotalNotExceeds::test_cart_total_not_exceeds@web-ui
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_cart_total_not_exceeds:conftest.py:322 END   tests/web-ui/test_cart_total.py::TestCartTotalNotExceeds::test_cart_total_not_exceeds@web-ui
+INFO     ai_automation.test_cart_total_not_exceeds:conftest.py:320 START tests/web-ui/test_cart_total.py::TestCartTotalNotExceeds::test_cart_total_not_exceeds@web-ui
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_cart_total_not_exceeds:conftest.py:322 END   tests/web-ui/test_cart_total.py::TestCartTotalNotExceeds::test_cart_total_not_exceeds@web-ui

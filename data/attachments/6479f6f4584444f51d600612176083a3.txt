@@ -1,0 +1,11 @@
+INFO     ai_automation.test_login_error_does_not_reveal_email_existence:conftest.py:320 START tests/api/test_pentest.py::TestAuthenticationPentest::test_login_error_does_not_reveal_email_existence
+INFO     ai_automation.pentest:test_pentest.py:249 Step: POST login with fake email probe-a@pentest-nonexistent.test
+INFO     ai_automation.pentest:test_pentest.py:257 Step: POST login with fake email probe-b@pentest-nonexistent.test
+INFO     ai_automation.pentest:test_pentest.py:265 Step: Assert generic warning present and no account-enumeration phrases
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_login_error_does_not_reveal_email_existence:conftest.py:322 END   tests/api/test_pentest.py::TestAuthenticationPentest::test_login_error_does_not_reveal_email_existence

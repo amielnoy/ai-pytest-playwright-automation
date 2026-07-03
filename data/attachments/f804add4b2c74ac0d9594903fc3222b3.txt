@@ -1,0 +1,2 @@
+2026-07-03 13:15:14,186 | INFO     | ai_automation.test_starts_with_05 | START tests/unit/test_factories.py::TestTelephoneFormat::test_starts_with_05
+2026-07-03 13:15:14,190 | INFO     | ai_automation.test_starts_with_05 | END   tests/unit/test_factories.py::TestTelephoneFormat::test_starts_with_05

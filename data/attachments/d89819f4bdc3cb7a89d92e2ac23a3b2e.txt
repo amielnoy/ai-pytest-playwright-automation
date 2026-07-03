@@ -1,0 +1,4 @@
+2026-07-03 13:15:11,701 | INFO     | ai_automation.test_ssn_not_reflected | START tests/api/test_chat_dlp.py::TestChatDLP::test_ssn_not_reflected
+2026-07-03 13:15:11,703 | DEBUG    | urllib3.connectionpool | Starting new HTTP connection (1): 127.0.0.1:8000
+2026-07-03 13:15:11,705 | DEBUG    | urllib3.connectionpool | http://127.0.0.1:8000 "POST /chat HTTP/1.1" 200 213
+2026-07-03 13:15:11,707 | INFO     | ai_automation.test_ssn_not_reflected | END   tests/api/test_chat_dlp.py::TestChatDLP::test_ssn_not_reflected

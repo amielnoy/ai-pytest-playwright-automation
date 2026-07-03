@@ -1,0 +1,7 @@
+2026-07-03 13:15:13,364 | INFO     | ai_automation.test_cart_total_matches_item_sum | START tests/contract/test_contracts.py::TestPriceContract::test_cart_total_matches_item_sum
+2026-07-03 13:15:13,366 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:13,367 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:13,367 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:13,367 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:13,368 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:13,373 | INFO     | ai_automation.test_cart_total_matches_item_sum | END   tests/contract/test_contracts.py::TestPriceContract::test_cart_total_matches_item_sum

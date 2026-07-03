@@ -1,0 +1,2 @@
+INFO     ai_automation.test_sort_alphabetically_ascending:conftest.py:320 START tests/web-ui/test_sort_alphabetically.py::TestSortAlphabetically::test_sort_alphabetically_ascending@web-ui
+INFO     ai_automation.test_sort_alphabetically_ascending:conftest.py:322 END   tests/web-ui/test_sort_alphabetically.py::TestSortAlphabetically::test_sort_alphabetically_ascending@web-ui

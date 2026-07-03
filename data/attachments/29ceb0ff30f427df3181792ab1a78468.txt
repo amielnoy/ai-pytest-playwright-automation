@@ -1,0 +1,2 @@
+INFO     ai_automation.test_cart_total_positive_after_adding_items:conftest.py:320 START tests/web-ui/test_system_coverage.py::TestCartFlowCoverage::test_cart_total_positive_after_adding_items@web-ui
+INFO     ai_automation.test_cart_total_positive_after_adding_items:conftest.py:322 END   tests/web-ui/test_system_coverage.py::TestCartFlowCoverage::test_cart_total_positive_after_adding_items@web-ui

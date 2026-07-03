@@ -1,0 +1,4 @@
+INFO     ai_automation.test_allure_status_exposes_report_url:conftest.py:320 START tests/unit/test_fastapi_app.py::test_allure_status_exposes_report_url
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+INFO     httpx:_client.py:1025 HTTP Request: GET http://testserver/reports/allure/status "HTTP/1.1 200 OK"
+INFO     ai_automation.test_allure_status_exposes_report_url:conftest.py:322 END   tests/unit/test_fastapi_app.py::test_allure_status_exposes_report_url

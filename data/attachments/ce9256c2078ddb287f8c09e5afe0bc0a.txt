@@ -1,0 +1,2 @@
+INFO     ai_automation.test_registration_newsletter_radios_have_accessible_names:conftest.py:320 START tests/web-ui/test_accessibility_sanity.py::TestAccessibilitySanity::test_registration_newsletter_radios_have_accessible_names@web-ui
+INFO     ai_automation.test_registration_newsletter_radios_have_accessible_names:conftest.py:322 END   tests/web-ui/test_accessibility_sanity.py::TestAccessibilitySanity::test_registration_newsletter_radios_have_accessible_names@web-ui

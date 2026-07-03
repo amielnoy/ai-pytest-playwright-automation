@@ -1,0 +1,8 @@
+INFO     ai_automation.test_registration_page_has_required_fields:conftest.py:320 START tests/contract/test_contracts.py::TestRegistrationPageContract::test_registration_page_has_required_fields
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_registration_page_has_required_fields:conftest.py:322 END   tests/contract/test_contracts.py::TestRegistrationPageContract::test_registration_page_has_required_fields

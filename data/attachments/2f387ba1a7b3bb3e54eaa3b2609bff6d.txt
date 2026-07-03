@@ -1,0 +1,13 @@
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): 127.0.0.1:8000
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): 127.0.0.1:8000
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): 127.0.0.1:8000
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): 127.0.0.1:8000
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): 127.0.0.1:8000
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): 127.0.0.1:8000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://127.0.0.1:8000 "GET /health HTTP/1.1" 200 15
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): 127.0.0.1:8000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://127.0.0.1:8000 "POST /chat HTTP/1.1" 200 114
+INFO     ai_automation.test_chat_response_is_non_empty_string:conftest.py:320 START tests/api/test_chat_ai.py::TestChatEndpoint::test_chat_response_is_non_empty_string
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): 127.0.0.1:8000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://127.0.0.1:8000 "POST /chat HTTP/1.1" 200 149
+INFO     ai_automation.test_chat_response_is_non_empty_string:conftest.py:322 END   tests/api/test_chat_ai.py::TestChatEndpoint::test_chat_response_is_non_empty_string

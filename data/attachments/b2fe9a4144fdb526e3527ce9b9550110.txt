@@ -1,0 +1,2 @@
+INFO     ai_automation.test_email_format:conftest.py:320 START tests/unit/test_factories.py::TestMakeRegistration::test_email_format
+INFO     ai_automation.test_email_format:conftest.py:322 END   tests/unit/test_factories.py::TestMakeRegistration::test_email_format

@@ -1,0 +1,3 @@
+INFO     ai_automation.test_search_route:conftest.py:320 START tests/unit/test_opencart_fallback.py::TestRouteDispatcher::test_search_route
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_search_route:conftest.py:322 END   tests/unit/test_opencart_fallback.py::TestRouteDispatcher::test_search_route

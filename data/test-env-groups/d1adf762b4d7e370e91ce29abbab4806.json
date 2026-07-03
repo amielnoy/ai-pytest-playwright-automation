@@ -1,1 +1,1 @@
-{"id":"d1adf762b4d7e370e91ce29abbab4806","fullName":"tests.api.test_chat_ai.TestChatEndpoint#test_chat_returns_200_with_response_field","name":"POST /chat returns 200 with a response field","status":"broken","testResultsByEnv":{"default":"75a5246599f87b1b15c3fb67815f0c57"}}
+{"id":"d1adf762b4d7e370e91ce29abbab4806","fullName":"tests.api.test_chat_ai.TestChatEndpoint#test_chat_returns_200_with_response_field","name":"POST /chat returns 200 with a response field","status":"passed","testResultsByEnv":{"default":"a60112b320e2c746aa9b4552c0b25a52"}}

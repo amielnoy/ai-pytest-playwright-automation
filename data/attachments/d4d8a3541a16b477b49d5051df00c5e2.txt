@@ -1,0 +1,2 @@
+2026-07-03 13:15:14,968 | INFO     | ai_automation.test_sort_by_name_ascending | START tests/unit/test_opencart_fallback.py::TestSearchProducts::test_sort_by_name_ascending
+2026-07-03 13:15:14,969 | INFO     | ai_automation.test_sort_by_name_ascending | END   tests/unit/test_opencart_fallback.py::TestSearchProducts::test_sort_by_name_ascending

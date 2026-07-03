@@ -1,1 +1,1 @@
-{"id":"f6d8b909a289e43d7accbea41f41924f","fullName":"tests.api.test_api_data_driven.TestSearchApiJson#test_search_returns_expected_product_json","name":"Search [MacBook] returns [MacBook] – JSON","status":"passed","testResultsByEnv":{"default":"7656defc200ed4c3b1a1318a73e46bc5"}}
+{"id":"f6d8b909a289e43d7accbea41f41924f","fullName":"tests.api.test_api_data_driven.TestSearchApiJson#test_search_returns_expected_product_json","name":"Search [Canon] returns [Canon] – JSON","status":"passed","testResultsByEnv":{"default":"aa0e247b01c297735d828b7023b7e116"}}

@@ -1,0 +1,4 @@
+INFO     ai_automation.test_ocsessid_cookie_is_set_with_root_path_scope:conftest.py:320 START tests/api/test_security_api.py::TestSessionSecurity::test_ocsessid_cookie_is_set_with_root_path_scope
+INFO     ai_automation.security.api:test_security_api.py:200 Step: GET https://tutorialsninja.com/demo with fresh session, capture Set-Cookie
+INFO     ai_automation.security.api:test_security_api.py:206 Step: Assert OCSESSID present and path=/ in Set-Cookie value
+INFO     ai_automation.test_ocsessid_cookie_is_set_with_root_path_scope:conftest.py:322 END   tests/api/test_security_api.py::TestSessionSecurity::test_ocsessid_cookie_is_set_with_root_path_scope

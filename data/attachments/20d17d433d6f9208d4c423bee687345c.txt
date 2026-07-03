@@ -1,0 +1,1 @@
+{'response': 'Hello! How can I help you today?', 'model': 'mock-claude-haiku-4-5', 'input_tokens': 2, 'output_tokens': 7}

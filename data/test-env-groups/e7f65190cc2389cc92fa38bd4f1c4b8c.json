@@ -1,1 +1,1 @@
-{"id":"e7f65190cc2389cc92fa38bd4f1c4b8c","fullName":"tests.unit.test_api_client.TestParseCards#test_no_products","name":"_parse_cards returns empty list when no product-thumb blocks found","status":"passed","testResultsByEnv":{"default":"397eb59ab3e5f13a9318e3f96e5636d2"}}
+{"id":"e7f65190cc2389cc92fa38bd4f1c4b8c","fullName":"tests.unit.test_api_client.TestParseCards#test_no_products","name":"_parse_cards returns empty list when no product-thumb blocks found","status":"passed","testResultsByEnv":{"default":"4021f08a9d0124ad1b95af2ecb54710c"}}

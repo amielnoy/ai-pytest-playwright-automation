@@ -1,0 +1,2 @@
+2026-07-03 13:15:16,011 | INFO     | ai_automation.test_rest_client_retries_only_idempotent_methods_by_default | START tests/unit/test_rest_client.py::test_rest_client_retries_only_idempotent_methods_by_default
+2026-07-03 13:15:16,012 | INFO     | ai_automation.test_rest_client_retries_only_idempotent_methods_by_default | END   tests/unit/test_rest_client.py::test_rest_client_retries_only_idempotent_methods_by_default

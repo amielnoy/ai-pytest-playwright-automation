@@ -1,0 +1,6 @@
+INFO     ai_automation.test_null_byte_in_search_is_handled_gracefully:conftest.py:320 START tests/api/test_security_api.py::TestSearchSecurity::test_null_byte_in_search_is_handled_gracefully
+INFO     ai_automation.security.api:test_security_api.py:90 Step: GET search with null byte query: 'MacBook\x00evil'
+DEBUG    charset_normalizer:api.py:739 Encoding detection: utf_8 is most likely the one.
+INFO     ai_automation.security.api:test_security_api.py:94 Step: Assert 200 and no Fatal error on null byte input
+DEBUG    charset_normalizer:api.py:739 Encoding detection: utf_8 is most likely the one.
+INFO     ai_automation.test_null_byte_in_search_is_handled_gracefully:conftest.py:322 END   tests/api/test_security_api.py::TestSearchSecurity::test_null_byte_in_search_is_handled_gracefully

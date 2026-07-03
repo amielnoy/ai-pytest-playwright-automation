@@ -1,0 +1,2 @@
+2026-07-03 13:15:14,745 | INFO     | ai_automation.test_search_under_price_default_limit | START tests/unit/test_flows.py::TestSearchFlow::test_search_under_price_default_limit
+2026-07-03 13:15:14,746 | INFO     | ai_automation.test_search_under_price_default_limit | END   tests/unit/test_flows.py::TestSearchFlow::test_search_under_price_default_limit

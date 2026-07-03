@@ -1,0 +1,11 @@
+2026-07-03 13:15:11,783 | INFO     | ai_automation.test_ldap_injection_in_search_handled_safely | START tests/api/test_pentest.py::TestInjectionPentest::test_ldap_injection_in_search_handled_safely
+2026-07-03 13:15:11,784 | INFO     | ai_automation.pentest | Step: GET search with LDAP injection: '*)(uid=*))(|(uid=*'
+2026-07-03 13:15:11,786 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:11,786 | INFO     | ai_automation.pentest | Step: Assert 200 and no Fatal error or DB error markers
+2026-07-03 13:15:11,787 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:11,787 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:11,788 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:11,788 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:11,788 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:11,789 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:11,790 | INFO     | ai_automation.test_ldap_injection_in_search_handled_safely | END   tests/api/test_pentest.py::TestInjectionPentest::test_ldap_injection_in_search_handled_safely

@@ -1,0 +1,2 @@
+2026-07-03 13:15:13,618 | INFO     | ai_automation.test_has_user_agent | START tests/unit/test_api_client.py::TestBuildSession::test_has_user_agent
+2026-07-03 13:15:13,619 | INFO     | ai_automation.test_has_user_agent | END   tests/unit/test_api_client.py::TestBuildSession::test_has_user_agent

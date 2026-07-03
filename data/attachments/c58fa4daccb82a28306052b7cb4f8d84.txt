@@ -1,0 +1,2 @@
+INFO     ai_automation.test_no_shared_state_registration:conftest.py:320 START tests/unit/test_factories.py::TestFactoryIsolation::test_no_shared_state_registration
+INFO     ai_automation.test_no_shared_state_registration:conftest.py:322 END   tests/unit/test_factories.py::TestFactoryIsolation::test_no_shared_state_registration

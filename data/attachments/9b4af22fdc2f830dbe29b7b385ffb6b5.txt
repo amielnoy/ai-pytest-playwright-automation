@@ -1,0 +1,4 @@
+INFO     ai_automation.test_login_attack_no_crash_json[oversized_password]:conftest.py:320 START tests/api/test_pentest_data_driven.py::TestAuthAttackJson::test_login_attack_no_crash_json[oversized_password]
+INFO     ai_automation.pentest.data_driven:test_pentest_data_driven.py:439 Step: JSON auth attack id=oversized_password email='probe@pentest.test'
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_login_attack_no_crash_json[oversized_password]:conftest.py:322 END   tests/api/test_pentest_data_driven.py::TestAuthAttackJson::test_login_attack_no_crash_json[oversized_password]

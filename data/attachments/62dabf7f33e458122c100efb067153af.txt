@@ -1,0 +1,2 @@
+INFO     ai_automation.test_sort_by_name_descending:conftest.py:320 START tests/unit/test_opencart_fallback.py::TestSearchProducts::test_sort_by_name_descending
+INFO     ai_automation.test_sort_by_name_descending:conftest.py:322 END   tests/unit/test_opencart_fallback.py::TestSearchProducts::test_sort_by_name_descending

@@ -1,0 +1,6 @@
+INFO     ai_automation.test_checkout_page_is_not_accessible_with_empty_cart:conftest.py:320 START tests/api/test_pentest.py::TestAccessControlPentest::test_checkout_page_is_not_accessible_with_empty_cart
+INFO     ai_automation.pentest:test_pentest.py:483 Step: GET checkout/checkout with empty cart session
+INFO     ai_automation.pentest:test_pentest.py:489 Step: Assert Billing Details and payment form absent for empty cart
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_checkout_page_is_not_accessible_with_empty_cart:conftest.py:322 END   tests/api/test_pentest.py::TestAccessControlPentest::test_checkout_page_is_not_accessible_with_empty_cart

@@ -1,0 +1,2 @@
+2026-07-03 13:15:14,169 | INFO     | ai_automation.test_email_max_length | START tests/unit/test_factories.py::TestRegistrationFieldLimits::test_email_max_length
+2026-07-03 13:15:14,173 | INFO     | ai_automation.test_email_max_length | END   tests/unit/test_factories.py::TestRegistrationFieldLimits::test_email_max_length

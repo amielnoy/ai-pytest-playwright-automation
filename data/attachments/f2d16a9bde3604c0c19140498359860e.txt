@@ -1,0 +1,2 @@
+INFO     ai_automation.test_search_iphone:conftest.py:320 START tests/unit/test_opencart_fallback.py::TestSearchProducts::test_search_iphone
+INFO     ai_automation.test_search_iphone:conftest.py:322 END   tests/unit/test_opencart_fallback.py::TestSearchProducts::test_search_iphone

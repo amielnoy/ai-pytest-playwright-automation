@@ -1,0 +1,2 @@
+INFO     ai_automation.test_has_user_agent:conftest.py:320 START tests/unit/test_api_client.py::TestBuildSession::test_has_user_agent
+INFO     ai_automation.test_has_user_agent:conftest.py:322 END   tests/unit/test_api_client.py::TestBuildSession::test_has_user_agent

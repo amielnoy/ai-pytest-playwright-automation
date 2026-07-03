@@ -1,0 +1,11 @@
+INFO     ai_automation.test_cart_keeps_multiple_products_in_same_session:conftest.py:320 START tests/api/test_api_integrations.py::TestCartApiIntegration::test_cart_keeps_multiple_products_in_same_session
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_cart_keeps_multiple_products_in_same_session:conftest.py:322 END   tests/api/test_api_integrations.py::TestCartApiIntegration::test_cart_keeps_multiple_products_in_same_session

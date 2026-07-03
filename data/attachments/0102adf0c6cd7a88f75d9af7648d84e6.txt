@@ -1,0 +1,2 @@
+INFO     ai_automation.test_iphone_product_detail_has_essentials:conftest.py:320 START tests/web-ui/test_system_coverage.py::TestProductDetailCoverage::test_iphone_product_detail_has_essentials@web-ui
+INFO     ai_automation.test_iphone_product_detail_has_essentials:conftest.py:322 END   tests/web-ui/test_system_coverage.py::TestProductDetailCoverage::test_iphone_product_detail_has_essentials@web-ui

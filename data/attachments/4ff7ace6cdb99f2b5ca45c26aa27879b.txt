@@ -1,0 +1,7 @@
+INFO     ai_automation.test_search_returns_positive_prices_inline[MacBook]:conftest.py:320 START tests/api/test_api_data_driven.py::TestSearchApiInline::test_search_returns_positive_prices_inline[MacBook]
+INFO     ai_automation.api.data_driven:logger.py:131 Annotated call: TestSearchApiInline.test_search_returns_positive_prices_inline(query='MacBook')
+INFO     ai_automation.api.data_driven:test_api_data_driven.py:101 Step: search for 'MacBook'
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.api.data_driven:test_api_data_driven.py:107 Prices for 'MacBook': [602.0, 2000.0]
+INFO     ai_automation.test_search_returns_positive_prices_inline[MacBook]:conftest.py:322 END   tests/api/test_api_data_driven.py::TestSearchApiInline::test_search_returns_positive_prices_inline[MacBook]

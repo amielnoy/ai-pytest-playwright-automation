@@ -1,0 +1,4 @@
+INFO     ai_automation.test_report_test_status_returns_error_message_when_dir_does_not_exist:conftest.py:320 START tests/unit/test_report_test_status.py::test_report_test_status_returns_error_message_when_dir_does_not_exist
+INFO     ai_automation.unit.test_report_test_status:test_report_test_status.py:234 Step: Call report_test_status with missing allure_dir=/tmp/pytest-of-runner/pytest-0/popen-gw2/test_report_test_status_return0/no-such-dir
+INFO     ai_automation.unit.test_report_test_status:test_report_test_status.py:238 Step: Assert '❌' present in error response
+INFO     ai_automation.test_report_test_status_returns_error_message_when_dir_does_not_exist:conftest.py:322 END   tests/unit/test_report_test_status.py::test_report_test_status_returns_error_message_when_dir_does_not_exist

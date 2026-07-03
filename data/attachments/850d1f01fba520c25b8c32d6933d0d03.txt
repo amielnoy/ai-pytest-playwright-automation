@@ -1,0 +1,6 @@
+2026-07-03 13:15:09,901 | INFO     | ai_automation.test_search_page_exposes_refine_search_controls | START tests/api/test_api_integrations.py::TestSearchApiIntegration::test_search_page_exposes_refine_search_controls
+2026-07-03 13:15:09,905 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:09,905 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:09,906 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:09,906 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:09,911 | INFO     | ai_automation.test_search_page_exposes_refine_search_controls | END   tests/api/test_api_integrations.py::TestSearchApiIntegration::test_search_page_exposes_refine_search_controls

@@ -1,0 +1,7 @@
+2026-07-03 13:15:09,975 | INFO     | ai_automation.test_cart_add_response_total_matches_cart_page_total | START tests/api/test_api_integrations.py::TestCartApiIntegration::test_cart_add_response_total_matches_cart_page_total
+2026-07-03 13:15:09,978 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:09,978 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:09,978 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:09,980 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:09,980 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:09,982 | INFO     | ai_automation.test_cart_add_response_total_matches_cart_page_total | END   tests/api/test_api_integrations.py::TestCartApiIntegration::test_cart_add_response_total_matches_cart_page_total

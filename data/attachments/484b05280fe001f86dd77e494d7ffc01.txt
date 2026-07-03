@@ -1,0 +1,2 @@
+INFO     ai_automation.test_register_page_delegates_full_registration_flow_to_form:conftest.py:320 START tests/unit/test_page_objects.py::test_register_page_delegates_full_registration_flow_to_form
+INFO     ai_automation.test_register_page_delegates_full_registration_flow_to_form:conftest.py:322 END   tests/unit/test_page_objects.py::test_register_page_delegates_full_registration_flow_to_form

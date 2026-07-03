@@ -1,0 +1,5 @@
+2026-07-03 13:15:12,416 | INFO     | ai_automation.test_protected_route_requires_auth_inline[account/edit-Your Personal Details-Returning Customer] | START tests/api/test_pentest_data_driven.py::TestAccessControlInline::test_protected_route_requires_auth_inline[account/edit-Your Personal Details-Returning Customer]
+2026-07-03 13:15:12,418 | INFO     | ai_automation.pentest.data_driven | Step: unauthenticated GET account/edit
+2026-07-03 13:15:12,418 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:12,418 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:12,420 | INFO     | ai_automation.test_protected_route_requires_auth_inline[account/edit-Your Personal Details-Returning Customer] | END   tests/api/test_pentest_data_driven.py::TestAccessControlInline::test_protected_route_requires_auth_inline[account/edit-Your Personal Details-Returning Customer]

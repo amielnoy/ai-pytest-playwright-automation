@@ -1,0 +1,4 @@
+INFO     ai_automation.test_independent_sessions_receive_distinct_ocsessid:conftest.py:320 START tests/api/test_security_api.py::TestSessionSecurity::test_independent_sessions_receive_distinct_ocsessid
+INFO     ai_automation.security.api:test_security_api.py:220 Step: Create session_a and session_b, GET https://tutorialsninja.com/demo with each
+INFO     ai_automation.security.api:test_security_api.py:227 Step: Compare OCSESSID values across sessions
+INFO     ai_automation.test_independent_sessions_receive_distinct_ocsessid:conftest.py:322 END   tests/api/test_security_api.py::TestSessionSecurity::test_independent_sessions_receive_distinct_ocsessid

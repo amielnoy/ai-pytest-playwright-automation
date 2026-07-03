@@ -1,0 +1,2 @@
+2026-07-03 13:15:13,775 | INFO     | ai_automation.test_newsletter_defaults_false | START tests/unit/test_factories.py::TestMakeRegistration::test_newsletter_defaults_false
+2026-07-03 13:15:13,776 | INFO     | ai_automation.test_newsletter_defaults_false | END   tests/unit/test_factories.py::TestMakeRegistration::test_newsletter_defaults_false

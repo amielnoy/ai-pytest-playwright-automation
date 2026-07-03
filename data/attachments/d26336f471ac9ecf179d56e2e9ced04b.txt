@@ -1,0 +1,2 @@
+INFO     ai_automation.test_exactly_ten_digits:conftest.py:320 START tests/unit/test_factories.py::TestTelephoneFormat::test_exactly_ten_digits
+INFO     ai_automation.test_exactly_ten_digits:conftest.py:322 END   tests/unit/test_factories.py::TestTelephoneFormat::test_exactly_ten_digits

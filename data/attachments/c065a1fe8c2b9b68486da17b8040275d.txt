@@ -1,0 +1,2 @@
+2026-07-03 13:15:15,511 | INFO     | ai_automation.test_cart_page_delegates_to_summary_component | START tests/unit/test_page_objects.py::test_cart_page_delegates_to_summary_component
+2026-07-03 13:15:15,516 | INFO     | ai_automation.test_cart_page_delegates_to_summary_component | END   tests/unit/test_page_objects.py::test_cart_page_delegates_to_summary_component

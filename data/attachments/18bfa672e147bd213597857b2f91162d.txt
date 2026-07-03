@@ -1,0 +1,2 @@
+INFO     ai_automation.test_custom_products_pool:conftest.py:320 START tests/unit/test_factories.py::TestMakeSearch::test_custom_products_pool
+INFO     ai_automation.test_custom_products_pool:conftest.py:322 END   tests/unit/test_factories.py::TestMakeSearch::test_custom_products_pool

@@ -1,0 +1,2 @@
+INFO     ai_automation.test_max_total_exceeds_item_price:conftest.py:320 START tests/unit/test_factories.py::TestMakeCartScenario::test_max_total_exceeds_item_price
+INFO     ai_automation.test_max_total_exceeds_item_price:conftest.py:322 END   tests/unit/test_factories.py::TestMakeCartScenario::test_max_total_exceeds_item_price

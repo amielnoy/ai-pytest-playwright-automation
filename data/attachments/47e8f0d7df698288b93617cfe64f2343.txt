@@ -1,0 +1,2 @@
+INFO     ai_automation.test_alert_component_returns_banner_field_success_and_waits:conftest.py:320 START tests/unit/test_page_objects.py::test_alert_component_returns_banner_field_success_and_waits
+INFO     ai_automation.test_alert_component_returns_banner_field_success_and_waits:conftest.py:322 END   tests/unit/test_page_objects.py::test_alert_component_returns_banner_field_success_and_waits

@@ -1,0 +1,2 @@
+INFO     ai_automation.test_login_empty_credentials_shows_warning:conftest.py:320 START tests/web-ui/test_system_coverage.py::TestNavigationCoverage::test_login_empty_credentials_shows_warning@web-ui
+INFO     ai_automation.test_login_empty_credentials_shows_warning:conftest.py:322 END   tests/web-ui/test_system_coverage.py::TestNavigationCoverage::test_login_empty_credentials_shows_warning@web-ui

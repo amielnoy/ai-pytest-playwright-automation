@@ -1,0 +1,2 @@
+INFO     ai_automation.test_max_price_in_range:conftest.py:320 START tests/unit/test_factories.py::TestMakeSearch::test_max_price_in_range
+INFO     ai_automation.test_max_price_in_range:conftest.py:322 END   tests/unit/test_factories.py::TestMakeSearch::test_max_price_in_range

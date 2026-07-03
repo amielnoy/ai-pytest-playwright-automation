@@ -1,0 +1,2 @@
+2026-07-03 13:15:13,693 | INFO     | ai_automation.test_limit_respected | START tests/unit/test_api_client.py::TestCreateCart::test_limit_respected
+2026-07-03 13:15:13,695 | INFO     | ai_automation.test_limit_respected | END   tests/unit/test_api_client.py::TestCreateCart::test_limit_respected

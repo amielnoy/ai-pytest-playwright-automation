@@ -1,0 +1,2 @@
+INFO     ai_automation.test_search_price_filter_excludes_expensive:conftest.py:320 START tests/web-ui/test_search_under_price.py::TestSearchUnderPrice::test_search_price_filter_excludes_expensive@web-ui
+INFO     ai_automation.test_search_price_filter_excludes_expensive:conftest.py:322 END   tests/web-ui/test_search_under_price.py::TestSearchUnderPrice::test_search_price_filter_excludes_expensive@web-ui

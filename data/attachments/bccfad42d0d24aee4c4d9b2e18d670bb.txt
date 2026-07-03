@@ -1,0 +1,11 @@
+2026-07-03 13:15:11,761 | INFO     | ai_automation.test_command_injection_in_search_produces_no_os_output | START tests/api/test_pentest.py::TestInjectionPentest::test_command_injection_in_search_produces_no_os_output
+2026-07-03 13:15:11,762 | INFO     | ai_automation.pentest | Step: GET search with command injection payload: 'MacBook$(whoami)'
+2026-07-03 13:15:11,767 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:11,767 | INFO     | ai_automation.pentest | Step: Assert no uid=, root:, /bin/bash in response body
+2026-07-03 13:15:11,768 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:11,768 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:11,768 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:11,769 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:11,769 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:11,769 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:11,771 | INFO     | ai_automation.test_command_injection_in_search_produces_no_os_output | END   tests/api/test_pentest.py::TestInjectionPentest::test_command_injection_in_search_produces_no_os_output

@@ -1,0 +1,2 @@
+INFO     ai_automation.test_ipod_storage:conftest.py:320 START tests/web-ui/test_ipod_storage.py::TestIpoDStorage::test_ipod_storage@web-ui
+INFO     ai_automation.test_ipod_storage:conftest.py:322 END   tests/web-ui/test_ipod_storage.py::TestIpoDStorage::test_ipod_storage@web-ui

@@ -1,0 +1,2 @@
+2026-07-03 13:15:16,323 | INFO     | ai_automation.test_events_list_forwarded | START tests/unit/test_self_healing.py::TestHealingLocatorFactory::test_events_list_forwarded
+2026-07-03 13:15:16,325 | INFO     | ai_automation.test_events_list_forwarded | END   tests/unit/test_self_healing.py::TestHealingLocatorFactory::test_events_list_forwarded

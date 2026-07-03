@@ -1,0 +1,2 @@
+INFO     ai_automation.test_override_max_price_recalculates_max_total:conftest.py:320 START tests/unit/test_factories.py::TestCartScenarioMath::test_override_max_price_recalculates_max_total
+INFO     ai_automation.test_override_max_price_recalculates_max_total:conftest.py:322 END   tests/unit/test_factories.py::TestCartScenarioMath::test_override_max_price_recalculates_max_total

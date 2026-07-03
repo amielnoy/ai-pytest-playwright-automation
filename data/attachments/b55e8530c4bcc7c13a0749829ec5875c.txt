@@ -1,0 +1,6 @@
+INFO     ai_automation.test_sql_injection_in_search_returns_200_without_db_error:conftest.py:320 START tests/api/test_security_api.py::TestSearchSecurity::test_sql_injection_in_search_returns_200_without_db_error
+INFO     ai_automation.security.api:test_security_api.py:42 Step: GET search with SQL injection payload: "' OR '1'='1'--"
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.security.api:test_security_api.py:46 Step: Assert 200 and no DB error markers
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_sql_injection_in_search_returns_200_without_db_error:conftest.py:322 END   tests/api/test_security_api.py::TestSearchSecurity::test_sql_injection_in_search_returns_200_without_db_error

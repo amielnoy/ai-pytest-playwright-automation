@@ -1,0 +1,2 @@
+2026-07-03 13:15:13,611 | INFO     | ai_automation.test_equality | START tests/unit/test_api_client.py::TestApiProduct::test_equality
+2026-07-03 13:15:13,612 | INFO     | ai_automation.test_equality | END   tests/unit/test_api_client.py::TestApiProduct::test_equality

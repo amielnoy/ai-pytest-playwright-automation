@@ -1,0 +1,2 @@
+2026-07-03 13:15:14,274 | INFO     | ai_automation.test_no_shared_state_registration | START tests/unit/test_factories.py::TestFactoryIsolation::test_no_shared_state_registration
+2026-07-03 13:15:14,283 | INFO     | ai_automation.test_no_shared_state_registration | END   tests/unit/test_factories.py::TestFactoryIsolation::test_no_shared_state_registration

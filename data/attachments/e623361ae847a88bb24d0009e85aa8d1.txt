@@ -1,0 +1,8 @@
+2026-07-03 13:15:09,736 | INFO     | ai_automation.test_search_returns_expected_product_json[Samsung] | START tests/api/test_api_data_driven.py::TestSearchApiJson::test_search_returns_expected_product_json[Samsung]
+2026-07-03 13:15:09,738 | INFO     | ai_automation.api.data_driven | Annotated call: TestSearchApiJson.test_search_returns_expected_product_json(query='Samsung', expected_product='Samsung', min_cards=1)
+2026-07-03 13:15:09,738 | INFO     | ai_automation.api.data_driven | Step: JSON-driven search for 'Samsung' (min_cards=1)
+2026-07-03 13:15:09,739 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:09,740 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:09,740 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:09,740 | INFO     | ai_automation.api.data_driven | Cards: 1, names: ['Samsung SyncMaster 941BW']
+2026-07-03 13:15:09,742 | INFO     | ai_automation.test_search_returns_expected_product_json[Samsung] | END   tests/api/test_api_data_driven.py::TestSearchApiJson::test_search_returns_expected_product_json[Samsung]

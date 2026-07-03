@@ -1,0 +1,4 @@
+2026-07-03 13:15:14,432 | INFO     | ai_automation.test_health_returns_ok | START tests/unit/test_fastapi_app.py::test_health_returns_ok
+2026-07-03 13:15:14,433 | DEBUG    | asyncio | Using selector: EpollSelector
+2026-07-03 13:15:14,437 | INFO     | httpx | HTTP Request: GET http://testserver/health "HTTP/1.1 200 OK"
+2026-07-03 13:15:14,438 | INFO     | ai_automation.test_health_returns_ok | END   tests/unit/test_fastapi_app.py::test_health_returns_ok

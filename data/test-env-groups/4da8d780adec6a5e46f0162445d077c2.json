@@ -1,1 +1,1 @@
-{"id":"4da8d780adec6a5e46f0162445d077c2","fullName":"tests.web-ui.test_sanity.TestSanity#test_home_page_header_controls","name":"Home page exposes the critical header controls","status":"failed","testResultsByEnv":{"default":"a7eba97f388765c3e8d6eac9b8bab3dd"}}
+{"id":"4da8d780adec6a5e46f0162445d077c2","fullName":"tests.web-ui.test_sanity.TestSanity#test_home_page_header_controls","name":"Home page exposes the critical header controls","status":"passed","testResultsByEnv":{"default":"237111adb24d694c59cd7ffb3e8ddcb7"}}

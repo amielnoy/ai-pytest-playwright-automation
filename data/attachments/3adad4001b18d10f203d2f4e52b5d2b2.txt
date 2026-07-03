@@ -1,0 +1,10 @@
+2026-07-03 13:15:09,652 | INFO     | ai_automation.test_cart_add_from_search_inline[Canon] | START tests/api/test_api_data_driven.py::TestCartApiInline::test_cart_add_from_search_inline[Canon]
+2026-07-03 13:15:09,654 | INFO     | ai_automation.api.data_driven | Annotated call: TestCartApiInline.test_cart_add_from_search_inline(query='Canon')
+2026-07-03 13:15:09,655 | INFO     | ai_automation.api.data_driven | Step: find product for 'Canon'
+2026-07-03 13:15:09,655 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:09,656 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:09,656 | INFO     | ai_automation.api.data_driven | Step: add product 30 to cart
+2026-07-03 13:15:09,657 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:09,662 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:09,662 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:09,665 | INFO     | ai_automation.test_cart_add_from_search_inline[Canon] | END   tests/api/test_api_data_driven.py::TestCartApiInline::test_cart_add_from_search_inline[Canon]

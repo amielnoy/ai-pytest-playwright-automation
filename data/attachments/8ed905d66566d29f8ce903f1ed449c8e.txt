@@ -1,0 +1,3 @@
+2026-07-03 13:15:14,868 | INFO     | ai_automation.test_log_annotated_call_logs_primitive_annotated_arguments | START tests/unit/test_logger.py::test_log_annotated_call_logs_primitive_annotated_arguments
+2026-07-03 13:15:14,869 | INFO     | test_annotated_call | Annotated call: test_log_annotated_call_logs_primitive_annotated_arguments.<locals>.sample(query='MacBook', max_price=2000.0)
+2026-07-03 13:15:14,870 | INFO     | ai_automation.test_log_annotated_call_logs_primitive_annotated_arguments | END   tests/unit/test_logger.py::test_log_annotated_call_logs_primitive_annotated_arguments

@@ -1,0 +1,5 @@
+2026-07-03 13:15:15,901 | INFO     | ai_automation.test_terminal_report_contains_status_icons_for_all_non_zero_statuses | START tests/unit/test_report_test_status.py::test_terminal_report_contains_status_icons_for_all_non_zero_statuses
+2026-07-03 13:15:15,903 | INFO     | ai_automation.unit.test_report_test_status | Step: Call _terminal_report on mixed classified results
+2026-07-03 13:15:15,907 | INFO     | ai_automation.unit.test_report_test_status | Step: Assert ✅ ❌ ⚠️ ⏭️ 🔁 all present in terminal output
+2026-07-03 13:15:15,907 | INFO     | ai_automation.unit.test_report_test_status | Step: Assert PASSED, FAILED, BROKEN, SKIPPED, FLAKY appear in report
+2026-07-03 13:15:15,908 | INFO     | ai_automation.test_terminal_report_contains_status_icons_for_all_non_zero_statuses | END   tests/unit/test_report_test_status.py::test_terminal_report_contains_status_icons_for_all_non_zero_statuses

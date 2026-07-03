@@ -1,0 +1,2 @@
+2026-07-03 13:16:40,549 | INFO     | ai_automation.test_account_menu_opens_login_page | START tests/web-ui/test_navigation_and_empty_states.py::TestNavigationAndEmptyStates::test_account_menu_opens_login_page@web-ui
+2026-07-03 13:16:43,749 | INFO     | ai_automation.test_account_menu_opens_login_page | END   tests/web-ui/test_navigation_and_empty_states.py::TestNavigationAndEmptyStates::test_account_menu_opens_login_page@web-ui

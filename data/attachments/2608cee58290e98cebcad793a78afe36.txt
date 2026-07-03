@@ -1,0 +1,2 @@
+2026-07-03 13:15:13,489 | INFO     | ai_automation.test_url_encodes_spaces | START tests/unit/test_api_client.py::TestSearchUrl::test_url_encodes_spaces
+2026-07-03 13:15:13,489 | INFO     | ai_automation.test_url_encodes_spaces | END   tests/unit/test_api_client.py::TestSearchUrl::test_url_encodes_spaces

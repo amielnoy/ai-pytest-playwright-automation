@@ -1,0 +1,2 @@
+INFO     ai_automation.test_primary_returned_as_last_resort_when_all_fail:conftest.py:320 START tests/unit/test_self_healing.py::TestSelfHealingResolution::test_primary_returned_as_last_resort_when_all_fail
+INFO     ai_automation.test_primary_returned_as_last_resort_when_all_fail:conftest.py:322 END   tests/unit/test_self_healing.py::TestSelfHealingResolution::test_primary_returned_as_last_resort_when_all_fail

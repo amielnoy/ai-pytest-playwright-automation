@@ -1,0 +1,2 @@
+2026-07-03 13:15:15,719 | INFO     | ai_automation.test_nav_bar_search_currency_login_register_logout_and_status | START tests/unit/test_page_objects.py::test_nav_bar_search_currency_login_register_logout_and_status
+2026-07-03 13:15:15,819 | INFO     | ai_automation.test_nav_bar_search_currency_login_register_logout_and_status | END   tests/unit/test_page_objects.py::test_nav_bar_search_currency_login_register_logout_and_status

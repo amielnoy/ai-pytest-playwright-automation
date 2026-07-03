@@ -1,1 +1,1 @@
-{"id":"313cb172757355e9ddf25b8bf04bba83","fullName":"tests.api.test_api_data_driven.TestSearchApiJson#test_search_prices_within_budget_json","name":"Search [iPhone] prices within max 1000.0 – JSON","status":"passed","testResultsByEnv":{"default":"e696fb2ecfbbfd8353ae935a8634a057"}}
+{"id":"313cb172757355e9ddf25b8bf04bba83","fullName":"tests.api.test_api_data_driven.TestSearchApiJson#test_search_prices_within_budget_json","name":"Search [Canon] prices within max 500.0 – JSON","status":"passed","testResultsByEnv":{"default":"d948f4ac45be72821345abb0e054d489"}}

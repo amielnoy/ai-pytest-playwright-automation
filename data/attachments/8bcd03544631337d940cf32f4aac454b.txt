@@ -1,0 +1,2 @@
+INFO     ai_automation.test_har_via_tracing_api:conftest.py:320 START tests/web-ui/test_playwright_v160_features.py::TestHARRecordingViaTracing::test_har_via_tracing_api@web-ui
+INFO     ai_automation.test_har_via_tracing_api:conftest.py:322 END   tests/web-ui/test_playwright_v160_features.py::TestHARRecordingViaTracing::test_har_via_tracing_api@web-ui

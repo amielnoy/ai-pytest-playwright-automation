@@ -1,0 +1,11 @@
+INFO:     127.0.0.1:54130 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54138 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54124 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54158 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54150 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54166 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54170 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54180 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54184 - "POST /chat HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:54186 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54190 - "POST /chat HTTP/1.1" 200 OK

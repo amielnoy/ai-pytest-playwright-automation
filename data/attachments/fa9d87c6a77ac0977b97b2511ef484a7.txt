@@ -1,0 +1,4 @@
+INFO     ai_automation.test_search_no_results_contract:conftest.py:320 START tests/contract/test_contracts.py::TestSearchContract::test_search_no_results_contract
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_search_no_results_contract:conftest.py:322 END   tests/contract/test_contracts.py::TestSearchContract::test_search_no_results_contract

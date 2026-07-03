@@ -1,0 +1,2 @@
+2026-07-03 13:15:14,935 | INFO     | ai_automation.test_case_insensitive | START tests/unit/test_opencart_fallback.py::TestSearchProducts::test_case_insensitive
+2026-07-03 13:15:14,936 | INFO     | ai_automation.test_case_insensitive | END   tests/unit/test_opencart_fallback.py::TestSearchProducts::test_case_insensitive

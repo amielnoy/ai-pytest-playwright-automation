@@ -1,0 +1,2 @@
+2026-07-03 13:15:14,909 | INFO     | ai_automation.test_search_iphone | START tests/unit/test_opencart_fallback.py::TestSearchProducts::test_search_iphone
+2026-07-03 13:15:14,910 | INFO     | ai_automation.test_search_iphone | END   tests/unit/test_opencart_fallback.py::TestSearchProducts::test_search_iphone

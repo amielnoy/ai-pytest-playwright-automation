@@ -1,0 +1,2 @@
+INFO     ai_automation.test_skips_card_without_cart_add:conftest.py:320 START tests/unit/test_api_client.py::TestParseCards::test_skips_card_without_cart_add
+INFO     ai_automation.test_skips_card_without_cart_add:conftest.py:322 END   tests/unit/test_api_client.py::TestParseCards::test_skips_card_without_cart_add

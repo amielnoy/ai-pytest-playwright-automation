@@ -1,0 +1,2 @@
+2026-07-03 13:15:15,633 | INFO     | ai_automation.test_search_results_view_sort_and_cards_helpers | START tests/unit/test_page_objects.py::test_search_results_view_sort_and_cards_helpers
+2026-07-03 13:15:15,647 | INFO     | ai_automation.test_search_results_view_sort_and_cards_helpers | END   tests/unit/test_page_objects.py::test_search_results_view_sort_and_cards_helpers

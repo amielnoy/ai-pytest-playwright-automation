@@ -1,0 +1,2 @@
+2026-07-03 13:15:13,677 | INFO     | ai_automation.test_calls_search_then_cart_add | START tests/unit/test_api_client.py::TestCreateCart::test_calls_search_then_cart_add
+2026-07-03 13:15:13,679 | INFO     | ai_automation.test_calls_search_then_cart_add | END   tests/unit/test_api_client.py::TestCreateCart::test_calls_search_then_cart_add

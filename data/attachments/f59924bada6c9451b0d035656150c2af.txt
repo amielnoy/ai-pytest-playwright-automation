@@ -1,0 +1,2 @@
+2026-07-03 13:15:13,700 | INFO     | ai_automation.test_all_fields_present | START tests/unit/test_factories.py::TestMakeRegistration::test_all_fields_present
+2026-07-03 13:15:13,701 | INFO     | ai_automation.test_all_fields_present | END   tests/unit/test_factories.py::TestMakeRegistration::test_all_fields_present

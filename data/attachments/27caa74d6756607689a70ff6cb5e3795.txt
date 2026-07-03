@@ -1,0 +1,2 @@
+2026-07-03 13:15:13,554 | INFO     | ai_automation.test_no_products | START tests/unit/test_api_client.py::TestParseCards::test_no_products
+2026-07-03 13:15:13,555 | INFO     | ai_automation.test_no_products | END   tests/unit/test_api_client.py::TestParseCards::test_no_products

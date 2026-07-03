@@ -1,0 +1,2 @@
+INFO     ai_automation.test_resolved_property:conftest.py:320 START tests/unit/test_self_healing.py::TestSelfHealingProxies::test_resolved_property
+INFO     ai_automation.test_resolved_property:conftest.py:322 END   tests/unit/test_self_healing.py::TestSelfHealingProxies::test_resolved_property

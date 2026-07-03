@@ -1,0 +1,5 @@
+2026-07-03 13:15:12,626 | INFO     | ai_automation.test_injection_payload_in_search_json[cmd_backtick] | START tests/api/test_pentest_data_driven.py::TestInjectionJson::test_injection_payload_in_search_json[cmd_backtick]
+2026-07-03 13:15:12,631 | INFO     | ai_automation.pentest.data_driven | Step: JSON injection search category=Command Injection payload='MacBook`id`'
+2026-07-03 13:15:12,636 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:12,637 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 13:15:12,640 | INFO     | ai_automation.test_injection_payload_in_search_json[cmd_backtick] | END   tests/api/test_pentest_data_driven.py::TestInjectionJson::test_injection_payload_in_search_json[cmd_backtick]
