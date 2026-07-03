@@ -18,14 +18,20 @@ UI and API test automation for the TutorialsNinja demo store, built with:
 
 This repository also includes a 30-session automation QA course plus a Git basics bridge under [`course/`](course/README.md). Start there for the learning path, session order, exercise workflow, and guidance on when to use the teaching scaffold versus the production framework. For a visual browser overview, open [`course_overview.html`](course_overview.html).
 
+A shorter, three-session **AI Testing Learning Series** lives under [`docs/learning/`](docs/learning/README.md), and a beginner Playwright walkthrough is in [`docs/tutorials/`](docs/tutorials/ui-automation-playwright-for-beginners.md).
+
+The **AI Testing Academy** landing pages present the framework with live in-browser AI agents (a QA-Automation resume evaluator and an interview-prep helper). Open [`ai-testing-academy.html`](ai-testing-academy.html) (Hebrew) or [`ai-testing-academy-en.html`](ai-testing-academy-en.html) (English). Short explainer clips for the site are kept in [`videos/`](videos/README.md).
+
 ## Project Layout
 
 ```text
 agents/       Agent runners and planning helpers
 config/       Runtime configuration
 data/         Test data, parametrize corpora, and local-only secrets
+docs/         OpenAPI spec, learning sessions, and tutorials
 flows/        Business-level UI/API workflows
 mcp_servers/  Local MCP tools, including the test reporter
+notebooks/    Jupyter notebooks for log and data analysis
 pages/        Playwright page objects and components
 scripts/      Test, Docker, Compose, and report helper scripts
 server/       FastAPI automation service
@@ -33,7 +39,9 @@ services/     API service clients
 stds/         Test standards and generated page snapshot source docs
 tests/        API, contract, unit, and web UI tests
 utils/        Shared utilities
+assets/       Logos and shared static assets
 course/       Training material and teaching examples
+videos/       Explainer video clips for the learning site
 artifacts/    Generated or captured artifacts kept out of core code paths
 monitoring/   Prometheus and Grafana configuration
 ```
@@ -347,6 +355,15 @@ LOGGER = get_logger("api.data_driven")
 def test_search(search_service, query: str):
     ...
 # logs: Annotated call: test_search(query='MacBook')
+```
+
+### Analyzing logs with pandas
+
+`notebooks/load_logs_with_pandas.ipynb` loads `logs/automation.log` into a pandas DataFrame and produces quick summaries (records per level, per logger, and over time). Run a suite first so the log file exists, then open the notebook:
+
+```bash
+pytest tests/unit -q
+jupyter lab notebooks/load_logs_with_pandas.ipynb
 ```
 
 ## Monitoring

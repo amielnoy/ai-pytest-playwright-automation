@@ -23,3 +23,8 @@ pytest tests/unit -q        # should pass with no browser or network
 ## Format
 
 Each session: ~20 min instructor walkthrough, ~50 min guided hands-on, ~15 min exercise, ~5 min wrap-up. Every code reference points at a real file in this repo — open the files live rather than using slides.
+
+## Related material
+
+- **AI Testing Academy** landing pages with live in-browser AI agents (a QA-Automation resume evaluator and an interview-prep helper): [`../../ai-testing-academy.html`](../../ai-testing-academy.html) (Hebrew) and [`../../ai-testing-academy-en.html`](../../ai-testing-academy-en.html) (English). Short explainer clips live in [`../../videos/`](../../videos/README.md).
+- **Log analysis notebook** — [`../../notebooks/load_logs_with_pandas.ipynb`](../../notebooks/load_logs_with_pandas.ipynb) loads `logs/automation.log` into pandas for quick summaries (pairs well with Session 1's first test run).

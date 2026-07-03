@@ -12,7 +12,8 @@
     "funcargs", "teardowns", "makereport",
     "fastapi", "uvicorn",
     "cadvisor", "nodeexporter", "procfs", "sysfs", "diskstats", "netdev", "meminfo",
-    "pushgateway", "instrumentator"
+    "pushgateway", "instrumentator",
+    "ipynb", "jupyter", "pandas", "dataframe"
   ],
   "ignorePaths": [
     "architecture.html",

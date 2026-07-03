@@ -209,7 +209,7 @@ def test_search(search_service, query: str):
 # logs: Annotated call: test_search(query='MacBook')
 ```
 
-`logs/` is generated and git-ignored.
+`logs/` is generated and git-ignored. `notebooks/load_logs_with_pandas.ipynb` loads `logs/automation.log` into a pandas DataFrame for quick analysis (counts per level/logger, activity over time); run a suite first so the log file exists.
 
 ### API Service Layer
 
