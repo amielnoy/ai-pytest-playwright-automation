@@ -1,22 +1,37 @@
 /* A curated bank of real, commonly-asked QA-Automation interview questions,
-   grouped by the same five stages the interview agent (Agent 2) runs. Rendered as
-   a collapsible section so candidates can read the questions and then practice each
-   stage live with the agent. Bilingual; built in JS so the big locale HTML fragments
-   stay untouched. (A static client-only site can't scrape at runtime — CORS — and
-   there's no reliable public interview-question API; see README for a build-time
-   generator if you want this refreshed from public sources.) */
-import { $ } from './dom.js';
-import { esc } from './dom.js';
+   grouped by the same five stages the interview agent (Agent 2) runs — plus an
+   optional "Enrich with AI" control that asks Gemini (the default provider) for the
+   most-searched interview questions for a role, each with a concise model answer.
+   Rendered as a collapsible section; built in JS so the big locale HTML fragments
+   stay untouched. Bilingual. */
+import { $, esc } from './dom.js';
 import { activeLang } from './i18n.js';
+import { callGeminiGrounded, extractJSON } from './providers.js';
+
+/* Seed keywords always mixed into the grounded search, on top of the entered role. */
+const SEED_KEYWORDS = 'AI dev, AI test automation, Playwright, pytest, Page Object Model, flaky tests, CI/CD, Docker, API testing, SDET, AI/LLM testing';
 
 interface Stage { icon: string; title: string; items: string[]; }
-interface Bank { nav: string; title: string; lead: string; note: string; stages: Stage[]; }
+interface Bank {
+  nav: string; title: string; lead: string; note: string; stages: Stage[];
+  enrichCta: string; enrichPlaceholder: string; enrichHint: string;
+  enriching: string; enrichHeading: string; roleDefault: string; langName: string;
+}
+/* One enriched Q&A item returned by the model. */
+interface AiQA { stage?: string; question: string; answer?: string; keywords?: string[]; }
 
 const EN: Bank = {
   nav: '❓ Interview Questions',
   title: '❓ Real Interview Questions',
   lead: 'The questions QA-Automation candidates actually get, grouped by the five interview stages. Read them, prepare your STAR answers, then run a live mock with the agent above.',
   note: '💡 Practice these out loud with Agent 2 — turn on 🔊 Voice for a hands-free mock interview.',
+  enrichCta: '✨ Enrich with AI',
+  enrichPlaceholder: 'Role or keywords (e.g. SDET, Playwright, CI/CD)',
+  enrichHint: 'Uses Gemini with live Google Search to pull the QA / AI-test-automation interview questions most searched in the last 3 months — each with a model answer. Needs a Gemini key in the Connection Setup above.',
+  enriching: '✨ Enriching…',
+  enrichHeading: '✨ AI-enriched Q&A — trending in the last 3 months',
+  roleDefault: 'QA Automation Engineer',
+  langName: 'English',
   stages: [
     { icon: '🧭', title: 'Stage 1 — HR & Motivation', items: [
       'Walk me through your background and why you moved into test automation.',
@@ -63,6 +78,13 @@ const HE: Bank = {
   title: '❓ שאלות ראיון אמיתיות',
   lead: 'השאלות שמועמדי QA Automation באמת נשאלים, מחולקות לחמשת שלבי הראיון. קראו, הכינו תשובות בשיטת STAR, ואז הריצו סימולציה חיה עם הסוכן למעלה.',
   note: '💡 תרגלו בקול רם עם סוכן 2 — הפעילו 🔊 קול לראיון סימולציה ללא ידיים.',
+  enrichCta: '✨ העשר עם AI',
+  enrichPlaceholder: 'תפקיד או מילות מפתח (למשל SDET, Playwright, CI/CD)',
+  enrichHint: 'משתמש ב-Gemini עם חיפוש Google חי כדי להביא את שאלות הראיון (QA ואוטומציית בדיקות מבוססת AI) המחופשות ביותר ב-3 החודשים האחרונים — כל אחת עם תשובת מודל. דורש מפתח Gemini באזור החיבור למעלה.',
+  enriching: '✨ מעשיר…',
+  enrichHeading: '✨ שו"ת בהעשרת AI — מגמות 3 החודשים האחרונים',
+  roleDefault: 'מהנדס/ת אוטומציית QA',
+  langName: 'Hebrew',
   stages: [
     { icon: '🧭', title: 'שלב 1 — משאבי אנוש ומוטיבציה', items: [
       'ספר על הרקע שלך ולמה עברת לאוטומציית בדיקות.',
@@ -104,12 +126,59 @@ const HE: Bank = {
   ]
 };
 
+const SYSTEM = 'You are a senior QA-Automation interviewer and career coach. Return ONLY valid JSON, no prose.';
+
+/* Ask the AI for the most-searched interview questions (with model answers) for a role. */
+async function enrich(bank: Bank): Promise<void> {
+  const btn = $('qaEnrichBtn');
+  const err = $('qaEnrichErr');
+  const out = $('qaEnriched');
+  err.textContent = '';
+  const role = $('qaKeywords').value.trim() || bank.roleDefault;
+  btn.disabled = true; btn.textContent = bank.enriching;
+  try {
+    const user =
+      'You have Google Search — use it. Find the QA / test-automation interview questions that have been ' +
+      'most commonly asked and searched in the LAST 3 MONTHS, seeding the search with these keywords: ' +
+      `${SEED_KEYWORDS}, ${role}. Prioritise current, trending topics — especially AI in development and ` +
+      'test automation. Return the 8 highest-value questions a candidate should prepare now, each with a ' +
+      'concise 2-4 sentence model answer. ' +
+      'Return ONLY JSON: {"questions":[{"stage":"...","question":"...","answer":"...","keywords":["..."]}]}. ' +
+      `Write every question and answer in ${bank.langName}.`;
+    const reply = await callGeminiGrounded(SYSTEM, user, 3000);
+    const items: AiQA[] = (extractJSON(reply).questions || []);
+    out.innerHTML =
+      `<h3>${esc(bank.enrichHeading)} — ${esc(role)}</h3>` +
+      items.map(q =>
+        `<details class="agent-box"><summary><h3 style="display:inline;margin:0;">${esc(q.question)}</h3></summary>` +
+        `<p style="margin-top:12px;">${esc(q.answer || '')}</p>` +
+        `<div>${(q.keywords || []).map(k => `<span class="tag">${esc(k)}</span>`).join(' ')}` +
+        (q.stage ? `<span class="notice" style="margin-inline-start:8px;">${esc(q.stage)}</span>` : '') +
+        '</div></details>'
+      ).join('');
+  } catch (e) {
+    err.textContent = (e as Error).message;
+  }
+  btn.disabled = false; btn.textContent = bank.enrichCta;
+}
+
 export function initQuestions(): void {
   const bank = activeLang === 'he' ? HE : EN;
   const section = document.createElement('section');
   section.id = 'interview-questions';
   section.innerHTML =
     `<h2>${esc(bank.title)}</h2><p class="lead">${esc(bank.lead)}</p>` +
+    // AI enrichment control
+    '<div class="agent-box">' +
+      '<div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">' +
+        `<input type="text" id="qaKeywords" placeholder="${esc(bank.enrichPlaceholder)}" style="flex:1; min-width:220px;">` +
+        `<button type="button" class="primary" id="qaEnrichBtn" style="margin-top:0;">${esc(bank.enrichCta)}</button>` +
+      '</div>' +
+      `<p class="notice">${esc(bank.enrichHint)}</p>` +
+      '<div id="qaEnrichErr" class="error" role="alert"></div>' +
+      '<div id="qaEnriched" role="region" aria-live="polite"></div>' +
+    '</div>' +
+    // curated bank
     bank.stages.map(stage =>
       `<details class="agent-box"><summary><h3 style="display:inline;margin:0;">${esc(stage.icon + ' ' + stage.title)}</h3></summary>` +
       `<ul style="margin-top:14px;">${stage.items.map(q => `<li>${esc(q)}</li>`).join('')}</ul></details>`
@@ -125,4 +194,9 @@ export function initQuestions(): void {
     link.className = 'link'; link.href = '#interview-questions'; link.textContent = bank.nav;
     navAnchor.after(link);
   }
+
+  $('qaEnrichBtn').addEventListener('click', () => enrich(bank));
+  $('qaKeywords').addEventListener('keydown', e => {
+    if ((e as KeyboardEvent).key === 'Enter') { e.preventDefault(); enrich(bank); }
+  });
 }
