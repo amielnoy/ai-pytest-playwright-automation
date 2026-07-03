@@ -16,7 +16,7 @@ RUN printf 'server {\n\
     listen 80;\n\
     server_name _;\n\
     root /usr/share/nginx/html;\n\
-    index ai-testing-academy-en.html;\n\
+    index ai-testing-academy.html;\n\
     location / { try_files $uri $uri/ =404; }\n\
     location ~* \\.(svg|png|jpe?g|gif|mp4|webm|css|js|woff2?)$ { expires 7d; access_log off; }\n\
 }\n' > /etc/nginx/conf.d/default.conf
