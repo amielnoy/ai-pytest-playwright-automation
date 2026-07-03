@@ -87,8 +87,10 @@ jobs:
         run: |
           PAGES_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}"
           ARCH_URL="${PAGES_URL}/architecture.html"
+          ACADEMY_URL="${PAGES_URL}/academy/"
           REPO_URL="https://github.com/${{ github.repository }}"
           RUN_URL="${REPO_URL}/actions/runs/${{ github.run_id }}"
+          ACADEMY_WF_URL="${REPO_URL}/actions/workflows/ai-testing-academy.yml"
           COMMIT_SHORT=$(echo "${{ github.sha }}" | cut -c1-7)
           BRANCH="${{ github.ref_name }}"
           RUN_NUM="${{ github.run_number }}"
@@ -147,6 +149,7 @@ jobs:
             echo "|----------|------|"
             echo "| 📈 Allure Report | [Open report](${PAGES_URL}) |"
             echo "| 🏗️ Architecture | [architecture.html](${ARCH_URL}) |"
+            echo "| 🎓 AI Testing Academy | [Open site](${ACADEMY_URL}) · [deploy runs](${ACADEMY_WF_URL}) |"
             echo "| 🌿 Branch | \`${BRANCH}\` |"
             echo "| 🔖 Commit | [\`${COMMIT_SHORT}\`](${REPO_URL}/commit/${{ github.sha }}) |"
             echo "| 🔄 Run | [#${RUN_NUM}](${RUN_URL}) |"
@@ -224,6 +227,7 @@ jobs:
           | **Allure Report** | [Open report]($PAGES_URL) |
           | **GitHub Pages URL** | https://amielnoy.github.io/AI_AUTOMATION_TESTING/ |
           | **Architecture docs** | [architecture.html](https://amielnoy.github.io/AI_AUTOMATION_TESTING/architecture.html) |
+          | **AI Testing Academy** | [Open site]($PAGES_URL/academy/) · [deploy runs](${REPO_URL}/actions/workflows/ai-testing-academy.yml) |
           | **Branch** | \`$BRANCH\` |
           | **Commit** | [\`$COMMIT_SHORT\`](${REPO_URL}/commit/${{ github.sha }}) |
           | **Run** | [#${RUN_NUM}]($RUN_URL) |

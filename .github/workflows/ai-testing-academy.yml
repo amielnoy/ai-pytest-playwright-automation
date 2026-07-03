@@ -88,3 +88,20 @@ jobs:
           publish_dir: academy-site
           destination_dir: academy
           keep_files: true
+
+      - name: Post deployment link to job summary
+        if: always()
+        run: |
+          ACADEMY_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/academy/"
+          {
+            echo "## 🎓 AI Testing Academy — deployed"
+            echo ""
+            echo "| Resource | Link |"
+            echo "|----------|------|"
+            echo "| 🌐 Live site | [Open academy](${ACADEMY_URL}) |"
+            echo "| 🇬🇧 English | [Open](${ACADEMY_URL}?lang=en) |"
+            echo "| 🇮🇱 Hebrew | [Open](${ACADEMY_URL}?lang=he) |"
+            echo ""
+            echo "> [!NOTE]"
+            echo "> Pages may take a minute to reflect the latest deploy."
+          } >> "$GITHUB_STEP_SUMMARY"
