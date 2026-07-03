@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 160" width="1060" height="160">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c0392b"/>
+      <stop offset="1" stop-color="#e07b28"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#c0392b"/>
+      <stop offset="0.5" stop-color="#d85a29"/>
+      <stop offset="1" stop-color="#e07b28"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- ===== Mark: hexagon + circuit + bolt ===== -->
+  <g transform="translate(80,80)" filter="url(#glow)">
+    <!-- hexagon -->
+    <polygon points="0,-62 54,-31 54,31 0,62 -54,31 -54,-31"
+             fill="none" stroke="url(#g)" stroke-width="7" stroke-linejoin="round"/>
+    <!-- circuit nodes -->
+    <g stroke="url(#g)" stroke-width="4" fill="#0d1117">
+      <line x1="0" y1="-62" x2="0" y2="-40"/>
+      <line x1="54" y1="31" x2="34" y2="20"/>
+      <line x1="-54" y1="31" x2="-34" y2="20"/>
+      <circle cx="0" cy="-62" r="7" fill="#c0392b" stroke="none"/>
+      <circle cx="54" cy="31" r="7" fill="#e07b28" stroke="none"/>
+      <circle cx="-54" cy="31" r="7" fill="#c0392b" stroke="none"/>
+    </g>
+    <!-- lightning bolt -->
+    <path d="M 10,-34 L -22,6 L -4,6 L -12,36 L 22,-6 L 3,-6 Z"
+          fill="url(#g)"/>
+  </g>
+
+  <!-- ===== Wordmark ===== -->
+  <g font-family="'Segoe UI',Arial,sans-serif">
+    <text x="175" y="88" font-size="52" font-weight="800" fill="url(#g2)" letter-spacing="1"
+          textLength="850" lengthAdjust="spacingAndGlyphs">AI <tspan fill="#8a7a6a" font-weight="400">×</tspan> DEV <tspan fill="#8a7a6a" font-weight="400">×</tspan> TEST <tspan fill="#8a7a6a" font-weight="400">×</tspan> DEVOPS</text>
+    <text x="177" y="122" font-size="19" font-weight="500" fill="#7c7168" letter-spacing="6"
+          textLength="848" lengthAdjust="spacing">TESTING ACADEMY · POWERED BY AI AGENTS</text>
+  </g>
+</svg>
