@@ -1,0 +1,11 @@
+2026-07-03 00:54:40,646 | INFO     | ai_automation.test_cart_keeps_multiple_products_in_same_session | START tests/api/test_api_integrations.py::TestCartApiIntegration::test_cart_keeps_multiple_products_in_same_session
+2026-07-03 00:54:40,654 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,655 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,655 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,657 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,658 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,658 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,660 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,661 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,662 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,664 | INFO     | ai_automation.test_cart_keeps_multiple_products_in_same_session | END   tests/api/test_api_integrations.py::TestCartApiIntegration::test_cart_keeps_multiple_products_in_same_session

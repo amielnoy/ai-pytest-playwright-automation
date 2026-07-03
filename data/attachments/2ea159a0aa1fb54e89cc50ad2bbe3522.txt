@@ -1,0 +1,5 @@
+2026-07-03 00:54:43,936 | INFO     | ai_automation.test_protected_route_requires_auth_inline[account/wishlist-My Wish List-Returning Customer] | START tests/api/test_pentest_data_driven.py::TestAccessControlInline::test_protected_route_requires_auth_inline[account/wishlist-My Wish List-Returning Customer]
+2026-07-03 00:54:43,937 | INFO     | ai_automation.pentest.data_driven | Step: unauthenticated GET account/wishlist
+2026-07-03 00:54:43,938 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:43,938 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:43,940 | INFO     | ai_automation.test_protected_route_requires_auth_inline[account/wishlist-My Wish List-Returning Customer] | END   tests/api/test_pentest_data_driven.py::TestAccessControlInline::test_protected_route_requires_auth_inline[account/wishlist-My Wish List-Returning Customer]

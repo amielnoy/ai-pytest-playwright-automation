@@ -1,0 +1,2 @@
+2026-07-03 01:12:01,188 | INFO     | ai_automation.test_product_detail_soft | START tests/web-ui/test_soft_assertions_demo.py::TestSoftAssertionsDemo::test_product_detail_soft@web-ui
+2026-07-03 01:12:33,046 | INFO     | ai_automation.test_product_detail_soft | END   tests/web-ui/test_soft_assertions_demo.py::TestSoftAssertionsDemo::test_product_detail_soft@web-ui

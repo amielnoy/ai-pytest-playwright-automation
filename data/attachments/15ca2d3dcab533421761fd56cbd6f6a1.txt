@@ -1,2 +1,0 @@
-2026-07-03 00:57:12,857 | INFO     | ai_automation.test_iphone_product_detail_has_essentials | START tests/web-ui/test_system_coverage.py::TestProductDetailCoverage::test_iphone_product_detail_has_essentials@web-ui
-2026-07-03 00:57:16,938 | INFO     | ai_automation.test_iphone_product_detail_has_essentials | END   tests/web-ui/test_system_coverage.py::TestProductDetailCoverage::test_iphone_product_detail_has_essentials@web-ui

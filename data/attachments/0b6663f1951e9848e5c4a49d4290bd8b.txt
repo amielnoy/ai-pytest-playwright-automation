@@ -1,6 +1,0 @@
-2026-07-03 00:54:22,340 | INFO     | ai_automation.test_wishlist_requires_authentication | START tests/api/test_pentest.py::TestAccessControlPentest::test_wishlist_requires_authentication
-2026-07-03 00:54:22,341 | INFO     | ai_automation.pentest | Step: GET account/wishlist without credentials
-2026-07-03 00:54:22,341 | INFO     | ai_automation.pentest | Step: Assert login page shown and My Wish List absent
-2026-07-03 00:54:22,341 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-07-03 00:54:22,342 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-07-03 00:54:22,343 | INFO     | ai_automation.test_wishlist_requires_authentication | END   tests/api/test_pentest.py::TestAccessControlPentest::test_wishlist_requires_authentication

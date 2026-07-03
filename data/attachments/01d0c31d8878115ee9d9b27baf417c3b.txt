@@ -1,0 +1,2 @@
+2026-07-03 00:54:47,332 | INFO     | ai_automation.test_open_cart_custom_min_items | START tests/unit/test_flows.py::TestCartFlow::test_open_cart_custom_min_items
+2026-07-03 00:54:47,334 | INFO     | ai_automation.test_open_cart_custom_min_items | END   tests/unit/test_flows.py::TestCartFlow::test_open_cart_custom_min_items

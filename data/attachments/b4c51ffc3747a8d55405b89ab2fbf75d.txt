@@ -1,2 +1,0 @@
-2026-07-03 00:54:26,141 | INFO     | ai_automation.test_add_products_call_sequence | START tests/unit/test_flows.py::TestCartFlow::test_add_products_call_sequence
-2026-07-03 00:54:26,143 | INFO     | ai_automation.test_add_products_call_sequence | END   tests/unit/test_flows.py::TestCartFlow::test_add_products_call_sequence

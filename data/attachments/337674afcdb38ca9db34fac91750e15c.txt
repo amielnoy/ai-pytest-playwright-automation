@@ -1,5 +1,0 @@
-2026-07-03 00:54:22,618 | INFO     | ai_automation.test_oversized_search_handled_inline[16K_alpha] | START tests/api/test_pentest_data_driven.py::TestInjectionInline::test_oversized_search_handled_inline[16K_alpha]
-2026-07-03 00:54:22,620 | INFO     | ai_automation.pentest.data_driven | Step: oversized search payload char='A' len=16384
-2026-07-03 00:54:22,621 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-07-03 00:54:22,622 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-07-03 00:54:22,624 | INFO     | ai_automation.test_oversized_search_handled_inline[16K_alpha] | END   tests/api/test_pentest_data_driven.py::TestInjectionInline::test_oversized_search_handled_inline[16K_alpha]

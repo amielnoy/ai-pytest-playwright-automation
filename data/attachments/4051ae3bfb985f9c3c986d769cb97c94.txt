@@ -1,0 +1,4 @@
+INFO     ai_automation.test_product_detail_soft:conftest.py:296 START tests/web-ui/test_soft_assertions_demo.py::TestSoftAssertionsDemo::test_product_detail_soft@web-ui
+INFO     ai_automation.test_product_detail_soft:conftest.py:298 END   tests/web-ui/test_soft_assertions_demo.py::TestSoftAssertionsDemo::test_product_detail_soft@web-ui
+INFO     ai_automation.test_product_detail_soft:conftest.py:296 START tests/web-ui/test_soft_assertions_demo.py::TestSoftAssertionsDemo::test_product_detail_soft@web-ui
+INFO     ai_automation.test_product_detail_soft:conftest.py:298 END   tests/web-ui/test_soft_assertions_demo.py::TestSoftAssertionsDemo::test_product_detail_soft@web-ui

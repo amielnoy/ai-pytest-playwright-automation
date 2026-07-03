@@ -1,0 +1,5 @@
+2026-07-03 00:54:44,141 | INFO     | ai_automation.test_injection_payload_in_search_json[ldap_wildcard] | START tests/api/test_pentest_data_driven.py::TestInjectionJson::test_injection_payload_in_search_json[ldap_wildcard]
+2026-07-03 00:54:44,142 | INFO     | ai_automation.pentest.data_driven | Step: JSON injection search category=LDAP Injection payload='*)(uid=*))(|(uid=*'
+2026-07-03 00:54:44,143 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:44,144 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:44,145 | INFO     | ai_automation.test_injection_payload_in_search_json[ldap_wildcard] | END   tests/api/test_pentest_data_driven.py::TestInjectionJson::test_injection_payload_in_search_json[ldap_wildcard]

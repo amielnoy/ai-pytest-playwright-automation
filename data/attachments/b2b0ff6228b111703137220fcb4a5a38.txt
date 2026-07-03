@@ -1,0 +1,2 @@
+2026-07-03 00:54:47,224 | INFO     | ai_automation.test_search_call_sequence | START tests/unit/test_flows.py::TestSearchFlow::test_search_call_sequence
+2026-07-03 00:54:47,266 | INFO     | ai_automation.test_search_call_sequence | END   tests/unit/test_flows.py::TestSearchFlow::test_search_call_sequence

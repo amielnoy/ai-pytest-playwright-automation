@@ -1,2 +1,0 @@
-2026-07-03 00:54:25,373 | INFO     | ai_automation.test_override_telephone_blank | START tests/unit/test_factories.py::TestMakeRegistration::test_override_telephone_blank
-2026-07-03 00:54:25,374 | INFO     | ai_automation.test_override_telephone_blank | END   tests/unit/test_factories.py::TestMakeRegistration::test_override_telephone_blank

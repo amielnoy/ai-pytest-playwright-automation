@@ -1,7 +1,0 @@
-2026-07-03 00:54:19,012 | INFO     | ai_automation.test_cart_accepts_products_from_search_results[iPhone] | START tests/api/test_api.py::TestCartApi::test_cart_accepts_products_from_search_results[iPhone]
-2026-07-03 00:54:19,014 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-07-03 00:54:19,015 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-07-03 00:54:19,015 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-07-03 00:54:19,018 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-07-03 00:54:19,018 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-07-03 00:54:19,021 | INFO     | ai_automation.test_cart_accepts_products_from_search_results[iPhone] | END   tests/api/test_api.py::TestCartApi::test_cart_accepts_products_from_search_results[iPhone]

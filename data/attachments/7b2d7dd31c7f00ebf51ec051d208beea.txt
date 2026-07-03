@@ -1,2 +1,0 @@
-2026-07-03 00:54:27,175 | INFO     | ai_automation.test_registration_form_accessibility_helpers_use_class_locators | START tests/unit/test_page_objects.py::test_registration_form_accessibility_helpers_use_class_locators
-2026-07-03 00:54:27,189 | INFO     | ai_automation.test_registration_form_accessibility_helpers_use_class_locators | END   tests/unit/test_page_objects.py::test_registration_form_accessibility_helpers_use_class_locators

@@ -1,1 +1,1 @@
-{"id":"fb37a749415c66752788011753e41e89","fullName":"tests.unit.test_opencart_fallback.TestSessionCookie#test_creates_new_cookie","name":"ensure_session_cookie creates a new OCSESSID when none exists","status":"passed","testResultsByEnv":{"default":"ba4c50e45d5027f3a4d9273f61d4bead"}}
+{"id":"fb37a749415c66752788011753e41e89","fullName":"tests.unit.test_opencart_fallback.TestSessionCookie#test_creates_new_cookie","name":"ensure_session_cookie creates a new OCSESSID when none exists","status":"passed","testResultsByEnv":{"default":"730ddec788e1645ae21084e160b4556d"}}

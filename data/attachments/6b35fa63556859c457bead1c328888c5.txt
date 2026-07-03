@@ -1,2 +1,0 @@
-2026-07-03 00:54:25,168 | INFO     | ai_automation.test_raises_when_no_products | START tests/unit/test_api_client.py::TestCreateCart::test_raises_when_no_products
-2026-07-03 00:54:25,171 | INFO     | ai_automation.test_raises_when_no_products | END   tests/unit/test_api_client.py::TestCreateCart::test_raises_when_no_products

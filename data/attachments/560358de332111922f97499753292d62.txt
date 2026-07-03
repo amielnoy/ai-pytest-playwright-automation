@@ -1,0 +1,2 @@
+2026-07-03 00:54:46,747 | INFO     | ai_automation.test_password_length | START tests/unit/test_factories.py::TestMakeInvalidCredentials::test_password_length
+2026-07-03 00:54:46,749 | INFO     | ai_automation.test_password_length | END   tests/unit/test_factories.py::TestMakeInvalidCredentials::test_password_length

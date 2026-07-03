@@ -1,0 +1,2 @@
+2026-07-03 01:14:08,318 | INFO     | ai_automation.test_sort_name_descending | START tests/web-ui/test_system_coverage.py::TestSearchDataIntegrity::test_sort_name_descending@web-ui
+2026-07-03 01:14:40,224 | INFO     | ai_automation.test_sort_name_descending | END   tests/web-ui/test_system_coverage.py::TestSearchDataIntegrity::test_sort_name_descending@web-ui

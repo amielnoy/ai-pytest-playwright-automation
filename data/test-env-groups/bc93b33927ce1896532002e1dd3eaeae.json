@@ -1,1 +1,1 @@
-{"id":"bc93b33927ce1896532002e1dd3eaeae","fullName":"tests.unit.test_opencart_fallback.TestRouteDispatcher#test_register_route","name":"GET account/register returns 200 with registration form","status":"passed","testResultsByEnv":{"default":"a2233fa2bce6a858b04dc11f2d06983b"}}
+{"id":"bc93b33927ce1896532002e1dd3eaeae","fullName":"tests.unit.test_opencart_fallback.TestRouteDispatcher#test_register_route","name":"GET account/register returns 200 with registration form","status":"passed","testResultsByEnv":{"default":"371e099c31bbe295060658f5d09038af"}}

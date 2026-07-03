@@ -1,2 +1,0 @@
-2026-07-03 00:54:25,287 | INFO     | ai_automation.test_telephone_numeric | START tests/unit/test_factories.py::TestMakeRegistration::test_telephone_numeric
-2026-07-03 00:54:25,288 | INFO     | ai_automation.test_telephone_numeric | END   tests/unit/test_factories.py::TestMakeRegistration::test_telephone_numeric

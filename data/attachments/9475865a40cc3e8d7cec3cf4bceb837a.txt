@@ -1,0 +1,2 @@
+2026-07-03 00:54:46,094 | INFO     | ai_automation.test_heuristic_classifies_automation_bug_from_fixture | START tests/unit/test_allure_failure_agent.py::test_heuristic_classifies_automation_bug_from_fixture
+2026-07-03 00:54:46,100 | INFO     | ai_automation.test_heuristic_classifies_automation_bug_from_fixture | END   tests/unit/test_allure_failure_agent.py::test_heuristic_classifies_automation_bug_from_fixture

@@ -1,3 +1,0 @@
-2026-07-03 00:55:09,702 | INFO     | ai_automation.test_cart_total_not_exceeds | START tests/web-ui/test_cart_total.py::TestCartTotalNotExceeds::test_cart_total_not_exceeds@web-ui
-2026-07-03 00:55:09,744 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-07-03 00:55:19,408 | INFO     | ai_automation.test_cart_total_not_exceeds | END   tests/web-ui/test_cart_total.py::TestCartTotalNotExceeds::test_cart_total_not_exceeds@web-ui

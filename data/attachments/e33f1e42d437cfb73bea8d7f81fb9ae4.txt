@@ -1,0 +1,2 @@
+2026-07-03 00:54:47,201 | INFO     | ai_automation.test_register_returns_success_flag | START tests/unit/test_flows.py::TestRegistrationFlow::test_register_returns_success_flag
+2026-07-03 00:54:47,203 | INFO     | ai_automation.test_register_returns_success_flag | END   tests/unit/test_flows.py::TestRegistrationFlow::test_register_returns_success_flag

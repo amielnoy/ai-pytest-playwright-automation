@@ -1,2 +1,0 @@
-2026-07-03 00:56:35,510 | INFO     | ai_automation.test_home_header_hard | START tests/web-ui/test_soft_assertions_demo.py::TestSoftAssertionsDemo::test_home_header_hard@web-ui
-2026-07-03 00:56:38,454 | INFO     | ai_automation.test_home_header_hard | END   tests/web-ui/test_soft_assertions_demo.py::TestSoftAssertionsDemo::test_home_header_hard@web-ui

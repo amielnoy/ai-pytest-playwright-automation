@@ -1,0 +1,4 @@
+INFO     ai_automation.test_search_prices_soft_loop:conftest.py:296 START tests/web-ui/test_soft_assertions_demo.py::TestSoftAssertionsDemo::test_search_prices_soft_loop@web-ui
+INFO     ai_automation.test_search_prices_soft_loop:conftest.py:298 END   tests/web-ui/test_soft_assertions_demo.py::TestSoftAssertionsDemo::test_search_prices_soft_loop@web-ui
+INFO     ai_automation.test_search_prices_soft_loop:conftest.py:296 START tests/web-ui/test_soft_assertions_demo.py::TestSoftAssertionsDemo::test_search_prices_soft_loop@web-ui
+INFO     ai_automation.test_search_prices_soft_loop:conftest.py:298 END   tests/web-ui/test_soft_assertions_demo.py::TestSoftAssertionsDemo::test_search_prices_soft_loop@web-ui

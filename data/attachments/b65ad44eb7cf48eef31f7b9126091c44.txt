@@ -1,2 +1,0 @@
-2026-07-03 00:54:25,660 | INFO     | ai_automation.test_password_has_special_char | START tests/unit/test_factories.py::TestRegistrationPasswordComplexity::test_password_has_special_char
-2026-07-03 00:54:25,662 | INFO     | ai_automation.test_password_has_special_char | END   tests/unit/test_factories.py::TestRegistrationPasswordComplexity::test_password_has_special_char

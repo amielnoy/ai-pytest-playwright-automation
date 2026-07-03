@@ -1,2 +1,0 @@
-2026-07-03 00:54:27,569 | INFO     | ai_automation.test_second_fallback_used_when_first_fails | START tests/unit/test_self_healing.py::TestSelfHealingResolution::test_second_fallback_used_when_first_fails
-2026-07-03 00:54:27,572 | INFO     | ai_automation.test_second_fallback_used_when_first_fails | END   tests/unit/test_self_healing.py::TestSelfHealingResolution::test_second_fallback_used_when_first_fails

@@ -1,0 +1,2 @@
+2026-07-03 00:54:46,913 | INFO     | ai_automation.test_blank_field_is_isolated[email] | START tests/unit/test_factories.py::TestParametrizedMissingFields::test_blank_field_is_isolated[email]
+2026-07-03 00:54:46,915 | INFO     | ai_automation.test_blank_field_is_isolated[email] | END   tests/unit/test_factories.py::TestParametrizedMissingFields::test_blank_field_is_isolated[email]

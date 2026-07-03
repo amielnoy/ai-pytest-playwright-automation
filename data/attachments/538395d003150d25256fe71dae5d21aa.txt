@@ -1,2 +1,0 @@
-2026-07-03 00:57:16,943 | INFO     | ai_automation.test_product_reviews_tab_exposes_form_fields | START tests/web-ui/test_system_coverage.py::TestProductDetailCoverage::test_product_reviews_tab_exposes_form_fields@web-ui
-2026-07-03 00:57:20,939 | INFO     | ai_automation.test_product_reviews_tab_exposes_form_fields | END   tests/web-ui/test_system_coverage.py::TestProductDetailCoverage::test_product_reviews_tab_exposes_form_fields@web-ui

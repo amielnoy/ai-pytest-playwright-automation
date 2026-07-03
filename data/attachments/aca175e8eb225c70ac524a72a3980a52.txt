@@ -1,8 +1,0 @@
-2026-07-03 00:54:19,306 | INFO     | ai_automation.test_search_returns_expected_product_json[iPhone] | START tests/api/test_api_data_driven.py::TestSearchApiJson::test_search_returns_expected_product_json[iPhone]
-2026-07-03 00:54:19,308 | INFO     | ai_automation.api.data_driven | Annotated call: TestSearchApiJson.test_search_returns_expected_product_json(query='iPhone', expected_product='iPhone', min_cards=1)
-2026-07-03 00:54:19,309 | INFO     | ai_automation.api.data_driven | Step: JSON-driven search for 'iPhone' (min_cards=1)
-2026-07-03 00:54:19,309 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-07-03 00:54:19,310 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-07-03 00:54:19,310 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-07-03 00:54:19,310 | INFO     | ai_automation.api.data_driven | Cards: 1, names: ['iPhone']
-2026-07-03 00:54:19,313 | INFO     | ai_automation.test_search_returns_expected_product_json[iPhone] | END   tests/api/test_api_data_driven.py::TestSearchApiJson::test_search_returns_expected_product_json[iPhone]

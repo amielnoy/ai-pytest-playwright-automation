@@ -1,6 +1,0 @@
-2026-07-03 00:54:19,595 | INFO     | ai_automation.test_cart_add_ignores_invalid_product_id[] | START tests/api/test_api_integrations.py::TestCartApiNegative::test_cart_add_ignores_invalid_product_id[]
-2026-07-03 00:54:19,600 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-07-03 00:54:19,600 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-07-03 00:54:19,600 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-07-03 00:54:19,600 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-07-03 00:54:19,602 | INFO     | ai_automation.test_cart_add_ignores_invalid_product_id[] | END   tests/api/test_api_integrations.py::TestCartApiNegative::test_cart_add_ignores_invalid_product_id[]

@@ -1,1 +1,1 @@
-{"id":"ad05a5a698d9682a1549b1c2cfaf8233","fullName":"tests.unit.test_logger#test_configure_logging_adds_one_daily_file_handler","name":"test_configure_logging_adds_one_daily_file_handler","status":"passed","testResultsByEnv":{"default":"c68465725512d7ee0cab89247772105b"}}
+{"id":"ad05a5a698d9682a1549b1c2cfaf8233","fullName":"tests.unit.test_logger#test_configure_logging_adds_one_daily_file_handler","name":"test_configure_logging_adds_one_daily_file_handler","status":"passed","testResultsByEnv":{"default":"cb832e5d68108d0cc861c8e06f42a6e2"}}

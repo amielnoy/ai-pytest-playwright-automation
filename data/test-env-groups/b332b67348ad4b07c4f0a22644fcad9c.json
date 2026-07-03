@@ -1,1 +1,1 @@
-{"id":"b332b67348ad4b07c4f0a22644fcad9c","fullName":"tests.unit.test_factories.TestRegistrationPasswordComplexity#test_password_min_length","name":"generated password is at least 12 characters long","status":"passed","testResultsByEnv":{"default":"0740ee3454c97eea22560630c59ccc27"}}
+{"id":"b332b67348ad4b07c4f0a22644fcad9c","fullName":"tests.unit.test_factories.TestRegistrationPasswordComplexity#test_password_min_length","name":"generated password is at least 12 characters long","status":"passed","testResultsByEnv":{"default":"72f7852d7776de671dcb9eb988d8d75a"}}

@@ -1,0 +1,2 @@
+2026-07-03 01:13:12,187 | INFO     | ai_automation.test_search_prices_soft_loop | START tests/web-ui/test_soft_assertions_demo.py::TestSoftAssertionsDemo::test_search_prices_soft_loop@web-ui
+2026-07-03 01:13:19,428 | INFO     | ai_automation.test_search_prices_soft_loop | END   tests/web-ui/test_soft_assertions_demo.py::TestSoftAssertionsDemo::test_search_prices_soft_loop@web-ui

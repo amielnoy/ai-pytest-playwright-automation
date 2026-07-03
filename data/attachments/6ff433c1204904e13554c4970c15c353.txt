@@ -1,5 +1,0 @@
-2026-07-03 00:54:23,025 | INFO     | ai_automation.test_injection_payload_in_search_json[null_byte] | START tests/api/test_pentest_data_driven.py::TestInjectionJson::test_injection_payload_in_search_json[null_byte]
-2026-07-03 00:54:23,026 | INFO     | ai_automation.pentest.data_driven | Step: JSON injection search category=Null Byte payload='MacBook%00evil'
-2026-07-03 00:54:23,027 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-07-03 00:54:23,027 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-07-03 00:54:23,029 | INFO     | ai_automation.test_injection_payload_in_search_json[null_byte] | END   tests/api/test_pentest_data_driven.py::TestInjectionJson::test_injection_payload_in_search_json[null_byte]

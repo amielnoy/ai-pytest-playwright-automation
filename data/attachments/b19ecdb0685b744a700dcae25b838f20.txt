@@ -1,2 +1,0 @@
-2026-07-03 00:54:27,009 | INFO     | ai_automation.test_search_results_product_names_sort_and_stored_information | START tests/unit/test_page_objects.py::test_search_results_product_names_sort_and_stored_information
-2026-07-03 00:54:27,014 | INFO     | ai_automation.test_search_results_product_names_sort_and_stored_information | END   tests/unit/test_page_objects.py::test_search_results_product_names_sort_and_stored_information

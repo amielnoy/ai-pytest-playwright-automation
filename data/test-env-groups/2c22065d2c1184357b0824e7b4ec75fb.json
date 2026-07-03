@@ -1,1 +1,1 @@
-{"id":"2c22065d2c1184357b0824e7b4ec75fb","fullName":"tests.unit.test_self_healing.TestSelfHealingProxies#test_resolved_property","name":".resolved returns the underlying Playwright locator","status":"passed","testResultsByEnv":{"default":"67737296a7c5999ba143d3d941cf6297"}}
+{"id":"2c22065d2c1184357b0824e7b4ec75fb","fullName":"tests.unit.test_self_healing.TestSelfHealingProxies#test_resolved_property","name":".resolved returns the underlying Playwright locator","status":"passed","testResultsByEnv":{"default":"63af8703d824f11e02ab470107e4678d"}}

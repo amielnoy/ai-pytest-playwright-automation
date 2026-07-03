@@ -1,0 +1,2 @@
+2026-07-03 00:54:47,183 | INFO     | ai_automation.test_register_newsletter_forwarded | START tests/unit/test_flows.py::TestRegistrationFlow::test_register_newsletter_forwarded
+2026-07-03 00:54:47,186 | INFO     | ai_automation.test_register_newsletter_forwarded | END   tests/unit/test_flows.py::TestRegistrationFlow::test_register_newsletter_forwarded

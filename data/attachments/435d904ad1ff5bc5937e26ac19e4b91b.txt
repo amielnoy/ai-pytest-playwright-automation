@@ -1,0 +1,7 @@
+2026-07-03 00:54:40,145 | INFO     | ai_automation.test_search_returns_expected_product_inline[iPhone-iPhone] | START tests/api/test_api_data_driven.py::TestSearchApiInline::test_search_returns_expected_product_inline[iPhone-iPhone]
+2026-07-03 00:54:40,147 | INFO     | ai_automation.api.data_driven | Annotated call: TestSearchApiInline.test_search_returns_expected_product_inline(query='iPhone', expected_product='iPhone')
+2026-07-03 00:54:40,148 | INFO     | ai_automation.api.data_driven | Step: search for 'iPhone'
+2026-07-03 00:54:40,148 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,149 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,149 | INFO     | ai_automation.api.data_driven | Found product names: ['iPhone']
+2026-07-03 00:54:40,152 | INFO     | ai_automation.test_search_returns_expected_product_inline[iPhone-iPhone] | END   tests/api/test_api_data_driven.py::TestSearchApiInline::test_search_returns_expected_product_inline[iPhone-iPhone]

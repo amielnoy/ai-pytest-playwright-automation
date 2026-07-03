@@ -1,0 +1,4 @@
+INFO     ai_automation.test_add_items_to_cart:conftest.py:296 START tests/web-ui/test_add_to_cart.py::TestAddItemsToCart::test_add_items_to_cart@web-ui
+INFO     ai_automation.test_add_items_to_cart:conftest.py:298 END   tests/web-ui/test_add_to_cart.py::TestAddItemsToCart::test_add_items_to_cart@web-ui
+INFO     ai_automation.test_add_items_to_cart:conftest.py:296 START tests/web-ui/test_add_to_cart.py::TestAddItemsToCart::test_add_items_to_cart@web-ui
+INFO     ai_automation.test_add_items_to_cart:conftest.py:298 END   tests/web-ui/test_add_to_cart.py::TestAddItemsToCart::test_add_items_to_cart@web-ui

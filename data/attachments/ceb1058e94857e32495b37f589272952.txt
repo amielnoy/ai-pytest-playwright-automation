@@ -1,0 +1,4 @@
+INFO     ai_automation.test_empty_cart_page_shows_empty_state:conftest.py:296 START tests/web-ui/test_navigation_and_empty_states.py::TestNavigationAndEmptyStates::test_empty_cart_page_shows_empty_state@web-ui
+INFO     ai_automation.test_empty_cart_page_shows_empty_state:conftest.py:298 END   tests/web-ui/test_navigation_and_empty_states.py::TestNavigationAndEmptyStates::test_empty_cart_page_shows_empty_state@web-ui
+INFO     ai_automation.test_empty_cart_page_shows_empty_state:conftest.py:296 START tests/web-ui/test_navigation_and_empty_states.py::TestNavigationAndEmptyStates::test_empty_cart_page_shows_empty_state@web-ui
+INFO     ai_automation.test_empty_cart_page_shows_empty_state:conftest.py:298 END   tests/web-ui/test_navigation_and_empty_states.py::TestNavigationAndEmptyStates::test_empty_cart_page_shows_empty_state@web-ui

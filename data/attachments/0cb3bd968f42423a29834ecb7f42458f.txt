@@ -1,0 +1,14 @@
+2026-07-03 00:54:43,482 | INFO     | ai_automation.test_admin_panel_does_not_expose_interface | START tests/api/test_pentest.py::TestAccessControlPentest::test_admin_panel_does_not_expose_interface
+2026-07-03 00:54:43,484 | INFO     | ai_automation.pentest | Step: GET /admin/ with no credentials
+2026-07-03 00:54:43,485 | INFO     | ai_automation.pentest | Step: Assert Dashboard, Sales, Catalog admin sections absent
+2026-07-03 00:54:43,487 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:43,487 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:43,488 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:43,488 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:43,489 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:43,489 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:43,489 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:43,490 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:43,490 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:43,491 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:43,492 | INFO     | ai_automation.test_admin_panel_does_not_expose_interface | END   tests/api/test_pentest.py::TestAccessControlPentest::test_admin_panel_does_not_expose_interface

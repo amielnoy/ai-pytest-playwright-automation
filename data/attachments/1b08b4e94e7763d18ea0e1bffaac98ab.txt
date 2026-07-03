@@ -1,0 +1,7 @@
+2026-07-03 00:54:40,147 | INFO     | ai_automation.test_search_returns_expected_product_inline[Canon-Canon] | START tests/api/test_api_data_driven.py::TestSearchApiInline::test_search_returns_expected_product_inline[Canon-Canon]
+2026-07-03 00:54:40,149 | INFO     | ai_automation.api.data_driven | Annotated call: TestSearchApiInline.test_search_returns_expected_product_inline(query='Canon', expected_product='Canon')
+2026-07-03 00:54:40,149 | INFO     | ai_automation.api.data_driven | Step: search for 'Canon'
+2026-07-03 00:54:40,152 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,152 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,153 | INFO     | ai_automation.api.data_driven | Found product names: ['Canon EOS 5D']
+2026-07-03 00:54:40,155 | INFO     | ai_automation.test_search_returns_expected_product_inline[Canon-Canon] | END   tests/api/test_api_data_driven.py::TestSearchApiInline::test_search_returns_expected_product_inline[Canon-Canon]

@@ -1,5 +1,0 @@
-2026-07-03 00:54:22,574 | INFO     | ai_automation.test_command_injection_in_search_inline[MacBook`id`] | START tests/api/test_pentest_data_driven.py::TestInjectionInline::test_command_injection_in_search_inline[MacBook`id`]
-2026-07-03 00:54:22,575 | INFO     | ai_automation.pentest.data_driven | Step: command injection payload='MacBook`id`'
-2026-07-03 00:54:22,580 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-07-03 00:54:22,580 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-07-03 00:54:22,581 | INFO     | ai_automation.test_command_injection_in_search_inline[MacBook`id`] | END   tests/api/test_pentest_data_driven.py::TestInjectionInline::test_command_injection_in_search_inline[MacBook`id`]

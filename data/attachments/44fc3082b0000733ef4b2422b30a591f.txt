@@ -1,0 +1,5 @@
+2026-07-03 00:54:44,073 | INFO     | ai_automation.test_injection_payload_in_search_json[sql_union] | START tests/api/test_pentest_data_driven.py::TestInjectionJson::test_injection_payload_in_search_json[sql_union]
+2026-07-03 00:54:44,074 | INFO     | ai_automation.pentest.data_driven | Step: JSON injection search category=SQL Injection payload="' UNION SELECT 1,2,3--"
+2026-07-03 00:54:44,075 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:44,076 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:44,077 | INFO     | ai_automation.test_injection_payload_in_search_json[sql_union] | END   tests/api/test_pentest_data_driven.py::TestInjectionJson::test_injection_payload_in_search_json[sql_union]

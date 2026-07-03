@@ -1,0 +1,2 @@
+2026-07-03 01:03:19,793 | INFO     | ai_automation.test_header_search_submits_query_and_shows_matching_results | START tests/web-ui/test_navigation_and_empty_states.py::TestNavigationAndEmptyStates::test_header_search_submits_query_and_shows_matching_results@web-ui
+2026-07-03 01:03:51,558 | INFO     | ai_automation.test_header_search_submits_query_and_shows_matching_results | END   tests/web-ui/test_navigation_and_empty_states.py::TestNavigationAndEmptyStates::test_header_search_submits_query_and_shows_matching_results@web-ui

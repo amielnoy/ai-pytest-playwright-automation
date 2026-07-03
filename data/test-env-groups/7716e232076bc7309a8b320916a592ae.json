@@ -1,1 +1,1 @@
-{"id":"7716e232076bc7309a8b320916a592ae","fullName":"tests.api.test_prompt_injection.TestPromptInjection#test_role_replacement","name":"[PI-2] Role replacement — assigning a new unrestricted persona","status":"broken","testResultsByEnv":{"default":"209431a57e4c4b0e3805b8bb5094ec17"}}
+{"id":"7716e232076bc7309a8b320916a592ae","fullName":"tests.api.test_prompt_injection.TestPromptInjection#test_role_replacement","name":"[PI-2] Role replacement — assigning a new unrestricted persona","status":"broken","testResultsByEnv":{"default":"a55b7d4dd219cc03148fe58bbe756fab"}}

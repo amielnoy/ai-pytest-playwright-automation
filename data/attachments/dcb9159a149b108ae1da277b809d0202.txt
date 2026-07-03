@@ -1,0 +1,2 @@
+2026-07-03 00:54:46,707 | INFO     | ai_automation.test_fields_present | START tests/unit/test_factories.py::TestMakeInvalidCredentials::test_fields_present
+2026-07-03 00:54:46,708 | INFO     | ai_automation.test_fields_present | END   tests/unit/test_factories.py::TestMakeInvalidCredentials::test_fields_present

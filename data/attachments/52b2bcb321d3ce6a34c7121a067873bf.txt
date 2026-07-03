@@ -1,0 +1,2 @@
+2026-07-03 00:54:48,711 | INFO     | ai_automation.test_self_heal_event_is_frozen_dataclass | START tests/unit/test_self_healing.py::TestHealEventRecording::test_self_heal_event_is_frozen_dataclass
+2026-07-03 00:54:48,712 | INFO     | ai_automation.test_self_heal_event_is_frozen_dataclass | END   tests/unit/test_self_healing.py::TestHealEventRecording::test_self_heal_event_is_frozen_dataclass

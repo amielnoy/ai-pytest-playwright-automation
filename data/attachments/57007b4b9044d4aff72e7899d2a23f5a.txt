@@ -1,4 +1,0 @@
-2026-07-03 00:54:22,861 | INFO     | ai_automation.test_sensitive_path_blocked_inline[config_bak] | START tests/api/test_pentest_data_driven.py::TestFileExposureInline::test_sensitive_path_blocked_inline[config_bak]
-2026-07-03 00:54:22,862 | INFO     | ai_automation.pentest.data_driven | Step: probe sensitive path https://tutorialsninja.com/demo/config.php.bak
-2026-07-03 00:54:22,862 | INFO     | ai_automation.pentest.data_driven | Status for /config.php.bak: 404
-2026-07-03 00:54:22,864 | INFO     | ai_automation.test_sensitive_path_blocked_inline[config_bak] | END   tests/api/test_pentest_data_driven.py::TestFileExposureInline::test_sensitive_path_blocked_inline[config_bak]

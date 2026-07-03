@@ -1,0 +1,4 @@
+INFO     ai_automation.test_list_view_keeps_search_results_available:conftest.py:296 START tests/web-ui/test_navigation_and_empty_states.py::TestNavigationAndEmptyStates::test_list_view_keeps_search_results_available@web-ui
+INFO     ai_automation.test_list_view_keeps_search_results_available:conftest.py:298 END   tests/web-ui/test_navigation_and_empty_states.py::TestNavigationAndEmptyStates::test_list_view_keeps_search_results_available@web-ui
+INFO     ai_automation.test_list_view_keeps_search_results_available:conftest.py:296 START tests/web-ui/test_navigation_and_empty_states.py::TestNavigationAndEmptyStates::test_list_view_keeps_search_results_available@web-ui
+INFO     ai_automation.test_list_view_keeps_search_results_available:conftest.py:298 END   tests/web-ui/test_navigation_and_empty_states.py::TestNavigationAndEmptyStates::test_list_view_keeps_search_results_available@web-ui

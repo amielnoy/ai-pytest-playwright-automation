@@ -1,0 +1,7 @@
+2026-07-03 00:54:40,188 | INFO     | ai_automation.test_search_returns_positive_prices_inline[iPhone] | START tests/api/test_api_data_driven.py::TestSearchApiInline::test_search_returns_positive_prices_inline[iPhone]
+2026-07-03 00:54:40,191 | INFO     | ai_automation.api.data_driven | Annotated call: TestSearchApiInline.test_search_returns_positive_prices_inline(query='iPhone')
+2026-07-03 00:54:40,191 | INFO     | ai_automation.api.data_driven | Step: search for 'iPhone'
+2026-07-03 00:54:40,192 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,192 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,192 | INFO     | ai_automation.api.data_driven | Prices for 'iPhone': [123.2]
+2026-07-03 00:54:40,195 | INFO     | ai_automation.test_search_returns_positive_prices_inline[iPhone] | END   tests/api/test_api_data_driven.py::TestSearchApiInline::test_search_returns_positive_prices_inline[iPhone]

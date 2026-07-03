@@ -1,6 +1,0 @@
-2026-07-03 00:54:24,506 | INFO     | ai_automation.test_oversized_search_query_is_handled_gracefully | START tests/api/test_security_api.py::TestSearchSecurity::test_oversized_search_query_is_handled_gracefully
-2026-07-03 00:54:24,508 | INFO     | ai_automation.security.api | Step: GET search with 4096-char oversized query
-2026-07-03 00:54:24,510 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-07-03 00:54:24,511 | INFO     | ai_automation.security.api | Step: Assert 200 and no Fatal error for oversized input
-2026-07-03 00:54:24,512 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-07-03 00:54:24,514 | INFO     | ai_automation.test_oversized_search_query_is_handled_gracefully | END   tests/api/test_security_api.py::TestSearchSecurity::test_oversized_search_query_is_handled_gracefully

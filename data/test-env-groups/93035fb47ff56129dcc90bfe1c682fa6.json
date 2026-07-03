@@ -1,1 +1,1 @@
-{"id":"93035fb47ff56129dcc90bfe1c682fa6","fullName":"tests.api.test_pentest.TestInfoDisclosurePentest#test_x_powered_by_header_absent","name":"X-Powered-By header is absent — PHP version not disclosed","status":"passed","testResultsByEnv":{"default":"ac429cf3899865a518a74a43415709b6"}}
+{"id":"93035fb47ff56129dcc90bfe1c682fa6","fullName":"tests.api.test_pentest.TestInfoDisclosurePentest#test_x_powered_by_header_absent","name":"X-Powered-By header is absent — PHP version not disclosed","status":"passed","testResultsByEnv":{"default":"7ee026cd9ccdf3ad3bccc182ab2d3780"}}

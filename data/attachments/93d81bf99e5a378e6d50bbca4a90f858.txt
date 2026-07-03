@@ -1,7 +1,0 @@
-2026-07-03 00:54:19,133 | INFO     | ai_automation.test_search_returns_positive_prices_inline[Canon] | START tests/api/test_api_data_driven.py::TestSearchApiInline::test_search_returns_positive_prices_inline[Canon]
-2026-07-03 00:54:19,135 | INFO     | ai_automation.api.data_driven | Annotated call: TestSearchApiInline.test_search_returns_positive_prices_inline(query='Canon')
-2026-07-03 00:54:19,135 | INFO     | ai_automation.api.data_driven | Step: search for 'Canon'
-2026-07-03 00:54:19,137 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-07-03 00:54:19,137 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-07-03 00:54:19,137 | INFO     | ai_automation.api.data_driven | Prices for 'Canon': [98.0]
-2026-07-03 00:54:19,139 | INFO     | ai_automation.test_search_returns_positive_prices_inline[Canon] | END   tests/api/test_api_data_driven.py::TestSearchApiInline::test_search_returns_positive_prices_inline[Canon]

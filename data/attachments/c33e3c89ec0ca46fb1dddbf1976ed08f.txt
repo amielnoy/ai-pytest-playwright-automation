@@ -1,0 +1,2 @@
+2026-07-03 00:54:46,600 | INFO     | ai_automation.test_override_limit | START tests/unit/test_factories.py::TestMakeSearch::test_override_limit
+2026-07-03 00:54:46,601 | INFO     | ai_automation.test_override_limit | END   tests/unit/test_factories.py::TestMakeSearch::test_override_limit

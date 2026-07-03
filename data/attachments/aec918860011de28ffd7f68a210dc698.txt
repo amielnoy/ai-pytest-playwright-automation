@@ -1,0 +1,4 @@
+INFO     ai_automation.test_home_page_header_controls:conftest.py:296 START tests/web-ui/test_sanity.py::TestSanity::test_home_page_header_controls@web-ui
+INFO     ai_automation.test_home_page_header_controls:conftest.py:298 END   tests/web-ui/test_sanity.py::TestSanity::test_home_page_header_controls@web-ui
+INFO     ai_automation.test_home_page_header_controls:conftest.py:296 START tests/web-ui/test_sanity.py::TestSanity::test_home_page_header_controls@web-ui
+INFO     ai_automation.test_home_page_header_controls:conftest.py:298 END   tests/web-ui/test_sanity.py::TestSanity::test_home_page_header_controls@web-ui

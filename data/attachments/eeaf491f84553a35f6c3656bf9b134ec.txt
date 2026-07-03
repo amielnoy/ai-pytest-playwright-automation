@@ -1,6 +1,0 @@
-2026-07-03 00:54:24,547 | INFO     | ai_automation.test_cart_add_with_xss_product_id | START tests/api/test_security_api.py::TestCartSecurity::test_cart_add_with_xss_product_id
-2026-07-03 00:54:24,549 | INFO     | ai_automation.security.api | Step: POST cart/add with XSS product_id: '<script>alert(1)</script>'
-2026-07-03 00:54:24,549 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-07-03 00:54:24,549 | INFO     | ai_automation.security.api | Step: Assert 200 and no unencoded <script> in response
-2026-07-03 00:54:24,549 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-07-03 00:54:24,550 | INFO     | ai_automation.test_cart_add_with_xss_product_id | END   tests/api/test_security_api.py::TestCartSecurity::test_cart_add_with_xss_product_id

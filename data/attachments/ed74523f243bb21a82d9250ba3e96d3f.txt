@@ -1,4 +1,0 @@
-2026-07-03 00:54:18,914 | INFO     | ai_automation.test_search_returns_expected_product_names[MacBook-MacBook] | START tests/api/test_api.py::TestSearchApi::test_search_returns_expected_product_names[MacBook-MacBook]
-2026-07-03 00:54:18,919 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-07-03 00:54:18,920 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-07-03 00:54:18,922 | INFO     | ai_automation.test_search_returns_expected_product_names[MacBook-MacBook] | END   tests/api/test_api.py::TestSearchApi::test_search_returns_expected_product_names[MacBook-MacBook]

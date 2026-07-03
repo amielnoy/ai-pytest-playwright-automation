@@ -1,0 +1,7 @@
+2026-07-03 00:54:40,184 | INFO     | ai_automation.test_search_returns_expected_product_inline[Samsung-Samsung] | START tests/api/test_api_data_driven.py::TestSearchApiInline::test_search_returns_expected_product_inline[Samsung-Samsung]
+2026-07-03 00:54:40,186 | INFO     | ai_automation.api.data_driven | Annotated call: TestSearchApiInline.test_search_returns_expected_product_inline(query='Samsung', expected_product='Samsung')
+2026-07-03 00:54:40,186 | INFO     | ai_automation.api.data_driven | Step: search for 'Samsung'
+2026-07-03 00:54:40,189 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,189 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,189 | INFO     | ai_automation.api.data_driven | Found product names: ['Samsung SyncMaster 941BW']
+2026-07-03 00:54:40,192 | INFO     | ai_automation.test_search_returns_expected_product_inline[Samsung-Samsung] | END   tests/api/test_api_data_driven.py::TestSearchApiInline::test_search_returns_expected_product_inline[Samsung-Samsung]

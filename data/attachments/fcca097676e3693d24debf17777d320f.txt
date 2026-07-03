@@ -1,0 +1,6 @@
+2026-07-03 00:54:40,271 | INFO     | ai_automation.test_empty_search_returns_200_no_cards_inline[zzz_no_such_item_abc] | START tests/api/test_api_data_driven.py::TestSearchApiInline::test_empty_search_returns_200_no_cards_inline[zzz_no_such_item_abc]
+2026-07-03 00:54:40,273 | INFO     | ai_automation.api.data_driven | Annotated call: TestSearchApiInline.test_empty_search_returns_200_no_cards_inline(query='zzz_no_such_item_abc')
+2026-07-03 00:54:40,273 | INFO     | ai_automation.api.data_driven | Step: empty-result search for 'zzz_no_such_item_abc'
+2026-07-03 00:54:40,276 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,277 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,279 | INFO     | ai_automation.test_empty_search_returns_200_no_cards_inline[zzz_no_such_item_abc] | END   tests/api/test_api_data_driven.py::TestSearchApiInline::test_empty_search_returns_200_no_cards_inline[zzz_no_such_item_abc]

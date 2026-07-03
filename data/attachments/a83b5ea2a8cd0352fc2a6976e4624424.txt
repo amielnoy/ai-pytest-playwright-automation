@@ -1,0 +1,6 @@
+2026-07-03 00:54:43,453 | INFO     | ai_automation.test_account_edit_requires_authentication | START tests/api/test_pentest.py::TestAccessControlPentest::test_account_edit_requires_authentication
+2026-07-03 00:54:43,455 | INFO     | ai_automation.pentest | Step: GET account/edit without credentials
+2026-07-03 00:54:43,455 | INFO     | ai_automation.pentest | Step: Assert login page shown and personal-details form absent
+2026-07-03 00:54:43,456 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:43,456 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:43,458 | INFO     | ai_automation.test_account_edit_requires_authentication | END   tests/api/test_pentest.py::TestAccessControlPentest::test_account_edit_requires_authentication

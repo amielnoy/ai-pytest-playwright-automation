@@ -1,0 +1,8 @@
+2026-07-03 00:54:40,392 | INFO     | ai_automation.test_search_returns_expected_product_json[MacBook] | START tests/api/test_api_data_driven.py::TestSearchApiJson::test_search_returns_expected_product_json[MacBook]
+2026-07-03 00:54:40,394 | INFO     | ai_automation.api.data_driven | Annotated call: TestSearchApiJson.test_search_returns_expected_product_json(query='MacBook', expected_product='MacBook', min_cards=1)
+2026-07-03 00:54:40,395 | INFO     | ai_automation.api.data_driven | Step: JSON-driven search for 'MacBook' (min_cards=1)
+2026-07-03 00:54:40,395 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,396 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,396 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,397 | INFO     | ai_automation.api.data_driven | Cards: 2, names: ['MacBook', 'MacBook Pro']
+2026-07-03 00:54:40,399 | INFO     | ai_automation.test_search_returns_expected_product_json[MacBook] | END   tests/api/test_api_data_driven.py::TestSearchApiJson::test_search_returns_expected_product_json[MacBook]

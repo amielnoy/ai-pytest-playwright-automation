@@ -1,2 +1,0 @@
-2026-07-03 00:56:33,518 | INFO     | ai_automation.test_search_respects_limit | START tests/web-ui/test_search_under_price.py::TestSearchUnderPrice::test_search_respects_limit@web-ui
-2026-07-03 00:56:35,507 | INFO     | ai_automation.test_search_respects_limit | END   tests/web-ui/test_search_under_price.py::TestSearchUnderPrice::test_search_respects_limit@web-ui

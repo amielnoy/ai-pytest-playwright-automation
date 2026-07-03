@@ -1,2 +1,0 @@
-2026-07-03 00:54:26,891 | INFO     | ai_automation.test_register_page_delegates_full_registration_flow_to_form | START tests/unit/test_page_objects.py::test_register_page_delegates_full_registration_flow_to_form
-2026-07-03 00:54:26,897 | INFO     | ai_automation.test_register_page_delegates_full_registration_flow_to_form | END   tests/unit/test_page_objects.py::test_register_page_delegates_full_registration_flow_to_form

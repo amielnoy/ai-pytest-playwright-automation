@@ -1,2 +1,0 @@
-2026-07-03 00:54:26,354 | INFO     | ai_automation.test_known_id_returns_product | START tests/unit/test_opencart_fallback.py::TestProductById::test_known_id_returns_product
-2026-07-03 00:54:26,355 | INFO     | ai_automation.test_known_id_returns_product | END   tests/unit/test_opencart_fallback.py::TestProductById::test_known_id_returns_product

@@ -1,4 +1,0 @@
-2026-07-03 00:54:27,493 | INFO     | ai_automation.test_rest_client_post_is_excluded_from_default_retry_methods | START tests/unit/test_security_unit.py::test_rest_client_post_is_excluded_from_default_retry_methods
-2026-07-03 00:54:27,493 | INFO     | ai_automation.security.unit | Step: Build RestClient() and inspect HTTPS adapter max_retries
-2026-07-03 00:54:27,493 | INFO     | ai_automation.security.unit | Step: Assert POST not in allowed_methods=frozenset({'HEAD', 'GET', 'OPTIONS'})
-2026-07-03 00:54:27,494 | INFO     | ai_automation.test_rest_client_post_is_excluded_from_default_retry_methods | END   tests/unit/test_security_unit.py::test_rest_client_post_is_excluded_from_default_retry_methods

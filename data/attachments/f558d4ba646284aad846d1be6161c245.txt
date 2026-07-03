@@ -1,0 +1,2 @@
+2026-07-03 00:54:46,881 | INFO     | ai_automation.test_exactly_ten_digits | START tests/unit/test_factories.py::TestTelephoneFormat::test_exactly_ten_digits
+2026-07-03 00:54:46,889 | INFO     | ai_automation.test_exactly_ten_digits | END   tests/unit/test_factories.py::TestTelephoneFormat::test_exactly_ten_digits

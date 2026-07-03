@@ -1,2 +1,0 @@
-2026-07-03 00:54:26,799 | INFO     | ai_automation.test_base_page_navigate_builds_base_and_relative_urls | START tests/unit/test_page_objects.py::test_base_page_navigate_builds_base_and_relative_urls
-2026-07-03 00:54:26,805 | INFO     | ai_automation.test_base_page_navigate_builds_base_and_relative_urls | END   tests/unit/test_page_objects.py::test_base_page_navigate_builds_base_and_relative_urls

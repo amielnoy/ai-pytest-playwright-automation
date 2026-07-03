@@ -1,0 +1,8 @@
+2026-07-03 00:54:40,066 | INFO     | ai_automation.test_cart_page_reflects_api_add | START tests/api/test_api.py::TestCartApi::test_cart_page_reflects_api_add
+2026-07-03 00:54:40,068 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,068 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,069 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,072 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,072 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,073 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,075 | INFO     | ai_automation.test_cart_page_reflects_api_add | END   tests/api/test_api.py::TestCartApi::test_cart_page_reflects_api_add

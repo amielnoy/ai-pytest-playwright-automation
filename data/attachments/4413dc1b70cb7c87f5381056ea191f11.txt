@@ -1,2 +1,0 @@
-2026-07-03 00:54:27,204 | INFO     | ai_automation.test_product_card_reads_fields_and_adds_to_cart | START tests/unit/test_page_objects.py::test_product_card_reads_fields_and_adds_to_cart
-2026-07-03 00:54:27,221 | INFO     | ai_automation.test_product_card_reads_fields_and_adds_to_cart | END   tests/unit/test_page_objects.py::test_product_card_reads_fields_and_adds_to_cart

@@ -1,0 +1,4 @@
+2026-07-03 00:54:40,639 | INFO     | ai_automation.test_new_session_cart_starts_empty | START tests/api/test_api_integrations.py::TestCartApiIntegration::test_new_session_cart_starts_empty
+2026-07-03 00:54:40,643 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,644 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,646 | INFO     | ai_automation.test_new_session_cart_starts_empty | END   tests/api/test_api_integrations.py::TestCartApiIntegration::test_new_session_cart_starts_empty

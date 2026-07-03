@@ -1,0 +1,2 @@
+2026-07-03 00:54:46,221 | INFO     | ai_automation.test_respects_limit | START tests/unit/test_api_client.py::TestParseCards::test_respects_limit
+2026-07-03 00:54:46,223 | INFO     | ai_automation.test_respects_limit | END   tests/unit/test_api_client.py::TestParseCards::test_respects_limit

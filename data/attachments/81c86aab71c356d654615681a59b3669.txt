@@ -1,4 +1,0 @@
-2026-07-03 00:54:18,930 | INFO     | ai_automation.test_search_returns_positive_prices[iPhone] | START tests/api/test_api.py::TestSearchApi::test_search_returns_positive_prices[iPhone]
-2026-07-03 00:54:18,935 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-07-03 00:54:18,936 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
-2026-07-03 00:54:18,938 | INFO     | ai_automation.test_search_returns_positive_prices[iPhone] | END   tests/api/test_api.py::TestSearchApi::test_search_returns_positive_prices[iPhone]

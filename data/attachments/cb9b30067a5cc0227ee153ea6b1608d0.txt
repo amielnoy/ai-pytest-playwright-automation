@@ -1,2 +1,0 @@
-2026-07-03 00:55:46,082 | INFO     | ai_automation.test_empty_cart_page_shows_empty_state | START tests/web-ui/test_navigation_and_empty_states.py::TestNavigationAndEmptyStates::test_empty_cart_page_shows_empty_state@web-ui
-2026-07-03 00:55:52,229 | INFO     | ai_automation.test_empty_cart_page_shows_empty_state | END   tests/web-ui/test_navigation_and_empty_states.py::TestNavigationAndEmptyStates::test_empty_cart_page_shows_empty_state@web-ui

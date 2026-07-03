@@ -1,1 +1,1 @@
-{"id":"e931eb9196fc7252e4dbf14879fcccf6","fullName":"tests.unit.test_factories.TestMakeRegistration#test_email_format","name":"email matches the auto+<hex8>@example.com pattern","status":"passed","testResultsByEnv":{"default":"207d5087d7fe98985e0b020855454816"}}
+{"id":"e931eb9196fc7252e4dbf14879fcccf6","fullName":"tests.unit.test_factories.TestMakeRegistration#test_email_format","name":"email matches the auto+<hex8>@example.com pattern","status":"passed","testResultsByEnv":{"default":"9f68f918785817e068e4dd06674b1382"}}

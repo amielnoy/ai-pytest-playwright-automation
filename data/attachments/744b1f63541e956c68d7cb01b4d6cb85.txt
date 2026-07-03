@@ -1,2 +1,0 @@
-2026-07-03 00:54:26,725 | INFO     | ai_automation.test_extracts_route | START tests/unit/test_opencart_fallback.py::TestRouteFromRequest::test_extracts_route
-2026-07-03 00:54:26,726 | INFO     | ai_automation.test_extracts_route | END   tests/unit/test_opencart_fallback.py::TestRouteFromRequest::test_extracts_route

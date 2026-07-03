@@ -1,0 +1,2 @@
+2026-07-03 00:54:48,214 | INFO     | ai_automation.test_cart_summary_returns_zero_when_total_is_hidden_or_unparseable | START tests/unit/test_page_objects.py::test_cart_summary_returns_zero_when_total_is_hidden_or_unparseable
+2026-07-03 00:54:48,220 | INFO     | ai_automation.test_cart_summary_returns_zero_when_total_is_hidden_or_unparseable | END   tests/unit/test_page_objects.py::test_cart_summary_returns_zero_when_total_is_hidden_or_unparseable

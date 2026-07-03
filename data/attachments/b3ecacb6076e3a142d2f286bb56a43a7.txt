@@ -1,0 +1,2 @@
+2026-07-03 00:54:47,433 | INFO     | ai_automation.test_empty_query_returns_nothing | START tests/unit/test_opencart_fallback.py::TestSearchProducts::test_empty_query_returns_nothing
+2026-07-03 00:54:47,434 | INFO     | ai_automation.test_empty_query_returns_nothing | END   tests/unit/test_opencart_fallback.py::TestSearchProducts::test_empty_query_returns_nothing

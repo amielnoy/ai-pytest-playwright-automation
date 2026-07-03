@@ -1,0 +1,5 @@
+2026-07-03 00:54:43,813 | INFO     | ai_automation.test_login_malformed_input_no_crash_inline[sql_email] | START tests/api/test_pentest_data_driven.py::TestAuthAttackInline::test_login_malformed_input_no_crash_inline[sql_email]
+2026-07-03 00:54:43,814 | INFO     | ai_automation.pentest.data_driven | Step: login attack email="' OR '1'='1'--@x.com"
+2026-07-03 00:54:43,816 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:43,816 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:43,817 | INFO     | ai_automation.test_login_malformed_input_no_crash_inline[sql_email] | END   tests/api/test_pentest_data_driven.py::TestAuthAttackInline::test_login_malformed_input_no_crash_inline[sql_email]

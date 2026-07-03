@@ -1,0 +1,5 @@
+2026-07-03 00:54:44,155 | INFO     | ai_automation.test_injection_payload_in_search_json[path_traversal] | START tests/api/test_pentest_data_driven.py::TestInjectionJson::test_injection_payload_in_search_json[path_traversal]
+2026-07-03 00:54:44,157 | INFO     | ai_automation.pentest.data_driven | Step: JSON injection search category=Path Traversal payload='../../etc/passwd'
+2026-07-03 00:54:44,157 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:44,158 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:44,159 | INFO     | ai_automation.test_injection_payload_in_search_json[path_traversal] | END   tests/api/test_pentest_data_driven.py::TestInjectionJson::test_injection_payload_in_search_json[path_traversal]

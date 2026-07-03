@@ -1,0 +1,4 @@
+INFO     ai_automation.test_search_items_under_price:conftest.py:296 START tests/web-ui/test_search_under_price.py::TestSearchUnderPrice::test_search_items_under_price@web-ui
+INFO     ai_automation.test_search_items_under_price:conftest.py:298 END   tests/web-ui/test_search_under_price.py::TestSearchUnderPrice::test_search_items_under_price@web-ui
+INFO     ai_automation.test_search_items_under_price:conftest.py:296 START tests/web-ui/test_search_under_price.py::TestSearchUnderPrice::test_search_items_under_price@web-ui
+INFO     ai_automation.test_search_items_under_price:conftest.py:298 END   tests/web-ui/test_search_under_price.py::TestSearchUnderPrice::test_search_items_under_price@web-ui

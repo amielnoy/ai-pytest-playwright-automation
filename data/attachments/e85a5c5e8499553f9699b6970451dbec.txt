@@ -1,0 +1,2 @@
+2026-07-03 00:54:48,665 | INFO     | ai_automation.test_primary_returned_as_last_resort_when_all_fail | START tests/unit/test_self_healing.py::TestSelfHealingResolution::test_primary_returned_as_last_resort_when_all_fail
+2026-07-03 00:54:48,667 | INFO     | ai_automation.test_primary_returned_as_last_resort_when_all_fail | END   tests/unit/test_self_healing.py::TestSelfHealingResolution::test_primary_returned_as_last_resort_when_all_fail

@@ -1,0 +1,2 @@
+2026-07-03 00:54:47,045 | INFO     | ai_automation.test_override_max_price_recalculates_max_total | START tests/unit/test_factories.py::TestCartScenarioMath::test_override_max_price_recalculates_max_total
+2026-07-03 00:54:47,046 | INFO     | ai_automation.test_override_max_price_recalculates_max_total | END   tests/unit/test_factories.py::TestCartScenarioMath::test_override_max_price_recalculates_max_total

@@ -1,0 +1,6 @@
+2026-07-03 00:54:40,598 | INFO     | ai_automation.test_search_product_cards_have_ids_and_names | START tests/api/test_api_integrations.py::TestSearchApiIntegration::test_search_product_cards_have_ids_and_names
+2026-07-03 00:54:40,600 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,600 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,600 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,601 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 00:54:40,602 | INFO     | ai_automation.test_search_product_cards_have_ids_and_names | END   tests/api/test_api_integrations.py::TestSearchApiIntegration::test_search_product_cards_have_ids_and_names
