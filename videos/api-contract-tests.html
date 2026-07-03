@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>API &amp; Contract Tests — Animated Explainer</title>
+<style>
+  :root{
+    --bg:#fbf7f2; --bg2:#f8efe6; --card:#ffffff; --border:#e9dccf;
+    --text:#2e2933; --muted:#6e6473; --accent:#c0392b; --accent2:#e07b28;
+    --green:#3e8e57; --yellow:#b07c1f; --red:#c0392b;
+    --code-bg:#332f3f;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{height:100%;}
+  body{font-family:"Heebo","Segoe UI",Arial,sans-serif; background:var(--bg); color:var(--text);
+       display:flex; align-items:center; justify-content:center; overflow:hidden;}
+
+  /* 16:9 stage, screen-record this element */
+  .stage{position:relative; width:min(96vw,1120px); aspect-ratio:16/9; background:
+      radial-gradient(ellipse at top,#f8e2cf 0%,var(--bg) 70%);
+      border:1px solid var(--border); border-radius:18px; overflow:hidden;
+      box-shadow:0 10px 40px rgba(120,80,50,.18);}
+
+  /* clean full-frame capture mode (?rec=1) — stage fills the viewport, chrome hidden */
+  body.rec{display:block;}
+  body.rec .stage{width:100vw; height:100vh; aspect-ratio:auto; border:none;
+      border-radius:0; box-shadow:none;}
+  body.rec .controls,body.rec .brand{display:none;}
+
+  .scene{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center;
+      justify-content:center; gap:18px; padding:6% 8%; text-align:center;
+      opacity:0; transform:translateY(18px); pointer-events:none;
+      transition:opacity .6s ease, transform .6s ease;}
+  .scene.on{opacity:1; transform:none;}
+  .scene h1{font-size:clamp(1.4rem,3.6vw,2.6rem); line-height:1.2;}
+  .scene h1 span{background:linear-gradient(90deg,var(--accent),var(--accent2));
+      -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .scene p{color:var(--muted); font-size:clamp(.9rem,1.8vw,1.15rem); max-width:80%;}
+  .kicker{font-family:monospace; font-size:.8rem; letter-spacing:.14em; text-transform:uppercase;
+      color:var(--accent2); background:var(--card); border:1px solid var(--border);
+      border-radius:999px; padding:5px 14px;}
+
+  code,pre{font-family:"JetBrains Mono",Consolas,monospace;}
+  pre{direction:ltr; text-align:left; background:var(--code-bg); color:#e8e2ef;
+      border-radius:12px; border-top:3px solid var(--accent2); padding:18px 22px;
+      font-size:clamp(.7rem,1.35vw,.95rem); line-height:1.6; box-shadow:0 8px 24px rgba(0,0,0,.18);
+      max-width:92%; overflow:hidden;}
+  .comment{color:#8a93a0;} .kw{color:#ff7b72;} .str{color:#a5d6ff;} .fn{color:#d2a8ff;} .num{color:#79c0ff;}
+
+  /* pyramid */
+  .pyr{display:flex; flex-direction:column; align-items:center; gap:8px;}
+  .pyr .row{border-radius:8px; padding:9px 0; color:#fff; font-weight:700; font-size:clamp(.7rem,1.5vw,1rem);
+      display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow);
+      transform:scaleX(.4); opacity:0; transition:transform .5s ease, opacity .5s ease;}
+  .scene.on .pyr .row{transform:scaleX(1); opacity:1;}
+  .scene.on .pyr .row:nth-child(1){transition-delay:.1s;}
+  .scene.on .pyr .row:nth-child(2){transition-delay:.35s;}
+  .scene.on .pyr .row:nth-child(3){transition-delay:.6s;}
+  .scene.on .pyr .row:nth-child(4){transition-delay:.85s;}
+  .r1{width:180px; background:var(--red);}
+  .r2{width:300px; background:var(--accent2);}
+  .r3{width:420px; background:var(--yellow);}
+  .r4{width:540px; background:var(--green);}
+
+  .cards{display:flex; gap:16px; flex-wrap:wrap; justify-content:center;}
+  .mini{background:var(--card); border:1px solid var(--border); border-radius:12px; padding:14px 18px;
+      box-shadow:0 6px 18px rgba(120,80,50,.12); min-width:160px; max-width:230px;
+      opacity:0; transform:translateY(14px); transition:opacity .5s ease, transform .5s ease;}
+  .scene.on .mini{opacity:1; transform:none;}
+  .scene.on .mini:nth-child(2){transition-delay:.18s;}
+  .scene.on .mini:nth-child(3){transition-delay:.36s;}
+  .mini h4{color:var(--accent); font-size:.95rem; margin-bottom:6px;}
+  .mini p{font-size:.8rem; color:var(--muted); max-width:100%;}
+  .ok{color:var(--green); font-weight:700;} .bad{color:var(--red); font-weight:700;}
+
+  /* progress + controls */
+  .bar{position:absolute; left:0; bottom:0; height:5px; width:0;
+      background:linear-gradient(90deg,var(--accent),var(--accent2)); transition:width .25s linear;}
+  .controls{position:absolute; top:14px; right:16px; display:flex; gap:8px; z-index:5;}
+  .controls button{font:inherit; font-size:.82rem; cursor:pointer; border:1px solid var(--border);
+      background:var(--card); color:var(--text); border-radius:8px; padding:6px 12px; box-shadow:var(--shadow);}
+  .controls button:hover{border-color:var(--accent2);}
+  .cap{position:absolute; left:0; right:0; bottom:22px; text-align:center; padding:0 8%;
+      color:var(--text); font-size:clamp(.8rem,1.7vw,1.05rem); font-weight:500;
+      text-shadow:0 1px 0 #fff; opacity:0; transition:opacity .4s ease;}
+  .cap.on{opacity:1;}
+  .brand{position:absolute; left:16px; top:14px; font-family:monospace; font-size:.78rem;
+      color:var(--muted); z-index:5;}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="brand">AI × Automation × DevOps</div>
+  <div class="controls">
+    <button type="button" id="playBtn" onclick="play()">▶ Play</button>
+    <button type="button" onclick="restart()">↻ Restart</button>
+  </div>
+
+  <!-- 0 hook -->
+  <section class="scene" data-cap="Most of your UI tests don't need a browser at all.">
+    <span class="kicker">API &amp; Contract Tests</span>
+    <h1>Slow tests, breaking for reasons<br><span>that aren't the thing you're testing</span></h1>
+    <p>What if most of them never touched a browser?</p>
+  </section>
+
+  <!-- 1 pyramid -->
+  <section class="scene" data-cap="Push coverage down the pyramid — API tests are faster and steadier.">
+    <span class="kicker">The Test Pyramid</span>
+    <div class="pyr">
+      <div class="row r1">🖥️ UI — few &amp; slow</div>
+      <div class="row r2">📜 Contract</div>
+      <div class="row r3">🔌 API</div>
+      <div class="row r4">⚡ Unit — many &amp; fast</div>
+    </div>
+    <p>Fewer expensive UI tests on top. More coverage in the fast layers below.</p>
+  </section>
+
+  <!-- 2 no raw requests -->
+  <section class="scene" data-cap="Tests never call requests directly — everything goes through the service layer.">
+    <span class="kicker">The Rule</span>
+    <h1>No raw <span>requests</span> in tests</h1>
+    <pre><span class="comment"># services/rest_client.py handles retries + timeout</span>
+<span class="comment"># one service class per endpoint</span>
+results = search_service.<span class="fn">search</span>(<span class="str">"MacBook"</span>)
+<span class="kw">assert</span> results.status_code == HTTP_OK  <span class="comment"># from constants</span></pre>
+    <p>Change the API in <b>one</b> place — not in fifty tests.</p>
+  </section>
+
+  <!-- 3 data-driven -->
+  <section class="scene" data-cap="One test shape, many inputs — parametrize instead of copy-paste.">
+    <span class="kicker">Data-Driven</span>
+    <pre><span class="kw">@pytest</span>.mark.parametrize(<span class="str">"query"</span>, [<span class="str">"MacBook"</span>, <span class="str">"iPhone"</span>, <span class="str">"Samsung"</span>])
+<span class="kw">def</span> <span class="fn">test_search</span>(search_service, query: <span class="kw">str</span>):
+    hits = search_service.<span class="fn">search</span>(query)
+    <span class="kw">assert</span> hits.<span class="fn">count</span>() &gt; <span class="num">0</span></pre>
+    <p>One function → a dozen cases. Status codes live in one constants file.</p>
+  </section>
+
+  <!-- 4 contract -->
+  <section class="scene" data-cap="Contract tests check shape, not behavior — status, fields, parseable IDs and prices.">
+    <span class="kicker">The Quiet Hero</span>
+    <h1>Contract tests check the <span>shape</span></h1>
+    <div class="cards">
+      <div class="mini"><h4>Status</h4><p>Is the code right? <span class="ok">200 ✓</span></p></div>
+      <div class="mini"><h4>Fields</h4><p>Required keys present, no silent drops</p></div>
+      <div class="mini"><h4>Parse</h4><p>Product IDs &amp; prices actually parse</p></div>
+    </div>
+    <p>Map-driven — one assertion shape across many endpoints.</p>
+  </section>
+
+  <!-- 5 why it matters -->
+  <section class="scene" data-cap="When a field name changes, a contract test fails instantly — with a clear reason.">
+    <span class="kicker">Why It Matters</span>
+    <h1>Fail <span>fast</span> and <span>clearly</span></h1>
+    <div class="cards">
+      <div class="mini"><h4 class="bad">Without</h4><p>UI test flakes hours later — <span class="bad">and you guess why</span></p></div>
+      <div class="mini"><h4 class="ok">With</h4><p>Contract test fails now — <span class="ok">"price field missing"</span></p></div>
+    </div>
+  </section>
+
+  <!-- 6 outro -->
+  <section class="scene" data-cap="Fast where it can be, thorough where it must be.">
+    <span class="kicker">The Payoff</span>
+    <h1>Fast where it can be,<br><span>thorough where it must be</span></h1>
+    <p>Let the API layer carry the load. Let contracts guard the shape.
+       Keep the browser for the few flows that truly need it.</p>
+  </section>
+
+  <div class="cap" id="cap"></div>
+  <div class="bar" id="bar"></div>
+</div>
+
+<script>
+  // scene durations in ms — total ≈ 75s, tuned to the narration script.
+  // A recorder can override exact timing via ?dur=ms,ms,... (keeps voice in sync).
+  const _p = new URLSearchParams(location.search);
+  const _durOverride = _p.get('dur');
+  const DUR = _durOverride
+    ? _durOverride.split(',').map(Number)
+    : [6000, 9000, 11000, 11000, 12000, 10000, 12000];
+  const scenes = [...document.querySelectorAll('.scene')];
+  const cap = document.getElementById('cap');
+  const bar = document.getElementById('bar');
+  const playBtn = document.getElementById('playBtn');
+  let i = 0, timer = null, tick = null, playing = false;
+
+  function showScene(n){
+    scenes.forEach((s, k) => s.classList.toggle('on', k === n));
+    cap.textContent = scenes[n].dataset.cap || '';
+    cap.classList.add('on');
+    // animate progress bar across this scene
+    const total = DUR.reduce((a,b)=>a+b,0);
+    const before = DUR.slice(0,n).reduce((a,b)=>a+b,0);
+    let start = null;
+    cancelAnimationFrame(tick);
+    const step = ts => {
+      if (start === null) start = ts;
+      const p = Math.min((ts - start) / DUR[n], 1);
+      bar.style.width = ((before + p*DUR[n]) / total * 100) + '%';
+      if (p < 1 && playing) tick = requestAnimationFrame(step);
+    };
+    tick = requestAnimationFrame(step);
+  }
+
+  function next(){
+    if (i >= scenes.length - 1){ playing = false; playBtn.textContent = '↻ Replay'; return; }
+    i++; showScene(i);
+    timer = setTimeout(next, DUR[i]);
+  }
+
+  function play(){
+    if (playing) return;
+    if (i >= scenes.length - 1) return restart();
+    playing = true; playBtn.textContent = '▮▮ Playing';
+    showScene(i);
+    timer = setTimeout(next, DUR[i]);
+  }
+
+  function restart(){
+    clearTimeout(timer); cancelAnimationFrame(tick);
+    i = 0; playing = true; playBtn.textContent = '▮▮ Playing';
+    bar.style.width = '0%';
+    showScene(0);
+    timer = setTimeout(next, DUR[0]);
+  }
+
+  showScene(0); // show first frame paused
+
+  // recorder hooks: ?rec=1 clean frame, ?autoplay=1 starts without a click
+  if (_p.get('rec')) document.body.classList.add('rec');
+  if (_p.get('autoplay')) requestAnimationFrame(() => requestAnimationFrame(play));
+</script>
+</body>
+</html>
