@@ -181,21 +181,13 @@ jobs:
           name: allure-results
           path: allure-results/
 
-      - name: Checkout gh-pages history
-        uses: actions/checkout@v4
+      - name: Restore Allure history (trend charts)
+        uses: actions/cache@v4
         with:
-          ref: gh-pages
-          path: gh-pages-prev
-        continue-on-error: true
-
-      - name: Restore Allure history for trend charts
-        run: |
-          if [ -d gh-pages-prev/allure-history ]; then
-            cp -r gh-pages-prev/allure-history ./allure-history
-            echo "History restored from previous run."
-          else
-            echo "No previous history found — first run."
-          fi
+          path: allure-history
+          key: allure-history-${{ github.run_id }}
+          restore-keys: |
+            allure-history-
 
       - name: Set up Node.js 20
         uses: actions/setup-node@v4
@@ -207,12 +199,6 @@ jobs:
 
       - name: Generate Allure 3 report
         run: npx allure generate allure-results
-
-      - name: Persist history for next run
-        run: |
-          if [ -d allure-history ]; then
-            cp -r allure-history allure-report/allure-history
-          fi
 
       - name: Copy architecture.html into report
         run: cp architecture.html allure-report/architecture.html
@@ -244,21 +230,25 @@ jobs:
           > The report may take a minute to appear after the first deploy while GitHub Pages activates.
           EOF
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: allure-report
-          publish_branch: gh-pages
-          keep_files: false
-          commit_message: "ci: Allure report run #${{ github.run_number }} [${{ github.sha }}]"
+          path: allure-report
 
-      - name: Ensure GitHub Pages source is gh-pages root
-        if: success()
-        run: |
-          curl -X PUT \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Content-Type: application/json" \
-            https://api.github.com/repos/${{ github.repository }}/pages \
-            -d '{"source":{"branch":"gh-pages","path":"/"}}'
+  # --- Job 3: deploy the report to GitHub Pages (official artifact flow) ---
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: report
+    runs-on: ubuntu-latest
+    # Dedicated Pages concurrency so deployments serialize instead of cancelling
+    # each other mid-sync (the cause of "Deployment failed, try again later").
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
