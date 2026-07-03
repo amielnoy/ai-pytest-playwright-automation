@@ -26,25 +26,75 @@ const $ = id => document.getElementById(id);
 const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g,
   c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
+/* True when the text contains Hebrew — used to flip generated resumes to RTL. */
+const isRtlText = t => /[֐-׿]/.test(t);
+
+/* Each provider is a self-contained strategy: label/placeholder/models for the
+   UI, plus validateKey/build/parse/keyHint for the request. Adding a provider is
+   a new entry here — callClaude never changes (Open/Closed). */
 const PROVIDERS = {
   gemini: {
     label: __S.keyLabelGemini,
     placeholder: "AIza...",
-    models: ["gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.5-pro"]
+    models: ["gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.5-pro"],
+    build(key, model, system, messages, maxTokens) {
+      const generationConfig = { maxOutputTokens: maxTokens };
+      if (model.includes("flash")) generationConfig.thinkingConfig = { thinkingBudget: 0 };
+      return {
+        url: "https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent",
+        headers: { "content-type": "application/json", "x-goog-api-key": key },
+        body: {
+          system_instruction: { parts: [{ text: system }] },
+          contents: messages.map(m => ({
+            role: m.role === "assistant" ? "model" : "user",
+            parts: [{ text: m.content }]
+          })),
+          generationConfig
+        }
+      };
+    },
+    parse: d => (d.candidates?.[0]?.content?.parts || []).map(p => p.text || "").join("\n"),
+    keyHint: (key, status) =>
+      [400, 401, 403].includes(status) && !key.startsWith("AIza") ? __S.errGeminiKeyHint : ""
   },
   anthropic: {
     label: __S.keyLabelAnthropic,
     placeholder: "sk-ant-...",
-    models: ["claude-sonnet-5", "claude-haiku-4-5-20251001"]
+    models: ["claude-sonnet-5", "claude-haiku-4-5-20251001"],
+    validateKey(key) { if (!key.startsWith("sk-ant-")) throw new Error(__S.errKeyNotAnthropic); },
+    build(key, model, system, messages, maxTokens) {
+      return {
+        url: "https://api.anthropic.com/v1/messages",
+        headers: {
+          "content-type": "application/json",
+          "x-api-key": key,
+          "anthropic-version": "2023-06-01",
+          "anthropic-dangerous-direct-browser-access": "true"
+        },
+        body: { model, max_tokens: maxTokens, system, messages }
+      };
+    },
+    parse: d => d.content.filter(b => b.type === "text").map(b => b.text).join("\n")
   },
   openai: {
     label: __S.keyLabelOpenai,
     placeholder: "sk-...",
-    models: ["gpt-5-mini", "gpt-5.4-mini", "gpt-5.4"]
+    models: ["gpt-5-mini", "gpt-5.4-mini", "gpt-5.4"],
+    validateKey(key) { if (key.startsWith("sk-ant-")) throw new Error(__S.errKeyNotOpenai); },
+    build(key, model, system, messages, maxTokens) {
+      return {
+        url: "https://api.openai.com/v1/chat/completions",
+        headers: { "content-type": "application/json", "Authorization": "Bearer " + key },
+        body: { model, max_completion_tokens: maxTokens, messages: [{ role: "system", content: system }, ...messages] }
+      };
+    },
+    parse: d => d.choices?.[0]?.message?.content || ""
   }
 };
 
 function currentProvider() { return $("providerSel").value; }
+/* localStorage slot holding the user's own key for the active provider. */
+function providerKeyStore() { return "ata_key_" + currentProvider(); }
 
 /* keys loaded from .env (works when the page is served over http, e.g. python3 -m http.server) */
 const envKeys = {};
@@ -73,7 +123,7 @@ function applyKeyMode() {
   // default state (until the user touches the box): UI-saved key wins first,
   // then the .env key; own-key mode when there's no .env key at all.
   if (!ownKeyTouched)
-    $("useOwnKey").checked = !!localStorage.getItem("ata_key_" + currentProvider()) || !envKey;
+    $("useOwnKey").checked = !!localStorage.getItem(providerKeyStore()) || !envKey;
   const own = $("useOwnKey").checked;
   $("useOwnKey").disabled = !envKey;                 // can't turn off what doesn't exist
   $("ownKeyRow").style.opacity = envKey ? "1" : ".5";
@@ -81,7 +131,7 @@ function applyKeyMode() {
   $("apiKey").disabled = !own;
   $("apiKey").placeholder = own ? p.placeholder : __S.placeholderEnvKey;
   if (own) {
-    $("apiKey").value = localStorage.getItem("ata_key_" + currentProvider()) || "";
+    $("apiKey").value = localStorage.getItem(providerKeyStore()) || "";
     $("apiKeyLabel").textContent = p.label;
   } else {
     $("apiKey").value = envKey;
@@ -102,54 +152,14 @@ $("providerSel").value = localStorage.getItem("ata_provider") || "gemini";
 onProviderChange();
 $("providerSel").addEventListener("change", () => localStorage.setItem("ata_provider", currentProvider()));
 $("apiKey").addEventListener("change", () =>
-  localStorage.setItem("ata_key_" + currentProvider(), $("apiKey").value.trim()));
+  localStorage.setItem(providerKeyStore(), $("apiKey").value.trim()));
 
 async function callClaude(system, messages, maxTokens = 2500) {
   const key = $("apiKey").value.trim();
   if (!key) throw new Error(__S.errNoKey);
-  if (currentProvider() === "anthropic" && !key.startsWith("sk-ant-"))
-    throw new Error(__S.errKeyNotAnthropic);
-  if (currentProvider() === "openai" && key.startsWith("sk-ant-"))
-    throw new Error(__S.errKeyNotOpenai);
-  const model = $("modelSel").value;
-  let url, headers, body, parse;
-
-  if (currentProvider() === "anthropic") {
-    url = "https://api.anthropic.com/v1/messages";
-    headers = {
-      "content-type": "application/json",
-      "x-api-key": key,
-      "anthropic-version": "2023-06-01",
-      "anthropic-dangerous-direct-browser-access": "true"
-    };
-    body = { model, max_tokens: maxTokens, system, messages };
-    parse = d => d.content.filter(b => b.type === "text").map(b => b.text).join("\n");
-  } else if (currentProvider() === "gemini") {
-    url = "https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent";
-    headers = { "content-type": "application/json", "x-goog-api-key": key };
-    body = {
-      system_instruction: { parts: [{ text: system }] },
-      contents: messages.map(m => ({
-        role: m.role === "assistant" ? "model" : "user",
-        parts: [{ text: m.content }]
-      })),
-      generationConfig: { maxOutputTokens: maxTokens }
-    };
-    if (model.includes("flash")) body.generationConfig.thinkingConfig = { thinkingBudget: 0 };
-    parse = d => (d.candidates?.[0]?.content?.parts || []).map(p => p.text || "").join("\n");
-  } else {
-    url = "https://api.openai.com/v1/chat/completions";
-    headers = {
-      "content-type": "application/json",
-      "Authorization": "Bearer " + key
-    };
-    body = {
-      model,
-      max_completion_tokens: maxTokens,
-      messages: [{ role: "system", content: system }, ...messages]
-    };
-    parse = d => (d.choices?.[0]?.message?.content) || "";
-  }
+  const provider = PROVIDERS[currentProvider()];
+  provider.validateKey?.(key);
+  const { url, headers, body } = provider.build(key, $("modelSel").value, system, messages, maxTokens);
 
   let res;
   try {
@@ -163,12 +173,10 @@ async function callClaude(system, messages, maxTokens = 2500) {
   }
   if (!res.ok) {
     const errBody = await res.text();
-    let hint = "";
-    if (currentProvider() === "gemini" && [400, 401, 403].includes(res.status) && !key.startsWith("AIza"))
-      hint = __S.errGeminiKeyHint;
+    const hint = provider.keyHint ? provider.keyHint(key, res.status) : "";
     throw new Error(__S.errApiPrefix + res.status + "): " + errBody.slice(0, 300) + hint);
   }
-  return parse(await res.json());
+  return provider.parse(await res.json());
 }
 
 function resetSettings() {
@@ -343,7 +351,7 @@ async function showImprovedResume() {
   try {
     const text = await ensureImprovedResume();
     $("improvedText").textContent = text;
-    $("improvedText").dir = /[֐-׿]/.test(text) ? "rtl" : "ltr";
+    $("improvedText").dir = isRtlText(text) ? "rtl" : "ltr";
     $("improvedWrap").style.display = "block";
     $("improvedWrap").scrollIntoView({ behavior: "smooth", block: "start" });
   } catch (e) { $("improvedErr").textContent = e.message; }
@@ -356,7 +364,7 @@ async function downloadImprovedPdf() {
   btn.disabled = true; btn.textContent = __S.btnPreparingPdf;
   try {
     const text = await ensureImprovedResume();
-    const rtl = /[֐-׿]/.test(text);
+    const rtl = isRtlText(text);
     const w = window.open("", "_blank");
     if (!w) throw new Error(__S.errPopupBlocked);
     w.document.title = "Resume — " + lastEval.role;
@@ -484,7 +492,6 @@ document.querySelectorAll(".video-card").forEach(card => {
 
 /* ---------- UI/UX enhancement layer ---------- */
 (function(){
-  const $ = id => document.getElementById(id);
   const root = document.documentElement;
 
   /* theme — saved choice, else OS preference */
