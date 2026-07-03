@@ -11,12 +11,12 @@ from services.api.opencart_fallback import (
     response,
     product_by_id,
 )
-from services.rest_client import RestClient
+from services.http_client import HttpClient
 from utils.price_parser import parse_price
 
 
 class CartService:
-    def __init__(self, client: RestClient, base_url: str):
+    def __init__(self, client: HttpClient, base_url: str):
         self.client = client
         self.base_url = base_url
 

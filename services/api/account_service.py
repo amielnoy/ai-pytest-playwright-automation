@@ -1,10 +1,10 @@
 from requests import Response
 
-from services.rest_client import RestClient
+from services.http_client import HttpClient
 
 
 class AccountService:
-    def __init__(self, client: RestClient, base_url: str):
+    def __init__(self, client: HttpClient, base_url: str):
         self.client = client
         self.base_url = base_url
 

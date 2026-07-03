@@ -13,19 +13,11 @@ from contextlib import closing
 from dataclasses import dataclass
 from urllib.parse import urlencode
 
-from services.rest_client import RestClient
+from services.rest_client import DEFAULT_HEADERS, RestClient
 from utils.price_parser import parse_price
 
-_HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/124.0.0.0 Safari/537.36"
-    ),
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-    "Accept-Language": "en-US,en;q=0.9",
-    "X-Requested-With": "XMLHttpRequest",
-}
+# Same browser-like headers as RestClient, plus the AJAX marker OpenCart expects.
+_HEADERS = {**DEFAULT_HEADERS, "X-Requested-With": "XMLHttpRequest"}
 
 
 @dataclass
