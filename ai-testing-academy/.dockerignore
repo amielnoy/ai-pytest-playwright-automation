@@ -1,0 +1,7 @@
+Dockerfile
+.dockerignore
+render_api_contract_video.py
+__pycache__/
+**/__pycache__/
+videos/_build/
+videos/*-narration.md
