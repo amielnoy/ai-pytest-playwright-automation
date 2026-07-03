@@ -24,11 +24,11 @@
   a{color:var(--accent); text-decoration:none;}
 
   /* NAV — vertical sidebar docked to the right */
-  nav{position:fixed; top:0; right:0; bottom:0; width:212px; z-index:50;
+  nav{position:fixed; top:0; right:0; bottom:0; width:280px; z-index:50;
       background:rgba(250,248,245,.97); backdrop-filter:blur(8px);
       border-left:1px solid var(--border); display:flex; flex-direction:column;
       gap:6px; align-items:stretch; padding:22px 14px; overflow-y:auto;}
-  nav .logo{font-weight:800; font-size:1rem; background:linear-gradient(90deg,var(--accent),var(--accent2));
+  nav .logo{font-weight:800; font-size:1rem; white-space:nowrap; background:linear-gradient(90deg,var(--accent),var(--accent2));
       -webkit-background-clip:text; background-clip:text; color:transparent;}
   nav a.link{color:var(--muted); font-size:.95rem; font-weight:700; padding:10px 14px; border-radius:10px; display:block;}
   nav a.link:hover{color:var(--text); background:var(--card); box-shadow:var(--shadow);}
@@ -37,7 +37,7 @@
   nav .nav-group{font-size:1.1rem; letter-spacing:.03em; text-transform:uppercase; color:var(--text);
       opacity:.85; font-weight:800; padding:16px 14px 5px;}
   nav .nav-group:first-of-type{padding-top:2px;}
-  header,main,footer{margin-right:212px; margin-left:0;} /* clear the sidebar — physically on the right */
+  header,main,footer{margin-right:280px; margin-left:0;} /* clear the sidebar — physically on the right */
   section{scroll-margin-top:20px;}
   /* mobile nav is handled by the off-canvas drawer in the enhancement layer below */
 
