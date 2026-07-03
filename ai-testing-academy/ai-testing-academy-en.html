@@ -475,7 +475,7 @@ npm run allure:open       <span class="comment"># opens it in the browser</span>
     </a>
     <div class="card video-card" data-src="videos/intro-automation.mp4">
       <h4>🎭 UI Automation with Playwright</h4>
-      <p>A full registration test run, POM structure and fixtures · <a href="docs/tutorials/ui-automation-playwright-for-beginners.md" target="_blank">📖 Written beginner tutorial</a></p>
+      <p>A full registration test run, POM structure and fixtures · <a href="../docs/tutorials/ui-automation-playwright-for-beginners.md" target="_blank">📖 Written beginner tutorial</a></p>
     </div>
     <div class="card video-card" data-src="videos/api-contract-tests.mp4">
       <h4>🔌 API & Contract Tests</h4>
@@ -622,7 +622,7 @@ const ENV_VAR_BY_PROVIDER = { gemini: "GEMINI_API_KEY", anthropic: "ANTHROPIC_AP
 
 async function loadEnvFile() {
   try {
-    const res = await fetch(".env", { cache: "no-store" });
+    const res = await fetch("../.env", { cache: "no-store" });
     if (!res.ok) return;
     for (const line of (await res.text()).split("\n")) {
       const m = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.+?)\s*$/);

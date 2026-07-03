@@ -20,7 +20,7 @@ This repository also includes a 30-session automation QA course plus a Git basic
 
 A shorter, three-session **AI Testing Learning Series** lives under [`docs/learning/`](docs/learning/README.md), and a beginner Playwright walkthrough is in [`docs/tutorials/`](docs/tutorials/ui-automation-playwright-for-beginners.md).
 
-The **AI Testing Academy** landing pages present the framework with live in-browser AI agents (a QA-Automation resume evaluator and an interview-prep helper). Open [`ai-testing-academy.html`](ai-testing-academy.html) (Hebrew) or [`ai-testing-academy-en.html`](ai-testing-academy-en.html) (English). Short explainer clips for the site are kept in [`videos/`](videos/README.md).
+The **AI Testing Academy** landing pages present the framework with live in-browser AI agents (a QA-Automation resume evaluator and an interview-prep helper). Open [`ai-testing-academy/ai-testing-academy.html`](ai-testing-academy/ai-testing-academy.html) (Hebrew) or [`ai-testing-academy/ai-testing-academy-en.html`](ai-testing-academy/ai-testing-academy-en.html) (English). Short explainer clips for the site are kept in [`ai-testing-academy/videos/`](ai-testing-academy/videos/README.md).
 
 ## Project Layout
 
@@ -39,9 +39,8 @@ services/     API service clients
 stds/         Test standards and generated page snapshot source docs
 tests/        API, contract, unit, and web UI tests
 utils/        Shared utilities
-assets/       Logos and shared static assets
 course/       Training material and teaching examples
-videos/       Explainer video clips for the learning site
+ai-testing-academy/  Landing pages, explainer videos, and logos for the learning site
 artifacts/    Generated or captured artifacts kept out of core code paths
 monitoring/   Prometheus and Grafana configuration
 ```

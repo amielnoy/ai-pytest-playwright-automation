@@ -26,5 +26,5 @@ Each session: ~20 min instructor walkthrough, ~50 min guided hands-on, ~15 min e
 
 ## Related material
 
-- **AI Testing Academy** landing pages with live in-browser AI agents (a QA-Automation resume evaluator and an interview-prep helper): [`../../ai-testing-academy.html`](../../ai-testing-academy.html) (Hebrew) and [`../../ai-testing-academy-en.html`](../../ai-testing-academy-en.html) (English). Short explainer clips live in [`../../videos/`](../../videos/README.md).
+- **AI Testing Academy** landing pages with live in-browser AI agents (a QA-Automation resume evaluator and an interview-prep helper): [`../../ai-testing-academy/ai-testing-academy.html`](../../ai-testing-academy/ai-testing-academy.html) (Hebrew) and [`../../ai-testing-academy/ai-testing-academy-en.html`](../../ai-testing-academy/ai-testing-academy-en.html) (English). Short explainer clips live in [`../../ai-testing-academy/videos/`](../../ai-testing-academy/videos/README.md).
 - **Log analysis notebook** — [`../../notebooks/load_logs_with_pandas.ipynb`](../../notebooks/load_logs_with_pandas.ipynb) loads `logs/automation.log` into pandas for quick summaries (pairs well with Session 1's first test run).

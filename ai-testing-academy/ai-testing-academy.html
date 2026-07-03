@@ -471,7 +471,7 @@ npm run allure:open       <span class="comment"># פותח בדפדפן</span></
   <div class="grid" id="videoGrid">
     <div class="card video-card" data-src="videos/intro-automation.mp4">
       <h4>🎭 אוטומציית UI עם Playwright</h4>
-      <p>הרצת בדיקת רישום מלאה, מבנה ה-POM וה-fixtures · <a href="docs/tutorials/ui-automation-playwright-for-beginners.md" target="_blank">📖 מדריך כתוב למתחילים</a></p>
+      <p>הרצת בדיקת רישום מלאה, מבנה ה-POM וה-fixtures · <a href="../docs/tutorials/ui-automation-playwright-for-beginners.md" target="_blank">📖 מדריך כתוב למתחילים</a></p>
     </div>
     <div class="card video-card" data-src="videos/api-contract-tests.mp4">
       <h4>🔌 בדיקות API ו-Contract</h4>
@@ -618,7 +618,7 @@ const ENV_VAR_BY_PROVIDER = { gemini: "GEMINI_API_KEY", anthropic: "ANTHROPIC_AP
 
 async function loadEnvFile() {
   try {
-    const res = await fetch(".env", { cache: "no-store" });
+    const res = await fetch("../.env", { cache: "no-store" });
     if (!res.ok) return;
     for (const line of (await res.text()).split("\n")) {
       const m = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.+?)\s*$/);
