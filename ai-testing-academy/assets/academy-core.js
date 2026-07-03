@@ -28,17 +28,17 @@ const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g,
 
 const PROVIDERS = {
   gemini: {
-    label: __S.k0,
+    label: __S.keyLabelGemini,
     placeholder: "AIza...",
     models: ["gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.5-pro"]
   },
   anthropic: {
-    label: __S.k1,
+    label: __S.keyLabelAnthropic,
     placeholder: "sk-ant-...",
     models: ["claude-sonnet-5", "claude-haiku-4-5-20251001"]
   },
   openai: {
-    label: __S.k2,
+    label: __S.keyLabelOpenai,
     placeholder: "sk-...",
     models: ["gpt-5-mini", "gpt-5.4-mini", "gpt-5.4"]
   }
@@ -79,13 +79,13 @@ function applyKeyMode() {
   $("ownKeyRow").style.opacity = envKey ? "1" : ".5";
 
   $("apiKey").disabled = !own;
-  $("apiKey").placeholder = own ? p.placeholder : __S.k3;
+  $("apiKey").placeholder = own ? p.placeholder : __S.placeholderEnvKey;
   if (own) {
     $("apiKey").value = localStorage.getItem("ata_key_" + currentProvider()) || "";
     $("apiKeyLabel").textContent = p.label;
   } else {
     $("apiKey").value = envKey;
-    $("apiKeyLabel").textContent = p.label.replace(__S.k4, __S.k5);
+    $("apiKeyLabel").textContent = p.label.replace(__S.labelSuffixLocal, __S.labelSuffixEnv);
   }
 }
 
@@ -106,11 +106,11 @@ $("apiKey").addEventListener("change", () =>
 
 async function callClaude(system, messages, maxTokens = 2500) {
   const key = $("apiKey").value.trim();
-  if (!key) throw new Error(__S.k6);
+  if (!key) throw new Error(__S.errNoKey);
   if (currentProvider() === "anthropic" && !key.startsWith("sk-ant-"))
-    throw new Error(__S.k7);
+    throw new Error(__S.errKeyNotAnthropic);
   if (currentProvider() === "openai" && key.startsWith("sk-ant-"))
-    throw new Error(__S.k8);
+    throw new Error(__S.errKeyNotOpenai);
   const model = $("modelSel").value;
   let url, headers, body, parse;
 
@@ -156,17 +156,17 @@ async function callClaude(system, messages, maxTokens = 2500) {
     res = await fetch(url, { method: "POST", headers, body: JSON.stringify(body) });
   } catch (e) {
     throw new Error(
-      __S.k9 + new URL(url).host + __S.k10 +
-      __S.k11 +
-      __S.k12 +
-      __S.k13);
+      __S.errBlockedPrefix + new URL(url).host + __S.errBlockedMid +
+      __S.errBlockedCauses +
+      __S.errBlockedTry +
+      __S.errBlockedOpenUrl);
   }
   if (!res.ok) {
     const errBody = await res.text();
     let hint = "";
     if (currentProvider() === "gemini" && [400, 401, 403].includes(res.status) && !key.startsWith("AIza"))
-      hint = __S.k14;
-    throw new Error(__S.k15 + res.status + "): " + errBody.slice(0, 300) + hint);
+      hint = __S.errGeminiKeyHint;
+    throw new Error(__S.errApiPrefix + res.status + "): " + errBody.slice(0, 300) + hint);
   }
   return parse(await res.json());
 }
@@ -178,10 +178,10 @@ function resetSettings() {
 
 async function testConnection() {
   const el = $("connStatus");
-  el.style.color = "var(--muted)"; el.textContent = __S.k16;
+  el.style.color = "var(--muted)"; el.textContent = __S.statusTesting;
   try {
-    const reply = await callClaude(__S.k17, [{ role: "user", content: __S.k18 }], 20);
-    el.style.color = "var(--green)"; el.textContent = __S.k19 + $("modelSel").value + "): " + reply.slice(0, 40);
+    const reply = await callClaude(__S.pingSystem, [{ role: "user", content: __S.pingUser }], 20);
+    el.style.color = "var(--green)"; el.textContent = __S.statusOkPrefix + $("modelSel").value + "): " + reply.slice(0, 40);
   } catch (e) {
     el.style.color = "var(--red)"; el.textContent = "❌ " + e.message;
   }
@@ -191,7 +191,7 @@ function extractJSON(text) {
   const fenced = text.match(/```(?:json)?\s*([\s\S]*?)```/);
   const raw = fenced ? fenced[1] : text;
   const start = raw.indexOf("{"), end = raw.lastIndexOf("}");
-  if (start === -1 || end === -1) throw new Error(__S.k20);
+  if (start === -1 || end === -1) throw new Error(__S.errNoJson);
   return JSON.parse(raw.slice(start, end + 1));
 }
 
@@ -213,7 +213,7 @@ async function loadFirst(urls, globalName) {
     try { await loadScript(u); if (window[globalName]) return u; }
     catch (e) { errors.push(e.message); }
   }
-  throw new Error(__S.k21 + errors.join("\n"));
+  throw new Error(__S.errCdnFail + errors.join("\n"));
 }
 
 const PDFJS_V = "3.11.174", MAMMOTH_V = "1.8.0";
@@ -256,20 +256,20 @@ window.addEventListener("load", () => {
 async function handleResumeFile(file) {
   if (!file) return;
   $("resumeErr").textContent = "";
-  $("uploadLabel").textContent = __S.k22 + file.name + "...";
+  $("uploadLabel").textContent = __S.uploadReading + file.name + "...";
   try {
     const ext = file.name.split(".").pop().toLowerCase();
     let text;
     if (ext === "pdf") text = await extractPdf(file);
     else if (ext === "docx") text = await extractDocx(file);
     else if (ext === "txt") text = await file.text();
-    else throw new Error(__S.k23 + ext + __S.k24);
+    else throw new Error(__S.errFormatPrefix + ext + __S.errFormatSuffix);
     text = text.replace(/[ \t]+/g, " ").replace(/\n{3,}/g, "\n\n").trim();
-    if (text.length < 40) throw new Error(__S.k25);
+    if (text.length < 40) throw new Error(__S.errExtractFail);
     $("resumeText").value = text;
-    $("uploadLabel").textContent = "✅ " + file.name + __S.k26 + text.length + __S.k27;
+    $("uploadLabel").textContent = "✅ " + file.name + __S.uploadLoadedMid + text.length + __S.uploadLoadedSuffix;
   } catch (e) {
-    $("uploadLabel").textContent = __S.k28;
+    $("uploadLabel").textContent = __S.uploadPrompt;
     $("resumeErr").textContent = e.message;
   }
 }
@@ -289,13 +289,13 @@ let improvedResume = null;
 async function evaluateResume() {
   const txt = $("resumeText").value.trim();
   $("resumeErr").textContent = "";
-  if (txt.length < 80) { $("resumeErr").textContent = __S.k29; return; }
+  if (txt.length < 80) { $("resumeErr").textContent = __S.errResumeEmpty; return; }
   const btn = $("resumeBtn");
-  btn.disabled = true; btn.innerHTML = __S.k30;
+  btn.disabled = true; btn.innerHTML = __S.btnEvaluating;
   try {
     const role = $("targetRole").value.trim() || "QA Automation Engineer";
     const reply = await callClaude(RESUME_SYSTEM,
-      [{ role: "user", content: __S.k31 + role + __S.k32 + txt }]);
+      [{ role: "user", content: __S.promptRolePrefix + role + __S.promptResumeLabel + txt }]);
     const r = extractJSON(reply);
     $("resumeScore").textContent = r.overall;
     $("resumeScore").style.borderColor = r.overall >= 75 ? "var(--green)" : r.overall >= 50 ? "var(--yellow)" : "var(--red)";
@@ -312,7 +312,7 @@ async function evaluateResume() {
     $("improvedWrap").style.display = "none";
     $("resumeResult").style.display = "block";
   } catch (e) { $("resumeErr").textContent = e.message; }
-  btn.disabled = false; btn.textContent = __S.k33;
+  btn.disabled = false; btn.textContent = __S.btnEvaluate;
 }
 
 /* ---------- Improved resume: generate / show / download as PDF ---------- */
@@ -320,14 +320,14 @@ const IMPROVE_SYSTEM = L.prompts.improve;
 
 async function ensureImprovedResume() {
   if (improvedResume) return improvedResume;
-  if (!lastEval) throw new Error(__S.k34);
+  if (!lastEval) throw new Error(__S.errNoEval);
   const jd = ($("jobDesc") ? $("jobDesc").value : "").trim();
   const reply = await callClaude(IMPROVE_SYSTEM, [{
     role: "user",
-    content: __S.k35 + lastEval.role +
-      (jd ? __S.k36 + jd : "") +
-      __S.k37 + JSON.stringify({ gaps: lastEval.evaluation.gaps, recommendations: lastEval.evaluation.recommendations }) +
-      __S.k38 + lastEval.resume
+    content: __S.promptRolePrefixImprove + lastEval.role +
+      (jd ? __S.promptJobDescLabel + jd : "") +
+      __S.promptEvalResultsLabel + JSON.stringify({ gaps: lastEval.evaluation.gaps, recommendations: lastEval.evaluation.recommendations }) +
+      __S.promptOriginalResumeLabel + lastEval.resume
   }], 4000);
   improvedResume = reply.trim();
   return improvedResume;
@@ -339,7 +339,7 @@ if ($("jobDesc")) $("jobDesc").addEventListener("input", () => { improvedResume 
 async function showImprovedResume() {
   const btn = $("improveBtn");
   $("improvedErr").textContent = "";
-  btn.disabled = true; btn.innerHTML = __S.k39;
+  btn.disabled = true; btn.innerHTML = __S.btnImproving;
   try {
     const text = await ensureImprovedResume();
     $("improvedText").textContent = text;
@@ -347,18 +347,18 @@ async function showImprovedResume() {
     $("improvedWrap").style.display = "block";
     $("improvedWrap").scrollIntoView({ behavior: "smooth", block: "start" });
   } catch (e) { $("improvedErr").textContent = e.message; }
-  btn.disabled = false; btn.textContent = __S.k40;
+  btn.disabled = false; btn.textContent = __S.btnBuildResume;
 }
 
 async function downloadImprovedPdf() {
   const btn = $("pdfBtn");
   $("improvedErr").textContent = "";
-  btn.disabled = true; btn.textContent = __S.k41;
+  btn.disabled = true; btn.textContent = __S.btnPreparingPdf;
   try {
     const text = await ensureImprovedResume();
     const rtl = /[֐-׿]/.test(text);
     const w = window.open("", "_blank");
-    if (!w) throw new Error(__S.k42);
+    if (!w) throw new Error(__S.errPopupBlocked);
     w.document.title = "Resume — " + lastEval.role;
     w.document.documentElement.lang = rtl ? "he" : "en";
     w.document.documentElement.dir = rtl ? "rtl" : "ltr";
@@ -371,7 +371,7 @@ async function downloadImprovedPdf() {
     w.focus();
     setTimeout(() => w.print(), 400);  // in the dialog choose "Save as PDF"
   } catch (e) { $("improvedErr").textContent = e.message; }
-  btn.disabled = false; btn.textContent = __S.k43;
+  btn.disabled = false; btn.textContent = __S.btnDownloadPdf;
 }
 
 /* ---------- Agent 2: Interview readiness ---------- */
@@ -390,7 +390,7 @@ function addMsg(cls, text) {
 }
 
 async function agentTurn() {
-  const thinking = addMsg("sys", __S.k44);
+  const thinking = addMsg("sys", __S.statusInterviewerThinking);
   try {
     const reply = await callClaude(INTERVIEW_SYSTEM, chat, 1500);
     thinking.remove();
@@ -404,13 +404,13 @@ async function agentTurn() {
 
 async function startInterview() {
   $("chatErr").textContent = "";
-  if (!$("apiKey").value.trim()) { $("chatErr").textContent = __S.k45; return; }
+  if (!$("apiKey").value.trim()) { $("chatErr").textContent = __S.errNoKeyInterview; return; }
   $("chatBox").innerHTML = "";
-  chat = [{ role: "user", content: __S.k46 }];
+  chat = [{ role: "user", content: __S.interviewOpener }];
   interviewOn = true;
   $("chatInput").disabled = false; $("sendBtn").disabled = false; $("verdictBtn").disabled = false;
-  $("startBtn").textContent = __S.k47;
-  addMsg("user", __S.k48);
+  $("startBtn").textContent = __S.btnRestartInterview;
+  addMsg("user", __S.interviewOpenerMsg);
   await agentTurn();
 }
 
@@ -431,7 +431,7 @@ async function requestVerdict() {
   if (!interviewOn) return;
   $("chatErr").textContent = "";
   chat.push({ role: "user", content: "___VERDICT___" });
-  addMsg("sys", __S.k49);
+  addMsg("sys", __S.statusGeneratingVerdict);
   $("sendBtn").disabled = true; $("verdictBtn").disabled = true;
   await agentTurn();
   $("verdictBtn").disabled = false; $("sendBtn").disabled = false;
@@ -450,10 +450,10 @@ document.querySelectorAll(".video-card").forEach(card => {
   v.addEventListener("loadedmetadata", () => { ph.remove(); });
   v.addEventListener("error", () => {
     v.remove();
-    ph.textContent = __S.k50 + src + __S.k51;
+    ph.textContent = __S.videoMissingPrefix + src + __S.videoMissingSuffix;
   });
   const ph = document.createElement("div");
-  ph.className = "no-video"; ph.textContent = __S.k52;
+  ph.className = "no-video"; ph.textContent = __S.videoLoading;
   card.appendChild(v); card.appendChild(ph);
 });
 
@@ -494,7 +494,7 @@ document.querySelectorAll(".video-card").forEach(card => {
     root.setAttribute("data-theme", t);
     const dark = t === "dark";
     if ($("themeIcon")) $("themeIcon").textContent = dark ? "☀️" : "🌙";
-    if ($("themeLabel")) $("themeLabel").textContent = dark ? __S.k53 : __S.k54;
+    if ($("themeLabel")) $("themeLabel").textContent = dark ? __S.themeLabelLight : __S.themeLabelDark;
   }
   $("themeToggle") && $("themeToggle").addEventListener("click", () => {
     const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
@@ -533,12 +533,12 @@ document.querySelectorAll(".video-card").forEach(card => {
     const wrap = document.createElement("div"); wrap.className = "pre-wrap";
     pre.parentNode.insertBefore(wrap, pre); wrap.appendChild(pre);
     const btn = document.createElement("button"); btn.type = "button";
-    btn.className = "copy-btn"; btn.textContent = __S.k55;
+    btn.className = "copy-btn"; btn.textContent = __S.copyBtn;
     btn.addEventListener("click", async () => {
       try { await navigator.clipboard.writeText(pre.innerText);
-        btn.textContent = __S.k56; btn.classList.add("copied");
-        setTimeout(() => { btn.textContent = __S.k57; btn.classList.remove("copied"); }, 1600);
-      } catch (_) { btn.textContent = __S.k58; }
+        btn.textContent = __S.copyBtnDone; btn.classList.add("copied");
+        setTimeout(() => { btn.textContent = __S.copyBtnReset; btn.classList.remove("copied"); }, 1600);
+      } catch (_) { btn.textContent = __S.copyBtnFail; }
     });
     wrap.appendChild(btn);
   });
