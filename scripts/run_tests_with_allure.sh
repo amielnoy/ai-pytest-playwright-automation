@@ -25,6 +25,12 @@ echo "Running tests with Allure results: ${ALLURE_RESULTS_DIR}"
 pytest_exit_code=$?
 
 echo "Generating fresh Allure report: ${ALLURE_REPORT_DIR}"
+# Ensure the local Allure 3 CLI is installed so `npx allure` never falls back
+# to a globally-installed Allure 2 (which would render the old classic report).
+if [ ! -x node_modules/.bin/allure ]; then
+  echo "Installing Allure 3 CLI (npm install)..."
+  npm install --no-audit --no-fund
+fi
 rm -rf "${ALLURE_REPORT_DIR}"
 npx allure generate "${ALLURE_RESULTS_DIR}"
 allure_exit_code=$?

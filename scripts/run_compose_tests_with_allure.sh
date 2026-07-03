@@ -359,6 +359,12 @@ PYEOF
 # Allure 3 automatically reads ./allure-history/ from CWD for trend charts
 # and updates it in-place — no explicit restore/save needed (matches CI pattern).
 step "Generating Allure report → ${ALLURE_REPORT_REL}/"
+# Ensure the local Allure 3 CLI is installed so `npx allure` never falls back
+# to a globally-installed Allure 2 (which would render the old classic report).
+if [ ! -x node_modules/.bin/allure ]; then
+  step "Installing Allure 3 CLI (npm install)..."
+  npm install --no-audit --no-fund
+fi
 rm -rf "${ALLURE_REPORT_DIR}"
 set +e
 # Use RELATIVE paths — Allure 3 CLI prepends CWD to absolute paths (bug)
