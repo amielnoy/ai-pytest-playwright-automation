@@ -39,7 +39,8 @@ export type StringKey =
   | 'statusInterviewerThinking' | 'errNoKeyInterview' | 'interviewOpener'
   | 'btnRestartInterview' | 'interviewOpenerMsg' | 'statusGeneratingVerdict'
   | 'videoMissingPrefix' | 'videoMissingSuffix' | 'videoLoading' | 'themeLabelLight'
-  | 'themeLabelDark' | 'copyBtn' | 'copyBtnDone' | 'copyBtnReset' | 'copyBtnFail';
+  | 'themeLabelDark' | 'copyBtn' | 'copyBtnDone' | 'copyBtnReset' | 'copyBtnFail'
+  | 'micTitle' | 'micListening' | 'voiceModeOn' | 'voiceModeOff';
 
 export interface LocalePrompts {
   resume: string;
