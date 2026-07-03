@@ -37,7 +37,7 @@
   nav .nav-group{font-size:1.1rem; letter-spacing:.03em; text-transform:uppercase; color:var(--text);
       opacity:.85; font-weight:800; padding:16px 14px 5px;}
   nav .nav-group:first-of-type{padding-top:2px;}
-  header,main,footer{margin-left:280px;} /* clear the left sidebar */
+  body{padding-left:280px;} /* reserve space for the fixed left sidebar (main's margin:0 auto can't cancel padding) */
   section{scroll-margin-top:20px;}
   /* mobile nav is handled by the off-canvas drawer in the enhancement layer below */
 
@@ -266,7 +266,7 @@
     body.nav-open .nav-scrim{opacity:1; pointer-events:auto;}
     nav .nav-group{display:block;}
     header{padding-top:56px;}
-    header,main,footer{margin-left:0;}
+    body{padding-left:0;}
   }
 
   /* ===== accessibility layer ===== */
