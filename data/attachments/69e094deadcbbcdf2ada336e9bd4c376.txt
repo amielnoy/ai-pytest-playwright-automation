@@ -1,0 +1,4 @@
+2026-07-03 14:12:54,976 | INFO     | ai_automation.test_allure_status_exposes_report_url | START tests/unit/test_fastapi_app.py::test_allure_status_exposes_report_url
+2026-07-03 14:12:54,977 | DEBUG    | asyncio | Using selector: EpollSelector
+2026-07-03 14:12:54,981 | INFO     | httpx | HTTP Request: GET http://testserver/reports/allure/status "HTTP/1.1 200 OK"
+2026-07-03 14:12:54,982 | INFO     | ai_automation.test_allure_status_exposes_report_url | END   tests/unit/test_fastapi_app.py::test_allure_status_exposes_report_url

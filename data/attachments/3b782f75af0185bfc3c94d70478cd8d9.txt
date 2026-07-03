@@ -1,0 +1,2 @@
+INFO     ai_automation.test_full_page_aria_snapshot:conftest.py:320 START tests/web-ui/test_playwright_v160_features.py::TestAriaSnapshotsOnPage::test_full_page_aria_snapshot@web-ui
+INFO     ai_automation.test_full_page_aria_snapshot:conftest.py:322 END   tests/web-ui/test_playwright_v160_features.py::TestAriaSnapshotsOnPage::test_full_page_aria_snapshot@web-ui

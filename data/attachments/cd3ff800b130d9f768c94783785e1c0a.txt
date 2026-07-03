@@ -1,0 +1,8 @@
+INFO:     127.0.0.1:54526 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54524 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54536 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54548 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54554 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54566 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54568 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54574 - "POST /chat HTTP/1.1" 200 OK

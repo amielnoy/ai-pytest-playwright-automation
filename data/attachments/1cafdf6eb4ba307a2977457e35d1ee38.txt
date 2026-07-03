@@ -1,0 +1,2 @@
+2026-07-03 14:12:54,416 | INFO     | ai_automation.test_override_max_price | START tests/unit/test_factories.py::TestMakeSearch::test_override_max_price
+2026-07-03 14:12:54,417 | INFO     | ai_automation.test_override_max_price | END   tests/unit/test_factories.py::TestMakeSearch::test_override_max_price

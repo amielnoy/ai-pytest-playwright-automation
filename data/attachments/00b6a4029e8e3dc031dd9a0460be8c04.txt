@@ -1,0 +1,3 @@
+INFO     ai_automation.test_log_annotated_call_logs_primitive_annotated_arguments:conftest.py:320 START tests/unit/test_logger.py::test_log_annotated_call_logs_primitive_annotated_arguments
+INFO     test_annotated_call:logger.py:131 Annotated call: test_log_annotated_call_logs_primitive_annotated_arguments.<locals>.sample(query='MacBook', max_price=2000.0)
+INFO     ai_automation.test_log_annotated_call_logs_primitive_annotated_arguments:conftest.py:322 END   tests/unit/test_logger.py::test_log_annotated_call_logs_primitive_annotated_arguments

@@ -1,0 +1,2 @@
+2026-07-03 14:12:54,170 | INFO     | ai_automation.test_returns_ocsessid_and_products | START tests/unit/test_api_client.py::TestCreateCart::test_returns_ocsessid_and_products
+2026-07-03 14:12:54,175 | INFO     | ai_automation.test_returns_ocsessid_and_products | END   tests/unit/test_api_client.py::TestCreateCart::test_returns_ocsessid_and_products

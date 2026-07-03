@@ -1,0 +1,4 @@
+INFO     ai_automation.test_run_pytest_rejects_unsafe_arguments:conftest.py:320 START tests/unit/test_fastapi_app.py::test_run_pytest_rejects_unsafe_arguments
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/runs/pytest "HTTP/1.1 400 Bad Request"
+INFO     ai_automation.test_run_pytest_rejects_unsafe_arguments:conftest.py:322 END   tests/unit/test_fastapi_app.py::test_run_pytest_rejects_unsafe_arguments

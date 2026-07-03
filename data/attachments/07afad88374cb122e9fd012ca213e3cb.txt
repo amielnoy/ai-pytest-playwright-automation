@@ -1,0 +1,2 @@
+2026-07-03 14:13:26,360 | INFO     | ai_automation.test_add_items_to_cart | START tests/web-ui/test_add_to_cart.py::TestAddItemsToCart::test_add_items_to_cart@web-ui
+2026-07-03 14:13:30,661 | INFO     | ai_automation.test_add_items_to_cart | END   tests/web-ui/test_add_to_cart.py::TestAddItemsToCart::test_add_items_to_cart@web-ui

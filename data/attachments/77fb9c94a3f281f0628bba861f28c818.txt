@@ -1,0 +1,4 @@
+2026-07-03 14:12:52,169 | INFO     | ai_automation.test_chat_custom_system_prompt_is_respected | START tests/api/test_chat_ai.py::TestChatEndpoint::test_chat_custom_system_prompt_is_respected
+2026-07-03 14:12:52,172 | DEBUG    | urllib3.connectionpool | Starting new HTTP connection (1): 127.0.0.1:8000
+2026-07-03 14:12:52,175 | DEBUG    | urllib3.connectionpool | http://127.0.0.1:8000 "POST /chat HTTP/1.1" 200 133
+2026-07-03 14:12:52,177 | INFO     | ai_automation.test_chat_custom_system_prompt_is_respected | END   tests/api/test_chat_ai.py::TestChatEndpoint::test_chat_custom_system_prompt_is_respected

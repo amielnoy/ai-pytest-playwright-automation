@@ -1,0 +1,3 @@
+2026-07-03 14:14:02,742 | INFO     | ai_automation.test_cart_total_consistent_with_item_prices | START tests/web-ui/test_cart_total.py::TestCartTotalNotExceeds::test_cart_total_consistent_with_item_prices@web-ui
+2026-07-03 14:14:02,791 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:14:12,764 | INFO     | ai_automation.test_cart_total_consistent_with_item_prices | END   tests/web-ui/test_cart_total.py::TestCartTotalNotExceeds::test_cart_total_consistent_with_item_prices@web-ui

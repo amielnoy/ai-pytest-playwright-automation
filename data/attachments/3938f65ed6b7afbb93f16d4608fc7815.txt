@@ -1,0 +1,5 @@
+2026-07-03 14:12:53,766 | INFO     | ai_automation.test_search_query_map_returns_expected_products[iphone] | START tests/contract/test_contracts.py::TestSearchContract::test_search_query_map_returns_expected_products[iphone]
+2026-07-03 14:12:53,767 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:53,767 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:53,768 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:53,769 | INFO     | ai_automation.test_search_query_map_returns_expected_products[iphone] | END   tests/contract/test_contracts.py::TestSearchContract::test_search_query_map_returns_expected_products[iphone]

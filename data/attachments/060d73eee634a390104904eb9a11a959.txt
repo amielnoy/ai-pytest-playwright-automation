@@ -1,0 +1,7 @@
+INFO     ai_automation.test_cart_total_positive_after_adding_quantity_two:conftest.py:320 START tests/api/test_api_integrations.py::TestCartApiIntegration::test_cart_total_positive_after_adding_quantity_two
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_cart_total_positive_after_adding_quantity_two:conftest.py:322 END   tests/api/test_api_integrations.py::TestCartApiIntegration::test_cart_total_positive_after_adding_quantity_two

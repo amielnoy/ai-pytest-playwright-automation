@@ -1,0 +1,2 @@
+2026-07-03 14:12:55,650 | INFO     | ai_automation.test_unknown_product_returns_list | START tests/unit/test_opencart_fallback.py::TestCartAddPayload::test_unknown_product_returns_list
+2026-07-03 14:12:55,651 | INFO     | ai_automation.test_unknown_product_returns_list | END   tests/unit/test_opencart_fallback.py::TestCartAddPayload::test_unknown_product_returns_list

@@ -1,0 +1,2 @@
+2026-07-03 14:12:56,635 | INFO     | ai_automation.test_primary_returned_when_count_positive | START tests/unit/test_self_healing.py::TestSelfHealingResolution::test_primary_returned_when_count_positive
+2026-07-03 14:12:56,636 | INFO     | ai_automation.test_primary_returned_when_count_positive | END   tests/unit/test_self_healing.py::TestSelfHealingResolution::test_primary_returned_when_count_positive

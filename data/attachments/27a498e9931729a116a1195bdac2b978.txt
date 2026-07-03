@@ -1,0 +1,5 @@
+INFO     ai_automation.test_search_service_product_names_does_not_raise_on_xss_html:conftest.py:320 START tests/unit/test_security_unit.py::test_search_service_product_names_does_not_raise_on_xss_html
+INFO     ai_automation.security.unit:test_security_unit.py:86 Step: Build SearchService with RestClient, base_url=https://example.test
+INFO     ai_automation.security.unit:test_security_unit.py:90 Step: Call service.product_names on XSS HTML; expect list, no exception
+INFO     ai_automation.security.unit:test_security_unit.py:94 Step: Assert isinstance(names, list)
+INFO     ai_automation.test_search_service_product_names_does_not_raise_on_xss_html:conftest.py:322 END   tests/unit/test_security_unit.py::test_search_service_product_names_does_not_raise_on_xss_html

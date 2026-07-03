@@ -1,0 +1,4 @@
+2026-07-03 14:12:53,774 | INFO     | ai_automation.test_search_response_has_names_and_prices | START tests/contract/test_contracts.py::TestSearchContract::test_search_response_has_names_and_prices
+2026-07-03 14:12:53,776 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:53,776 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:53,777 | INFO     | ai_automation.test_search_response_has_names_and_prices | END   tests/contract/test_contracts.py::TestSearchContract::test_search_response_has_names_and_prices

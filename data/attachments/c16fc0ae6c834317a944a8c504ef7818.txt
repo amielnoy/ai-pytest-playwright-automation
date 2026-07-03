@@ -1,0 +1,5 @@
+2026-07-03 14:12:52,775 | INFO     | ai_automation.test_command_injection_in_search_inline[MacBook| cat /etc/passwd] | START tests/api/test_pentest_data_driven.py::TestInjectionInline::test_command_injection_in_search_inline[MacBook| cat /etc/passwd]
+2026-07-03 14:12:52,776 | INFO     | ai_automation.pentest.data_driven | Step: command injection payload='MacBook| cat /etc/passwd'
+2026-07-03 14:12:52,777 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:52,777 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:52,778 | INFO     | ai_automation.test_command_injection_in_search_inline[MacBook| cat /etc/passwd] | END   tests/api/test_pentest_data_driven.py::TestInjectionInline::test_command_injection_in_search_inline[MacBook| cat /etc/passwd]

@@ -1,0 +1,7 @@
+INFO     ai_automation.test_cart_total_matches_item_sum:conftest.py:320 START tests/contract/test_contracts.py::TestPriceContract::test_cart_total_matches_item_sum
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_cart_total_matches_item_sum:conftest.py:322 END   tests/contract/test_contracts.py::TestPriceContract::test_cart_total_matches_item_sum

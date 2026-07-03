@@ -1,0 +1,4 @@
+2026-07-03 14:12:52,143 | INFO     | ai_automation.test_chat_response_is_non_empty_string | START tests/api/test_chat_ai.py::TestChatEndpoint::test_chat_response_is_non_empty_string
+2026-07-03 14:12:52,145 | DEBUG    | urllib3.connectionpool | Starting new HTTP connection (1): 127.0.0.1:8000
+2026-07-03 14:12:52,152 | DEBUG    | urllib3.connectionpool | http://127.0.0.1:8000 "POST /chat HTTP/1.1" 200 149
+2026-07-03 14:12:52,153 | INFO     | ai_automation.test_chat_response_is_non_empty_string | END   tests/api/test_chat_ai.py::TestChatEndpoint::test_chat_response_is_non_empty_string

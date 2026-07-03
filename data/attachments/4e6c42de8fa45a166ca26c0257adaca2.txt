@@ -1,0 +1,4 @@
+2026-07-03 14:12:55,094 | INFO     | ai_automation.test_run_pytest_rejects_unsafe_arguments | START tests/unit/test_fastapi_app.py::test_run_pytest_rejects_unsafe_arguments
+2026-07-03 14:12:55,095 | DEBUG    | asyncio | Using selector: EpollSelector
+2026-07-03 14:12:55,097 | INFO     | httpx | HTTP Request: POST http://testserver/runs/pytest "HTTP/1.1 400 Bad Request"
+2026-07-03 14:12:55,097 | INFO     | ai_automation.test_run_pytest_rejects_unsafe_arguments | END   tests/unit/test_fastapi_app.py::test_run_pytest_rejects_unsafe_arguments

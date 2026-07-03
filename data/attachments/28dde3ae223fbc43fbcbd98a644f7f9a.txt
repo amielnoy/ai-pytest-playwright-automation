@@ -1,0 +1,2 @@
+INFO     ai_automation.test_override_max_price:conftest.py:320 START tests/unit/test_factories.py::TestMakeSearch::test_override_max_price
+INFO     ai_automation.test_override_max_price:conftest.py:322 END   tests/unit/test_factories.py::TestMakeSearch::test_override_max_price

@@ -1,0 +1,7 @@
+INFO     ai_automation.test_search_returns_positive_prices_inline[iPhone]:conftest.py:320 START tests/api/test_api_data_driven.py::TestSearchApiInline::test_search_returns_positive_prices_inline[iPhone]
+INFO     ai_automation.api.data_driven:logger.py:131 Annotated call: TestSearchApiInline.test_search_returns_positive_prices_inline(query='iPhone')
+INFO     ai_automation.api.data_driven:test_api_data_driven.py:101 Step: search for 'iPhone'
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.api.data_driven:test_api_data_driven.py:107 Prices for 'iPhone': [123.2]
+INFO     ai_automation.test_search_returns_positive_prices_inline[iPhone]:conftest.py:322 END   tests/api/test_api_data_driven.py::TestSearchApiInline::test_search_returns_positive_prices_inline[iPhone]

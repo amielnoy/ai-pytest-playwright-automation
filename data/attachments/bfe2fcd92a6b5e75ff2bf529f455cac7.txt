@@ -1,0 +1,6 @@
+2026-07-03 14:12:50,159 | INFO     | ai_automation.test_search_returns_numeric_ids_inline[iPhone] | START tests/api/test_api_data_driven.py::TestSearchApiInline::test_search_returns_numeric_ids_inline[iPhone]
+2026-07-03 14:12:50,160 | INFO     | ai_automation.api.data_driven | Annotated call: TestSearchApiInline.test_search_returns_numeric_ids_inline(query='iPhone')
+2026-07-03 14:12:50,161 | INFO     | ai_automation.api.data_driven | Step: search ids for 'iPhone'
+2026-07-03 14:12:50,161 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:50,162 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:50,164 | INFO     | ai_automation.test_search_returns_numeric_ids_inline[iPhone] | END   tests/api/test_api_data_driven.py::TestSearchApiInline::test_search_returns_numeric_ids_inline[iPhone]

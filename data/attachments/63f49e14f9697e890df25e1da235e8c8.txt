@@ -1,0 +1,2 @@
+2026-07-03 14:12:56,200 | INFO     | ai_automation.test_cart_summary_reads_total_count_and_empty_state | START tests/unit/test_page_objects.py::test_cart_summary_reads_total_count_and_empty_state
+2026-07-03 14:12:56,283 | INFO     | ai_automation.test_cart_summary_reads_total_count_and_empty_state | END   tests/unit/test_page_objects.py::test_cart_summary_reads_total_count_and_empty_state

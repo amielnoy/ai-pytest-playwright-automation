@@ -1,0 +1,4 @@
+2026-07-03 14:12:52,379 | INFO     | ai_automation.test_server_header_does_not_expose_version | START tests/api/test_pentest.py::TestInfoDisclosurePentest::test_server_header_does_not_expose_version
+2026-07-03 14:12:52,380 | INFO     | ai_automation.pentest | Step: GET https://tutorialsninja.com/demo and read Server header
+2026-07-03 14:12:52,380 | INFO     | ai_automation.pentest | Step: Assert no digit-dot-digit pattern in Server: 
+2026-07-03 14:12:52,381 | INFO     | ai_automation.test_server_header_does_not_expose_version | END   tests/api/test_pentest.py::TestInfoDisclosurePentest::test_server_header_does_not_expose_version

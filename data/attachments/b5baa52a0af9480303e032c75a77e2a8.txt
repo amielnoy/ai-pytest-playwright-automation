@@ -1,0 +1,5 @@
+INFO     ai_automation.test_cart_service_total_returns_none_on_truncated_html:conftest.py:320 START tests/unit/test_security_unit.py::test_cart_service_total_returns_none_on_truncated_html
+INFO     ai_automation.security.unit:test_security_unit.py:146 Step: Build CartService with RestClient, base_url=https://example.test
+INFO     ai_automation.security.unit:test_security_unit.py:150 Step: Call service.total on truncated HTML; expect None, no exception
+INFO     ai_automation.security.unit:test_security_unit.py:154 Step: Assert result is None for unparseable/truncated HTML
+INFO     ai_automation.test_cart_service_total_returns_none_on_truncated_html:conftest.py:322 END   tests/unit/test_security_unit.py::test_cart_service_total_returns_none_on_truncated_html

@@ -1,0 +1,2 @@
+2026-07-03 14:15:36,950 | INFO     | ai_automation.test_cart_total_positive_after_adding_items | START tests/web-ui/test_system_coverage.py::TestCartFlowCoverage::test_cart_total_positive_after_adding_items@web-ui
+2026-07-03 14:15:40,947 | INFO     | ai_automation.test_cart_total_positive_after_adding_items | END   tests/web-ui/test_system_coverage.py::TestCartFlowCoverage::test_cart_total_positive_after_adding_items@web-ui

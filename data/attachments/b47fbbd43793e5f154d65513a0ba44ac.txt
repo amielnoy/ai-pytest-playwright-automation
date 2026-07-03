@@ -1,0 +1,2 @@
+INFO     ai_automation.test_home_header_soft:conftest.py:320 START tests/web-ui/test_soft_assertions_demo.py::TestSoftAssertionsDemo::test_home_header_soft@web-ui
+INFO     ai_automation.test_home_header_soft:conftest.py:322 END   tests/web-ui/test_soft_assertions_demo.py::TestSoftAssertionsDemo::test_home_header_soft@web-ui

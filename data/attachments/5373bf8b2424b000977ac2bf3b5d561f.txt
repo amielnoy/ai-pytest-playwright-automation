@@ -1,0 +1,2 @@
+INFO     ai_automation.test_base_page_wait_for_visible_uses_first_matching_locator:conftest.py:320 START tests/unit/test_page_objects.py::test_base_page_wait_for_visible_uses_first_matching_locator
+INFO     ai_automation.test_base_page_wait_for_visible_uses_first_matching_locator:conftest.py:322 END   tests/unit/test_page_objects.py::test_base_page_wait_for_visible_uses_first_matching_locator

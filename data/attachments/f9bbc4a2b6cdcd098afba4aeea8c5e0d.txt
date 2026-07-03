@@ -1,0 +1,2 @@
+2026-07-03 14:12:55,732 | INFO     | ai_automation.test_register_html_has_form | START tests/unit/test_opencart_fallback.py::TestHTMLGenerators::test_register_html_has_form
+2026-07-03 14:12:55,733 | INFO     | ai_automation.test_register_html_has_form | END   tests/unit/test_opencart_fallback.py::TestHTMLGenerators::test_register_html_has_form

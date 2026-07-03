@@ -1,0 +1,3 @@
+2026-07-03 14:12:55,759 | INFO     | ai_automation.test_home_route | START tests/unit/test_opencart_fallback.py::TestRouteDispatcher::test_home_route
+2026-07-03 14:12:55,761 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:55,762 | INFO     | ai_automation.test_home_route | END   tests/unit/test_opencart_fallback.py::TestRouteDispatcher::test_home_route

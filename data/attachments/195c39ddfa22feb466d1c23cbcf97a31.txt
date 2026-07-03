@@ -1,0 +1,6 @@
+2026-07-03 14:12:55,062 | INFO     | ai_automation.test_mock_cart_add_calculates_total_from_quantity[40-3-369.6] | START tests/unit/test_fastapi_app.py::test_mock_cart_add_calculates_total_from_quantity[40-3-369.6]
+2026-07-03 14:12:55,063 | DEBUG    | asyncio | Using selector: EpollSelector
+2026-07-03 14:12:55,065 | INFO     | httpx | HTTP Request: DELETE http://testserver/mock/cart "HTTP/1.1 200 OK"
+2026-07-03 14:12:55,066 | DEBUG    | asyncio | Using selector: EpollSelector
+2026-07-03 14:12:55,068 | INFO     | httpx | HTTP Request: POST http://testserver/mock/cart/add "HTTP/1.1 200 OK"
+2026-07-03 14:12:55,069 | INFO     | ai_automation.test_mock_cart_add_calculates_total_from_quantity[40-3-369.6] | END   tests/unit/test_fastapi_app.py::test_mock_cart_add_calculates_total_from_quantity[40-3-369.6]

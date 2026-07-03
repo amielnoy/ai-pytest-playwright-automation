@@ -1,0 +1,6 @@
+INFO     ai_automation.test_write_allure_entry_creates_result_json_and_both_attachments:conftest.py:320 START tests/unit/test_report_test_status.py::test_write_allure_entry_creates_result_json_and_both_attachments
+INFO     ai_automation.unit.test_report_test_status:test_report_test_status.py:200 Step: Call _write_allure_entry, expect 3 new files in allure dir
+INFO     ai_automation.unit.test_report_test_status:test_report_test_status.py:208 Step: Assert exactly 3 new files: *-result.json, *txt*, *html*
+INFO     ai_automation.unit.test_report_test_status:test_report_test_status.py:217 Step: Parse result JSON and check attachments list
+INFO     ai_automation.unit.test_report_test_status:test_report_test_status.py:224 Step: Assert overall status is 'failed' (has failed/flaky tests)
+INFO     ai_automation.test_write_allure_entry_creates_result_json_and_both_attachments:conftest.py:322 END   tests/unit/test_report_test_status.py::test_write_allure_entry_creates_result_json_and_both_attachments

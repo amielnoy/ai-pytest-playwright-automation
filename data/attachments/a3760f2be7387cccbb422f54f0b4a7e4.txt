@@ -1,0 +1,2 @@
+INFO     ai_automation.test_cart_summary_reads_total_count_and_empty_state:conftest.py:320 START tests/unit/test_page_objects.py::test_cart_summary_reads_total_count_and_empty_state
+INFO     ai_automation.test_cart_summary_reads_total_count_and_empty_state:conftest.py:322 END   tests/unit/test_page_objects.py::test_cart_summary_reads_total_count_and_empty_state

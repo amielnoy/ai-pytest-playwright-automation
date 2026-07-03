@@ -1,0 +1,12 @@
+- heading "Register Account" [level=1]
+- text: First Name
+- textbox "First Name"
+- text: Last Name
+- textbox "Last Name"
+- text: E-Mail
+- textbox "E-Mail"
+- text: Telephone
+- textbox "Telephone"
+- text: Password
+- textbox "Password"
+- button "Continue"

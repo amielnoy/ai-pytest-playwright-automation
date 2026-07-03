@@ -1,0 +1,2 @@
+INFO     ai_automation.test_newsletter_defaults_false:conftest.py:320 START tests/unit/test_factories.py::TestMakeRegistration::test_newsletter_defaults_false
+INFO     ai_automation.test_newsletter_defaults_false:conftest.py:322 END   tests/unit/test_factories.py::TestMakeRegistration::test_newsletter_defaults_false

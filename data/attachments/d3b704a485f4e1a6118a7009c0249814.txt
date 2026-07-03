@@ -1,0 +1,2 @@
+2026-07-03 14:12:54,643 | INFO     | ai_automation.test_first_name_max_length | START tests/unit/test_factories.py::TestRegistrationFieldLimits::test_first_name_max_length
+2026-07-03 14:12:54,649 | INFO     | ai_automation.test_first_name_max_length | END   tests/unit/test_factories.py::TestRegistrationFieldLimits::test_first_name_max_length

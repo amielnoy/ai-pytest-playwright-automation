@@ -1,0 +1,4 @@
+2026-07-03 14:12:52,407 | INFO     | ai_automation.test_x_powered_by_header_absent | START tests/api/test_pentest.py::TestInfoDisclosurePentest::test_x_powered_by_header_absent
+2026-07-03 14:12:52,409 | INFO     | ai_automation.pentest | Step: GET https://tutorialsninja.com/demo and check X-Powered-By header
+2026-07-03 14:12:52,409 | INFO     | ai_automation.pentest | Step: Assert 'X-Powered-By' not in response headers
+2026-07-03 14:12:52,410 | INFO     | ai_automation.test_x_powered_by_header_absent | END   tests/api/test_pentest.py::TestInfoDisclosurePentest::test_x_powered_by_header_absent

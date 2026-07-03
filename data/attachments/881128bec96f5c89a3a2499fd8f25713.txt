@@ -1,0 +1,9 @@
+2026-07-03 14:12:53,678 | INFO     | ai_automation.test_unauthenticated_account_page_does_not_expose_account_data | START tests/api/test_security_api.py::TestSessionSecurity::test_unauthenticated_account_page_does_not_expose_account_data
+2026-07-03 14:12:53,679 | INFO     | ai_automation.security.api | Step: GET account/account with no credentials
+2026-07-03 14:12:53,679 | INFO     | ai_automation.security.api | Step: Assert account-dashboard-only markers absent from response
+2026-07-03 14:12:53,679 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:53,679 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:53,679 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:53,680 | INFO     | ai_automation.security.api | Step: Assert login page markers present in response
+2026-07-03 14:12:53,680 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:53,681 | INFO     | ai_automation.test_unauthenticated_account_page_does_not_expose_account_data | END   tests/api/test_security_api.py::TestSessionSecurity::test_unauthenticated_account_page_does_not_expose_account_data

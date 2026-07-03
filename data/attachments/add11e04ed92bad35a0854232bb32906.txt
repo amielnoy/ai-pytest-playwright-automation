@@ -1,0 +1,2 @@
+INFO     ai_automation.test_events_none_does_not_raise:conftest.py:320 START tests/unit/test_self_healing.py::TestHealEventRecording::test_events_none_does_not_raise
+INFO     ai_automation.test_events_none_does_not_raise:conftest.py:322 END   tests/unit/test_self_healing.py::TestHealEventRecording::test_events_none_does_not_raise

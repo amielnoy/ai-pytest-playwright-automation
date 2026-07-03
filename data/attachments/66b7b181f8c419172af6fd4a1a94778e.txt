@@ -1,0 +1,2 @@
+INFO     ai_automation.test_raises_when_no_products:conftest.py:320 START tests/unit/test_api_client.py::TestCreateCart::test_raises_when_no_products
+INFO     ai_automation.test_raises_when_no_products:conftest.py:322 END   tests/unit/test_api_client.py::TestCreateCart::test_raises_when_no_products

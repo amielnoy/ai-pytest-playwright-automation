@@ -1,1 +1,1 @@
-{"id":"6b93ca03acf0e26b0ae62f2ed6d557c0","fullName":"tests.api.test_prompt_injection.TestPromptInjection#test_direct_instruction_override","name":"[PI-1] Direct override — 'ignore previous instructions'","status":"passed","testResultsByEnv":{"default":"a9a341c7d4d09659808f157494a9a4c6"}}
+{"id":"6b93ca03acf0e26b0ae62f2ed6d557c0","fullName":"tests.api.test_prompt_injection.TestPromptInjection#test_direct_instruction_override","name":"[PI-1] Direct override — 'ignore previous instructions'","status":"passed","testResultsByEnv":{"default":"b38b17612957801ba7fc4e1e60ad0102"}}

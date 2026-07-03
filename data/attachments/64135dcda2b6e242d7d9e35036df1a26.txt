@@ -1,0 +1,2 @@
+2026-07-03 14:12:55,405 | INFO     | ai_automation.test_search_macbook | START tests/unit/test_opencart_fallback.py::TestSearchProducts::test_search_macbook
+2026-07-03 14:12:55,406 | INFO     | ai_automation.test_search_macbook | END   tests/unit/test_opencart_fallback.py::TestSearchProducts::test_search_macbook

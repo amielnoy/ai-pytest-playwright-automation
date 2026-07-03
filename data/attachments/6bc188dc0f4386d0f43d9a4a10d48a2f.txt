@@ -1,0 +1,4 @@
+INFO     ai_automation.test_chat_returns_mock_response_without_api_key:conftest.py:320 START tests/unit/test_fastapi_app.py::test_chat_returns_mock_response_without_api_key
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/chat "HTTP/1.1 200 OK"
+INFO     ai_automation.test_chat_returns_mock_response_without_api_key:conftest.py:322 END   tests/unit/test_fastapi_app.py::test_chat_returns_mock_response_without_api_key

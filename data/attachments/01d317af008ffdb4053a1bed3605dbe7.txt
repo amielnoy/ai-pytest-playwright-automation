@@ -1,0 +1,5 @@
+2026-07-03 14:12:52,980 | INFO     | ai_automation.test_protected_route_requires_auth_inline[account/password-Change Password-Returning Customer] | START tests/api/test_pentest_data_driven.py::TestAccessControlInline::test_protected_route_requires_auth_inline[account/password-Change Password-Returning Customer]
+2026-07-03 14:12:52,981 | INFO     | ai_automation.pentest.data_driven | Step: unauthenticated GET account/password
+2026-07-03 14:12:52,981 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:52,981 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:52,983 | INFO     | ai_automation.test_protected_route_requires_auth_inline[account/password-Change Password-Returning Customer] | END   tests/api/test_pentest_data_driven.py::TestAccessControlInline::test_protected_route_requires_auth_inline[account/password-Change Password-Returning Customer]

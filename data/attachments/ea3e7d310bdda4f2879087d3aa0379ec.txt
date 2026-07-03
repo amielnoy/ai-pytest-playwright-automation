@@ -1,0 +1,6 @@
+2026-07-03 14:12:53,555 | INFO     | ai_automation.test_html_injection_img_tag_in_search_is_encoded | START tests/api/test_security_api.py::TestSearchSecurity::test_html_injection_img_tag_in_search_is_encoded
+2026-07-03 14:12:53,556 | INFO     | ai_automation.security.api | Step: GET search with HTML injection payload: '<img src=x onerror=alert(1)>'
+2026-07-03 14:12:53,556 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:53,556 | INFO     | ai_automation.security.api | Step: Assert raw <img src=x onerror=alert(1)> absent as executable tag
+2026-07-03 14:12:53,556 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:53,558 | INFO     | ai_automation.test_html_injection_img_tag_in_search_is_encoded | END   tests/api/test_security_api.py::TestSearchSecurity::test_html_injection_img_tag_in_search_is_encoded

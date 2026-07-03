@@ -1,0 +1,2 @@
+INFO     ai_automation.test_cart_add_route:conftest.py:320 START tests/unit/test_opencart_fallback.py::TestRouteDispatcher::test_cart_add_route
+INFO     ai_automation.test_cart_add_route:conftest.py:322 END   tests/unit/test_opencart_fallback.py::TestRouteDispatcher::test_cart_add_route

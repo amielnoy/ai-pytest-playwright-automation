@@ -1,0 +1,4 @@
+INFO     ai_automation.test_test_data_endpoint_returns_404_for_unknown_key:conftest.py:320 START tests/unit/test_fastapi_app.py::test_test_data_endpoint_returns_404_for_unknown_key
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+INFO     httpx:_client.py:1025 HTTP Request: GET http://testserver/automation/test-data/does-not-exist "HTTP/1.1 404 Not Found"
+INFO     ai_automation.test_test_data_endpoint_returns_404_for_unknown_key:conftest.py:322 END   tests/unit/test_fastapi_app.py::test_test_data_endpoint_returns_404_for_unknown_key

@@ -1,0 +1,6 @@
+INFO     ai_automation.test_order_history_requires_authentication:conftest.py:320 START tests/api/test_pentest.py::TestAccessControlPentest::test_order_history_requires_authentication
+INFO     ai_automation.pentest:test_pentest.py:400 Step: GET account/order without credentials
+INFO     ai_automation.pentest:test_pentest.py:404 Step: Assert login page shown and order history absent
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_order_history_requires_authentication:conftest.py:322 END   tests/api/test_pentest.py::TestAccessControlPentest::test_order_history_requires_authentication

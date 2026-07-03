@@ -1,0 +1,2 @@
+INFO     ai_automation.test_log_annotated_call_uses_function_metadata:conftest.py:320 START tests/unit/test_logger.py::test_log_annotated_call_uses_function_metadata
+INFO     ai_automation.test_log_annotated_call_uses_function_metadata:conftest.py:322 END   tests/unit/test_logger.py::test_log_annotated_call_uses_function_metadata

@@ -1,0 +1,5 @@
+2026-07-03 14:12:53,117 | INFO     | ai_automation.test_injection_payload_in_search_json[ssti_erb] | START tests/api/test_pentest_data_driven.py::TestInjectionJson::test_injection_payload_in_search_json[ssti_erb]
+2026-07-03 14:12:53,119 | INFO     | ai_automation.pentest.data_driven | Step: JSON injection search category=SSTI payload='<%=7*7%>'
+2026-07-03 14:12:53,120 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:53,120 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:53,122 | INFO     | ai_automation.test_injection_payload_in_search_json[ssti_erb] | END   tests/api/test_pentest_data_driven.py::TestInjectionJson::test_injection_payload_in_search_json[ssti_erb]

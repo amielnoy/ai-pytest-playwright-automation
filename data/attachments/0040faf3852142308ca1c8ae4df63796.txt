@@ -1,0 +1,2 @@
+INFO     ai_automation.test_no_items_added_when_nothing_matches:conftest.py:320 START tests/web-ui/test_add_to_cart.py::TestAddItemsToCart::test_no_items_added_when_nothing_matches@web-ui
+INFO     ai_automation.test_no_items_added_when_nothing_matches:conftest.py:322 END   tests/web-ui/test_add_to_cart.py::TestAddItemsToCart::test_no_items_added_when_nothing_matches@web-ui

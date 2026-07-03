@@ -1,0 +1,4 @@
+2026-07-03 14:12:54,953 | INFO     | ai_automation.test_test_data_endpoint_returns_search_data | START tests/unit/test_fastapi_app.py::test_test_data_endpoint_returns_search_data
+2026-07-03 14:12:54,955 | DEBUG    | asyncio | Using selector: EpollSelector
+2026-07-03 14:12:54,962 | INFO     | httpx | HTTP Request: GET http://testserver/automation/test-data/search "HTTP/1.1 200 OK"
+2026-07-03 14:12:54,963 | INFO     | ai_automation.test_test_data_endpoint_returns_search_data | END   tests/unit/test_fastapi_app.py::test_test_data_endpoint_returns_search_data

@@ -1,0 +1,5 @@
+2026-07-03 14:12:53,240 | INFO     | ai_automation.test_login_attack_no_crash_json[empty_creds] | START tests/api/test_pentest_data_driven.py::TestAuthAttackJson::test_login_attack_no_crash_json[empty_creds]
+2026-07-03 14:12:53,241 | INFO     | ai_automation.pentest.data_driven | Step: JSON auth attack id=empty_creds email=''
+2026-07-03 14:12:53,242 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:53,242 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:53,243 | INFO     | ai_automation.test_login_attack_no_crash_json[empty_creds] | END   tests/api/test_pentest_data_driven.py::TestAuthAttackJson::test_login_attack_no_crash_json[empty_creds]

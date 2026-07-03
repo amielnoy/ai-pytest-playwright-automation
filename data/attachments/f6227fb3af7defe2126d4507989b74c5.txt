@@ -1,0 +1,2 @@
+INFO     ai_automation.test_extracts_route:conftest.py:320 START tests/unit/test_opencart_fallback.py::TestRouteFromRequest::test_extracts_route
+INFO     ai_automation.test_extracts_route:conftest.py:322 END   tests/unit/test_opencart_fallback.py::TestRouteFromRequest::test_extracts_route

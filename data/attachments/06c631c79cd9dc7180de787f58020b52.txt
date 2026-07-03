@@ -1,0 +1,4 @@
+2026-07-03 14:12:52,147 | INFO     | ai_automation.test_chat_response_includes_metadata | START tests/api/test_chat_ai.py::TestChatEndpoint::test_chat_response_includes_metadata
+2026-07-03 14:12:52,150 | DEBUG    | urllib3.connectionpool | Starting new HTTP connection (1): 127.0.0.1:8000
+2026-07-03 14:12:52,155 | DEBUG    | urllib3.connectionpool | http://127.0.0.1:8000 "POST /chat HTTP/1.1" 200 114
+2026-07-03 14:12:52,160 | INFO     | ai_automation.test_chat_response_includes_metadata | END   tests/api/test_chat_ai.py::TestChatEndpoint::test_chat_response_includes_metadata

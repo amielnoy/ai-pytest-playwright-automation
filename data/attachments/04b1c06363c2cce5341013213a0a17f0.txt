@@ -1,0 +1,4 @@
+INFO     ai_automation.test_all_search_prices_are_positive:conftest.py:320 START tests/contract/test_contracts.py::TestPriceContract::test_all_search_prices_are_positive
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_all_search_prices_are_positive:conftest.py:322 END   tests/contract/test_contracts.py::TestPriceContract::test_all_search_prices_are_positive

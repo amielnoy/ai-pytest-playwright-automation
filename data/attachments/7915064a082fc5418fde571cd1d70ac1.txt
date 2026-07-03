@@ -1,0 +1,5 @@
+INFO     ai_automation.test_injection_payload_in_search_json[sql_classic]:conftest.py:320 START tests/api/test_pentest_data_driven.py::TestInjectionJson::test_injection_payload_in_search_json[sql_classic]
+INFO     ai_automation.pentest.data_driven:test_pentest_data_driven.py:405 Step: JSON injection search category=SQL Injection payload="' OR '1'='1'--"
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_injection_payload_in_search_json[sql_classic]:conftest.py:322 END   tests/api/test_pentest_data_driven.py::TestInjectionJson::test_injection_payload_in_search_json[sql_classic]

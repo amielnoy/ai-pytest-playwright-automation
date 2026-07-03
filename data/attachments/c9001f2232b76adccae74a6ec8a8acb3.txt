@@ -1,0 +1,4 @@
+2026-07-03 14:12:54,971 | INFO     | ai_automation.test_test_data_endpoint_returns_404_for_unknown_key | START tests/unit/test_fastapi_app.py::test_test_data_endpoint_returns_404_for_unknown_key
+2026-07-03 14:12:54,973 | DEBUG    | asyncio | Using selector: EpollSelector
+2026-07-03 14:12:54,979 | INFO     | httpx | HTTP Request: GET http://testserver/automation/test-data/does-not-exist "HTTP/1.1 404 Not Found"
+2026-07-03 14:12:54,980 | INFO     | ai_automation.test_test_data_endpoint_returns_404_for_unknown_key | END   tests/unit/test_fastapi_app.py::test_test_data_endpoint_returns_404_for_unknown_key

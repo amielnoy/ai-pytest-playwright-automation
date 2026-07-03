@@ -1,0 +1,4 @@
+2026-07-03 14:12:49,858 | INFO     | ai_automation.test_search_returns_200 | START tests/api/test_api.py::TestSearchApi::test_search_returns_200
+2026-07-03 14:12:49,863 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:49,864 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:49,866 | INFO     | ai_automation.test_search_returns_200 | END   tests/api/test_api.py::TestSearchApi::test_search_returns_200

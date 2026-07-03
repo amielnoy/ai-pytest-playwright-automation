@@ -1,0 +1,2 @@
+INFO     ai_automation.test_starts_with_05:conftest.py:320 START tests/unit/test_factories.py::TestTelephoneFormat::test_starts_with_05
+INFO     ai_automation.test_starts_with_05:conftest.py:322 END   tests/unit/test_factories.py::TestTelephoneFormat::test_starts_with_05

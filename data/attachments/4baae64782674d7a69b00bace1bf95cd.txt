@@ -1,0 +1,2 @@
+INFO     ai_automation.test_password_has_digit:conftest.py:320 START tests/unit/test_factories.py::TestRegistrationPasswordComplexity::test_password_has_digit
+INFO     ai_automation.test_password_has_digit:conftest.py:322 END   tests/unit/test_factories.py::TestRegistrationPasswordComplexity::test_password_has_digit

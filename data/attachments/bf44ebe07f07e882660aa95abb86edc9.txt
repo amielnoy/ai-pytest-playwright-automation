@@ -1,0 +1,4 @@
+2026-07-03 14:12:54,995 | INFO     | ai_automation.test_allure_summary_returns_404_when_summary_missing | START tests/unit/test_fastapi_app.py::test_allure_summary_returns_404_when_summary_missing
+2026-07-03 14:12:54,997 | DEBUG    | asyncio | Using selector: EpollSelector
+2026-07-03 14:12:55,001 | INFO     | httpx | HTTP Request: GET http://testserver/reports/allure/summary "HTTP/1.1 404 Not Found"
+2026-07-03 14:12:55,003 | INFO     | ai_automation.test_allure_summary_returns_404_when_summary_missing | END   tests/unit/test_fastapi_app.py::test_allure_summary_returns_404_when_summary_missing

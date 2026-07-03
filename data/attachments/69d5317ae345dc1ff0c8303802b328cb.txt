@@ -1,0 +1,2 @@
+INFO     ai_automation.test_cli_screenshot_for_coding_agent:conftest.py:320 START tests/web-ui/test_playwright_v160_features.py::TestPlaywrightCLIForCodingAgents::test_cli_screenshot_for_coding_agent@web-ui
+INFO     ai_automation.test_cli_screenshot_for_coding_agent:conftest.py:322 END   tests/web-ui/test_playwright_v160_features.py::TestPlaywrightCLIForCodingAgents::test_cli_screenshot_for_coding_agent@web-ui

@@ -1,0 +1,5 @@
+INFO     ai_automation.test_command_injection_in_search_inline[MacBook; ls /]:conftest.py:320 START tests/api/test_pentest_data_driven.py::TestInjectionInline::test_command_injection_in_search_inline[MacBook; ls /]
+INFO     ai_automation.pentest.data_driven:test_pentest_data_driven.py:190 Step: command injection payload='MacBook; ls /'
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_command_injection_in_search_inline[MacBook; ls /]:conftest.py:322 END   tests/api/test_pentest_data_driven.py::TestInjectionInline::test_command_injection_in_search_inline[MacBook; ls /]

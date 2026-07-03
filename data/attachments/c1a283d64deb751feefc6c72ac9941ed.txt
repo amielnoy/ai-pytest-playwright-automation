@@ -1,0 +1,45 @@
+2026-07-03 14:12:54,910 | INFO     | ai_automation.test_seeded_search_is_reproducible | START tests/unit/test_factories.py::TestCrossFactorySeeding::test_seeded_search_is_reproducible
+2026-07-03 14:12:54,911 | DEBUG    | faker.factory | Looking for locale `en_US` in provider `faker.providers.address`.
+2026-07-03 14:12:54,913 | DEBUG    | faker.factory | Provider `faker.providers.address` has been localized to `en_US`.
+2026-07-03 14:12:54,914 | DEBUG    | faker.factory | Looking for locale `en_US` in provider `faker.providers.automotive`.
+2026-07-03 14:12:54,915 | DEBUG    | faker.factory | Provider `faker.providers.automotive` has been localized to `en_US`.
+2026-07-03 14:12:54,915 | DEBUG    | faker.factory | Looking for locale `en_US` in provider `faker.providers.bank`.
+2026-07-03 14:12:54,916 | DEBUG    | faker.factory | Specified locale `en_US` is not available for provider `faker.providers.bank`. Locale reset to `en_GB` for this provider.
+2026-07-03 14:12:54,916 | DEBUG    | faker.factory | Looking for locale `en_US` in provider `faker.providers.barcode`.
+2026-07-03 14:12:54,917 | DEBUG    | faker.factory | Provider `faker.providers.barcode` has been localized to `en_US`.
+2026-07-03 14:12:54,917 | DEBUG    | faker.factory | Looking for locale `en_US` in provider `faker.providers.color`.
+2026-07-03 14:12:54,918 | DEBUG    | faker.factory | Provider `faker.providers.color` has been localized to `en_US`.
+2026-07-03 14:12:54,918 | DEBUG    | faker.factory | Looking for locale `en_US` in provider `faker.providers.company`.
+2026-07-03 14:12:54,920 | DEBUG    | faker.factory | Provider `faker.providers.company` has been localized to `en_US`.
+2026-07-03 14:12:54,920 | DEBUG    | faker.factory | Looking for locale `en_US` in provider `faker.providers.credit_card`.
+2026-07-03 14:12:54,920 | DEBUG    | faker.factory | Provider `faker.providers.credit_card` has been localized to `en_US`.
+2026-07-03 14:12:54,921 | DEBUG    | faker.factory | Looking for locale `en_US` in provider `faker.providers.currency`.
+2026-07-03 14:12:54,922 | DEBUG    | faker.factory | Provider `faker.providers.currency` has been localized to `en_US`.
+2026-07-03 14:12:54,922 | DEBUG    | faker.factory | Looking for locale `en_US` in provider `faker.providers.date_time`.
+2026-07-03 14:12:54,924 | DEBUG    | faker.factory | Provider `faker.providers.date_time` has been localized to `en_US`.
+2026-07-03 14:12:54,924 | DEBUG    | faker.factory | Provider `faker.providers.emoji` does not feature localization. Specified locale `en_US` is not utilized for this provider.
+2026-07-03 14:12:54,924 | DEBUG    | faker.factory | Provider `faker.providers.file` does not feature localization. Specified locale `en_US` is not utilized for this provider.
+2026-07-03 14:12:54,924 | DEBUG    | faker.factory | Looking for locale `en_US` in provider `faker.providers.geo`.
+2026-07-03 14:12:54,925 | DEBUG    | faker.factory | Provider `faker.providers.geo` has been localized to `en_US`.
+2026-07-03 14:12:54,925 | DEBUG    | faker.factory | Looking for locale `en_US` in provider `faker.providers.internet`.
+2026-07-03 14:12:54,927 | DEBUG    | faker.factory | Provider `faker.providers.internet` has been localized to `en_US`.
+2026-07-03 14:12:54,927 | DEBUG    | faker.factory | Provider `faker.providers.isbn` does not feature localization. Specified locale `en_US` is not utilized for this provider.
+2026-07-03 14:12:54,927 | DEBUG    | faker.factory | Looking for locale `en_US` in provider `faker.providers.job`.
+2026-07-03 14:12:54,930 | DEBUG    | faker.factory | Provider `faker.providers.job` has been localized to `en_US`.
+2026-07-03 14:12:54,930 | DEBUG    | faker.factory | Looking for locale `en_US` in provider `faker.providers.lorem`.
+2026-07-03 14:12:54,932 | DEBUG    | faker.factory | Provider `faker.providers.lorem` has been localized to `en_US`.
+2026-07-03 14:12:54,932 | DEBUG    | faker.factory | Looking for locale `en_US` in provider `faker.providers.misc`.
+2026-07-03 14:12:54,933 | DEBUG    | faker.factory | Provider `faker.providers.misc` has been localized to `en_US`.
+2026-07-03 14:12:54,933 | DEBUG    | faker.factory | Looking for locale `en_US` in provider `faker.providers.passport`.
+2026-07-03 14:12:54,933 | DEBUG    | faker.factory | Provider `faker.providers.passport` has been localized to `en_US`.
+2026-07-03 14:12:54,933 | DEBUG    | faker.factory | Looking for locale `en_US` in provider `faker.providers.person`.
+2026-07-03 14:12:54,939 | DEBUG    | faker.factory | Provider `faker.providers.person` has been localized to `en_US`.
+2026-07-03 14:12:54,940 | DEBUG    | faker.factory | Looking for locale `en_US` in provider `faker.providers.phone_number`.
+2026-07-03 14:12:54,942 | DEBUG    | faker.factory | Provider `faker.providers.phone_number` has been localized to `en_US`.
+2026-07-03 14:12:54,942 | DEBUG    | faker.factory | Provider `faker.providers.profile` does not feature localization. Specified locale `en_US` is not utilized for this provider.
+2026-07-03 14:12:54,942 | DEBUG    | faker.factory | Provider `faker.providers.python` does not feature localization. Specified locale `en_US` is not utilized for this provider.
+2026-07-03 14:12:54,942 | DEBUG    | faker.factory | Provider `faker.providers.sbn` does not feature localization. Specified locale `en_US` is not utilized for this provider.
+2026-07-03 14:12:54,943 | DEBUG    | faker.factory | Looking for locale `en_US` in provider `faker.providers.ssn`.
+2026-07-03 14:12:54,945 | DEBUG    | faker.factory | Provider `faker.providers.ssn` has been localized to `en_US`.
+2026-07-03 14:12:54,945 | DEBUG    | faker.factory | Provider `faker.providers.user_agent` does not feature localization. Specified locale `en_US` is not utilized for this provider.
+2026-07-03 14:12:54,946 | INFO     | ai_automation.test_seeded_search_is_reproducible | END   tests/unit/test_factories.py::TestCrossFactorySeeding::test_seeded_search_is_reproducible

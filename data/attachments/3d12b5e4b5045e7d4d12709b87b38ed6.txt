@@ -1,0 +1,10 @@
+2026-07-03 14:12:50,366 | INFO     | ai_automation.test_cart_add_from_search_json[MacBook] | START tests/api/test_api_data_driven.py::TestCartApiJson::test_cart_add_from_search_json[MacBook]
+2026-07-03 14:12:50,368 | INFO     | ai_automation.api.data_driven | Annotated call: TestCartApiJson.test_cart_add_from_search_json(query='MacBook')
+2026-07-03 14:12:50,368 | INFO     | ai_automation.api.data_driven | Step: JSON cart add for 'MacBook'
+2026-07-03 14:12:50,369 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:50,369 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:50,369 | INFO     | ai_automation.api.data_driven | Step: add product 43 from query 'MacBook'
+2026-07-03 14:12:50,370 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:50,370 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:50,371 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:50,373 | INFO     | ai_automation.test_cart_add_from_search_json[MacBook] | END   tests/api/test_api_data_driven.py::TestCartApiJson::test_cart_add_from_search_json[MacBook]

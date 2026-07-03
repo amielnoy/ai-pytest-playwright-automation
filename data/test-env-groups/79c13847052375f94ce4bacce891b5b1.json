@@ -1,1 +1,1 @@
-{"id":"79c13847052375f94ce4bacce891b5b1","fullName":"tests.unit.test_flows.TestLoginFlow#test_logout_delegates","name":"logout() delegates to home.logout()","status":"passed","testResultsByEnv":{"default":"5c532b0aedf699d2062cf9023c9afe08"}}
+{"id":"79c13847052375f94ce4bacce891b5b1","fullName":"tests.unit.test_flows.TestLoginFlow#test_logout_delegates","name":"logout() delegates to home.logout()","status":"passed","testResultsByEnv":{"default":"b0418633dd2fbcf02619eacc11e70a5a"}}

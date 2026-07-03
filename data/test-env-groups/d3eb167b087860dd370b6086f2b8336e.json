@@ -1,1 +1,1 @@
-{"id":"d3eb167b087860dd370b6086f2b8336e","fullName":"tests.api.test_api_integrations.TestSearchApiIntegration#test_search_product_names_are_non_empty","name":"Search result product names are non-empty","status":"passed","testResultsByEnv":{"default":"eacc2a2b5d2bea7af0f03832323c52ca"}}
+{"id":"d3eb167b087860dd370b6086f2b8336e","fullName":"tests.api.test_api_integrations.TestSearchApiIntegration#test_search_product_names_are_non_empty","name":"Search result product names are non-empty","status":"passed","testResultsByEnv":{"default":"529d2e5785aec01fcbb6642437ca4a55"}}

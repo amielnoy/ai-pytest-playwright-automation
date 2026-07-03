@@ -1,0 +1,6 @@
+INFO     ai_automation.test_xss_script_tag_in_search_is_encoded_in_response:conftest.py:320 START tests/api/test_security_api.py::TestSearchSecurity::test_xss_script_tag_in_search_is_encoded_in_response
+INFO     ai_automation.security.api:test_security_api.py:56 Step: GET search with XSS payload: '<script>alert(1)</script>'
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.security.api:test_security_api.py:60 Step: Assert raw <script>alert(1)</script> absent from response body
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_xss_script_tag_in_search_is_encoded_in_response:conftest.py:322 END   tests/api/test_security_api.py::TestSearchSecurity::test_xss_script_tag_in_search_is_encoded_in_response

@@ -1,1 +1,1 @@
-{"id":"a7f113d22658a16ac149289fc6e51c3c","fullName":"tests.unit.test_opencart_fallback.TestSearchProducts#test_empty_query_returns_nothing","name":"search_products('') returns no results (empty query)","status":"passed","testResultsByEnv":{"default":"8072498196da931a446e1d755897f491"}}
+{"id":"a7f113d22658a16ac149289fc6e51c3c","fullName":"tests.unit.test_opencart_fallback.TestSearchProducts#test_empty_query_returns_nothing","name":"search_products('') returns no results (empty query)","status":"passed","testResultsByEnv":{"default":"6fb2c4ebf283c55ffaca13d93523f87c"}}

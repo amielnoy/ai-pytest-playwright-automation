@@ -1,0 +1,4 @@
+2026-07-03 14:12:55,036 | INFO     | ai_automation.test_mock_product_search_returns_matching_products[MacBook-43-MacBook-602.0] | START tests/unit/test_fastapi_app.py::test_mock_product_search_returns_matching_products[MacBook-43-MacBook-602.0]
+2026-07-03 14:12:55,039 | DEBUG    | asyncio | Using selector: EpollSelector
+2026-07-03 14:12:55,042 | INFO     | httpx | HTTP Request: GET http://testserver/mock/products/search?query=MacBook "HTTP/1.1 200 OK"
+2026-07-03 14:12:55,043 | INFO     | ai_automation.test_mock_product_search_returns_matching_products[MacBook-43-MacBook-602.0] | END   tests/unit/test_fastapi_app.py::test_mock_product_search_returns_matching_products[MacBook-43-MacBook-602.0]

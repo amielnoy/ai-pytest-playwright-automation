@@ -1,0 +1,2 @@
+2026-07-03 14:12:55,882 | INFO     | ai_automation.test_no_route_returns_empty | START tests/unit/test_opencart_fallback.py::TestRouteFromRequest::test_no_route_returns_empty
+2026-07-03 14:12:55,883 | INFO     | ai_automation.test_no_route_returns_empty | END   tests/unit/test_opencart_fallback.py::TestRouteFromRequest::test_no_route_returns_empty

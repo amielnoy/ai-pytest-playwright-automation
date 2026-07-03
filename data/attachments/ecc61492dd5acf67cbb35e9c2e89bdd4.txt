@@ -1,0 +1,2 @@
+2026-07-03 14:12:56,657 | INFO     | ai_automation.test_primary_returned_after_wait_succeeds | START tests/unit/test_self_healing.py::TestSelfHealingResolution::test_primary_returned_after_wait_succeeds
+2026-07-03 14:12:56,658 | INFO     | ai_automation.test_primary_returned_after_wait_succeeds | END   tests/unit/test_self_healing.py::TestSelfHealingResolution::test_primary_returned_after_wait_succeeds

@@ -1,0 +1,5 @@
+INFO     ai_automation.test_ssti_in_search_not_evaluated_inline[{{7*7}}-49]:conftest.py:320 START tests/api/test_pentest_data_driven.py::TestInjectionInline::test_ssti_in_search_not_evaluated_inline[{{7*7}}-49]
+INFO     ai_automation.pentest.data_driven:test_pentest_data_driven.py:166 Step: SSTI search payload='{{7*7}}'
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_ssti_in_search_not_evaluated_inline[{{7*7}}-49]:conftest.py:322 END   tests/api/test_pentest_data_driven.py::TestInjectionInline::test_ssti_in_search_not_evaluated_inline[{{7*7}}-49]

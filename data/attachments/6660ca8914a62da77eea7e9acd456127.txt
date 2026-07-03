@@ -1,0 +1,2 @@
+INFO     ai_automation.test_override_query:conftest.py:320 START tests/unit/test_factories.py::TestMakeSearch::test_override_query
+INFO     ai_automation.test_override_query:conftest.py:322 END   tests/unit/test_factories.py::TestMakeSearch::test_override_query

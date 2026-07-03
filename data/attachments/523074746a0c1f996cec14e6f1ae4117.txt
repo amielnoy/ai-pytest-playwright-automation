@@ -1,0 +1,2 @@
+INFO     ai_automation.test_account_menu_opens_login_page:conftest.py:320 START tests/web-ui/test_navigation_and_empty_states.py::TestNavigationAndEmptyStates::test_account_menu_opens_login_page@web-ui
+INFO     ai_automation.test_account_menu_opens_login_page:conftest.py:322 END   tests/web-ui/test_navigation_and_empty_states.py::TestNavigationAndEmptyStates::test_account_menu_opens_login_page@web-ui

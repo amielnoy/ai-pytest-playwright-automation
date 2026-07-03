@@ -1,0 +1,2 @@
+2026-07-03 14:12:55,636 | INFO     | ai_automation.test_known_product_returns_total | START tests/unit/test_opencart_fallback.py::TestCartAddPayload::test_known_product_returns_total
+2026-07-03 14:12:55,637 | INFO     | ai_automation.test_known_product_returns_total | END   tests/unit/test_opencart_fallback.py::TestCartAddPayload::test_known_product_returns_total

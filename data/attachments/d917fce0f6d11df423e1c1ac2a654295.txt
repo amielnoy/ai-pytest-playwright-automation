@@ -1,0 +1,10 @@
+2026-07-03 14:12:55,020 | INFO     | ai_automation.test_mock_cart_flow | START tests/unit/test_fastapi_app.py::test_mock_cart_flow
+2026-07-03 14:12:55,021 | DEBUG    | asyncio | Using selector: EpollSelector
+2026-07-03 14:12:55,023 | INFO     | httpx | HTTP Request: DELETE http://testserver/mock/cart "HTTP/1.1 200 OK"
+2026-07-03 14:12:55,024 | DEBUG    | asyncio | Using selector: EpollSelector
+2026-07-03 14:12:55,028 | INFO     | httpx | HTTP Request: GET http://testserver/mock/products/search?query=MacBook "HTTP/1.1 200 OK"
+2026-07-03 14:12:55,028 | DEBUG    | asyncio | Using selector: EpollSelector
+2026-07-03 14:12:55,031 | INFO     | httpx | HTTP Request: POST http://testserver/mock/cart/add "HTTP/1.1 200 OK"
+2026-07-03 14:12:55,032 | DEBUG    | asyncio | Using selector: EpollSelector
+2026-07-03 14:12:55,034 | INFO     | httpx | HTTP Request: GET http://testserver/mock/cart "HTTP/1.1 200 OK"
+2026-07-03 14:12:55,035 | INFO     | ai_automation.test_mock_cart_flow | END   tests/unit/test_fastapi_app.py::test_mock_cart_flow

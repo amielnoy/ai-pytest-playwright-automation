@@ -1,0 +1,2 @@
+2026-07-03 14:12:56,820 | INFO     | ai_automation.test_fallbacks_wired_in_order | START tests/unit/test_self_healing.py::TestHealingLocatorFactory::test_fallbacks_wired_in_order
+2026-07-03 14:12:56,822 | INFO     | ai_automation.test_fallbacks_wired_in_order | END   tests/unit/test_self_healing.py::TestHealingLocatorFactory::test_fallbacks_wired_in_order

@@ -1,0 +1,4 @@
+INFO     ai_automation.test_x_frame_options_header_present_to_prevent_clickjacking:conftest.py:320 START tests/api/test_pentest.py::TestPentestFindings::test_x_frame_options_header_present_to_prevent_clickjacking
+INFO     ai_automation.pentest:test_pentest.py:570 Step: GET account/login and check X-Frame-Options header
+INFO     ai_automation.pentest:test_pentest.py:576 Step: Assert X-Frame-Options present; got: 'NOT PRESENT'
+INFO     ai_automation.test_x_frame_options_header_present_to_prevent_clickjacking:conftest.py:322 END   tests/api/test_pentest.py::TestPentestFindings::test_x_frame_options_header_present_to_prevent_clickjacking

@@ -1,0 +1,2 @@
+INFO     ai_automation.test_cart_page_delegates_to_summary_component:conftest.py:320 START tests/unit/test_page_objects.py::test_cart_page_delegates_to_summary_component
+INFO     ai_automation.test_cart_page_delegates_to_summary_component:conftest.py:322 END   tests/unit/test_page_objects.py::test_cart_page_delegates_to_summary_component

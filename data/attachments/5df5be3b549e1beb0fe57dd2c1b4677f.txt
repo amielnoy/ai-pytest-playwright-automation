@@ -1,0 +1,4 @@
+INFO     ai_automation.test_sensitive_path_blocked_inline[server_status]:conftest.py:320 START tests/api/test_pentest_data_driven.py::TestFileExposureInline::test_sensitive_path_blocked_inline[server_status]
+INFO     ai_automation.pentest.data_driven:test_pentest_data_driven.py:370 Step: probe sensitive path https://tutorialsninja.com/demo/server-status
+INFO     ai_automation.pentest.data_driven:test_pentest_data_driven.py:378 Status for /server-status: 404
+INFO     ai_automation.test_sensitive_path_blocked_inline[server_status]:conftest.py:322 END   tests/api/test_pentest_data_driven.py::TestFileExposureInline::test_sensitive_path_blocked_inline[server_status]

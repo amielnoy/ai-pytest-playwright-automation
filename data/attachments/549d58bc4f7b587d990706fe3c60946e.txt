@@ -1,0 +1,4 @@
+2026-07-03 14:12:53,643 | INFO     | ai_automation.test_ocsessid_cookie_is_set_with_root_path_scope | START tests/api/test_security_api.py::TestSessionSecurity::test_ocsessid_cookie_is_set_with_root_path_scope
+2026-07-03 14:12:53,644 | INFO     | ai_automation.security.api | Step: GET https://tutorialsninja.com/demo with fresh session, capture Set-Cookie
+2026-07-03 14:12:53,644 | INFO     | ai_automation.security.api | Step: Assert OCSESSID present and path=/ in Set-Cookie value
+2026-07-03 14:12:53,645 | INFO     | ai_automation.test_ocsessid_cookie_is_set_with_root_path_scope | END   tests/api/test_security_api.py::TestSessionSecurity::test_ocsessid_cookie_is_set_with_root_path_scope

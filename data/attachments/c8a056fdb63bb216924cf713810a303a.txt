@@ -1,0 +1,2 @@
+2026-07-03 14:12:55,750 | INFO     | ai_automation.test_register_html_success | START tests/unit/test_opencart_fallback.py::TestHTMLGenerators::test_register_html_success
+2026-07-03 14:12:55,751 | INFO     | ai_automation.test_register_html_success | END   tests/unit/test_opencart_fallback.py::TestHTMLGenerators::test_register_html_success

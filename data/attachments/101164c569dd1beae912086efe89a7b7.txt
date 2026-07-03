@@ -1,0 +1,2 @@
+2026-07-03 14:12:54,541 | INFO     | ai_automation.test_email_domain | START tests/unit/test_factories.py::TestMakeInvalidCredentials::test_email_domain
+2026-07-03 14:12:54,543 | INFO     | ai_automation.test_email_domain | END   tests/unit/test_factories.py::TestMakeInvalidCredentials::test_email_domain

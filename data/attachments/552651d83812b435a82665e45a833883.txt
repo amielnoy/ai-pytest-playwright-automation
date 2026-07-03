@@ -1,0 +1,5 @@
+2026-07-03 14:12:52,626 | INFO     | ai_automation.test_xss_in_search_not_reflected_inline[<svg onload=alert(1)>-<svg onload=alert(1)>] | START tests/api/test_pentest_data_driven.py::TestInjectionInline::test_xss_in_search_not_reflected_inline[<svg onload=alert(1)>-<svg onload=alert(1)>]
+2026-07-03 14:12:52,627 | INFO     | ai_automation.pentest.data_driven | Step: XSS search payload='<svg onload=alert(1)>'
+2026-07-03 14:12:52,628 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:52,628 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:52,630 | INFO     | ai_automation.test_xss_in_search_not_reflected_inline[<svg onload=alert(1)>-<svg onload=alert(1)>] | END   tests/api/test_pentest_data_driven.py::TestInjectionInline::test_xss_in_search_not_reflected_inline[<svg onload=alert(1)>-<svg onload=alert(1)>]

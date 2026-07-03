@@ -1,0 +1,10 @@
+2026-07-03 14:12:50,168 | INFO     | ai_automation.test_cart_add_from_search_inline[MacBook] | START tests/api/test_api_data_driven.py::TestCartApiInline::test_cart_add_from_search_inline[MacBook]
+2026-07-03 14:12:50,170 | INFO     | ai_automation.api.data_driven | Annotated call: TestCartApiInline.test_cart_add_from_search_inline(query='MacBook')
+2026-07-03 14:12:50,172 | INFO     | ai_automation.api.data_driven | Step: find product for 'MacBook'
+2026-07-03 14:12:50,172 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:50,173 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:50,173 | INFO     | ai_automation.api.data_driven | Step: add product 43 to cart
+2026-07-03 14:12:50,173 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:50,174 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:50,174 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:50,177 | INFO     | ai_automation.test_cart_add_from_search_inline[MacBook] | END   tests/api/test_api_data_driven.py::TestCartApiInline::test_cart_add_from_search_inline[MacBook]

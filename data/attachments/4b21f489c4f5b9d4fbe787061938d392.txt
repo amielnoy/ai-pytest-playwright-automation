@@ -1,0 +1,2 @@
+INFO     ai_automation.test_open_cart_custom_min_items:conftest.py:320 START tests/unit/test_flows.py::TestCartFlow::test_open_cart_custom_min_items
+INFO     ai_automation.test_open_cart_custom_min_items:conftest.py:322 END   tests/unit/test_flows.py::TestCartFlow::test_open_cart_custom_min_items

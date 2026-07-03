@@ -1,0 +1,5 @@
+INFO     ai_automation.test_rest_client_timeout_is_forwarded_on_every_request:conftest.py:320 START tests/unit/test_security_unit.py::test_rest_client_timeout_is_forwarded_on_every_request
+INFO     ai_automation.security.unit:test_security_unit.py:57 Step: Build RestClient(timeout=5) and swap in FakeSession
+INFO     ai_automation.security.unit:test_security_unit.py:63 Step: Invoke client.get and client.post
+INFO     ai_automation.security.unit:test_security_unit.py:68 Step: Assert timeout forwarded in GET and POST kwargs
+INFO     ai_automation.test_rest_client_timeout_is_forwarded_on_every_request:conftest.py:322 END   tests/unit/test_security_unit.py::test_rest_client_timeout_is_forwarded_on_every_request

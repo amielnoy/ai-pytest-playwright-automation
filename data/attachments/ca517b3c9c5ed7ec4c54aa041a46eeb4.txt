@@ -1,0 +1,2 @@
+INFO     ai_automation.test_rest_client_methods_delegate_to_request_with_default_timeout:conftest.py:320 START tests/unit/test_rest_client.py::test_rest_client_methods_delegate_to_request_with_default_timeout
+INFO     ai_automation.test_rest_client_methods_delegate_to_request_with_default_timeout:conftest.py:322 END   tests/unit/test_rest_client.py::test_rest_client_methods_delegate_to_request_with_default_timeout

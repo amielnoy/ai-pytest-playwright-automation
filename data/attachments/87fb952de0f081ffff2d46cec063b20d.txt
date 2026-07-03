@@ -1,0 +1,4 @@
+INFO     ai_automation.test_rest_client_custom_headers_do_not_inject_credential_headers:conftest.py:320 START tests/unit/test_security_unit.py::test_rest_client_custom_headers_do_not_inject_credential_headers
+INFO     ai_automation.security.unit:test_security_unit.py:41 Step: Instantiate RestClient with X-Requested-With only
+INFO     ai_automation.security.unit:test_security_unit.py:45 Step: Assert Authorization and Cookie absent from session.headers
+INFO     ai_automation.test_rest_client_custom_headers_do_not_inject_credential_headers:conftest.py:322 END   tests/unit/test_security_unit.py::test_rest_client_custom_headers_do_not_inject_credential_headers

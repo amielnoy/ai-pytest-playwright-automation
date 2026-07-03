@@ -1,0 +1,6 @@
+2026-07-03 14:12:50,364 | INFO     | ai_automation.test_empty_search_returns_200_no_cards_json[empty_1] | START tests/api/test_api_data_driven.py::TestSearchApiJson::test_empty_search_returns_200_no_cards_json[empty_1]
+2026-07-03 14:12:50,365 | INFO     | ai_automation.api.data_driven | Annotated call: TestSearchApiJson.test_empty_search_returns_200_no_cards_json(query='zzz_no_such_item_abc')
+2026-07-03 14:12:50,365 | INFO     | ai_automation.api.data_driven | Step: JSON empty-result search for 'zzz_no_such_item_abc'
+2026-07-03 14:12:50,368 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:50,368 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:50,370 | INFO     | ai_automation.test_empty_search_returns_200_no_cards_json[empty_1] | END   tests/api/test_api_data_driven.py::TestSearchApiJson::test_empty_search_returns_200_no_cards_json[empty_1]

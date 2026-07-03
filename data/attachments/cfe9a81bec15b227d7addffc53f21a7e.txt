@@ -1,0 +1,4 @@
+INFO     ai_automation.test_server_header_does_not_expose_version:conftest.py:320 START tests/api/test_pentest.py::TestInfoDisclosurePentest::test_server_header_does_not_expose_version
+INFO     ai_automation.pentest:test_pentest.py:317 Step: GET https://tutorialsninja.com/demo and read Server header
+INFO     ai_automation.pentest:test_pentest.py:321 Step: Assert no digit-dot-digit pattern in Server:
+INFO     ai_automation.test_server_header_does_not_expose_version:conftest.py:322 END   tests/api/test_pentest.py::TestInfoDisclosurePentest::test_server_header_does_not_expose_version

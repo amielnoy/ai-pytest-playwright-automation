@@ -1,0 +1,2 @@
+INFO     ai_automation.test_alert_component_prefers_visible_banner_and_returns_empty_without_errors:conftest.py:320 START tests/unit/test_page_objects.py::test_alert_component_prefers_visible_banner_and_returns_empty_without_errors
+INFO     ai_automation.test_alert_component_prefers_visible_banner_and_returns_empty_without_errors:conftest.py:322 END   tests/unit/test_page_objects.py::test_alert_component_prefers_visible_banner_and_returns_empty_without_errors

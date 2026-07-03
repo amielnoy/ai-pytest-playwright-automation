@@ -1,0 +1,2 @@
+INFO     ai_automation.test_get_logger_returns_child_logger:conftest.py:320 START tests/unit/test_logger.py::test_get_logger_returns_child_logger
+INFO     ai_automation.test_get_logger_returns_child_logger:conftest.py:322 END   tests/unit/test_logger.py::test_get_logger_returns_child_logger

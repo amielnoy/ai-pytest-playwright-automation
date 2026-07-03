@@ -1,0 +1,4 @@
+2026-07-03 14:12:52,166 | INFO     | ai_automation.test_chat_answers_arithmetic_question | START tests/api/test_chat_ai.py::TestChatEndpoint::test_chat_answers_arithmetic_question
+2026-07-03 14:12:52,171 | DEBUG    | urllib3.connectionpool | Starting new HTTP connection (1): 127.0.0.1:8000
+2026-07-03 14:12:52,173 | DEBUG    | urllib3.connectionpool | http://127.0.0.1:8000 "POST /chat HTTP/1.1" 200 84
+2026-07-03 14:12:52,175 | INFO     | ai_automation.test_chat_answers_arithmetic_question | END   tests/api/test_chat_ai.py::TestChatEndpoint::test_chat_answers_arithmetic_question

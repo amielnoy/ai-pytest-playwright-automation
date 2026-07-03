@@ -1,0 +1,6 @@
+INFO     ai_automation.test_cart_add_with_xss_product_id:conftest.py:320 START tests/api/test_security_api.py::TestCartSecurity::test_cart_add_with_xss_product_id
+INFO     ai_automation.security.api:test_security_api.py:153 Step: POST cart/add with XSS product_id: '<script>alert(1)</script>'
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.security.api:test_security_api.py:157 Step: Assert 200 and no unencoded <script> in response
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_cart_add_with_xss_product_id:conftest.py:322 END   tests/api/test_security_api.py::TestCartSecurity::test_cart_add_with_xss_product_id

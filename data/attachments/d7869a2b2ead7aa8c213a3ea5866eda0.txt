@@ -1,0 +1,2 @@
+INFO     ai_automation.test_equality:conftest.py:320 START tests/unit/test_api_client.py::TestApiProduct::test_equality
+INFO     ai_automation.test_equality:conftest.py:322 END   tests/unit/test_api_client.py::TestApiProduct::test_equality

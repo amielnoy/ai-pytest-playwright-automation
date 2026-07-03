@@ -1,0 +1,2 @@
+2026-07-03 14:12:55,800 | INFO     | ai_automation.test_cart_add_route | START tests/unit/test_opencart_fallback.py::TestRouteDispatcher::test_cart_add_route
+2026-07-03 14:12:55,801 | INFO     | ai_automation.test_cart_add_route | END   tests/unit/test_opencart_fallback.py::TestRouteDispatcher::test_cart_add_route

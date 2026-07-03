@@ -1,0 +1,6 @@
+INFO     ai_automation.test_mock_cart_add_calculates_total_from_quantity[43-1-602.0]:conftest.py:320 START tests/unit/test_fastapi_app.py::test_mock_cart_add_calculates_total_from_quantity[43-1-602.0]
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+INFO     httpx:_client.py:1025 HTTP Request: DELETE http://testserver/mock/cart "HTTP/1.1 200 OK"
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/mock/cart/add "HTTP/1.1 200 OK"
+INFO     ai_automation.test_mock_cart_add_calculates_total_from_quantity[43-1-602.0]:conftest.py:322 END   tests/unit/test_fastapi_app.py::test_mock_cart_add_calculates_total_from_quantity[43-1-602.0]

@@ -1,0 +1,6 @@
+2026-07-03 14:12:52,254 | INFO     | ai_automation.test_ssti_jinja2_payload_not_evaluated_in_search | START tests/api/test_pentest.py::TestInjectionPentest::test_ssti_jinja2_payload_not_evaluated_in_search
+2026-07-03 14:12:52,256 | INFO     | ai_automation.pentest | Step: GET search with SSTI payload: '{{9999*9999}}'
+2026-07-03 14:12:52,258 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:52,258 | INFO     | ai_automation.pentest | Step: Assert '99980001' absent — payload not executed by template engine
+2026-07-03 14:12:52,259 | DEBUG    | charset_normalizer | Encoding detection: ascii is most likely the one.
+2026-07-03 14:12:52,261 | INFO     | ai_automation.test_ssti_jinja2_payload_not_evaluated_in_search | END   tests/api/test_pentest.py::TestInjectionPentest::test_ssti_jinja2_payload_not_evaluated_in_search

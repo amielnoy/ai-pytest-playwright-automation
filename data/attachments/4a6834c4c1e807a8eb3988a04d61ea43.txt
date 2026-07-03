@@ -1,0 +1,7 @@
+INFO     ai_automation.test_cart_accepts_products_from_search_results[MacBook]:conftest.py:320 START tests/api/test_api.py::TestCartApi::test_cart_accepts_products_from_search_results[MacBook]
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+DEBUG    charset_normalizer:api.py:721 Encoding detection: ascii is most likely the one.
+INFO     ai_automation.test_cart_accepts_products_from_search_results[MacBook]:conftest.py:322 END   tests/api/test_api.py::TestCartApi::test_cart_accepts_products_from_search_results[MacBook]

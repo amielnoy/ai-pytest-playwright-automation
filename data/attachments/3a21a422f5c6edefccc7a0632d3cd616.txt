@@ -1,0 +1,2 @@
+2026-07-03 14:12:55,175 | INFO     | ai_automation.test_register_call_sequence | START tests/unit/test_flows.py::TestRegistrationFlow::test_register_call_sequence
+2026-07-03 14:12:55,177 | INFO     | ai_automation.test_register_call_sequence | END   tests/unit/test_flows.py::TestRegistrationFlow::test_register_call_sequence

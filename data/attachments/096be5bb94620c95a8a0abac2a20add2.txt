@@ -1,0 +1,2 @@
+INFO     ai_automation.test_home_page_accessibility_helpers_delegate_to_nav_and_image_locator:conftest.py:320 START tests/unit/test_page_objects.py::test_home_page_accessibility_helpers_delegate_to_nav_and_image_locator
+INFO     ai_automation.test_home_page_accessibility_helpers_delegate_to_nav_and_image_locator:conftest.py:322 END   tests/unit/test_page_objects.py::test_home_page_accessibility_helpers_delegate_to_nav_and_image_locator

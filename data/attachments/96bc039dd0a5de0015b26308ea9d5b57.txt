@@ -1,0 +1,2 @@
+2026-07-03 14:12:56,266 | INFO     | ai_automation.test_registration_form_chooses_no_newsletter_by_default | START tests/unit/test_page_objects.py::test_registration_form_chooses_no_newsletter_by_default
+2026-07-03 14:12:56,270 | INFO     | ai_automation.test_registration_form_chooses_no_newsletter_by_default | END   tests/unit/test_page_objects.py::test_registration_form_chooses_no_newsletter_by_default

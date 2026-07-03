@@ -1,0 +1,6 @@
+2026-07-03 14:12:56,429 | INFO     | ai_automation.test_write_allure_entry_creates_result_json_and_both_attachments | START tests/unit/test_report_test_status.py::test_write_allure_entry_creates_result_json_and_both_attachments
+2026-07-03 14:12:56,431 | INFO     | ai_automation.unit.test_report_test_status | Step: Call _write_allure_entry, expect 3 new files in allure dir
+2026-07-03 14:12:56,432 | INFO     | ai_automation.unit.test_report_test_status | Step: Assert exactly 3 new files: *-result.json, *txt*, *html*
+2026-07-03 14:12:56,432 | INFO     | ai_automation.unit.test_report_test_status | Step: Parse result JSON and check attachments list
+2026-07-03 14:12:56,432 | INFO     | ai_automation.unit.test_report_test_status | Step: Assert overall status is 'failed' (has failed/flaky tests)
+2026-07-03 14:12:56,433 | INFO     | ai_automation.test_write_allure_entry_creates_result_json_and_both_attachments | END   tests/unit/test_report_test_status.py::test_write_allure_entry_creates_result_json_and_both_attachments

@@ -1,0 +1,2 @@
+INFO     ai_automation.test_415_is_challenge:conftest.py:320 START tests/unit/test_opencart_fallback.py::TestIsChallengedPage::test_415_is_challenge
+INFO     ai_automation.test_415_is_challenge:conftest.py:322 END   tests/unit/test_opencart_fallback.py::TestIsChallengedPage::test_415_is_challenge

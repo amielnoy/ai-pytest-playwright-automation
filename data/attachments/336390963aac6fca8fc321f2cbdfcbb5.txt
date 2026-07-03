@@ -1,0 +1,5 @@
+INFO     ai_automation.test_load_results_reads_only_result_json_files:conftest.py:320 START tests/unit/test_report_test_status.py::test_load_results_reads_only_result_json_files
+INFO     ai_automation.unit.test_report_test_status:test_report_test_status.py:92 Step: Write result JSONs and a container JSON to tmp_path
+INFO     ai_automation.unit.test_report_test_status:test_report_test_status.py:99 Step: Call _load_results and assert count == 2
+INFO     ai_automation.unit.test_report_test_status:test_report_test_status.py:103 Step: Assert len == 2, invalid JSON ignored
+INFO     ai_automation.test_load_results_reads_only_result_json_files:conftest.py:322 END   tests/unit/test_report_test_status.py::test_load_results_reads_only_result_json_files
