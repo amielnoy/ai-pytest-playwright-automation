@@ -1,10 +1,10 @@
 from playwright.sync_api import Page, expect
 
 from pages.components.alert import AlertComponent
-from pages.self_healing import SelfHealEvent, healing_locator
+from pages.self_healing import SelfHealEvent, SelfHealingHost
 
 
-class BasePage:
+class BasePage(SelfHealingHost):
     _HTML_SELECTOR = "html"
     _ANY_ID_SELECTOR = "[id]"
     _DUPLICATE_IDS_SCRIPT = """elements => {
@@ -17,13 +17,7 @@ class BasePage:
         self.base_url = base_url.rstrip("/")
         self._self_heal_events: list[SelfHealEvent] = []
         self.alert = AlertComponent(page)
-        self._html = healing_locator(
-            page.locator(self._HTML_SELECTOR),
-            name="document root",
-            primary_label=self._HTML_SELECTOR,
-            fallbacks=[("body", page.locator("body"))],
-            events=self._self_heal_events,
-        )
+        self._html = self._healed(self._HTML_SELECTOR, "document root", ["body"])
         self._id_elements = page.locator(self._ANY_ID_SELECTOR)
 
     def navigate(self, path: str = "", wait_until: str = "domcontentloaded") -> None:

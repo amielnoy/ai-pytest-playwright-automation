@@ -1,7 +1,6 @@
 from playwright.sync_api import Page, expect
 
 from pages.components.base_component import BaseComponent
-from pages.self_healing import healing_locator
 
 
 class AlertComponent(BaseComponent):
@@ -11,34 +10,17 @@ class AlertComponent(BaseComponent):
 
     def __init__(self, page: Page) -> None:
         super().__init__(page)
-        self.success_alert = healing_locator(
-            page.locator(self._SUCCESS),
-            name="success alert",
-            primary_label=self._SUCCESS,
-            fallbacks=[
-                ("[class*='alert'][class*='success']", page.locator("[class*='alert'][class*='success']")),
-            ],
-            events=self._self_heal_events,
+        self.success_alert = self._healed(
+            self._SUCCESS, "success alert",
+            ["[class*='alert'][class*='success']"],
         )
-        self.danger_alert = healing_locator(
-            page.locator(self._DANGER),
-            name="danger alert",
-            primary_label=self._DANGER,
-            fallbacks=[
-                ("[class*='alert'][class*='danger']", page.locator("[class*='alert'][class*='danger']")),
-                ("[class*='alert'][class*='warning']", page.locator("[class*='alert'][class*='warning']")),
-            ],
-            events=self._self_heal_events,
+        self.danger_alert = self._healed(
+            self._DANGER, "danger alert",
+            ["[class*='alert'][class*='danger']", "[class*='alert'][class*='warning']"],
         )
-        self.field_errors = healing_locator(
-            page.locator(self._FIELD_ERROR),
-            name="field error",
-            primary_label=self._FIELD_ERROR,
-            fallbacks=[
-                ("[class*='text-danger']", page.locator("[class*='text-danger']")),
-                ("[class*='error']", page.locator("[class*='error']")),
-            ],
-            events=self._self_heal_events,
+        self.field_errors = self._healed(
+            self._FIELD_ERROR, "field error",
+            ["[class*='text-danger']", "[class*='error']"],
         )
 
     def get_error(self) -> str:

@@ -2,7 +2,6 @@ from playwright.sync_api import Page
 
 from pages.base_page import BasePage
 from pages.components import NavBarComponent
-from pages.self_healing import healing_locator
 
 
 class HomePage(BasePage):
@@ -17,15 +16,9 @@ class HomePage(BasePage):
         self.nav = NavBarComponent(page)
         self.page_heading = page.get_by_role("heading", level=1)
         self.cart_link = page.get_by_role("link", name="Shopping Cart")
-        self.featured_product_images = healing_locator(
-            page.locator(self._FEATURED_PRODUCT_IMAGES),
-            name="featured product images",
-            primary_label=self._FEATURED_PRODUCT_IMAGES,
-            fallbacks=[
-                (".product-thumb [role='img']", page.locator(".product-thumb [role='img']")),
-                (".product-thumb img", page.locator(".product-thumb img")),
-            ],
-            events=self._self_heal_events,
+        self.featured_product_images = self._healed(
+            self._FEATURED_PRODUCT_IMAGES, "featured product images",
+            [".product-thumb [role='img']", ".product-thumb img"],
         )
 
     def open(self) -> "HomePage":

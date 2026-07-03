@@ -22,10 +22,11 @@ import time
 import urllib.request
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
-HTML = ROOT / "videos" / "api-contract-tests.html"
-OUT = ROOT / "videos" / "api-contract-tests.mp4"
-BUILD = ROOT / "videos" / "_build"
+BASE = Path(__file__).resolve().parent          # the ai-testing-academy/ folder
+REPO_ROOT = BASE.parent                          # repo root, where .env lives
+HTML = BASE / "videos" / "api-contract-tests.html"
+OUT = BASE / "videos" / "api-contract-tests.mp4"
+BUILD = BASE / "videos" / "_build"
 
 TTS_MODEL = "gemini-2.5-flash-preview-tts"
 VOICE = "Charon"           # warm, informative documentary-style voice
@@ -58,7 +59,7 @@ LINES = [
 
 
 def load_key() -> str:
-    for line in (ROOT / ".env").read_text().splitlines():
+    for line in (REPO_ROOT / ".env").read_text().splitlines():
         if line.strip().startswith("GEMINI_API_KEY="):
             return line.split("=", 1)[1].strip().strip("\"'")
     sys.exit("GEMINI_API_KEY not found in .env")
@@ -146,7 +147,7 @@ def main() -> None:
     for p in BUILD.glob("*"):
         p.unlink()
     BUILD.rmdir()
-    print(f"[done] wrote {OUT.relative_to(ROOT)}", flush=True)
+    print(f"[done] wrote {OUT.relative_to(REPO_ROOT)}", flush=True)
 
 
 def record_webm(url: str, total_ms: int) -> Path:

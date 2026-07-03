@@ -124,11 +124,11 @@
       margin-bottom: 1.6rem;
     }
     nav.sidebar .nav-label {
-      font-size: 0.7rem;
-      font-weight: 700;
+      font-size: 0.9rem;
+      font-weight: 800;
       color: var(--muted);
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.05em;
       padding: 0 0.5rem;
       margin-bottom: 0.5rem;
     }
@@ -586,6 +586,7 @@
     </div>
     <div class="nav-section">
       <div class="nav-label">ארכיטקטורה</div>
+      <a href="#patterns">דפוסי עיצוב</a>
       <a href="#pom">Page Object Model</a>
       <a href="#flows">Flows Layer</a>
       <a href="#services">שכבת ה-API</a>
@@ -822,6 +823,59 @@
             <td><code>pytest -m ai</code></td>
           </tr>
         </table>
+      </div>
+    </section>
+
+    <!-- ── DESIGN PATTERNS ── -->
+    <section id="patterns">
+      <h2><span class="icon">🧩</span> דפוסי עיצוב</h2>
+      <p>המסגרת אינה רק אוסף בדיקות — היא מיישמת סט מכוּון של <strong>דפוסי עיצוב</strong> ששומרים עליה תחזוקתית ככל שהאתר משתנה תחתיה. אלה הדפוסים שמופיעים בפועל בקוד:</p>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🧩</div>
+          <div class="card-title">Page Object Model</div>
+          <div class="card-desc">כל עמוד הוא מחלקה תחת <code>pages/</code>; הבדיקות קוראות להתנהגות, לא ל-selectors — משתנה באתר? מתקנים קובץ אחד.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏭</div>
+          <div class="card-title">Factory</div>
+          <div class="card-desc"><code>utils/factories.py</code>, ה-builders <code>healing_locator()</code> / <code>_healed()</code>, ו-<code>create_app()</code> בונים אובייקטים מוגדרים במלואם מאחורי קריאה אחת.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🧭</div>
+          <div class="card-title">Strategy — Self-Healing</div>
+          <div class="card-desc"><code>pages/self_healing.py</code> פותר locator ראשי ואז רשימת fallback מאושרת — אסטרטגיית התאוששות דטרמיניסטית, מתועדת כ-<code>SelfHealEvent</code>.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎛️</div>
+          <div class="card-title">Facade</div>
+          <div class="card-desc">מחלקות ה-<code>services/api/*</code> ו-<code>RestClient</code> מסתירות requests, retries, timeouts ופרסינג HTML מאחורי מתודות עסקיות קטנות.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔌</div>
+          <div class="card-title">Adapter / Fallback</div>
+          <div class="card-desc"><code>opencart_fallback.py</code> מתאים requests (ומסלולי דפדפן) לחנות בזיכרון כשהאתר החי חסום, כדי שהבדיקות יישארו דטרמיניסטיות.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">💉</div>
+          <div class="card-title">Dependency Injection</div>
+          <div class="card-desc">ה-fixtures של pytest מזריקים <code>browser → context → page → services</code>; השירותים תלויים בפרוטוקול <code>HttpClient</code>, לא בלקוח קונקרטי.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔒</div>
+          <div class="card-title">Singleton</div>
+          <div class="card-desc">‏logger משותף יחיד <code>ai_automation</code> (<code>utils/logger.py</code>) ורג'יסטרי עגלה לפי session מגבים את כל הריצה.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🧱</div>
+          <div class="card-title">Composite</div>
+          <div class="card-desc">עמוד מורכב מרכיבים לשימוש חוזר — <code>NavBar</code>, <code>Alert</code>, <code>CartSummary</code>, <code>ProductCard</code> — במקום מחלקה ענקית אחת.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📋</div>
+          <div class="card-title">Template Method</div>
+          <div class="card-desc">מחלקות ה-<code>flows/</code> חולקות שלד אחד — פתיחה ← ניווט ← פעולה ← אימות — כשכל flow ממלא את השלבים.</div>
+        </div>
       </div>
     </section>
 

@@ -1,0 +1,14 @@
+{
+  "name": "ai-testing-academy",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI Testing Academy — bilingual landing site with in-browser AI agents (TypeScript, no runtime build).",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "watch": "tsc -p tsconfig.json --watch"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}

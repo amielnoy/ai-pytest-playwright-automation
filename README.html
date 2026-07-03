@@ -448,7 +448,7 @@
           <h2>Course Materials</h2>
           <p>This repository includes a <strong>30-session automation QA course</strong> plus a Git basics bridge under <a href="course/README.md"><code>course/</code></a>.</p>
           <p>Start there for the learning path, session order, exercise workflow, and guidance on when to use the teaching scaffold versus the production framework.</p>
-          <p>A shorter three-session <strong>AI Testing Learning Series</strong> lives under <a href="docs/learning/README.md"><code>docs/learning/</code></a>, and the <strong>AI Testing Academy</strong> landing pages add live in-browser AI agents (a QA-Automation resume evaluator and an interview-prep helper) in <a href="ai-testing-academy.html"><code>Hebrew</code></a> and <a href="ai-testing-academy-en.html"><code>English</code></a>. Short explainer clips are in <a href="videos/README.md"><code>videos/</code></a>.</p>
+          <p>A shorter three-session <strong>AI Testing Learning Series</strong> lives under <a href="docs/learning/README.md"><code>docs/learning/</code></a>, and the <strong>AI Testing Academy</strong> landing pages add live in-browser AI agents (a QA-Automation resume evaluator with optional job-description tailoring, and an interview-prep helper) in <a href="ai-testing-academy/ai-testing-academy.html?lang=he"><code>Hebrew</code></a> and <a href="ai-testing-academy/ai-testing-academy.html"><code>English</code></a>. Short explainer clips are in <a href="ai-testing-academy/videos/README.md"><code>ai-testing-academy/videos/</code></a>. Run it in Docker via <code>ai-testing-academy/Dockerfile</code>; CI also publishes it to GitHub Pages at <code>/academy/</code>. Three CLI agents (<code>agents/test_planner_agent.py</code> &rarr; <code>test_writer_agent.py</code> &rarr; <code>test_healer_agent.py</code>) plan, write and heal the automation.</p>
           <a href="course_overview.html" class="badge badge-teal" style="display:inline-flex; text-decoration:none;">Open course overview →</a>
         </section>
 
@@ -472,9 +472,8 @@
           <span class="dir">stds/</span>         <span class="note">Test standards and generated page snapshot source docs</span><br>
           <span class="dir">tests/</span>        <span class="note">API, contract, unit, and web UI tests</span><br>
           <span class="dir">utils/</span>        <span class="note">Shared utilities</span><br>
-          <span class="dir">assets/</span>       <span class="note">Logos and shared static assets</span><br>
           <span class="dir">course/</span>       <span class="note">Training material and teaching examples</span><br>
-          <span class="dir">videos/</span>       <span class="note">Explainer video clips for the learning site</span><br>
+          <span class="dir">ai-testing-academy/</span>  <span class="note">Landing pages, explainer videos, and logos for the learning site</span><br>
           <span class="dir">artifacts/</span>    <span class="note">Generated or captured artifacts kept out of core code paths</span><br>
           <span class="dir">monitoring/</span>   <span class="note">Prometheus and Grafana configuration</span>
         </div>

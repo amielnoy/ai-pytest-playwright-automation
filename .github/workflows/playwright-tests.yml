@@ -7,15 +7,20 @@
 #        Value: paste the full contents of data/secrets.json (never commit that file)
 #   GitHub masks TEST_SECRETS_JSON in logs; the write step does not echo the JSON body.
 #
-# The report job also enforces GitHub Pages source to gh-pages/root automatically.
+# Publishes the automation report to the site root. The AI Testing Academy is
+# published separately by ai-testing-academy.yml under /academy/.
 
 name: Playwright Tests
 
 on:
   push:
     branches: [main, feature]
+    paths-ignore:
+      - "ai-testing-academy/**"
   pull_request:
     branches: [main, feature]
+    paths-ignore:
+      - "ai-testing-academy/**"
   workflow_dispatch:
 
 concurrency:
@@ -24,16 +29,12 @@ concurrency:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 jobs:
   # --- Job 1: run tests ---
   test:
     name: Run Playwright Tests
     runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
     steps:
       - name: Checkout
@@ -168,8 +169,9 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     if: always()
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+    concurrency:
+      group: pages
+      cancel-in-progress: false
 
     steps:
       - name: Checkout
@@ -181,21 +183,13 @@ jobs:
           name: allure-results
           path: allure-results/
 
-      - name: Checkout gh-pages history
-        uses: actions/checkout@v4
+      - name: Restore Allure history (trend charts)
+        uses: actions/cache@v4
         with:
-          ref: gh-pages
-          path: gh-pages-prev
-        continue-on-error: true
-
-      - name: Restore Allure history for trend charts
-        run: |
-          if [ -d gh-pages-prev/allure-history ]; then
-            cp -r gh-pages-prev/allure-history ./allure-history
-            echo "History restored from previous run."
-          else
-            echo "No previous history found — first run."
-          fi
+          path: allure-history
+          key: allure-history-${{ github.run_id }}
+          restore-keys: |
+            allure-history-
 
       - name: Set up Node.js 20
         uses: actions/setup-node@v4
@@ -207,12 +201,6 @@ jobs:
 
       - name: Generate Allure 3 report
         run: npx allure generate allure-results
-
-      - name: Persist history for next run
-        run: |
-          if [ -d allure-history ]; then
-            cp -r allure-history allure-report/allure-history
-          fi
 
       - name: Copy architecture.html into report
         run: cp architecture.html allure-report/architecture.html
@@ -244,21 +232,23 @@ jobs:
           > The report may take a minute to appear after the first deploy while GitHub Pages activates.
           EOF
 
-      - name: Deploy to GitHub Pages
+      - name: Slim the published site (drop heavy CI videos/traces)
+        run: |
+          BEFORE=$(du -sm allure-report | cut -f1)
+          # Playwright records a video (.webm) + trace (.zip) per web-ui test in CI and
+          # Allure bundles them into the report, bloating the Pages artifact to ~100MB+
+          # (a likely cause of the "Deployment failed, try again later" sync error).
+          # A public report doesn't need them — pass/fail, logs and failure screenshots
+          # remain, and the raw allure-results artifact still carries them for debugging.
+          find allure-report -type f \( -name '*.webm' -o -name '*.zip' \) -delete 2>/dev/null || true
+          AFTER=$(du -sm allure-report | cut -f1)
+          echo "Trimmed published report: ${BEFORE}MB -> ${AFTER}MB"
+
+      - name: Deploy report to GitHub Pages
+        if: github.event_name != 'pull_request'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: allure-report
           publish_branch: gh-pages
-          keep_files: false
-          commit_message: "ci: Allure report run #${{ github.run_number }} [${{ github.sha }}]"
-
-      - name: Ensure GitHub Pages source is gh-pages root
-        if: success()
-        run: |
-          curl -X PUT \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Content-Type: application/json" \
-            https://api.github.com/repos/${{ github.repository }}/pages \
-            -d '{"source":{"branch":"gh-pages","path":"/"}}'
+          publish_dir: allure-report
+          keep_files: true

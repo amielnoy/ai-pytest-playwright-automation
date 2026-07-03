@@ -27,7 +27,9 @@ services:
       CI: "true"
       DATABASE_URL: postgresql://automation:automation@db:5432/automation
     ports:
-      - "8000:8000"
+      # Host port is configurable to avoid collisions; container stays on 8000.
+      # Override: AUTOMATION_SERVER_PORT=8001 ./scripts/run_compose_tests_with_allure.sh
+      - "${AUTOMATION_SERVER_PORT:-8000}:8000"
     depends_on:
       db:
         condition: service_healthy

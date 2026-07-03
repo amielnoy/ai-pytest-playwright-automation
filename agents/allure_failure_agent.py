@@ -282,6 +282,109 @@ def _print_banner(allure_dir: Path, use_llm: bool, model: str) -> None:
     print("=" * 70)
 
 
+def _build_history_map(
+    results: list[dict[str, Any]],
+) -> dict[str, list[dict[str, Any]]]:
+    """Group result files by their Allure historyId (falling back to uuid)."""
+    history_map: dict[str, list[dict[str, Any]]] = {}
+    for raw in results:
+        history_id = raw.get("historyId") or raw.get("uuid") or ""
+        history_map.setdefault(history_id, []).append(raw)
+    return history_map
+
+
+def _gather_related_history(
+    raw: dict[str, Any], history_map: dict[str, list[dict[str, Any]]]
+) -> list[str]:
+    """Return "name | status | message" lines for prior runs of the same test."""
+    history_id = raw.get("historyId") or raw.get("uuid") or ""
+    related: list[str] = []
+    for h in history_map.get(history_id, []):
+        if h is raw:
+            continue
+        try:
+            hname = h.get("fullName") or h.get("name") or ""
+            hstatus = _normalize_text(h.get("status"))
+            hmsg = _normalize_text((h.get("statusDetails") or {}).get("message"))
+            related.append(f"{hname} | {hstatus} | {hmsg}")
+        except Exception:
+            continue
+    return related
+
+
+def _read_attachment_excerpts(resolved_dir: Path, raw: dict[str, Any]) -> list[str]:
+    """Read small text attachments for a result as truncated excerpts."""
+    excerpts: list[str] = []
+    for att in (raw.get("attachments") or []):
+        src = att.get("source") or att.get("name")
+        if not src:
+            continue
+        src_path = Path(resolved_dir) / src
+        if not src_path.exists() or src_path.stat().st_size > 20_000:
+            continue
+        try:
+            excerpts.append(src_path.read_text(encoding="utf-8")[:4096])
+        except Exception:
+            continue
+    return excerpts
+
+
+def _process_single_result(
+    raw: dict[str, Any],
+    idx: int,
+    total: int,
+    resolved_dir: Path,
+    history_map: dict[str, list[dict[str, Any]]],
+    *,
+    use_llm: bool,
+    model: str,
+    api_key: str,
+) -> dict[str, Any]:
+    """Classify one Allure result (heuristic, then optional LLM refinement)."""
+    context = _extract_failure_context(raw)
+    name_label = (context["full_name"] or context["name"] or "unnamed")[:60]
+    status = _normalize_text(context.get("status"))
+    print(f"  [{idx:>3}/{total}] {status.upper():<8}  {name_label}")
+
+    related = _gather_related_history(raw, history_map)
+    if related:
+        context["rag"] = "\n".join(related)
+    attachments = _read_attachment_excerpts(resolved_dir, raw)
+    if attachments:
+        context["attachments_text"] = "\n---\n".join(attachments)
+
+    classification = (
+        "flaky" if _result_is_flaky(raw, history_map)
+        else _classify_failure_heuristic(context)
+    )
+    details: dict[str, Any] = {
+        "name": context["name"],
+        "full_name": context["full_name"],
+        "status": context["status"],
+        "message": context["message"],
+        "trace": context["trace"],
+        "classification": classification,
+        "confidence": "heuristic",
+        "summary": "",
+    }
+
+    if use_llm and status != "passed":
+        if api_key:
+            print(f"           -> querying AI ({model})...")
+            llm_data = _classify_with_llm(context, model=model, api_key=api_key)
+            details["classification"] = llm_data["category"]
+            details["summary"] = llm_data["summary"]
+            details["confidence"] = llm_data["confidence"]
+            details["extraction"] = llm_data.get("extraction", "")
+            print(f"           -> classified: {details['classification']} ({details['confidence']} confidence)")
+        else:
+            details["summary"] = "No GROQ_API_KEY configured."
+            details["confidence"] = "low"
+            print("           -> skipped AI (no GROQ_API_KEY)")
+
+    return details
+
+
 def analyze_allure_results(
     allure_dir: str = "",
     use_llm: bool = True,
@@ -300,82 +403,20 @@ def analyze_allure_results(
         print("  Run your tests first:  pytest --alluredir=allure-results\n")
         return []
 
-    history_map: dict[str, list[dict[str, Any]]] = {}
-    for raw in results:
-        history_id = raw.get("historyId") or raw.get("uuid") or ""
-        history_map.setdefault(history_id, []).append(raw)
+    history_map = _build_history_map(results)
+    if use_llm and api_key is None:
+        api_key = os.environ.get("GROQ_API_KEY", "")
 
     print(f"\n  Found {len(results)} result file(s). Processing...\n")
 
-    outputs: list[dict[str, Any]] = []
-    for idx, raw in enumerate(results, 1):
-        context = _extract_failure_context(raw)
-        name_label = (context["full_name"] or context["name"] or "unnamed")[:60]
-        status = _normalize_text(context.get("status"))
-        print(f"  [{idx:>3}/{len(results)}] {status.upper():<8}  {name_label}")
-
-        history_id = raw.get("historyId") or raw.get("uuid") or ""
-        related_texts: list[str] = []
-        for h in history_map.get(history_id, []):
-            if h is raw:
-                continue
-            try:
-                hname = h.get("fullName") or h.get("name") or ""
-                hstatus = _normalize_text(h.get("status"))
-                hmsg = _normalize_text((h.get("statusDetails") or {}).get("message"))
-                related_texts.append(f"{hname} | {hstatus} | {hmsg}")
-            except Exception:
-                continue
-
-        attachments_excerpt: list[str] = []
-        for att in (raw.get("attachments") or []):
-            src = att.get("source") or att.get("name")
-            if not src:
-                continue
-            src_path = Path(resolved_dir) / src
-            if not src_path.exists() or src_path.stat().st_size > 20_000:
-                continue
-            try:
-                attachments_excerpt.append(src_path.read_text(encoding="utf-8")[:4096])
-            except Exception:
-                continue
-
-        if related_texts:
-            context["rag"] = "\n".join(related_texts)
-        if attachments_excerpt:
-            context["attachments_text"] = "\n---\n".join(attachments_excerpt)
-
-        classification = "flaky" if _result_is_flaky(raw, history_map) else _classify_failure_heuristic(context)
-        details = {
-            "name": context["name"],
-            "full_name": context["full_name"],
-            "status": context["status"],
-            "message": context["message"],
-            "trace": context["trace"],
-            "classification": classification,
-            "confidence": "heuristic",
-            "summary": "",
-        }
-
-        if use_llm and status != "passed":
-            if api_key is None:
-                api_key = os.environ.get("GROQ_API_KEY", "")
-            if api_key:
-                print(f"           -> querying AI ({model})...")
-                llm_data = _classify_with_llm(context, model=model, api_key=api_key)
-                details["classification"] = llm_data["category"]
-                details["summary"] = llm_data["summary"]
-                details["confidence"] = llm_data["confidence"]
-                details["extraction"] = llm_data.get("extraction", "")
-                print(f"           -> classified: {details['classification']} ({details['confidence']} confidence)")
-            else:
-                details["summary"] = "No GROQ_API_KEY configured."
-                details["confidence"] = "low"
-                print("           -> skipped AI (no GROQ_API_KEY)")
-
-        outputs.append(details)
-
-    return outputs
+    total = len(results)
+    return [
+        _process_single_result(
+            raw, idx, total, resolved_dir, history_map,
+            use_llm=use_llm, model=model, api_key=api_key or "",
+        )
+        for idx, raw in enumerate(results, 1)
+    ]
 
 
 def format_analysis_report(analysis: list[dict[str, Any]]) -> str:

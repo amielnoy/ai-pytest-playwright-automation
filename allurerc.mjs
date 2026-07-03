@@ -10,6 +10,9 @@ export default defineConfig({
         reportName: "Ness Automation Report",
         singleFile: false,
         reportLanguage: "en",
+        theme: "auto",
+        // Reproduce the old Suites tree: package > class > method.
+        groupBy: ["parentSuite", "suite", "subSuite"],
       },
     },
   },

@@ -11,7 +11,9 @@ import allure
 import pytest
 from playwright.sync_api import Browser, BrowserContext, Page, Route, Request, sync_playwright
 
-from services.api.opencart_fallback import fallback_response_for_request
+import requests
+
+from services.api.opencart_fallback import fallback_response_for_request, is_challenge_page
 from requests.cookies import RequestsCookieJar
 from utils.data_loader import get_config
 from utils.logger import configure_logging, get_logger, AllureLogHandler
@@ -22,14 +24,36 @@ _IN_CI = os.environ.get("CI", "").lower() in ("true", "1")
 
 
 def _check_site_available(url: str, timeout: float = 5.0) -> bool:
+    """The live demo store counts as available only if it is reachable *and*
+    serving real store content. tutorialsninja.com is frequently bot-blocked
+    (HTTP 415 / JS challenge), which is TCP-reachable but useless for the browser
+    tests — so a plain socket connect is not enough. When the site is blocked we
+    return False and the browser fallback route (offline OpenCart) is installed
+    instead, exactly as it is when the host is unreachable.
+    """
     try:
         parsed = urlparse(url)
         host = parsed.hostname or ""
         port = parsed.port or (443 if parsed.scheme == "https" else 80)
         with socket.create_connection((host, port), timeout=timeout):
-            return True
+            pass
     except OSError:
         return False
+
+    try:
+        resp = requests.get(
+            url,
+            timeout=timeout,
+            headers={
+                "User-Agent": (
+                    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                    "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+                )
+            },
+        )
+    except requests.RequestException:
+        return False
+    return resp.ok and not is_challenge_page(resp)
 
 
 _SITE_AVAILABLE = _check_site_available(CONFIG["base_url"])

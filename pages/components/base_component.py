@@ -1,9 +1,9 @@
 from playwright.sync_api import Page
 
-from pages.self_healing import SelfHealEvent
+from pages.self_healing import SelfHealEvent, SelfHealingHost
 
 
-class BaseComponent:
+class BaseComponent(SelfHealingHost):
     """Root class for page-level components (interact with the full page)."""
 
     def __init__(self, page: Page) -> None:

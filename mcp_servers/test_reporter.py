@@ -358,7 +358,7 @@ def _write_allure_entry(
 # MCP tool                                                                      #
 # --------------------------------------------------------------------------- #
 
-@mcp.tool()
+@mcp.tool(structured_output=False)
 def report_test_status(
     allure_dir: str = "",
     html_out: str = "",
