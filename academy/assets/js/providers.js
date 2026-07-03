@@ -163,6 +163,31 @@ export function extractJSON(text) {
         throw new Error(S.errNoJson);
     return JSON.parse(raw.slice(start, end + 1));
 }
+/* The Gemini key regardless of the currently-selected provider (used by the
+   grounded enrichment, which is always Gemini). */
+export function geminiKey() {
+    return localStorage.getItem('ata_key_gemini') || envKeyFor('gemini') ||
+        (currentProvider() === 'gemini' ? $('apiKey').value.trim() : '');
+}
+/* A direct Gemini call with Google Search grounding — answers are grounded in
+   current search results, so recency-sensitive prompts ("last 3 months") work. */
+export async function callGeminiGrounded(system, user, maxTokens = 3000) {
+    const key = geminiKey();
+    if (!key)
+        throw new Error(S.errNoKey);
+    const model = 'gemini-2.5-flash';
+    const body = {
+        system_instruction: { parts: [{ text: system }] },
+        contents: [{ role: 'user', parts: [{ text: user }] }],
+        tools: [{ google_search: {} }],
+        generationConfig: { maxOutputTokens: maxTokens }
+    };
+    const res = await fetch('https://generativelanguage.googleapis.com/v1beta/models/' + model + ':generateContent', { method: 'POST', headers: { 'content-type': 'application/json', 'x-goog-api-key': key }, body: JSON.stringify(body) });
+    if (!res.ok)
+        throw new Error(S.errApiPrefix + res.status + '): ' + (await res.text()).slice(0, 300));
+    const d = await res.json();
+    return (d.candidates?.[0]?.content?.parts || []).map((p) => p.text || '').join('\n');
+}
 /* Wire the provider select + key-gating controls and load the .env defaults. */
 export function initProviders() {
     $('useOwnKey').addEventListener('change', () => { ownKeyTouched = true; applyKeyMode(); });
